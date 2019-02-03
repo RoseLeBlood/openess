@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">OpenESS
-   &#160;<span id="projectnumber">0.3</span>
+   &#160;<span id="projectnumber">0.2 Alpha</span>
    </div>
    <div id="projectbrief">Embedded Sound Server</div>
   </td>
@@ -93,6 +93,15 @@ $(document).ready(function(){initNavTree('ess__socket_8c_ad94b8a0636ed0862671902
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="ess__socket_8c_source.html#l00098">98</a> of file <a class="el" href="ess__socket_8c_source.html">ess_socket.c</a>.</p>
+<div class="fragment"><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                                                           {</div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keywordflow">if</span>(_socket == 0) <span class="keywordflow">return</span> <a class="code" href="ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405.html#ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b">ESS_SOCKET_ERROR_NULL</a>;</div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordflow">if</span> (  (_socket-&gt;<a class="code" href="structess__socket_af476a7792869899c5ee5420357a86555.html#af476a7792869899c5ee5420357a86555">retval</a>  = close(_socket-&gt;<a class="code" href="structess__socket_a2734695ac47da1d4ba8587caf8c3ed0f.html#a2734695ac47da1d4ba8587caf8c3ed0f">socket</a>))  != 0 ) {</div><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    _socket-&gt;<a class="code" href="structess__socket_aef088073eca1d1d9f381868e42152520.html#aef088073eca1d1d9f381868e42152520">status</a> = <a class="code" href="ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dc.html#a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc">ESS_SOCKET_STATUS_ERROR</a>;</div><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405.html#ae801b9b95ffd15cadd2a367ef726d405a51ccd446ce3de87bfa81d620812f18a4">ESS_SOCKET_ERROR_CLOSE</a>;</div><div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  }</div><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405.html#ae801b9b95ffd15cadd2a367ef726d405afed31ad640a62c99c98982717fcb4b40">ESS_SOCKET_ERROR_OK</a>;</div><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;}</div><div class="ttc" id="ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405_html_ae801b9b95ffd15cadd2a367ef726d405afed31ad640a62c99c98982717fcb4b40"><div class="ttname"><a href="ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405.html#ae801b9b95ffd15cadd2a367ef726d405afed31ad640a62c99c98982717fcb4b40">ESS_SOCKET_ERROR_OK</a></div><div class="ttdef"><b>Definition:</b> <a href="ess__socket_8h_source.html#l00066">ess_socket.h:66</a></div></div>
+<div class="ttc" id="ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405_html_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b"><div class="ttname"><a href="ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405.html#ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b">ESS_SOCKET_ERROR_NULL</a></div><div class="ttdef"><b>Definition:</b> <a href="ess__socket_8h_source.html#l00067">ess_socket.h:67</a></div></div>
+<div class="ttc" id="ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dc_html_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc"><div class="ttname"><a href="ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dc.html#a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc">ESS_SOCKET_STATUS_ERROR</a></div><div class="ttdef"><b>Definition:</b> <a href="ess__socket_8h_source.html#l00058">ess_socket.h:58</a></div></div>
+<div class="ttc" id="structess__socket_a2734695ac47da1d4ba8587caf8c3ed0f_html_a2734695ac47da1d4ba8587caf8c3ed0f"><div class="ttname"><a href="structess__socket_a2734695ac47da1d4ba8587caf8c3ed0f.html#a2734695ac47da1d4ba8587caf8c3ed0f">ess_socket::socket</a></div><div class="ttdeci">int socket</div><div class="ttdef"><b>Definition:</b> <a href="ess__socket_8h_source.html#l00082">ess_socket.h:82</a></div></div>
+<div class="ttc" id="structess__socket_af476a7792869899c5ee5420357a86555_html_af476a7792869899c5ee5420357a86555"><div class="ttname"><a href="structess__socket_af476a7792869899c5ee5420357a86555.html#af476a7792869899c5ee5420357a86555">ess_socket::retval</a></div><div class="ttdeci">int retval</div><div class="ttdef"><b>Definition:</b> <a href="ess__socket_8h_source.html#l00083">ess_socket.h:83</a></div></div>
+<div class="ttc" id="ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405_html_ae801b9b95ffd15cadd2a367ef726d405a51ccd446ce3de87bfa81d620812f18a4"><div class="ttname"><a href="ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405.html#ae801b9b95ffd15cadd2a367ef726d405a51ccd446ce3de87bfa81d620812f18a4">ESS_SOCKET_ERROR_CLOSE</a></div><div class="ttdef"><b>Definition:</b> <a href="ess__socket_8h_source.html#l00073">ess_socket.h:73</a></div></div>
+<div class="ttc" id="structess__socket_aef088073eca1d1d9f381868e42152520_html_aef088073eca1d1d9f381868e42152520"><div class="ttname"><a href="structess__socket_aef088073eca1d1d9f381868e42152520.html#aef088073eca1d1d9f381868e42152520">ess_socket::status</a></div><div class="ttdeci">ess_socket_status_t status</div><div class="ttdef"><b>Definition:</b> <a href="ess__socket_8h_source.html#l00086">ess_socket.h:86</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
@@ -100,7 +109,7 @@ $(document).ready(function(){initNavTree('ess__socket_8c_ad94b8a0636ed0862671902
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_97aefd0d527b934f1d99a682da8fe6a9.html">lib</a></li><li class="navelem"><a class="el" href="dir_248b79838343de614f767172412e5b92.html">esd</a></li><li class="navelem"><a class="el" href="ess__socket_8c.html">ess_socket.c</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="ess__socket_8c.html">ess_socket.c</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>

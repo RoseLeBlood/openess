@@ -30,7 +30,27 @@
 
 
 /**
+ * @brief If defined compiled backend for esp32
+ */
+#define ESS_PLATFORM_ESP32
+
+/**
+ * @brief If defined compiled backend for Raspberry PI (linux)
+ */
+//#define ESS_PLATFORM_RPI
+/**
+ * @brief If defined compiled backend for generic linux (openal)
+ */
+//#define ESS_PLATFORM_LINUX
+/**
+ * @brief If defined compiled backend for  generic windows (openal, wasapi)
+ */
+//#define ESS_PLATFORM_WINDOWS
+
+
+/**
  * @brief If defined then UART backend available
+ * Only avaible on platform : `ESS_PLATFORM_ESP32` and `ESS_PLATFORM_RPI`
  */
 #define ESS_ENABLE_BACKEND_UART
 /**
@@ -39,6 +59,7 @@
 #define ESS_ENABLE_BACKEND_UDP
 /**
  * @brief If defined then I2S backend available
+ * Only avaible on platform : `ESS_PLATFORM_ESP32` and `ESS_PLATFORM_RPI`
  */
 #define ESS_ENABLE_BACKEND_I2S
 
@@ -65,10 +86,6 @@
 #endif
 
 
-
-
-/* Defined if debugging is enabled */
-#define ESDBG
 
 
 /* size of the audio buffer */

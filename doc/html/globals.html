@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">OpenESS
-   &#160;<span id="projectnumber">0.3</span>
+   &#160;<span id="projectnumber">0.2 Alpha</span>
    </div>
    <div id="projectbrief">Embedded Sound Server</div>
   </td>
@@ -74,7 +74,7 @@ $(document).ready(function(){initNavTree('globals.html','');});
 
 <h3><a id="index_b"></a>- b -</h3><ul>
 <li>backends_list
-: <a class="el" href="ess__backend_8c_a0aae1a44ffbe4df0c0b4d13810ec8e22.html#a0aae1a44ffbe4df0c0b4d13810ec8e22">ess_backend.c</a>
+: <a class="el" href="ess__platform__esp32_8h_a0aae1a44ffbe4df0c0b4d13810ec8e22.html#a0aae1a44ffbe4df0c0b4d13810ec8e22">ess_platform_esp32.h</a>
 </li>
 </ul>
 
@@ -104,9 +104,6 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <li>ESD_VOLUME_BASE
 : <a class="el" href="config_8h_aa50aa01cae9d01ba2b0c3a52e5fb0354.html#aa50aa01cae9d01ba2b0c3a52e5fb0354">config.h</a>
 </li>
-<li>ESDBG
-: <a class="el" href="config_8h_ad9240bd90812bedfc664ff3d4918415e.html#ad9240bd90812bedfc664ff3d4918415e">config.h</a>
-</li>
 <li>ess_backend_error
 : <a class="el" href="ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72.html#aac7bdeadfb36709a6f5ab36dda98fb72">ess_backend.h</a>
 </li>
@@ -127,14 +124,11 @@ $(document).ready(function(){initNavTree('globals.html','');});
 , <a class="el" href="ess__context_8h_aaf61f8f05f797647c229f2f8167c8e6e.html#aaf61f8f05f797647c229f2f8167c8e6e">ess_context.h</a>
 </li>
 <li>ess_backend_get_size()
-: <a class="el" href="ess__backend_8c_a6ba1bf553b596dd14d47748bec40bc9c.html#a6ba1bf553b596dd14d47748bec40bc9c">ess_backend.c</a>
-, <a class="el" href="ess__backend_8h_a6ba1bf553b596dd14d47748bec40bc9c.html#a6ba1bf553b596dd14d47748bec40bc9c">ess_backend.h</a>
+: <a class="el" href="ess__backend_8h_a6ba1bf553b596dd14d47748bec40bc9c.html#a6ba1bf553b596dd14d47748bec40bc9c">ess_backend.h</a>
+, <a class="el" href="ess__backend_8c_a6ba1bf553b596dd14d47748bec40bc9c.html#a6ba1bf553b596dd14d47748bec40bc9c">ess_backend.c</a>
 </li>
 <li>ESS_BACKEND_I2S_FORMAT
 : <a class="el" href="config_8h_a6006e6b6eac0e38b977816a742b23e03.html#a6006e6b6eac0e38b977816a742b23e03">config.h</a>
-</li>
-<li>ess_backend_i2s_generic_getFactory()
-: <a class="el" href="i2s__gerneric__backend_8h_ae6e72b30a98a97db08ffcbea65504954.html#ae6e72b30a98a97db08ffcbea65504954">i2s_gerneric_backend.h</a>
 </li>
 <li>ESS_BACKEND_NOT_FOUND
 : <a class="el" href="ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72.html#aac7bdeadfb36709a6f5ab36dda98fb72add38429c69b4419fb3ac6a66a6455834">ess_backend.h</a>
@@ -152,8 +146,8 @@ $(document).ready(function(){initNavTree('globals.html','');});
 : <a class="el" href="null__backend_8c_a33e63b8a1c6f7277f98c43ec14fc5966.html#a33e63b8a1c6f7277f98c43ec14fc5966">null_backend.c</a>
 </li>
 <li>ess_backend_null_getFactory()
-: <a class="el" href="null__backend_8c_a76cca5b79ff4c68316ec3284b78d6436.html#a76cca5b79ff4c68316ec3284b78d6436">null_backend.c</a>
-, <a class="el" href="null__backend_8h_a76cca5b79ff4c68316ec3284b78d6436.html#a76cca5b79ff4c68316ec3284b78d6436">null_backend.h</a>
+: <a class="el" href="ess__platform_8h_a76cca5b79ff4c68316ec3284b78d6436.html#a76cca5b79ff4c68316ec3284b78d6436">ess_platform.h</a>
+, <a class="el" href="null__backend_8c_a76cca5b79ff4c68316ec3284b78d6436.html#a76cca5b79ff4c68316ec3284b78d6436">null_backend.c</a>
 </li>
 <li>ess_backend_null_open()
 : <a class="el" href="null__backend_8c_a805ad6e810c45a41082aa81f7d849411.html#a805ad6e810c45a41082aa81f7d849411">null_backend.c</a>
@@ -186,25 +180,22 @@ $(document).ready(function(){initNavTree('globals.html','');});
 : <a class="el" href="ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72.html#aac7bdeadfb36709a6f5ab36dda98fb72a073e5090b0053c3db2662c79aec5de76">ess_backend.h</a>
 </li>
 <li>ess_backend_probe()
-: <a class="el" href="ess__backend_8c_a2a77a7ddc5730431b3f86ddc2750315b.html#a2a77a7ddc5730431b3f86ddc2750315b">ess_backend.c</a>
-, <a class="el" href="ess__backend_8h_a2a77a7ddc5730431b3f86ddc2750315b.html#a2a77a7ddc5730431b3f86ddc2750315b">ess_backend.h</a>
+: <a class="el" href="ess__backend_8h_a2a77a7ddc5730431b3f86ddc2750315b.html#a2a77a7ddc5730431b3f86ddc2750315b">ess_backend.h</a>
+, <a class="el" href="ess__backend_8c_a2a77a7ddc5730431b3f86ddc2750315b.html#a2a77a7ddc5730431b3f86ddc2750315b">ess_backend.c</a>
 </li>
 <li>ess_backend_probe_all()
-: <a class="el" href="ess__backend_8c_a38e02fd000a6be3510ec8f9df0a46ed7.html#a38e02fd000a6be3510ec8f9df0a46ed7">ess_backend.c</a>
-, <a class="el" href="ess__backend_8h_a38e02fd000a6be3510ec8f9df0a46ed7.html#a38e02fd000a6be3510ec8f9df0a46ed7">ess_backend.h</a>
+: <a class="el" href="ess__backend_8h_a38e02fd000a6be3510ec8f9df0a46ed7.html#a38e02fd000a6be3510ec8f9df0a46ed7">ess_backend.h</a>
+, <a class="el" href="ess__backend_8c_a38e02fd000a6be3510ec8f9df0a46ed7.html#a38e02fd000a6be3510ec8f9df0a46ed7">ess_backend.c</a>
 </li>
 <li>ess_backend_set_sample_format()
-: <a class="el" href="ess__backend_8c_a1e2f543b02ce1dae0c06b54aaf8cf9b9.html#a1e2f543b02ce1dae0c06b54aaf8cf9b9">ess_backend.c</a>
-, <a class="el" href="ess__backend_8h_a1e2f543b02ce1dae0c06b54aaf8cf9b9.html#a1e2f543b02ce1dae0c06b54aaf8cf9b9">ess_backend.h</a>
+: <a class="el" href="ess__backend_8h_a1e2f543b02ce1dae0c06b54aaf8cf9b9.html#a1e2f543b02ce1dae0c06b54aaf8cf9b9">ess_backend.h</a>
+, <a class="el" href="ess__backend_8c_a1e2f543b02ce1dae0c06b54aaf8cf9b9.html#a1e2f543b02ce1dae0c06b54aaf8cf9b9">ess_backend.c</a>
 </li>
 <li>ESS_BACKEND_UART_BAUDRAT
 : <a class="el" href="config_8h_a877be7a5994da0fbc4a90fc0d2a55dd4.html#a877be7a5994da0fbc4a90fc0d2a55dd4">config.h</a>
 </li>
 <li>ESS_BACKEND_UART_CTS
 : <a class="el" href="config_8h_ad9feb54c36cd8108c9783d51417f2f20.html#ad9feb54c36cd8108c9783d51417f2f20">config.h</a>
-</li>
-<li>ess_backend_uart_getFactory()
-: <a class="el" href="uart__backend_8h_a8e06fe41eabd305f236ef78f89100a9f.html#a8e06fe41eabd305f236ef78f89100a9f">uart_backend.h</a>
 </li>
 <li>ESS_BACKEND_UART_RTS
 : <a class="el" href="config_8h_ac892535bab324b6ba680ab071adca204.html#ac892535bab324b6ba680ab071adca204">config.h</a>
@@ -215,9 +206,6 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <li>ESS_BACKEND_UART_TXD
 : <a class="el" href="config_8h_a31e66e9e78324a884ef420474ec7565c.html#a31e66e9e78324a884ef420474ec7565c">config.h</a>
 </li>
-<li>ess_backend_udp_getFactory()
-: <a class="el" href="udp__backend_8h_a69d57bcb3dab10675191e090227d7887.html#a69d57bcb3dab10675191e090227d7887">udp_backend.h</a>
-</li>
 <li>ESS_BACKEND_UDP_PORT
 : <a class="el" href="config_8h_a8cf3fc0a0687282fd85ebdcc7442a12c.html#a8cf3fc0a0687282fd85ebdcc7442a12c">config.h</a>
 </li>
@@ -225,22 +213,22 @@ $(document).ready(function(){initNavTree('globals.html','');});
 : <a class="el" href="config_8h_ae5ea97fe059d11c446b103bf9148b9ee.html#ae5ea97fe059d11c446b103bf9148b9ee">config.h</a>
 </li>
 <li>ess_backends_entry_t
-: <a class="el" href="ess__backend_8c_ab165b21292abd511e9838af61ab3d331.html#ab165b21292abd511e9838af61ab3d331">ess_backend.c</a>
+: <a class="el" href="ess__platform__esp32_8h_ab165b21292abd511e9838af61ab3d331.html#ab165b21292abd511e9838af61ab3d331">ess_platform_esp32.h</a>
 </li>
 <li>ESS_CONTEX_ISPAUSED
 : <a class="el" href="ess__context_8h_a4b185bc84680674eb2efc8f720d3362b.html#a4b185bc84680674eb2efc8f720d3362baf33b77dd00f57d9dd7ab4909e3559dae">ess_context.h</a>
 </li>
 <li>ess_context_close()
-: <a class="el" href="ess__context_8c_a9a12468e0f826cc92385be2df34a38d4.html#a9a12468e0f826cc92385be2df34a38d4">ess_context.c</a>
-, <a class="el" href="ess__context_8h_a9a12468e0f826cc92385be2df34a38d4.html#a9a12468e0f826cc92385be2df34a38d4">ess_context.h</a>
+: <a class="el" href="ess__context_8h_a9a12468e0f826cc92385be2df34a38d4.html#a9a12468e0f826cc92385be2df34a38d4">ess_context.h</a>
+, <a class="el" href="ess__context_8c_a9a12468e0f826cc92385be2df34a38d4.html#a9a12468e0f826cc92385be2df34a38d4">ess_context.c</a>
 </li>
 <li>ess_context_create()
-: <a class="el" href="ess__context_8c_ab4416b551bfa02c67f0dd76f01eb0494.html#ab4416b551bfa02c67f0dd76f01eb0494">ess_context.c</a>
-, <a class="el" href="ess__context_8h_ab4416b551bfa02c67f0dd76f01eb0494.html#ab4416b551bfa02c67f0dd76f01eb0494">ess_context.h</a>
+: <a class="el" href="ess__context_8h_ab4416b551bfa02c67f0dd76f01eb0494.html#ab4416b551bfa02c67f0dd76f01eb0494">ess_context.h</a>
+, <a class="el" href="ess__context_8c_ab4416b551bfa02c67f0dd76f01eb0494.html#ab4416b551bfa02c67f0dd76f01eb0494">ess_context.c</a>
 </li>
 <li>ess_context_destroy()
-: <a class="el" href="ess__context_8c_a0a9e96c03cba2bfef2999c0199070d17.html#a0a9e96c03cba2bfef2999c0199070d17">ess_context.c</a>
-, <a class="el" href="ess__context_8h_a0a9e96c03cba2bfef2999c0199070d17.html#a0a9e96c03cba2bfef2999c0199070d17">ess_context.h</a>
+: <a class="el" href="ess__context_8h_a0a9e96c03cba2bfef2999c0199070d17.html#a0a9e96c03cba2bfef2999c0199070d17">ess_context.h</a>
+, <a class="el" href="ess__context_8c_a0a9e96c03cba2bfef2999c0199070d17.html#a0a9e96c03cba2bfef2999c0199070d17">ess_context.c</a>
 </li>
 <li>ESS_CONTEXT_ERROR
 : <a class="el" href="ess__context_8h_a4b185bc84680674eb2efc8f720d3362b.html#a4b185bc84680674eb2efc8f720d3362baa6ed95d92bbe32c445b0adce2fc256ce">ess_context.h</a>
@@ -261,36 +249,36 @@ $(document).ready(function(){initNavTree('globals.html','');});
 : <a class="el" href="ess__context_8h_a4b185bc84680674eb2efc8f720d3362b.html#a4b185bc84680674eb2efc8f720d3362ba29dbe40f674348273f3b23c9c5fcf62d">ess_context.h</a>
 </li>
 <li>ess_context_get_backend_info()
-: <a class="el" href="ess__context_8c_a139494e2518952f79ec0bc7d788d7612.html#a139494e2518952f79ec0bc7d788d7612">ess_context.c</a>
-, <a class="el" href="ess__context_8h_a139494e2518952f79ec0bc7d788d7612.html#a139494e2518952f79ec0bc7d788d7612">ess_context.h</a>
+: <a class="el" href="ess__context_8h_a139494e2518952f79ec0bc7d788d7612.html#a139494e2518952f79ec0bc7d788d7612">ess_context.h</a>
+, <a class="el" href="ess__context_8c_a139494e2518952f79ec0bc7d788d7612.html#a139494e2518952f79ec0bc7d788d7612">ess_context.c</a>
 </li>
 <li>ess_context_get_backend_name()
-: <a class="el" href="ess__context_8c_a1038af3d90a5a8a45d4fc35cbd425e5b.html#a1038af3d90a5a8a45d4fc35cbd425e5b">ess_context.c</a>
-, <a class="el" href="ess__context_8h_a1038af3d90a5a8a45d4fc35cbd425e5b.html#a1038af3d90a5a8a45d4fc35cbd425e5b">ess_context.h</a>
+: <a class="el" href="ess__context_8h_a1038af3d90a5a8a45d4fc35cbd425e5b.html#a1038af3d90a5a8a45d4fc35cbd425e5b">ess_context.h</a>
+, <a class="el" href="ess__context_8c_a1038af3d90a5a8a45d4fc35cbd425e5b.html#a1038af3d90a5a8a45d4fc35cbd425e5b">ess_context.c</a>
 </li>
 <li>ess_context_get_last_error()
-: <a class="el" href="ess__context_8c_ae8c078f30231eae2756ff85825dac90a.html#ae8c078f30231eae2756ff85825dac90a">ess_context.c</a>
-, <a class="el" href="ess__context_8h_ae8c078f30231eae2756ff85825dac90a.html#ae8c078f30231eae2756ff85825dac90a">ess_context.h</a>
+: <a class="el" href="ess__context_8h_ae8c078f30231eae2756ff85825dac90a.html#ae8c078f30231eae2756ff85825dac90a">ess_context.h</a>
+, <a class="el" href="ess__context_8c_ae8c078f30231eae2756ff85825dac90a.html#ae8c078f30231eae2756ff85825dac90a">ess_context.c</a>
 </li>
 <li>ess_context_init()
-: <a class="el" href="ess__context_8c_a40a2211f2793b0346c879b61b35ff63e.html#a40a2211f2793b0346c879b61b35ff63e">ess_context.c</a>
-, <a class="el" href="ess__context_8h_a40a2211f2793b0346c879b61b35ff63e.html#a40a2211f2793b0346c879b61b35ff63e">ess_context.h</a>
+: <a class="el" href="ess__context_8h_a40a2211f2793b0346c879b61b35ff63e.html#a40a2211f2793b0346c879b61b35ff63e">ess_context.h</a>
+, <a class="el" href="ess__context_8c_a40a2211f2793b0346c879b61b35ff63e.html#a40a2211f2793b0346c879b61b35ff63e">ess_context.c</a>
 </li>
 <li>ess_context_init_ex()
-: <a class="el" href="ess__context_8c_a26ae0093adaa4a6945fed6cfd31d4ae7.html#a26ae0093adaa4a6945fed6cfd31d4ae7">ess_context.c</a>
-, <a class="el" href="ess__context_8h_a26ae0093adaa4a6945fed6cfd31d4ae7.html#a26ae0093adaa4a6945fed6cfd31d4ae7">ess_context.h</a>
+: <a class="el" href="ess__context_8h_a26ae0093adaa4a6945fed6cfd31d4ae7.html#a26ae0093adaa4a6945fed6cfd31d4ae7">ess_context.h</a>
+, <a class="el" href="ess__context_8c_a26ae0093adaa4a6945fed6cfd31d4ae7.html#a26ae0093adaa4a6945fed6cfd31d4ae7">ess_context.c</a>
 </li>
 <li>ess_context_paused()
-: <a class="el" href="ess__context_8c_a6b450cd4cfd4fed931f99b05c38e0172.html#a6b450cd4cfd4fed931f99b05c38e0172">ess_context.c</a>
-, <a class="el" href="ess__context_8h_a6b450cd4cfd4fed931f99b05c38e0172.html#a6b450cd4cfd4fed931f99b05c38e0172">ess_context.h</a>
+: <a class="el" href="ess__context_8h_a6b450cd4cfd4fed931f99b05c38e0172.html#a6b450cd4cfd4fed931f99b05c38e0172">ess_context.h</a>
+, <a class="el" href="ess__context_8c_a6b450cd4cfd4fed931f99b05c38e0172.html#a6b450cd4cfd4fed931f99b05c38e0172">ess_context.c</a>
 </li>
 <li>ess_context_resume()
-: <a class="el" href="ess__context_8c_ac6041313862e70f48b8441df8136b0ba.html#ac6041313862e70f48b8441df8136b0ba">ess_context.c</a>
-, <a class="el" href="ess__context_8h_ac6041313862e70f48b8441df8136b0ba.html#ac6041313862e70f48b8441df8136b0ba">ess_context.h</a>
+: <a class="el" href="ess__context_8h_ac6041313862e70f48b8441df8136b0ba.html#ac6041313862e70f48b8441df8136b0ba">ess_context.h</a>
+, <a class="el" href="ess__context_8c_ac6041313862e70f48b8441df8136b0ba.html#ac6041313862e70f48b8441df8136b0ba">ess_context.c</a>
 </li>
 <li>ess_context_set_format()
-: <a class="el" href="ess__context_8c_a043e71fe24a24e03093860bc4b200196.html#a043e71fe24a24e03093860bc4b200196">ess_context.c</a>
-, <a class="el" href="ess__context_8h_a043e71fe24a24e03093860bc4b200196.html#a043e71fe24a24e03093860bc4b200196">ess_context.h</a>
+: <a class="el" href="ess__context_8h_a043e71fe24a24e03093860bc4b200196.html#a043e71fe24a24e03093860bc4b200196">ess_context.h</a>
+, <a class="el" href="ess__context_8c_a043e71fe24a24e03093860bc4b200196.html#a043e71fe24a24e03093860bc4b200196">ess_context.c</a>
 </li>
 <li>ess_context_status
 : <a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2e">ess_context.h</a>
@@ -320,12 +308,12 @@ $(document).ready(function(){initNavTree('globals.html','');});
 : <a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context.h</a>
 </li>
 <li>ess_context_write()
-: <a class="el" href="ess__context_8c_a6c76d2e4a5752afa7eed3fb1ee5af4a6.html#a6c76d2e4a5752afa7eed3fb1ee5af4a6">ess_context.c</a>
-, <a class="el" href="ess__context_8h_a6c76d2e4a5752afa7eed3fb1ee5af4a6.html#a6c76d2e4a5752afa7eed3fb1ee5af4a6">ess_context.h</a>
+: <a class="el" href="ess__context_8h_a6c76d2e4a5752afa7eed3fb1ee5af4a6.html#a6c76d2e4a5752afa7eed3fb1ee5af4a6">ess_context.h</a>
+, <a class="el" href="ess__context_8c_a6c76d2e4a5752afa7eed3fb1ee5af4a6.html#a6c76d2e4a5752afa7eed3fb1ee5af4a6">ess_context.c</a>
 </li>
 <li>ess_context_write_ex()
-: <a class="el" href="ess__context_8c_a16d47e3fb120401a67a90f9a63b43f8b.html#a16d47e3fb120401a67a90f9a63b43f8b">ess_context.c</a>
-, <a class="el" href="ess__context_8h_a16d47e3fb120401a67a90f9a63b43f8b.html#a16d47e3fb120401a67a90f9a63b43f8b">ess_context.h</a>
+: <a class="el" href="ess__context_8h_a16d47e3fb120401a67a90f9a63b43f8b.html#a16d47e3fb120401a67a90f9a63b43f8b">ess_context.h</a>
+, <a class="el" href="ess__context_8c_a16d47e3fb120401a67a90f9a63b43f8b.html#a16d47e3fb120401a67a90f9a63b43f8b">ess_context.c</a>
 </li>
 <li>ESS_CONTEXT_WRONGFORMAT
 : <a class="el" href="ess__context_8h_a4b185bc84680674eb2efc8f720d3362b.html#a4b185bc84680674eb2efc8f720d3362bace646ce156ae1461491206d2bfa7f902">ess_context.h</a>
@@ -343,16 +331,16 @@ $(document).ready(function(){initNavTree('globals.html','');});
 : <a class="el" href="ess__format_8h_aa73ee1bade9564053c023e42c9ea1ec9.html#aa73ee1bade9564053c023e42c9ea1ec9">ess_format.h</a>
 </li>
 <li>ess_format_get_bits()
-: <a class="el" href="ess__format_8c_a908ba8ba5f79f758076fb4eda99411b8.html#a908ba8ba5f79f758076fb4eda99411b8">ess_format.c</a>
-, <a class="el" href="ess__format_8h_a908ba8ba5f79f758076fb4eda99411b8.html#a908ba8ba5f79f758076fb4eda99411b8">ess_format.h</a>
+: <a class="el" href="ess__format_8h_a908ba8ba5f79f758076fb4eda99411b8.html#a908ba8ba5f79f758076fb4eda99411b8">ess_format.h</a>
+, <a class="el" href="ess__format_8c_a908ba8ba5f79f758076fb4eda99411b8.html#a908ba8ba5f79f758076fb4eda99411b8">ess_format.c</a>
 </li>
 <li>ess_format_get_channels()
-: <a class="el" href="ess__format_8c_ad73c9e3cb555815afe7dd2b9f5593ab2.html#ad73c9e3cb555815afe7dd2b9f5593ab2">ess_format.c</a>
-, <a class="el" href="ess__format_8h_ad73c9e3cb555815afe7dd2b9f5593ab2.html#ad73c9e3cb555815afe7dd2b9f5593ab2">ess_format.h</a>
+: <a class="el" href="ess__format_8h_ad73c9e3cb555815afe7dd2b9f5593ab2.html#ad73c9e3cb555815afe7dd2b9f5593ab2">ess_format.h</a>
+, <a class="el" href="ess__format_8c_ad73c9e3cb555815afe7dd2b9f5593ab2.html#ad73c9e3cb555815afe7dd2b9f5593ab2">ess_format.c</a>
 </li>
 <li>ess_format_get_samplerate()
-: <a class="el" href="ess__format_8c_a1ffe1ef6e4eb9a836859e1ed497dbf6a.html#a1ffe1ef6e4eb9a836859e1ed497dbf6a">ess_format.c</a>
-, <a class="el" href="ess__format_8h_a1ffe1ef6e4eb9a836859e1ed497dbf6a.html#a1ffe1ef6e4eb9a836859e1ed497dbf6a">ess_format.h</a>
+: <a class="el" href="ess__format_8h_a1ffe1ef6e4eb9a836859e1ed497dbf6a.html#a1ffe1ef6e4eb9a836859e1ed497dbf6a">ess_format.h</a>
+, <a class="el" href="ess__format_8c_a1ffe1ef6e4eb9a836859e1ed497dbf6a.html#a1ffe1ef6e4eb9a836859e1ed497dbf6a">ess_format.c</a>
 </li>
 <li>ESS_FORMAT_MONO_44100_16
 : <a class="el" href="ess__format_8h_aa73ee1bade9564053c023e42c9ea1ec9.html#aa73ee1bade9564053c023e42c9ea1ec9a99732198d6ef636a40b2566e7d5e3228">ess_format.h</a>
@@ -412,15 +400,18 @@ $(document).ready(function(){initNavTree('globals.html','');});
 : <a class="el" href="ess__format_8h_a06d5bae640b8d903863bba8722212aea.html#a06d5bae640b8d903863bba8722212aea">ess_format.h</a>
 </li>
 <li>ess_format_to_string()
-: <a class="el" href="ess__format_8c_add94d3ae146eb3612217c1d8cceaa0a4.html#add94d3ae146eb3612217c1d8cceaa0a4">ess_format.c</a>
-, <a class="el" href="ess__format_8h_add94d3ae146eb3612217c1d8cceaa0a4.html#add94d3ae146eb3612217c1d8cceaa0a4">ess_format.h</a>
+: <a class="el" href="ess__format_8h_add94d3ae146eb3612217c1d8cceaa0a4.html#add94d3ae146eb3612217c1d8cceaa0a4">ess_format.h</a>
+, <a class="el" href="ess__format_8c_add94d3ae146eb3612217c1d8cceaa0a4.html#add94d3ae146eb3612217c1d8cceaa0a4">ess_format.c</a>
 </li>
 <li>ess_get_address_family()
-: <a class="el" href="ess__socket_8c_aa50935ade25f18193eae883d52936d35.html#aa50935ade25f18193eae883d52936d35">ess_socket.c</a>
-, <a class="el" href="ess__socket_8h_aa50935ade25f18193eae883d52936d35.html#aa50935ade25f18193eae883d52936d35">ess_socket.h</a>
+: <a class="el" href="ess__socket_8h_aa50935ade25f18193eae883d52936d35.html#aa50935ade25f18193eae883d52936d35">ess_socket.h</a>
+, <a class="el" href="ess__socket_8c_aa50935ade25f18193eae883d52936d35.html#aa50935ade25f18193eae883d52936d35">ess_socket.c</a>
 </li>
 <li>ess_open_listen_socket()
 : <a class="el" href="server_8h_a6f27a2e3ea0edc392d67de2129fc8a0d.html#a6f27a2e3ea0edc392d67de2129fc8a0d">server.h</a>
+</li>
+<li>ESS_PLATFORM_ESP32
+: <a class="el" href="config_8h_a3f389a7d9b38a23281f85044251d3e5c.html#a3f389a7d9b38a23281f85044251d3e5c">config.h</a>
 </li>
 <li>ess_restart_server()
 : <a class="el" href="server_8h_a74f45549f9048accb7ca06f859298047.html#a74f45549f9048accb7ca06f859298047">server.h</a>
@@ -459,16 +450,16 @@ $(document).ready(function(){initNavTree('globals.html','');});
 : <a class="el" href="server_8h_ad9d41ce8b8cb5f8d4964fbcf23d3d00e.html#ad9d41ce8b8cb5f8d4964fbcf23d3d00e">server.h</a>
 </li>
 <li>ess_socket_close()
-: <a class="el" href="ess__socket_8c_ad94b8a0636ed08626719021449b1125e.html#ad94b8a0636ed08626719021449b1125e">ess_socket.c</a>
-, <a class="el" href="ess__socket_8h_ad8a29347a0563dd1846dbf17fc0bbe89.html#ad8a29347a0563dd1846dbf17fc0bbe89">ess_socket.h</a>
+: <a class="el" href="ess__socket_8h_ad8a29347a0563dd1846dbf17fc0bbe89.html#ad8a29347a0563dd1846dbf17fc0bbe89">ess_socket.h</a>
+, <a class="el" href="ess__socket_8c_ad94b8a0636ed08626719021449b1125e.html#ad94b8a0636ed08626719021449b1125e">ess_socket.c</a>
 </li>
 <li>ess_socket_create()
-: <a class="el" href="ess__socket_8c_a614bfd74e39c9bed10d8cc84f3432084.html#a614bfd74e39c9bed10d8cc84f3432084">ess_socket.c</a>
-, <a class="el" href="ess__socket_8h_a7f3edc0046396141d2db85c73b2fc3be.html#a7f3edc0046396141d2db85c73b2fc3be">ess_socket.h</a>
+: <a class="el" href="ess__socket_8h_a7f3edc0046396141d2db85c73b2fc3be.html#a7f3edc0046396141d2db85c73b2fc3be">ess_socket.h</a>
+, <a class="el" href="ess__socket_8c_a614bfd74e39c9bed10d8cc84f3432084.html#a614bfd74e39c9bed10d8cc84f3432084">ess_socket.c</a>
 </li>
 <li>ess_socket_create_server()
-: <a class="el" href="ess__socket_8c_a75db6093b6b0ebcdefc5cd42b33ddefc.html#a75db6093b6b0ebcdefc5cd42b33ddefc">ess_socket.c</a>
-, <a class="el" href="ess__socket_8h_a7bc966f0e1e11bb57b265fea3e2b3551.html#a7bc966f0e1e11bb57b265fea3e2b3551">ess_socket.h</a>
+: <a class="el" href="ess__socket_8h_a7bc966f0e1e11bb57b265fea3e2b3551.html#a7bc966f0e1e11bb57b265fea3e2b3551">ess_socket.h</a>
+, <a class="el" href="ess__socket_8c_a75db6093b6b0ebcdefc5cd42b33ddefc.html#a75db6093b6b0ebcdefc5cd42b33ddefc">ess_socket.c</a>
 </li>
 <li>ess_socket_error
 : <a class="el" href="ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405.html#ae801b9b95ffd15cadd2a367ef726d405">ess_socket.h</a>

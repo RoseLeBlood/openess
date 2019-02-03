@@ -1,6 +1,7 @@
 var NAVTREE =
 [
   [ "OpenESS", "index.html", [
+    [ "openess", "md__r_e_a_d_m_e.html", null ],
     [ "Modules", "modules.html", "modules" ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
@@ -28,7 +29,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"structess__context_aa9fc8c9d76be4bb5132f040e75a5966a.html#aa9fc8c9d76be4bb5132f040e75a5966a"
+"structess__backend_a9d983cf89f2f302341ec92414915e9c2.html#a9d983cf89f2f302341ec92414915e9c2"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

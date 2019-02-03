@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>OpenESS: lib/esd/ess_context.h File Reference</title>
+<title>OpenESS: include/ess_context.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">OpenESS
-   &#160;<span id="projectnumber">0.3</span>
+   &#160;<span id="projectnumber">0.2 Alpha</span>
    </div>
    <div id="projectbrief">Embedded Sound Server</div>
   </td>
@@ -71,23 +71,27 @@ $(document).ready(function(){initNavTree('ess__context_8h.html','');});
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="ess_8h_source.html">ess.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ess__format_8h_source.html">ess_format.h</a>&quot;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for ess_context.h:</div>
-<div class="dyncontent">
-<div class="center"><img src="ess__context_8h__incl.png" border="0" usemap="#lib_2esd_2ess__context_8h" alt=""/></div>
-<map name="lib_2esd_2ess__context_8h" id="lib_2esd_2ess__context_8h">
+</div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for ess_context.h:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="ess__context_8h__incl.png" border="0" usemap="#include_2ess__context_8h" alt=""/></div>
+<map name="include_2ess__context_8h" id="include_2ess__context_8h">
 <area shape="rect" id="node2" href="ess_8h.html" title="ess.h" alt="" coords="55,80,109,107"/>
 <area shape="rect" id="node4" href="ess__format_8h.html" title="ess_format.h" alt="" coords="98,155,197,181"/>
 <area shape="rect" id="node3" href="config_8h.html" title="File containing configurations. " alt="" coords="5,155,73,181"/>
 </map>
 </div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><img src="ess__context_8h__dep__incl.png" border="0" usemap="#lib_2esd_2ess__context_8hdep" alt=""/></div>
-<map name="lib_2esd_2ess__context_8hdep" id="lib_2esd_2ess__context_8hdep">
-<area shape="rect" id="node2" href="ess__backend_8c.html" title="lib/esd/ess_backend.c" alt="" coords="5,80,157,107"/>
-<area shape="rect" id="node3" href="ess__context_8c.html" title="lib/esd/ess_context.c" alt="" coords="181,80,328,107"/>
+</div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="ess__context_8h__dep__incl.png" border="0" usemap="#include_2ess__context_8hdep" alt=""/></div>
+<map name="include_2ess__context_8hdep" id="include_2ess__context_8hdep">
+<area shape="rect" id="node2" href="ess__backend_8c.html" title="src/ess_backend.c" alt="" coords="5,80,137,107"/>
+<area shape="rect" id="node3" href="ess__context_8c.html" title="src/ess_context.c" alt="" coords="161,80,288,107"/>
 </map>
 </div>
 </div>
@@ -103,30 +107,18 @@ Data Structures</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:aaf61f8f05f797647c229f2f8167c8e6e"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structess__backend.html">ess_backend</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_aaf61f8f05f797647c229f2f8167c8e6e.html#aaf61f8f05f797647c229f2f8167c8e6e">ess_backend_facktory_t</a></td></tr>
 <tr class="separator:aaf61f8f05f797647c229f2f8167c8e6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb5314cbbcb2bed6fc8b770d8ef3257c"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2e">ess_context_status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_adb5314cbbcb2bed6fc8b770d8ef3257c.html#adb5314cbbcb2bed6fc8b770d8ef3257c">ess_context_status_t</a></td></tr>
-<tr class="memdesc:adb5314cbbcb2bed6fc8b770d8ef3257c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio context stats.  <a href="ess__context_8h_adb5314cbbcb2bed6fc8b770d8ef3257c.html#adb5314cbbcb2bed6fc8b770d8ef3257c">More...</a><br /></td></tr>
-<tr class="separator:adb5314cbbcb2bed6fc8b770d8ef3257c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc807999e4f53d1867abf8a0ac682f33"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="ess__context_8h_a4b185bc84680674eb2efc8f720d3362b.html#a4b185bc84680674eb2efc8f720d3362b">ess_context_error</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_acc807999e4f53d1867abf8a0ac682f33.html#acc807999e4f53d1867abf8a0ac682f33">ess_context_error_t</a></td></tr>
 <tr class="memdesc:acc807999e4f53d1867abf8a0ac682f33"><td class="mdescLeft">&#160;</td><td class="mdescRight">ess context error codes  <a href="ess__context_8h_acc807999e4f53d1867abf8a0ac682f33.html#acc807999e4f53d1867abf8a0ac682f33">More...</a><br /></td></tr>
 <tr class="separator:acc807999e4f53d1867abf8a0ac682f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb5314cbbcb2bed6fc8b770d8ef3257c"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2e">ess_context_status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_adb5314cbbcb2bed6fc8b770d8ef3257c.html#adb5314cbbcb2bed6fc8b770d8ef3257c">ess_context_status_t</a></td></tr>
+<tr class="memdesc:adb5314cbbcb2bed6fc8b770d8ef3257c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio context stats.  <a href="ess__context_8h_adb5314cbbcb2bed6fc8b770d8ef3257c.html#adb5314cbbcb2bed6fc8b770d8ef3257c">More...</a><br /></td></tr>
+<tr class="separator:adb5314cbbcb2bed6fc8b770d8ef3257c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a8fec5766c0b3615f8f12f7948e949b"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structess__context.html">ess_context</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context_t</a></td></tr>
 <tr class="memdesc:a8a8fec5766c0b3615f8f12f7948e949b"><td class="mdescLeft">&#160;</td><td class="mdescRight">ess context  <a href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">More...</a><br /></td></tr>
 <tr class="separator:a8a8fec5766c0b3615f8f12f7948e949b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a55313861d12b8c596371cace86eacc2e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2e">ess_context_status</a> { <br />
-&#160;&#160;<a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2ea2ee2157354733689af9991d071d24d24">ESS_CONTEXT_STATUS_CREATED</a>, 
-<a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2eada32323ceb7303d5432781a25cef7f65">ESS_CONTEXT_STATUS_RUN</a>, 
-<a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2ea6f6315ef32fd6f85789578726d3d06b9">ESS_CONTEXT_STATUS_PAUSED</a>, 
-<a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2ea6ca265da2cff09e1478d2bdf8d1ebe9b">ESS_CONTEXT_STATUS_ERROR</a>, 
-<br />
-&#160;&#160;<a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2ea5941ca16a82f0818868363bd2c2fca57">ESS_CONTEXT_STATUS_RESTART</a>, 
-<a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2ea4dd76905722568e7e99af4ef39438662">ESS_CONTEXT_STATUS_CLOSE</a>
-<br />
- }<tr class="memdesc:a55313861d12b8c596371cace86eacc2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio context stats.  <a href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2e">More...</a><br /></td></tr>
-</td></tr>
-<tr class="separator:a55313861d12b8c596371cace86eacc2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b185bc84680674eb2efc8f720d3362b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_a4b185bc84680674eb2efc8f720d3362b.html#a4b185bc84680674eb2efc8f720d3362b">ess_context_error</a> { <br />
 &#160;&#160;<a class="el" href="ess__context_8h_a4b185bc84680674eb2efc8f720d3362b.html#a4b185bc84680674eb2efc8f720d3362ba5fbe734224f5adb51e59c6dd88506d60">ESS_CONTEXT_ERROR_OK</a> = 0, 
 <a class="el" href="ess__context_8h_a4b185bc84680674eb2efc8f720d3362b.html#a4b185bc84680674eb2efc8f720d3362ba020750f30895b9adb7b2814810976de0">ESS_CONTEXT_ERROR_OUTOFMEM</a> = -1, 
@@ -139,24 +131,45 @@ Enumerations</h2></td></tr>
  }<tr class="memdesc:a4b185bc84680674eb2efc8f720d3362b"><td class="mdescLeft">&#160;</td><td class="mdescRight">ess context error codes  <a href="ess__context_8h_a4b185bc84680674eb2efc8f720d3362b.html#a4b185bc84680674eb2efc8f720d3362b">More...</a><br /></td></tr>
 </td></tr>
 <tr class="separator:a4b185bc84680674eb2efc8f720d3362b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55313861d12b8c596371cace86eacc2e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2e">ess_context_status</a> { <br />
+&#160;&#160;<a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2ea2ee2157354733689af9991d071d24d24">ESS_CONTEXT_STATUS_CREATED</a>, 
+<a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2eada32323ceb7303d5432781a25cef7f65">ESS_CONTEXT_STATUS_RUN</a>, 
+<a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2ea6f6315ef32fd6f85789578726d3d06b9">ESS_CONTEXT_STATUS_PAUSED</a>, 
+<a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2ea6ca265da2cff09e1478d2bdf8d1ebe9b">ESS_CONTEXT_STATUS_ERROR</a>, 
+<br />
+&#160;&#160;<a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2ea5941ca16a82f0818868363bd2c2fca57">ESS_CONTEXT_STATUS_RESTART</a>, 
+<a class="el" href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2ea4dd76905722568e7e99af4ef39438662">ESS_CONTEXT_STATUS_CLOSE</a>
+<br />
+ }<tr class="memdesc:a55313861d12b8c596371cace86eacc2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio context stats.  <a href="ess__context_8h_a55313861d12b8c596371cace86eacc2e.html#a55313861d12b8c596371cace86eacc2e">More...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:a55313861d12b8c596371cace86eacc2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a9a12468e0f826cc92385be2df34a38d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__context_8h_acc807999e4f53d1867abf8a0ac682f33.html#acc807999e4f53d1867abf8a0ac682f33">ess_context_error_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_a9a12468e0f826cc92385be2df34a38d4.html#a9a12468e0f826cc92385be2df34a38d4">ess_context_close</a> (<a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context_t</a> *context)</td></tr>
+<tr class="memdesc:a9a12468e0f826cc92385be2df34a38d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">close the context and close the backend  <a href="ess__context_8h_a9a12468e0f826cc92385be2df34a38d4.html#a9a12468e0f826cc92385be2df34a38d4">More...</a><br /></td></tr>
+<tr class="separator:a9a12468e0f826cc92385be2df34a38d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4416b551bfa02c67f0dd76f01eb0494"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__context_8h_acc807999e4f53d1867abf8a0ac682f33.html#acc807999e4f53d1867abf8a0ac682f33">ess_context_error_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_ab4416b551bfa02c67f0dd76f01eb0494.html#ab4416b551bfa02c67f0dd76f01eb0494">ess_context_create</a> (<a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context_t</a> *context, <a class="el" href="ess__format_8h_a06d5bae640b8d903863bba8722212aea.html#a06d5bae640b8d903863bba8722212aea">ess_format_t</a> format)</td></tr>
 <tr class="memdesc:ab4416b551bfa02c67f0dd76f01eb0494"><td class="mdescLeft">&#160;</td><td class="mdescRight">creater the context  <a href="ess__context_8h_ab4416b551bfa02c67f0dd76f01eb0494.html#ab4416b551bfa02c67f0dd76f01eb0494">More...</a><br /></td></tr>
 <tr class="separator:ab4416b551bfa02c67f0dd76f01eb0494"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a9e96c03cba2bfef2999c0199070d17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__context_8h_acc807999e4f53d1867abf8a0ac682f33.html#acc807999e4f53d1867abf8a0ac682f33">ess_context_error_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_a0a9e96c03cba2bfef2999c0199070d17.html#a0a9e96c03cba2bfef2999c0199070d17">ess_context_destroy</a> (<a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context_t</a> *context)</td></tr>
+<tr class="memdesc:a0a9e96c03cba2bfef2999c0199070d17"><td class="mdescLeft">&#160;</td><td class="mdescRight">destroy and free the context  <a href="ess__context_8h_a0a9e96c03cba2bfef2999c0199070d17.html#a0a9e96c03cba2bfef2999c0199070d17">More...</a><br /></td></tr>
+<tr class="separator:a0a9e96c03cba2bfef2999c0199070d17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a139494e2518952f79ec0bc7d788d7612"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_a139494e2518952f79ec0bc7d788d7612.html#a139494e2518952f79ec0bc7d788d7612">ess_context_get_backend_info</a> (<a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context_t</a> *context)</td></tr>
+<tr class="memdesc:a139494e2518952f79ec0bc7d788d7612"><td class="mdescLeft">&#160;</td><td class="mdescRight">get using backend informations  <a href="ess__context_8h_a139494e2518952f79ec0bc7d788d7612.html#a139494e2518952f79ec0bc7d788d7612">More...</a><br /></td></tr>
+<tr class="separator:a139494e2518952f79ec0bc7d788d7612"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1038af3d90a5a8a45d4fc35cbd425e5b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_a1038af3d90a5a8a45d4fc35cbd425e5b.html#a1038af3d90a5a8a45d4fc35cbd425e5b">ess_context_get_backend_name</a> (<a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context_t</a> *context)</td></tr>
+<tr class="memdesc:a1038af3d90a5a8a45d4fc35cbd425e5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the usind backend name  <a href="ess__context_8h_a1038af3d90a5a8a45d4fc35cbd425e5b.html#a1038af3d90a5a8a45d4fc35cbd425e5b">More...</a><br /></td></tr>
+<tr class="separator:a1038af3d90a5a8a45d4fc35cbd425e5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8c078f30231eae2756ff85825dac90a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__context_8h_acc807999e4f53d1867abf8a0ac682f33.html#acc807999e4f53d1867abf8a0ac682f33">ess_context_error_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_ae8c078f30231eae2756ff85825dac90a.html#ae8c078f30231eae2756ff85825dac90a">ess_context_get_last_error</a> (<a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context_t</a> *context)</td></tr>
+<tr class="memdesc:ae8c078f30231eae2756ff85825dac90a"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the last error from context  <a href="ess__context_8h_ae8c078f30231eae2756ff85825dac90a.html#ae8c078f30231eae2756ff85825dac90a">More...</a><br /></td></tr>
+<tr class="separator:ae8c078f30231eae2756ff85825dac90a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40a2211f2793b0346c879b61b35ff63e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__context_8h_acc807999e4f53d1867abf8a0ac682f33.html#acc807999e4f53d1867abf8a0ac682f33">ess_context_error_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_a40a2211f2793b0346c879b61b35ff63e.html#a40a2211f2793b0346c879b61b35ff63e">ess_context_init</a> (<a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context_t</a> *context, const char *name)</td></tr>
 <tr class="memdesc:a40a2211f2793b0346c879b61b35ff63e"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialisiert the context  <a href="ess__context_8h_a40a2211f2793b0346c879b61b35ff63e.html#a40a2211f2793b0346c879b61b35ff63e">More...</a><br /></td></tr>
 <tr class="separator:a40a2211f2793b0346c879b61b35ff63e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26ae0093adaa4a6945fed6cfd31d4ae7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__context_8h_acc807999e4f53d1867abf8a0ac682f33.html#acc807999e4f53d1867abf8a0ac682f33">ess_context_error_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_a26ae0093adaa4a6945fed6cfd31d4ae7.html#a26ae0093adaa4a6945fed6cfd31d4ae7">ess_context_init_ex</a> (<a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context_t</a> *context, <a class="el" href="ess__backend_8h_ab1487f8c501b38b66796d0fbecb7ed7b.html#ab1487f8c501b38b66796d0fbecb7ed7b">ess_backend_facktory_t</a> *backend)</td></tr>
 <tr class="memdesc:a26ae0093adaa4a6945fed6cfd31d4ae7"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialisiert the context with a user backend  <a href="ess__context_8h_a26ae0093adaa4a6945fed6cfd31d4ae7.html#a26ae0093adaa4a6945fed6cfd31d4ae7">More...</a><br /></td></tr>
 <tr class="separator:a26ae0093adaa4a6945fed6cfd31d4ae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a12468e0f826cc92385be2df34a38d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__context_8h_acc807999e4f53d1867abf8a0ac682f33.html#acc807999e4f53d1867abf8a0ac682f33">ess_context_error_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_a9a12468e0f826cc92385be2df34a38d4.html#a9a12468e0f826cc92385be2df34a38d4">ess_context_close</a> (<a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context_t</a> *context)</td></tr>
-<tr class="memdesc:a9a12468e0f826cc92385be2df34a38d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">close the context and close the backend  <a href="ess__context_8h_a9a12468e0f826cc92385be2df34a38d4.html#a9a12468e0f826cc92385be2df34a38d4">More...</a><br /></td></tr>
-<tr class="separator:a9a12468e0f826cc92385be2df34a38d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a9e96c03cba2bfef2999c0199070d17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__context_8h_acc807999e4f53d1867abf8a0ac682f33.html#acc807999e4f53d1867abf8a0ac682f33">ess_context_error_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_a0a9e96c03cba2bfef2999c0199070d17.html#a0a9e96c03cba2bfef2999c0199070d17">ess_context_destroy</a> (<a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context_t</a> *context)</td></tr>
-<tr class="memdesc:a0a9e96c03cba2bfef2999c0199070d17"><td class="mdescLeft">&#160;</td><td class="mdescRight">destroy and free the context  <a href="ess__context_8h_a0a9e96c03cba2bfef2999c0199070d17.html#a0a9e96c03cba2bfef2999c0199070d17">More...</a><br /></td></tr>
-<tr class="separator:a0a9e96c03cba2bfef2999c0199070d17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b450cd4cfd4fed931f99b05c38e0172"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__context_8h_acc807999e4f53d1867abf8a0ac682f33.html#acc807999e4f53d1867abf8a0ac682f33">ess_context_error_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_a6b450cd4cfd4fed931f99b05c38e0172.html#a6b450cd4cfd4fed931f99b05c38e0172">ess_context_paused</a> (<a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context_t</a> *context)</td></tr>
 <tr class="memdesc:a6b450cd4cfd4fed931f99b05c38e0172"><td class="mdescLeft">&#160;</td><td class="mdescRight">set backend to standby  <a href="ess__context_8h_a6b450cd4cfd4fed931f99b05c38e0172.html#a6b450cd4cfd4fed931f99b05c38e0172">More...</a><br /></td></tr>
 <tr class="separator:a6b450cd4cfd4fed931f99b05c38e0172"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,22 +185,13 @@ Functions</h2></td></tr>
 <tr class="memitem:a16d47e3fb120401a67a90f9a63b43f8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__context_8h_acc807999e4f53d1867abf8a0ac682f33.html#acc807999e4f53d1867abf8a0ac682f33">ess_context_error_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_a16d47e3fb120401a67a90f9a63b43f8b.html#a16d47e3fb120401a67a90f9a63b43f8b">ess_context_write_ex</a> (<a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context_t</a> *context, void *buffer, int buf_size, unsigned int *wrote)</td></tr>
 <tr class="memdesc:a16d47e3fb120401a67a90f9a63b43f8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">write audio data to the backend  <a href="ess__context_8h_a16d47e3fb120401a67a90f9a63b43f8b.html#a16d47e3fb120401a67a90f9a63b43f8b">More...</a><br /></td></tr>
 <tr class="separator:a16d47e3fb120401a67a90f9a63b43f8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1038af3d90a5a8a45d4fc35cbd425e5b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_a1038af3d90a5a8a45d4fc35cbd425e5b.html#a1038af3d90a5a8a45d4fc35cbd425e5b">ess_context_get_backend_name</a> (<a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context_t</a> *context)</td></tr>
-<tr class="memdesc:a1038af3d90a5a8a45d4fc35cbd425e5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the usind backend name  <a href="ess__context_8h_a1038af3d90a5a8a45d4fc35cbd425e5b.html#a1038af3d90a5a8a45d4fc35cbd425e5b">More...</a><br /></td></tr>
-<tr class="separator:a1038af3d90a5a8a45d4fc35cbd425e5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a139494e2518952f79ec0bc7d788d7612"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_a139494e2518952f79ec0bc7d788d7612.html#a139494e2518952f79ec0bc7d788d7612">ess_context_get_backend_info</a> (<a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context_t</a> *context)</td></tr>
-<tr class="memdesc:a139494e2518952f79ec0bc7d788d7612"><td class="mdescLeft">&#160;</td><td class="mdescRight">get using backend informations  <a href="ess__context_8h_a139494e2518952f79ec0bc7d788d7612.html#a139494e2518952f79ec0bc7d788d7612">More...</a><br /></td></tr>
-<tr class="separator:a139494e2518952f79ec0bc7d788d7612"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8c078f30231eae2756ff85825dac90a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__context_8h_acc807999e4f53d1867abf8a0ac682f33.html#acc807999e4f53d1867abf8a0ac682f33">ess_context_error_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ess__context_8h_ae8c078f30231eae2756ff85825dac90a.html#ae8c078f30231eae2756ff85825dac90a">ess_context_get_last_error</a> (<a class="el" href="ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b.html#a8a8fec5766c0b3615f8f12f7948e949b">ess_context_t</a> *context)</td></tr>
-<tr class="memdesc:ae8c078f30231eae2756ff85825dac90a"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the last error from context  <a href="ess__context_8h_ae8c078f30231eae2756ff85825dac90a.html#ae8c078f30231eae2756ff85825dac90a">More...</a><br /></td></tr>
-<tr class="separator:ae8c078f30231eae2756ff85825dac90a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_97aefd0d527b934f1d99a682da8fe6a9.html">lib</a></li><li class="navelem"><a class="el" href="dir_248b79838343de614f767172412e5b92.html">esd</a></li><li class="navelem"><a class="el" href="ess__context_8h.html">ess_context.h</a></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="ess__context_8h.html">ess_context.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>

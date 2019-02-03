@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">OpenESS
-   &#160;<span id="projectnumber">0.3</span>
+   &#160;<span id="projectnumber">0.2 Alpha</span>
    </div>
    <div id="projectbrief">Embedded Sound Server</div>
   </td>
@@ -71,44 +71,39 @@ $(document).ready(function(){initNavTree('structess__backend.html','');});
  <a href="structess__backend.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ess__backend_8h_source.html">ess_backend.h</a>&gt;</code></p>
-<div class="dynheader">
-Collaboration diagram for ess_backend:</div>
-<div class="dyncontent">
-<div class="center"><img src="structess__backend__coll__graph.png" border="0" usemap="#ess__backend_coll__map" alt="Collaboration graph"/></div>
-<map name="ess__backend_coll__map" id="ess__backend_coll__map">
-</map>
-</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a8c6d047c3627513d9636c3b4fefb897a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c.html#aa3de0496a3f361a6b38684e9cb65f01c">ess_backend_error_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_a8c6d047c3627513d9636c3b4fefb897a.html#a8c6d047c3627513d9636c3b4fefb897a">ess_backend_probe</a> )(<a class="el" href="ess__format_8h_a06d5bae640b8d903863bba8722212aea.html#a06d5bae640b8d903863bba8722212aea">ess_format_t</a> format)</td></tr>
-<tr class="separator:a8c6d047c3627513d9636c3b4fefb897a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae466d865ab3a7abc722aa841924ed0b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c.html#aa3de0496a3f361a6b38684e9cb65f01c">ess_backend_error_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_ae466d865ab3a7abc722aa841924ed0b4.html#ae466d865ab3a7abc722aa841924ed0b4">ess_backend_open</a> )(<a class="el" href="ess__format_8h_a06d5bae640b8d903863bba8722212aea.html#a06d5bae640b8d903863bba8722212aea">ess_format_t</a> format)</td></tr>
-<tr class="separator:ae466d865ab3a7abc722aa841924ed0b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade8d1b28e35436e8b8a83559c1e21e17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c.html#aa3de0496a3f361a6b38684e9cb65f01c">ess_backend_error_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_ade8d1b28e35436e8b8a83559c1e21e17.html#ade8d1b28e35436e8b8a83559c1e21e17">ess_backend_close</a> )(void)</td></tr>
 <tr class="separator:ade8d1b28e35436e8b8a83559c1e21e17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e1053f7c0940950f3db4f0fdea96485"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c.html#aa3de0496a3f361a6b38684e9cb65f01c">ess_backend_error_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_a3e1053f7c0940950f3db4f0fdea96485.html#a3e1053f7c0940950f3db4f0fdea96485">ess_backend_pause</a> )(void)</td></tr>
-<tr class="separator:a3e1053f7c0940950f3db4f0fdea96485"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4987ca20d4a292cb3d7c80c30c24b934"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c.html#aa3de0496a3f361a6b38684e9cb65f01c">ess_backend_error_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_a4987ca20d4a292cb3d7c80c30c24b934.html#a4987ca20d4a292cb3d7c80c30c24b934">ess_backend_resum</a> )(void)</td></tr>
-<tr class="separator:a4987ca20d4a292cb3d7c80c30c24b934"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78829ac3209c70754830781c0c4c4222"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c.html#aa3de0496a3f361a6b38684e9cb65f01c">ess_backend_error_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_a78829ac3209c70754830781c0c4c4222.html#a78829ac3209c70754830781c0c4c4222">ess_backend_write</a> )(void *buffer, int buf_size, unsigned int *wrote)</td></tr>
-<tr class="separator:a78829ac3209c70754830781c0c4c4222"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fdb8acf9c07b481fe8d26b9e4f219bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c.html#aa3de0496a3f361a6b38684e9cb65f01c">ess_backend_error_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_a2fdb8acf9c07b481fe8d26b9e4f219bb.html#a2fdb8acf9c07b481fe8d26b9e4f219bb">ess_backend_read</a> )(void *buffer, int buf_size, unsigned int *readed)</td></tr>
-<tr class="separator:a2fdb8acf9c07b481fe8d26b9e4f219bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64ef78c35298d183fa33c43c8432db8e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c.html#aa3de0496a3f361a6b38684e9cb65f01c">ess_backend_error_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_a64ef78c35298d183fa33c43c8432db8e.html#a64ef78c35298d183fa33c43c8432db8e">ess_backend_flush</a> )(void)</td></tr>
 <tr class="separator:a64ef78c35298d183fa33c43c8432db8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae466d865ab3a7abc722aa841924ed0b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c.html#aa3de0496a3f361a6b38684e9cb65f01c">ess_backend_error_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_ae466d865ab3a7abc722aa841924ed0b4.html#ae466d865ab3a7abc722aa841924ed0b4">ess_backend_open</a> )(<a class="el" href="ess__format_8h_a06d5bae640b8d903863bba8722212aea.html#a06d5bae640b8d903863bba8722212aea">ess_format_t</a> format)</td></tr>
+<tr class="separator:ae466d865ab3a7abc722aa841924ed0b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e1053f7c0940950f3db4f0fdea96485"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c.html#aa3de0496a3f361a6b38684e9cb65f01c">ess_backend_error_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_a3e1053f7c0940950f3db4f0fdea96485.html#a3e1053f7c0940950f3db4f0fdea96485">ess_backend_pause</a> )(void)</td></tr>
+<tr class="separator:a3e1053f7c0940950f3db4f0fdea96485"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c6d047c3627513d9636c3b4fefb897a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c.html#aa3de0496a3f361a6b38684e9cb65f01c">ess_backend_error_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_a8c6d047c3627513d9636c3b4fefb897a.html#a8c6d047c3627513d9636c3b4fefb897a">ess_backend_probe</a> )(<a class="el" href="ess__format_8h_a06d5bae640b8d903863bba8722212aea.html#a06d5bae640b8d903863bba8722212aea">ess_format_t</a> format)</td></tr>
+<tr class="separator:a8c6d047c3627513d9636c3b4fefb897a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fdb8acf9c07b481fe8d26b9e4f219bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c.html#aa3de0496a3f361a6b38684e9cb65f01c">ess_backend_error_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_a2fdb8acf9c07b481fe8d26b9e4f219bb.html#a2fdb8acf9c07b481fe8d26b9e4f219bb">ess_backend_read</a> )(void *buffer, int buf_size, unsigned int *readed)</td></tr>
+<tr class="separator:a2fdb8acf9c07b481fe8d26b9e4f219bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4987ca20d4a292cb3d7c80c30c24b934"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c.html#aa3de0496a3f361a6b38684e9cb65f01c">ess_backend_error_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_a4987ca20d4a292cb3d7c80c30c24b934.html#a4987ca20d4a292cb3d7c80c30c24b934">ess_backend_resum</a> )(void)</td></tr>
+<tr class="separator:a4987ca20d4a292cb3d7c80c30c24b934"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d983cf89f2f302341ec92414915e9c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c.html#aa3de0496a3f361a6b38684e9cb65f01c">ess_backend_error_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_a9d983cf89f2f302341ec92414915e9c2.html#a9d983cf89f2f302341ec92414915e9c2">ess_backend_set_sample_format</a> )(<a class="el" href="ess__format_8h_a06d5bae640b8d903863bba8722212aea.html#a06d5bae640b8d903863bba8722212aea">ess_format_t</a> format)</td></tr>
 <tr class="separator:a9d983cf89f2f302341ec92414915e9c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a729f16eead1faf64c4d493872e4309b5"><td class="memItemLeft" align="right" valign="top">const char *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_a729f16eead1faf64c4d493872e4309b5.html#a729f16eead1faf64c4d493872e4309b5">get_name</a> )(void)</td></tr>
-<tr class="separator:a729f16eead1faf64c4d493872e4309b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78829ac3209c70754830781c0c4c4222"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c.html#aa3de0496a3f361a6b38684e9cb65f01c">ess_backend_error_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_a78829ac3209c70754830781c0c4c4222.html#a78829ac3209c70754830781c0c4c4222">ess_backend_write</a> )(void *buffer, int buf_size, unsigned int *wrote)</td></tr>
+<tr class="separator:a78829ac3209c70754830781c0c4c4222"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc8bf06755a702736730f43f75c815b9"><td class="memItemLeft" align="right" valign="top">const char *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_acc8bf06755a702736730f43f75c815b9.html#acc8bf06755a702736730f43f75c815b9">get_info</a> )(void)</td></tr>
 <tr class="separator:acc8bf06755a702736730f43f75c815b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a729f16eead1faf64c4d493872e4309b5"><td class="memItemLeft" align="right" valign="top">const char *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structess__backend_a729f16eead1faf64c4d493872e4309b5.html#a729f16eead1faf64c4d493872e4309b5">get_name</a> )(void)</td></tr>
+<tr class="separator:a729f16eead1faf64c4d493872e4309b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ess backend factory </p>
 <p>Embedded Sound System Backend factory. Backend vtable </p>
+
+<p class="definition">Definition at line <a class="el" href="ess__backend_8h_source.html#l00060">60</a> of file <a class="el" href="ess__backend_8h_source.html">ess_backend.h</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>lib/esd/<a class="el" href="ess__backend_8h_source.html">ess_backend.h</a></li>
+<li>include/<a class="el" href="ess__backend_8h_source.html">ess_backend.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
