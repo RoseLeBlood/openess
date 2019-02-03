@@ -1,3 +1,6 @@
+#include "ess_format.h"
+#include "config.h"
+#include "ess_backend.h"
 #include "backend/null_backend.h"
 
 
@@ -33,6 +36,9 @@ ess_backend_error_t  ess_backend_null_resume( void ){
   g_null_paused = 0;
   return ESS_BACKEND_OK;
 }
+ess_backend_error_t  ess_backend_null_set_sample_format(ess_format_t format) {
+  return ESS_BACKEND_OK;
+}
 const char* ess_backend_null_get_name(void) {
   return "null";
 }
@@ -48,6 +54,7 @@ ess_backend_facktory_t _null_backend_config = {
   ess_backend_null_write,
   ess_backend_null_read,
   ess_backend_null_flush,
+  ess_backend_null_set_sample_format,
   ess_backend_null_get_name,
   ess_backend_null_get_info
 };

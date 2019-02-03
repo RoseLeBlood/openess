@@ -1,0 +1,102 @@
+.TH "lib/esd/server.h" 3 "Sun Feb 3 2019" "Version 0.3" "OpenESS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/esd/server.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'esd\&.h'\fP
+.br
+\fC#include 'context\&.h'\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBess_server\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef enum \fBess_server_status\fP \fBess_server_status_t\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBess_server\fP \fBess_server_t\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBess_server_status\fP { \fBESS_SERVER_STATUS_STOP\fP, \fBESS_SERVER_STATUS_RUN\fP, \fBESS_SERVER_STATUS_STANDBY\fP, \fBESS_SERVER_STATUS_ERROR\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBess_server_start\fP (\fBess_server_t\fP *server, const char *backend_name)"
+.br
+.ti -1c
+.RI "int \fBess_server_stop\fP (\fBess_server_t\fP *server)"
+.br
+.ti -1c
+.RI "int \fBess_restart_server\fP (\fBess_server_t\fP *server)"
+.br
+.ti -1c
+.RI "int \fBess_standby_server\fP (\fBess_server_t\fP *server)"
+.br
+.ti -1c
+.RI "int \fBess_resume_server\fP (\fBess_server_t\fP *server)"
+.br
+.ti -1c
+.RI "int \fBess_open_listen_socket\fP (\fBess_server_t\fP *server)"
+.br
+.ti -1c
+.RI "void \fBess_set_audio_buffer\fP (\fBess_server_t\fP *server)"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef enum \fBess_server_status\fP \fBess_server_status_t\fP"
+
+.SS "typedef struct \fBess_server\fP  \fBess_server_t\fP"
+
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBess_server_status\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIESS_SERVER_STATUS_STOP \fP\fP
+.TP
+\fB\fIESS_SERVER_STATUS_RUN \fP\fP
+.TP
+\fB\fIESS_SERVER_STATUS_STANDBY \fP\fP
+.TP
+\fB\fIESS_SERVER_STATUS_ERROR \fP\fP
+.SH "Function Documentation"
+.PP 
+.SS "int ess_open_listen_socket (\fBess_server_t\fP * server)"
+
+.SS "int ess_restart_server (\fBess_server_t\fP * server)"
+
+.SS "int ess_resume_server (\fBess_server_t\fP * server)"
+
+.SS "int ess_server_start (\fBess_server_t\fP * server, const char * backend_name)"
+
+.SS "int ess_server_stop (\fBess_server_t\fP * server)"
+
+.SS "void ess_set_audio_buffer (\fBess_server_t\fP * server)"
+
+.SS "int ess_standby_server (\fBess_server_t\fP * server)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OpenESS from the source code\&.

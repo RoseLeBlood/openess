@@ -1,6 +1,7 @@
+#include "ess_format.h"
 #include "config.h"
 #ifdef ESS_ENABLE_BACKEND_UDP
-
+#include "ess_backend.h"
 #include "backend/udp_backend.h"
 
 
@@ -9,12 +10,12 @@ int g_udp_paused = 0;
 
 ess_backend_error_t ess_backend_udp_probe(ess_format_t format) {
   switch (format) {
-    case ESS_FORMAT_MONO_92000_8:
-    case ESS_FORMAT_MONO_92000_16:
-    case ESS_FORMAT_MONO_92000_24:
-    case ESS_FORMAT_STEREO_92000_8:
-    case ESS_FORMAT_STEREO_92000_16:
-    case ESS_FORMAT_STEREO_92000_24:
+    case ESS_FORMAT_MONO_96000_8:
+    case ESS_FORMAT_MONO_96000_16:
+    case ESS_FORMAT_MONO_96000_24:
+    case ESS_FORMAT_STEREO_96000_8:
+    case ESS_FORMAT_STEREO_96000_16:
+    case ESS_FORMAT_STEREO_96000_24:
       break;
     default:
       return ESS_BACKEND_OK;
@@ -48,6 +49,9 @@ ess_backend_error_t  ess_backend_udp_resume( void ){
   g_udp_paused = 0;
   return ESS_BACKEND_OK;
 }
+ess_backend_error_t  ess_backend_udp_set_sample_format(ess_format_t format) {
+  return ESS_BACKEND_OK;
+}
 const char* ess_backend_udp_get_name(void) {
   #ifdef ESS_BACKEND_UDP_USING_IP6
   return "udp6-backend";
@@ -67,6 +71,7 @@ ess_backend_facktory_t _udp_backend_config = {
   ess_backend_udp_write,
   ess_backend_udp_read,
   ess_backend_udp_flush,
+  ess_backend_udp_set_sample_format,
   ess_backend_udp_get_name,
   ess_backend_udp_get_info
 };

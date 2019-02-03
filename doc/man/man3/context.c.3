@@ -1,0 +1,362 @@
+.TH "lib/esd/context.c" 3 "Sat Feb 2 2019" "Version 0.3" "OpenESS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/esd/context.c \- ESS context source\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'context\&.h'\fP
+.br
+\fC#include 'backend\&.h'\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <esp_log\&.h>\fP
+.br
+\fC#include 'config\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBLOG_TAG\fP   'EssC'"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBess_context_error_t\fP \fBess_context_create\fP (\fBess_context_t\fP *context, \fBess_format_t\fP format)"
+.br
+.RI "creater the context "
+.ti -1c
+.RI "\fBess_context_error_t\fP \fBess_context_init\fP (\fBess_context_t\fP *context, const char *name)"
+.br
+.RI "initialisiert the context "
+.ti -1c
+.RI "\fBess_context_error_t\fP \fBess_context_init_ex\fP (\fBess_context_t\fP *context, \fBess_backend_facktory_t\fP *backend)"
+.br
+.RI "initialisiert the context with a user backend "
+.ti -1c
+.RI "\fBess_context_error_t\fP \fBess_context_close\fP (\fBess_context_t\fP *context)"
+.br
+.RI "close the context and close the backend "
+.ti -1c
+.RI "\fBess_context_error_t\fP \fBess_context_destroy\fP (\fBess_context_t\fP *context)"
+.br
+.RI "destroy and free the context "
+.ti -1c
+.RI "\fBess_context_error_t\fP \fBess_context_paused\fP (\fBess_context_t\fP *context)"
+.br
+.RI "set backend to standby "
+.ti -1c
+.RI "\fBess_context_error_t\fP \fBess_context_resume\fP (\fBess_context_t\fP *context)"
+.br
+.RI "set backend to run "
+.ti -1c
+.RI "\fBess_context_error_t\fP \fBess_context_set_format\fP (\fBess_context_t\fP *context, \fBess_format_t\fP *format)"
+.br
+.RI "set new format to the context - close and reinit "
+.ti -1c
+.RI "unsigned int \fBess_context_write\fP (\fBess_context_t\fP *context, void *buffer, int buf_size)"
+.br
+.RI "write audio data to the backend "
+.ti -1c
+.RI "\fBess_context_error_t\fP \fBess_context_write_ex\fP (\fBess_context_t\fP *context, void *buffer, int buf_size, unsigned int *wrote)"
+.br
+.RI "write audio data to the backend "
+.ti -1c
+.RI "const char * \fBess_context_get_backend_name\fP (\fBess_context_t\fP *context)"
+.br
+.RI "get the usind backend name "
+.ti -1c
+.RI "const char * \fBess_context_get_backend_info\fP (\fBess_context_t\fP *context)"
+.br
+.RI "get using backend informations "
+.ti -1c
+.RI "\fBess_context_error_t\fP \fBess_context_get_last_error\fP (\fBess_context_t\fP *context)"
+.br
+.RI "get the last error from context "
+.in -1c
+.SH "Detailed Description"
+.PP 
+ESS context source\&. 
+
+
+.PP
+\fBAuthor:\fP
+.RS 4
+Anna Sopdia Schröck 
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+30 Januar 20119 
+.RE
+.PP
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define LOG_TAG   'EssC'"
+
+.SH "Function Documentation"
+.PP 
+.SS "\fBess_context_error_t\fP ess_context_close (\fBess_context_t\fP * context)"
+
+.PP
+close the context and close the backend 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcontext\fP the context 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+when ok then ESS_CONTEXT_ERROR_OK 
+.RE
+.PP
+
+.SS "\fBess_context_error_t\fP ess_context_create (\fBess_context_t\fP * context, \fBess_format_t\fP format)"
+
+.PP
+creater the context 
+.PP
+.nf
+ess_context_t context;
+ess_context_create(&context, ESS_FORMAT_STEREO_92000_24);
+
+.fi
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcontext\fP the context 
+.br
+\fIformat\fP the using context format 
+.RE
+.PP
+
+.SS "\fBess_context_error_t\fP ess_context_destroy (\fBess_context_t\fP * context)"
+
+.PP
+destroy and free the context 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcontext\fP the context 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+when ok then ESS_CONTEXT_ERROR_OK 
+.RE
+.PP
+
+.SS "const char* ess_context_get_backend_info (\fBess_context_t\fP * context)"
+
+.PP
+get using backend informations 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcontext\fP the context 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the using backend informations 
+.RE
+.PP
+
+.SS "const char* ess_context_get_backend_name (\fBess_context_t\fP * context)"
+
+.PP
+get the usind backend name 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcontext\fP the context 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the using backend name 
+.RE
+.PP
+
+.SS "\fBess_context_error_t\fP ess_context_get_last_error (\fBess_context_t\fP * context)"
+
+.PP
+get the last error from context 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcontext\fP the context 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the last error 
+.RE
+.PP
+
+.SS "\fBess_context_error_t\fP ess_context_init (\fBess_context_t\fP * context, const char * name)"
+
+.PP
+initialisiert the context 
+.PP
+.nf
+ess_context_t context;
+
+ess_context_create(&context, ESS_FORMAT_STEREO_92000_24);
+ess_context_init_ex(&context, "uart");
+
+.fi
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcontext\fP the context 
+.br
+\fIname\fP the name of the using backend 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+when ok then ESS_CONTEXT_ERROR_OK 
+.RE
+.PP
+
+.SS "\fBess_context_error_t\fP ess_context_init_ex (\fBess_context_t\fP * context, \fBess_backend_facktory_t\fP * backend)"
+
+.PP
+initialisiert the context with a user backend 
+.PP
+.nf
+ess_context_t context;
+ess_backend_facktory_t* user_backend = { ,,, };
+
+ess_context_create(&context, ESS_FORMAT_STEREO_92000_24);
+
+ess_context_init_ex(&context, user_backend);
+
+.fi
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcontext\fP the context 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+when ok then ESS_CONTEXT_ERROR_OK 
+.RE
+.PP
+
+.SS "\fBess_context_error_t\fP ess_context_paused (\fBess_context_t\fP * context)"
+
+.PP
+set backend to standby 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcontext\fP the context 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+when ok then ESS_CONTEXT_ERROR_OK 
+.RE
+.PP
+
+.SS "\fBess_context_error_t\fP ess_context_resume (\fBess_context_t\fP * context)"
+
+.PP
+set backend to run 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcontext\fP the context 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+when ok then ESS_CONTEXT_ERROR_OK 
+.RE
+.PP
+
+.SS "\fBess_context_error_t\fP ess_context_set_format (\fBess_context_t\fP * context, \fBess_format_t\fP * format)"
+
+.PP
+set new format to the context - close and reinit 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcontext\fP the context 
+.br
+\fIformat\fP the new using format 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+when ok then ESS_CONTEXT_ERROR_OK 
+.RE
+.PP
+
+.SS "unsigned int ess_context_write (\fBess_context_t\fP * context, void * buffer, int buf_size)"
+
+.PP
+write audio data to the backend 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcontext\fP the context 
+.br
+\fIbuffer\fP the audio pcm data 
+.br
+\fIbuf_size\fP the size of the buffer 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the written data\&. 
+.RE
+.PP
+
+.SS "\fBess_context_error_t\fP ess_context_write_ex (\fBess_context_t\fP * context, void * buffer, int buf_size, unsigned int * wrote)"
+
+.PP
+write audio data to the backend 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcontext\fP the context 
+.br
+\fIbuffer\fP the audio pcm data 
+.br
+\fIbuf_size\fP the size of the buffer 
+.br
+\fIwrote\fP the written data 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+when ok then ESS_CONTEXT_ERROR_OK 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OpenESS from the source code\&.

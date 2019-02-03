@@ -28,8 +28,6 @@
 #ifndef __ESS_BACKEND_NULL_H__
 #define __ESS_BACKEND_NULL_H__
 
-#include "backend.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -24,7 +24,7 @@
  * @brief File containing configurations
  *
  */
- 
+
 #ifndef __ESD_CONFIG_H__
 #define __ESD_CONFIG_H__
 
@@ -60,6 +60,8 @@
 	#define I2S_EXTERNAL_DAC_LRCLK 25
 	#define I2S_EXTERNAL_DAC_DOUT 22
 	#define  I2S_EXTERNAL_DAC_DIN   -1                                                    //Not used
+
+  #define ESS_BACKEND_I2S_FORMAT ESS_FORMAT_STEREO_96000_16
 #endif
 
 

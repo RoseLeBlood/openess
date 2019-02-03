@@ -1,0 +1,148 @@
+.TH "lib/esd/ess_socket.c" 3 "Sun Feb 3 2019" "Version 0.3" "OpenESS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/esd/ess_socket.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'ess_socket\&.h'\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <sys/socket\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include <netdb\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <errno\&.h>\fP
+.br
+\fC#include <sys/ioctl\&.h>\fP
+.br
+\fC#include <netinet/in\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBess_socket_fam_t\fP \fBess_get_address_family\fP (const char *hostname)"
+.br
+.RI "Look up which address families a host supports\&. "
+.ti -1c
+.RI "\fBess_socket_error_t\fP \fBess_socket_create\fP (\fBess_socket_t\fP *socket, \fBess_socket_fam_t\fP fam, \fBess_socket_pro_t\fP protokoll, const char *hostname, unsigned short port)"
+.br
+.RI "setup the \fBess_socket\fP structure "
+.ti -1c
+.RI "\fBess_socket_error_t\fP \fBess_socket_create_server\fP (\fBess_socket_t\fP *_socket)"
+.br
+.RI "Create a TCP or UDP server socket\&. "
+.ti -1c
+.RI "\fBess_socket_error_t\fP \fBess_socket_close\fP (\fBess_socket_t\fP *_socket)"
+.br
+.RI "Close a socket\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBess_socket_fam_t\fP ess_get_address_family (const char * hostname)"
+
+.PP
+Look up which address families a host supports\&. If you want to send a datagram to a host but you don't know if it supports IPv4 or IPv6, use this function\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIhostname\fP The hostname of the host you want to look up\&.
+.RE
+.PP
+\fBReturn values:\fP
+.RS 4
+\fIESS_SOCKET_FAMILY_IP4\fP Host supports only IP4 
+.br
+\fIESS_SOCKET_FAMILY_IP6\fP Host supports IP6 and IP4 
+.br
+\fI<0\fP Error\&. 
+.RE
+.PP
+
+.SS "\fBess_socket_error_t\fP ess_socket_close (\fBess_socket_t\fP * socket)"
+
+.PP
+Close a socket\&. This function closes a socket\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsocket\fP the using socket struct
+.RE
+.PP
+\fBReturn values:\fP
+.RS 4
+\fIESS_SOCKET_ERROR_OK\fP Closed socket successfully 
+.br
+\fIESS_SOCKET_ERROR_NULL\fP socket was NULL 
+.br
+\fIESS_SOCKET_ERROR_CLOSE\fP Socket was already closed (other errors are very unlikely to occur) 
+.RE
+.PP
+
+.SS "\fBess_socket_error_t\fP ess_socket_create (\fBess_socket_t\fP * socket, \fBess_socket_fam_t\fP fam, \fBess_socket_pro_t\fP protokoll, const char * addr, unsigned short port)"
+
+.PP
+setup the \fBess_socket\fP structure 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsocket\fP the ess_socket_t structure to fill
+.br
+\fIprotokoll\fP \fCESS_SOCKET_PROTO_STREAM\fP, \fCESS_SOCKET_PROTO_DRAM\fP or \fCESS_SOCKET_PROTO_DRAM_LITE\fP 
+.br
+\fIfam\fP Either \fCESS_SOCKET_FAMILY_IP4\fP, \fCESS_SOCKET_FAMILY_IP6\fP or \fCESS_SOCKET_FAMILY_BOTH\fP; latter means that the DNS resolver should decide\&. 
+.br
+\fIbind_addr\fP Address to bind to\&. If you want to bind to every address use '0\&.0\&.0\&.0' or '::' (IPv6 wildcard) 
+.br
+\fIport\fP The port to bind to\&.
+.RE
+.PP
+\fBReturn values:\fP
+.RS 4
+\fIESS_SOCKET_ERROR_OK\fP 
+.RE
+.PP
+
+.SS "\fBess_socket_error_t\fP ess_socket_create_server (\fBess_socket_t\fP * socket)"
+
+.PP
+Create a TCP or UDP server socket\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsocket\fP the using socket struct 
+.RE
+.PP
+\fBReturn values:\fP
+.RS 4
+\fIESS_SOCKET_ERROR_OK\fP the socket was created - TCP socket are listin 
+.br
+\fIESS_SOCKET_ERROR_UNSPEC\fP socket alwas created 
+.br
+\fIESS_SOCKET_ERROR_UNSPEC_PROTOKOL\fP unknown protokol  ESS_SOCKET_ERROR_UNSPEC_FAMILY unknown family 
+.br
+\fIESS_SOCKET_ERROR_GETADDR\fP 
+.br
+\fIESS_SOCKET_ERROR_BIND\fP error to call bind 
+.br
+\fIESS_SOCKET_ERROR_NULL\fP socket was NULL 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OpenESS from the source code\&.

@@ -1,0 +1,81 @@
+.TH "ess_backend" 3 "Sun Feb 3 2019" "Version 0.3" "OpenESS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ess_backend \- ess backend factory  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ess_backend\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "\fBess_backend_error_t\fP(* \fBess_backend_probe\fP )(\fBess_format_t\fP format)"
+.br
+.ti -1c
+.RI "\fBess_backend_error_t\fP(* \fBess_backend_open\fP )(\fBess_format_t\fP format)"
+.br
+.ti -1c
+.RI "\fBess_backend_error_t\fP(* \fBess_backend_close\fP )(void)"
+.br
+.ti -1c
+.RI "\fBess_backend_error_t\fP(* \fBess_backend_pause\fP )(void)"
+.br
+.ti -1c
+.RI "\fBess_backend_error_t\fP(* \fBess_backend_resum\fP )(void)"
+.br
+.ti -1c
+.RI "\fBess_backend_error_t\fP(* \fBess_backend_write\fP )(void *buffer, int buf_size, unsigned int *wrote)"
+.br
+.ti -1c
+.RI "\fBess_backend_error_t\fP(* \fBess_backend_read\fP )(void *buffer, int buf_size, unsigned int *readed)"
+.br
+.ti -1c
+.RI "\fBess_backend_error_t\fP(* \fBess_backend_flush\fP )(void)"
+.br
+.ti -1c
+.RI "\fBess_backend_error_t\fP(* \fBess_backend_set_sample_format\fP )(\fBess_format_t\fP format)"
+.br
+.ti -1c
+.RI "const char *(* \fBget_name\fP )(void)"
+.br
+.ti -1c
+.RI "const char *(* \fBget_info\fP )(void)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+ess backend factory 
+
+Embedded Sound System Backend factory\&. Backend vtable 
+.SH "Field Documentation"
+.PP 
+.SS "\fBess_backend_error_t\fP(*  ess_backend::ess_backend_close) (void)"
+close the backend 
+.SS "\fBess_backend_error_t\fP(*  ess_backend::ess_backend_flush) (void)"
+flush backend data 
+.SS "\fBess_backend_error_t\fP(*  ess_backend::ess_backend_open) (\fBess_format_t\fP format)"
+open the backend 
+.SS "\fBess_backend_error_t\fP(*  ess_backend::ess_backend_pause) (void)"
+paused the backend 
+.SS "\fBess_backend_error_t\fP(*  ess_backend::ess_backend_probe) (\fBess_format_t\fP format)"
+probe the backend - format supported? 
+.SS "\fBess_backend_error_t\fP(*  ess_backend::ess_backend_read) (void *buffer, int buf_size, unsigned int *readed)"
+read data from the backend 
+.SS "\fBess_backend_error_t\fP(*  ess_backend::ess_backend_resum) (void)"
+resumed the backend 
+.SS "\fBess_backend_error_t\fP(*  ess_backend::ess_backend_set_sample_format) (\fBess_format_t\fP format)"
+set new sample format 
+.SS "\fBess_backend_error_t\fP(*  ess_backend::ess_backend_write) (void *buffer, int buf_size, unsigned int *wrote)"
+write data to the backend 
+.SS "const char*(*  ess_backend::get_info) (void)"
+get infos for this backend 
+.SS "const char*(*  ess_backend::get_name) (void)"
+get the name for this backend 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OpenESS from the source code\&.

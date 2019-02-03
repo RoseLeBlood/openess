@@ -1,0 +1,164 @@
+.TH "lib/esd/config.h" 3 "Sun Feb 3 2019" "Version 0.3" "OpenESS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/esd/config.h \- File containing configurations\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBESS_ENABLE_BACKEND_UART\fP"
+.br
+.RI "If defined then UART backend available\&. "
+.ti -1c
+.RI "#define \fBESS_ENABLE_BACKEND_UDP\fP"
+.br
+.RI "If defined then UDP backend available\&. "
+.ti -1c
+.RI "#define \fBESS_ENABLE_BACKEND_I2S\fP"
+.br
+.RI "If defined then I2S backend available\&. "
+.ti -1c
+.RI "#define \fBESS_BACKEND_UART_BAUDRAT\fP   115200"
+.br
+.ti -1c
+.RI "#define \fBESS_BACKEND_UART_TXD\fP   (GPIO_NUM_4)"
+.br
+.ti -1c
+.RI "#define \fBESS_BACKEND_UART_RXD\fP   (GPIO_NUM_5)"
+.br
+.ti -1c
+.RI "#define \fBESS_BACKEND_UART_RTS\fP   (UART_PIN_NO_CHANGE)"
+.br
+.ti -1c
+.RI "#define \fBESS_BACKEND_UART_CTS\fP   (UART_PIN_NO_CHANGE)"
+.br
+.ti -1c
+.RI "#define \fBESS_BACKEND_UDP_PORT\fP   1522"
+.br
+.ti -1c
+.RI "#define \fBESS_BACKEND_UDP_USING_IP6\fP   1"
+.br
+.ti -1c
+.RI "#define \fBI2S_EXTERNAL_DAC_BCK\fP   26"
+.br
+.ti -1c
+.RI "#define \fBI2S_EXTERNAL_DAC_LRCLK\fP   25"
+.br
+.ti -1c
+.RI "#define \fBI2S_EXTERNAL_DAC_DOUT\fP   22"
+.br
+.ti -1c
+.RI "#define \fBI2S_EXTERNAL_DAC_DIN\fP   \-1"
+.br
+.ti -1c
+.RI "#define \fBESS_BACKEND_I2S_FORMAT\fP   \fBESS_FORMAT_STEREO_96000_16\fP"
+.br
+.ti -1c
+.RI "#define \fBESDBG\fP"
+.br
+.ti -1c
+.RI "#define \fBESD_BUF_SIZE\fP   (1024)"
+.br
+.ti -1c
+.RI "#define \fBESD_MAX_WRITE_SIZE\fP   (6 * 512)"
+.br
+.ti -1c
+.RI "#define \fBESD_KEY_LEN\fP   (16)"
+.br
+.ti -1c
+.RI "#define \fBESD_DEFAULT_PORT\fP   (16001)"
+.br
+.ti -1c
+.RI "#define \fBESD_DEFAULT_RATE\fP   (48000)"
+.br
+.ti -1c
+.RI "#define \fBESD_NAME_MAX\fP   (128)"
+.br
+.ti -1c
+.RI "#define \fBESD_ENDIAN_KEY\fP   ( (unsigned int) ( ('E' << 24) + ('N' << 16) + ('D' << 8) + ('N') ) )"
+.br
+.ti -1c
+.RI "#define \fBESD_VOLUME_BASE\fP   (256)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+File containing configurations\&. 
+
+
+.PP
+\fBAuthor:\fP
+.RS 4
+Anna Sopdia Schröck 
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+30 Januar 20119 
+.RE
+.PP
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define ESD_BUF_SIZE   (1024)"
+
+.SS "#define ESD_DEFAULT_PORT   (16001)"
+
+.SS "#define ESD_DEFAULT_RATE   (48000)"
+
+.SS "#define ESD_ENDIAN_KEY   ( (unsigned int) ( ('E' << 24) + ('N' << 16) + ('D' << 8) + ('N') ) )"
+
+.SS "#define ESD_KEY_LEN   (16)"
+
+.SS "#define ESD_MAX_WRITE_SIZE   (6 * 512)"
+
+.SS "#define ESD_NAME_MAX   (128)"
+
+.SS "#define ESD_VOLUME_BASE   (256)"
+
+.SS "#define ESDBG"
+
+.SS "#define ESS_BACKEND_I2S_FORMAT   \fBESS_FORMAT_STEREO_96000_16\fP"
+
+.SS "#define ESS_BACKEND_UART_BAUDRAT   115200"
+
+.SS "#define ESS_BACKEND_UART_CTS   (UART_PIN_NO_CHANGE)"
+
+.SS "#define ESS_BACKEND_UART_RTS   (UART_PIN_NO_CHANGE)"
+
+.SS "#define ESS_BACKEND_UART_RXD   (GPIO_NUM_5)"
+
+.SS "#define ESS_BACKEND_UART_TXD   (GPIO_NUM_4)"
+
+.SS "#define ESS_BACKEND_UDP_PORT   1522"
+
+.SS "#define ESS_BACKEND_UDP_USING_IP6   1"
+
+.SS "#define ESS_ENABLE_BACKEND_I2S"
+
+.PP
+If defined then I2S backend available\&. 
+.SS "#define ESS_ENABLE_BACKEND_UART"
+
+.PP
+If defined then UART backend available\&. 
+.SS "#define ESS_ENABLE_BACKEND_UDP"
+
+.PP
+If defined then UDP backend available\&. 
+.SS "#define I2S_EXTERNAL_DAC_BCK   26"
+
+.SS "#define I2S_EXTERNAL_DAC_DIN   \-1"
+
+.SS "#define I2S_EXTERNAL_DAC_DOUT   22"
+
+.SS "#define I2S_EXTERNAL_DAC_LRCLK   25"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OpenESS from the source code\&.

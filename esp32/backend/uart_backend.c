@@ -1,6 +1,7 @@
+#include "ess_format.h"
 #include "config.h"
 #ifdef ESS_ENABLE_BACKEND_UART
-
+#include "ess_backend.h"
 #include "backend/uart_backend.h"
 
 #include <stdio.h>
@@ -64,6 +65,12 @@ ess_backend_error_t  ess_backend_uart_resume( void ){
   g_uart_paused = false;
   return ESS_BACKEND_OK;
 }
+ess_backend_error_t  ess_backend_uart_set_sample_format(ess_format_t format) {
+  const char* buffer = ess_format_to_string(format);
+  uart_write_bytes(UART_NUM_1, (const char *) buffer, strlen(buffer));
+
+  return ESS_BACKEND_OK;
+}
 const char* ess_backend_uart_get_name(void) {
   return "uart1 backend";
 }
@@ -80,6 +87,7 @@ ess_backend_facktory_t _uart_backend_config = {
   ess_backend_uart_write,
   ess_backend_uart_read,
   ess_backend_uart_flush,
+  ess_backend_uart_set_sample_format,
   ess_backend_uart_get_name,
   ess_backend_uart_get_info
 };

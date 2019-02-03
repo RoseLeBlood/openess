@@ -1,0 +1,176 @@
+.TH "lib/esd/ess_backend.c" 3 "Sun Feb 3 2019" "Version 0.3" "OpenESS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/esd/ess_backend.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'ess_backend\&.h'\fP
+.br
+\fC#include 'ess_context\&.h'\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <esp_log\&.h>\fP
+.br
+\fC#include 'backend/uart_backend\&.h'\fP
+.br
+\fC#include 'backend/i2s_gerneric_backend\&.h'\fP
+.br
+\fC#include 'backend/udp_backend\&.h'\fP
+.br
+\fC#include 'backend/null_backend\&.h'\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBess_backends_entry\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBLOG_TAG\fP   'EssB'"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBess_backends_entry\fP \fBess_backends_entry_t\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBess_backend_get_size\fP ()"
+.br
+.RI "get the size of using backends "
+.ti -1c
+.RI "\fBess_backend_error_t\fP \fBess_backend_probe_all\fP (\fBess_format_t\fP format, \fBess_backend_facktory_t\fP **backend)"
+.br
+.RI "Check that all backends support the specified format and return all working backends\&. "
+.ti -1c
+.RI "\fBess_backend_error_t\fP \fBess_backend_probe\fP (const char *name, \fBess_format_t\fP format, \fBess_backend_facktory_t\fP *backend)"
+.br
+.RI "Checked the backend with the specified name and returns it if successful\&. "
+.ti -1c
+.RI "\fBess_backend_error_t\fP \fBess_backend_set_sample_format\fP (\fBess_backend_facktory_t\fP *backend, \fBess_format_t\fP forma)"
+.br
+.RI "set sample format "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBess_backends_entry_t\fP \fBbackends_list\fP []"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define LOG_TAG   'EssB'"
+
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fBess_backends_entry\fP \fBess_backends_entry_t\fP"
+
+.SH "Function Documentation"
+.PP 
+.SS "int ess_backend_get_size ()"
+
+.PP
+get the size of using backends 
+.PP
+\fBReturns:\fP
+.RS 4
+number of support backends 
+.RE
+.PP
+
+.SS "\fBess_backend_error_t\fP ess_backend_probe (const char * name, \fBess_format_t\fP format, \fBess_backend_facktory_t\fP * backend)"
+
+.PP
+Checked the backend with the specified name and returns it if successful\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIName\fP of the backend 
+.br
+\fIformat\fP the format to probe 
+.br
+\fIbackend\fP return the working backend\&. if not null 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+if backend support : ESS_BACKEND_OK else ESS_BACKEND_ERROR_WRONG_FORMAT or ESS_BACKEND_ERROR 
+.RE
+.PP
+
+.SS "\fBess_backend_error_t\fP ess_backend_probe_all (\fBess_format_t\fP format, \fBess_backend_facktory_t\fP ** backend)"
+
+.PP
+Check that all backends support the specified format and return all working backends\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIformat\fP the format to probe 
+.br
+\fIbackend\fP return all working backends\&. if not null 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+number of working backends or ESS_BACKEND_ERROR_WRONG_FORMAT when no backend supported 
+.RE
+.PP
+
+.SS "\fBess_backend_error_t\fP ess_backend_set_sample_format (\fBess_backend_facktory_t\fP * backend, \fBess_format_t\fP forma)"
+
+.PP
+set sample format 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIthe\fP usiing backend 
+.br
+\fIsample\fP format 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+if backend support : ESS_BACKEND_OK else ESS_BACKEND_ERROR_WRONG_FORMAT or ESS_BACKEND_ERROR 
+.RE
+.PP
+
+.SH "Variable Documentation"
+.PP 
+.SS "\fBess_backends_entry_t\fP backends_list[]"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+
+  { "uart", ess_backend_uart_getFactory},
+
+
+  { "i2s_generic", ess_backend_i2s_generic_getFactory},
+
+
+  { "udp", ess_backend_udp_getFactory},
+
+  { "null", ess_backend_null_getFactory},
+}
+.fi
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OpenESS from the source code\&.

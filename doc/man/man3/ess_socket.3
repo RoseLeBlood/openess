@@ -1,0 +1,59 @@
+.TH "ess_socket" 3 "Sun Feb 3 2019" "Version 0.3" "OpenESS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ess_socket \- hold all socket managment importend data  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ess_socket\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "char \fBhostname\fP [32]"
+.br
+.ti -1c
+.RI "unsigned short \fBport\fP"
+.br
+.ti -1c
+.RI "int \fBsocket\fP"
+.br
+.ti -1c
+.RI "int \fBretval\fP"
+.br
+.ti -1c
+.RI "\fBess_socket_pro_t\fP \fBprotokol\fP"
+.br
+.ti -1c
+.RI "\fBess_socket_fam_t\fP \fBfamily\fP"
+.br
+.ti -1c
+.RI "\fBess_socket_status_t\fP \fBstatus\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+hold all socket managment importend data 
+.SH "Field Documentation"
+.PP 
+.SS "\fBess_socket_fam_t\fP ess_socket::family"
+\fCESS_SOCKET_FAMILY_IP4\fP, \fCESS_SOCKET_FAMILY_IP6\fP or \fCESS_SOCKET_FAMILY_BOTH\fP; latter means that the DNS resolver should decide\&. 
+.SS "char ess_socket::hostname[32]"
+Address to bind\&. If you want to bind to every address use '0\&.0\&.0\&.0' or '::' (IPv6 wildcard) 
+.SS "unsigned short ess_socket::port"
+The port to bind\&. 
+.SS "\fBess_socket_pro_t\fP ess_socket::protokol"
+\fCESS_SOCKET_PROTO_STREAM\fP, \fCESS_SOCKET_PROTO_DRAM\fP or \fCESS_SOCKET_PROTO_DRAM_LITE\fP - the using protokoll 
+.SS "int ess_socket::retval"
+
+.SS "int ess_socket::socket"
+The socket 
+.SS "\fBess_socket_status_t\fP ess_socket::status"
+\fBess_socket\fP status 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OpenESS from the source code\&.

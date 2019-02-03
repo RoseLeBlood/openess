@@ -1,0 +1,180 @@
+.TH "lib/esd/format.h" 3 "Sat Feb 2 2019" "Version 0.3" "OpenESS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/esd/format.h \- Embedded Sound Server Audio format list\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef enum \fBess_format\fP \fBess_format_t\fP"
+.br
+.RI "Audio Format list\&. "
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBess_format\fP { \fBESS_FORMAT_MONO_44100_8\fP, \fBESS_FORMAT_MONO_44100_16\fP, \fBESS_FORMAT_MONO_44100_24\fP, \fBESS_FORMAT_MONO_48000_8\fP, \fBESS_FORMAT_MONO_48000_16\fP, \fBESS_FORMAT_MONO_48000_24\fP, \fBESS_FORMAT_MONO_96000_8\fP, \fBESS_FORMAT_MONO_96000_16\fP, \fBESS_FORMAT_MONO_96000_24\fP, \fBESS_FORMAT_STEREO_44100_8\fP, \fBESS_FORMAT_STEREO_44100_16\fP, \fBESS_FORMAT_STEREO_44100_24\fP, \fBESS_FORMAT_STEREO_48000_8\fP, \fBESS_FORMAT_STEREO_48000_16\fP, \fBESS_FORMAT_STEREO_48000_24\fP, \fBESS_FORMAT_STEREO_96000_8\fP, \fBESS_FORMAT_STEREO_96000_16\fP, \fBESS_FORMAT_STEREO_96000_24\fP }
+.RI "Audio Format list\&. ""
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBess_format_get_channels\fP (\fBess_format_t\fP format)"
+.br
+.RI "Help to get the number of channels of the format\&. "
+.ti -1c
+.RI "int \fBess_format_get_samplerate\fP (\fBess_format_t\fP format)"
+.br
+.RI "Help to get the samplerate of the format\&. "
+.ti -1c
+.RI "int \fBess_format_get_bits\fP (\fBess_format_t\fP format)"
+.br
+.RI "Help to get bits of the format\&. "
+.ti -1c
+.RI "const char * \fBess_format_to_string\fP (\fBess_format_t\fP format)"
+.br
+.RI "Help to get the string of the format\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Embedded Sound Server Audio format list\&. 
+
+
+.PP
+\fBAuthor:\fP
+.RS 4
+Anna Sopdia Schröck 
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+30 Januar 20119 
+.RE
+.PP
+
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef enum \fBess_format\fP \fBess_format_t\fP"
+
+.PP
+Audio Format list\&. 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBess_format\fP"
+
+.PP
+Audio Format list\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIESS_FORMAT_MONO_44100_8 \fP\fP
+samplerate 44100 8 Bit Mono 
+.TP
+\fB\fIESS_FORMAT_MONO_44100_16 \fP\fP
+samplerate 44100 16 Bit Mono 
+.TP
+\fB\fIESS_FORMAT_MONO_44100_24 \fP\fP
+samplerate 44100 24 Bit Mono 
+.TP
+\fB\fIESS_FORMAT_MONO_48000_8 \fP\fP
+samplerate 48000 8 Bit Mono 
+.TP
+\fB\fIESS_FORMAT_MONO_48000_16 \fP\fP
+samplerate 48000 16 Bit Mono 
+.TP
+\fB\fIESS_FORMAT_MONO_48000_24 \fP\fP
+samplerate 48000 24 Bit Mono 
+.TP
+\fB\fIESS_FORMAT_MONO_96000_8 \fP\fP
+samplerate 96000 8 Bit Mono 
+.TP
+\fB\fIESS_FORMAT_MONO_96000_16 \fP\fP
+samplerate 96000 16 Bit Mono 
+.TP
+\fB\fIESS_FORMAT_MONO_96000_24 \fP\fP
+samplerate 96000 24 Bit Mono 
+.TP
+\fB\fIESS_FORMAT_STEREO_44100_8 \fP\fP
+samplerate 44100 8 Bit Stereo 
+.TP
+\fB\fIESS_FORMAT_STEREO_44100_16 \fP\fP
+samplerate 44100 16 Bit Stereo 
+.TP
+\fB\fIESS_FORMAT_STEREO_44100_24 \fP\fP
+samplerate 44100 24 Bit Stereo 
+.TP
+\fB\fIESS_FORMAT_STEREO_48000_8 \fP\fP
+samplerate 48000 8 Bit Stereo 
+.TP
+\fB\fIESS_FORMAT_STEREO_48000_16 \fP\fP
+samplerate 48000 16 Bit Stereo 
+.TP
+\fB\fIESS_FORMAT_STEREO_48000_24 \fP\fP
+samplerate 96000 24 Bit Stereo 
+.TP
+\fB\fIESS_FORMAT_STEREO_96000_8 \fP\fP
+samplerate 96000 8 Bit Stereo 
+.TP
+\fB\fIESS_FORMAT_STEREO_96000_16 \fP\fP
+samplerate 96000 16 Bit Stereo 
+.TP
+\fB\fIESS_FORMAT_STEREO_96000_24 \fP\fP
+samplerate 96000 24 Bit Stereo 
+.SH "Function Documentation"
+.PP 
+.SS "int ess_format_get_bits (\fBess_format_t\fP format)"
+
+.PP
+Help to get bits of the format\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIformat\fP The format to parse 
+.RE
+.PP
+
+.SS "int ess_format_get_channels (\fBess_format_t\fP format)"
+
+.PP
+Help to get the number of channels of the format\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIformat\fP The format to parse 
+.RE
+.PP
+
+.SS "int ess_format_get_samplerate (\fBess_format_t\fP format)"
+
+.PP
+Help to get the samplerate of the format\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIformat\fP The format to parse 
+.RE
+.PP
+
+.SS "const char* ess_format_to_string (\fBess_format_t\fP format)"
+
+.PP
+Help to get the string of the format\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIformat\fP The format to parse 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OpenESS from the source code\&.
