@@ -26,8 +26,8 @@ static i2s_config_t std_config = {
     .bits_per_sample = 16,                                                                                     //16-bit per channel
     .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,                           //2-channels
     .communication_format = I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB,
-    .dma_buf_count = 3,
-    .dma_buf_len = ESD_BUF_SIZE,                                                      //
+    .dma_buf_count = ESS_BACKEND_I2S_DMA_BUF_COUNT,
+    .dma_buf_len = ESS_BACKEND_I2S_DMA_BUF_SIZE,                                                      //
     .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1                                //Interrupt level 1
 };
 

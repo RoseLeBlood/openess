@@ -41,8 +41,14 @@
 int ess_backend_get_size() {
   return sizeof(backends_list) / sizeof(ess_backends_entry_t);
 }
-
-
+ess_backend_facktory_t* ess_backend_create_factory_list() {
+  return (ess_backend_facktory_t*)malloc(sizeof(ess_backend_facktory_t) * ess_backend_get_size());
+}
+ess_backend_error_t ess_backend_destroy_factory_list(ess_backend_facktory_t* list) {
+  if(list == 0)  return ESS_BACKEND_ERROR_NULL;
+  free(list);
+  return ESS_BACKEND_OK;
+}
 ess_backend_error_t ess_backend_probe_all(ess_format_t format, ess_backend_facktory_t** backend) {
   ess_backend_facktory_t *factory;
 
