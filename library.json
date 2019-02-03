@@ -1,6 +1,6 @@
 {
   "name": "OpenESS",
-  "keywords": "json, rest, http, web",
+  "keywords": "soundserver, audio,server,ess,sound,socket,esp32",
   "description": "An elegant and efficient Sound Server for embedded systems",
   "homepage": "https://github.com/RoseLeBlood/openess",
   "repository": {
