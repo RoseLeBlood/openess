@@ -1,5 +1,5 @@
 <div>
- <img src="/docs/Logo-OpenESS.png" width="256" align="left"> 
+ <img src="https://github.com/RoseLeBlood/openess/blob/master/docs/Logo-OpenESS.png" width="256" align="left"> 
  <div align="center">
   <h1>Open Embedded Sound Server</h1>
    <h3>
@@ -41,7 +41,7 @@ _For more examples and usage, please refer to the [Wiki][wiki] or the _
   * add platform abstraction layer
 * 0.0.1
     * Work in progress
-    
+
 ## Meta
 
 Anna_Sophia Schröck – [@padersophia](https://twitter.com/padersophia) – annasophia.schroeck@gmail.com
