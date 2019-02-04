@@ -28,7 +28,9 @@
  *
  */
 #include "ess_socket.h"
+#include "esp_log.h"
 
+#include "config.h"
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -66,7 +68,8 @@ ess_socket_error_t ess_socket_create(ess_socket_t* socket, ess_socket_fam_t fam,
   socket->protokol = protokoll;
   socket->port = port;
   socket->status = ESS_SOCKET_STATUS_CREATED;
-  strcpy(socket->hostname, hostname);
+  strncpy(socket->hostname, hostname, strlen(socket->hostname));
+  socket->hostname_len = strlen(hostname);
 
   return ESS_SOCKET_ERROR_OK;
 }
@@ -131,5 +134,114 @@ ess_socket_error_t ess_socket_close(ess_socket_t* _socket) {
     _socket->status = ESS_SOCKET_STATUS_ERROR;
     return ESS_SOCKET_ERROR_CLOSE;
   }
+  return ESS_SOCKET_ERROR_OK;
+}
+
+ess_socket_error_t ess_socket_end_write(ess_socket_t* _socket) {
+  if(_socket == 0) return ESS_SOCKET_ERROR_NULL;
+
+  if (  (_socket->retval  = shutdown(_socket->socket,  SHUT_WR) )  != 0 ) {
+    _socket->status = ESS_SOCKET_STATUS_ERROR;
+    return ESS_SOCKET_ERROR_CLOSE;
+  }
+  return ESS_SOCKET_ERROR_OK;
+
+  if (  (_socket->retval  = shutdown(_socket->socket,  SHUT_WR) )  != 0 ) {
+    _socket->status = ESS_SOCKET_STATUS_ERROR;
+    return ESS_SOCKET_ERROR_CLOSE;
+  }
+}
+
+ess_socket_error_t ess_socket_end_read(ess_socket_t* _socket) {
+  if(_socket == 0) return ESS_SOCKET_ERROR_NULL;
+
+  if (  (_socket->retval  = shutdown(_socket->socket,  SHUT_RD) )  != 0 ) {
+    _socket->status = ESS_SOCKET_STATUS_ERROR;
+    return ESS_SOCKET_ERROR_CLOSE;
+  }
+  return ESS_SOCKET_ERROR_OK;
+}
+
+ess_socket_error_t ess_socket_end(ess_socket_t* _socket) {
+  if(_socket == 0) return ESS_SOCKET_ERROR_NULL;
+
+  if (  (_socket->retval  = shutdown(_socket->socket,  SHUT_RD) )  != 0 ) {
+    _socket->status = ESS_SOCKET_STATUS_ERROR;
+    return ESS_SOCKET_ERROR_CLOSE;
+  }
+  if (  (_socket->retval  = shutdown(_socket->socket,  SHUT_WR) )  != 0 ) {
+    _socket->status = ESS_SOCKET_STATUS_ERROR;
+    return ESS_SOCKET_ERROR_CLOSE;
+  }
+
+  return ESS_SOCKET_ERROR_OK;
+}
+
+ess_socket_t* ess_socket_accept(ess_socket_t* server_socket, ess_socket_error_t* error_code, int flasg) {
+  if(server_socket == 0) { if(error_code != 0) *error_code = ESS_SOCKET_ERROR_NULL; return 0; }
+
+  ess_socket_t *client_socket;
+  int  nbl = 0;
+  struct sockaddr_in incoming;
+  struct sockaddr_in6 incoming6;
+  unsigned int size_in6 = sizeof(struct sockaddr_in6);
+  unsigned int size_in = sizeof(struct sockaddr_in);
+
+  //socklen_t addrlen = sizeof(struct sockaddr_storage);
+
+  client_socket = (ess_socket_t*)malloc(sizeof(ess_socket_t));
+  if(client_socket == 0) return 0;
+
+  client_socket->hostname_len = INET6_ADDRSTRLEN;
+
+  if(server_socket->family == ESS_SOCKET_FAMILY_IP4) {
+
+    if ( (client_socket->socket = accept(server_socket->socket, (struct sockaddr*)&incoming, (socklen_t *) &size_in)) != 0) {
+      if(error_code != 0) *error_code = ESS_SOCKET_ERROR_NULL; return 0;
+    }
+
+    if(server_socket->protokol == ESS_SOCKET_PROTO_STREAM) {
+      server_socket->port  = ntohs( incoming.sin_port );
+		  long addr = ntohl( incoming.sin_addr.s_addr );
+
+      snprintf(client_socket->hostname,  client_socket->hostname_len, "%03u.%03u.%03u.%03u",
+        (unsigned int) addr >> 24,  (unsigned int) (addr >> 16) % 256,  (unsigned int) (addr >> 8) % 256,
+        (unsigned int) addr % 256 );
+      client_socket->hostname_len = strlen(client_socket->hostname);
+    }
+
+  } else {
+
+    if ( (client_socket->socket = accept( server_socket->socket,(struct sockaddr *)&incoming6, (socklen_t *) &size_in6 )) != 0) {
+      if(error_code != 0) *error_code = ESS_SOCKET_ERROR_NULL;
+      return 0;
+    }
+
+    char addrbuf[INET6_ADDRSTRLEN];
+    addrbuf[0] = '\0';
+
+    client_socket->port = ntohs( incoming6.sin6_port );
+
+    if ( inet_ntop( AF_INET6, &(incoming6.sin6_addr), addrbuf, sizeof(addrbuf) )) {
+      ESP_LOGI("EssS", "client from :%s/%d", addrbuf, client_socket->port);
+      strncpy(client_socket->hostname,  addrbuf,  strlen(addrbuf) );
+    }
+  }
+
+  if ( ioctl( client_socket->socket , FIONBIO, &nbl ) < 0 ) {
+    ESP_LOGE("EssS", "(%02d) couldn't turn on blocking for client",  client_socket->socket );
+    client_socket->status = ESS_SOCKET_STATUS_ERROR;
+    if(error_code != 0) { *error_code = ESS_SOCKET_ERROR_NULL; return 0; }
+
+    close(client_socket->socket);
+  }
+  return client_socket;
+}
+ess_socket_error_t ess_socket_set_buffer(ess_socket_t* _socket,  unsigned int rec_buffer_size,  unsigned int send_buffer_size) {
+  if(_socket == 0) return ESS_SOCKET_ERROR_NULL;
+
+  setsockopt( _socket->socket, SOL_SOCKET, SO_SNDBUF, &send_buffer_size, sizeof( send_buffer_size ) );
+  setsockopt( _socket->socket, SOL_SOCKET, SO_RCVBUF, &rec_buffer_size, sizeof( rec_buffer_size ) );
+
   return ESS_SOCKET_ERROR_OK;
 }

@@ -78,7 +78,8 @@ typedef enum ess_socket_error {
  * @brief hold all socket managment importend data
  */
 typedef struct ess_socket {
-  char hostname[32];                     /**<  Address to bind. If you want to bind to every address use "0.0.0.0" or "::" (IPv6 wildcard) */
+  char hostname[64];                     /**<  Address to bind or client hostname. If you want to bind to every address use "0.0.0.0" or "::" (IPv6 wildcard) */
+  unsigned int hostname_len;            /** < hostname length*/
   unsigned int port;                    /**<  The port to bind. */
 
   int socket;                                   /**<  The socket */
@@ -131,6 +132,22 @@ ess_socket_error_t ess_socket_create(ess_socket_t* socket, ess_socket_fam_t fam,
 */
 ess_socket_error_t ess_socket_create_server(ess_socket_t* socket);
 /**
+ * @brief accept a connection attempt on a server socket.
+ *
+ * This function accepts an incoming connection on a server socket.
+ *
+ * @param server_socket the server socket
+ * @param error_code
+ * @param accept_flags flags for `accept4(2)`
+ *
+ * @retval != 0 A the client socket
+ * @retval NULL Error  see paramerter 'error_code'
+ */
+ess_socket_t* ess_socket_accept(ess_socket_t* server_socket, ess_socket_error_t* error_code, int flasg);
+
+
+
+/**
  * @brief Close a socket.
  *
  * This function closes a socket.
@@ -143,7 +160,50 @@ ess_socket_error_t ess_socket_create_server(ess_socket_t* socket);
  */
 ess_socket_error_t ess_socket_close(ess_socket_t* socket);
 
+/**
+ * @brief perform a `shutdown(2)` call on a socket  (write)
+ *
+ * This function closes a socket.
+ *
+ * @param socket the using socket struct
+ *
+ * @retval ESS_SOCKET_ERROR_OK Closed socket successfully
+ * @retval ESS_SOCKET_ERROR_NULL socket was NULL
+ * @retval ESS_SOCKET_ERROR_CLOSE Socket was already closed (other errors are very unlikely to occur)
+ */
+ess_socket_error_t ess_socket_end_write(ess_socket_t* socket);
+/**
+ * @brief perform a `shutdown(2)` call on a socket  (read)
+ *
+ * @param socket the using socket struct
+ *
+ * @retval ESS_SOCKET_ERROR_OK Closed socket successfully
+ * @retval ESS_SOCKET_ERROR_NULL socket was NULL
+ * @retval ESS_SOCKET_ERROR_CLOSE Socket was already closed (other errors are very unlikely to occur)
+ */
+ess_socket_error_t ess_socket_end_read(ess_socket_t* socket);
+/**
+ * @brief perform a `shutdown(2)` call on a socket  (read/write)
+ *
+ * @param socket the using socket struct
+ *
+ * @retval ESS_SOCKET_ERROR_OK Closed socket successfully
+ * @retval ESS_SOCKET_ERROR_NULL socket was NULL
+ * @retval ESS_SOCKET_ERROR_CLOSE Socket was already closed (other errors are very unlikely to occur)
+ */
+ess_socket_error_t ess_socket_end(ess_socket_t* socket);
 
-
+/**
+ * @brief set send and recive buffer size of the socket
+ *
+ * @param socket the using socket struct
+ * @param rec_buffer_size the size of the raed buffer
+ * @param send_buffer_size the size of the send buffer
+ * @retval ESS_SOCKET_ERROR_OK Closed socket successfully
+ * @retval ESS_SOCKET_ERROR_NULL socket was NULL
+ * @retval ESS_SOCKET_ERROR_CLOSE Socket was already closed (other errors are very unlikely to occur)
+ */
+ess_socket_error_t ess_socket_set_buffer(ess_socket_t* socket, unsigned int rec_buffer_size,
+   unsigned int send_buffer_size);
 
 #endif
