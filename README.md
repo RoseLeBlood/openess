@@ -1,10 +1,15 @@
+---
+layout: page
+title: OpenESS Project Page
+---
+
 <div>
  <img src="https://roseleblood.github.io/openess/Logo-OpenESS.png" width="256" align="left"> 
  <div align="left">
   <h1>Open Embedded Sound Server</h1>
    <h3>
        Website
-     </a>
+     <a href="https://roseleblood.github.io/">Website</a>
      <span> | </span>
      <a href="https://github.com/RoseLeBlood/openess/wiki">
        Wiki
@@ -139,3 +144,4 @@ _For more examples and usage, please refer to the [Wiki][wiki]
     * Work in progress
 
 [wiki]: https://github.com/RoseLeBlood/openess/wiki
+
