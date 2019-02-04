@@ -46,7 +46,7 @@ ess_backend_facktory_t* ess_backend_create_factory_list() {
 }
 ess_backend_error_t ess_backend_destroy_factory_list(ess_backend_facktory_t* list) {
   if(list == 0)  return ESS_BACKEND_ERROR_NULL;
-  free(list);
+  //free(list);
   return ESS_BACKEND_OK;
 }
 ess_backend_error_t ess_backend_probe_all(ess_format_t format, ess_backend_facktory_t** backend) {
@@ -58,10 +58,10 @@ ess_backend_error_t ess_backend_probe_all(ess_format_t format, ess_backend_fackt
     factory = backends_list[i].getFactory();
 
     if(factory->ess_backend_probe(format) != ESS_BACKEND_OK) {
-      ESP_LOGE(LOG_TAG, "Failed to probe backend \"%s\"", backends_list[n].name);
+      ESP_LOGE(LOG_TAG, "Failed to probe backend \"%s\"", backends_list[i].name);
       continue;
     } else {
-      ESP_LOGI(LOG_TAG,"Possible format for backend: \"%s\" ", backends_list[n].name);
+      ESP_LOGI(LOG_TAG,"Possible format for backend: \"%s\" ", backends_list[i].name);
       if(backend) { backend[n] = factory; }
       n++;
     }
@@ -89,4 +89,13 @@ ess_backend_error_t ess_backend_probe(const char* name, ess_format_t format, ess
 ess_backend_error_t ess_backend_set_sample_format(ess_backend_facktory_t* backend,  ess_format_t forma) {
   if(backend == 0) return ESS_BACKEND_ERROR_NULL;
   return backend->ess_backend_set_sample_format(forma);
+}
+void* ess_backend_get_user_daten(ess_backend_facktory_t* backend) {
+  if(backend == 0)  return 0;
+  return  backend->user_daten;
+}
+ess_backend_error_t ess_backend_set_user_daten(ess_backend_facktory_t* backend, void* data) {
+  if(backend == 0)  return ESS_BACKEND_ERROR_NULL;
+  backend->user_daten = data;
+  return ESS_BACKEND_OK;
 }

@@ -58,18 +58,20 @@ typedef enum ess_backend_error {
  * Embedded Sound System Backend factory. Backend vtable
  */
 typedef struct ess_backend {
-  ess_backend_error_t (* ess_backend_probe )(ess_format_t format);/**< probe the backend - format supported? */
-  ess_backend_error_t (* ess_backend_open )(ess_format_t format); /**< open the backend */
+  ess_backend_error_t (* ess_backend_probe )(const ess_format_t format);/**< probe the backend - format supported? */
+  ess_backend_error_t (* ess_backend_open )(const ess_format_t format); /**< open the backend */
   ess_backend_error_t (*  ess_backend_close)( void ); /**< close the backend */
   ess_backend_error_t (*  ess_backend_pause)( void ); /**< paused the backend */
   ess_backend_error_t (*  ess_backend_resum)( void ); /**< resumed the backend */
-  ess_backend_error_t  (*  ess_backend_write)( void *buffer, int buf_size, unsigned int* wrote ); /**< write data to the backend */
-  ess_backend_error_t  (*  ess_backend_read)( void *buffer, int buf_size, unsigned int* readed );/**< read data from the backend */
+  ess_backend_error_t  (*  ess_backend_write)( void *buffer, unsigned int buf_size, unsigned int* wrote ); /**< write data to the backend */
+  ess_backend_error_t  (*  ess_backend_read)( void *buffer, unsigned int buf_size, unsigned int* readed );/**< read data from the backend */
   ess_backend_error_t (*   ess_backend_flush)( void ); /**< flush backend data  */
   ess_backend_error_t (* ess_backend_set_sample_format)(ess_format_t format); /**<  set new sample format */
 
   const char* (* get_name) (void); /**< get the name for this backend */
   const char* (* get_info)(void);  /**< get infos for this backend */
+
+  void* user_daten;
 } ess_backend_facktory_t;
 
 
@@ -79,30 +81,9 @@ typedef struct ess_backend {
  * @return number of support backends
  */
 int ess_backend_get_size();
-/**
- * @brief create a backend factory list for probe
- * the list have 0 entrys
- * @code
- * ess_backend_facktory_t* backend_list = ess_backend_create_factory_list();
- * ess_backend_probe_all(ESS_FORMAT_STEREO_96000_24,  &backend_list);
- * ....
- * ess_backend_destroy_factory_list(backend_list);
- * @endcode
- * @return a pointer of a new ess_backend_facktory_t list
- */
-ess_backend_facktory_t* ess_backend_create_factory_list();
-/**
- * @brief destroy the backend factory list
- * @code
- * ess_backend_facktory_t* backend_list = ess_backend_create_factory_list();
- * ess_backend_probe_all(ESS_FORMAT_STEREO_96000_24,  &backend_list);
- * ....
- * ess_backend_destroy_factory_list(backend_list);
- * @endcode
- * @retval ESS_BACKEND_OK
- * @retval ESS_BACKEND_ERROR_NULL
- */
-ess_backend_error_t ess_backend_destroy_factory_list(ess_backend_facktory_t* list);
+
+ess_backend_facktory_t* ess_backend_create_factory_list() ;
+ess_backend_error_t ess_backend_destroy_factory_list(ess_backend_facktory_t* list) ;
 /**
  * @brief Check that all backends support the specified format and return all working backends.
  * @param format the format to probe
@@ -110,9 +91,9 @@ ess_backend_error_t ess_backend_destroy_factory_list(ess_backend_facktory_t* lis
  * @return  number of working backends or errir codes
  * @retval ESS_BACKEND_ERROR_WRONG_FORMAT when no  backend  supported
  */
-ess_backend_error_t ess_backend_probe_all(ess_format_t format, ess_backend_facktory_t** backend);
+ess_backend_error_t ess_backend_probe_all(const ess_format_t format, ess_backend_facktory_t** backend);
 /**
- * @brief Checked the backend with the specified name and returns it if successful.
+ * @brief checked the backend with the specified name and returns it if successful.
  * @param Name of the backend
  * @param format the format to probe
  * @param backend return the working backend. if not null
@@ -120,17 +101,32 @@ ess_backend_error_t ess_backend_probe_all(ess_format_t format, ess_backend_fackt
  * @retval ESS_BACKEND_ERROR_WRONG_FORMAT
  * @retval ESS_BACKEND_ERROR
  */
-ess_backend_error_t ess_backend_probe(const char* name, ess_format_t format, ess_backend_facktory_t* backend);
+ess_backend_error_t ess_backend_probe(const char* name, const ess_format_t format, ess_backend_facktory_t* backend);
 
 /**
  * @brief set sample format
- * @param the usiing backend
- * @param sample format
- * @return if backend support : ESS_BACKEND_OK else ESS_BACKEND_ERROR_WRONG_FORMAT or ESS_BACKEND_ERROR
+ * @param [in] backend the usiing backend
+ * @param [in] forma sample format
+ * @retval  ESS_BACKEND_OK if backend support
+ * @retval ESS_BACKEND_ERROR_WRONG_FORMAT
+ * @retval ESS_BACKEND_ERROR
  */
-ess_backend_error_t ess_backend_set_sample_format(ess_backend_facktory_t* backend,  ess_format_t forma);
+ess_backend_error_t ess_backend_set_sample_format(ess_backend_facktory_t* backend,  const ess_format_t forma);
 
-
+/**
+ * @brief get user daten from backend (internal user)
+ * @param [in] the using backend
+ * @return the user daten
+ */
+void* ess_backend_get_user_daten(ess_backend_facktory_t* backend);
+/**
+ * @brief set user daten from backend (internal user)
+ * @param[in] the usiing backend
+ * @param [in] data the using data
+ * @retval  ESS_BACKEND_OK
+ * @retval ESS_BACKEND_ERROR_NULL backend null
+ */
+ess_backend_error_t ess_backend_set_user_daten(ess_backend_facktory_t* backend, void* data);
 #ifdef __cplusplus
 }
 #endif

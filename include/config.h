@@ -137,10 +137,4 @@
 	#define ESS_BACKEND_I2S_DMA_BUF_COUNT 6
 #endif
 
-
-
-
-
-
-
 #endif

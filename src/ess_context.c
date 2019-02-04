@@ -35,7 +35,7 @@
 
 #define LOG_TAG "EssC"
 
-ess_context_error_t ess_context_create(ess_context_t* context, ess_format_t format) {
+ess_context_error_t ess_context_create(ess_context_t* context, const ess_format_t format) {
   context = (ess_context_t*)malloc(sizeof(ess_context_t));
   if(context == 0) { context->last_error = ESS_CONTEXT_ERROR_OUTOFMEM;
     return ESS_CONTEXT_ERROR_OUTOFMEM; }
@@ -66,9 +66,10 @@ ess_context_error_t ess_context_init_ex(ess_context_t* context, ess_backend_fack
     ESP_LOGE(LOG_TAG,"Error to open backend");
     return -1;
   } else {
+
     context->backend = backend;
     context->status = ESS_CONTEXT_STATUS_RUN;
-    ESP_LOGI(LOG_TAG,"Possible to open backend");
+    
   }
   context->last_error = ESS_CONTEXT_ERROR_OK;
   return ESS_CONTEXT_ERROR_OK;
@@ -116,19 +117,19 @@ ess_context_error_t ess_context_resume(ess_context_t* context) {
   return ESS_CONTEXT_ERROR_OK;
 }
 
-ess_context_error_t ess_context_set_format(ess_context_t* context, ess_format_t format) {
+ess_context_error_t ess_context_set_format(ess_context_t* context, const ess_format_t format) {
   if(context == 0) return ESS_CONTEXT_ERROR;
   if(context->backend == 0)  return context->last_error =  ESS_CONTEXT_ERRORNOBACKEND;
 
   return (ess_backend_set_sample_format(context->backend, format) != 0) ? ESS_CONTEXT_WRONGFORMAT : ESS_CONTEXT_ERROR_OK;
 }
 
-unsigned int ess_context_write(ess_context_t* context, void *buffer, int buf_size) {
+unsigned int ess_context_write(ess_context_t* context, void *buffer, unsigned int buf_size) {
   unsigned int wrote;
   ess_context_write_ex(context, buffer, buf_size, &wrote);
   return wrote;
 }
-ess_context_error_t ess_context_write_ex(ess_context_t* context, void *buffer, int buf_size,  unsigned int* wrote) {
+ess_context_error_t ess_context_write_ex(ess_context_t* context, void *buffer, unsigned int buf_size,  unsigned int* wrote) {
   if(context == 0) return ESS_CONTEXT_ERROR;
   if(context->status == ESS_CONTEXT_STATUS_PAUSED) return context->last_error = ESS_CONTEX_ISPAUSED;
   if(context->backend == 0)  return context->last_error =  ESS_CONTEXT_ERRORNOBACKEND;

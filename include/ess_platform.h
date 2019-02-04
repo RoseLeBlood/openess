@@ -73,7 +73,7 @@ typedef struct ess_platform_semaphore {
 
 typedef struct ess_platform_ringbuffer {
   char name[16];
-  void* handle;
+  void* handle, *qhandle;
   ess_platform_ringbuffer_mode_t type;
 }ess_platform_ringbuffer_t;
 
@@ -273,6 +273,18 @@ ess_platform_error_t ess_platform_ringbuffer_destroy(ess_platform_ringbuffer_t* 
 ess_platform_error_t ess_platform_ringbuffer_write(ess_platform_ringbuffer_t* rng,
     void* data, unsigned int length, unsigned int ms);
 /**
+ * @brief can read from the ringbuffer
+ *
+ * @param [in] rng the ringbuffer context
+ * @param [in] ms how long to wait before giving up - in ms
+ *
+ * @retval ESS_PLATFORM_ERROR_OK yes
+ * @reval ESS_PLATFORM_NOT_IMP  function is for using platform not implantiert
+ * @retval ESS_PLATFORM_ERROR no
+ * @retval ESS_PLATFORM_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
+ */
+ess_platform_error_t ess_platform_ringbuffer_can_read(ess_platform_ringbuffer_t* rng, unsigned int ms);
+/**
  * @brief read data from the ring buffer.
  *
  * @param [in] rng the ringbuffer context
@@ -280,9 +292,7 @@ ess_platform_error_t ess_platform_ringbuffer_write(ess_platform_ringbuffer_t* rn
  * @param [in] ms how long to wait before giving up - in ms
  *
  * @retval a pointer to the storage retrieved.
- * @retval ESS_PLATFORM_ERROR_OK no error
  * @reval ESS_PLATFORM_NOT_IMP  function is for using platform not implantiert
- * @retval ESS_PLATFORM_ERROR can't write
  * @retval ESS_PLATFORM_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
  */
 void* ess_platform_ringbuffer_read(ess_platform_ringbuffer_t* rng, unsigned int* length, unsigned int ms);

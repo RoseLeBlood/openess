@@ -83,7 +83,7 @@ typedef struct ess_context {
  * @param context the context
  * @param format the using context format
  */
-ess_context_error_t ess_context_create(ess_context_t* context, ess_format_t format);
+ess_context_error_t ess_context_create(ess_context_t* context, const ess_format_t format);
 /**
  * @brief  initialisiert the context
  * @code
@@ -150,7 +150,7 @@ ess_context_error_t ess_context_resume(ess_context_t* context);
  * @param format the new using format
  * @return when ok then ESS_CONTEXT_ERROR_OK
  */
-ess_context_error_t ess_context_set_format(ess_context_t* context, ess_format_t format);
+ess_context_error_t ess_context_set_format(ess_context_t* context, const ess_format_t format);
 
 /**
  * @brief write audio data to the backend
@@ -159,7 +159,7 @@ ess_context_error_t ess_context_set_format(ess_context_t* context, ess_format_t 
  * @param buf_size the size of the buffer
  * @return the written data.
  */
-unsigned int ess_context_write(ess_context_t* context, void *buffer, int buf_size);
+unsigned int ess_context_write(ess_context_t* context, void *buffer, unsigned int buf_size);
 /**
  * @brief write audio data to the backend
  * @param context the context
@@ -168,7 +168,7 @@ unsigned int ess_context_write(ess_context_t* context, void *buffer, int buf_siz
  * @param wrote  the written data
  * @return when ok then ESS_CONTEXT_ERROR_OK
  */
-ess_context_error_t ess_context_write_ex(ess_context_t* context, void *buffer, int buf_size,  unsigned int* wrote);
+ess_context_error_t ess_context_write_ex(ess_context_t* context, void *buffer, unsigned int buf_size,  unsigned int* wrote);
 /**
  * @brief get the usind backend name
  * @param context the context

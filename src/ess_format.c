@@ -28,92 +28,53 @@
 #include "ess_format.h"
 #include <stdio.h>
 
-int ess_format_get_channels(ess_format_t format) {
-  switch(format) {
-      case ESS_FORMAT_MONO_44100_8:
-      case ESS_FORMAT_MONO_44100_16:
-      case ESS_FORMAT_MONO_44100_24:
-      case ESS_FORMAT_MONO_48000_8:
-      case ESS_FORMAT_MONO_48000_16:
-      case ESS_FORMAT_MONO_48000_24:
-      case ESS_FORMAT_MONO_96000_8:
-      case ESS_FORMAT_MONO_96000_16:
-      case ESS_FORMAT_MONO_96000_24:
-        return 1;
-      case ESS_FORMAT_STEREO_44100_8:
-      case ESS_FORMAT_STEREO_44100_16:
-      case ESS_FORMAT_STEREO_44100_24:
-      case ESS_FORMAT_STEREO_48000_8:
-      case ESS_FORMAT_STEREO_48000_16:
-      case ESS_FORMAT_STEREO_48000_24:
-      case ESS_FORMAT_STEREO_96000_8:
-      case ESS_FORMAT_STEREO_96000_16:
-      case ESS_FORMAT_STEREO_96000_24:
-        return 2;
-  };
-  return -1;
-}
-int ess_format_get_samplerate(ess_format_t format) {
-  switch(format) {
-     case ESS_FORMAT_MONO_44100_8:
-     case ESS_FORMAT_MONO_44100_16:
-     case ESS_FORMAT_MONO_44100_24:
-      return 44100;
-     case ESS_FORMAT_MONO_48000_8:
-     case ESS_FORMAT_MONO_48000_16:
-     case ESS_FORMAT_MONO_48000_24:
-      return 48000;
-     case ESS_FORMAT_MONO_96000_8:
-     case ESS_FORMAT_MONO_96000_16:
-     case ESS_FORMAT_MONO_96000_24:
-       return 96000;
-     case ESS_FORMAT_STEREO_44100_8:
-     case ESS_FORMAT_STEREO_44100_16:
-     case ESS_FORMAT_STEREO_44100_24:
-      return 44100;
-     case ESS_FORMAT_STEREO_48000_8:
-     case ESS_FORMAT_STEREO_48000_16:
-     case ESS_FORMAT_STEREO_48000_24:
-      return 48000;
-     case ESS_FORMAT_STEREO_96000_8:
-     case ESS_FORMAT_STEREO_96000_16:
-     case ESS_FORMAT_STEREO_96000_24:
-       return 96000;
-  };
-  return -1;
-  }
+typedef struct _format2human {
+  char string[32];
+  int samplerate;
+  int bits;
+  int channels;
+}format2human_t;
 
-int ess_format_get_bits(ess_format_t format) {
-  switch(format) {
-      case ESS_FORMAT_MONO_44100_8:
-      case ESS_FORMAT_MONO_48000_8:
-      case ESS_FORMAT_MONO_96000_8:
-      case ESS_FORMAT_STEREO_44100_8:
-      case ESS_FORMAT_STEREO_48000_8:
-      case ESS_FORMAT_STEREO_96000_8:
-        return 8;
-      case ESS_FORMAT_MONO_48000_16:
-      case ESS_FORMAT_MONO_44100_16:
-      case ESS_FORMAT_MONO_96000_16:
-      case ESS_FORMAT_STEREO_44100_16:
-      case ESS_FORMAT_STEREO_48000_16:
-      case ESS_FORMAT_STEREO_96000_16:
-        return 16;
-      case ESS_FORMAT_MONO_44100_24:
-      case ESS_FORMAT_MONO_48000_24:
-      case ESS_FORMAT_MONO_96000_24:
-      case ESS_FORMAT_STEREO_44100_24:
-      case ESS_FORMAT_STEREO_48000_24:
-      case ESS_FORMAT_STEREO_96000_24:
-        return 24;
-  };
-  return -1;
+format2human_t format_parse[] = {
+  {  "ESS_FORMAT_MONO_44100_8", 44100, 8, 1 },
+  {  "ESS_FORMAT_MONO_48000_8", 48000, 8, 1 },
+  {  "ESS_FORMAT_MONO_96000_8", 96000, 8, 1 },
+  {  "ESS_FORMAT_STEREO_44100_8", 44100, 8, 2 },
+  {  "ESS_FORMAT_STEREO_48000_8", 48000, 8, 2 },
+  {  "ESS_FORMAT_STEREO_96000_8", 96000, 8, 2 },
+  {  "ESS_FORMAT_MONO_48000_16", 48000, 16, 1 },
+  {  " ESS_FORMAT_MONO_44100_16", 44100, 16, 1 },
+  {  " ESS_FORMAT_MONO_96000_16", 96000, 16, 1 },
+  {   "ESS_FORMAT_STEREO_44100_16", 44100, 16, 2 },
+  {  "ESS_FORMAT_STEREO_48000_16", 48000, 16, 2 },
+  {  "ESS_FORMAT_STEREO_96000_16", 96000, 16, 2 },
+  {   "ESS_FORMAT_MONO_44100_24", 44100, 24, 1 },
+  {   "ESS_FORMAT_MONO_48000_24", 48000, 24, 1 },
+  {   "ESS_FORMAT_MONO_96000_24", 96000, 24, 1 },
+  {    "ESS_FORMAT_STEREO_44100_24", 44100, 24, 2 },
+  {   "ESS_FORMAT_STEREO_48000_24", 48000, 24, 2 },
+  {    "ESS_FORMAT_STEREO_96000_24", 96000, 24, 2 },
+};
+
+int ess_format_get_channels(const ess_format_t format) {
+  if(format >= ESS_FORMAT_MAX) return -1;
+    return format_parse[format].channels;
 }
-char __g_format_buffer[32];
+int ess_format_get_samplerate(const ess_format_t format) {
+  if(format >= ESS_FORMAT_MAX) return -1;
+  return format_parse[format].samplerate;
+}
+
+int ess_format_get_bits(const ess_format_t format) {
+  if(format >= ESS_FORMAT_MAX) return -1;
+  return format_parse[format].bits;
+}
+
+
+
+
 const char* ess_format_to_string(ess_format_t format) {
-
-  sprintf(__g_format_buffer, "%d:%d:%d", ess_format_get_samplerate(format),
-                                                                      ess_format_get_bits(format),
-                                                                      ess_format_get_channels(format) );
-  return __g_format_buffer;
+  if(format >= ESS_FORMAT_MAX) return "NO_FORMAT";
+  return format_parse[format].string;
+  return "NO_FORMAT";
 }
