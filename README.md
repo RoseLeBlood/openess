@@ -1,9 +1,8 @@
 <div>
  <img src="/docs/Logo-OpenESS.png" width="256" align="left"> 
- <div align="right">
+ <div align="center">
   <h1>Open Embedded Sound Server</h1>
    <h3>
-     <a href="https://choo.io">
        Website
      </a>
      <span> | </span>
@@ -11,7 +10,6 @@
        Wiki
      </a>
      <span> | </span>
-     <a href="https://github.com/choojs/choo/blob/master/.github/CONTRIBUTING.md">
        Contributing
      </a>
      <span> | </span>
@@ -19,7 +17,7 @@
        Documentation
      </a>
      <span> | </span>
-     <a href="https://webchat.freenode.net/?channels=choo">
+     <a href="https://webchat.freenode.net/?channels=openess">
        Chat
      </a>
    </h3>
