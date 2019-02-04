@@ -1,7 +1,8 @@
 var NAVTREE =
 [
   [ "OpenESS", "index.html", [
-    [ "openess", "d3/dcc/md__r_e_a_d_m_e.html", null ],
+    [ "Contributing to OpenESS", "d6/dcd/md__c_o_n_t_r_i_b_u_t_i_n_g.html", null ],
+    [ "README", "d3/dcc/md__r_e_a_d_m_e.html", null ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],
@@ -28,7 +29,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"db/d16/config_8h.html#aec220c9a7472c9bf1257d587a1f5de78"
+"db/d16/config_8h.html#adfe2386980d49f63c523d8f6ca387bfc"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
