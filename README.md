@@ -6,7 +6,7 @@
        Website
      </a>
      <span> | </span>
-     <a href="https://github.com/choojs/choo-handbook">
+     <a href="https://github.com/RoseLeBlood/openess/wiki">
        Wiki
      </a>
      <span> | </span>
