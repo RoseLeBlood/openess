@@ -30,6 +30,29 @@
 **OpenESS**  is a network-capable sound server libary mainly for embedded systems and other operatins systems. 
 OpenESS is free and open-source software, and is licensed under the terms of the GNU Lesser General Public License.
 
+## Getting Started
+
+### Setting Up Development Environment
+
+#### PlatformIO
+
+OpenESS is made for use with [platformio](http://platformio.org/), an advanced ecosystem for microcontroller
+development. To get started with coding esphomelib applications, you first have to 
+[install the atom-based platformio IDE](http://platformio.org/platformio-ide) or for advanced users, 
+[install the command line version of platformio](http://docs.platformio.org/en/latest/installation.html).
+
+Then create a new project for an [ESP32-based board](http://docs.platformio.org/en/latest/platforms/espressif32.html#boards)
+(for example, `nodemcu-32s`). Then open up the newly created `platformio.ini` file and insert
+
+```ini
+; ...
+platform = espressif32
+board = nodemcu-32s
+framework = esp-idf
+lib_deps = openess
+```
+Finally, create a new source file in the `src/` folder (for example `main.c`) and start coding with openess.
+
 ## Usage example
 _create the server_ 
 ```c
@@ -82,6 +105,29 @@ extern "C" void app_main() {
 
 ```
 _For more examples and usage, please refer to the [Wiki][wiki]
+
+## Current Features (version 0.2-1)
+
+* Powerful core that allows for easy to port 
+* Automatic WiFi handling (reconnects, etc.)
+* Powerful socket abscrations layer (SAL)
+* Easy to use platform configuration 
+* Semaphore, task and ringbuffer handling on various platform
+* generic backends: udp, uart and i2s
+
+## Progressed features (when ready than version 0.9)
+
+* running example server on esp32 and linux
+* audio mixing from multiple clients
+* MQTT status upport and logging
+* mDNS 
+* code style
+
+## Planned features
+
+* Improve documentation
+
+* **Suggestions?** Feel free to create an issue and tag it with feature request.
 
 
 ## Release History
