@@ -1,7 +1,3 @@
----
-layout: page
-title: OpenESS Project Page
----
 
 <div>
  <img src="https://roseleblood.github.io/openess/Logo-OpenESS.png" width="256" align="left"> 
