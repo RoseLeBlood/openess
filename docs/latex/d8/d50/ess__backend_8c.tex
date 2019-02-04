@@ -1,0 +1,371 @@
+\hypertarget{ess__backend_8c}{}\section{src/ess\+\_\+backend.c File Reference}
+\label{ess__backend_8c}\index{src/ess\+\_\+backend.\+c@{src/ess\+\_\+backend.\+c}}
+{\ttfamily \#include \char`\"{}ess\+\_\+backend.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ess\+\_\+context.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$esp\+\_\+log.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ess\+\_\+platform.\+h\char`\"{}}\newline
+Include dependency graph for ess\+\_\+backend.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{db/dcf/ess__backend_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ess__backend_8c_a7ce0df38eb467e59f209470c8f5ac4e6}{L\+O\+G\+\_\+\+T\+AG}~\char`\"{}EssB\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{ess__backend_8c_a6ba1bf553b596dd14d47748bec40bc9c}{ess\+\_\+backend\+\_\+get\+\_\+size} ()
+\begin{DoxyCompactList}\small\item\em get the size of using backends \end{DoxyCompactList}\item 
+\hyperlink{ess__backend_8h_ab1487f8c501b38b66796d0fbecb7ed7b}{ess\+\_\+backend\+\_\+facktory\+\_\+t} $\ast$ \hyperlink{ess__backend_8c_a16cb59b090351d9b9989de80b8bad520}{ess\+\_\+backend\+\_\+create\+\_\+factory\+\_\+list} ()
+\item 
+\hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t} \hyperlink{ess__backend_8c_ab6129a1d1c11f81718f9122facfddd35}{ess\+\_\+backend\+\_\+destroy\+\_\+factory\+\_\+list} (\hyperlink{ess__backend_8h_ab1487f8c501b38b66796d0fbecb7ed7b}{ess\+\_\+backend\+\_\+facktory\+\_\+t} $\ast$list)
+\item 
+\hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t} \hyperlink{ess__backend_8c_a38e02fd000a6be3510ec8f9df0a46ed7}{ess\+\_\+backend\+\_\+probe\+\_\+all} (\hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t} format, \hyperlink{ess__backend_8h_ab1487f8c501b38b66796d0fbecb7ed7b}{ess\+\_\+backend\+\_\+facktory\+\_\+t} $\ast$$\ast$backend)
+\begin{DoxyCompactList}\small\item\em Check that all backends support the specified format and return all working backends. \end{DoxyCompactList}\item 
+\hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t} \hyperlink{ess__backend_8c_a2a77a7ddc5730431b3f86ddc2750315b}{ess\+\_\+backend\+\_\+probe} (const char $\ast$name, \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t} format, \hyperlink{ess__backend_8h_ab1487f8c501b38b66796d0fbecb7ed7b}{ess\+\_\+backend\+\_\+facktory\+\_\+t} $\ast$backend)
+\begin{DoxyCompactList}\small\item\em checked the backend with the specified name and returns it if successful. \end{DoxyCompactList}\item 
+\hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t} \hyperlink{ess__backend_8c_a1e2f543b02ce1dae0c06b54aaf8cf9b9}{ess\+\_\+backend\+\_\+set\+\_\+sample\+\_\+format} (\hyperlink{ess__backend_8h_ab1487f8c501b38b66796d0fbecb7ed7b}{ess\+\_\+backend\+\_\+facktory\+\_\+t} $\ast$backend, \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t} forma)
+\begin{DoxyCompactList}\small\item\em set sample format \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{ess__backend_8c_a5adbfcb9ef73a620c893f59771c3f5e9}{ess\+\_\+backend\+\_\+get\+\_\+user\+\_\+daten} (\hyperlink{ess__backend_8h_ab1487f8c501b38b66796d0fbecb7ed7b}{ess\+\_\+backend\+\_\+facktory\+\_\+t} $\ast$backend)
+\begin{DoxyCompactList}\small\item\em get user daten from backend (internal user) \end{DoxyCompactList}\item 
+\hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t} \hyperlink{ess__backend_8c_a6c9175335019d29a98371a855895a429}{ess\+\_\+backend\+\_\+set\+\_\+user\+\_\+daten} (\hyperlink{ess__backend_8h_ab1487f8c501b38b66796d0fbecb7ed7b}{ess\+\_\+backend\+\_\+facktory\+\_\+t} $\ast$backend, void $\ast$data)
+\begin{DoxyCompactList}\small\item\em set user daten from backend (internal user) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ess__backend_8c_a7ce0df38eb467e59f209470c8f5ac4e6}\label{ess__backend_8c_a7ce0df38eb467e59f209470c8f5ac4e6}} 
+\index{ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}!L\+O\+G\+\_\+\+T\+AG@{L\+O\+G\+\_\+\+T\+AG}}
+\index{L\+O\+G\+\_\+\+T\+AG@{L\+O\+G\+\_\+\+T\+AG}!ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}}
+\subsubsection{\texorpdfstring{L\+O\+G\+\_\+\+T\+AG}{LOG\_TAG}}
+{\footnotesize\ttfamily \#define L\+O\+G\+\_\+\+T\+AG~\char`\"{}EssB\char`\"{}}
+
+
+
+Definition at line 36 of file ess\+\_\+backend.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ess__backend_8c_a16cb59b090351d9b9989de80b8bad520}\label{ess__backend_8c_a16cb59b090351d9b9989de80b8bad520}} 
+\index{ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}!ess\+\_\+backend\+\_\+create\+\_\+factory\+\_\+list@{ess\+\_\+backend\+\_\+create\+\_\+factory\+\_\+list}}
+\index{ess\+\_\+backend\+\_\+create\+\_\+factory\+\_\+list@{ess\+\_\+backend\+\_\+create\+\_\+factory\+\_\+list}!ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+create\+\_\+factory\+\_\+list()}{ess\_backend\_create\_factory\_list()}}
+{\footnotesize\ttfamily \hyperlink{ess__backend_8h_ab1487f8c501b38b66796d0fbecb7ed7b}{ess\+\_\+backend\+\_\+facktory\+\_\+t}$\ast$ ess\+\_\+backend\+\_\+create\+\_\+factory\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 44 of file ess\+\_\+backend.\+c.
+
+
+\begin{DoxyCode}
+44                                                           \{
+45   \textcolor{keywordflow}{return} (\hyperlink{structess__backend}{ess\_backend\_facktory\_t}*)malloc(\textcolor{keyword}{sizeof}(
+      \hyperlink{structess__backend}{ess\_backend\_facktory\_t}) * \hyperlink{ess__backend_8c_a6ba1bf553b596dd14d47748bec40bc9c}{ess\_backend\_get\_size}());
+46 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{d8/d50/ess__backend_8c_a16cb59b090351d9b9989de80b8bad520_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{ess__backend_8c_ab6129a1d1c11f81718f9122facfddd35}\label{ess__backend_8c_ab6129a1d1c11f81718f9122facfddd35}} 
+\index{ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}!ess\+\_\+backend\+\_\+destroy\+\_\+factory\+\_\+list@{ess\+\_\+backend\+\_\+destroy\+\_\+factory\+\_\+list}}
+\index{ess\+\_\+backend\+\_\+destroy\+\_\+factory\+\_\+list@{ess\+\_\+backend\+\_\+destroy\+\_\+factory\+\_\+list}!ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+destroy\+\_\+factory\+\_\+list()}{ess\_backend\_destroy\_factory\_list()}}
+{\footnotesize\ttfamily \hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t} ess\+\_\+backend\+\_\+destroy\+\_\+factory\+\_\+list (\begin{DoxyParamCaption}\item[{\hyperlink{ess__backend_8h_ab1487f8c501b38b66796d0fbecb7ed7b}{ess\+\_\+backend\+\_\+facktory\+\_\+t} $\ast$}]{list }\end{DoxyParamCaption})}
+
+
+
+Definition at line 47 of file ess\+\_\+backend.\+c.
+
+
+\begin{DoxyCode}
+47                                                                                    \{
+48   \textcolor{keywordflow}{if}(list == 0)  \textcolor{keywordflow}{return} \hyperlink{ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72aec1740308fb5c8dbd28e701365024bf9}{ESS\_BACKEND\_ERROR\_NULL};
+49   \textcolor{comment}{//free(list);}
+50   \textcolor{keywordflow}{return} \hyperlink{ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72a4abbaf43c0ba0a394549d3d5394e7545}{ESS\_BACKEND\_OK};
+51 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ess__backend_8c_a6ba1bf553b596dd14d47748bec40bc9c}\label{ess__backend_8c_a6ba1bf553b596dd14d47748bec40bc9c}} 
+\index{ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}!ess\+\_\+backend\+\_\+get\+\_\+size@{ess\+\_\+backend\+\_\+get\+\_\+size}}
+\index{ess\+\_\+backend\+\_\+get\+\_\+size@{ess\+\_\+backend\+\_\+get\+\_\+size}!ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+get\+\_\+size()}{ess\_backend\_get\_size()}}
+{\footnotesize\ttfamily int ess\+\_\+backend\+\_\+get\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get the size of using backends 
+
+\begin{DoxyReturn}{Returns}
+number of support backends 
+\end{DoxyReturn}
+
+
+Definition at line 41 of file ess\+\_\+backend.\+c.
+
+
+\begin{DoxyCode}
+41                            \{
+42   \textcolor{keywordflow}{return} \textcolor{keyword}{sizeof}(\hyperlink{ess__platform__esp32_8h_a0aae1a44ffbe4df0c0b4d13810ec8e22}{backends\_list}) / \textcolor{keyword}{sizeof}(\hyperlink{structess__backends__entry}{ess\_backends\_entry\_t});
+43 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/d50/ess__backend_8c_a6ba1bf553b596dd14d47748bec40bc9c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{ess__backend_8c_a5adbfcb9ef73a620c893f59771c3f5e9}\label{ess__backend_8c_a5adbfcb9ef73a620c893f59771c3f5e9}} 
+\index{ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}!ess\+\_\+backend\+\_\+get\+\_\+user\+\_\+daten@{ess\+\_\+backend\+\_\+get\+\_\+user\+\_\+daten}}
+\index{ess\+\_\+backend\+\_\+get\+\_\+user\+\_\+daten@{ess\+\_\+backend\+\_\+get\+\_\+user\+\_\+daten}!ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+get\+\_\+user\+\_\+daten()}{ess\_backend\_get\_user\_daten()}}
+{\footnotesize\ttfamily void$\ast$ ess\+\_\+backend\+\_\+get\+\_\+user\+\_\+daten (\begin{DoxyParamCaption}\item[{\hyperlink{ess__backend_8h_ab1487f8c501b38b66796d0fbecb7ed7b}{ess\+\_\+backend\+\_\+facktory\+\_\+t} $\ast$}]{backend }\end{DoxyParamCaption})}
+
+
+
+get user daten from backend (internal user) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em the} & using backend \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the user daten 
+\end{DoxyReturn}
+
+
+Definition at line 93 of file ess\+\_\+backend.\+c.
+
+
+\begin{DoxyCode}
+93                                                                   \{
+94   \textcolor{keywordflow}{if}(backend == 0)  \textcolor{keywordflow}{return} 0;
+95   \textcolor{keywordflow}{return}  backend->\hyperlink{structess__backend_a5ad8569143b4728c7b7f91c53661d8b5}{user\_daten};
+96 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ess__backend_8c_a2a77a7ddc5730431b3f86ddc2750315b}\label{ess__backend_8c_a2a77a7ddc5730431b3f86ddc2750315b}} 
+\index{ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}!ess\+\_\+backend\+\_\+probe@{ess\+\_\+backend\+\_\+probe}}
+\index{ess\+\_\+backend\+\_\+probe@{ess\+\_\+backend\+\_\+probe}!ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+probe()}{ess\_backend\_probe()}}
+{\footnotesize\ttfamily \hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t} ess\+\_\+backend\+\_\+probe (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name,  }\item[{const \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t}}]{format,  }\item[{\hyperlink{ess__backend_8h_ab1487f8c501b38b66796d0fbecb7ed7b}{ess\+\_\+backend\+\_\+facktory\+\_\+t} $\ast$}]{backend }\end{DoxyParamCaption})}
+
+
+
+checked the backend with the specified name and returns it if successful. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Name} & of the backend \\
+\hline
+{\em format} & the format to probe \\
+\hline
+{\em backend} & return the working backend. if not null \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em E\+S\+S\+\_\+\+B\+A\+C\+K\+E\+N\+D\+\_\+\+OK} & if backend support \\
+\hline
+{\em E\+S\+S\+\_\+\+B\+A\+C\+K\+E\+N\+D\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+R\+O\+N\+G\+\_\+\+F\+O\+R\+M\+AT} & \\
+\hline
+{\em E\+S\+S\+\_\+\+B\+A\+C\+K\+E\+N\+D\+\_\+\+E\+R\+R\+OR} & \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line 76 of file ess\+\_\+backend.\+c.
+
+
+\begin{DoxyCode}
+76                                                                                                            
+         \{
+77   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i = 0; i < \hyperlink{ess__backend_8c_a6ba1bf553b596dd14d47748bec40bc9c}{ess\_backend\_get\_size}(); i++ ) \{
+78     \textcolor{keywordflow}{if}(strcmp(\hyperlink{ess__platform__esp32_8h_a0aae1a44ffbe4df0c0b4d13810ec8e22}{backends\_list}[i].name, name)) \{
+79       \textcolor{keywordflow}{if}(\hyperlink{ess__platform__esp32_8h_a0aae1a44ffbe4df0c0b4d13810ec8e22}{backends\_list}[i].getFactory()->ess\_backend\_probe(format)) \{
+80         \textcolor{keywordflow}{if}(backend) backend = \hyperlink{ess__platform__esp32_8h_a0aae1a44ffbe4df0c0b4d13810ec8e22}{backends\_list}[i].\hyperlink{structess__backends__entry_a86f760dbdba11d491bc8209327d7e514}{getFactory}();
+81         \textcolor{keywordflow}{return} \hyperlink{ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72a4abbaf43c0ba0a394549d3d5394e7545}{ESS\_BACKEND\_OK};
+82       \} \textcolor{keywordflow}{else} \{
+83         \textcolor{keywordflow}{return} \hyperlink{ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72a1e60377ebbc9f5d7741aa3459fbf1f8d}{ESS\_BACKEND\_ERROR\_WRONG\_FORMAT};
+84       \}
+85     \}
+86   \}
+87   \textcolor{keywordflow}{return} \hyperlink{ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72a1575cc2ec75e5e0912e283a5a8cad77c}{ESS\_BACKEND\_ERROR};
+88 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{d8/d50/ess__backend_8c_a2a77a7ddc5730431b3f86ddc2750315b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{d8/d50/ess__backend_8c_a2a77a7ddc5730431b3f86ddc2750315b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{ess__backend_8c_a38e02fd000a6be3510ec8f9df0a46ed7}\label{ess__backend_8c_a38e02fd000a6be3510ec8f9df0a46ed7}} 
+\index{ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}!ess\+\_\+backend\+\_\+probe\+\_\+all@{ess\+\_\+backend\+\_\+probe\+\_\+all}}
+\index{ess\+\_\+backend\+\_\+probe\+\_\+all@{ess\+\_\+backend\+\_\+probe\+\_\+all}!ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+probe\+\_\+all()}{ess\_backend\_probe\_all()}}
+{\footnotesize\ttfamily \hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t} ess\+\_\+backend\+\_\+probe\+\_\+all (\begin{DoxyParamCaption}\item[{const \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t}}]{format,  }\item[{\hyperlink{ess__backend_8h_ab1487f8c501b38b66796d0fbecb7ed7b}{ess\+\_\+backend\+\_\+facktory\+\_\+t} $\ast$$\ast$}]{backend }\end{DoxyParamCaption})}
+
+
+
+Check that all backends support the specified format and return all working backends. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em format} & the format to probe \\
+\hline
+{\em backend} & return all working backends. if not null \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+number of working backends or errir codes 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em E\+S\+S\+\_\+\+B\+A\+C\+K\+E\+N\+D\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+R\+O\+N\+G\+\_\+\+F\+O\+R\+M\+AT} & when no backend supported \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line 52 of file ess\+\_\+backend.\+c.
+
+
+\begin{DoxyCode}
+52                                                                                                  \{
+53   \hyperlink{structess__backend}{ess\_backend\_facktory\_t} *factory;
+54 
+55   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i,n = 0;
+56 
+57   \textcolor{keywordflow}{for}( i = 0; i < \hyperlink{ess__backend_8c_a6ba1bf553b596dd14d47748bec40bc9c}{ess\_backend\_get\_size}(); i++ ) \{
+58     factory = \hyperlink{ess__platform__esp32_8h_a0aae1a44ffbe4df0c0b4d13810ec8e22}{backends\_list}[i].\hyperlink{structess__backends__entry_a86f760dbdba11d491bc8209327d7e514}{getFactory}();
+59 
+60     \textcolor{keywordflow}{if}(factory->\hyperlink{structess__backend_aae4f1015dadb3ed79975c5b7b78e547f}{ess\_backend\_probe}(format) != \hyperlink{ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72a4abbaf43c0ba0a394549d3d5394e7545}{ESS\_BACKEND\_OK}) \{
+61       ESP\_LOGE(\hyperlink{ess__backend_8c_a7ce0df38eb467e59f209470c8f5ac4e6}{LOG\_TAG}, \textcolor{stringliteral}{"Failed to probe backend \(\backslash\)"%s\(\backslash\)""}, \hyperlink{ess__platform__esp32_8h_a0aae1a44ffbe4df0c0b4d13810ec8e22}{backends\_list}[i].name);
+62       \textcolor{keywordflow}{continue};
+63     \} \textcolor{keywordflow}{else} \{
+64       ESP\_LOGI(\hyperlink{ess__backend_8c_a7ce0df38eb467e59f209470c8f5ac4e6}{LOG\_TAG},\textcolor{stringliteral}{"Possible format for backend: \(\backslash\)"%s\(\backslash\)" "}, 
+      \hyperlink{ess__platform__esp32_8h_a0aae1a44ffbe4df0c0b4d13810ec8e22}{backends\_list}[i].name);
+65       \textcolor{keywordflow}{if}(backend) \{ backend[n] = factory; \}
+66       n++;
+67     \}
+68 
+69   \}
+70   ESP\_LOGI(\hyperlink{ess__backend_8c_a7ce0df38eb467e59f209470c8f5ac4e6}{LOG\_TAG},\textcolor{stringliteral}{"%d/%d backends probe possible\(\backslash\)n"}, n, 
+      \hyperlink{ess__backend_8c_a6ba1bf553b596dd14d47748bec40bc9c}{ess\_backend\_get\_size}());
+71 
+72   \textcolor{keywordflow}{if}(n == 0) \textcolor{keywordflow}{return} \hyperlink{ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72a1e60377ebbc9f5d7741aa3459fbf1f8d}{ESS\_BACKEND\_ERROR\_WRONG\_FORMAT};
+73   \textcolor{keywordflow}{return} n;
+74 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/d50/ess__backend_8c_a38e02fd000a6be3510ec8f9df0a46ed7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{ess__backend_8c_a1e2f543b02ce1dae0c06b54aaf8cf9b9}\label{ess__backend_8c_a1e2f543b02ce1dae0c06b54aaf8cf9b9}} 
+\index{ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}!ess\+\_\+backend\+\_\+set\+\_\+sample\+\_\+format@{ess\+\_\+backend\+\_\+set\+\_\+sample\+\_\+format}}
+\index{ess\+\_\+backend\+\_\+set\+\_\+sample\+\_\+format@{ess\+\_\+backend\+\_\+set\+\_\+sample\+\_\+format}!ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+set\+\_\+sample\+\_\+format()}{ess\_backend\_set\_sample\_format()}}
+{\footnotesize\ttfamily \hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t} ess\+\_\+backend\+\_\+set\+\_\+sample\+\_\+format (\begin{DoxyParamCaption}\item[{\hyperlink{ess__backend_8h_ab1487f8c501b38b66796d0fbecb7ed7b}{ess\+\_\+backend\+\_\+facktory\+\_\+t} $\ast$}]{backend,  }\item[{const \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t}}]{forma }\end{DoxyParamCaption})}
+
+
+
+set sample format 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em backend} & the usiing backend \\
+\hline
+\mbox{\tt in}  & {\em forma} & sample format \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em E\+S\+S\+\_\+\+B\+A\+C\+K\+E\+N\+D\+\_\+\+OK} & if backend support \\
+\hline
+{\em E\+S\+S\+\_\+\+B\+A\+C\+K\+E\+N\+D\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+R\+O\+N\+G\+\_\+\+F\+O\+R\+M\+AT} & \\
+\hline
+{\em E\+S\+S\+\_\+\+B\+A\+C\+K\+E\+N\+D\+\_\+\+E\+R\+R\+OR} & \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line 89 of file ess\+\_\+backend.\+c.
+
+
+\begin{DoxyCode}
+89                                                                                                         \{
+90   \textcolor{keywordflow}{if}(backend == 0) \textcolor{keywordflow}{return} \hyperlink{ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72aec1740308fb5c8dbd28e701365024bf9}{ESS\_BACKEND\_ERROR\_NULL};
+91   \textcolor{keywordflow}{return} backend->\hyperlink{structess__backend_af8790cbdeabfcdafa015466bdb552ac2}{ess\_backend\_set\_sample\_format}(forma);
+92 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/d50/ess__backend_8c_a1e2f543b02ce1dae0c06b54aaf8cf9b9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{ess__backend_8c_a6c9175335019d29a98371a855895a429}\label{ess__backend_8c_a6c9175335019d29a98371a855895a429}} 
+\index{ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}!ess\+\_\+backend\+\_\+set\+\_\+user\+\_\+daten@{ess\+\_\+backend\+\_\+set\+\_\+user\+\_\+daten}}
+\index{ess\+\_\+backend\+\_\+set\+\_\+user\+\_\+daten@{ess\+\_\+backend\+\_\+set\+\_\+user\+\_\+daten}!ess\+\_\+backend.\+c@{ess\+\_\+backend.\+c}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+set\+\_\+user\+\_\+daten()}{ess\_backend\_set\_user\_daten()}}
+{\footnotesize\ttfamily \hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t} ess\+\_\+backend\+\_\+set\+\_\+user\+\_\+daten (\begin{DoxyParamCaption}\item[{\hyperlink{ess__backend_8h_ab1487f8c501b38b66796d0fbecb7ed7b}{ess\+\_\+backend\+\_\+facktory\+\_\+t} $\ast$}]{backend,  }\item[{void $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+set user daten from backend (internal user) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em the} & usiing backend \\
+\hline
+\mbox{\tt in}  & {\em data} & the using data \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em E\+S\+S\+\_\+\+B\+A\+C\+K\+E\+N\+D\+\_\+\+OK} & \\
+\hline
+{\em E\+S\+S\+\_\+\+B\+A\+C\+K\+E\+N\+D\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & backend null \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line 97 of file ess\+\_\+backend.\+c.
+
+
+\begin{DoxyCode}
+97                                                                                             \{
+98   \textcolor{keywordflow}{if}(backend == 0)  \textcolor{keywordflow}{return} \hyperlink{ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72aec1740308fb5c8dbd28e701365024bf9}{ESS\_BACKEND\_ERROR\_NULL};
+99   backend->\hyperlink{structess__backend_a5ad8569143b4728c7b7f91c53661d8b5}{user\_daten} = data;
+100   \textcolor{keywordflow}{return} \hyperlink{ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72a4abbaf43c0ba0a394549d3d5394e7545}{ESS\_BACKEND\_OK};
+101 \}
+\end{DoxyCode}

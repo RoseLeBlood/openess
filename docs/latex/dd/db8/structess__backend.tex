@@ -1,0 +1,175 @@
+\hypertarget{structess__backend}{}\section{ess\+\_\+backend Struct Reference}
+\label{structess__backend}\index{ess\+\_\+backend@{ess\+\_\+backend}}
+
+
+ess backend factory  
+
+
+
+
+{\ttfamily \#include $<$ess\+\_\+backend.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$ \hyperlink{structess__backend_aae4f1015dadb3ed79975c5b7b78e547f}{ess\+\_\+backend\+\_\+probe} )(const \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t} format)
+\item 
+\hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$ \hyperlink{structess__backend_ae6dfe97715fbf9f3fbf7b46a2d311e64}{ess\+\_\+backend\+\_\+open} )(const \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t} format)
+\item 
+\hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$ \hyperlink{structess__backend_a5bc22e85096f398b542b05d8b1e41308}{ess\+\_\+backend\+\_\+close} )(void)
+\item 
+\hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$ \hyperlink{structess__backend_ad263ce89d932658c73be2e5863d0afcf}{ess\+\_\+backend\+\_\+pause} )(void)
+\item 
+\hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$ \hyperlink{structess__backend_ab9a30f8d9f4bd941ae74e3ef0c9d7aa3}{ess\+\_\+backend\+\_\+resum} )(void)
+\item 
+\hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$ \hyperlink{structess__backend_a3a1b32830c82ec84aa0e6c02280d7f6c}{ess\+\_\+backend\+\_\+write} )(void $\ast$buffer, unsigned int buf\+\_\+size, unsigned int $\ast$wrote)
+\item 
+\hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$ \hyperlink{structess__backend_ae79b75bd5bc3c4fd9c3b3706eed97bfb}{ess\+\_\+backend\+\_\+read} )(void $\ast$buffer, unsigned int buf\+\_\+size, unsigned int $\ast$readed)
+\item 
+\hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$ \hyperlink{structess__backend_ad5f882cfd71495bd8f0dc15540fb7c9a}{ess\+\_\+backend\+\_\+flush} )(void)
+\item 
+\hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$ \hyperlink{structess__backend_af8790cbdeabfcdafa015466bdb552ac2}{ess\+\_\+backend\+\_\+set\+\_\+sample\+\_\+format} )(\hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t} format)
+\item 
+const char $\ast$($\ast$ \hyperlink{structess__backend_a1e8975441f4fbb374da179cc7e8bcbae}{get\+\_\+name} )(void)
+\item 
+const char $\ast$($\ast$ \hyperlink{structess__backend_a9f29adb0a4cfb608557d26692fa78254}{get\+\_\+info} )(void)
+\item 
+void $\ast$ \hyperlink{structess__backend_a5ad8569143b4728c7b7f91c53661d8b5}{user\+\_\+daten}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+ess backend factory 
+
+Embedded Sound System Backend factory. Backend vtable 
+
+Definition at line 60 of file ess\+\_\+backend.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\Hypertarget{structess__backend_a5bc22e85096f398b542b05d8b1e41308}\label{structess__backend_a5bc22e85096f398b542b05d8b1e41308}} 
+\index{ess\+\_\+backend@{ess\+\_\+backend}!ess\+\_\+backend\+\_\+close@{ess\+\_\+backend\+\_\+close}}
+\index{ess\+\_\+backend\+\_\+close@{ess\+\_\+backend\+\_\+close}!ess\+\_\+backend@{ess\+\_\+backend}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+close}{ess\_backend\_close}}
+{\footnotesize\ttfamily \hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$  ess\+\_\+backend\+\_\+close) (void)}
+
+close the backend 
+
+Definition at line 63 of file ess\+\_\+backend.\+h.
+
+\mbox{\Hypertarget{structess__backend_ad5f882cfd71495bd8f0dc15540fb7c9a}\label{structess__backend_ad5f882cfd71495bd8f0dc15540fb7c9a}} 
+\index{ess\+\_\+backend@{ess\+\_\+backend}!ess\+\_\+backend\+\_\+flush@{ess\+\_\+backend\+\_\+flush}}
+\index{ess\+\_\+backend\+\_\+flush@{ess\+\_\+backend\+\_\+flush}!ess\+\_\+backend@{ess\+\_\+backend}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+flush}{ess\_backend\_flush}}
+{\footnotesize\ttfamily \hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$  ess\+\_\+backend\+\_\+flush) (void)}
+
+flush backend data 
+
+Definition at line 68 of file ess\+\_\+backend.\+h.
+
+\mbox{\Hypertarget{structess__backend_ae6dfe97715fbf9f3fbf7b46a2d311e64}\label{structess__backend_ae6dfe97715fbf9f3fbf7b46a2d311e64}} 
+\index{ess\+\_\+backend@{ess\+\_\+backend}!ess\+\_\+backend\+\_\+open@{ess\+\_\+backend\+\_\+open}}
+\index{ess\+\_\+backend\+\_\+open@{ess\+\_\+backend\+\_\+open}!ess\+\_\+backend@{ess\+\_\+backend}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+open}{ess\_backend\_open}}
+{\footnotesize\ttfamily \hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$  ess\+\_\+backend\+\_\+open) (const \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t} format)}
+
+open the backend 
+
+Definition at line 62 of file ess\+\_\+backend.\+h.
+
+\mbox{\Hypertarget{structess__backend_ad263ce89d932658c73be2e5863d0afcf}\label{structess__backend_ad263ce89d932658c73be2e5863d0afcf}} 
+\index{ess\+\_\+backend@{ess\+\_\+backend}!ess\+\_\+backend\+\_\+pause@{ess\+\_\+backend\+\_\+pause}}
+\index{ess\+\_\+backend\+\_\+pause@{ess\+\_\+backend\+\_\+pause}!ess\+\_\+backend@{ess\+\_\+backend}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+pause}{ess\_backend\_pause}}
+{\footnotesize\ttfamily \hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$  ess\+\_\+backend\+\_\+pause) (void)}
+
+paused the backend 
+
+Definition at line 64 of file ess\+\_\+backend.\+h.
+
+\mbox{\Hypertarget{structess__backend_aae4f1015dadb3ed79975c5b7b78e547f}\label{structess__backend_aae4f1015dadb3ed79975c5b7b78e547f}} 
+\index{ess\+\_\+backend@{ess\+\_\+backend}!ess\+\_\+backend\+\_\+probe@{ess\+\_\+backend\+\_\+probe}}
+\index{ess\+\_\+backend\+\_\+probe@{ess\+\_\+backend\+\_\+probe}!ess\+\_\+backend@{ess\+\_\+backend}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+probe}{ess\_backend\_probe}}
+{\footnotesize\ttfamily \hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$  ess\+\_\+backend\+\_\+probe) (const \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t} format)}
+
+probe the backend -\/ format supported? 
+
+Definition at line 61 of file ess\+\_\+backend.\+h.
+
+\mbox{\Hypertarget{structess__backend_ae79b75bd5bc3c4fd9c3b3706eed97bfb}\label{structess__backend_ae79b75bd5bc3c4fd9c3b3706eed97bfb}} 
+\index{ess\+\_\+backend@{ess\+\_\+backend}!ess\+\_\+backend\+\_\+read@{ess\+\_\+backend\+\_\+read}}
+\index{ess\+\_\+backend\+\_\+read@{ess\+\_\+backend\+\_\+read}!ess\+\_\+backend@{ess\+\_\+backend}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+read}{ess\_backend\_read}}
+{\footnotesize\ttfamily \hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$  ess\+\_\+backend\+\_\+read) (void $\ast$buffer, unsigned int buf\+\_\+size, unsigned int $\ast$readed)}
+
+read data from the backend 
+
+Definition at line 67 of file ess\+\_\+backend.\+h.
+
+\mbox{\Hypertarget{structess__backend_ab9a30f8d9f4bd941ae74e3ef0c9d7aa3}\label{structess__backend_ab9a30f8d9f4bd941ae74e3ef0c9d7aa3}} 
+\index{ess\+\_\+backend@{ess\+\_\+backend}!ess\+\_\+backend\+\_\+resum@{ess\+\_\+backend\+\_\+resum}}
+\index{ess\+\_\+backend\+\_\+resum@{ess\+\_\+backend\+\_\+resum}!ess\+\_\+backend@{ess\+\_\+backend}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+resum}{ess\_backend\_resum}}
+{\footnotesize\ttfamily \hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$  ess\+\_\+backend\+\_\+resum) (void)}
+
+resumed the backend 
+
+Definition at line 65 of file ess\+\_\+backend.\+h.
+
+\mbox{\Hypertarget{structess__backend_af8790cbdeabfcdafa015466bdb552ac2}\label{structess__backend_af8790cbdeabfcdafa015466bdb552ac2}} 
+\index{ess\+\_\+backend@{ess\+\_\+backend}!ess\+\_\+backend\+\_\+set\+\_\+sample\+\_\+format@{ess\+\_\+backend\+\_\+set\+\_\+sample\+\_\+format}}
+\index{ess\+\_\+backend\+\_\+set\+\_\+sample\+\_\+format@{ess\+\_\+backend\+\_\+set\+\_\+sample\+\_\+format}!ess\+\_\+backend@{ess\+\_\+backend}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+set\+\_\+sample\+\_\+format}{ess\_backend\_set\_sample\_format}}
+{\footnotesize\ttfamily \hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$  ess\+\_\+backend\+\_\+set\+\_\+sample\+\_\+format) (\hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t} format)}
+
+set new sample format 
+
+Definition at line 69 of file ess\+\_\+backend.\+h.
+
+\mbox{\Hypertarget{structess__backend_a3a1b32830c82ec84aa0e6c02280d7f6c}\label{structess__backend_a3a1b32830c82ec84aa0e6c02280d7f6c}} 
+\index{ess\+\_\+backend@{ess\+\_\+backend}!ess\+\_\+backend\+\_\+write@{ess\+\_\+backend\+\_\+write}}
+\index{ess\+\_\+backend\+\_\+write@{ess\+\_\+backend\+\_\+write}!ess\+\_\+backend@{ess\+\_\+backend}}
+\subsubsection{\texorpdfstring{ess\+\_\+backend\+\_\+write}{ess\_backend\_write}}
+{\footnotesize\ttfamily \hyperlink{ess__backend_8h_aa3de0496a3f361a6b38684e9cb65f01c}{ess\+\_\+backend\+\_\+error\+\_\+t}($\ast$  ess\+\_\+backend\+\_\+write) (void $\ast$buffer, unsigned int buf\+\_\+size, unsigned int $\ast$wrote)}
+
+write data to the backend 
+
+Definition at line 66 of file ess\+\_\+backend.\+h.
+
+\mbox{\Hypertarget{structess__backend_a9f29adb0a4cfb608557d26692fa78254}\label{structess__backend_a9f29adb0a4cfb608557d26692fa78254}} 
+\index{ess\+\_\+backend@{ess\+\_\+backend}!get\+\_\+info@{get\+\_\+info}}
+\index{get\+\_\+info@{get\+\_\+info}!ess\+\_\+backend@{ess\+\_\+backend}}
+\subsubsection{\texorpdfstring{get\+\_\+info}{get\_info}}
+{\footnotesize\ttfamily const char$\ast$($\ast$  get\+\_\+info) (void)}
+
+get infos for this backend 
+
+Definition at line 72 of file ess\+\_\+backend.\+h.
+
+\mbox{\Hypertarget{structess__backend_a1e8975441f4fbb374da179cc7e8bcbae}\label{structess__backend_a1e8975441f4fbb374da179cc7e8bcbae}} 
+\index{ess\+\_\+backend@{ess\+\_\+backend}!get\+\_\+name@{get\+\_\+name}}
+\index{get\+\_\+name@{get\+\_\+name}!ess\+\_\+backend@{ess\+\_\+backend}}
+\subsubsection{\texorpdfstring{get\+\_\+name}{get\_name}}
+{\footnotesize\ttfamily const char$\ast$($\ast$  get\+\_\+name) (void)}
+
+get the name for this backend 
+
+Definition at line 71 of file ess\+\_\+backend.\+h.
+
+\mbox{\Hypertarget{structess__backend_a5ad8569143b4728c7b7f91c53661d8b5}\label{structess__backend_a5ad8569143b4728c7b7f91c53661d8b5}} 
+\index{ess\+\_\+backend@{ess\+\_\+backend}!user\+\_\+daten@{user\+\_\+daten}}
+\index{user\+\_\+daten@{user\+\_\+daten}!ess\+\_\+backend@{ess\+\_\+backend}}
+\subsubsection{\texorpdfstring{user\+\_\+daten}{user\_daten}}
+{\footnotesize\ttfamily void$\ast$ user\+\_\+daten}
+
+
+
+Definition at line 74 of file ess\+\_\+backend.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{ess__backend_8h}{ess\+\_\+backend.\+h}\end{DoxyCompactItemize}
