@@ -1,5 +1,5 @@
 <div>
- <img src="https://github.com/RoseLeBlood/openess/blob/master/docs/Logo-OpenESS.png" width="256" align="left"> 
+ <img src="https://roseleblood.github.io/openess/Logo-OpenESS.png" width="256" align="left"> 
  <div align="center">
   <h1>Open Embedded Sound Server</h1>
    <h3>
