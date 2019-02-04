@@ -28,10 +28,7 @@
 #ifndef __ESS_CONFIG_H__
 #define __ESS_CONFIG_H__
 
-#define OPEN_ESS_VERSION_0_1 // Protokol version
-// #define OPEN_ESS_VERSION_1_0 // TODO: Future Plan - server, backends, platforms referen imp ready
-// #define OPEN_ESS_VERSION  1_1 // TODO: Future Plan 11 - all platforms ready  -- MT Safe
-// #define OPEN_ESS_VERSION  2_0 // TODO: Future Future Plan 2 - ??
+
 
 #define ESS_PROTOCOL_UDP							1
 #define ESS_PROTOCOL_TCP							2

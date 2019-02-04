@@ -23,7 +23,7 @@
  * @date 30 Januar 20119
  * @brief Contains all ess context  functions
  *
- * @addtogroup ess_context
+ * 
  */
 
 #ifndef __ESS_CONTEXT_H__

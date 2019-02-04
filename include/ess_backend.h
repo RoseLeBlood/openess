@@ -24,7 +24,7 @@
  * @date 30 Januar 20119
  * @brief Contains all ess backend  functions and the backend factory struct
  *
- * @addtogroup ess_backend
+ * 
  */
 
 #ifndef __ESS_BACKEND_H__

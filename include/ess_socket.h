@@ -24,7 +24,7 @@
  * @brief Contains all ess socket functions.
  * It contains all functions used to work with INET and INET6 sockets, both TCP, UDP, UDP lite
  *
- * @addtogroup ess_socket
+ * 
  */
 
 #ifndef _ESS_SOCKET_H_

@@ -23,7 +23,7 @@
  * @brief Contains all ess format  functions and all formats
  * It contains all functions used to work with formats
  *
- * @addtogroup ess_format
+ * 
  */
 #ifndef __ESS_FORMAT_H__
 #define __ESS_FORMAT_H__
