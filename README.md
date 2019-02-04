@@ -3,14 +3,4 @@ Open embedded sound server
 
 A mini sound server for embedded solutions 
 
-
-
-
-## reference implantierung
-found in directorie `esp32` or the esp32 
-esp32 backends are: 
-+ null backend: no sound
-+ i2s_generic: i2s module
-+ uart backend: send audio over uart1
-+ udp backend: send audio over udp - no impl
-	
+documentation found you hier: https://roseleblood.github.io/openess/html/d3/dcc/md__r_e_a_d_m_e.html	
