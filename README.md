@@ -1,11 +1,30 @@
-<img src="/docs/Logo-OpenESS.png" width="256" align="left"> 
-
-# Open Embedded SoundServer Daemon Alpa
-
-
-A mini SoundServer for embedded solutions 
-
-Docu: https://roseleblood.github.io/openess/html/d3/dcc/md__r_e_a_d_m_e.html
+<div>
+ <img src="/docs/Logo-OpenESS.png" width="256" align="left"> 
+ <div align="right">
+  <h1>Open Embedded Sound Server</h1>
+   <h3>
+     <a href="https://choo.io">
+       Website
+     </a>
+     <span> | </span>
+     <a href="https://github.com/choojs/choo-handbook">
+       Wiki
+     </a>
+     <span> | </span>
+     <a href="https://github.com/choojs/choo/blob/master/.github/CONTRIBUTING.md">
+       Contributing
+     </a>
+     <span> | </span>
+     <a href="https://roseleblood.github.io/openess/html/d3/dcc/md__r_e_a_d_m_e.html">
+       Documentation
+     </a>
+     <span> | </span>
+     <a href="https://webchat.freenode.net/?channels=choo">
+       Chat
+     </a>
+   </h3>
+ </div>
+</div>
 
 ## Usage example
 
@@ -13,7 +32,7 @@ A few motivating and useful examples of how your product can be used. Spice this
 
 TODO
 
-_For more examples and usage, please refer to the [Wiki][wiki]._
+_For more examples and usage, please refer to the [Wiki][wiki] or the _
 
 
 ## Release History
