@@ -10,6 +10,7 @@
        Wiki
      </a>
      <span> | </span>
+     <a href="https://github.com/RoseLeBlood/openess/blob/master/CONTRIBUTING.md">
        Contributing
      </a>
      <span> | </span>
