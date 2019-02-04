@@ -24,7 +24,7 @@
  * @brief Contains all ess socket functions.
  * It contains all functions used to work with INET and INET6 sockets, both TCP, UDP, UDP lite
  *
- * 
+ *
  */
 
 #ifndef _ESS_SOCKET_H_
@@ -66,6 +66,7 @@ typedef enum ess_socket_error {
   ESS_SOCKET_ERROR_OK = 0,                                 /**< no error*/
   ESS_SOCKET_ERROR_NULL = -1,                           /**< `ess_socket_t` is NULL */
   ESS_SOCKET_ERROR_UNSPEC_PROTOKOL,      /**< unknown protokol */
+  ESS_SOCKET_ERROR_WRONG_PROTOKOL,  /**< wrong protokol */
   ESS_SOCKET_ERROR_UNSPEC_FAMILY,              /**< unknown family */
   ESS_SOCKET_ERROR_UNSPEC,
   ESS_SOCKET_ERROR_GETADDR,                            /**<  getaddrinfo error see  ess_socket_t::retval */
@@ -78,7 +79,8 @@ typedef enum ess_socket_error {
  */
 typedef struct ess_socket {
   char hostname[32];                     /**<  Address to bind. If you want to bind to every address use "0.0.0.0" or "::" (IPv6 wildcard) */
-  unsigned short port;                    /**<  The port to bind. */
+  unsigned int port;                    /**<  The port to bind. */
+
   int socket;                                   /**<  The socket */
   int retval;
   ess_socket_pro_t protokol;          /**< `ESS_SOCKET_PROTO_STREAM`, `ESS_SOCKET_PROTO_DRAM` or `ESS_SOCKET_PROTO_DRAM_LITE` - the using protokoll */
@@ -128,7 +130,6 @@ ess_socket_error_t ess_socket_create(ess_socket_t* socket, ess_socket_fam_t fam,
 * @retval ESS_SOCKET_ERROR_NULL socket was NULL
 */
 ess_socket_error_t ess_socket_create_server(ess_socket_t* socket);
-
 /**
  * @brief Close a socket.
  *
@@ -141,6 +142,8 @@ ess_socket_error_t ess_socket_create_server(ess_socket_t* socket);
  * @retval ESS_SOCKET_ERROR_CLOSE Socket was already closed (other errors are very unlikely to occur)
  */
 ess_socket_error_t ess_socket_close(ess_socket_t* socket);
+
+
 
 
 #endif

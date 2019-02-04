@@ -93,7 +93,7 @@ ess_socket_error_t ess_socket_create_server(ess_socket_t* _socket) {
   hints.ai_flags = AI_PASSIVE;
 
   char buffer[8];
-  sprintf(buffer,"%d",_socket->port) ;
+  snprintf(buffer, 8,"%d",_socket->port) ;
   if (  (_socket->retval = getaddrinfo(_socket->hostname, buffer ,&hints,&result)) != 0 ) {
     _socket->status = ESS_SOCKET_STATUS_ERROR;
     return ESS_SOCKET_ERROR_GETADDR;
@@ -133,34 +133,3 @@ ess_socket_error_t ess_socket_close(ess_socket_t* _socket) {
   }
   return ESS_SOCKET_ERROR_OK;
 }
-
-
-
-
-/* connec t STREAM
-int sfd, return_value;
-struct addrinfo hint, *result, *result_check;
-memset(&hint,0,sizeof hint);
-
-switch ( socket->protokol ) {
-  case ESS_SOCKET_FAMILY_IP4: hint.ai_family = AF_INET; break;
-  case ESS_SOCKET_FAMILY_IP6: hint.ai_family = AF_INET6; break;
-  case ESS_SOCKET_IP_FAMILY_BOTH: hint.ai_family = AF_UNSPEC; break;
-  default: return ESS_SOCKET_ERROR_UNSPEC_PROTOKOL;
-};
-hint.ai_socktype = SOCK_STREAM;
-
-if (  (return_value = getaddrinfo(socket->hostname,socket->port, &hint, &result))  != 0 ) {
-  return ESS_SOCKET_ERROR_GETADDR;
-}
-for ( result_check = result; result_check != NULL; result_check = result_check->ai_next ) {
-  sfd = socket(result_check->ai_family, result_check->ai_socktype | flags, result_check->ai_protocol);
-  if ( sfd < 0 )  continue;
-
-  if ( -1 != connect(sfd,result_check->ai_addr,result_check->ai_addrlen))  break;
-  close(sfd);
-}
-freeaddrinfo(result);
-
-
-return ESS_SOCKET_ERROR_OK;*/
