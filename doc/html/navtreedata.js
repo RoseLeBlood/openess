@@ -2,7 +2,6 @@ var NAVTREE =
 [
   [ "OpenESS", "index.html", [
     [ "openess", "md__r_e_a_d_m_e.html", null ],
-    [ "Modules", "modules.html", "modules" ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],
@@ -14,7 +13,7 @@ var NAVTREE =
     [ "Files", null, [
       [ "File List", "files.html", "files" ],
       [ "Globals", "globals.html", [
-        [ "All", "globals.html", null ],
+        [ "All", "globals.html", "globals_dup" ],
         [ "Functions", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
@@ -29,7 +28,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"structess__backend_a9d983cf89f2f302341ec92414915e9c2.html#a9d983cf89f2f302341ec92414915e9c2"
+"generic__platform__semaphore_8c.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

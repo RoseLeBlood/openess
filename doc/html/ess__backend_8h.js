@@ -12,8 +12,12 @@ var ess__backend_8h =
       [ "ESS_BACKEND_ERROR_NULL", "ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72.html#aac7bdeadfb36709a6f5ab36dda98fb72aec1740308fb5c8dbd28e701365024bf9", null ],
       [ "ESS_BACKEND_ERROR", "ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72.html#aac7bdeadfb36709a6f5ab36dda98fb72a1575cc2ec75e5e0912e283a5a8cad77c", null ]
     ] ],
+    [ "ess_backend_create_factory_list", "ess__backend_8h_a16cb59b090351d9b9989de80b8bad520.html#a16cb59b090351d9b9989de80b8bad520", null ],
+    [ "ess_backend_destroy_factory_list", "ess__backend_8h_ab6129a1d1c11f81718f9122facfddd35.html#ab6129a1d1c11f81718f9122facfddd35", null ],
     [ "ess_backend_get_size", "ess__backend_8h_a6ba1bf553b596dd14d47748bec40bc9c.html#a6ba1bf553b596dd14d47748bec40bc9c", null ],
-    [ "ess_backend_probe", "ess__backend_8h_a2a77a7ddc5730431b3f86ddc2750315b.html#a2a77a7ddc5730431b3f86ddc2750315b", null ],
-    [ "ess_backend_probe_all", "ess__backend_8h_a38e02fd000a6be3510ec8f9df0a46ed7.html#a38e02fd000a6be3510ec8f9df0a46ed7", null ],
-    [ "ess_backend_set_sample_format", "ess__backend_8h_a1e2f543b02ce1dae0c06b54aaf8cf9b9.html#a1e2f543b02ce1dae0c06b54aaf8cf9b9", null ]
+    [ "ess_backend_get_user_daten", "ess__backend_8h_a5adbfcb9ef73a620c893f59771c3f5e9.html#a5adbfcb9ef73a620c893f59771c3f5e9", null ],
+    [ "ess_backend_probe", "ess__backend_8h_a9da07e785f1062832e5b0eadae2fd1b1.html#a9da07e785f1062832e5b0eadae2fd1b1", null ],
+    [ "ess_backend_probe_all", "ess__backend_8h_ae425d7c64cceee74831168327d858fed.html#ae425d7c64cceee74831168327d858fed", null ],
+    [ "ess_backend_set_sample_format", "ess__backend_8h_ab9b737a43ebfa9d220c02a32e79346d8.html#ab9b737a43ebfa9d220c02a32e79346d8", null ],
+    [ "ess_backend_set_user_daten", "ess__backend_8h_a6c9175335019d29a98371a855895a429.html#a6c9175335019d29a98371a855895a429", null ]
 ];

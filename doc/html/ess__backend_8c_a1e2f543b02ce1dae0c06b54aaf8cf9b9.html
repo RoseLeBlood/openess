@@ -75,7 +75,7 @@ $(document).ready(function(){initNavTree('ess__backend_8c_a1e2f543b02ce1dae0c06b
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="ess__format_8h_a06d5bae640b8d903863bba8722212aea.html#a06d5bae640b8d903863bba8722212aea">ess_format_t</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163.html#ab03f24cb5d42f4448f713bf1ec178163">ess_format_t</a>&#160;</td>
           <td class="paramname"><em>forma</em>&#160;</td>
         </tr>
         <tr>
@@ -89,15 +89,22 @@ $(document).ready(function(){initNavTree('ess__backend_8c_a1e2f543b02ce1dae0c06b
 <p>set sample format </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">the</td><td>usiing backend </td></tr>
-    <tr><td class="paramname">sample</td><td>format </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">backend</td><td>the usiing backend </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">forma</td><td>sample format </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>if backend support : ESS_BACKEND_OK else ESS_BACKEND_ERROR_WRONG_FORMAT or ESS_BACKEND_ERROR </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">ESS_BACKEND_OK</td><td>if backend support </td></tr>
+    <tr><td class="paramname">ESS_BACKEND_ERROR_WRONG_FORMAT</td><td></td></tr>
+    <tr><td class="paramname">ESS_BACKEND_ERROR</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="ess__backend_8c_source.html#l00083">83</a> of file <a class="el" href="ess__backend_8c_source.html">ess_backend.c</a>.</p>
-<div class="fragment"><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                                                                                                        {</div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keywordflow">if</span>(backend == 0) <span class="keywordflow">return</span> <a class="code" href="ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72.html#aac7bdeadfb36709a6f5ab36dda98fb72aec1740308fb5c8dbd28e701365024bf9">ESS_BACKEND_ERROR_NULL</a>;</div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keywordflow">return</span> backend-&gt;<a class="code" href="structess__backend_a9d983cf89f2f302341ec92414915e9c2.html#a9d983cf89f2f302341ec92414915e9c2">ess_backend_set_sample_format</a>(forma);</div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div><div class="ttc" id="ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72_html_aac7bdeadfb36709a6f5ab36dda98fb72aec1740308fb5c8dbd28e701365024bf9"><div class="ttname"><a href="ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72.html#aac7bdeadfb36709a6f5ab36dda98fb72aec1740308fb5c8dbd28e701365024bf9">ESS_BACKEND_ERROR_NULL</a></div><div class="ttdef"><b>Definition:</b> <a href="ess__backend_8h_source.html#l00051">ess_backend.h:51</a></div></div>
+<p class="definition">Definition at line <a class="el" href="ess__backend_8c_source.html#l00089">89</a> of file <a class="el" href="ess__backend_8c_source.html">ess_backend.c</a>.</p>
+<div class="fragment"><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                                                                                                        {</div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keywordflow">if</span>(backend == 0) <span class="keywordflow">return</span> <a class="code" href="ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72.html#aac7bdeadfb36709a6f5ab36dda98fb72aec1740308fb5c8dbd28e701365024bf9">ESS_BACKEND_ERROR_NULL</a>;</div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keywordflow">return</span> backend-&gt;<a class="code" href="structess__backend_a9d983cf89f2f302341ec92414915e9c2.html#a9d983cf89f2f302341ec92414915e9c2">ess_backend_set_sample_format</a>(forma);</div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div><div class="ttc" id="ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72_html_aac7bdeadfb36709a6f5ab36dda98fb72aec1740308fb5c8dbd28e701365024bf9"><div class="ttname"><a href="ess__backend_8h_aac7bdeadfb36709a6f5ab36dda98fb72.html#aac7bdeadfb36709a6f5ab36dda98fb72aec1740308fb5c8dbd28e701365024bf9">ESS_BACKEND_ERROR_NULL</a></div><div class="ttdef"><b>Definition:</b> <a href="ess__backend_8h_source.html#l00051">ess_backend.h:51</a></div></div>
 <div class="ttc" id="structess__backend_a9d983cf89f2f302341ec92414915e9c2_html_a9d983cf89f2f302341ec92414915e9c2"><div class="ttname"><a href="structess__backend_a9d983cf89f2f302341ec92414915e9c2.html#a9d983cf89f2f302341ec92414915e9c2">ess_backend::ess_backend_set_sample_format</a></div><div class="ttdeci">ess_backend_error_t(* ess_backend_set_sample_format)(ess_format_t format)</div><div class="ttdef"><b>Definition:</b> <a href="ess__backend_8h_source.html#l00069">ess_backend.h:69</a></div></div>
 </div><!-- fragment --><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
@@ -106,7 +113,7 @@ $(document).ready(function(){initNavTree('ess__backend_8c_a1e2f543b02ce1dae0c06b
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="ess__backend_8c_a1e2f543b02ce1dae0c06b54aaf8cf9b9_a1e2f543b02ce1dae0c06b54aaf8cf9b9_icgraph.png" border="0" usemap="#ess__backend_8c_a1e2f543b02ce1dae0c06b54aaf8cf9b9_a1e2f543b02ce1dae0c06b54aaf8cf9b9_icgraph" alt=""/></div>
 <map name="ess__backend_8c_a1e2f543b02ce1dae0c06b54aaf8cf9b9_a1e2f543b02ce1dae0c06b54aaf8cf9b9_icgraph" id="ess__backend_8c_a1e2f543b02ce1dae0c06b54aaf8cf9b9_a1e2f543b02ce1dae0c06b54aaf8cf9b9_icgraph">
-<area shape="rect" id="node2" href="ess__context_8c_a043e71fe24a24e03093860bc4b200196.html#a043e71fe24a24e03093860bc4b200196" title="set the sample format to backend " alt="" coords="227,13,389,39"/>
+<area shape="rect" id="node2" href="ess__context_8c_aebeaf3ec64fe0e348557884dfa601944.html#aebeaf3ec64fe0e348557884dfa601944" title="set the sample format to backend " alt="" coords="227,13,389,39"/>
 </map>
 </div>
 
