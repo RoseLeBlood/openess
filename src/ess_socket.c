@@ -398,3 +398,60 @@ ess_socket_error_t ess_socket_connect_dram(ess_socket_t* _socket, const char* ho
 
   return ESS_SOCKET_ERROR_OK;
 }
+int ess_socket_write_dram(ess_socket_t* _socket, const void* buf, unsigned int size,
+  const char* host, int port, int sendto_flags) {
+
+  struct sockaddr_storage oldsock;
+  struct addrinfo *result, *result_check, hint;
+  socklen_t oldsocklen = sizeof(struct sockaddr_storage);
+  int return_value;
+  char buffer[8]; buffer[0] = '\0';
+  snprintf(buffer, 8, "%d", port);
+
+  if(buf == 0) return 0;
+
+  if (_socket == 0  || port == 0  || host == NULL)   {
+    return ESS_SOCKET_ERROR_NULL;
+  }
+  if (  getsockname(_socket->socket, (struct sockaddr*)&oldsock,(socklen_t*)&oldsocklen) == -1 ){
+    return ESS_SOCKET_ERROR_UNSPEC;
+  }
+  hint.ai_family = oldsock.ss_family;
+  hint.ai_socktype = SOCK_DGRAM;
+
+  if ( getaddrinfo(host,buffer,&hint,&result) != 0){
+    return ESS_SOCKET_ERROR_UNSPEC;
+  }
+  for ( result_check = result; result_check != NULL; result_check = result_check->ai_next ) { // go through the linked list of struct addrinfo elements
+    if (  (return_value = sendto(_socket->socket,buf,size,sendto_flags,result_check->ai_addr,result_check->ai_addrlen)) != -1) // connected without error
+      break;
+  }
+  freeaddrinfo(result);
+
+  return return_value;
+}
+ess_socket_error_t ess_socket_read_dram(ess_socket_t* socket, void* buf, unsigned int size, char* src_host,
+  unsigned int src_host_len,  int src_port, unsigned int src_service_len, int recvfrom_flags, int numeric) {
+
+  struct sockaddr_storage client;
+  ssize_t bytes;
+  int retval;
+
+  char buffer[8]; buffer[0] = '\0';
+  snprintf(buffer, 8, "%d", src_port);
+
+  if(buf == 0 || size == 0) return 0;
+
+  if (_socket == 0 )   {
+    return ESS_SOCKET_ERROR_NULL;
+  }
+  memset(buffer,0,size);
+  if ( src_host ) memset(src_host,0,src_host_len);
+
+  socklen_t stor_addrlen = sizeof(struct sockaddr_storage);
+
+  if ( bytes = recvfrom(socket->socket, buffer,size,recvfrom_flags,(struct sockaddr*)&client,&stor_addrlen) == -1)
+    return ESS_SOCKET_ERROR_UNSPEC;
+
+  return bytes;
+}

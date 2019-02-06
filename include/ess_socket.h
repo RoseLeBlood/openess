@@ -224,7 +224,7 @@ ess_socket_t* ess_socket_connect_stream(const char* hostname, int port, ess_sock
  *  The socket is automatically bound to some port.
  *
  * @param [in] fam is ESS_SOCKET_FAMILY_IP4  (AF_INET) or ESS_SOCKET_FAMILY_IP6  (AF_INET6).
- * @param [in] proto is ESS_SOCKET_PROTO_DRAM or ESS_SOCKET_PROTO_DRAM_LITE  
+ * @param [in] proto is ESS_SOCKET_PROTO_DRAM or ESS_SOCKET_PROTO_DRAM_LITE
  * @param [in]  flags may be the flags specified in socket(2), i.e. SOCK_NONBLOCK and/or SOCK_CLOEXEC. More than one
  * flags may be ORed. This argument is only sensible on Linux >= 2.6.27!
  * @param [out] error_code if !=0 then error codes
@@ -251,4 +251,61 @@ ess_socket_t* ess_socket_create_dram(ess_socket_fam_t  fam, ess_socket_pro_t pro
  */
 ess_socket_error_t ess_socket_connect_dram(ess_socket_t* socket, const char* hostname, int port) ;
 
+
+/**
+ * @brief This function is the equivalent to `sendto(2)`
+ *
+ * @param [in] the socket you got from `ess_socket_create_dram`.
+ * @param buf is a pointer to some data.
+ * @param size is the length of the buffer .
+ * @param host is the host to which we want to send the data.
+ * @param port is the port on the remote host.
+ * @param sendto_flags is available on all platforms. The value given here goes directly to the internal sendto() call.
+ * @param [out] error Error codes
+ *
+ * @retval n *n* bytes of data could be sent.
+ * @retval ESS_SOCKET_ERROR_UNSPEC Unsopec error.
+ * @retval ESS_SOCKET_ERROR_NULL size, host or socket is NULL
+ */
+ess_socket_error_t ess_socket_write_dram(ess_socket_t* socket, const void* buf, unsigned int size,
+  const char* host, int port, int sendto_flags);
+
+/**
+ * @brief Receive data from a UDP/IP socket
+ *
+ *
+ * @param [in] the socket you got from `ess_socket_create_dram`.
+ * @param buf where the data will be written
+ * @param size the size of `buffer`
+ * @param src_host Where the sending host's name/IP will be stored
+ * @param src_host_len `src_host`'s length
+ * @param src_port where the port on remote side will be written to
+ * @param recvfrom_flags Flags for `recvfrom(2)`
+ *
+ * @retval n *n* bytes of data were received.
+ * @retval 0 Peer sent EOF.
+ * @retval <0 An error occurred.
+ */
+ess_socket_error_t ess_socket_read_dram(ess_socket_t* socket, void* buf, unsigned int size, char* src_host,
+  unsigned int src_host_len, int  src_port, int recvfrom_flags);
+
+  /**
+   * @brief Receive data from a UDP/IP socket
+   *
+   *
+   * @param [in] the local socket you got from `ess_socket_create_dram`.
+  * @param [in] the socket you got from `ess_socket_create_dram`.
+   * @param buf where the data will be written
+   * @param size the size of `buffer`
+   * @param src_host Where the sending host's name/IP will be stored
+   * @param src_host_len `src_host`'s length
+   * @param src_port where the port on remote side will be written to
+   * @param recvfrom_flags Flags for `recvfrom(2)`
+   *
+   * @retval n *n* bytes of data were received.
+   * @retval 0 Peer sent EOF.
+   * @retval <0 An error occurred.
+   */
+ess_socket_error_t ess_socket_read_dram(ess_socket_t* server_socket, ess_socket_t* write_socket,
+  void* buf, unsigned int size, int recvfrom_flags);
 #endif
