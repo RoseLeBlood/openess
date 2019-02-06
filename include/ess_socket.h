@@ -132,7 +132,6 @@ ess_socket_error_t ess_socket_create_server( ess_socket_fam_t fam, ess_socket_pr
  *
  * @param server_socket the server socket
  * @param error_code
- * @param accept_flags flags for `accept4(2)`
  *
  * @retval != 0 A the client socket
  * @retval NULL Error  see paramerter 'error_code'
@@ -289,23 +288,34 @@ ess_socket_error_t ess_socket_write_dram(ess_socket_t* socket, const void* buf, 
 ess_socket_error_t ess_socket_read_dram(ess_socket_t* socket, void* buf, unsigned int size, char* src_host,
   unsigned int src_host_len, int  src_port, int recvfrom_flags);
 
-  /**
-   * @brief Receive data from a UDP/IP socket
-   *
-   *
-   * @param [in] the local socket you got from `ess_socket_create_dram`.
-  * @param [in] the socket you got from `ess_socket_create_dram`.
-   * @param buf where the data will be written
-   * @param size the size of `buffer`
-   * @param src_host Where the sending host's name/IP will be stored
-   * @param src_host_len `src_host`'s length
-   * @param src_port where the port on remote side will be written to
-   * @param recvfrom_flags Flags for `recvfrom(2)`
-   *
-   * @retval n *n* bytes of data were received.
-   * @retval 0 Peer sent EOF.
-   * @retval <0 An error occurred.
-   */
-ess_socket_error_t ess_socket_read_dram(ess_socket_t* server_socket, ess_socket_t* write_socket,
-  void* buf, unsigned int size, int recvfrom_flags);
+  
+/**
+* @brief read from socket
+*
+*
+* @param [in] the remote socket 
+* @param buffer where the data will be read
+* @param size the size of `buffer`
+* @param readed how many bytes readed
+*
+*
+* @retval ESS_SOCKET_ERROR_OK all ok
+* @retval ESS_SOCKET_UNSPEC Error 
+*/
+ess_socket_error_t ess_socket_read(ess_socket_t* socket, void* buffer, unsigned int size, unsigned int* readed);
+/**
+* @brief read from socket
+*
+*
+* @param [in] the remote socket 
+* @param buffer where the data will be read
+* @param size the size of `buffer`
+* @param wrote how many bytes wrote
+*
+*
+* @retval ESS_SOCKET_ERROR_OK all ok
+* @retval ESS_SOCKET_UNSPEC Error 
+*/
+ess_socket_error_t ess_socket_write(ess_socket_t* socket, const void* buffer, unsigned int size, unsigned int* wrote);
+
 #endif

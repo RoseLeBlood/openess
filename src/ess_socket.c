@@ -455,3 +455,36 @@ ess_socket_error_t ess_socket_read_dram(ess_socket_t* socket, void* buf, unsigne
 
   return bytes;
 }
+
+ess_socket_error_t ess_socket_read(ess_socket_t* socket, void* buffer, unsigned int size, int* readed) {
+  int readed_g = 0;
+  
+  if(buffer == 0) { if(readed) *readed = 0; return ESS_SOCKET_ERROR_NULL; }
+
+  if (_socket == 0)   {
+    return ESS_SOCKET_ERROR_NULL; if(readed) *readed = 0;
+  }
+  readed_g = read(socket->socket, buffer, size);
+  if(readed_g > 0) {
+  	return ESS_SOCKET_ERROR_UNSPEC; if(readed) *readed = 0;
+  }
+  if(readed) {
+    *readed = readed_g;
+  return ESS_SOCKET_ERROR_OK;
+}
+ess_socket_error_t ess_socket_write(ess_socket_t* socket, const void* buffer, unsigned int size, unsigned int* wrote) {
+  int wrote_g = 0;
+  
+  if(buffer == 0) { if(wrote) *wrote = 0; return ESS_SOCKET_ERROR_NULL; }
+
+  if (_socket == 0)   {
+    return ESS_SOCKET_ERROR_NULL; if(wrote) *wrote = 0;
+  }
+  wrote_g = write(socket->socket, buffer, size);
+  if(readed_g > 0) {
+  	return ESS_SOCKET_ERROR_UNSPEC; if(wrote) *wrote = 0;
+  }
+  if(wrote) {
+    *wrote = wrote_g;
+  return ESS_SOCKET_ERROR_OK;
+}
