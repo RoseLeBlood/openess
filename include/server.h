@@ -3,6 +3,7 @@
 
 #include "esd.h"
 #include "context.h"
+#include "ess_socket.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,11 +17,9 @@ typedef enum ess_server_status {
 }ess_server_status_t;
 
 typedef struct ess_server {
-  const char* hostname;
+  ess_socket_t socket;
   ess_backend_t* backend;
   ess_format_t format;
-  int port;
-  int socket;
 
   void* buffer;
   int magl, magr;
