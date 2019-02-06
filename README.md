@@ -35,6 +35,8 @@ OpenESS is free and open-source software, and is licensed under the terms of the
 
 ## Getting Started
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6d9316aa71a84c3e87a1344d1a9015fa)](https://app.codacy.com/app/RoseLeBlood/openess?utm_source=github.com&utm_medium=referral&utm_content=RoseLeBlood/openess&utm_campaign=Badge_Grade_Settings)
+
 ### Setting Up Development Environment
 
 #### PlatformIO
