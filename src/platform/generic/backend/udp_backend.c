@@ -48,7 +48,7 @@ ess_backend_error_t ess_backend_udp_probe(const ess_format_t format) {
     case ESS_FORMAT_STEREO_96000_8:
     case ESS_FORMAT_STEREO_96000_16:
     case ESS_FORMAT_STEREO_96000_24:
-      break;
+      return ESS_BACKEND_ERROR_WRONG_FORMAT;
     default:
       return ESS_BACKEND_OK;
   }

@@ -50,27 +50,20 @@ ess_backend_error_t ess_backend_destroy_factory_list(ess_backend_facktory_t* lis
   return ESS_BACKEND_OK;
 }
 ess_backend_error_t ess_backend_probe_all(ess_format_t format, ess_backend_facktory_t** backend, int* size) {
-  ess_backend_facktory_t *factory;
+  ess_backend_facktory_t *factory = 0;
 
   unsigned int i,n = 0;
 
   for( i = 0; i < ess_backend_get_size(); i++ ) {
     factory = backends_list[i].getFactory();
 
-    if(factory->ess_backend_probe(format) != ESS_BACKEND_OK) {
-      ESP_LOGE(LOG_TAG, "Failed to probe backend \"%s\"", backends_list[i].name);
-      continue;
-    } else {
-      ESP_LOGI(LOG_TAG,"Possible format for backend: \"%s\" ", backends_list[i].name);
-      if(backend) { backend[n] = factory; }
-      n++;
+    if(factory->ess_backend_probe(format) == ESS_BACKEND_OK) {
+      if(*backend) { backend[n] = factory; } n++;
     }
-
   }
   ESP_LOGI(LOG_TAG,"%d/%d backends probe possible\n", n, ess_backend_get_size());
 
   if(size) *size = n;
-  if(n == 0) return ESS_BACKEND_ERROR_WRONG_FORMAT;
   return n;
 }
 

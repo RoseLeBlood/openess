@@ -22,7 +22,7 @@ ess_backends_entry_t backends_list[] = {
 
 
 #ifdef ESS_ENABLE_BACKEND_UART
-  { "uart", ess_backend_uart_getFactory},
+  { "uart1 backend", ess_backend_uart_getFactory},
 #endif //ESS_ENABLE_BACKEND_UART
 #ifdef ESS_ENABLE_BACKEND_I2S
   { "i2s_generic", ess_backend_i2s_generic_getFactory},
