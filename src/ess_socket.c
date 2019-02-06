@@ -398,7 +398,8 @@ ess_socket_error_t ess_socket_connect_dram(ess_socket_t* _socket, const char* ho
 
   return ESS_SOCKET_ERROR_OK;
 }
-int ess_socket_write_dram(ess_socket_t* _socket, const void* buf, unsigned int size,
+
+ess_socket_error_t ess_socket_write_dram(ess_socket_t* socket, const void* buf, unsigned int size,
   const char* host, int port, int sendto_flags) {
 
   struct sockaddr_storage oldsock;
@@ -410,10 +411,10 @@ int ess_socket_write_dram(ess_socket_t* _socket, const void* buf, unsigned int s
 
   if(buf == 0) return 0;
 
-  if (_socket == 0  || port == 0  || host == NULL)   {
+  if (socket == 0  || port == 0  || host == NULL)   {
     return ESS_SOCKET_ERROR_NULL;
   }
-  if (  getsockname(_socket->socket, (struct sockaddr*)&oldsock,(socklen_t*)&oldsocklen) == -1 ){
+  if (  getsockname(socket->socket, (struct sockaddr*)&oldsock,(socklen_t*)&oldsocklen) == -1 ){
     return ESS_SOCKET_ERROR_UNSPEC;
   }
   hint.ai_family = oldsock.ss_family;
@@ -423,7 +424,7 @@ int ess_socket_write_dram(ess_socket_t* _socket, const void* buf, unsigned int s
     return ESS_SOCKET_ERROR_UNSPEC;
   }
   for ( result_check = result; result_check != NULL; result_check = result_check->ai_next ) { // go through the linked list of struct addrinfo elements
-    if (  (return_value = sendto(_socket->socket,buf,size,sendto_flags,result_check->ai_addr,result_check->ai_addrlen)) != -1) // connected without error
+    if (  (return_value = sendto(socket->socket,buf,size,sendto_flags,result_check->ai_addr,result_check->ai_addrlen)) != -1) // connected without error
       break;
   }
   freeaddrinfo(result);
@@ -431,18 +432,17 @@ int ess_socket_write_dram(ess_socket_t* _socket, const void* buf, unsigned int s
   return return_value;
 }
 ess_socket_error_t ess_socket_read_dram(ess_socket_t* socket, void* buf, unsigned int size, char* src_host,
-  unsigned int src_host_len,  int src_port, unsigned int src_service_len, int recvfrom_flags, int numeric) {
+  unsigned int src_host_len, int  src_port, int recvfrom_flags) {
 
   struct sockaddr_storage client;
-  ssize_t bytes;
-  int retval;
+  unsigned int bytes;
 
   char buffer[8]; buffer[0] = '\0';
   snprintf(buffer, 8, "%d", src_port);
 
   if(buf == 0 || size == 0) return 0;
 
-  if (_socket == 0 )   {
+  if (socket == 0 )   {
     return ESS_SOCKET_ERROR_NULL;
   }
   memset(buffer,0,size);
@@ -450,18 +450,18 @@ ess_socket_error_t ess_socket_read_dram(ess_socket_t* socket, void* buf, unsigne
 
   socklen_t stor_addrlen = sizeof(struct sockaddr_storage);
 
-  if ( bytes = recvfrom(socket->socket, buffer,size,recvfrom_flags,(struct sockaddr*)&client,&stor_addrlen) == -1)
+  if ( (bytes = recvfrom(socket->socket, buffer,size,recvfrom_flags,(struct sockaddr*)&client,&stor_addrlen)) == -1)
     return ESS_SOCKET_ERROR_UNSPEC;
 
   return bytes;
 }
 
-ess_socket_error_t ess_socket_read(ess_socket_t* socket, void* buffer, unsigned int size, int* readed) {
+ess_socket_error_t ess_socket_read(ess_socket_t* socket, void* buffer, unsigned int size, unsigned int* readed) {
   int readed_g = 0;
-  
+
   if(buffer == 0) { if(readed) *readed = 0; return ESS_SOCKET_ERROR_NULL; }
 
-  if (_socket == 0)   {
+  if (socket == 0)   {
     return ESS_SOCKET_ERROR_NULL; if(readed) *readed = 0;
   }
   readed_g = read(socket->socket, buffer, size);
@@ -470,21 +470,23 @@ ess_socket_error_t ess_socket_read(ess_socket_t* socket, void* buffer, unsigned 
   }
   if(readed) {
     *readed = readed_g;
+  }
   return ESS_SOCKET_ERROR_OK;
 }
 ess_socket_error_t ess_socket_write(ess_socket_t* socket, const void* buffer, unsigned int size, unsigned int* wrote) {
   int wrote_g = 0;
-  
+
   if(buffer == 0) { if(wrote) *wrote = 0; return ESS_SOCKET_ERROR_NULL; }
 
-  if (_socket == 0)   {
+  if (socket == 0)   {
     return ESS_SOCKET_ERROR_NULL; if(wrote) *wrote = 0;
   }
   wrote_g = write(socket->socket, buffer, size);
-  if(readed_g > 0) {
+  if(wrote_g > 0) {
   	return ESS_SOCKET_ERROR_UNSPEC; if(wrote) *wrote = 0;
   }
   if(wrote) {
     *wrote = wrote_g;
+  }
   return ESS_SOCKET_ERROR_OK;
 }
