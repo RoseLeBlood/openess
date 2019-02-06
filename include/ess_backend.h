@@ -24,7 +24,7 @@
  * @date 30 Januar 20119
  * @brief Contains all ess backend  functions and the backend factory struct
  *
- * 
+ *
  */
 
 #ifndef __ESS_BACKEND_H__
@@ -88,10 +88,11 @@ ess_backend_error_t ess_backend_destroy_factory_list(ess_backend_facktory_t* lis
  * @brief Check that all backends support the specified format and return all working backends.
  * @param format the format to probe
  * @param backend return all working backends. if not null
+ * @param size number of using devices
  * @return  number of working backends or errir codes
  * @retval ESS_BACKEND_ERROR_WRONG_FORMAT when no  backend  supported
  */
-ess_backend_error_t ess_backend_probe_all(const ess_format_t format, ess_backend_facktory_t** backend);
+ess_backend_error_t ess_backend_probe_all(const ess_format_t format, ess_backend_facktory_t** backend, int* size);
 /**
  * @brief checked the backend with the specified name and returns it if successful.
  * @param Name of the backend

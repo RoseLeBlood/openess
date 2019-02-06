@@ -49,7 +49,7 @@ ess_backend_error_t ess_backend_destroy_factory_list(ess_backend_facktory_t* lis
   //free(list);
   return ESS_BACKEND_OK;
 }
-ess_backend_error_t ess_backend_probe_all(ess_format_t format, ess_backend_facktory_t** backend) {
+ess_backend_error_t ess_backend_probe_all(ess_format_t format, ess_backend_facktory_t** backend, int* size) {
   ess_backend_facktory_t *factory;
 
   unsigned int i,n = 0;
@@ -69,6 +69,7 @@ ess_backend_error_t ess_backend_probe_all(ess_format_t format, ess_backend_fackt
   }
   ESP_LOGI(LOG_TAG,"%d/%d backends probe possible\n", n, ess_backend_get_size());
 
+  if(size) *size = n;
   if(n == 0) return ESS_BACKEND_ERROR_WRONG_FORMAT;
   return n;
 }
