@@ -215,6 +215,40 @@ ess_socket_error_t ess_socket_set_buffer(ess_socket_t* socket, unsigned int rec_
     * @retval NULL Error  see paramerter 'error_code'
     * @return A valid socket.
     */
-ess_socket_t* ess_socket_connect(const char* hostname, int port, ess_socket_fam_t family, int flags, ess_socket_error_t* error_code) ;
+ess_socket_t* ess_socket_connect_stream(const char* hostname, int port, ess_socket_fam_t family, int flags, ess_socket_error_t* error_code) ;
+
+
+/**
+ * @brief Creates a new UDP/IP socket
+ *
+ *  The socket is automatically bound to some port.
+ *
+ * @param [in] fam is ESS_SOCKET_FAMILY_IP4  (AF_INET) or ESS_SOCKET_FAMILY_IP6  (AF_INET6).
+ * @param [in] proto is ESS_SOCKET_PROTO_DRAM or ESS_SOCKET_PROTO_DRAM_LITE  
+ * @param [in]  flags may be the flags specified in socket(2), i.e. SOCK_NONBLOCK and/or SOCK_CLOEXEC. More than one
+ * flags may be ORed. This argument is only sensible on Linux >= 2.6.27!
+ * @param [out] error_code if !=0 then error codes
+ *
+ * @return The socket file descriptor number, on error NULL.
+ *
+ * To send and receive data with this socket use the functions explained below, ess_socket_read_dram() and ess_socket_write_dram().
+ */
+ess_socket_t* ess_socket_create_dram(ess_socket_fam_t  fam, ess_socket_pro_t proto, int flags, ess_socket_error_t* error_code);
+/**
+ * @brief connect a new UDP socket
+ *
+ * This function returns a working client UDP socket.
+ *
+ * @param hostname The host the socket will be connected to (everything resolvable, e.g. "::1", "8.8.8.8", "example.com")
+ * @param port The host's port.
+ * @param family `ESS_SOCKET_FAMILY_IP6` or `ESS_SOCKET_FAMILY_IP4`.
+ * @param prot `ESS_SOCKET_PROTO_DRAM` or `ESS_SOCKET_PROTO_DRAM_LITE`
+ * @param error_code ESS_SOCKET_ERROR_NULL hostname was NULL
+ *
+ *
+ * @retval NULL Error  see paramerter 'error_code'
+ * @return A valid socket.
+ */
+ess_socket_error_t ess_socket_connect_dram(ess_socket_t* socket, const char* hostname, int port) ;
 
 #endif

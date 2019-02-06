@@ -93,7 +93,7 @@ ess_socket_error_t ess_socket_create_server( ess_socket_fam_t fam, ess_socket_pr
   }
   hints.ai_flags = AI_PASSIVE;
 
-  char buffer[8];
+  char buffer[8]; buffer[0] = '\0'; buffer[0] = '\0';
   snprintf(buffer, 8,"%d",_socket->port) ;
   if (  (_socket->retval = getaddrinfo(_socket->hostname, buffer ,&hints,&result)) != 0 ) {
     _socket->status = ESS_SOCKET_STATUS_ERROR;
@@ -244,13 +244,13 @@ ess_socket_error_t ess_socket_set_buffer(ess_socket_t* _socket,  unsigned int re
 
   return ESS_SOCKET_ERROR_OK;
 }
-ess_socket_t* ess_socket_connect(const char* hostname, int port, ess_socket_fam_t family, int flags, ess_socket_error_t* error_code)  {
+ess_socket_t* ess_socket_connect_stream(const char* hostname, int port, ess_socket_fam_t family, int flags, ess_socket_error_t* error_code)  {
   if(hostname == NULL) { if(error_code != 0) { *error_code = ESS_SOCKET_ERROR_NULL; } return 0; }
 
   int sfd;
   struct addrinfo hint, *result, *result_check;
   ess_socket_t* new_socket;
-  char buffer[8];
+  char buffer[8]; buffer[0] = '\0';
 
   memset(&hint,0,sizeof hint);
 
@@ -300,7 +300,101 @@ ess_socket_t* ess_socket_connect(const char* hostname, int port, ess_socket_fam_
   new_socket->family = family;
   new_socket->protokol = ESS_SOCKET_PROTO_STREAM;
 
+  return new_socket;
+}
+ess_socket_t* ess_socket_create_dram(ess_socket_fam_t  fam, ess_socket_pro_t proto, int flags, ess_socket_error_t* error_code) {
+  int sfd;
+  int _proto;
 
+  if (fam != ESS_SOCKET_FAMILY_IP6 && fam != ESS_SOCKET_FAMILY_IP4)   {
+    if(error_code != 0) { *error_code = ESS_SOCKET_ERROR_UNSPEC_FAMILY; }
+    return 0;
+  }
+  if(proto == ESS_SOCKET_PROTO_DRAM_LITE) {
+    _proto = IPPROTO_UDPLITE;
+  } else if(proto == ESS_SOCKET_PROTO_DRAM) {
+    _proto  = 0;
+  } else {
+    if(error_code != 0) { *error_code = ESS_SOCKET_ERROR_UNSPEC_PROTOKOL; }
+    return 0;
+  }
+
+  switch ( proto )
+  {
+  case ESS_SOCKET_FAMILY_IP4 :
+    sfd = socket(AF_INET,SOCK_DGRAM|flags,_proto);
+    break;
+  case ESS_SOCKET_FAMILY_IP6 :
+    sfd = socket(AF_INET6,SOCK_DGRAM|flags,_proto);
+    break;
+  default:
+    if(error_code != 0) { *error_code = ESS_SOCKET_ERROR_UNSPEC_FAMILY; }
+    return 0;
+  }
+
+  if ( -1 == sfd ) {
+    if(error_code != 0) { *error_code = ESS_SOCKET_ERROR_CONNECT; }
+    return 0;
+  }
+  ess_socket_t*  new_socket = (ess_socket_t*)malloc(sizeof(ess_socket_t));
+  if(new_socket == 0) {
+    if(error_code != 0) { *error_code = ESS_SOCKET_ERROR_OUTOF_MEM; }
+    return 0;
+  }
+  new_socket->socket = sfd;
+  new_socket->family = fam;
+  new_socket->protokol = proto;
 
   return new_socket;
+}
+
+ess_socket_error_t ess_socket_connect_dram(ess_socket_t* _socket, const char* host, int port)  {
+
+  struct addrinfo *result, *result_check, hint;
+  struct sockaddr_storage oldsockaddr;
+  socklen_t oldsockaddrlen = sizeof(struct sockaddr_storage);
+  char buffer[8]; buffer[0] = '\0';
+
+
+  snprintf(buffer, 8,"%d",port) ;
+
+  if ( host == NULL ) {
+    return 0;
+  }
+
+  //TODO: Create new ERROR Codes
+
+  if ( -1 == getsockname(_socket->socket,(struct sockaddr*)&oldsockaddr,&oldsockaddrlen) ){
+    return ESS_SOCKET_ERROR_UNSPEC;
+  }
+
+  if ( oldsockaddrlen > sizeof(struct sockaddr_storage) ) {
+    return ESS_SOCKET_ERROR_UNSPEC;
+  }
+
+  memset(&hint,0,sizeof(struct addrinfo));
+
+  hint.ai_family = ((struct sockaddr_in*)&oldsockaddr)->sin_family; // AF_INET or AF_INET6 - offset is same at sockaddr_in and sockaddr_in6
+
+  hint.ai_socktype =  SOCK_DGRAM;
+
+  if (  getaddrinfo(host,buffer,&hint,&result) != 0) {
+    return ESS_SOCKET_ERROR_GETADDR;
+  }
+
+  for ( result_check = result; result_check != NULL; result_check = result_check->ai_next ) { // go through the linked list of struct addrinfo elements
+    if (  connect(_socket->socket,result_check->ai_addr,result_check->ai_addrlen) != -1) // connected without error
+        break;
+
+    if ( result_check == 0 ) {
+      return ESS_SOCKET_ERROR_CONNECT;
+    }
+  }
+  freeaddrinfo(result);
+
+  _socket->hostname_len = strlen(host);
+  strncpy(_socket->hostname, host, _socket->hostname_len);
+  _socket->port = port;
+
+  return ESS_SOCKET_ERROR_OK;
 }
