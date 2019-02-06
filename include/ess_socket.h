@@ -64,14 +64,16 @@ typedef enum ess_socket_status {
  */
 typedef enum ess_socket_error {
   ESS_SOCKET_ERROR_OK = 0,                                 /**< no error*/
-  ESS_SOCKET_ERROR_NULL = -1,                           /**< `ess_socket_t` is NULL */
+  ESS_SOCKET_ERROR_NULL = -1,                           /**< the `ess_socket_t` or other parameter was NULL */
   ESS_SOCKET_ERROR_UNSPEC_PROTOKOL,      /**< unknown protokol */
   ESS_SOCKET_ERROR_WRONG_PROTOKOL,  /**< wrong protokol */
   ESS_SOCKET_ERROR_UNSPEC_FAMILY,              /**< unknown family */
   ESS_SOCKET_ERROR_UNSPEC,
   ESS_SOCKET_ERROR_GETADDR,                            /**<  getaddrinfo error see  ess_socket_t::retval */
   ESS_SOCKET_ERROR_BIND,                                     /**<  bind error see  ess_socket_t::retval  */
+  ESS_SOCKET_ERROR_CONNECT,                            /** <  connect error */
   ESS_SOCKET_ERROR_CLOSE,                                     /**<  close error see  ess_socket_t::retval  */
+  ESS_SOCKET_ERROR_OUTOF_MEM                      /**< Out of Memory */
 }ess_socket_error_t;
 
 /**
@@ -103,25 +105,16 @@ typedef struct ess_socket {
  */
 ess_socket_fam_t ess_get_address_family(const char* hostname);
 
-/**
-* @brief setup the ess_socket structure
-*
-* @param socket the ess_socket_t structure to fill
 
+/**
+* @brief Create a TCP or UDP server socket
+*
 * @param protokoll  `ESS_SOCKET_PROTO_STREAM`, `ESS_SOCKET_PROTO_DRAM` or `ESS_SOCKET_PROTO_DRAM_LITE`
 * @param fam Either `ESS_SOCKET_FAMILY_IP4`, `ESS_SOCKET_FAMILY_IP6` or `ESS_SOCKET_FAMILY_BOTH`; latter means that the DNS resolver should decide.
 * @param bind_addr Address to bind to. If you want to bind to every address use "0.0.0.0" or "::" (IPv6 wildcard)
 * @param port The port to bind to.
-*
-* @retval ESS_SOCKET_ERROR_OK
-*/
-ess_socket_error_t ess_socket_create(ess_socket_t* socket, ess_socket_fam_t fam, ess_socket_pro_t protokoll,
-                                                             const char* addr, unsigned short port);
-
-
-/**
-* @brief Create a TCP or UDP server socket
 * @param socket the using socket struct
+*
 * @retval ESS_SOCKET_ERROR_OK the socket was created  - TCP socket are listin
 * @retval ESS_SOCKET_ERROR_UNSPEC socket alwas created
 * @retval ESS_SOCKET_ERROR_UNSPEC_PROTOKOL unknown protokol
@@ -130,7 +123,8 @@ ess_socket_error_t ess_socket_create(ess_socket_t* socket, ess_socket_fam_t fam,
 * @retval ESS_SOCKET_ERROR_BIND error to call bind
 * @retval ESS_SOCKET_ERROR_NULL socket was NULL
 */
-ess_socket_error_t ess_socket_create_server(ess_socket_t* socket);
+ess_socket_error_t ess_socket_create_server( ess_socket_fam_t fam, ess_socket_pro_t protokoll,
+                                                             const char* addr, unsigned short port, ess_socket_t* socket);
 /**
  * @brief accept a connection attempt on a server socket.
  *
@@ -143,7 +137,7 @@ ess_socket_error_t ess_socket_create_server(ess_socket_t* socket);
  * @retval != 0 A the client socket
  * @retval NULL Error  see paramerter 'error_code'
  */
-ess_socket_t* ess_socket_accept(ess_socket_t* server_socket, ess_socket_error_t* error_code, int flasg);
+ess_socket_t* ess_socket_accept(ess_socket_t* server_socket, ess_socket_error_t* error_code);
 
 
 
@@ -205,5 +199,22 @@ ess_socket_error_t ess_socket_end(ess_socket_t* socket);
  */
 ess_socket_error_t ess_socket_set_buffer(ess_socket_t* socket, unsigned int rec_buffer_size,
    unsigned int send_buffer_size);
+
+   /**
+    * @brief Create and connect a new TCP/IP socket
+    *
+    * This function returns a working client TCP/IP socket.
+    *
+    * @param hostname The host the socket will be connected to (everything resolvable, e.g. "::1", "8.8.8.8", "example.com")
+    * @param port The host's port.
+    * @param family `ESS_SOCKET_FAMILY_IP6` or `ESS_SOCKET_FAMILY_IP4`.
+    * @param flags Flags to be passed to `socket(2)`. Most flags are Linux-only!
+    * @param error_code ESS_SOCKET_ERROR_NULL hostname was NULL
+    *
+    *
+    * @retval NULL Error  see paramerter 'error_code'
+    * @return A valid socket.
+    */
+ess_socket_t* ess_socket_connect(const char* hostname, int port, ess_socket_fam_t family, int flags, ess_socket_error_t* error_code) ;
 
 #endif

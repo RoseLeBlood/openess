@@ -59,19 +59,15 @@ ess_backend_error_t ess_backend_udp_open(const ess_format_t format) {
   ess_socket_error_t error;
 
 #if ESS_BACKEND_UDP_FAMILY == ESS_FAMILY_BOTH
-  error = ess_socket_create(&(((udp_backend_t*)_udp_backend_config.user_daten)->socket), ESS_SOCKET_FAMILY_BOTH, ESS_SOCKET_PROTO_DRAM, "::",
-                                ESS_BACKEND_UDP_PORT);
+  error =  ess_socket_create_server(  ESS_SOCKET_FAMILY_BOTH, ESS_SOCKET_PROTO_DRAM, "::",
+    ESS_BACKEND_UDP_PORT, &(((udp_backend_t*)_udp_backend_config.user_daten)->socket));
 #elif ESS_BACKEND_UDP_FAMILY == ESS_FAMILY_IP4
-  error = ess_socket_create(&(((udp_backend_t*)_udp_backend_config.user_daten)->socket), ESS_SOCKET_FAMILY_IP4, ESS_SOCKET_PROTO_DRAM, "0.0.0.0",
-                              ESS_BACKEND_UDP_PORT);
+  error =  ess_socket_create_server(  ESS_SOCKET_FAMILY_IP4, ESS_SOCKET_PROTO_DRAM, "0.0.0.0",
+    ESS_BACKEND_UDP_PORT, &(((udp_backend_t*)_udp_backend_config.user_daten)->socket));
 #else
-  error = ess_socket_create(&(((udp_backend_t*)_udp_backend_config.user_daten)->socket), ESS_SOCKET_FAMILY_IP6, ESS_SOCKET_PROTO_DRAM, "::",
-                              ESS_BACKEND_UDP_PORT);
+  error =  ess_socket_create_server(  ESS_SOCKET_FAMILY_IP6, ESS_SOCKET_PROTO_DRAM, "::",
+    ESS_BACKEND_UDP_PORT, &(((udp_backend_t*)_udp_backend_config.user_daten)->socket));
 #endif
-  if(error != ESS_SOCKET_ERROR_OK) return ESS_BACKEND_ERROR;
-
-  error = ess_socket_create_server(&(((udp_backend_t*)_udp_backend_config.user_daten)->socket));
-
   return error == ESS_SOCKET_ERROR_OK ? ESS_BACKEND_OK :  ESS_BACKEND_ERROR;
 }
 ess_backend_error_t  ess_backend_udp_close( void ){

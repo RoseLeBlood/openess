@@ -62,19 +62,17 @@ ess_socket_fam_t ess_get_address_family(const char* hostname) {
   };
   return af;
 }
-ess_socket_error_t ess_socket_create(ess_socket_t* socket, ess_socket_fam_t fam, ess_socket_pro_t protokoll,  const char* hostname, unsigned short port) {
-  if(socket == 0) return ESS_SOCKET_ERROR_NULL;
-  socket->family = fam;
-  socket->protokol = protokoll;
-  socket->port = port;
-  socket->status = ESS_SOCKET_STATUS_CREATED;
-  strncpy(socket->hostname, hostname, strlen(socket->hostname));
-  socket->hostname_len = strlen(hostname);
-
-  return ESS_SOCKET_ERROR_OK;
-}
-ess_socket_error_t ess_socket_create_server(ess_socket_t* _socket) {
+ess_socket_error_t ess_socket_create_server( ess_socket_fam_t fam, ess_socket_pro_t protokoll,
+                                                             const char* hostname, unsigned short port, ess_socket_t* _socket) {
   if(_socket == 0) return ESS_SOCKET_ERROR_NULL;
+
+  _socket->family = fam;
+  _socket->protokol = protokoll;
+  _socket->port = port;
+  _socket->status = ESS_SOCKET_STATUS_CREATED;
+  strncpy(_socket->hostname, hostname, strlen(hostname));
+  _socket->hostname_len = strlen(hostname);
+
   if(_socket->status != ESS_SOCKET_STATUS_CREATED || _socket->status == ESS_SOCKET_STATUS_STOPPED)
     return ESS_SOCKET_ERROR_UNSPEC;
 
@@ -177,7 +175,7 @@ ess_socket_error_t ess_socket_end(ess_socket_t* _socket) {
   return ESS_SOCKET_ERROR_OK;
 }
 
-ess_socket_t* ess_socket_accept(ess_socket_t* server_socket, ess_socket_error_t* error_code, int flasg) {
+ess_socket_t* ess_socket_accept(ess_socket_t* server_socket, ess_socket_error_t* error_code) {
   if(server_socket == 0) { if(error_code != 0) *error_code = ESS_SOCKET_ERROR_NULL; return 0; }
 
   ess_socket_t *client_socket;
@@ -188,6 +186,7 @@ ess_socket_t* ess_socket_accept(ess_socket_t* server_socket, ess_socket_error_t*
   unsigned int size_in = sizeof(struct sockaddr_in);
 
   //socklen_t addrlen = sizeof(struct sockaddr_storage);
+
 
   client_socket = (ess_socket_t*)malloc(sizeof(ess_socket_t));
   if(client_socket == 0) return 0;
@@ -244,4 +243,64 @@ ess_socket_error_t ess_socket_set_buffer(ess_socket_t* _socket,  unsigned int re
   setsockopt( _socket->socket, SOL_SOCKET, SO_RCVBUF, &rec_buffer_size, sizeof( rec_buffer_size ) );
 
   return ESS_SOCKET_ERROR_OK;
+}
+ess_socket_t* ess_socket_connect(const char* hostname, int port, ess_socket_fam_t family, int flags, ess_socket_error_t* error_code)  {
+  if(hostname == NULL) { if(error_code != 0) { *error_code = ESS_SOCKET_ERROR_NULL; } return 0; }
+
+  int sfd;
+  struct addrinfo hint, *result, *result_check;
+  ess_socket_t* new_socket;
+  char buffer[8];
+
+  memset(&hint,0,sizeof hint);
+
+  switch ( family ) {
+    case ESS_SOCKET_FAMILY_IP4: hint.ai_family = AF_INET; break;
+    case ESS_SOCKET_FAMILY_IP6: hint.ai_family = AF_INET6; break;
+    default: hint.ai_family = AF_UNSPEC;
+  }
+
+
+  hint.ai_socktype = SOCK_STREAM;
+
+
+  snprintf(buffer, 8,"%d",port) ;
+
+  if (   getaddrinfo(hostname,buffer,&hint,&result) != 0) {
+    if(error_code != 0) { *error_code = ESS_SOCKET_ERROR_GETADDR; }
+    return 0;
+  }
+
+  for ( result_check = result; result_check != 0; result_check = result_check->ai_next )  { // go through the linked list of struct addrinfo elements
+      sfd = socket(result_check->ai_family, result_check->ai_socktype | flags, result_check->ai_protocol);
+
+      if ( sfd < 0 )  continue;
+
+      if (  connect(sfd,result_check->ai_addr,result_check->ai_addrlen)  != -1) // connected without error
+        break;
+        close(sfd);
+  }
+  freeaddrinfo(result);
+
+  if ( result_check == 0 ) {
+    if(error_code != 0) { *error_code = ESS_SOCKET_ERROR_GETADDR; }
+    return 0;
+  }
+  // Yes :)
+  new_socket = (ess_socket_t*)malloc(sizeof(ess_socket_t));
+  if(new_socket == 0) {
+    if(error_code != 0) { *error_code = ESS_SOCKET_ERROR_OUTOF_MEM; }
+    return 0;
+  }
+  new_socket->socket = sfd;
+
+  strncpy(new_socket->hostname, hostname, strlen(hostname));
+
+  new_socket->port = port;
+  new_socket->family = family;
+  new_socket->protokol = ESS_SOCKET_PROTO_STREAM;
+
+
+
+  return new_socket;
 }
