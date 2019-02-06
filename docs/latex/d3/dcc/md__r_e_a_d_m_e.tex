@@ -1,16 +1,117 @@
    \section*{Open Embedded Sound Server}
 
- \subsubsection*{Website   $\vert$  \href{https://github.com/RoseLeBlood/openess/wiki}{\tt Wiki }  $\vert$  \href{https://github.com/RoseLeBlood/openess/blob/master/CONTRIBUTING.md}{\tt Contributing }  $\vert$  \href{https://roseleblood.github.io/openess/html/d3/dcc/md__r_e_a_d_m_e.html}{\tt Documentation }  $\vert$  \href{https://webchat.freenode.net/?channels=openess}{\tt Chat } }
+ \subsubsection*{Website \href{https://roseleblood.github.io/}{\tt Website}  $\vert$  \href{https://github.com/RoseLeBlood/openess/wiki}{\tt Wiki }  $\vert$  \href{https://github.com/RoseLeBlood/openess/blob/master/CONTRIBUTING.md}{\tt Contributing }  $\vert$  \href{https://roseleblood.github.io/openess/html/d3/dcc/md__r_e_a_d_m_e.html}{\tt Documentation }  $\vert$  \href{https://webchat.freenode.net/?channels=openess}{\tt Chat } }
 
-  
+
+
+ 
+
+
+
+{\bfseries Open\+E\+SS} is a network-\/capable sound server libary mainly for embedded systems and other operatins systems. Open\+E\+SS is free and open-\/source software, and is licensed under the terms of the G\+NU Lesser General Public License.
+
+\subsection*{Getting Started}
+
+\subsubsection*{Setting Up Development Environment}
+
+\paragraph*{Platform\+IO}
+
+Open\+E\+SS is made for use with \href{http://platformio.org/}{\tt platformio}, an advanced ecosystem for microcontroller development. To get started with coding esphomelib applications, you first have to \href{http://platformio.org/platformio-ide}{\tt install the atom-\/based platformio I\+DE} or for advanced users, \href{http://docs.platformio.org/en/latest/installation.html}{\tt install the command line version of platformio}.
+
+Then create a new project for an \href{http://docs.platformio.org/en/latest/platforms/espressif32.html#boards}{\tt E\+S\+P32-\/based board} (for example, {\ttfamily nodemcu-\/32s}). Then open up the newly created {\ttfamily platformio.\+ini} file and insert
+
+
+\begin{DoxyCode}
+; ...
+platform = espressif32
+board = nodemcu-32s
+framework = esp-idf
+lib\_deps = openess
+\end{DoxyCode}
+ Finally, create a new source file in the {\ttfamily src/} folder (for example {\ttfamily main.\+c}) and start coding with openess.
 
 \subsection*{Usage example}
 
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
+{\itshape create the server} 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include "\hyperlink{ess_8h}{ess.h}"}
+\textcolor{preprocessor}{#include "\hyperlink{ess__backend_8h}{ess\_backend.h}"}
+\textcolor{preprocessor}{#include "\hyperlink{ess__context_8h}{ess\_context.h}"}
+\textcolor{preprocessor}{#include "\hyperlink{ess__format_8h}{ess\_format.h}"}
 
-T\+O\+DO
 
-\+\_\+\+For more examples and usage, please refer to the \href{https://github.com/RoseLeBlood/openess/wiki}{\tt Wiki} or the \+\_\+
+
+\hyperlink{structess__context}{ess\_context\_t} context;
+\hyperlink{structess__backend}{ess\_backend\_facktory\_t}* backend\_list;
+
+\textcolor{keyword}{extern} \textcolor{stringliteral}{"C"} \textcolor{keywordtype}{void} app\_main() \{
+
+  \textcolor{comment}{//WORK IN PROGRESSS}
+
+
+  \textcolor{keywordflow}{for}(;;) \{ usleep(100000); \}
+\}
+\end{DoxyCode}
+ {\itshape create the audio context} 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include "\hyperlink{ess_8h}{ess.h}"}
+\textcolor{preprocessor}{#include "\hyperlink{ess__backend_8h}{ess\_backend.h}"}
+\textcolor{preprocessor}{#include "\hyperlink{ess__context_8h}{ess\_context.h}"}
+\textcolor{preprocessor}{#include "\hyperlink{ess__format_8h}{ess\_format.h}"}
+
+
+
+\hyperlink{structess__context}{ess\_context\_t} context;
+\hyperlink{structess__backend}{ess\_backend\_facktory\_t}* backend\_list;
+
+\textcolor{keyword}{extern} \textcolor{stringliteral}{"C"} \textcolor{keywordtype}{void} app\_main() \{
+  backend\_list =\hyperlink{ess__backend_8h_a16cb59b090351d9b9989de80b8bad520}{ess\_backend\_create\_factory\_list}();
+
+  \hyperlink{ess__backend_8h_ae425d7c64cceee74831168327d858fed}{ess\_backend\_probe\_all}(\hyperlink{ess__format_8h_a58e799cbd00d4340e368ec3a52bd187d}{ESS\_FORMAT\_STEREO\_96000\_24},  &
+      backend\_list);
+  \hyperlink{ess__context_8h_ab878ad831da78e331d88c591ff8dcc85}{ess\_context\_create}(&context, \hyperlink{ess__format_8h_a58e799cbd00d4340e368ec3a52bd187d}{ESS\_FORMAT\_STEREO\_96000\_24});
+  ess\_context\_init\_ex(&context, &backend\_list[0]);
+
+  \hyperlink{ess__backend_8h_ab6129a1d1c11f81718f9122facfddd35}{ess\_backend\_destroy\_factory\_list}(backend\_list);
+
+  \textcolor{comment}{//TODO anythings}
+
+
+  \textcolor{keywordflow}{for}(;;) \{ usleep(100000); \}
+\}
+\end{DoxyCode}
+ \+\_\+\+For more examples and usage, please refer to the \href{https://github.com/RoseLeBlood/openess/wiki}{\tt Wiki}
+
+\subsection*{Current Features (version 0.\+2-\/1)}
+
+
+\begin{DoxyItemize}
+\item Powerful core that allows for easy to port
+\item Automatic Wi\+Fi handling (reconnects, etc.)
+\item Powerful socket abscrations layer (S\+AL)
+\item Easy to use platform configuration
+\item Semaphore, task and ringbuffer handling on various platform
+\item generic backends\+: udp, uart and i2s
+\end{DoxyItemize}
+
+\subsection*{Progressed features (when ready than version 0.\+9)}
+
+
+\begin{DoxyItemize}
+\item running example server on esp32 and linux
+\item audio mixing from multiple clients
+\item M\+Q\+TT status upport and logging
+\item m\+D\+NS
+\item code style
+\end{DoxyItemize}
+
+\subsection*{Planned features}
+
+
+\begin{DoxyItemize}
+\item Improve documentation
+\item {\bfseries Suggestions?} Feel free to create an issue and tag it with feature request.
+\end{DoxyItemize}
 
 \subsection*{Release History}
 
@@ -23,14 +124,6 @@ T\+O\+DO
 \end{DoxyItemize}
 \item 0.\+0.\+1
 \begin{DoxyItemize}
-\item Work in progress
+\item Work in progress 
 \end{DoxyItemize}
 \end{DoxyItemize}
-
-\subsection*{Meta}
-
-Anna\+\_\+\+Sophia Schröck – \href{https://twitter.com/padersophia}{\tt } – \href{mailto:annasophia.schroeck@gmail.com}{\tt annasophia.\+schroeck@gmail.\+com}
-
-Distributed under the G\+PL v3 license. See {\ttfamily L\+I\+C\+E\+N\+SE} for more information.
-
-\href{https://github.com/RoseLeBlood/}{\tt https\+://github.\+com/\+Rose\+Le\+Blood/} 

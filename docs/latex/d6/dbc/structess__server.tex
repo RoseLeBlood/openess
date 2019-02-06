@@ -4,18 +4,24 @@
 
 {\ttfamily \#include $<$server.\+h$>$}
 
+
+
+Collaboration diagram for ess\+\_\+server\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=147pt]{d0/d53/structess__server__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
-const char $\ast$ \hyperlink{structess__server_aad01339e89106fdf68f57ef118956fa9}{hostname}
+\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} \hyperlink{structess__server_ae1095210270047614ecdcf9d808e764c}{socket}
 \item 
 ess\+\_\+backend\+\_\+t $\ast$ \hyperlink{structess__server_ab2b85d146ada2907a81371aace6e926d}{backend}
 \item 
 \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t} \hyperlink{structess__server_abb4395d1c05d3bbc2e1d011507ddd19b}{format}
-\item 
-int \hyperlink{structess__server_a63c89c04d1feae07ca35558055155ffb}{port}
-\item 
-int \hyperlink{structess__server_a3666576f6b88007cc7b8f26c7da596c8}{socket}
 \item 
 void $\ast$ \hyperlink{structess__server_a368f7094dc38acca20612bbb392552f4}{buffer}
 \item 
@@ -36,7 +42,7 @@ int \hyperlink{structess__server_aed7ea92f45bd273dde380a45ddced592}{offset}
 \subsection{Detailed Description}
 
 
-Definition at line 18 of file server.\+h.
+Definition at line 19 of file server.\+h.
 
 
 
@@ -49,7 +55,7 @@ Definition at line 18 of file server.\+h.
 
 
 
-Definition at line 20 of file server.\+h.
+Definition at line 21 of file server.\+h.
 
 \mbox{\Hypertarget{structess__server_a368f7094dc38acca20612bbb392552f4}\label{structess__server_a368f7094dc38acca20612bbb392552f4}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!buffer@{buffer}}
@@ -59,7 +65,7 @@ Definition at line 20 of file server.\+h.
 
 
 
-Definition at line 25 of file server.\+h.
+Definition at line 24 of file server.\+h.
 
 \mbox{\Hypertarget{structess__server_abb4395d1c05d3bbc2e1d011507ddd19b}\label{structess__server_abb4395d1c05d3bbc2e1d011507ddd19b}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!format@{format}}
@@ -69,17 +75,7 @@ Definition at line 25 of file server.\+h.
 
 
 
-Definition at line 21 of file server.\+h.
-
-\mbox{\Hypertarget{structess__server_aad01339e89106fdf68f57ef118956fa9}\label{structess__server_aad01339e89106fdf68f57ef118956fa9}} 
-\index{ess\+\_\+server@{ess\+\_\+server}!hostname@{hostname}}
-\index{hostname@{hostname}!ess\+\_\+server@{ess\+\_\+server}}
-\subsubsection{\texorpdfstring{hostname}{hostname}}
-{\footnotesize\ttfamily const char$\ast$ hostname}
-
-
-
-Definition at line 19 of file server.\+h.
+Definition at line 22 of file server.\+h.
 
 \mbox{\Hypertarget{structess__server_a9f59b34b1f25fe00023291b678246bcc}\label{structess__server_a9f59b34b1f25fe00023291b678246bcc}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!length@{length}}
@@ -89,7 +85,7 @@ Definition at line 19 of file server.\+h.
 
 
 
-Definition at line 27 of file server.\+h.
+Definition at line 26 of file server.\+h.
 
 \mbox{\Hypertarget{structess__server_a1aa199bcd52f6acf8edbf2ee6898a21b}\label{structess__server_a1aa199bcd52f6acf8edbf2ee6898a21b}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!magl@{magl}}
@@ -99,7 +95,7 @@ Definition at line 27 of file server.\+h.
 
 
 
-Definition at line 26 of file server.\+h.
+Definition at line 25 of file server.\+h.
 
 \mbox{\Hypertarget{structess__server_a64b10d79850e935f9440886335b9f391}\label{structess__server_a64b10d79850e935f9440886335b9f391}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!magr@{magr}}
@@ -109,7 +105,7 @@ Definition at line 26 of file server.\+h.
 
 
 
-Definition at line 26 of file server.\+h.
+Definition at line 25 of file server.\+h.
 
 \mbox{\Hypertarget{structess__server_aed7ea92f45bd273dde380a45ddced592}\label{structess__server_aed7ea92f45bd273dde380a45ddced592}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!offset@{offset}}
@@ -119,27 +115,17 @@ Definition at line 26 of file server.\+h.
 
 
 
-Definition at line 27 of file server.\+h.
+Definition at line 26 of file server.\+h.
 
-\mbox{\Hypertarget{structess__server_a63c89c04d1feae07ca35558055155ffb}\label{structess__server_a63c89c04d1feae07ca35558055155ffb}} 
-\index{ess\+\_\+server@{ess\+\_\+server}!port@{port}}
-\index{port@{port}!ess\+\_\+server@{ess\+\_\+server}}
-\subsubsection{\texorpdfstring{port}{port}}
-{\footnotesize\ttfamily int port}
-
-
-
-Definition at line 22 of file server.\+h.
-
-\mbox{\Hypertarget{structess__server_a3666576f6b88007cc7b8f26c7da596c8}\label{structess__server_a3666576f6b88007cc7b8f26c7da596c8}} 
+\mbox{\Hypertarget{structess__server_ae1095210270047614ecdcf9d808e764c}\label{structess__server_ae1095210270047614ecdcf9d808e764c}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!socket@{socket}}
 \index{socket@{socket}!ess\+\_\+server@{ess\+\_\+server}}
 \subsubsection{\texorpdfstring{socket}{socket}}
-{\footnotesize\ttfamily int socket}
+{\footnotesize\ttfamily \hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} socket}
 
 
 
-Definition at line 23 of file server.\+h.
+Definition at line 20 of file server.\+h.
 
 \mbox{\Hypertarget{structess__server_a218b4f7c6cc2681a99c23a3b089d68b1}\label{structess__server_a218b4f7c6cc2681a99c23a3b089d68b1}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!speed@{speed}}
@@ -149,7 +135,7 @@ Definition at line 23 of file server.\+h.
 
 
 
-Definition at line 27 of file server.\+h.
+Definition at line 26 of file server.\+h.
 
 \mbox{\Hypertarget{structess__server_af34befa103928930a907b2eb5cc4739c}\label{structess__server_af34befa103928930a907b2eb5cc4739c}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!status@{status}}
@@ -159,7 +145,7 @@ Definition at line 27 of file server.\+h.
 
 
 
-Definition at line 29 of file server.\+h.
+Definition at line 28 of file server.\+h.
 
 
 
