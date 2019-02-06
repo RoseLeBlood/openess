@@ -79,7 +79,7 @@ typedef struct ess_context {
  * @code
  * ess_context_t *context;
  *
- * context = ess_context_init_ex ("uart", ESS_FORMAT_STEREO_92000_24);
+ * context = ess_context_init ("uart", ESS_FORMAT_STEREO_96000_24);
  *
  * @endcode
  *
@@ -88,14 +88,14 @@ typedef struct ess_context {
  * @retval NULL error with creating context
  * @return the new context
  */
-ess_context_t* ess_context_init( const char* name, const ess_format_t format);
+ess_context_t* ess_context_create( const char* name, const ess_format_t format);
 /**
  * @brief  initialisiert the context with a user backend
  * @code
  * ess_context_t *context;
  * ess_backend_facktory_t* user_backend = { ,,, };
  *
- * context = ess_context_init_ex( user_backend, ESS_FORMAT_STEREO_92000_24);
+ * context = ess_context_create_ex( user_backend, ESS_FORMAT_STEREO_96000_24);
  * @endcode
  * @param [in] format the using context format
  * @param [in] backend the user backend factory
@@ -103,13 +103,13 @@ ess_context_t* ess_context_init( const char* name, const ess_format_t format);
  * @retval NULL error with creating context
  * @return the new context
  */
-ess_context_t* ess_context_create(ess_backend_facktory_t* backend, const ess_format_t format);
+ess_context_t* ess_context_create_ex(ess_backend_facktory_t* backend, const ess_format_t format);
 /**
  * @brief close the context and close the backend
  * @param context the context
   * @return when ok then ESS_CONTEXT_ERROR_OK
  */
-ess_context_error_t ess_context_create_ex(ess_context_t* context);
+ess_context_error_t ess_context_close(ess_context_t* context);
 /**
  * @brief destroy and free the context
  * @param context the context

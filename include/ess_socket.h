@@ -288,33 +288,33 @@ ess_socket_error_t ess_socket_write_dram(ess_socket_t* socket, const void* buf, 
 ess_socket_error_t ess_socket_read_dram(ess_socket_t* socket, void* buf, unsigned int size, char* src_host,
   unsigned int src_host_len, int  src_port, int recvfrom_flags);
 
-  
+
 /**
 * @brief read from socket
 *
 *
-* @param [in] the remote socket 
+* @param [in] the remote socket
 * @param buffer where the data will be read
 * @param size the size of `buffer`
 * @param readed how many bytes readed
 *
 *
 * @retval ESS_SOCKET_ERROR_OK all ok
-* @retval ESS_SOCKET_UNSPEC Error 
+* @retval ESS_SOCKET_UNSPEC Error
 */
 ess_socket_error_t ess_socket_read(ess_socket_t* socket, void* buffer, unsigned int size, unsigned int* readed);
 /**
 * @brief read from socket
 *
 *
-* @param [in] the remote socket 
+* @param [in] the remote socket
 * @param buffer where the data will be read
 * @param size the size of `buffer`
 * @param wrote how many bytes wrote
 *
 *
 * @retval ESS_SOCKET_ERROR_OK all ok
-* @retval ESS_SOCKET_UNSPEC Error 
+* @retval ESS_SOCKET_UNSPEC Error
 */
 ess_socket_error_t ess_socket_write(ess_socket_t* socket, const void* buffer, unsigned int size, unsigned int* wrote);
 

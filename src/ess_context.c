@@ -48,6 +48,7 @@ ess_context_t* ess_context_create( const char* name, const ess_format_t format) 
       ESP_LOGE(LOG_TAG,"Error to open backend");
       free(context);
       return 0;
+    }
   }
   context->format = format;
   context->status = ESS_CONTEXT_STATUS_RUN;
@@ -61,11 +62,12 @@ ess_context_t* ess_context_create_ex(ess_backend_facktory_t* backend, const ess_
 
   if(context == 0) { return 0; }
 
-  if(ess_backend_probe(name, format, backend) == ESS_BACKEND_OK) {
+  if(backend->ess_backend_probe(format) != ESS_BACKEND_OK)   {
     if(backend->ess_backend_open(format) != ESS_BACKEND_OK) {
       ESP_LOGE(LOG_TAG,"Error to open backend");
       free(context);
       return 0;
+    }
   }
   context->format = format;
   context->status = ESS_CONTEXT_STATUS_RUN;
