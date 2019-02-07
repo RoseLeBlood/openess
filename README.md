@@ -28,14 +28,14 @@
  
 </div>
 
-<a href="https://www.codacy.com/app/RoseLeBlood/openess?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=RoseLeBlood/openess&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/4f0ba2c68a904b8da2f1d45d5f3596d4"/></a>
+
 
 **OpenESS**  is a network-capable sound server libary mainly for embedded systems and other operatins systems. 
 OpenESS is free and open-source software, and is licensed under the terms of the GNU Lesser General Public License.
 
-## Getting Started
+<a href="https://www.codacy.com/app/RoseLeBlood/openess?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=RoseLeBlood/openess&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/4f0ba2c68a904b8da2f1d45d5f3596d4"/></a>
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6d9316aa71a84c3e87a1344d1a9015fa)](https://app.codacy.com/app/RoseLeBlood/openess?utm_source=github.com&utm_medium=referral&utm_content=RoseLeBlood/openess&utm_campaign=Badge_Grade_Settings)
+## Getting Started
 
 ### Setting Up Development Environment
 
@@ -59,54 +59,27 @@ lib_deps = openess
 Finally, create a new source file in the `src/` folder (for example `main.c`) and start coding with openess.
 
 ## Usage example
-_create the server_ 
-```c
-#include "ess.h"
-#include "ess_backend.h"
-#include "ess_context.h"
-#include "ess_format.h"
 
-
-
-ess_context_t context;
-ess_backend_facktory_t* backend_list;
-
-extern "C" void app_main() {
-
-  //WORK IN PROGRESSS
-
-
-  for(;;) { usleep(100000); }
-}
-
-
-```
 _create the audio context_ 
 ```cpp
-#include "ess.h"
-#include "ess_backend.h"
 #include "ess_context.h"
 #include "ess_format.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 
-ess_context_t context;
-ess_backend_facktory_t* backend_list;
+void app_main() {
+  ess_context_t context;
+  ess_context_error_t error;
 
-extern "C" void app_main() {
-  backend_list =ess_backend_create_factory_list();
-
-  ess_backend_probe_all(ESS_FORMAT_STEREO_96000_24,  &backend_list);
-  ess_context_create(&context, ESS_FORMAT_STEREO_96000_24);
-  ess_context_init_ex(&context, &backend_list[0]);
-
-  ess_backend_destroy_factory_list(backend_list);
-
-  //TODO anythings
-
+  error = ess_context_create (&context, ESS_BACKEND_NAME_I2S_ESP32, ESS_FORMAT_STEREO_44100_16);
+  if(error != ESS_CONTEXT_ERROR_OK) printf("error in creating the context\n");
 
   for(;;) { usleep(100000); }
 }
+
 
 ```
 _For more examples and usage, please refer to the [Wiki][wiki]
