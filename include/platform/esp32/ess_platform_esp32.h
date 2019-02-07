@@ -22,16 +22,16 @@ ess_backends_entry_t backends_list[] = {
 
 
 #ifdef ESS_ENABLE_BACKEND_UART
-  { "uart1 backend", ess_backend_uart_getFactory},
+  { ESS_BACKEND_NAME_UART_ESP32 , ess_backend_uart_getFactory},
 #endif //ESS_ENABLE_BACKEND_UART
 #ifdef ESS_ENABLE_BACKEND_I2S
-  { "i2s_generic", ess_backend_i2s_generic_getFactory},
+  { ESS_BACKEND_NAME_I2S_ESP32, ess_backend_i2s_generic_getFactory},
 #endif // ESS_ENABLE_BACKEND_I2S
 
 #ifdef ESS_ENABLE_BACKEND_UDP
-  { "udp", ess_backend_udp_getFactory},
+  { ESS_BACKEND_NAME_UDP, ess_backend_udp_getFactory},
 #endif //ESS_ENABLE_BACKEND_UDP
-  { "null", ess_backend_null_getFactory},
+  { ESS_BACKEND_NAME_NULL, ess_backend_null_getFactory},
 };
 
 

@@ -36,44 +36,44 @@
 #define LOG_TAG "EssC"
 
 
-ess_context_t* ess_context_create( const char* name, const ess_format_t format) {
-  ess_context_t* context  = 0;
-  context = (ess_context_t*)malloc(sizeof(ess_context_t));
-  if(context == 0) { return 0; }
+ess_context_error_t ess_context_create(ess_context_t* context, const char* name, const ess_format_t format) {
+  if(context == 0) { return ESS_CONTEXT_ERROR; }
 
-  ess_backend_facktory_t* backend = 0;
-
-  if(ess_backend_probe(name, format, backend) == ESS_BACKEND_OK) {
-    if(backend->ess_backend_open(format) != ESS_BACKEND_OK) {
-      ESP_LOGE(LOG_TAG,"Error to open backend");
-      free(context);
-      return 0;
-    }
+  ess_backend_facktory_t* backend = ess_backend_get_by_name(name);
+  if(backend == 0) {
+    ESP_LOGE(LOG_TAG,"Backend with name: %s not found", name);
+    return ESS_CONTEXT_ERRORNOBACKEND;
   }
+
+ if(backend->ess_backend_probe(format) == ESS_BACKEND_OK) {
+   if(backend->ess_backend_open(format) != ESS_BACKEND_OK) {
+     ESP_LOGE(LOG_TAG,"Backend with name: %s error open", name);
+     return ESS_CONTEXT_WRONGFORMAT;
+   }
+ }
   context->format = format;
   context->status = ESS_CONTEXT_STATUS_RUN;
   context->backend = backend;
 
-  return context;
+  ESP_LOGI(LOG_TAG,"Backend with name: %s found and open", name);
+  return ESS_CONTEXT_ERROR_OK;
 }
-ess_context_t* ess_context_create_ex(ess_backend_facktory_t* backend, const ess_format_t format) {
-  ess_context_t* context  = 0;
-  context = (ess_context_t*)malloc(sizeof(ess_context_t));
+ess_context_error_t  ess_context_create_ex(ess_context_t* context, ess_backend_facktory_t* backend, const ess_format_t format) {
+  if(context == 0) { return ESS_CONTEXT_ERROR; }
+  if(backend == 0) return ESS_CONTEXT_ERRORNOBACKEND;
 
-  if(context == 0) { return 0; }
-
-  if(backend->ess_backend_probe(format) != ESS_BACKEND_OK)   {
+  if(backend->ess_backend_probe(format) == ESS_BACKEND_OK) {
     if(backend->ess_backend_open(format) != ESS_BACKEND_OK) {
-      ESP_LOGE(LOG_TAG,"Error to open backend");
-      free(context);
-      return 0;
+      ESP_LOGE(LOG_TAG,"Backend with name: %s error open", backend->get_name());
+      return ESS_CONTEXT_WRONGFORMAT;
     }
   }
-  context->format = format;
-  context->status = ESS_CONTEXT_STATUS_RUN;
-  context->backend = backend;
+   context->format = format;
+   context->status = ESS_CONTEXT_STATUS_RUN;
+   context->backend = backend;
 
-  return context;
+   ESP_LOGI(LOG_TAG,"Backend with name: %s found and open", name);
+   return ESS_CONTEXT_ERROR_OK;
 }
 ess_context_error_t ess_context_close(ess_context_t* context) {
   if(context == 0) return ESS_CONTEXT_ERROR;
@@ -90,8 +90,6 @@ ess_context_error_t ess_context_close(ess_context_t* context) {
 ess_context_error_t ess_context_destroy(ess_context_t* context) {
   if(context == 0) return ESS_CONTEXT_ERROR;
   ess_context_close(context);
-  if(context->backend != 0) free(context->backend );
-   free(context );
 
   context->last_error = ESS_CONTEXT_ERROR_OK;
   return ESS_CONTEXT_ERROR_OK;

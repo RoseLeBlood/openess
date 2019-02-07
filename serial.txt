@@ -1,0 +1,125 @@
+*****************************************************************************************************************************************************************************************************************************************
+Obsolete PIO Core v3.6.4 is used (previous was 4.0.0a2)
+Please remove multiple PIO Cores from a system:
+https://docs.platformio.org/page/faq.html#multiple-pio-cores-in-a-system
+*****************************************************************************************************************************************************************************************************************************************
+[37me[37mt[37ms Jun  8 2[37m0[37m16 00:22:57[37m[37m
+
+rst:0x1 [37m([37mPOWERON_RES[37mE[37mT),boot:0x[37m1[37m3 (SPI_FAST_[37mF[37mLASH_BOOT)[37m[37m
+configsip:[37m [37m0, SPIWP:0x[37me[37me
+clk_drv:[37m0[37mx00,q_drv:0[37mx[37m00,d_drv:0x[37m0[37m0,cs0_drv:[37m0[37mx00,hd_drv:[37m0[37mx00,wp_drv:[37m0[37mx00
+mode:D[37mI[37mO, clock di[37mv[37m:2
+load:0x[37m3[37mfff0018,len[37m:[37m4
+load:0x3[37mf[37mff001c,len[37m:[37m5776
+ho 0 [37mt[37mail 12 room[37m [37m4
+load:0x4[37m0[37m078000,len:[37m7[37m900
+load:0[37mx[37m40080000,l[37me[37mn:5836
+entr[37my[37m 0x4008031[37m4[37m
+[37m[37m[[37m0;32mI ([37m3[37m0) boot: ES[37mP[37m-IDF 3.301[37m0[37m2.190109 2n[37md[37m stage boo[37mt[37mloader[0m[37m
+[37m[0;32mI ([37m3[37m0) boot: co[37mm[37mpile time [37m1[37m4:21:46[0m[37m[37m
+[0;32mI ([37m3[37m0) boot: E[37mn[37mabling RNG [37me[37marly entro[37mp[37my source...[37m[37m[0m
+[0;3[37m2[37mmI (35) boo[37mt[37m: SPI Spee[37md[37m      : 40M[37mH[37mz[0m
+[0[37m;[37m32mI (39) b[37mo[37mot: SPI Mo[37md[37me       : D[37mI[37mO[0m
+[0[37m;[37m32mI (43) b[37mo[37mot: SPI Fl[37ma[37msh Size : 4[37mM[37mB[0m
+[0[37m;[37m32mI (47) b[37mo[37mot: Partit[37mi[37mon Table:[[37m0[37mm
+[0;32m[37mI[37m (51) boot:[37m [37m## Label  [37m [37m         Us[37ma[37mge        [37m [37m Type ST Of[37mf[37mset   Leng[37mt[37mh[0m
+[0;[37m3[37m2mI (58) b[37mo[37mot:  0 nvs [37m [37m          [37m [37m WiFi data [37m [37m      01 02[37m [37m00009000 0[37m0[37m006000[0m[37m
+[37m[0;32mI ([37m6[37m6) boot:  1[37m [37mphy_init  [37m [37m      RF da[37mt[37ma         [37m [37m01 01 0000f[37m0[37m00 0000100[37m0[37m[0m
+[0;3[37m2[37mmI (73) boo[37mt[37m:  2 facto[37mr[37my          [37mf[37mactory app[37m [37m     00 00 [37m0[37m0010000 00[37m1[37m00000[0m
+[37m[37m[0;32mI (8[37m1[37m) boot: End[37m [37mof partiti[37mo[37mn table[0m[37m[37m
+[0;32mI [37m([37m85) esp_ima[37mg[37me: segment[37m [37m0: paddr=0x[37m0[37m0010020 va[37md[37mdr=0x3f4000[37m2[37m0 size=0x0[37mb[37m1c8 ( 45512[37m)[37m map[0m
+[37m[37m[[37m0[37m;[37m32mI (110)[37m [37mesp_image: [37ms[37megment 1: [37mp[37maddr=0x0001[37mb[37m1f0 vaddr=[37m0[37mx3ffc0000 s[37mi[37mze=0x02470 [37m([37m  9328) lo[37ma[37md[0m
+[0;[37m3[37m2mI (113) [37me[37msp_image: s[37me[37mgment 2: p[37ma[37mddr=0x0001d[37m6[37m68 vaddr=0[37mx[37m40080000 si[37mz[37me=0x00400 [37m([37m  1024) loa[37md[37m[0m
+[0;[37m3[37m2mI (117) e[37ms[37mp_image: s[37me[37mgment 3: pa[37md[37mdr=0x0001d[37ma[37m70 vaddr=0x[37m4[37m0080400 si[37mz[37me=0x025a0 ([37m [37m 9632) loa[37md[37m[0m
+[0;3[37m2[37mmI (129) es[37mp[37m_image: se[37mg[37mment 4: pad[37md[37mr=0x000200[37m1[37m8 vaddr=0x4[37m0[37m0d0018 siz[37me[37m=0x22f14 (1[37m4[37m3124) map[37m[[37m0m
+[37m[37m[[37m0;32mI (184[37m)[37m esp_image:[37m [37msegment 5:[37m [37mpaddr=0x000[37m4[37m2f34 vaddr[37m=[37m0x400829a0 [37ms[37mize=0x0655c ( 25948) l[37mo[37mad[0m
+[37m[37m[[37m0;32mI (200)[37m [37mboot: Load[37me[37md app from [37mp[37martition a[37mt[37m offset 0x1[37m0[37m000[0m
+[37m[[37m0;32mI (200[37m)[37m boot: Dis[37ma[37mbling RNG e[37ma[37mrly entrop[37my[37m source...[37m[[37m0m
+[0;32[37mm[37mI (200) cpu[37m_[37mstart: Pro [37mc[37mpu up.[0m[37m[37m
+[0;32mI ([37m2[37m04) cpu_st[37ma[37mrt: Startin[37mg[37m app cpu, [37me[37mntry point[37m [37mis 0x400812[37mf[37m0[0m
+[0[37m;[37m32mI (0) cp[37mu[37m_start: App[37m [37mcpu up.[0[37mm[37m
+[0;32mI [37m([37m214) heap_[37mi[37mnit: Initia[37ml[37mizing. RAM[37m [37mavailable f[37mo[37mr dynamic [37ma[37mllocation:[37m[[37m0m
+[0;32[37mm[37mI (221) hea[37mp[37m_init: At 3[37mF[37mFAFF10 len[37m [37m000000F0 (0[37m [37mKiB): DRAM[37m[37m[0m
+[0;32[37mm[37mI (227) he[37ma[37mp_init: At [37m3[37mFFC4080 le[37mn[37m 0001BF80 ([37m1[37m11 KiB): D[37mR[37mAM[0m
+[[37m0[37m;32mI (233)[37m [37mheap_init:[37m [37mAt 3FFE0440[37m [37mlen 00003B[37mC[37m0 (14 KiB):[37m [37mD/IRAM[0m[37m
+[37m[0;32mI ([37m2[37m40) heap_in[37mi[37mt: At 3FFE[37m4[37m350 len 000[37m1[37mBCB0 (111 [37mK[37miB): D/IRAM[37m[37m[0m
+[0;3[37m2[37mmI (246) he[37ma[37mp_init: At[37m [37m40088EFC le[37mn[37m 00017104 ([37m9[37m2 KiB): IR[37mA[37mM[0m
+[0;[37m3[37m2mI (252) [37mc[37mpu_start: P[37mr[37mo cpu star[37mt[37m user code[37m[[37m0m
+[37m[37m[[37m0;32mI [37m([37m271) cpu_st[37ma[37mrt: Starti[37mn[37mg scheduler[37m [37mon PRO CPU[37m.[37m[0m
+[0;3[37m2[37mmI (0) cpu_[37ms[37mtart: Star[37mt[37ming schedul[37me[37mr on APP C[37mP[37mU.[0m
+Pro[37mb[37me backend:[37m [37muart1 backe[37mn[37md --------[37m-[37m-----------[37m-[37m----------[37m-[37m-----------[37m-[37m--------
+[37m	[37m	  support [37m([37mESS_FORMAT[37m_[37mMONO_44100_[37m8[37m)   
+		  [37ms[37mupport (ESS[37m_[37mFORMAT_MON[37mO[37m_48000_8)  [37m [37m
+		  supp[37mo[37mrt (ESS_FOR[37mM[37mAT_MONO_96[37m0[37m00_8)   
+	[37m	[37m  support [37m([37mESS_FORMAT_[37mS[37mTEREO_4410[37m0[37m_8)   
+		 [37m [37msupport (E[37mS[37mS_FORMAT_ST[37mE[37mREO_48000_[37m8[37m)   
+		  s[37mu[37mpport (ESS[37m_[37mFORMAT_STER[37mE[37mO_96000_8)[37m [37m  
+		  sup[37mp[37mort (ESS_F[37mO[37mRMAT_MONO_4[37m8[37m000_16)   [37m[37m
+		  suppor[37mt[37m ( ESS_FORM[37mA[37mT_MONO_441[37m0[37m0_16)   
+	[37m	[37m  support [37m([37m ESS_FORMAT[37m_[37mMONO_96000[37m_[37m16)   
+		 [37m [37msupport (E[37mS[37mS_FORMAT_ST[37mE[37mREO_44100_[37m1[37m6)   
+		  [37ms[37mupport (ES[37mS[37m_FORMAT_STE[37mR[37mEO_48000_16[37m)[37m   
+		  s[37mu[37mpport (ESS[37m_[37mFORMAT_STER[37mE[37mO_96000_16[37m)[37m   
+		  su[37mp[37mport (ESS_[37mF[37mORMAT_MONO_[37m4[37m4100_24)   [37m[37m
+		  suppo[37mr[37mt (ESS_FORM[37mA[37mT_MONO_480[37m0[37m0_24)   
+	[37m	[37m  support [37m([37mESS_FORMAT_[37mM[37mONO_96000_[37m2[37m4)   
+		  [37ms[37mupport (ES[37mS[37m_FORMAT_STE[37mR[37mEO_44100_2[37m4[37m)   
+		  s[37mu[37mpport (ESS[37m_[37mFORMAT_STER[37mE[37mO_48000_24[37m)[37m   
+		  su[37mp[37mport (ESS_[37mF[37mORMAT_STERE[37mO[37m_96000_24)[37m [37m  
+Probe b[37ma[37mckend: i2s[37m_[37mgeneric bac[37mk[37mend ------[37m-[37m-----------[37m-[37m----------[37m-[37m-----------[37m-[37m----------[37m
+[37m		  suppor[37mt[37m (ESS_FORMA[37mT[37m_MONO_4410[37m0[37m_8)   
+		 [37m [37msupport (E[37mS[37mS_FORMAT_MO[37mN[37mO_48000_8)[37m [37m  
+		  sup[37mp[37mort (ESS_F[37mO[37mRMAT_MONO_9[37m6[37m000_8)   [37m
+[37m		  support[37m [37m(ESS_FORMA[37mT[37m_STEREO_441[37m0[37m0_8)   
+		[37m [37m support ([37mE[37mSS_FORMAT_S[37mT[37mEREO_48000[37m_[37m8)   
+		  [37ms[37mupport (ES[37mS[37m_FORMAT_STE[37mR[37mEO_96000_8[37m)[37m   
+		  su[37mp[37mport (ESS_[37mF[37mORMAT_MONO_[37m4[37m8000_16)  [37m [37m
+		  suppo[37mr[37mt ( ESS_FO[37mR[37mMAT_MONO_44[37m1[37m00_16)   [37m
+[37m		  support[37m [37m( ESS_FORM[37mA[37mT_MONO_9600[37m0[37m_16)   
+	[37m	[37m  support ([37mE[37mSS_FORMAT_[37mS[37mTEREO_44100[37m_[37m16)   
+		[37m [37m support (E[37mS[37mS_FORMAT_S[37mT[37mEREO_48000_[37m1[37m6)   
+		 [37m [37msupport (ES[37mS[37m_FORMAT_ST[37mE[37mREO_96000_1[37m6[37m)   
+		  [37ms[37mupport (ESS[37m_[37mFORMAT_MONO[37m_[37m44100_24) [37m [37m 
+		  supp[37mo[37mrt (ESS_FO[37mR[37mMAT_MONO_48[37m0[37m00_24)   [37m
+[37m		  support[37m [37m(ESS_FORMA[37mT[37m_MONO_96000[37m_[37m24)   
+		[37m [37m support (E[37mS[37mS_FORMAT_S[37mT[37mEREO_44100_[37m2[37m4)   
+		 [37m [37msupport (ES[37mS[37m_FORMAT_STE[37mR[37mEO_48000_2[37m4[37m)   
+		  s[37mu[37mpport (ESS[37m_[37mFORMAT_STER[37mE[37mO_96000_24[37m)[37m   
+Probe [37mb[37mackend: ud[37mp[37m_both-backe[37mn[37md --------[37m-[37m-----------[37m-[37m----------[37m-[37m-----------[37m-[37m--------
+[37m	[37m	  support [37m([37mESS_FORMAT[37m_[37mMONO_44100_[37m8[37m)   
+		  [37ms[37mupport (ESS[37m_[37mFORMAT_MON[37mO[37m_48000_8)  [37m [37m
+		  supp[37mo[37mrt (ESS_FOR[37mM[37mAT_MONO_96[37m0[37m00_8)   
+	[37m	[37m  support ([37mE[37mSS_FORMAT_[37mS[37mTEREO_44100[37m_[37m8)   
+		 [37m [37msupport (ES[37mS[37m_FORMAT_ST[37mE[37mREO_48000_8[37m)[37m   
+		  s[37mu[37mpport (ESS[37m_[37mFORMAT_STER[37mE[37mO_96000_8)[37m [37m  
+		  no [37ms[37mupport (ES[37mS[37m_FORMAT_MON[37mO[37m_48000_16) [37m [37m 
+		  no [37ms[37mupport ( ES[37mS[37m_FORMAT_MO[37mN[37mO_44100_16)[37m [37m  
+		  no[37m [37msupport ( E[37mS[37mS_FORMAT_M[37mO[37mNO_96000_16[37m)[37m   
+		  s[37mu[37mpport (ESS_[37mF[37mORMAT_STERE[37mO[37m_44100_16)[37m [37m  
+		  sup[37mp[37mort (ESS_F[37mO[37mRMAT_STEREO[37m_[37m48000_16) [37m [37m 
+		  supp[37mo[37mrt (ESS_FO[37mR[37mMAT_STEREO_[37m9[37m6000_16)  [37m [37m
+		  suppo[37mr[37mt (ESS_FOR[37mM[37mAT_MONO_441[37m0[37m0_24)   
+[37m	[37m	  support [37m([37mESS_FORMAT[37m_[37mMONO_48000_[37m2[37m4)   
+		 [37m [37msupport (ES[37mS[37m_FORMAT_MO[37mN[37mO_96000_24)[37m [37m  
+		  no[37m [37msupport (ES[37mS[37m_FORMAT_ST[37mE[37mREO_44100_2[37m4[37m)   
+		  [37mn[37mo support ([37mE[37mSS_FORMAT_[37mS[37mTEREO_48000[37m_[37m24)   
+		[37m [37m no support[37m [37m(ESS_FORMA[37mT[37m_STEREO_960[37m0[37m0_24)   
+[37mP[37mrobe backen[37md[37m: null ----[37m-[37m----------[37m-[37m-----------[37m-[37m----------[37m-[37m-----------[37m-[37m-
+		  sup[37mp[37mort (ESS_FO[37mR[37mMAT_MONO_4[37m4[37m100_8)   
+[37m	[37m	  support[37m [37m(ESS_FORMAT[37m_[37mMONO_48000[37m_[37m8)   
+		  [37ms[37mupport (ESS[37m_[37mFORMAT_MON[37mO[37m_96000_8)  [37m [37m
+		  supp[37mo[37mrt (ESS_FOR[37mM[37mAT_STEREO_[37m4[37m4100_8)   [37m
+[37m		  suppor[37mt[37m (ESS_FORMA[37mT[37m_STEREO_48[37m0[37m00_8)   
+	[37m	[37m  support [37m([37mESS_FORMAT[37m_[37mSTEREO_9600[37m0[37m_8)   
+		[37m [37m support (E[37mS[37mS_FORMAT_MO[37mN[37mO_48000_16[37m)[37m   
+		  su[37mp[37mport ( ESS[37m_[37mFORMAT_MONO[37m_[37m44100_16) [37m [37m 
+		  supp[37mo[37mrt ( ESS_F[37mO[37mRMAT_MONO_9[37m6[37m000_16)   [37m[37m
+		  suppor[37mt[37m (ESS_FORMA[37mT[37m_STEREO_44[37m1[37m00_16)   [37m
+[37m		  support[37m [37m(ESS_FORMA[37mT[37m_STEREO_480[37m0[37m0_16)   
+[37m	[37m	  support [37m([37mESS_FORMAT[37m_[37mSTEREO_9600[37m0[37m_16)   
+	[37m	[37m  support ([37mE[37mSS_FORMAT_M[37mO[37mNO_44100_2[37m4[37m)   
+		  s[37mu[37mpport (ESS[37m_[37mFORMAT_MONO[37m_[37m48000_24) [37m [37m 
+		  supp[37mo[37mrt (ESS_FO[37mR[37mMAT_MONO_96[37m0[37m00_24)   [37m
+[37m		  support[37m [37m(ESS_FORMAT[37m_[37mSTEREO_441[37m0[37m0_24)   
+	[37m	[37m  support [37m([37mESS_FORMAT_[37mS[37mTEREO_4800[37m0[37m_24)   
+		[37m [37m support ([37mE[37mSS_FORMAT_S[37mT[37mEREO_96000[37m_[37m24)   

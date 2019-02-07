@@ -98,7 +98,7 @@ ess_backend_error_t  ess_backend_uart_set_sample_format(const ess_format_t forma
   return ESS_BACKEND_OK;
 }
 const char* ess_backend_uart_get_name(void) {
-  return "uart1 backend";
+  return ESS_BACKEND_NAME_UART_ESP32;
 }
 const char* ess_backend_uart_get_info(void) {
   return "Uart Audio Output for debugging or other thinks";

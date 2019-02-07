@@ -77,33 +77,40 @@ typedef struct ess_context {
 /**
  * @brief  initialisiert the context
  * @code
- * ess_context_t *context;
+ * ess_context_t context;
+ * ess_context_error_t error;
  *
- * context = ess_context_init ("uart", ESS_FORMAT_STEREO_96000_24);
- *
+ * error = ess_context_create (&context, "uart", ESS_FORMAT_STEREO_96000_24);
+ * if(error != ESS_CONTEXT_ERROR_OK) printf/("error in creating the context\n");
  * @endcode
  *
+ * @param [out] the creating ontext
  * @param [in] name the name of the using backend
  * @param [in] format the using context format
- * @retval NULL error with creating context
- * @return the new context
+ *
+ * @reval ESS_CONTEXT_WRONGFORMAT format not support
+ * @retval ESS_CONTEXT_ERROR_OK context created
  */
-ess_context_t* ess_context_create( const char* name, const ess_format_t format);
+ess_context_error_t  ess_context_create(ess_context_t* context,  const char* name, const ess_format_t format);
 /**
  * @brief  initialisiert the context with a user backend
  * @code
- * ess_context_t *context;
- * ess_backend_facktory_t* user_backend = { ,,, };
+ * ess_context_t context;
+ * ess_context_error_t error;
+ * ess_backend_facktory_t* user_backend = { ... };
  *
- * context = ess_context_create_ex( user_backend, ESS_FORMAT_STEREO_96000_24);
+ * error = ess_context_create_ex(&context, user_backend, ESS_FORMAT_STEREO_96000_24);
+ * if(error != ESS_CONTEXT_ERROR_OK) printf/("error in creating the context\n");
  * @endcode
+  * @param [out] the creating ontext
  * @param [in] format the using context format
  * @param [in] backend the user backend factory
  *
- * @retval NULL error with creating context
- * @return the new context
+ * @reval ESS_CONTEXT_WRONGFORMAT format not support
+ * @retval ESS_CONTEXT_ERROR_OK context created
+ * @reval ESS_CONTEXT_ERRORNOBACKEND backend was NULL
  */
-ess_context_t* ess_context_create_ex(ess_backend_facktory_t* backend, const ess_format_t format);
+ess_context_error_t ess_context_create_ex(ess_context_t* context, ess_backend_facktory_t* backend, const ess_format_t format);
 /**
  * @brief close the context and close the backend
  * @param context the context

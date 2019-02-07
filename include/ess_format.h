@@ -23,7 +23,7 @@
  * @brief Contains all ess format  functions and all formats
  * It contains all functions used to work with formats
  *
- * 
+ *
  */
 #ifndef __ESS_FORMAT_H__
 #define __ESS_FORMAT_H__
@@ -31,30 +31,29 @@
 /**
  * @brief Audio Format list
  */
+typedef enum ess_format {
+   ESS_FORMAT_MONO_44100_8 =                             0 , /**< samplerate 44100   8 Bit Mono */
+   ESS_FORMAT_MONO_44100_16 =                            1 , /**< samplerate 44100 16 Bit Mono */
+   ESS_FORMAT_MONO_44100_24 =                          2 , /**< samplerate 44100 24 Bit Mono */
+   ESS_FORMAT_MONO_48000_8   =                          3 , /**< samplerate 48000   8 Bit Mono */
+   ESS_FORMAT_MONO_48000_16 =                          4 , /**< samplerate 48000 16 Bit Mono */
+   ESS_FORMAT_MONO_48000_24 =                          5 , /**< samplerate 48000 24 Bit Mono */
+   ESS_FORMAT_MONO_96000_8  =                           6 , /**< samplerate 96000   8 Bit Mono */
+   ESS_FORMAT_MONO_96000_16 =                          7, /**< samplerate 96000 16 Bit Mono */
+   ESS_FORMAT_MONO_96000_24 =                          8, /**< samplerate 96000 24 Bit Mono */
+   ESS_FORMAT_STEREO_44100_8 =                          9 , /**< samplerate 44100   8 Bit Stereo */
+   ESS_FORMAT_STEREO_44100_16 =                      10 , /**< samplerate 44100 16 Bit Stereo */
+   ESS_FORMAT_STEREO_44100_24 =                      11 , /**< samplerate 44100 24 Bit Stereo */
+   ESS_FORMAT_STEREO_48000_8 =                        12 , /**< samplerate 48000   8 Bit Stereo */
+   ESS_FORMAT_STEREO_48000_16 =                      13 , /**< samplerate 48000 16 Bit Stereo */
+   ESS_FORMAT_STEREO_48000_24 =              14, /**< samplerate 96000 24 Bit Stereo */
+   ESS_FORMAT_STEREO_96000_8  =               15, /**< samplerate 96000   8 Bit Stereo */
+   ESS_FORMAT_STEREO_96000_16 =              16, /**< samplerate 96000 16 Bit Stereo */
+   ESS_FORMAT_STEREO_96000_24 =              17, /**< samplerate 96000 24 Bit Stereo */
 
-#define ESS_FORMAT_MONO_44100_8                            0 /**< samplerate 44100   8 Bit Mono */
-#define ESS_FORMAT_MONO_44100_16                           1 /**< samplerate 44100 16 Bit Mono */
-#define ESS_FORMAT_MONO_44100_24                           2 /**< samplerate 44100 24 Bit Mono */
-#define ESS_FORMAT_MONO_48000_8                             3 /**< samplerate 48000   8 Bit Mono */
-#define ESS_FORMAT_MONO_48000_16                           4 /**< samplerate 48000 16 Bit Mono */
-#define ESS_FORMAT_MONO_48000_24                           5 /**< samplerate 48000 24 Bit Mono */
-#define ESS_FORMAT_MONO_96000_8                             6 /**< samplerate 96000   8 Bit Mono */
-#define ESS_FORMAT_MONO_96000_16                           7/**< samplerate 96000 16 Bit Mono */
-#define ESS_FORMAT_MONO_96000_24                           8/**< samplerate 96000 24 Bit Mono */
-#define ESS_FORMAT_STEREO_44100_8                          9 /**< samplerate 44100   8 Bit Stereo */
-#define ESS_FORMAT_STEREO_44100_16                       10 /**< samplerate 44100 16 Bit Stereo */
-#define ESS_FORMAT_STEREO_44100_24                       11 /**< samplerate 44100 24 Bit Stereo */
-#define ESS_FORMAT_STEREO_48000_8                         12 /**< samplerate 48000   8 Bit Stereo */
-#define ESS_FORMAT_STEREO_48000_16                       13 /**< samplerate 48000 16 Bit Stereo */
-#define ESS_FORMAT_STEREO_48000_24               14/**< samplerate 96000 24 Bit Stereo */
-#define ESS_FORMAT_STEREO_96000_8                 15/**< samplerate 96000   8 Bit Stereo */
-#define ESS_FORMAT_STEREO_96000_16               16/**< samplerate 96000 16 Bit Stereo */
-#define ESS_FORMAT_STEREO_96000_24               17/**< samplerate 96000 24 Bit Stereo */
+   ESS_FORMAT_MAX  = 18,
+} ess_format_t;
 
-#define ESS_FORMAT_MAX 18
-
-
-typedef unsigned int ess_format_t;
 /**
  * @brief Help to get the number of channels of the format.
  * @param format The format to parse

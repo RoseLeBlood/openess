@@ -32,8 +32,6 @@
 int g_null_paused = 0;
 
 ess_backend_error_t ess_backend_null_probe(const ess_format_t format) {
-  printf("Possible to probe backend: null (%s)\n",
-  ess_format_to_string(format));
   return ESS_BACKEND_OK;
 }
 ess_backend_error_t ess_backend_null_open(const ess_format_t format) {
@@ -68,7 +66,7 @@ ess_backend_error_t  ess_backend_null_set_sample_format(const ess_format_t forma
   return ESS_BACKEND_OK;
 }
 const char* ess_backend_null_get_name(void) {
-  return "null";
+  return ESS_BACKEND_NAME_NULL;
 }
 const char* ess_backend_null_get_info(void) {
   return "Null Audio";

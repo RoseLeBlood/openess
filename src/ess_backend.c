@@ -41,36 +41,33 @@
 int ess_backend_get_size() {
   return sizeof(backends_list) / sizeof(ess_backends_entry_t);
 }
-ess_backend_facktory_t* ess_backend_create_factory_list() {
-  return (ess_backend_facktory_t*)malloc(sizeof(ess_backend_facktory_t) * ess_backend_get_size());
-}
-ess_backend_error_t ess_backend_destroy_factory_list(ess_backend_facktory_t* list) {
-  if(list == 0)  return ESS_BACKEND_ERROR_NULL;
-  //free(list);
-  return ESS_BACKEND_OK;
-}
-ess_backend_error_t ess_backend_probe_all(ess_format_t format, ess_backend_facktory_t** backend, int* size) {
-  ess_backend_facktory_t *factory = 0;
-
-  unsigned int i,n = 0;
-
-  for( i = 0; i < ess_backend_get_size(); i++ ) {
-    factory = backends_list[i].getFactory();
-
-    if(factory->ess_backend_probe(format) == ESS_BACKEND_OK) {
-      if(*backend) { backend[n] = factory; } n++;
-    }
-  }
-  ESP_LOGI(LOG_TAG,"%d/%d backends probe possible\n", n, ess_backend_get_size());
-
-  if(size) *size = n;
-  return n;
+ess_backends_entry_t* ess_backend_get_list(unsigned int* size) {
+  if(size != 0) *size = ( sizeof(backends_list) / sizeof(ess_backends_entry_t) );
+  return backends_list;
 }
 
-ess_backend_error_t ess_backend_probe(const char* name, ess_format_t format, ess_backend_facktory_t* backend) {
+ess_backend_facktory_t* ess_backend_get_by_index(unsigned int index)  {
+  if(index > ess_backend_get_size() ) return 0;
+  return backends_list[index].getFactory();
+}
+
+
+ess_backend_facktory_t* ess_backend_get_by_name(const char* name)  {
+  ess_backend_facktory_t* factory = 0;
+
   for(unsigned int i = 0; i < ess_backend_get_size(); i++ ) {
     if(strcmp(backends_list[i].name, name)) {
-      if(backends_list[i].getFactory()->ess_backend_probe(format)) {
+      factory = backends_list[i].getFactory();
+      break;
+    }
+  }
+  return factory;
+}
+
+ess_backend_error_t ess_backend_probe_ex(const char* name, ess_format_t format, ess_backend_facktory_t* backend) {
+  for(unsigned int i = 0; i < ess_backend_get_size(); i++ ) {
+    if(strcmp(backends_list[i].name, name)) {
+      if(backends_list[i].getFactory()->ess_backend_probe(format) == ESS_BACKEND_OK) {
         if(backend) backend = backends_list[i].getFactory();
         return ESS_BACKEND_OK;
       } else {
@@ -79,6 +76,10 @@ ess_backend_error_t ess_backend_probe(const char* name, ess_format_t format, ess
     }
   }
   return ESS_BACKEND_ERROR;
+}
+ess_backend_error_t ess_backend_probe(const ess_format_t format, ess_backend_facktory_t* backend) {
+  if(backend == 0) return ESS_BACKEND_NULL;
+  return backend->ess_backend_probe(format);
 }
 ess_backend_error_t ess_backend_set_sample_format(ess_backend_facktory_t* backend,  ess_format_t forma) {
   if(backend == 0) return ESS_BACKEND_ERROR_NULL;

@@ -126,7 +126,7 @@ ess_backend_error_t  ess_backend_i2s_set_sample_format(const ess_format_t format
   return ESS_BACKEND_OK;
 }
 const char* ess_backend_i2s_generic_get_name( ) {
-  return "i2s_generic backend";
+  return ESS_BACKEND_NAME_I2S_ESP32;
 }
 const char* ess_backend_i2s_generic_get_info( ) {
   return "I2S Generic Backend";

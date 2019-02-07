@@ -48,11 +48,10 @@ ess_backend_error_t ess_backend_udp_probe(const ess_format_t format) {
     case ESS_FORMAT_STEREO_96000_8:
     case ESS_FORMAT_STEREO_96000_16:
     case ESS_FORMAT_STEREO_96000_24:
-      return ESS_BACKEND_ERROR_WRONG_FORMAT;
+      break;
     default:
       return ESS_BACKEND_OK;
   }
-  printf("Format not support for backend: udp (%s)\n", ess_format_to_string(format));
   return ESS_BACKEND_ERROR_WRONG_FORMAT;
 }
 ess_backend_error_t ess_backend_udp_open(const ess_format_t format) {
@@ -99,13 +98,7 @@ ess_backend_error_t  ess_backend_udp_set_sample_format(const ess_format_t format
   return ESS_BACKEND_OK;
 }
 const char* ess_backend_udp_get_name(void) {
-  #if ESS_BACKEND_UDP_FAMILY == ESS_FAMILY_IP6
-  return "udp6-backend";
-  #elif  ESS_BACKEND_UDP_FAMILY == ESS_FAMILY_IP4
-  return "udp4-backend";
-  #else
-  return "udp_both-backend";
-  #endif
+  return ESS_BACKEND_NAME_UDP;
 }
 const char* ess_backend_udp_get_info(void) {
   return "Network audio backend over udp";

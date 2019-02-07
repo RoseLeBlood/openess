@@ -50,6 +50,7 @@ typedef enum ess_backend_error {
   ESS_BACKEND_PAUSED,				/**< Don't read or write becourse backend is paused */
   ESS_BACKEND_ERROR_NULL, /**< backend is null */
   ESS_BACKEND_ERROR,				/**< unknown error */
+  ESS_BACKEND_NULL, /**< no backend */
 } ess_backend_error_t;
 
 /**
@@ -77,33 +78,48 @@ typedef struct ess_backend {
 
 
 /**
- * @brief get the size of using backends
- * @return number of support backends
+ * @brief get ess_backend_facktory_t entry
+ * @param [in] number of the entry
+ * @return the backend
+ * @retval NULL no backends
+ */
+ess_backend_facktory_t* ess_backend_get_by_index(unsigned int index) ;
+
+/**
+ * @brief get ess_backend_facktory_t entry
+ * @param [in] name of the backend
+ * @return the backend
+ * @retval NULL no backends
+ */
+ess_backend_facktory_t* ess_backend_get_by_name(const char* name) ;
+
+/**
+ * @brief get the size of backends
+ * @return the  number of platform backends in the list
  */
 int ess_backend_get_size();
 
-ess_backend_facktory_t* ess_backend_create_factory_list() ;
-ess_backend_error_t ess_backend_destroy_factory_list(ess_backend_facktory_t* list) ;
-/**
- * @brief Check that all backends support the specified format and return all working backends.
- * @param format the format to probe
- * @param backend return all working backends. if not null
- * @param size number of using devices
- * @return  number of working backends or errir codes
- * @retval ESS_BACKEND_ERROR_WRONG_FORMAT when no  backend  supported
- */
-ess_backend_error_t ess_backend_probe_all(const ess_format_t format, ess_backend_facktory_t** backend, int* size);
 /**
  * @brief checked the backend with the specified name and returns it if successful.
- * @param Name of the backend
- * @param format the format to probe
- * @param backend return the working backend. if not null
+ * @param [in] Name of the backend
+ * @param [in] format the format to probe
+ * @param [out] backend return the working backend. if not null
+ *
  * @retval  ESS_BACKEND_OK if backend support
  * @retval ESS_BACKEND_ERROR_WRONG_FORMAT
  * @retval ESS_BACKEND_ERROR
  */
-ess_backend_error_t ess_backend_probe(const char* name, const ess_format_t format, ess_backend_facktory_t* backend);
+ess_backend_error_t ess_backend_probe_ex(const char* name, const ess_format_t format, ess_backend_facktory_t* backend);
 
+/**
+ * @brief checked the backend
+ * @param [in]  format the format to probe
+ * @param [in]  backend return the working backend. if not null
+ * @retval  ESS_BACKEND_OK if backend support
+ * @retval ESS_BACKEND_ERROR_WRONG_FORMAT
+ * @retval ESS_BACKEND_NULL backend is null
+ */
+ess_backend_error_t ess_backend_probe(const ess_format_t format, ess_backend_facktory_t* backend);
 /**
  * @brief set sample format
  * @param [in] backend the usiing backend
