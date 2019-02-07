@@ -40,7 +40,7 @@ typedef struct udp_backend {
 ess_backend_facktory_t _udp_backend_config;
 
 
-ess_backend_error_t ess_backend_udp_probe(const ess_format_t format) {
+ess_error_t ess_backend_udp_probe(const ess_format_t format) {
   switch (format) {
     case ESS_FORMAT_MONO_96000_8:
     case ESS_FORMAT_MONO_96000_16:
@@ -50,12 +50,12 @@ ess_backend_error_t ess_backend_udp_probe(const ess_format_t format) {
     case ESS_FORMAT_STEREO_96000_24:
       break;
     default:
-      return ESS_BACKEND_OK;
+      return ESS_OK;
   }
-  return ESS_BACKEND_ERROR_WRONG_FORMAT;
+  return ESS_ERROR_WRONG_FORMAT;
 }
-ess_backend_error_t ess_backend_udp_open(const ess_format_t format) {
-  ess_socket_error_t error;
+ess_error_t ess_backend_udp_open(const ess_format_t format) {
+  ess_error_t error;
 
 #if ESS_BACKEND_UDP_FAMILY == ESS_FAMILY_BOTH
   error =  ess_socket_create_server(  ESS_SOCKET_FAMILY_BOTH, ESS_SOCKET_PROTO_DRAM, "::",
@@ -67,35 +67,34 @@ ess_backend_error_t ess_backend_udp_open(const ess_format_t format) {
   error =  ess_socket_create_server(  ESS_SOCKET_FAMILY_IP6, ESS_SOCKET_PROTO_DRAM, "::",
     ESS_BACKEND_UDP_PORT, &(((udp_backend_t*)_udp_backend_config.user_daten)->socket));
 #endif
-  return error == ESS_SOCKET_ERROR_OK ? ESS_BACKEND_OK :  ESS_BACKEND_ERROR;
+  return error;
 }
-ess_backend_error_t  ess_backend_udp_close( void ){
-  return ess_socket_close(&(((udp_backend_t*)_udp_backend_config.user_daten)->socket)) == ESS_SOCKET_ERROR_OK ?
-    ESS_BACKEND_OK :  ESS_BACKEND_ERROR;
+ess_error_t  ess_backend_udp_close( void ){
+  return ess_socket_close(&(((udp_backend_t*)_udp_backend_config.user_daten)->socket)) ;
 }
-ess_backend_error_t  ess_backend_udp_pause( void ){
+ess_error_t  ess_backend_udp_pause( void ){
   ((udp_backend_t*)_udp_backend_config.user_daten)->udp_paused = 1;
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
-ess_backend_error_t     ess_backend_udp_write( void *buffer, unsigned int buf_size,  unsigned int* wrote ){
-  if( ((udp_backend_t*)_udp_backend_config.user_daten)->udp_paused ) return ESS_BACKEND_PAUSED;
+ess_error_t     ess_backend_udp_write( void *buffer, unsigned int buf_size,  unsigned int* wrote ){
+  if( ((udp_backend_t*)_udp_backend_config.user_daten)->udp_paused ) return ESS_ERROR_PAUSED;
   if(wrote) *wrote = -1;
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
-ess_backend_error_t     ess_backend_udp_read( void *buffer, unsigned int buf_size, unsigned int* readed  ){
-  if( ((udp_backend_t*)_udp_backend_config.user_daten)->udp_paused ) return ESS_BACKEND_PAUSED;
+ess_error_t     ess_backend_udp_read( void *buffer, unsigned int buf_size, unsigned int* readed  ){
+  if( ((udp_backend_t*)_udp_backend_config.user_daten)->udp_paused ) return ESS_ERROR_PAUSED;
   if(readed) *readed = -1;
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
-ess_backend_error_t  ess_backend_udp_flush( void ){
-  return ESS_BACKEND_OK;
+ess_error_t  ess_backend_udp_flush( void ){
+  return ESS_OK;
 }
-ess_backend_error_t  ess_backend_udp_resume( void ){
+ess_error_t  ess_backend_udp_resume( void ){
   ((udp_backend_t*)_udp_backend_config.user_daten)->udp_paused = 0;
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
-ess_backend_error_t  ess_backend_udp_set_sample_format(const ess_format_t format) {
-  return ESS_BACKEND_OK;
+ess_error_t  ess_backend_udp_set_sample_format(const ess_format_t format) {
+  return ESS_OK;
 }
 const char* ess_backend_udp_get_name(void) {
   return ESS_BACKEND_NAME_UDP;

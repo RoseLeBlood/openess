@@ -21,7 +21,7 @@
  * @file esp32_platform_task.c
  * @author Anna Sopdia Schröck
  * @date 3 Februar 20119
- * @brief all esp32 platform task functions source 
+ * @brief all esp32 platform task functions source
  *
  */
 #include "config.h"
@@ -42,20 +42,20 @@
 
 static int task_id = 0;
 
-ess_platform_error_t ess_platform_sleep(unsigned int ms) {
+ess_error_t ess_platform_sleep(unsigned int ms) {
   vTaskDelay(ms / portTICK_PERIOD_MS);
-  return ESS_PLATFORM_ERROR_OK;
+  return ESS_OK;
 }
 unsigned int ess_platform_get_tick_count() {
   return (uint32_t) (xTaskGetTickCount() * portTICK_PERIOD_MS);
 }
 
 
-ess_platform_error_t ess_platform_task_create(ess_platform_task_t* task, void task_func(void*),
+ess_error_t ess_platform_task_create(ess_platform_task_t* task, void task_func(void*),
     const char* taskName, void* param, unsigned int stackSize) {
-      if(task == 0) return ESS_PLATFORM_ERROR_NULL;
+      if(task == 0) return ESS_ERROR_NULL;
 
-
+      task->name[0] = '\0';
       strncpy(task->name, taskName, sizeof(task->name) );
 
       task->parem = param;
@@ -66,18 +66,18 @@ ess_platform_error_t ess_platform_task_create(ess_platform_task_t* task, void ta
       task->handle = 0;
       task->priority = 5;
 
-      return ESS_PLATFORM_ERROR_OK;
+      return ESS_OK;
 }
-ess_platform_error_t ess_platform_task_start(ess_platform_task_t* task) {
+ess_error_t ess_platform_task_start(ess_platform_task_t* task) {
   xTaskCreate(task->task, task->name, task->stack_size, task->userdata , task->priority,  task->handle);
 
-  return ESS_PLATFORM_ERROR_OK;
+  return ESS_OK;
 }
-ess_platform_error_t ess_platform_task_delete(ess_platform_task_t* task) {
-  if(task == 0) return ESS_PLATFORM_ERROR_NULL;
+ess_error_t ess_platform_task_delete(ess_platform_task_t* task) {
+  if(task == 0) return ESS_ERROR_NULL;
 
   vTaskDelete(task->handle);
 
-  return ESS_PLATFORM_ERROR_OK;
+  return ESS_OK;
 }
 #endif

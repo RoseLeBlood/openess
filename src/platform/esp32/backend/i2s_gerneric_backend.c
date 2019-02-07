@@ -66,19 +66,19 @@ static i2s_pin_config_t std_pin_config = {
 
 int g_i2s_generic_paused = 0;
 
-ess_backend_error_t ess_backend_i2s_generic_probe(const ess_format_t format) {
-  return ESS_BACKEND_OK;
+ess_error_t ess_backend_i2s_generic_probe(const ess_format_t format) {
+  return ESS_OK;
 }
 
-ess_backend_error_t ess_backend_i2s_generic_open(const ess_format_t format ) {
+ess_error_t ess_backend_i2s_generic_open(const ess_format_t format ) {
   std_config.sample_rate = ess_format_get_samplerate(ESS_BACKEND_I2S_FORMAT);
   std_config.bits_per_sample = ess_format_get_bits(ESS_BACKEND_I2S_FORMAT);
 
   if(i2s_driver_install(0, &std_config, 0, NULL) != ESP_OK) {
-    return ESS_BACKEND_ERROR;
+    return ESS_ERROR;
   }
   if(i2s_set_pin(0, &std_pin_config) != ESP_OK) {
-    return ESS_BACKEND_ERROR;
+    return ESS_ERROR;
   }
   i2s_set_clk(0, ess_format_get_samplerate(format) ,
                          ess_format_get_bits(format),
@@ -87,43 +87,43 @@ ess_backend_error_t ess_backend_i2s_generic_open(const ess_format_t format ) {
                           I2S_CHANNEL_MONO);
 
 
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
-ess_backend_error_t  ess_backend_i2s_generic_close(  ){
+ess_error_t  ess_backend_i2s_generic_close(  ){
   i2s_driver_uninstall(0);
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
-ess_backend_error_t  ess_backend_i2s_generic_pause(    ){
+ess_error_t  ess_backend_i2s_generic_pause(    ){
   g_i2s_generic_paused = 1;
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
-ess_backend_error_t     ess_backend_i2s_generic_write( void *buffer, unsigned int buf_size,  unsigned int* wrote  ){
-  if(g_i2s_generic_paused) return ESS_BACKEND_PAUSED;
+ess_error_t     ess_backend_i2s_generic_write( void *buffer, unsigned int buf_size,  unsigned int* wrote  ){
+  if(g_i2s_generic_paused) return ESS_ERROR_PAUSED;
   i2s_write(0, buffer, buf_size, wrote, 100);
 
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
-ess_backend_error_t     ess_backend_i2s_generic_read( void *buffer, unsigned int buf_size, unsigned int* readed  ){
-  if(g_i2s_generic_paused) return ESS_BACKEND_PAUSED;
+ess_error_t     ess_backend_i2s_generic_read( void *buffer, unsigned int buf_size, unsigned int* readed  ){
+  if(g_i2s_generic_paused) return ESS_ERROR_PAUSED;
 
 //  int  len = uart_read_bytes(UART_NUM_1, buffer, buf_size, 20 / portTICK_RATE_MS);
   return 0;
 }
-ess_backend_error_t  ess_backend_i2s_generic_flush(  ){
+ess_error_t  ess_backend_i2s_generic_flush(  ){
 
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
-ess_backend_error_t  ess_backend_i2s_generic_resume(  ){
+ess_error_t  ess_backend_i2s_generic_resume(  ){
   g_i2s_generic_paused = false;
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
-ess_backend_error_t  ess_backend_i2s_set_sample_format(const ess_format_t format) {
+ess_error_t  ess_backend_i2s_set_sample_format(const ess_format_t format) {
   i2s_set_clk(0, ess_format_get_samplerate(format) ,
                          ess_format_get_bits(format),
                          (ess_format_get_channels(format) == 2) ?
                           I2S_CHANNEL_STEREO :
                           I2S_CHANNEL_MONO);
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
 const char* ess_backend_i2s_generic_get_name( ) {
   return ESS_BACKEND_NAME_I2S_ESP32;

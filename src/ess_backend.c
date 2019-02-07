@@ -37,6 +37,14 @@
 
 #include "ess_platform.h"
 
+#ifdef ESS_ENABLE_BACKEND_UDP
+  ess_backend_facktory_t* ess_backend_udp_getFactory();
+#endif
+  ess_backend_facktory_t* ess_backend_null_getFactory();
+
+#ifdef ESS_PLATFORM_ESP32
+#include "platform/esp32/ess_platform_esp32.h"
+#endif
 
 int ess_backend_get_size() {
   return sizeof(backends_list) / sizeof(ess_backends_entry_t);
@@ -64,33 +72,33 @@ ess_backend_facktory_t* ess_backend_get_by_name(const char* name)  {
   return factory;
 }
 
-ess_backend_error_t ess_backend_probe_ex(const char* name, ess_format_t format, ess_backend_facktory_t* backend) {
+ess_error_t ess_backend_probe_ex(const char* name, ess_format_t format, ess_backend_facktory_t* backend) {
   for(unsigned int i = 0; i < ess_backend_get_size(); i++ ) {
     if(strcmp(backends_list[i].name, name)) {
-      if(backends_list[i].getFactory()->ess_backend_probe(format) == ESS_BACKEND_OK) {
+      if(backends_list[i].getFactory()->ess_backend_probe(format) == ESS_OK) {
         if(backend) backend = backends_list[i].getFactory();
-        return ESS_BACKEND_OK;
+        return ESS_OK;
       } else {
-        return ESS_BACKEND_ERROR_WRONG_FORMAT;
+        return ESS_ERROR_WRONG_FORMAT;
       }
     }
   }
-  return ESS_BACKEND_ERROR;
+  return ESS_ERROR;
 }
-ess_backend_error_t ess_backend_probe(const ess_format_t format, ess_backend_facktory_t* backend) {
-  if(backend == 0) return ESS_BACKEND_NULL;
+ess_error_t ess_backend_probe(const ess_format_t format, ess_backend_facktory_t* backend) {
+  if(backend == 0) return ESS_ERROR_NULL;
   return backend->ess_backend_probe(format);
 }
-ess_backend_error_t ess_backend_set_sample_format(ess_backend_facktory_t* backend,  ess_format_t forma) {
-  if(backend == 0) return ESS_BACKEND_ERROR_NULL;
+ess_error_t ess_backend_set_sample_format(ess_backend_facktory_t* backend,  ess_format_t forma) {
+  if(backend == 0) return ESS_ERROR_NULL;
   return backend->ess_backend_set_sample_format(forma);
 }
 void* ess_backend_get_user_daten(ess_backend_facktory_t* backend) {
   if(backend == 0)  return 0;
   return  backend->user_daten;
 }
-ess_backend_error_t ess_backend_set_user_daten(ess_backend_facktory_t* backend, void* data) {
-  if(backend == 0)  return ESS_BACKEND_ERROR_NULL;
+ess_error_t ess_backend_set_user_daten(ess_backend_facktory_t* backend, void* data) {
+  if(backend == 0)  return ESS_ERROR_NULL;
   backend->user_daten = data;
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }

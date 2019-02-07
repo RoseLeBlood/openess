@@ -27,26 +27,14 @@
 #ifndef _ESS_PLATFORM_H_
 #define _ESS_PLATFORM_H_
 
+#include "ess_error.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#ifdef ESS_ENABLE_BACKEND_UDP
-  ess_backend_facktory_t* ess_backend_udp_getFactory();
-#endif
-  ess_backend_facktory_t* ess_backend_null_getFactory();
 
-#ifdef ESS_PLATFORM_ESP32
-#include "platform/esp32/ess_platform_esp32.h"
-#endif
 
-typedef enum ess_platform_error {
-  ESS_PLATFORM_ERROR_OK = 0,  /** no error */
-  ESS_PLATFORM_NOT_IMP = -1,    /** function no implantiert */
-  ESS_PLATFORM_ERROR,  /** unspec error */
-  ESS_PLATFORM_ERROR_NULL,
-  ESS_PLATFORM_NOT_CREATED,
-}ess_platform_error_t;
 
 typedef enum  ess_platform_ringbuffer_mode{
   ESS_PLATFORM_RINGBUFFER_MODE_NOSPLIT,
@@ -91,7 +79,7 @@ unsigned int ess_platform_get_tick_count();
  * @retval ESS_PLATFORM_ERROR_OK
  *@reval ESS_PLATFORM_NOT_IMP  function is for using platform not implantiert
  */
-ess_platform_error_t ess_platform_sleep(unsigned int ms);
+ess_error_t ess_platform_sleep(unsigned int ms);
 /**
  * @brief fill the 'esp_platform_task_t' struct
  * @param[out] task The  pointer to the 'esp_platform_task_t' struct
@@ -105,7 +93,7 @@ ess_platform_error_t ess_platform_sleep(unsigned int ms);
  * @retval ESS_PLATFORM_ERROR unspec error
  * @retval ESS_PLATFORM_ERROR_NULL 'esp_platform_task_t' task is null
  */
-ess_platform_error_t ess_platform_task_create(ess_platform_task_t* task, void task_func(void*),
+ess_error_t ess_platform_task_create(ess_platform_task_t* task, void task_func(void*),
     const char* taskName, void* param, unsigned int stackSize);
 /**
  * @brief start the task
@@ -116,7 +104,7 @@ ess_platform_error_t ess_platform_task_create(ess_platform_task_t* task, void ta
  * @retval ESS_PLATFORM_ERROR
  * @retval ESS_PLATFORM_ERROR_NULL 'esp_platform_task_t' task is null
  */
-ess_platform_error_t ess_platform_task_start(ess_platform_task_t* task);
+ess_error_t ess_platform_task_start(ess_platform_task_t* task);
 /**
  * @brief delete the task
  * @param[int] task The  pointer to the 'esp_platform_task_t' struct
@@ -126,7 +114,7 @@ ess_platform_error_t ess_platform_task_start(ess_platform_task_t* task);
  * @retval ESS_PLATFORM_ERROR
  * @retval ESS_PLATFORM_ERROR_NULL 'esp_platform_task_t' task is null
  */
-ess_platform_error_t ess_platform_task_delete(ess_platform_task_t* task);
+ess_error_t ess_platform_task_delete(ess_platform_task_t* task);
 /**
  * @brief create the semaphore
  * @param [in] semp the semaphore context
@@ -137,7 +125,7 @@ ess_platform_error_t ess_platform_task_delete(ess_platform_task_t* task);
  * @retval ESS_PLATFORM_ERROR unspec error
  * @retval ESS_PLATFORM_ERROR_NULL 'ess_platform_semaphore_t' semp is null
  */
-ess_platform_error_t ess_platform_semaphore_create(ess_platform_semaphore_t* semp, const char* name);
+ess_error_t ess_platform_semaphore_create(ess_platform_semaphore_t* semp, const char* name);
 /**
  * @brief destroy the semaphore
  * @param [in] semp the semaphore context
@@ -148,7 +136,7 @@ ess_platform_error_t ess_platform_semaphore_create(ess_platform_semaphore_t* sem
  * @retval ESS_PLATFORM_NOT_CREATED  semaphore is not created
  * @retval ESS_PLATFORM_ERROR_NULL 'ess_platform_semaphore_t' semp is null
  */
-ess_platform_error_t ess_platform_semaphore_destroy(ess_platform_semaphore_t* semp);
+ess_error_t ess_platform_semaphore_destroy(ess_platform_semaphore_t* semp);
  /**
   * @brief take a semaphore
   * @param [in] semp the semaphore context
@@ -160,7 +148,7 @@ ess_platform_error_t ess_platform_semaphore_destroy(ess_platform_semaphore_t* se
   * @retval ESS_PLATFORM_NOT_CREATED  semaphore is not created
   * @retval ESS_PLATFORM_ERROR_NULL 'ess_platform_semaphore_t' semp is null
   */
-ess_platform_error_t ess_platform_semaphore_take_ex(ess_platform_semaphore_t* semp, unsigned int timeout_ms);
+ess_error_t ess_platform_semaphore_take_ex(ess_platform_semaphore_t* semp, unsigned int timeout_ms);
 /**
  * @brief take a semaphore
  * @param [in] semp the semaphore context
@@ -171,7 +159,7 @@ ess_platform_error_t ess_platform_semaphore_take_ex(ess_platform_semaphore_t* se
  * @retval ESS_PLATFORM_NOT_CREATED  semaphore is not created
  * @retval ESS_PLATFORM_ERROR_NULL 'ess_platform_semaphore_t' semp is null
  */
-ess_platform_error_t ess_platform_semaphore_take(ess_platform_semaphore_t* semp);
+ess_error_t ess_platform_semaphore_take(ess_platform_semaphore_t* semp);
 /**
  * @brief take a semaphore
  * @param [in] semp the semaphore context
@@ -182,7 +170,7 @@ ess_platform_error_t ess_platform_semaphore_take(ess_platform_semaphore_t* semp)
  * @retval ESS_PLATFORM_NOT_CREATED  semaphore is not created
  * @retval ESS_PLATFORM_ERROR_NULL 'ess_platform_semaphore_t' semp is null
  */
- ess_platform_error_t ess_platform_semaphore_give(ess_platform_semaphore_t* semp);
+ ess_error_t ess_platform_semaphore_give(ess_platform_semaphore_t* semp);
 /**
  * @brief give a semaphore
  * @param [in] semp the semaphore context
@@ -194,7 +182,7 @@ ess_platform_error_t ess_platform_semaphore_take(ess_platform_semaphore_t* semp)
  * @retval ESS_PLATFORM_NOT_CREATED  semaphore is not created
  * @retval ESS_PLATFORM_ERROR_NULL 'ess_platform_semaphore_t' semp is null
  */
-ess_platform_error_t ess_platform_semaphore_give_ex(ess_platform_semaphore_t* semp, int value);
+ess_error_t ess_platform_semaphore_give_ex(ess_platform_semaphore_t* semp, int value);
 /**
  * @brief give a semaphore
  * @param [in] semp the semaphore context
@@ -205,7 +193,7 @@ ess_platform_error_t ess_platform_semaphore_give_ex(ess_platform_semaphore_t* se
  * @retval ESS_PLATFORM_NOT_CREATED  semaphore is not created
  * @retval ESS_PLATFORM_ERROR_NULL 'ess_platform_semaphore_t' semp is null
  */
-ess_platform_error_t ess_platform_semaphore_give(ess_platform_semaphore_t* semp);
+ess_error_t ess_platform_semaphore_give(ess_platform_semaphore_t* semp);
 
 /**
  * @brief give a semaphore from ISR
@@ -217,7 +205,7 @@ ess_platform_error_t ess_platform_semaphore_give(ess_platform_semaphore_t* semp)
  * @retval ESS_PLATFORM_NOT_CREATED  semaphore is not created
  * @retval ESS_PLATFORM_ERROR_NULL 'ess_platform_semaphore_t' semp is null
  */
-ess_platform_error_t ess_platform_semaphore_give_isr(ess_platform_semaphore_t* semp);
+ess_error_t ess_platform_semaphore_give_isr(ess_platform_semaphore_t* semp);
 
 /**
  * @brief wait for a semaphore to be released by trying to take it and then releasing it again.
@@ -230,7 +218,7 @@ ess_platform_error_t ess_platform_semaphore_give_isr(ess_platform_semaphore_t* s
  * @retval ESS_PLATFORM_NOT_CREATED  semaphore is not created
  * @retval ESS_PLATFORM_ERROR_NULL 'ess_platform_semaphore_t' semp is null
  */
-ess_platform_error_t ess_platform_semaphore_wait(ess_platform_semaphore_t* semp, int* value);
+ess_error_t ess_platform_semaphore_wait(ess_platform_semaphore_t* semp, int* value);
 /**
  * @brief Create a ring buffer.
  *
@@ -244,7 +232,7 @@ ess_platform_error_t ess_platform_semaphore_wait(ess_platform_semaphore_t* semp,
  * @retval ESS_PLATFORM_ERROR unspec error
  * @retval ESS_PLATFORM_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
  */
-ess_platform_error_t ess_platform_ringbuffer_create(ess_platform_ringbuffer_t* rng ,
+ess_error_t ess_platform_ringbuffer_create(ess_platform_ringbuffer_t* rng ,
   unsigned int length,  ess_platform_ringbuffer_mode_t type, const char* name);
   /**
    * @brief destroy the ring buffer.
@@ -256,7 +244,7 @@ ess_platform_error_t ess_platform_ringbuffer_create(ess_platform_ringbuffer_t* r
    * @retval ESS_PLATFORM_ERROR unspec error
    * @retval ESS_PLATFORM_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
    */
-ess_platform_error_t ess_platform_ringbuffer_destroy(ess_platform_ringbuffer_t* rng);
+ess_error_t ess_platform_ringbuffer_destroy(ess_platform_ringbuffer_t* rng);
 /**
  * @brief write data to the ring buffer.
  *
@@ -270,7 +258,7 @@ ess_platform_error_t ess_platform_ringbuffer_destroy(ess_platform_ringbuffer_t* 
  * @retval ESS_PLATFORM_ERROR can't write
  * @retval ESS_PLATFORM_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
  */
-ess_platform_error_t ess_platform_ringbuffer_write(ess_platform_ringbuffer_t* rng,
+ess_error_t ess_platform_ringbuffer_write(ess_platform_ringbuffer_t* rng,
     void* data, unsigned int length, unsigned int ms);
 /**
  * @brief can read from the ringbuffer
@@ -283,7 +271,7 @@ ess_platform_error_t ess_platform_ringbuffer_write(ess_platform_ringbuffer_t* rn
  * @retval ESS_PLATFORM_ERROR no
  * @retval ESS_PLATFORM_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
  */
-ess_platform_error_t ess_platform_ringbuffer_can_read(ess_platform_ringbuffer_t* rng, unsigned int ms);
+ess_error_t ess_platform_ringbuffer_can_read(ess_platform_ringbuffer_t* rng, unsigned int ms);
 /**
  * @brief read data from the ring buffer.
  *

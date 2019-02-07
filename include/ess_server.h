@@ -1,8 +1,8 @@
 #ifndef _ESS_SERVER_H__
 #define _ESS_SERVER_H__
 
-#include "esd.h"
-#include "context.h"
+#include "ess.h"
+#include "ess_context.h"
 #include "ess_socket.h"
 
 #ifdef __cplusplus
@@ -18,7 +18,7 @@ typedef enum ess_server_status {
 
 typedef struct ess_server {
   ess_socket_t socket;
-  ess_backend_t* backend;
+  ess_context_t* context;
   ess_format_t format;
 
   void* buffer;
@@ -28,7 +28,7 @@ typedef struct ess_server {
   ess_server_status_t status;
 } ess_server_t;
 
-int ess_server_start(ess_server_t* server, const char* backend_name) ;
+ess_error_t ess_server_start(ess_server_t* server, ess_context_t* context, ess_format_t format) ;
 int ess_server_stop(ess_server_t* server);
 int ess_restart_server(ess_server_t* server);
 

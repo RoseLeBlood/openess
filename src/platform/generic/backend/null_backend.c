@@ -31,39 +31,39 @@
 
 int g_null_paused = 0;
 
-ess_backend_error_t ess_backend_null_probe(const ess_format_t format) {
-  return ESS_BACKEND_OK;
+ess_error_t ess_backend_null_probe(const ess_format_t format) {
+  return ESS_OK;
 }
-ess_backend_error_t ess_backend_null_open(const ess_format_t format) {
+ess_error_t ess_backend_null_open(const ess_format_t format) {
   printf("Possible to open backend: null (%s)\n",
   ess_format_to_string(format));
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
-ess_backend_error_t  ess_backend_null_close( void ){
+ess_error_t  ess_backend_null_close( void ){
   printf("Possible to close backend: null\n");
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
-ess_backend_error_t  ess_backend_null_pause( void ){
+ess_error_t  ess_backend_null_pause( void ){
   printf("Possible to pause backend: null\n");
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
-ess_backend_error_t     ess_backend_null_write( void *buffer, unsigned int buf_size,  unsigned int* wrote ){
+ess_error_t     ess_backend_null_write( void *buffer, unsigned int buf_size,  unsigned int* wrote ){
   if(wrote) *wrote = -1;
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
-ess_backend_error_t     ess_backend_null_read( void *buffer, unsigned int buf_size, unsigned int* readed  ){
+ess_error_t     ess_backend_null_read( void *buffer, unsigned int buf_size, unsigned int* readed  ){
   if(readed) *readed = -1;
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
-ess_backend_error_t  ess_backend_null_flush( void ){
-  return ESS_BACKEND_OK;
+ess_error_t  ess_backend_null_flush( void ){
+  return ESS_OK;
 }
-ess_backend_error_t  ess_backend_null_resume( void ){
+ess_error_t  ess_backend_null_resume( void ){
   printf("Possible to resume backend: null\n");
-  return ESS_BACKEND_OK;
+  return ESS_OK;
 }
-ess_backend_error_t  ess_backend_null_set_sample_format(const ess_format_t format) {
-  return ESS_BACKEND_OK;
+ess_error_t  ess_backend_null_set_sample_format(const ess_format_t format) {
+  return ESS_OK;
 }
 const char* ess_backend_null_get_name(void) {
   return ESS_BACKEND_NAME_NULL;

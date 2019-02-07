@@ -30,6 +30,8 @@
 #ifndef _ESS_SOCKET_H_
 #define _ESS_SOCKET_H_
 
+#include "ess_error.h"
+
 /**
  * @brief which ip family are use
  */
@@ -59,22 +61,6 @@ typedef enum ess_socket_status {
   ESS_SOCKET_STATUS_DESTROY   /**< socket is destroyed */
 }ess_socket_status_t;
 
-/**
- * @brief ess_socket error
- */
-typedef enum ess_socket_error {
-  ESS_SOCKET_ERROR_OK = 0,                                 /**< no error*/
-  ESS_SOCKET_ERROR_NULL = -1,                           /**< the `ess_socket_t` or other parameter was NULL */
-  ESS_SOCKET_ERROR_UNSPEC_PROTOKOL,      /**< unknown protokol */
-  ESS_SOCKET_ERROR_WRONG_PROTOKOL,  /**< wrong protokol */
-  ESS_SOCKET_ERROR_UNSPEC_FAMILY,              /**< unknown family */
-  ESS_SOCKET_ERROR_UNSPEC,
-  ESS_SOCKET_ERROR_GETADDR,                            /**<  getaddrinfo error see  ess_socket_t::retval */
-  ESS_SOCKET_ERROR_BIND,                                     /**<  bind error see  ess_socket_t::retval  */
-  ESS_SOCKET_ERROR_CONNECT,                            /** <  connect error */
-  ESS_SOCKET_ERROR_CLOSE,                                     /**<  close error see  ess_socket_t::retval  */
-  ESS_SOCKET_ERROR_OUTOF_MEM                      /**< Out of Memory */
-}ess_socket_error_t;
 
 /**
  * @brief hold all socket managment importend data
@@ -115,15 +101,15 @@ ess_socket_fam_t ess_get_address_family(const char* hostname);
 * @param port The port to bind to.
 * @param socket the using socket struct
 *
-* @retval ESS_SOCKET_ERROR_OK the socket was created  - TCP socket are listin
-* @retval ESS_SOCKET_ERROR_UNSPEC socket alwas created
-* @retval ESS_SOCKET_ERROR_UNSPEC_PROTOKOL unknown protokol
-* @retcal ESS_SOCKET_ERROR_UNSPEC_FAMILY unknown family
-* @retval ESS_SOCKET_ERROR_GETADDR
-* @retval ESS_SOCKET_ERROR_BIND error to call bind
-* @retval ESS_SOCKET_ERROR_NULL socket was NULL
+* @retval ESS_OK the socket was created  - TCP socket are listin
+* @retval ESS_ERROR_UNSPEC socket alwas created
+* @retval ESS_ERROR_UNSPEC_PROTOKOL unknown protokol
+* @retcal ESS_ERROR_UNSPEC_FAMILY unknown family
+* @retval ESS_ERROR_GETADDR
+* @retval ESS_ERROR_BIND error to call bind
+* @retval ESS_ERROR_NULL socket was NULL
 */
-ess_socket_error_t ess_socket_create_server( ess_socket_fam_t fam, ess_socket_pro_t protokoll,
+ess_error_t ess_socket_create_server( ess_socket_fam_t fam, ess_socket_pro_t protokoll,
                                                              const char* addr, unsigned short port, ess_socket_t* socket);
 /**
  * @brief accept a connection attempt on a server socket.
@@ -136,7 +122,7 @@ ess_socket_error_t ess_socket_create_server( ess_socket_fam_t fam, ess_socket_pr
  * @retval != 0 A the client socket
  * @retval NULL Error  see paramerter 'error_code'
  */
-ess_socket_t* ess_socket_accept(ess_socket_t* server_socket, ess_socket_error_t* error_code);
+ess_socket_t* ess_socket_accept(ess_socket_t* server_socket, ess_error_t* error_code);
 
 
 
@@ -147,11 +133,11 @@ ess_socket_t* ess_socket_accept(ess_socket_t* server_socket, ess_socket_error_t*
  *
 * @param socket the using socket struct
  *
- * @retval ESS_SOCKET_ERROR_OK Closed socket successfully
- * @retval ESS_SOCKET_ERROR_NULL socket was NULL
- * @retval ESS_SOCKET_ERROR_CLOSE Socket was already closed (other errors are very unlikely to occur)
+ * @retval ESS_OK Closed socket successfully
+ * @retval ESS_ERROR_NULL socket was NULL
+ * @retval ESS_ERROR_CLOSE Socket was already closed (other errors are very unlikely to occur)
  */
-ess_socket_error_t ess_socket_close(ess_socket_t* socket);
+ess_error_t ess_socket_close(ess_socket_t* socket);
 
 /**
  * @brief perform a `shutdown(2)` call on a socket  (write)
@@ -160,31 +146,31 @@ ess_socket_error_t ess_socket_close(ess_socket_t* socket);
  *
  * @param socket the using socket struct
  *
- * @retval ESS_SOCKET_ERROR_OK Closed socket successfully
- * @retval ESS_SOCKET_ERROR_NULL socket was NULL
- * @retval ESS_SOCKET_ERROR_CLOSE Socket was already closed (other errors are very unlikely to occur)
+ * @retval ESS_OK Closed socket successfully
+ * @retval ESS_ERROR_NULL socket was NULL
+ * @retval ESS_ERROR_CLOSE Socket was already closed (other errors are very unlikely to occur)
  */
-ess_socket_error_t ess_socket_end_write(ess_socket_t* socket);
+ess_error_t ess_socket_end_write(ess_socket_t* socket);
 /**
  * @brief perform a `shutdown(2)` call on a socket  (read)
  *
  * @param socket the using socket struct
  *
- * @retval ESS_SOCKET_ERROR_OK Closed socket successfully
- * @retval ESS_SOCKET_ERROR_NULL socket was NULL
- * @retval ESS_SOCKET_ERROR_CLOSE Socket was already closed (other errors are very unlikely to occur)
+ * @retval ESS_OK Closed socket successfully
+ * @retval ESS_ERROR_NULL socket was NULL
+ * @retval ESS_ERROR_CLOSE Socket was already closed (other errors are very unlikely to occur)
  */
-ess_socket_error_t ess_socket_end_read(ess_socket_t* socket);
+ess_error_t ess_socket_end_read(ess_socket_t* socket);
 /**
  * @brief perform a `shutdown(2)` call on a socket  (read/write)
  *
  * @param socket the using socket struct
  *
- * @retval ESS_SOCKET_ERROR_OK Closed socket successfully
- * @retval ESS_SOCKET_ERROR_NULL socket was NULL
- * @retval ESS_SOCKET_ERROR_CLOSE Socket was already closed (other errors are very unlikely to occur)
+ * @retval ESS_OK Closed socket successfully
+ * @retval ESS_ERROR_NULL socket was NULL
+ * @retval ESS_ERROR_CLOSE Socket was already closed (other errors are very unlikely to occur)
  */
-ess_socket_error_t ess_socket_end(ess_socket_t* socket);
+ess_error_t ess_socket_end(ess_socket_t* socket);
 
 /**
  * @brief set send and recive buffer size of the socket
@@ -192,11 +178,11 @@ ess_socket_error_t ess_socket_end(ess_socket_t* socket);
  * @param socket the using socket struct
  * @param rec_buffer_size the size of the raed buffer
  * @param send_buffer_size the size of the send buffer
- * @retval ESS_SOCKET_ERROR_OK Closed socket successfully
- * @retval ESS_SOCKET_ERROR_NULL socket was NULL
- * @retval ESS_SOCKET_ERROR_CLOSE Socket was already closed (other errors are very unlikely to occur)
+ * @retval ESS_OK Closed socket successfully
+ * @retval ESS_ERROR_NULL socket was NULL
+ * @retval ESS_ERROR_CLOSE Socket was already closed (other errors are very unlikely to occur)
  */
-ess_socket_error_t ess_socket_set_buffer(ess_socket_t* socket, unsigned int rec_buffer_size,
+ess_error_t ess_socket_set_buffer(ess_socket_t* socket, unsigned int rec_buffer_size,
    unsigned int send_buffer_size);
 
    /**
@@ -208,13 +194,13 @@ ess_socket_error_t ess_socket_set_buffer(ess_socket_t* socket, unsigned int rec_
     * @param port The host's port.
     * @param family `ESS_SOCKET_FAMILY_IP6` or `ESS_SOCKET_FAMILY_IP4`.
     * @param flags Flags to be passed to `socket(2)`. Most flags are Linux-only!
-    * @param error_code ESS_SOCKET_ERROR_NULL hostname was NULL
+    * @param error_code ESS_ERROR_NULL hostname was NULL
     *
     *
     * @retval NULL Error  see paramerter 'error_code'
     * @return A valid socket.
     */
-ess_socket_t* ess_socket_connect_stream(const char* hostname, int port, ess_socket_fam_t family, int flags, ess_socket_error_t* error_code) ;
+ess_socket_t* ess_socket_connect_stream(const char* hostname, int port, ess_socket_fam_t family, int flags, ess_error_t* error_code) ;
 
 
 /**
@@ -232,7 +218,7 @@ ess_socket_t* ess_socket_connect_stream(const char* hostname, int port, ess_sock
  *
  * To send and receive data with this socket use the functions explained below, ess_socket_read_dram() and ess_socket_write_dram().
  */
-ess_socket_t* ess_socket_create_dram(ess_socket_fam_t  fam, ess_socket_pro_t proto, int flags, ess_socket_error_t* error_code);
+ess_socket_t* ess_socket_create_dram(ess_socket_fam_t  fam, ess_socket_pro_t proto, int flags, ess_error_t* error_code);
 /**
  * @brief connect a new UDP socket
  *
@@ -242,13 +228,13 @@ ess_socket_t* ess_socket_create_dram(ess_socket_fam_t  fam, ess_socket_pro_t pro
  * @param port The host's port.
  * @param family `ESS_SOCKET_FAMILY_IP6` or `ESS_SOCKET_FAMILY_IP4`.
  * @param prot `ESS_SOCKET_PROTO_DRAM` or `ESS_SOCKET_PROTO_DRAM_LITE`
- * @param error_code ESS_SOCKET_ERROR_NULL hostname was NULL
+ * @param error_code ESS_ERROR_NULL hostname was NULL
  *
  *
  * @retval NULL Error  see paramerter 'error_code'
  * @return A valid socket.
  */
-ess_socket_error_t ess_socket_connect_dram(ess_socket_t* socket, const char* hostname, int port) ;
+ess_error_t ess_socket_connect_dram(ess_socket_t* socket, const char* hostname, int port) ;
 
 
 /**
@@ -263,10 +249,10 @@ ess_socket_error_t ess_socket_connect_dram(ess_socket_t* socket, const char* hos
  * @param [out] error Error codes
  *
  * @retval n *n* bytes of data could be sent.
- * @retval ESS_SOCKET_ERROR_UNSPEC Unsopec error.
- * @retval ESS_SOCKET_ERROR_NULL size, host or socket is NULL
+ * @retval ESS_ERROR_UNSPEC Unsopec error.
+ * @retval ESS_ERROR_NULL size, host or socket is NULL
  */
-ess_socket_error_t ess_socket_write_dram(ess_socket_t* socket, const void* buf, unsigned int size,
+ess_error_t ess_socket_write_dram(ess_socket_t* socket, const void* buf, unsigned int size,
   const char* host, int port, int sendto_flags);
 
 /**
@@ -285,7 +271,7 @@ ess_socket_error_t ess_socket_write_dram(ess_socket_t* socket, const void* buf, 
  * @retval 0 Peer sent EOF.
  * @retval <0 An error occurred.
  */
-ess_socket_error_t ess_socket_read_dram(ess_socket_t* socket, void* buf, unsigned int size, char* src_host,
+ess_error_t ess_socket_read_dram(ess_socket_t* socket, void* buf, unsigned int size, char* src_host,
   unsigned int src_host_len, int  src_port, int recvfrom_flags);
 
 
@@ -299,10 +285,10 @@ ess_socket_error_t ess_socket_read_dram(ess_socket_t* socket, void* buf, unsigne
 * @param readed how many bytes readed
 *
 *
-* @retval ESS_SOCKET_ERROR_OK all ok
+* @retval ESS_OK all ok
 * @retval ESS_SOCKET_UNSPEC Error
 */
-ess_socket_error_t ess_socket_read(ess_socket_t* socket, void* buffer, unsigned int size, unsigned int* readed);
+ess_error_t ess_socket_read(ess_socket_t* socket, void* buffer, unsigned int size, unsigned int* readed);
 /**
 * @brief read from socket
 *
@@ -313,9 +299,9 @@ ess_socket_error_t ess_socket_read(ess_socket_t* socket, void* buffer, unsigned 
 * @param wrote how many bytes wrote
 *
 *
-* @retval ESS_SOCKET_ERROR_OK all ok
+* @retval ESS_OK all ok
 * @retval ESS_SOCKET_UNSPEC Error
 */
-ess_socket_error_t ess_socket_write(ess_socket_t* socket, const void* buffer, unsigned int size, unsigned int* wrote);
+ess_error_t ess_socket_write(ess_socket_t* socket, const void* buffer, unsigned int size, unsigned int* wrote);
 
 #endif

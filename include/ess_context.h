@@ -31,7 +31,7 @@
 
 #include "ess.h"
 #include "ess_format.h"
-
+#include "ess_error.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -51,17 +51,6 @@ typedef enum ess_context_status {
 } ess_context_status_t;
 
 /**
- * @brief ess context error codes
- */
-typedef enum ess_context_error {
-  ESS_CONTEXT_ERROR_OK = 0,     /**< no error  */
-  ESS_CONTEXT_ERROR_OUTOFMEM = -1, /**< out of memory */
-  ESS_CONTEXT_ERRORNOBACKEND, /**< context has no backend */
-  ESS_CONTEXT_WRONGFORMAT, /**< context format is not supported from backend  */
-  ESS_CONTEXT_ERROR, /**< context unknown error  */
-  ESS_CONTEX_ISPAUSED = -42,  /**< can write while context is paused  */
-}ess_context_error_t;
-/**
  * @brief ess context
  *
  * Embedded sound server context. Abstract managment
@@ -70,7 +59,7 @@ typedef struct ess_context {
   ess_backend_facktory_t* backend; /**< using backend */
   ess_format_t format;		   /**< backend format */
   ess_context_status_t status;	   /**< context status */
-  ess_context_error_t last_error; /**< the last error */
+  ess_error_t last_error; /**< the last error */
 }ess_context_t;
 
 
@@ -78,63 +67,63 @@ typedef struct ess_context {
  * @brief  initialisiert the context
  * @code
  * ess_context_t context;
- * ess_context_error_t error;
+ * ess_error_t error;
  *
  * error = ess_context_create (&context, "uart", ESS_FORMAT_STEREO_96000_24);
- * if(error != ESS_CONTEXT_ERROR_OK) printf/("error in creating the context\n");
+ * if(error != ESS_OK) printf/("error in creating the context\n");
  * @endcode
  *
  * @param [out] the creating ontext
  * @param [in] name the name of the using backend
  * @param [in] format the using context format
  *
- * @reval ESS_CONTEXT_WRONGFORMAT format not support
- * @retval ESS_CONTEXT_ERROR_OK context created
+ * @reval ESS_ERROR_WRONG_FORMAT format not support
+ * @retval ESS_OK context created
  */
-ess_context_error_t  ess_context_create(ess_context_t* context,  const char* name, const ess_format_t format);
+ess_error_t  ess_context_create(ess_context_t* context,  const char* name, const ess_format_t format);
 /**
  * @brief  initialisiert the context with a user backend
  * @code
  * ess_context_t context;
- * ess_context_error_t error;
+ * ess_error_t error;
  * ess_backend_facktory_t* user_backend = { ... };
  *
  * error = ess_context_create_ex(&context, user_backend, ESS_FORMAT_STEREO_96000_24);
- * if(error != ESS_CONTEXT_ERROR_OK) printf/("error in creating the context\n");
+ * if(error != ESS_OK) printf/("error in creating the context\n");
  * @endcode
   * @param [out] the creating ontext
  * @param [in] format the using context format
  * @param [in] backend the user backend factory
  *
- * @reval ESS_CONTEXT_WRONGFORMAT format not support
- * @retval ESS_CONTEXT_ERROR_OK context created
- * @reval ESS_CONTEXT_ERRORNOBACKEND backend was NULL
+ * @reval ESS_ERROR_WRONG_FORMAT format not support
+ * @retval ESS_OK context created
+ * @reval ESS_ERROR_NOBACKEND backend was NULL
  */
-ess_context_error_t ess_context_create_ex(ess_context_t* context, ess_backend_facktory_t* backend, const ess_format_t format);
+ess_error_t ess_context_create_ex(ess_context_t* context, ess_backend_facktory_t* backend, const ess_format_t format);
 /**
  * @brief close the context and close the backend
  * @param context the context
-  * @return when ok then ESS_CONTEXT_ERROR_OK
+  * @return when ok then ESS_OK
  */
-ess_context_error_t ess_context_close(ess_context_t* context);
+ess_error_t ess_context_close(ess_context_t* context);
 /**
  * @brief destroy and free the context
  * @param context the context
- * @return when ok then ESS_CONTEXT_ERROR_OK
+ * @return when ok then ESS_OK
  */
-ess_context_error_t ess_context_destroy(ess_context_t* context);
+ess_error_t ess_context_destroy(ess_context_t* context);
 /**
  * @brief set backend to standby
  * @param context the context
- * @return when ok then ESS_CONTEXT_ERROR_OK
+ * @return when ok then ESS_OK
  */
-ess_context_error_t ess_context_paused(ess_context_t* context);
+ess_error_t ess_context_paused(ess_context_t* context);
 /**
  * @brief set backend to run
  * @param context the context
- * @return when ok then ESS_CONTEXT_ERROR_OK
+ * @return when ok then ESS_OK
  */
-ess_context_error_t ess_context_resume(ess_context_t* context);
+ess_error_t ess_context_resume(ess_context_t* context);
 /**
  * @brief set the sample format to backend
  * @param context the context
@@ -147,9 +136,9 @@ ess_context_error_t ess_context_resume(ess_context_t* context);
  * ess_context_set_format(&context, LOADED_WAV_FORMAT);
  * @endcode
  * @param format the new using format
- * @return when ok then ESS_CONTEXT_ERROR_OK
+ * @return when ok then ESS_OK
  */
-ess_context_error_t ess_context_set_format(ess_context_t* context, const ess_format_t format);
+ess_error_t ess_context_set_format(ess_context_t* context, const ess_format_t format);
 
 /**
  * @brief write audio data to the backend
@@ -165,9 +154,9 @@ unsigned int ess_context_write(ess_context_t* context, void *buffer, unsigned in
  * @param buffer the audio pcm data
  * @param buf_size the size of the buffer
  * @param wrote  the written data
- * @return when ok then ESS_CONTEXT_ERROR_OK
+ * @return when ok then ESS_OK
  */
-ess_context_error_t ess_context_write_ex(ess_context_t* context, void *buffer, unsigned int buf_size,  unsigned int* wrote);
+ess_error_t ess_context_write_ex(ess_context_t* context, void *buffer, unsigned int buf_size,  unsigned int* wrote);
 /**
  * @brief get the usind backend name
  * @param context the context
@@ -186,7 +175,7 @@ const char* ess_context_get_backend_info(ess_context_t* context);
  * @param context the context
  * @return the last error
  */
-ess_context_error_t ess_context_get_last_error(ess_context_t* context);
+ess_error_t ess_context_get_last_error(ess_context_t* context);
 
 #ifdef __cplusplus
 }
