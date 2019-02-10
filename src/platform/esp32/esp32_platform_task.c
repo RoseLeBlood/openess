@@ -29,7 +29,7 @@
 
 #include "ess_backend.h"
 #include "ess_platform.h"
-
+#include "ess_task.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -42,42 +42,124 @@
 
 static int task_id = 0;
 
-ess_error_t ess_platform_sleep(unsigned int ms) {
-  vTaskDelay(ms / portTICK_PERIOD_MS);
-  return ESS_OK;
-}
-unsigned int ess_platform_get_tick_count() {
-  return (uint32_t) (xTaskGetTickCount() * portTICK_PERIOD_MS);
-}
 
+
+void thread_stub_esp32_platform_task(void* data);
 
 ess_error_t ess_platform_task_create(ess_platform_task_t* task, void task_func(void*),
     const char* taskName, void* param, unsigned int stackSize) {
-      if(task == 0) return ESS_ERROR_NULL;
+    if(task == 0) return ESS_ERROR_NULL;
 
-      task->name[0] = '\0';
-      strncpy(task->name, taskName, sizeof(task->name) );
+    task->name[0] = '\0';
+    strncpy(task->name, taskName, sizeof(task->name) );
 
-      task->parem = param;
-      task->stack_size = stackSize;
-      task->task = task_func;
-      task->userdata = param;
-      task->task_id = task_id++;
-      task->handle = 0;
-      task->priority = 5;
+    task->parem = param;
+    task->stack_size = stackSize;
+
+    task->userdata = param;
+    task->task_id = task_id++;
+    task->handle = 0;
+    task->priority = 5;
+    task->running = 0;
+
+    if(ess_platform_mutex_create(&task->runningMutex, task->name) != ESS_OK)
+      return ESS_ERROR_TASK_CREAT;
+    if(ess_platform_mutex_create(&task->continuemutex, task->name) != ESS_OK)
+      return ESS_ERROR_TASK_CREAT;
+    if(ess_platform_mutex_create(&task->continuemutex2, task->name) != ESS_OK)
+      return ESS_ERROR_TASK_CREAT;
+    if(ess_platform_mutex_create(&task->contextMutext, task->name) != ESS_OK)
+      return ESS_ERROR_TASK_CREAT;
 
       return ESS_OK;
 }
 ess_error_t ess_platform_task_start(ess_platform_task_t* task) {
-  xTaskCreate(task->task, task->name, task->stack_size, task->userdata , task->priority,  task->handle);
+  if(task == 0) return ESS_ERROR_NULL;
+
+  ess_platform_mutex_lock(&task->continuemutex);
+  ess_platform_mutex_lock(&task->runningMutex);
+
+  if (task->running) {
+    ess_platform_mutex_unlock(&task->continuemutex);
+    ess_platform_mutex_unlock(&task->runningMutex);
+    return ESS_OK;
+  }
+  ess_platform_mutex_unlock(&task->runningMutex);
+
+  xTaskCreate( &thread_stub_esp32_platform_task,
+    task->name, task->stack_size, task , task->priority,  task->handle);
+
+	if (task->handle == 0) {
+    ess_platform_mutex_unlock(&task->continuemutex);
+		return ESS_ERROR;
+  }
+
+	ess_platform_mutex_unlock(&task->continuemutex);
 
   return ESS_OK;
 }
 ess_error_t ess_platform_task_delete(ess_platform_task_t* task) {
   if(task == 0) return ESS_ERROR_NULL;
 
-  vTaskDelete(task->handle);
+  ess_platform_mutex_lock(&task->continuemutex);
+  ess_platform_mutex_lock(&task->runningMutex);
+
+  if (!task->running) {
+    ess_platform_mutex_unlock(&task->continuemutex);
+    ess_platform_mutex_unlock(&task->runningMutex);
+    return ESS_OK;
+  }
+
+  vTaskDelete(task->handle); task->handle = 0;
+  task->running = 0;
+
+  ess_platform_mutex_unlock(&task->continuemutex);
+  ess_platform_mutex_unlock(&task->runningMutex);
 
   return ESS_OK;
+}
+ess_error_t ess_platform_task_suspend(ess_platform_task_t* task) {
+  if(task == 0) return ESS_ERROR_NULL;
+
+  ess_platform_mutex_lock(&task->runningMutex);
+  vTaskSuspend( task->handle );
+  ess_platform_mutex_unlock(&task->runningMutex);
+  return ESS_OK;
+}
+ess_error_t ess_platform_task_resume(ess_platform_task_t* task) {
+  if(task == 0) return ESS_ERROR_NULL;
+
+  ess_platform_mutex_lock(&task->runningMutex);
+  vTaskResume( task->handle );
+  ess_platform_mutex_unlock(&task->runningMutex);
+
+  return ESS_OK;
+}
+void thread_stub_esp32_platform_task(void* data) {
+  struct ess_platform_task *task;
+
+	task = (struct ess_platform_task*)(data);
+
+  ess_platform_mutex_lock(&task->continuemutex2);
+
+  ess_platform_mutex_lock(&task->runningMutex);
+  task->running = 1;
+  ess_platform_mutex_unlock(&task->runningMutex);
+
+  ess_platform_mutex_lock(&task->continuemutex);
+  ess_platform_mutex_unlock(&task->continuemutex);
+
+  ess_platform_mutex_unlock(&task->continuemutex2);
+  task->task_stub(task->userdata);
+
+
+  ess_platform_mutex_lock(&task->runningMutex);
+  task->running = 0;
+
+  vTaskDelete(task->handle);
+  task->handle = 0;
+
+  ess_platform_mutex_unlock(&task->runningMutex);
+
 }
 #endif

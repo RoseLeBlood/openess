@@ -25,7 +25,7 @@
 #ifndef _ESS_MAIN_HEADER_H_
 #define _ESS_MAIN_HEADER_H_
 
-#define OPEN_ESS_VERSION_0_1 // Protokol version
+#define OPEN_ESS_VERSION_0_5 // backends, platform, context
 // #define OPEN_ESS_VERSION_1_0 // TODO: Future Plan - server, backends, platforms referen imp ready
 // #define OPEN_ESS_VERSION  1_1 // TODO: Future Plan 11 - all platforms ready  -- MT Safe
 // #define OPEN_ESS_VERSION  2_0 // TODO: Future Future Plan 2 - ??
@@ -33,6 +33,12 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#include <errno.h>
+#include <time.h>
+
+#include <sys/time.h>
+#include <sys/signal.h>
 
 #include "config.h"
 #include "ess_format.h"

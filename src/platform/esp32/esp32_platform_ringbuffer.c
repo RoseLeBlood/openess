@@ -29,7 +29,7 @@
 
 #include "ess_backend.h"
 #include "ess_platform.h"
-
+#include "ess_ringbuffer.h"
 
 #include <stdio.h>
 #include <string.h>

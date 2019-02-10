@@ -28,6 +28,10 @@
 #ifndef __ESS_FORMAT_H__
 #define __ESS_FORMAT_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @brief Audio Format list
  */
@@ -75,5 +79,7 @@ int ess_format_get_bits(const ess_format_t format) ;
  */
 const char* ess_format_to_string(const ess_format_t format);
 
-
+#ifdef __cplusplus
+}
+#endif
 #endif

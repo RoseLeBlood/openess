@@ -53,11 +53,11 @@
 
 
 #ifdef ESS_PLATFORM_ESP32
-	#define ESS_CONFIG_SEMAPHORE_ESP32
-	//#define ESS_CONFIG_SEMAPHORE_GENERIC
+	#define ESS_CONFIG_SEMAPHORE_GENERIC
 	#define ESS_CONFIC_TASK_ESP32
-	//#define ESS_CONFIC_TASK_GENERIC
 	#define ESS_CONFIG_RINGBUFFER_ESP32
+	#define ESS_CONFIG_MUTEX_ESP32
+	#define ESS_CONFIG_SPINLOCK_ESP32
 	/** @brief If defined then UART backend available */
 	#define ESS_ENABLE_BACKEND_UART
 	/** @brief If defined then I2S backend available */
@@ -70,6 +70,7 @@
 
 #ifdef ESS_PLATFORM_RPI
 	#define ESS_CONFIG_SEMAPHORE_GENERIC
+	#define ESS_CONFIG_MUTEX_GENERIC
 	#define ESS_CONFIC_TASK_GENERIC
 	#define ESS_CONFIG_RINGBUFFER_GENERIC
 	/** @brief If defined then OpenAL backend available */
@@ -83,7 +84,7 @@
 	#define ESS_CONFIG_SEMAPHORE_GENERIC
 	#define ESS_CONFIC_TASK_GENERIC
 	#define ESS_CONFIG_RINGBUFFER_GENERIC
-	#define ESS_CONFIG_RINGBUFFER_GENERIC
+	#define ESS_CONFIG_MUTEX_GENERIC
 	/** @brief If defined then OpenAL backend available */
 	#define ESS_ENABLE_BACKEND_OPENAL
 	/** @brief If defined then Pulseaudio backend available */
@@ -99,7 +100,7 @@
 	#define ESS_CONFIG_SEMAPHORE_WINDOWS
 	#define ESS_CONFIC_TASK_WINDOWS
 	#define ESS_CONFIG_RINGBUFFER_WINDOWS
-	#define ESS_CONFIG_RINGBUFFER_WINDOWS
+	#define ESS_CONFIG_MUTEX_WINDOWS
 	/** @brief If defined then OpenAL backend available */
 	#define ESS_ENABLE_BACKEND_OPENAL
 	/** @brief If defined then OpenAL backend available */
