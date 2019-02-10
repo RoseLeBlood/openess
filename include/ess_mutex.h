@@ -84,7 +84,16 @@ ess_error_t ess_platform_mutex_lock(ess_platform_mutex_t* mtx);
  * @retval ESS_ERROR_NULL 'ess_platform_mutex_t' mtx is null
  */
 ess_error_t ess_platform_mutex_unlock(ess_platform_mutex_t* mtx);
-
+/**
+ * @brief try lock the mutex
+ * @param [in] mtx pointer of the mutex srtruct
+ *
+ * @retval ESS_OK lock the mutex
+ * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
+ * @retval ESS_ERROR can't lock
+ * @retval ESS_ERROR_NULL 'ess_platform_mutex_t' mtx is null
+ */
+ess_error_t ess_platform_mutex_try_lock(ess_platform_mutex_t* mtx);
 #ifdef __cplusplus
 }
 #endif

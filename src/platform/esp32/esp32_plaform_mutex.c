@@ -83,9 +83,9 @@ ess_error_t ess_platform_mutex_unlock(ess_platform_mutex_t* mtx) {
   return ESS_OK;
 }
 
-ess_error_t ess_platform_spinlock_try_lock(ess_platform_mutex_t* mtx) {
-  if(spi == 0) return ESS_ERROR_NULL;
-  if(spi->handle == 0) return ESS_ERROR_NULL;
+ess_error_t ess_platform_mutex_try_lock(ess_platform_mutex_t* mtx) {
+  if(mtx == 0) return ESS_ERROR_NULL;
+  if(mtx->handle == 0) return ESS_ERROR_NULL;
 
   return (xSemaphoreTake( mtx->handle, 0 ) == pdTRUE) ? ESS_OK : ESS_ERROR;
 }
