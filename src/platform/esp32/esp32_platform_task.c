@@ -61,6 +61,7 @@ ess_error_t ess_platform_task_create(ess_platform_task_t* task, void task_func(v
     task->handle = 0;
     task->priority = 5;
     task->running = 0;
+    task->task_stub = task_func;
 
     if(ess_platform_mutex_create(&task->runningMutex, task->name) != ESS_OK)
       return ESS_ERROR_TASK_CREAT;
@@ -89,10 +90,6 @@ ess_error_t ess_platform_task_start(ess_platform_task_t* task) {
   xTaskCreate( &thread_stub_esp32_platform_task,
     task->name, task->stack_size, task , task->priority,  task->handle);
 
-	if (task->handle == 0) {
-    ess_platform_mutex_unlock(&task->continuemutex);
-		return ESS_ERROR;
-  }
 
 	ess_platform_mutex_unlock(&task->continuemutex);
 
@@ -137,8 +134,8 @@ ess_error_t ess_platform_task_resume(ess_platform_task_t* task) {
 }
 void thread_stub_esp32_platform_task(void* data) {
   struct ess_platform_task *task;
+  task = (struct ess_platform_task*)(data);
 
-	task = (struct ess_platform_task*)(data);
 
   ess_platform_mutex_lock(&task->continuemutex2);
 
@@ -150,8 +147,9 @@ void thread_stub_esp32_platform_task(void* data) {
   ess_platform_mutex_unlock(&task->continuemutex);
 
   ess_platform_mutex_unlock(&task->continuemutex2);
-  task->task_stub(task->userdata);
 
+  if(  task->task_stub )  task->task_stub( task->userdata);
+  else printf("No user task functions");
 
   ess_platform_mutex_lock(&task->runningMutex);
   task->running = 0;

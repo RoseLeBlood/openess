@@ -50,7 +50,7 @@ typedef struct ess_platform_task {
   ess_platform_mutex_t continuemutex;
   ess_platform_mutex_t continuemutex2;
 
-  void (* task_stub)( void* userdata );
+  void (* task_stub)(void* data ); 
 }ess_platform_task_t;
 
 

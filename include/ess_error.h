@@ -33,7 +33,7 @@ typedef enum ess_error {
     ESS_ERROR_MAX,
 }ess_error_t;
 
-#define ESS_ERROR(error)   if(error != ESS_OK) printf("%s\n", ess_error_to_string(error))
+#define ESS_ERROR(error)   if(error != ESS_OK) printf("%s: %d %s\n", ess_error_to_string(error), __LINE__, __FILE__)
 
 const char* ess_error_to_string(const ess_error_t error);
 
