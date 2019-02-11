@@ -1,0 +1,290 @@
+\hypertarget{esp32__platform_8c}{}\section{src/platform/esp32/esp32\+\_\+platform.c File Reference}
+\label{esp32__platform_8c}\index{src/platform/esp32/esp32\+\_\+platform.\+c@{src/platform/esp32/esp32\+\_\+platform.\+c}}
+
+
+all esp32 platform functions source  
+
+
+{\ttfamily \#include \char`\"{}ess.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ess\+\_\+platform.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}freertos/\+Free\+R\+T\+O\+S.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}freertos/task.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}freertos/event\+\_\+groups.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}esp\+\_\+log.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}esp\+\_\+err.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nvs\+\_\+flash.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}esp\+\_\+system.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}esp\+\_\+spi\+\_\+flash.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sdkconfig.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}esp\+\_\+attr.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}esp\+\_\+partition.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$sys/time.\+h$>$}\newline
+Include dependency graph for esp32\+\_\+platform.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d7/d9c/esp32__platform_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \hyperlink{esp32__platform_8c_a94c4057bf1b7c58588e80bce004f76d3}{ess\+\_\+platform\+\_\+get\+\_\+tick\+\_\+count} ()
+\begin{DoxyCompactList}\small\item\em get the time in milliseconds since the scheduler started. \end{DoxyCompactList}\item 
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{esp32__platform_8c_a126e9e60b7e43898ddad9eb51678ea1b}{ess\+\_\+platform\+\_\+sleep} (unsigned int secs)
+\begin{DoxyCompactList}\small\item\em Sleep for the specified number of seconds. \end{DoxyCompactList}\item 
+int \hyperlink{esp32__platform_8c_a8c1db86962a8d9adff3c9aebc065de93}{ess\+\_\+platform\+\_\+usleep} (unsigned int usec)
+\begin{DoxyCompactList}\small\item\em Sleep for the specified number of useconds. \end{DoxyCompactList}\item 
+int I\+R\+A\+M\+\_\+\+A\+T\+TR \hyperlink{esp32__platform_8c_a5f989b2f8a054959e20de58242f32631}{ess\+\_\+platform\+\_\+nsleep} (const struct timespec $\ast$req, struct timespec $\ast$rem)
+\begin{DoxyCompactList}\small\item\em Sleep for the specified number of nanoseconds. \end{DoxyCompactList}\item 
+unsigned long I\+R\+A\+M\+\_\+\+A\+T\+TR \hyperlink{esp32__platform_8c_a056fa8f4543783064302264818332f10}{ess\+\_\+platform\+\_\+micros} ()
+\begin{DoxyCompactList}\small\item\em get microseconds since start  -\/1 function is for using platform not implantiert \end{DoxyCompactList}\item 
+unsigned long \hyperlink{esp32__platform_8c_a0f7331cdc0ad01629f941e2deff937ef}{ess\+\_\+platform\+\_\+millis} ()
+\begin{DoxyCompactList}\small\item\em get milliseconds since start  -\/1 function is for using platform not implantiert \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+port\+M\+U\+X\+\_\+\+T\+Y\+PE \hyperlink{esp32__platform_8c_a2bd5b9348154dbb586c0c9c2a9fca07b}{micros\+Mux} = port\+M\+U\+X\+\_\+\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+E\+R\+\_\+\+U\+N\+L\+O\+C\+K\+ED
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+all esp32 platform functions source 
+
+\begin{DoxyAuthor}{Author}
+Anna Sopdia Schröck 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+10 Februar 20119 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{esp32__platform_8c_a94c4057bf1b7c58588e80bce004f76d3}\label{esp32__platform_8c_a94c4057bf1b7c58588e80bce004f76d3}} 
+\index{esp32\+\_\+platform.\+c@{esp32\+\_\+platform.\+c}!ess\+\_\+platform\+\_\+get\+\_\+tick\+\_\+count@{ess\+\_\+platform\+\_\+get\+\_\+tick\+\_\+count}}
+\index{ess\+\_\+platform\+\_\+get\+\_\+tick\+\_\+count@{ess\+\_\+platform\+\_\+get\+\_\+tick\+\_\+count}!esp32\+\_\+platform.\+c@{esp32\+\_\+platform.\+c}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+get\+\_\+tick\+\_\+count()}{ess\_platform\_get\_tick\_count()}}
+{\footnotesize\ttfamily unsigned int ess\+\_\+platform\+\_\+get\+\_\+tick\+\_\+count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get the time in milliseconds since the scheduler started. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em $>$0} & the time in milliseconds since the scheduler started.  E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+MP function is for using platform not implantiert \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+OR} & \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line 44 of file esp32\+\_\+platform.\+c.
+
+
+\begin{DoxyCode}
+44                                            \{
+45   \textcolor{keywordflow}{return} (uint32\_t) (xTaskGetTickCount() * portTICK\_PERIOD\_MS);
+46 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{esp32__platform_8c_a056fa8f4543783064302264818332f10}\label{esp32__platform_8c_a056fa8f4543783064302264818332f10}} 
+\index{esp32\+\_\+platform.\+c@{esp32\+\_\+platform.\+c}!ess\+\_\+platform\+\_\+micros@{ess\+\_\+platform\+\_\+micros}}
+\index{ess\+\_\+platform\+\_\+micros@{ess\+\_\+platform\+\_\+micros}!esp32\+\_\+platform.\+c@{esp32\+\_\+platform.\+c}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+micros()}{ess\_platform\_micros()}}
+{\footnotesize\ttfamily unsigned long I\+R\+A\+M\+\_\+\+A\+T\+TR ess\+\_\+platform\+\_\+micros (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get microseconds since start  -\/1 function is for using platform not implantiert 
+
+\begin{DoxyReturn}{Returns}
+the microseconds since start 
+\end{DoxyReturn}
+
+
+Definition at line 100 of file esp32\+\_\+platform.\+c.
+
+
+\begin{DoxyCode}
+100                                               \{
+101   \textcolor{keyword}{static} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lccount = 0;
+102     \textcolor{keyword}{static} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} overflow = 0;
+103     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} ccount;
+104     portENTER\_CRITICAL\_ISR(&\hyperlink{esp32__platform_8c_a2bd5b9348154dbb586c0c9c2a9fca07b}{microsMux});
+105     \_\_asm\_\_ \_\_volatile\_\_ ( \textcolor{stringliteral}{"rsr %0, ccount"} : \textcolor{stringliteral}{"=a"} (ccount) );
+106     \textcolor{keywordflow}{if}(ccount < lccount)\{
+107         overflow += UINT32\_MAX / CONFIG\_ESP32\_DEFAULT\_CPU\_FREQ\_MHZ;
+108     \}
+109     lccount = ccount;
+110     portEXIT\_CRITICAL\_ISR(&\hyperlink{esp32__platform_8c_a2bd5b9348154dbb586c0c9c2a9fca07b}{microsMux});
+111     \textcolor{keywordflow}{return} overflow + (ccount / CONFIG\_ESP32\_DEFAULT\_CPU\_FREQ\_MHZ);
+112 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{esp32__platform_8c_a0f7331cdc0ad01629f941e2deff937ef}\label{esp32__platform_8c_a0f7331cdc0ad01629f941e2deff937ef}} 
+\index{esp32\+\_\+platform.\+c@{esp32\+\_\+platform.\+c}!ess\+\_\+platform\+\_\+millis@{ess\+\_\+platform\+\_\+millis}}
+\index{ess\+\_\+platform\+\_\+millis@{ess\+\_\+platform\+\_\+millis}!esp32\+\_\+platform.\+c@{esp32\+\_\+platform.\+c}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+millis()}{ess\_platform\_millis()}}
+{\footnotesize\ttfamily unsigned long ess\+\_\+platform\+\_\+millis (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get milliseconds since start  -\/1 function is for using platform not implantiert 
+
+\begin{DoxyReturn}{Returns}
+the milliseconds since start 
+\end{DoxyReturn}
+
+
+Definition at line 113 of file esp32\+\_\+platform.\+c.
+
+
+\begin{DoxyCode}
+113                                     \{
+114   \textcolor{keywordflow}{return} xTaskGetTickCount() * portTICK\_PERIOD\_MS;
+115 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{esp32__platform_8c_a5f989b2f8a054959e20de58242f32631}\label{esp32__platform_8c_a5f989b2f8a054959e20de58242f32631}} 
+\index{esp32\+\_\+platform.\+c@{esp32\+\_\+platform.\+c}!ess\+\_\+platform\+\_\+nsleep@{ess\+\_\+platform\+\_\+nsleep}}
+\index{ess\+\_\+platform\+\_\+nsleep@{ess\+\_\+platform\+\_\+nsleep}!esp32\+\_\+platform.\+c@{esp32\+\_\+platform.\+c}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+nsleep()}{ess\_platform\_nsleep()}}
+{\footnotesize\ttfamily int I\+R\+A\+M\+\_\+\+A\+T\+TR ess\+\_\+platform\+\_\+nsleep (\begin{DoxyParamCaption}\item[{const struct timespec $\ast$}]{req,  }\item[{struct timespec $\ast$}]{rem }\end{DoxyParamCaption})}
+
+
+
+Sleep for the specified number of nanoseconds. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em req} & \\
+\hline
+\mbox{\tt in}  & {\em rem} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em E\+S\+S\+\_\+\+OK} & E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+MP function is for using platform not implantiert \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line 57 of file esp32\+\_\+platform.\+c.
+
+
+\begin{DoxyCode}
+57                                                                                     \{
+58     \textcolor{keyword}{struct }timeval start, end;
+59 
+60     \textcolor{keywordflow}{if} ((req->tv\_nsec < 0) || (req->tv\_nsec > 999999999)) \{
+61         errno = EINVAL;
+62 
+63         \textcolor{keywordflow}{return} -1;
+64     \}
+65 
+66     \textcolor{comment}{// Get time in msecs}
+67     uint32\_t msecs;
+68 
+69     msecs  = req->tv\_sec * 1000;
+70     msecs += (req->tv\_nsec + 999999) / 1000000;
+71 
+72     \textcolor{keywordflow}{if} (rem != NULL) \{
+73         gettimeofday(&start, NULL);
+74     \}
+75 
+76     vTaskDelay(msecs / portTICK\_PERIOD\_MS);
+77     \textcolor{keywordflow}{if} (rem != NULL) \{
+78         rem->tv\_sec = 0;
+79         rem->tv\_nsec = 0;
+80 
+81         gettimeofday(&end, NULL);
+82 
+83         uint32\_t elapsed = (end.tv\_sec - start.tv\_sec) * 1000
+84                          + ((end.tv\_usec - start.tv\_usec) / 1000000);
+85 
+86         \textcolor{keywordflow}{if} (elapsed < msecs) \{
+87             \textcolor{keywordflow}{if} (elapsed > 1000) \{
+88                 rem->tv\_sec = elapsed / 1000;
+89                 elapsed -= rem->tv\_sec * 1000;
+90                 rem->tv\_nsec = elapsed * 1000000;
+91             \}
+92         \}
+93     \}
+94     errno = EINTR;
+95     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa7a39eb24d172b29cca7678967088d864}{ESS\_OK};
+96 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{esp32__platform_8c_a126e9e60b7e43898ddad9eb51678ea1b}\label{esp32__platform_8c_a126e9e60b7e43898ddad9eb51678ea1b}} 
+\index{esp32\+\_\+platform.\+c@{esp32\+\_\+platform.\+c}!ess\+\_\+platform\+\_\+sleep@{ess\+\_\+platform\+\_\+sleep}}
+\index{ess\+\_\+platform\+\_\+sleep@{ess\+\_\+platform\+\_\+sleep}!esp32\+\_\+platform.\+c@{esp32\+\_\+platform.\+c}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+sleep()}{ess\_platform\_sleep()}}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+platform\+\_\+sleep (\begin{DoxyParamCaption}\item[{unsigned int}]{secs }\end{DoxyParamCaption})}
+
+
+
+Sleep for the specified number of seconds. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em secs} & the period in seconds for which to sleep. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em E\+S\+S\+\_\+\+OK} & E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+MP function is for using platform not implantiert \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line 47 of file esp32\+\_\+platform.\+c.
+
+
+\begin{DoxyCode}
+47                                                   \{
+48   vTaskDelay( (secs * 1000) / ((TickType\_t) 1000 / configTICK\_RATE\_HZ));
+49   \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa7a39eb24d172b29cca7678967088d864}{ESS\_OK};
+50 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{esp32__platform_8c_a8c1db86962a8d9adff3c9aebc065de93}\label{esp32__platform_8c_a8c1db86962a8d9adff3c9aebc065de93}} 
+\index{esp32\+\_\+platform.\+c@{esp32\+\_\+platform.\+c}!ess\+\_\+platform\+\_\+usleep@{ess\+\_\+platform\+\_\+usleep}}
+\index{ess\+\_\+platform\+\_\+usleep@{ess\+\_\+platform\+\_\+usleep}!esp32\+\_\+platform.\+c@{esp32\+\_\+platform.\+c}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+usleep()}{ess\_platform\_usleep()}}
+{\footnotesize\ttfamily int ess\+\_\+platform\+\_\+usleep (\begin{DoxyParamCaption}\item[{unsigned int}]{usec }\end{DoxyParamCaption})}
+
+
+
+Sleep for the specified number of useconds. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em secs} & the period in useconds for which to sleep. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em E\+S\+S\+\_\+\+OK} & E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+MP function is for using platform not implantiert \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line 52 of file esp32\+\_\+platform.\+c.
+
+
+\begin{DoxyCode}
+52                                            \{
+53     vTaskDelay(usec / ((TickType\_t) 1000000 / configTICK\_RATE\_HZ));
+54     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa7a39eb24d172b29cca7678967088d864}{ESS\_OK};
+55 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{esp32__platform_8c_a2bd5b9348154dbb586c0c9c2a9fca07b}\label{esp32__platform_8c_a2bd5b9348154dbb586c0c9c2a9fca07b}} 
+\index{esp32\+\_\+platform.\+c@{esp32\+\_\+platform.\+c}!micros\+Mux@{micros\+Mux}}
+\index{micros\+Mux@{micros\+Mux}!esp32\+\_\+platform.\+c@{esp32\+\_\+platform.\+c}}
+\subsubsection{\texorpdfstring{micros\+Mux}{microsMux}}
+{\footnotesize\ttfamily port\+M\+U\+X\+\_\+\+T\+Y\+PE micros\+Mux = port\+M\+U\+X\+\_\+\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+E\+R\+\_\+\+U\+N\+L\+O\+C\+K\+ED}
+
+
+
+Definition at line 98 of file esp32\+\_\+platform.\+c.
+

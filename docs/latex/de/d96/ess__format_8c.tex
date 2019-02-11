@@ -22,13 +22,13 @@ typedef struct \hyperlink{struct__format2human}{\+\_\+format2human} \hyperlink{e
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{ess__format_8c_af1af5721aa4c3a136fef2b5eec4e5a91}{ess\+\_\+format\+\_\+get\+\_\+channels} (const \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t} format)
+int \hyperlink{ess__format_8c_af1af5721aa4c3a136fef2b5eec4e5a91}{ess\+\_\+format\+\_\+get\+\_\+channels} (const \hyperlink{ess__format_8h_a9aa23f58a25b9e8360c1400e0cadfd80}{ess\+\_\+format\+\_\+t} format)
 \begin{DoxyCompactList}\small\item\em Help to get the number of channels of the format. \end{DoxyCompactList}\item 
-int \hyperlink{ess__format_8c_a8a38ecc33aa70a8f9497d350706b6463}{ess\+\_\+format\+\_\+get\+\_\+samplerate} (const \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t} format)
+int \hyperlink{ess__format_8c_a8a38ecc33aa70a8f9497d350706b6463}{ess\+\_\+format\+\_\+get\+\_\+samplerate} (const \hyperlink{ess__format_8h_a9aa23f58a25b9e8360c1400e0cadfd80}{ess\+\_\+format\+\_\+t} format)
 \begin{DoxyCompactList}\small\item\em Help to get the samplerate of the format. \end{DoxyCompactList}\item 
-int \hyperlink{ess__format_8c_a57f133a9941097d8edc520a1769f0b16}{ess\+\_\+format\+\_\+get\+\_\+bits} (const \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t} format)
+int \hyperlink{ess__format_8c_a57f133a9941097d8edc520a1769f0b16}{ess\+\_\+format\+\_\+get\+\_\+bits} (const \hyperlink{ess__format_8h_a9aa23f58a25b9e8360c1400e0cadfd80}{ess\+\_\+format\+\_\+t} format)
 \begin{DoxyCompactList}\small\item\em Help to get bits of the format. \end{DoxyCompactList}\item 
-const char $\ast$ \hyperlink{ess__format_8c_add94d3ae146eb3612217c1d8cceaa0a4}{ess\+\_\+format\+\_\+to\+\_\+string} (\hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t} format)
+const char $\ast$ \hyperlink{ess__format_8c_add94d3ae146eb3612217c1d8cceaa0a4}{ess\+\_\+format\+\_\+to\+\_\+string} (\hyperlink{ess__format_8h_a9aa23f58a25b9e8360c1400e0cadfd80}{ess\+\_\+format\+\_\+t} format)
 \begin{DoxyCompactList}\small\item\em Help to get the string of the format. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -51,7 +51,7 @@ const char $\ast$ \hyperlink{ess__format_8c_add94d3ae146eb3612217c1d8cceaa0a4}{e
 \index{ess\+\_\+format.\+c@{ess\+\_\+format.\+c}!ess\+\_\+format\+\_\+get\+\_\+bits@{ess\+\_\+format\+\_\+get\+\_\+bits}}
 \index{ess\+\_\+format\+\_\+get\+\_\+bits@{ess\+\_\+format\+\_\+get\+\_\+bits}!ess\+\_\+format.\+c@{ess\+\_\+format.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+format\+\_\+get\+\_\+bits()}{ess\_format\_get\_bits()}}
-{\footnotesize\ttfamily int ess\+\_\+format\+\_\+get\+\_\+bits (\begin{DoxyParamCaption}\item[{const \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t}}]{format }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int ess\+\_\+format\+\_\+get\+\_\+bits (\begin{DoxyParamCaption}\item[{const \hyperlink{ess__format_8h_a9aa23f58a25b9e8360c1400e0cadfd80}{ess\+\_\+format\+\_\+t}}]{format }\end{DoxyParamCaption})}
 
 
 
@@ -69,7 +69,7 @@ Definition at line 68 of file ess\+\_\+format.\+c.
 
 \begin{DoxyCode}
 68                                                    \{
-69   \textcolor{keywordflow}{if}(format >= \hyperlink{ess__format_8h_afd7aa3f758b1c34994d1fe911d8365b6}{ESS\_FORMAT\_MAX}) \textcolor{keywordflow}{return} -1;
+69   \textcolor{keywordflow}{if}(format >= \hyperlink{ess__format_8h_aa73ee1bade9564053c023e42c9ea1ec9af085ca601a7ffc0f56098536616c3a3a}{ESS\_FORMAT\_MAX}) \textcolor{keywordflow}{return} -1;
 70   \textcolor{keywordflow}{return} \hyperlink{ess__format_8c_afe86278e648eeb366ddc31cb864ec547}{format\_parse}[format].\hyperlink{struct__format2human_ad1e28a1a66a25529b0b61b9ca4e66d44}{bits};
 71 \}
 \end{DoxyCode}
@@ -77,7 +77,7 @@ Definition at line 68 of file ess\+\_\+format.\+c.
 \index{ess\+\_\+format.\+c@{ess\+\_\+format.\+c}!ess\+\_\+format\+\_\+get\+\_\+channels@{ess\+\_\+format\+\_\+get\+\_\+channels}}
 \index{ess\+\_\+format\+\_\+get\+\_\+channels@{ess\+\_\+format\+\_\+get\+\_\+channels}!ess\+\_\+format.\+c@{ess\+\_\+format.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+format\+\_\+get\+\_\+channels()}{ess\_format\_get\_channels()}}
-{\footnotesize\ttfamily int ess\+\_\+format\+\_\+get\+\_\+channels (\begin{DoxyParamCaption}\item[{const \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t}}]{format }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int ess\+\_\+format\+\_\+get\+\_\+channels (\begin{DoxyParamCaption}\item[{const \hyperlink{ess__format_8h_a9aa23f58a25b9e8360c1400e0cadfd80}{ess\+\_\+format\+\_\+t}}]{format }\end{DoxyParamCaption})}
 
 
 
@@ -95,7 +95,7 @@ Definition at line 59 of file ess\+\_\+format.\+c.
 
 \begin{DoxyCode}
 59                                                        \{
-60   \textcolor{keywordflow}{if}(format >= \hyperlink{ess__format_8h_afd7aa3f758b1c34994d1fe911d8365b6}{ESS\_FORMAT\_MAX}) \textcolor{keywordflow}{return} -1;
+60   \textcolor{keywordflow}{if}(format >= \hyperlink{ess__format_8h_aa73ee1bade9564053c023e42c9ea1ec9af085ca601a7ffc0f56098536616c3a3a}{ESS\_FORMAT\_MAX}) \textcolor{keywordflow}{return} -1;
 61     \textcolor{keywordflow}{return} \hyperlink{ess__format_8c_afe86278e648eeb366ddc31cb864ec547}{format\_parse}[format].\hyperlink{struct__format2human_a178795099d0608972755dfef8d8367e3}{channels};
 62 \}
 \end{DoxyCode}
@@ -103,7 +103,7 @@ Definition at line 59 of file ess\+\_\+format.\+c.
 \index{ess\+\_\+format.\+c@{ess\+\_\+format.\+c}!ess\+\_\+format\+\_\+get\+\_\+samplerate@{ess\+\_\+format\+\_\+get\+\_\+samplerate}}
 \index{ess\+\_\+format\+\_\+get\+\_\+samplerate@{ess\+\_\+format\+\_\+get\+\_\+samplerate}!ess\+\_\+format.\+c@{ess\+\_\+format.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+format\+\_\+get\+\_\+samplerate()}{ess\_format\_get\_samplerate()}}
-{\footnotesize\ttfamily int ess\+\_\+format\+\_\+get\+\_\+samplerate (\begin{DoxyParamCaption}\item[{const \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t}}]{format }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int ess\+\_\+format\+\_\+get\+\_\+samplerate (\begin{DoxyParamCaption}\item[{const \hyperlink{ess__format_8h_a9aa23f58a25b9e8360c1400e0cadfd80}{ess\+\_\+format\+\_\+t}}]{format }\end{DoxyParamCaption})}
 
 
 
@@ -121,7 +121,7 @@ Definition at line 63 of file ess\+\_\+format.\+c.
 
 \begin{DoxyCode}
 63                                                          \{
-64   \textcolor{keywordflow}{if}(format >= \hyperlink{ess__format_8h_afd7aa3f758b1c34994d1fe911d8365b6}{ESS\_FORMAT\_MAX}) \textcolor{keywordflow}{return} -1;
+64   \textcolor{keywordflow}{if}(format >= \hyperlink{ess__format_8h_aa73ee1bade9564053c023e42c9ea1ec9af085ca601a7ffc0f56098536616c3a3a}{ESS\_FORMAT\_MAX}) \textcolor{keywordflow}{return} -1;
 65   \textcolor{keywordflow}{return} \hyperlink{ess__format_8c_afe86278e648eeb366ddc31cb864ec547}{format\_parse}[format].\hyperlink{struct__format2human_ac38751c7169cfeb9325a947cc0484286}{samplerate};
 66 \}
 \end{DoxyCode}
@@ -129,7 +129,7 @@ Definition at line 63 of file ess\+\_\+format.\+c.
 \index{ess\+\_\+format.\+c@{ess\+\_\+format.\+c}!ess\+\_\+format\+\_\+to\+\_\+string@{ess\+\_\+format\+\_\+to\+\_\+string}}
 \index{ess\+\_\+format\+\_\+to\+\_\+string@{ess\+\_\+format\+\_\+to\+\_\+string}!ess\+\_\+format.\+c@{ess\+\_\+format.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+format\+\_\+to\+\_\+string()}{ess\_format\_to\_string()}}
-{\footnotesize\ttfamily const char$\ast$ ess\+\_\+format\+\_\+to\+\_\+string (\begin{DoxyParamCaption}\item[{const \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t}}]{format }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily const char$\ast$ ess\+\_\+format\+\_\+to\+\_\+string (\begin{DoxyParamCaption}\item[{const \hyperlink{ess__format_8h_a9aa23f58a25b9e8360c1400e0cadfd80}{ess\+\_\+format\+\_\+t}}]{format }\end{DoxyParamCaption})}
 
 
 
@@ -147,16 +147,16 @@ Definition at line 76 of file ess\+\_\+format.\+c.
 
 \begin{DoxyCode}
 76                                                       \{
-77   \textcolor{keywordflow}{if}(format >= \hyperlink{ess__format_8h_afd7aa3f758b1c34994d1fe911d8365b6}{ESS\_FORMAT\_MAX}) \textcolor{keywordflow}{return} \textcolor{stringliteral}{"NO\_FORMAT"};
+77   \textcolor{keywordflow}{if}(format >= \hyperlink{ess__format_8h_aa73ee1bade9564053c023e42c9ea1ec9af085ca601a7ffc0f56098536616c3a3a}{ESS\_FORMAT\_MAX}) \textcolor{keywordflow}{return} \textcolor{stringliteral}{"NO\_FORMAT"};
 78   \textcolor{keywordflow}{return} \hyperlink{ess__format_8c_afe86278e648eeb366ddc31cb864ec547}{format\_parse}[format].\hyperlink{struct__format2human_a14f2551e7b5032527b89aa2d4025523a}{string};
-79   \textcolor{keywordflow}{return} \textcolor{stringliteral}{"NO\_FORMAT"};
-80 \}
+79 \}
 \end{DoxyCode}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=348pt]{de/d96/ess__format_8c_add94d3ae146eb3612217c1d8cceaa0a4_icgraph}
+\includegraphics[width=350pt]{de/d96/ess__format_8c_add94d3ae146eb3612217c1d8cceaa0a4_icgraph}
 \end{center}
 \end{figure}
 
@@ -178,8 +178,8 @@ Here is the caller graph for this function\+:\nopagebreak
   \{  \textcolor{stringliteral}{"ESS\_FORMAT\_STEREO\_48000\_8"}, 48000, 8, 2 \},
   \{  \textcolor{stringliteral}{"ESS\_FORMAT\_STEREO\_96000\_8"}, 96000, 8, 2 \},
   \{  \textcolor{stringliteral}{"ESS\_FORMAT\_MONO\_48000\_16"}, 48000, 16, 1 \},
-  \{  \textcolor{stringliteral}{" ESS\_FORMAT\_MONO\_44100\_16"}, 44100, 16, 1 \},
-  \{  \textcolor{stringliteral}{" ESS\_FORMAT\_MONO\_96000\_16"}, 96000, 16, 1 \},
+  \{  \textcolor{stringliteral}{"ESS\_FORMAT\_MONO\_44100\_16"}, 44100, 16, 1 \},
+  \{  \textcolor{stringliteral}{"ESS\_FORMAT\_MONO\_96000\_16"}, 96000, 16, 1 \},
   \{   \textcolor{stringliteral}{"ESS\_FORMAT\_STEREO\_44100\_16"}, 44100, 16, 2 \},
   \{  \textcolor{stringliteral}{"ESS\_FORMAT\_STEREO\_48000\_16"}, 48000, 16, 2 \},
   \{  \textcolor{stringliteral}{"ESS\_FORMAT\_STEREO\_96000\_16"}, 96000, 16, 2 \},

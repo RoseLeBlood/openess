@@ -1,6 +1,6 @@
    \section*{Open Embedded Sound Server}
 
- \subsubsection*{Website \href{https://roseleblood.github.io/}{\tt Website}  $\vert$  \href{https://github.com/RoseLeBlood/openess/wiki}{\tt Wiki }  $\vert$  \href{https://github.com/RoseLeBlood/openess/blob/master/CONTRIBUTING.md}{\tt Contributing }  $\vert$  \href{https://roseleblood.github.io/openess/html/d3/dcc/md__r_e_a_d_m_e.html}{\tt Documentation }  $\vert$  \href{https://webchat.freenode.net/?channels=openess}{\tt Chat } }
+ \subsubsection*{\href{https://roseleblood.github.io/}{\tt Website}  $\vert$  \href{https://github.com/RoseLeBlood/openess/wiki}{\tt Wiki }  $\vert$  \href{https://github.com/RoseLeBlood/openess/blob/master/CONTRIBUTING.md}{\tt Contributing }  $\vert$  \href{https://roseleblood.github.io/openess/html/d3/dcc/md__r_e_a_d_m_e.html}{\tt Documentation }  $\vert$  \href{https://webchat.freenode.net/?channels=openess}{\tt Chat } }
 
 
 
@@ -9,6 +9,8 @@
 
 
 {\bfseries Open\+E\+SS} is a network-\/capable sound server libary mainly for embedded systems and other operatins systems. Open\+E\+SS is free and open-\/source software, and is licensed under the terms of the G\+NU Lesser General Public License.
+
+\href{https://www.codacy.com/app/RoseLeBlood/openess?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=RoseLeBlood/openess&amp;utm_campaign=Badge_Grade}{\tt }
 
 \subsection*{Getting Started}
 
@@ -32,50 +34,24 @@ lib\_deps = openess
 
 \subsection*{Usage example}
 
-{\itshape create the server} 
+{\itshape create the audio context} 
 \begin{DoxyCode}
-\textcolor{preprocessor}{#include "\hyperlink{ess_8h}{ess.h}"}
-\textcolor{preprocessor}{#include "\hyperlink{ess__backend_8h}{ess\_backend.h}"}
 \textcolor{preprocessor}{#include "\hyperlink{ess__context_8h}{ess\_context.h}"}
 \textcolor{preprocessor}{#include "\hyperlink{ess__format_8h}{ess\_format.h}"}
 
+\textcolor{preprocessor}{#include <stdio.h>}
+\textcolor{preprocessor}{#include <stdlib.h>}
+\textcolor{preprocessor}{#include <unistd.h>}
 
 
-\hyperlink{structess__context}{ess\_context\_t} context;
-\hyperlink{structess__backend}{ess\_backend\_facktory\_t}* backend\_list;
+\textcolor{keywordtype}{void} \hyperlink{esp32__create__context_8c_abce06be17fc37d675118a678a8100a36}{app\_main}() \{
+  \hyperlink{structess__context}{ess\_context\_t} context;
+  ess\_context\_error\_t error;
 
-\textcolor{keyword}{extern} \textcolor{stringliteral}{"C"} \textcolor{keywordtype}{void} app\_main() \{
-
-  \textcolor{comment}{//WORK IN PROGRESSS}
-
-
-  \textcolor{keywordflow}{for}(;;) \{ usleep(100000); \}
-\}
-\end{DoxyCode}
- {\itshape create the audio context} 
-\begin{DoxyCode}
-\textcolor{preprocessor}{#include "\hyperlink{ess_8h}{ess.h}"}
-\textcolor{preprocessor}{#include "\hyperlink{ess__backend_8h}{ess\_backend.h}"}
-\textcolor{preprocessor}{#include "\hyperlink{ess__context_8h}{ess\_context.h}"}
-\textcolor{preprocessor}{#include "\hyperlink{ess__format_8h}{ess\_format.h}"}
-
-
-
-\hyperlink{structess__context}{ess\_context\_t} context;
-\hyperlink{structess__backend}{ess\_backend\_facktory\_t}* backend\_list;
-
-\textcolor{keyword}{extern} \textcolor{stringliteral}{"C"} \textcolor{keywordtype}{void} app\_main() \{
-  backend\_list =\hyperlink{ess__backend_8h_a16cb59b090351d9b9989de80b8bad520}{ess\_backend\_create\_factory\_list}();
-
-  \hyperlink{ess__backend_8h_ae425d7c64cceee74831168327d858fed}{ess\_backend\_probe\_all}(\hyperlink{ess__format_8h_a58e799cbd00d4340e368ec3a52bd187d}{ESS\_FORMAT\_STEREO\_96000\_24},  &
-      backend\_list);
-  \hyperlink{ess__context_8h_ab878ad831da78e331d88c591ff8dcc85}{ess\_context\_create}(&context, \hyperlink{ess__format_8h_a58e799cbd00d4340e368ec3a52bd187d}{ESS\_FORMAT\_STEREO\_96000\_24});
-  ess\_context\_init\_ex(&context, &backend\_list[0]);
-
-  \hyperlink{ess__backend_8h_ab6129a1d1c11f81718f9122facfddd35}{ess\_backend\_destroy\_factory\_list}(backend\_list);
-
-  \textcolor{comment}{//TODO anythings}
-
+  error = \hyperlink{ess__context_8h_ab105a63f0da1117385f72c8d6530023c}{ess\_context\_create} (&context, 
+      \hyperlink{config_8h_a02a4eb9ca75bf77fd60b4cb7bde37f2f}{ESS\_BACKEND\_NAME\_I2S\_ESP32}, \hyperlink{ess__format_8h_aa73ee1bade9564053c023e42c9ea1ec9ab4ad20e82e0980a848fb7fe80d0b3377}{ESS\_FORMAT\_STEREO\_44100\_16})
+      ;
+  \textcolor{keywordflow}{if}(error != ESS\_CONTEXT\_ERROR\_OK) printf(\textcolor{stringliteral}{"error in creating the context\(\backslash\)n"});
 
   \textcolor{keywordflow}{for}(;;) \{ usleep(100000); \}
 \}

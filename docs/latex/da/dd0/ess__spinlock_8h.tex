@@ -1,0 +1,190 @@
+\hypertarget{ess__spinlock_8h}{}\section{include/ess\+\_\+spinlock.h File Reference}
+\label{ess__spinlock_8h}\index{include/ess\+\_\+spinlock.\+h@{include/ess\+\_\+spinlock.\+h}}
+
+
+all platform specific spinlock functions  
+
+
+{\ttfamily \#include \char`\"{}ess\+\_\+error.\+h\char`\"{}}\newline
+Include dependency graph for ess\+\_\+spinlock.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{dd/dc4/ess__spinlock_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structess__platform__spinlock}{ess\+\_\+platform\+\_\+spinlock}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structess__platform__spinlock}{ess\+\_\+platform\+\_\+spinlock} \hyperlink{ess__spinlock_8h_affcfa4e492797fed4588c6351729adbd}{ess\+\_\+platform\+\_\+spinlock\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__spinlock_8h_a0689fe8c99166afd8ebf9d08bf0be690}{ess\+\_\+platform\+\_\+spinlock\+\_\+create} (\hyperlink{ess__spinlock_8h_affcfa4e492797fed4588c6351729adbd}{ess\+\_\+platform\+\_\+spinlock\+\_\+t} $\ast$spi, const char $\ast$name, int count)
+\begin{DoxyCompactList}\small\item\em create the spinlock \end{DoxyCompactList}\item 
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__spinlock_8h_a55139b68e5870b233ebd6ad8ffb38db8}{ess\+\_\+platform\+\_\+spinlock\+\_\+destroy} (\hyperlink{ess__spinlock_8h_affcfa4e492797fed4588c6351729adbd}{ess\+\_\+platform\+\_\+spinlock\+\_\+t} $\ast$spi)
+\begin{DoxyCompactList}\small\item\em destroy the spinlock \end{DoxyCompactList}\item 
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__spinlock_8h_a870003e8a54dce27157cbca71a945d64}{ess\+\_\+platform\+\_\+spinlock\+\_\+lock} (\hyperlink{ess__spinlock_8h_affcfa4e492797fed4588c6351729adbd}{ess\+\_\+platform\+\_\+spinlock\+\_\+t} $\ast$spi)
+\begin{DoxyCompactList}\small\item\em lock the spinlock \end{DoxyCompactList}\item 
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__spinlock_8h_a1f6f28c4df435229e34ade96c675e056}{ess\+\_\+platform\+\_\+spinlock\+\_\+try\+\_\+lock} (\hyperlink{ess__spinlock_8h_affcfa4e492797fed4588c6351729adbd}{ess\+\_\+platform\+\_\+spinlock\+\_\+t} $\ast$spi)
+\begin{DoxyCompactList}\small\item\em try lock the spinlock \end{DoxyCompactList}\item 
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__spinlock_8h_a7b7da6aa4922651caca97adbcea8796a}{ess\+\_\+platform\+\_\+spinlock\+\_\+unlock} (\hyperlink{ess__spinlock_8h_affcfa4e492797fed4588c6351729adbd}{ess\+\_\+platform\+\_\+spinlock\+\_\+t} $\ast$spi)
+\begin{DoxyCompactList}\small\item\em unlock the spinlock \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+all platform specific spinlock functions 
+
+\begin{DoxyAuthor}{Author}
+Anna Sopdia Schröck 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+11 Februar 20119 
+\end{DoxyDate}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{ess__spinlock_8h_affcfa4e492797fed4588c6351729adbd}\label{ess__spinlock_8h_affcfa4e492797fed4588c6351729adbd}} 
+\index{ess\+\_\+spinlock.\+h@{ess\+\_\+spinlock.\+h}!ess\+\_\+platform\+\_\+spinlock\+\_\+t@{ess\+\_\+platform\+\_\+spinlock\+\_\+t}}
+\index{ess\+\_\+platform\+\_\+spinlock\+\_\+t@{ess\+\_\+platform\+\_\+spinlock\+\_\+t}!ess\+\_\+spinlock.\+h@{ess\+\_\+spinlock.\+h}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+spinlock\+\_\+t}{ess\_platform\_spinlock\_t}}
+{\footnotesize\ttfamily typedef struct \hyperlink{structess__platform__spinlock}{ess\+\_\+platform\+\_\+spinlock} \hyperlink{ess__spinlock_8h_affcfa4e492797fed4588c6351729adbd}{ess\+\_\+platform\+\_\+spinlock\+\_\+t}}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ess__spinlock_8h_a0689fe8c99166afd8ebf9d08bf0be690}\label{ess__spinlock_8h_a0689fe8c99166afd8ebf9d08bf0be690}} 
+\index{ess\+\_\+spinlock.\+h@{ess\+\_\+spinlock.\+h}!ess\+\_\+platform\+\_\+spinlock\+\_\+create@{ess\+\_\+platform\+\_\+spinlock\+\_\+create}}
+\index{ess\+\_\+platform\+\_\+spinlock\+\_\+create@{ess\+\_\+platform\+\_\+spinlock\+\_\+create}!ess\+\_\+spinlock.\+h@{ess\+\_\+spinlock.\+h}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+spinlock\+\_\+create()}{ess\_platform\_spinlock\_create()}}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+platform\+\_\+spinlock\+\_\+create (\begin{DoxyParamCaption}\item[{\hyperlink{ess__spinlock_8h_affcfa4e492797fed4588c6351729adbd}{ess\+\_\+platform\+\_\+spinlock\+\_\+t} $\ast$}]{spi,  }\item[{const char $\ast$}]{name,  }\item[{int}]{count }\end{DoxyParamCaption})}
+
+
+
+create the spinlock 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em spi} & the spinlock struct \\
+\hline
+\mbox{\tt in}  & {\em name} & of the spinlock\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em E\+S\+S\+\_\+\+OK} & no error  E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+MP function is for using platform not implantiert \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+OR} & unspec error \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & \textquotesingle{}ess\+\_\+platform\+\_\+spinlock\+\_\+t\textquotesingle{} spi is null \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{ess__spinlock_8h_a55139b68e5870b233ebd6ad8ffb38db8}\label{ess__spinlock_8h_a55139b68e5870b233ebd6ad8ffb38db8}} 
+\index{ess\+\_\+spinlock.\+h@{ess\+\_\+spinlock.\+h}!ess\+\_\+platform\+\_\+spinlock\+\_\+destroy@{ess\+\_\+platform\+\_\+spinlock\+\_\+destroy}}
+\index{ess\+\_\+platform\+\_\+spinlock\+\_\+destroy@{ess\+\_\+platform\+\_\+spinlock\+\_\+destroy}!ess\+\_\+spinlock.\+h@{ess\+\_\+spinlock.\+h}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+spinlock\+\_\+destroy()}{ess\_platform\_spinlock\_destroy()}}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+platform\+\_\+spinlock\+\_\+destroy (\begin{DoxyParamCaption}\item[{\hyperlink{ess__spinlock_8h_affcfa4e492797fed4588c6351729adbd}{ess\+\_\+platform\+\_\+spinlock\+\_\+t} $\ast$}]{spi }\end{DoxyParamCaption})}
+
+
+
+destroy the spinlock 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em spi} & pointer of the spinlock srtruct\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em E\+S\+S\+\_\+\+OK} & no error  E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+MP function is for using platform not implantiert \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+OR} & unspec error \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+C\+R\+E\+A\+T\+ED} & spinlock is not created \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & \textquotesingle{}ess\+\_\+platform\+\_\+spinlock\+\_\+t\textquotesingle{} spi is null \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{ess__spinlock_8h_a870003e8a54dce27157cbca71a945d64}\label{ess__spinlock_8h_a870003e8a54dce27157cbca71a945d64}} 
+\index{ess\+\_\+spinlock.\+h@{ess\+\_\+spinlock.\+h}!ess\+\_\+platform\+\_\+spinlock\+\_\+lock@{ess\+\_\+platform\+\_\+spinlock\+\_\+lock}}
+\index{ess\+\_\+platform\+\_\+spinlock\+\_\+lock@{ess\+\_\+platform\+\_\+spinlock\+\_\+lock}!ess\+\_\+spinlock.\+h@{ess\+\_\+spinlock.\+h}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+spinlock\+\_\+lock()}{ess\_platform\_spinlock\_lock()}}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+platform\+\_\+spinlock\+\_\+lock (\begin{DoxyParamCaption}\item[{\hyperlink{ess__spinlock_8h_affcfa4e492797fed4588c6351729adbd}{ess\+\_\+platform\+\_\+spinlock\+\_\+t} $\ast$}]{spi }\end{DoxyParamCaption})}
+
+
+
+lock the spinlock 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em spi} & pointer of the spinlock srtruct\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em E\+S\+S\+\_\+\+OK} & no error  E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+MP function is for using platform not implantiert \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+OR} & unspec error \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+C\+R\+E\+A\+T\+ED} & spinlock is not created \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & \textquotesingle{}ess\+\_\+platform\+\_\+spinlock\+\_\+t\textquotesingle{} spi is null \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{ess__spinlock_8h_a1f6f28c4df435229e34ade96c675e056}\label{ess__spinlock_8h_a1f6f28c4df435229e34ade96c675e056}} 
+\index{ess\+\_\+spinlock.\+h@{ess\+\_\+spinlock.\+h}!ess\+\_\+platform\+\_\+spinlock\+\_\+try\+\_\+lock@{ess\+\_\+platform\+\_\+spinlock\+\_\+try\+\_\+lock}}
+\index{ess\+\_\+platform\+\_\+spinlock\+\_\+try\+\_\+lock@{ess\+\_\+platform\+\_\+spinlock\+\_\+try\+\_\+lock}!ess\+\_\+spinlock.\+h@{ess\+\_\+spinlock.\+h}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+spinlock\+\_\+try\+\_\+lock()}{ess\_platform\_spinlock\_try\_lock()}}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+platform\+\_\+spinlock\+\_\+try\+\_\+lock (\begin{DoxyParamCaption}\item[{\hyperlink{ess__spinlock_8h_affcfa4e492797fed4588c6351729adbd}{ess\+\_\+platform\+\_\+spinlock\+\_\+t} $\ast$}]{spi }\end{DoxyParamCaption})}
+
+
+
+try lock the spinlock 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em spi} & pointer of the spinlock srtruct\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em E\+S\+S\+\_\+\+OK} & lock the spinlock  E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+MP function is for using platform not implantiert \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+OR} & can\textquotesingle{}t lock \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & \textquotesingle{}ess\+\_\+platform\+\_\+spinlock\+\_\+t\textquotesingle{} spi is null \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{ess__spinlock_8h_a7b7da6aa4922651caca97adbcea8796a}\label{ess__spinlock_8h_a7b7da6aa4922651caca97adbcea8796a}} 
+\index{ess\+\_\+spinlock.\+h@{ess\+\_\+spinlock.\+h}!ess\+\_\+platform\+\_\+spinlock\+\_\+unlock@{ess\+\_\+platform\+\_\+spinlock\+\_\+unlock}}
+\index{ess\+\_\+platform\+\_\+spinlock\+\_\+unlock@{ess\+\_\+platform\+\_\+spinlock\+\_\+unlock}!ess\+\_\+spinlock.\+h@{ess\+\_\+spinlock.\+h}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+spinlock\+\_\+unlock()}{ess\_platform\_spinlock\_unlock()}}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+platform\+\_\+spinlock\+\_\+unlock (\begin{DoxyParamCaption}\item[{\hyperlink{ess__spinlock_8h_affcfa4e492797fed4588c6351729adbd}{ess\+\_\+platform\+\_\+spinlock\+\_\+t} $\ast$}]{spi }\end{DoxyParamCaption})}
+
+
+
+unlock the spinlock 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em spi} & pointer of the spinlock srtruct\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em E\+S\+S\+\_\+\+OK} & no error  E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+MP function is for using platform not implantiert \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+OR} & unspec error \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+C\+R\+E\+A\+T\+ED} & spinlock is not created \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & \textquotesingle{}ess\+\_\+platform\+\_\+spinlock\+\_\+t\textquotesingle{} spi is null \\
+\hline
+\end{DoxyRetVals}

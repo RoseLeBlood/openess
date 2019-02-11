@@ -1,0 +1,55 @@
+\hypertarget{esp32__create__context_8c}{}\section{examples/esp32\+\_\+create\+\_\+context.c File Reference}
+\label{esp32__create__context_8c}\index{examples/esp32\+\_\+create\+\_\+context.\+c@{examples/esp32\+\_\+create\+\_\+context.\+c}}
+{\ttfamily \#include \char`\"{}ess\+\_\+context.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ess\+\_\+format.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+Include dependency graph for esp32\+\_\+create\+\_\+context.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{da/ddc/esp32__create__context_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{esp32__create__context_8c_abce06be17fc37d675118a678a8100a36}{app\+\_\+main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{esp32__create__context_8c_abce06be17fc37d675118a678a8100a36}\label{esp32__create__context_8c_abce06be17fc37d675118a678a8100a36}} 
+\index{esp32\+\_\+create\+\_\+context.\+c@{esp32\+\_\+create\+\_\+context.\+c}!app\+\_\+main@{app\+\_\+main}}
+\index{app\+\_\+main@{app\+\_\+main}!esp32\+\_\+create\+\_\+context.\+c@{esp32\+\_\+create\+\_\+context.\+c}}
+\subsubsection{\texorpdfstring{app\+\_\+main()}{app\_main()}}
+{\footnotesize\ttfamily void app\+\_\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 9 of file esp32\+\_\+create\+\_\+context.\+c.
+
+
+\begin{DoxyCode}
+9                            \{
+10   \hyperlink{structess__context}{ess\_context\_t} context;
+11   ess\_context\_error\_t error;
+12 
+13   error = \hyperlink{ess__context_8h_ab105a63f0da1117385f72c8d6530023c}{ess\_context\_create} (&context, 
+      \hyperlink{config_8h_a02a4eb9ca75bf77fd60b4cb7bde37f2f}{ESS\_BACKEND\_NAME\_I2S\_ESP32}, \hyperlink{ess__format_8h_aa73ee1bade9564053c023e42c9ea1ec9ab4ad20e82e0980a848fb7fe80d0b3377}{ESS\_FORMAT\_STEREO\_44100\_16})
+      ;
+14   \textcolor{keywordflow}{if}(error != ESS\_CONTEXT\_ERROR\_OK) printf(\textcolor{stringliteral}{"error in creating the context\(\backslash\)n"});
+15 
+16   \textcolor{keywordflow}{for}(;;) \{ usleep(100000); \}
+17 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{df/dbb/esp32__create__context_8c_abce06be17fc37d675118a678a8100a36_cgraph}
+\end{center}
+\end{figure}

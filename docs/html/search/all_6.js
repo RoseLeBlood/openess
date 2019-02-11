@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['handle',['handle',['../d7/d24/structess__platform__task.html#a81011b79683fab64ce3aff71114f8fdd',1,'ess_platform_task::handle()'],['../d7/d90/structess__platform__semaphore.html#a81011b79683fab64ce3aff71114f8fdd',1,'ess_platform_semaphore::handle()'],['../d3/dd4/structess__platform__ringbuffer.html#a81011b79683fab64ce3aff71114f8fdd',1,'ess_platform_ringbuffer::handle()']]],
-  ['hostname',['hostname',['../db/d9d/structess__socket.html#a0c6be700c8763c26054098348ebef8d6',1,'ess_socket']]],
-  ['hostname_5flen',['hostname_len',['../db/d9d/structess__socket.html#a4d0d74743d167680649419163ce8c80e',1,'ess_socket']]]
+  ['g_5fnull_5fpaused',['g_null_paused',['../d1/df2/null__backend_8c.html#a4d6f13b456a8a822cd4da9cb0bd262d7',1,'null_backend.c']]],
+  ['generic_5fplatform_5ftask_2ec',['generic_platform_task.c',['../d5/d36/generic__platform__task_8c.html',1,'']]],
+  ['get_5finfo',['get_info',['../dd/db8/structess__backend.html#a9f29adb0a4cfb608557d26692fa78254',1,'ess_backend']]],
+  ['get_5fname',['get_name',['../dd/db8/structess__backend.html#a1e8975441f4fbb374da179cc7e8bcbae',1,'ess_backend']]],
+  ['getfactory',['getFactory',['../d4/db0/structess__backends__entry.html#a86f760dbdba11d491bc8209327d7e514',1,'ess_backends_entry']]]
 ];

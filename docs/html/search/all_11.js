@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['uart_5fbackend_2ec',['uart_backend.c',['../d2/d00/uart__backend_8c.html',1,'']]],
-  ['udp_5fbackend_2ec',['udp_backend.c',['../d5/da1/udp__backend_8c.html',1,'']]],
-  ['user_5fdaten',['user_daten',['../dd/db8/structess__backend.html#a5ad8569143b4728c7b7f91c53661d8b5',1,'ess_backend']]],
-  ['userdata',['userdata',['../d7/d24/structess__platform__task.html#afd0ffb02780e738d4c0a10ab833b7834',1,'ess_platform_task']]]
+  ['task_5fid',['task_id',['../d7/d24/structess__platform__task.html#a24913131dc491a81c23f2b8246d85e3b',1,'ess_platform_task']]],
+  ['task_5fstub',['task_stub',['../d7/d24/structess__platform__task.html#a66859f9ee9fc430e9bf28644aea7c5c7',1,'ess_platform_task']]],
+  ['text',['text',['../de/db9/structerror2human.html#a16343090e80c4472521560f30113d96c',1,'error2human']]],
+  ['type',['type',['../d3/dd4/structess__platform__ringbuffer.html#a6d72e7e7d09fd9b2363d51f2e6c408f5',1,'ess_platform_ringbuffer']]]
 ];

@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['samplerate',['samplerate',['../d5/d71/struct__format2human.html#ac38751c7169cfeb9325a947cc0484286',1,'_format2human']]],
-  ['server_2eh',['server.h',['../d8/dc3/server_8h.html',1,'']]],
-  ['socket',['socket',['../db/d9d/structess__socket.html#a3666576f6b88007cc7b8f26c7da596c8',1,'ess_socket::socket()'],['../d6/dbc/structess__server.html#ae1095210270047614ecdcf9d808e764c',1,'ess_server::socket()']]],
-  ['speed',['speed',['../d6/dbc/structess__server.html#a218b4f7c6cc2681a99c23a3b089d68b1',1,'ess_server']]],
-  ['stack_5fsize',['stack_size',['../d7/d24/structess__platform__task.html#adde5266300e9cdd7ca1134daba9adf24',1,'ess_platform_task']]],
-  ['status',['status',['../d3/d9c/structess__context.html#a6151ccede5aaf683375710d2677c74c7',1,'ess_context::status()'],['../db/d9d/structess__socket.html#a4e47521e8af756b9edf77f1f02f9b725',1,'ess_socket::status()'],['../d6/dbc/structess__server.html#af34befa103928930a907b2eb5cc4739c',1,'ess_server::status()']]],
-  ['string',['string',['../d5/d71/struct__format2human.html#a14f2551e7b5032527b89aa2d4025523a',1,'_format2human']]]
+  ['readme',['README',['../d3/dcc/md__r_e_a_d_m_e.html',1,'']]],
+  ['readme_2emd',['README.md',['../d9/dd6/_r_e_a_d_m_e_8md.html',1,'']]],
+  ['retval',['retval',['../db/d9d/structess__socket.html#a7f345697df7eb20c9aba1ab6980cae8f',1,'ess_socket']]],
+  ['running',['running',['../d7/d24/structess__platform__task.html#a2f45113638a0b749a8a205d2cd7fb42b',1,'ess_platform_task']]],
+  ['runningmutex',['runningMutex',['../d7/d24/structess__platform__task.html#a9580906913a08d567aa0f7bc5b7c4150',1,'ess_platform_task']]]
 ];

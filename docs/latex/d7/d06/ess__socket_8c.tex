@@ -14,7 +14,8 @@
 {\ttfamily \#include $<$errno.\+h$>$}\newline
 {\ttfamily \#include $<$sys/ioctl.\+h$>$}\newline
 {\ttfamily \#include $<$netinet/in.\+h$>$}\newline
-Include dependency graph for ess\+\_\+socket.\+c\+:\nopagebreak
+Include dependency graph for ess\+\_\+socket.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -26,33 +27,33 @@ Include dependency graph for ess\+\_\+socket.\+c\+:\nopagebreak
 \item 
 \hyperlink{ess__socket_8h_a9305eae437d57846661e997bb755d150}{ess\+\_\+socket\+\_\+fam\+\_\+t} \hyperlink{ess__socket_8c_aa50935ade25f18193eae883d52936d35}{ess\+\_\+get\+\_\+address\+\_\+family} (const char $\ast$hostname)
 \begin{DoxyCompactList}\small\item\em Look up which address families a host supports. \end{DoxyCompactList}\item 
-\hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_a575203e27b7952239e151fffb66da602}{ess\+\_\+socket\+\_\+create\+\_\+server} (\hyperlink{ess__socket_8h_a9305eae437d57846661e997bb755d150}{ess\+\_\+socket\+\_\+fam\+\_\+t} fam, \hyperlink{ess__socket_8h_a1e8e8de805f8e0b7da25e3b177977273}{ess\+\_\+socket\+\_\+pro\+\_\+t} protokoll, const char $\ast$hostname, unsigned short port, \hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$\+\_\+socket)
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_a62c983ed003d1db7341a50b0ef1a98ed}{ess\+\_\+socket\+\_\+create\+\_\+server} (\hyperlink{ess__socket_8h_a9305eae437d57846661e997bb755d150}{ess\+\_\+socket\+\_\+fam\+\_\+t} fam, \hyperlink{ess__socket_8h_a1e8e8de805f8e0b7da25e3b177977273}{ess\+\_\+socket\+\_\+pro\+\_\+t} protokoll, const char $\ast$hostname, unsigned short port, \hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$\+\_\+socket)
 \begin{DoxyCompactList}\small\item\em Create a T\+CP or U\+DP server socket. \end{DoxyCompactList}\item 
-\hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_ad94b8a0636ed08626719021449b1125e}{ess\+\_\+socket\+\_\+close} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$\+\_\+socket)
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_a92086273c5befc16e7a4821fcdefa71b}{ess\+\_\+socket\+\_\+close} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$\+\_\+socket)
 \begin{DoxyCompactList}\small\item\em Close a socket. \end{DoxyCompactList}\item 
-\hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_a482df0724a01526b25ecc3bbd2ae2bcb}{ess\+\_\+socket\+\_\+end\+\_\+write} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$\+\_\+socket)
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_a57c8d39ed9fc55eba03837238cb08557}{ess\+\_\+socket\+\_\+end\+\_\+write} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$\+\_\+socket)
 \begin{DoxyCompactList}\small\item\em perform a {\ttfamily shutdown(2)} call on a socket (write) \end{DoxyCompactList}\item 
-\hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_aa3179d64bbaa6d4f395490edf9fc391d}{ess\+\_\+socket\+\_\+end\+\_\+read} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$\+\_\+socket)
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_a03a4601382a1dabaf2c8946191ea7c08}{ess\+\_\+socket\+\_\+end\+\_\+read} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$\+\_\+socket)
 \begin{DoxyCompactList}\small\item\em perform a {\ttfamily shutdown(2)} call on a socket (read) \end{DoxyCompactList}\item 
-\hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_aac19f047f96c480e53f0510c8e91e0b5}{ess\+\_\+socket\+\_\+end} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$\+\_\+socket)
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_a8ba8f229958de5d36ad07b24f782a342}{ess\+\_\+socket\+\_\+end} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$\+\_\+socket)
 \begin{DoxyCompactList}\small\item\em perform a {\ttfamily shutdown(2)} call on a socket (read/write) \end{DoxyCompactList}\item 
-\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$ \hyperlink{ess__socket_8c_acbc86620807d4324b4fa26fa32664d3e}{ess\+\_\+socket\+\_\+accept} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$server\+\_\+socket, \hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} $\ast$error\+\_\+code)
+\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$ \hyperlink{ess__socket_8c_ac205e3a8f4f3786d88d5462ab8847414}{ess\+\_\+socket\+\_\+accept} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$server\+\_\+socket, \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} $\ast$error\+\_\+code)
 \begin{DoxyCompactList}\small\item\em accept a connection attempt on a server socket. \end{DoxyCompactList}\item 
-\hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_af9473834026e8a7b8a523f0107049865}{ess\+\_\+socket\+\_\+set\+\_\+buffer} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$\+\_\+socket, unsigned int rec\+\_\+buffer\+\_\+size, unsigned int send\+\_\+buffer\+\_\+size)
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_a54f5a1366f009fc50e193874d71b7d7f}{ess\+\_\+socket\+\_\+set\+\_\+buffer} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$\+\_\+socket, unsigned int rec\+\_\+buffer\+\_\+size, unsigned int send\+\_\+buffer\+\_\+size)
 \begin{DoxyCompactList}\small\item\em set send and recive buffer size of the socket \end{DoxyCompactList}\item 
-\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$ \hyperlink{ess__socket_8c_aa2183edb5d48e4023b832f607ca1b236}{ess\+\_\+socket\+\_\+connect\+\_\+stream} (const char $\ast$hostname, int port, \hyperlink{ess__socket_8h_a9305eae437d57846661e997bb755d150}{ess\+\_\+socket\+\_\+fam\+\_\+t} family, int flags, \hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} $\ast$error\+\_\+code)
+\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$ \hyperlink{ess__socket_8c_adef36f85812a91bfa3ded44e273d4c18}{ess\+\_\+socket\+\_\+connect\+\_\+stream} (const char $\ast$hostname, int port, \hyperlink{ess__socket_8h_a9305eae437d57846661e997bb755d150}{ess\+\_\+socket\+\_\+fam\+\_\+t} family, int flags, \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} $\ast$error\+\_\+code)
 \begin{DoxyCompactList}\small\item\em Create and connect a new T\+C\+P/\+IP socket. \end{DoxyCompactList}\item 
-\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$ \hyperlink{ess__socket_8c_a41df119d0e4bdb73aa8168f52a1e3216}{ess\+\_\+socket\+\_\+create\+\_\+dram} (\hyperlink{ess__socket_8h_a9305eae437d57846661e997bb755d150}{ess\+\_\+socket\+\_\+fam\+\_\+t} fam, \hyperlink{ess__socket_8h_a1e8e8de805f8e0b7da25e3b177977273}{ess\+\_\+socket\+\_\+pro\+\_\+t} proto, int flags, \hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} $\ast$error\+\_\+code)
+\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$ \hyperlink{ess__socket_8c_a78d5b3a7daf7c40ab4b3a30ef8205ccc}{ess\+\_\+socket\+\_\+create\+\_\+dram} (\hyperlink{ess__socket_8h_a9305eae437d57846661e997bb755d150}{ess\+\_\+socket\+\_\+fam\+\_\+t} fam, \hyperlink{ess__socket_8h_a1e8e8de805f8e0b7da25e3b177977273}{ess\+\_\+socket\+\_\+pro\+\_\+t} proto, int flags, \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} $\ast$error\+\_\+code)
 \begin{DoxyCompactList}\small\item\em Creates a new U\+D\+P/\+IP socket. \end{DoxyCompactList}\item 
-\hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_a8cd6ae7f8493a13c8cbd6ee36fc3a5af}{ess\+\_\+socket\+\_\+connect\+\_\+dram} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$\+\_\+socket, const char $\ast$host, int port)
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_a5c657bebe31d11c04ef7d7df48087376}{ess\+\_\+socket\+\_\+connect\+\_\+dram} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$\+\_\+socket, const char $\ast$host, int port)
 \begin{DoxyCompactList}\small\item\em connect a new U\+DP socket \end{DoxyCompactList}\item 
-\hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_ac6b05df26d4631108fdb5fb9df51e7d6}{ess\+\_\+socket\+\_\+write\+\_\+dram} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$socket, const void $\ast$buf, unsigned int size, const char $\ast$host, int port, int sendto\+\_\+flags)
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_a62b826aa7c650a8d4dc447f029364a94}{ess\+\_\+socket\+\_\+write\+\_\+dram} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$socket, const void $\ast$buf, unsigned int size, const char $\ast$host, int port, int sendto\+\_\+flags)
 \begin{DoxyCompactList}\small\item\em This function is the equivalent to {\ttfamily sendto(2)} \end{DoxyCompactList}\item 
-\hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_aa04b07f0d95d5b5c307f96ea5f899e7f}{ess\+\_\+socket\+\_\+read\+\_\+dram} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$socket, void $\ast$buf, unsigned int size, char $\ast$src\+\_\+host, unsigned int src\+\_\+host\+\_\+len, int src\+\_\+port, int recvfrom\+\_\+flags)
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_abe25e0d1df2293293f0aa3ee0dedadcf}{ess\+\_\+socket\+\_\+read\+\_\+dram} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$socket, void $\ast$buf, unsigned int size, char $\ast$src\+\_\+host, unsigned int src\+\_\+host\+\_\+len, int src\+\_\+port, int recvfrom\+\_\+flags)
 \begin{DoxyCompactList}\small\item\em Receive data from a U\+D\+P/\+IP socket. \end{DoxyCompactList}\item 
-\hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_a274fa100ab9d3180a27afca3bd61e5b4}{ess\+\_\+socket\+\_\+read} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$socket, void $\ast$buffer, unsigned int size, unsigned int $\ast$readed)
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_a944f0798ea120bef422f97909451b1a9}{ess\+\_\+socket\+\_\+read} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$socket, void $\ast$buffer, unsigned int size, unsigned int $\ast$readed)
 \begin{DoxyCompactList}\small\item\em read from socket \end{DoxyCompactList}\item 
-\hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_a0adeaaf662d0d188ffa83262b6ae315b}{ess\+\_\+socket\+\_\+write} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$socket, const void $\ast$buffer, unsigned int size, unsigned int $\ast$wrote)
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__socket_8c_a1cda1ccc6857cde561484dd998124bd7}{ess\+\_\+socket\+\_\+write} (\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$socket, const void $\ast$buffer, unsigned int size, unsigned int $\ast$wrote)
 \begin{DoxyCompactList}\small\item\em read from socket \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -108,11 +109,11 @@ Definition at line 47 of file ess\+\_\+socket.\+c.
 63   \textcolor{keywordflow}{return} af;
 64 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{ess__socket_8c_acbc86620807d4324b4fa26fa32664d3e}\label{ess__socket_8c_acbc86620807d4324b4fa26fa32664d3e}} 
+\mbox{\Hypertarget{ess__socket_8c_ac205e3a8f4f3786d88d5462ab8847414}\label{ess__socket_8c_ac205e3a8f4f3786d88d5462ab8847414}} 
 \index{ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}!ess\+\_\+socket\+\_\+accept@{ess\+\_\+socket\+\_\+accept}}
 \index{ess\+\_\+socket\+\_\+accept@{ess\+\_\+socket\+\_\+accept}!ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+socket\+\_\+accept()}{ess\_socket\_accept()}}
-{\footnotesize\ttfamily \hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t}$\ast$ ess\+\_\+socket\+\_\+accept (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{server\+\_\+socket,  }\item[{\hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} $\ast$}]{error\+\_\+code }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t}$\ast$ ess\+\_\+socket\+\_\+accept (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{server\+\_\+socket,  }\item[{\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} $\ast$}]{error\+\_\+code }\end{DoxyParamCaption})}
 
 
 
@@ -136,82 +137,84 @@ This function accepts an incoming connection on a server socket.
 \end{DoxyRetVals}
 
 
-Definition at line 178 of file ess\+\_\+socket.\+c.
+Definition at line 180 of file ess\+\_\+socket.\+c.
 
 
 \begin{DoxyCode}
-178                                                                                              \{
-179   \textcolor{keywordflow}{if}(server\_socket == 0) \{ \textcolor{keywordflow}{if}(error\_code != 0) *error\_code = 
-      \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL}; \textcolor{keywordflow}{return} 0; \}
-180 
-181   \hyperlink{structess__socket}{ess\_socket\_t} *client\_socket;
-182   \textcolor{keywordtype}{int}  nbl = 0;
-183   \textcolor{keyword}{struct }sockaddr\_in incoming;
-184   \textcolor{keyword}{struct }sockaddr\_in6 incoming6;
-185   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} size\_in6 = \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct }sockaddr\_in6);
-186   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} size\_in = \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct }sockaddr\_in);
-187 
-188   \textcolor{comment}{//socklen\_t addrlen = sizeof(struct sockaddr\_storage);}
+180                                                                                       \{
+181   \textcolor{keywordflow}{if}(server\_socket == 0) \{ \textcolor{keywordflow}{if}(error\_code != 0) *error\_code = \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL}; \textcolor{keywordflow}{return} 0; \}
+182 
+183   \hyperlink{structess__socket}{ess\_socket\_t} *client\_socket;
+184   \textcolor{keywordtype}{int}  nbl = 0;
+185   \textcolor{keyword}{struct }sockaddr\_in incoming;
+186   \textcolor{keyword}{struct }sockaddr\_in6 incoming6;
+187   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} size\_in6 = \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct }sockaddr\_in6);
+188   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} size\_in = \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct }sockaddr\_in);
 189 
-190 
-191   client\_socket = (\hyperlink{structess__socket}{ess\_socket\_t}*)malloc(\textcolor{keyword}{sizeof}(\hyperlink{structess__socket}{ess\_socket\_t}));
-192   \textcolor{keywordflow}{if}(client\_socket == 0) \textcolor{keywordflow}{return} 0;
-193 
-194   client\_socket->\hyperlink{structess__socket_a4d0d74743d167680649419163ce8c80e}{hostname\_len} = INET6\_ADDRSTRLEN;
+190   \textcolor{comment}{//socklen\_t addrlen = sizeof(struct sockaddr\_storage);}
+191 
+192 
+193   client\_socket = (\hyperlink{structess__socket}{ess\_socket\_t}*)malloc(\textcolor{keyword}{sizeof}(\hyperlink{structess__socket}{ess\_socket\_t}));
+194   \textcolor{keywordflow}{if}(client\_socket == 0) \textcolor{keywordflow}{return} 0;
 195 
-196   \textcolor{keywordflow}{if}(server\_socket->\hyperlink{structess__socket_ad09623d57ebd33fef8dac4e18c0cba2f}{family} == \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037a5e2c7645ba65720d7b828d111df09bb1}{ESS\_SOCKET\_FAMILY\_IP4}) \{
+196   client\_socket->\hyperlink{structess__socket_a4d0d74743d167680649419163ce8c80e}{hostname\_len} = INET6\_ADDRSTRLEN;
 197 
-198     \textcolor{keywordflow}{if} ( (client\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket} = accept(server\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, (\textcolor{keyword}{struct} sockaddr*)&incoming, (
+198   \textcolor{keywordflow}{if}(server\_socket->\hyperlink{structess__socket_ad09623d57ebd33fef8dac4e18c0cba2f}{family} == \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037a5e2c7645ba65720d7b828d111df09bb1}{ESS\_SOCKET\_FAMILY\_IP4}) \{
+199 
+200     \textcolor{keywordflow}{if} ( (client\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket} = accept(server\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, (\textcolor{keyword}{struct} sockaddr*)&incoming, (
       socklen\_t *) &size\_in)) != 0) \{
-199       \textcolor{keywordflow}{if}(error\_code != 0) *error\_code = \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL}; \textcolor{keywordflow}{return} 0;
-200     \}
-201 
-202     \textcolor{keywordflow}{if}(server\_socket->\hyperlink{structess__socket_a1f0429596710512357072b192ba3d2bd}{protokol} == \hyperlink{ess__socket_8h_a2a924f6745a916783fa640cb1c7e1922acba46066923047105db966901c0e8904}{ESS\_SOCKET\_PROTO\_STREAM}) \{
-203       server\_socket->\hyperlink{structess__socket_a938bdc6ae46c346147b6d4f67ad1e704}{port}  = ntohs( incoming.sin\_port );
-204           \textcolor{keywordtype}{long} addr = ntohl( incoming.sin\_addr.s\_addr );
-205 
-206       snprintf(client\_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname},  client\_socket->\hyperlink{structess__socket_a4d0d74743d167680649419163ce8c80e}{hostname\_len}, \textcolor{stringliteral}{"
+201       \textcolor{keywordflow}{if}(error\_code != 0) *error\_code = \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL};
+202       \textcolor{keywordflow}{return} 0;
+203     \}
+204 
+205     \textcolor{keywordflow}{if}(server\_socket->\hyperlink{structess__socket_a1f0429596710512357072b192ba3d2bd}{protokol} == \hyperlink{ess__socket_8h_a2a924f6745a916783fa640cb1c7e1922acba46066923047105db966901c0e8904}{ESS\_SOCKET\_PROTO\_STREAM}) \{
+206       server\_socket->\hyperlink{structess__socket_a938bdc6ae46c346147b6d4f67ad1e704}{port}  = ntohs( incoming.sin\_port );
+207           \textcolor{keywordtype}{long} addr = ntohl( incoming.sin\_addr.s\_addr );
+208 
+209       client\_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname}[0] = \textcolor{charliteral}{'\(\backslash\)0'};
+210       snprintf(client\_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname},  client\_socket->\hyperlink{structess__socket_a4d0d74743d167680649419163ce8c80e}{hostname\_len}, \textcolor{stringliteral}{"
       %03u.%03u.%03u.%03u"},
-207         (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}) addr >> 24,  (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}) (addr >> 16) % 256,  (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}) (addr >> 8) % 256,
-208         (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}) addr % 256 );
-209       client\_socket->\hyperlink{structess__socket_a4d0d74743d167680649419163ce8c80e}{hostname\_len} = strlen(client\_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname});
-210     \}
-211 
-212   \} \textcolor{keywordflow}{else} \{
-213 
-214     \textcolor{keywordflow}{if} ( (client\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket} = accept( server\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},(\textcolor{keyword}{struct} sockaddr *)&incoming6, 
+211         (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}) addr >> 24,  (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}) (addr >> 16) % 256,  (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}) (addr >> 8) % 256,
+212         (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}) addr % 256 );
+213       client\_socket->\hyperlink{structess__socket_a4d0d74743d167680649419163ce8c80e}{hostname\_len} = strlen(client\_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname});
+214     \}
+215 
+216   \} \textcolor{keywordflow}{else} \{
+217 
+218     \textcolor{keywordflow}{if} ( (client\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket} = accept( server\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},(\textcolor{keyword}{struct} sockaddr *)&incoming6, 
       (socklen\_t *) &size\_in6 )) != 0) \{
-215       \textcolor{keywordflow}{if}(error\_code != 0) *error\_code = \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL};
-216       \textcolor{keywordflow}{return} 0;
-217     \}
-218 
-219     \textcolor{keywordtype}{char} addrbuf[INET6\_ADDRSTRLEN];
-220     addrbuf[0] = \textcolor{charliteral}{'\(\backslash\)0'};
-221 
-222     client\_socket->\hyperlink{structess__socket_a938bdc6ae46c346147b6d4f67ad1e704}{port} = ntohs( incoming6.sin6\_port );
-223 
-224     \textcolor{keywordflow}{if} ( inet\_ntop( AF\_INET6, &(incoming6.sin6\_addr), addrbuf, \textcolor{keyword}{sizeof}(addrbuf) )) \{
-225       ESP\_LOGI(\textcolor{stringliteral}{"EssS"}, \textcolor{stringliteral}{"client from :%s/%d"}, addrbuf, client\_socket->\hyperlink{structess__socket_a938bdc6ae46c346147b6d4f67ad1e704}{port});
-226       strncpy(client\_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname},  addrbuf,  strlen(addrbuf) );
-227     \}
-228   \}
-229 
-230   \textcolor{keywordflow}{if} ( ioctl( client\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket} , FIONBIO, &nbl ) < 0 ) \{
-231     ESP\_LOGE(\textcolor{stringliteral}{"EssS"}, \textcolor{stringliteral}{"(%02d) couldn't turn on blocking for client"},  client\_socket->
-      \hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket} );
-232     client\_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
-233     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL}; \textcolor{keywordflow}{return} 0; \}
+219       \textcolor{keywordflow}{if}(error\_code != 0) *error\_code = \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL};
+220       \textcolor{keywordflow}{return} 0;
+221     \}
+222 
+223     \textcolor{keywordtype}{char} addrbuf[INET6\_ADDRSTRLEN];
+224     addrbuf[0] = \textcolor{charliteral}{'\(\backslash\)0'};
+225 
+226     client\_socket->\hyperlink{structess__socket_a938bdc6ae46c346147b6d4f67ad1e704}{port} = ntohs( incoming6.sin6\_port );
+227 
+228     \textcolor{keywordflow}{if} ( inet\_ntop( AF\_INET6, &(incoming6.sin6\_addr), addrbuf, \textcolor{keyword}{sizeof}(addrbuf) )) \{
+229       ESP\_LOGI(\textcolor{stringliteral}{"EssS"}, \textcolor{stringliteral}{"client from :%s/%d"}, addrbuf, client\_socket->\hyperlink{structess__socket_a938bdc6ae46c346147b6d4f67ad1e704}{port});
+230       client\_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname}[0] = \textcolor{charliteral}{'\(\backslash\)0'};
+231       strncpy(client\_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname},  addrbuf,  strlen(addrbuf) );
+232     \}
+233   \}
 234 
-235     close(client\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket});
-236   \}
-237   \textcolor{keywordflow}{return} client\_socket;
-238 \}
+235   \textcolor{keywordflow}{if} ( ioctl( client\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket} , FIONBIO, &nbl ) < 0 ) \{
+236     ESP\_LOGE(\textcolor{stringliteral}{"EssS"}, \textcolor{stringliteral}{"(%02d) couldn't turn on blocking for client"},  client\_socket->
+      \hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket} );
+237     client\_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
+238     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL}; \textcolor{keywordflow}{return} 0; \}
+239 
+240     close(client\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket});
+241   \}
+242   \textcolor{keywordflow}{return} client\_socket;
+243 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{ess__socket_8c_ad94b8a0636ed08626719021449b1125e}\label{ess__socket_8c_ad94b8a0636ed08626719021449b1125e}} 
+\mbox{\Hypertarget{ess__socket_8c_a92086273c5befc16e7a4821fcdefa71b}\label{ess__socket_8c_a92086273c5befc16e7a4821fcdefa71b}} 
 \index{ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}!ess\+\_\+socket\+\_\+close@{ess\+\_\+socket\+\_\+close}}
 \index{ess\+\_\+socket\+\_\+close@{ess\+\_\+socket\+\_\+close}!ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+socket\+\_\+close()}{ess\_socket\_close()}}
-{\footnotesize\ttfamily \hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+close (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+close (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket }\end{DoxyParamCaption})}
 
 
 
@@ -226,34 +229,34 @@ This function closes a socket.
 \end{DoxyParams}
 
 \begin{DoxyRetVals}{Return values}
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+OK} & Closed socket successfully \\
+{\em E\+S\+S\+\_\+\+OK} & Closed socket successfully \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & socket was N\+U\+LL \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & socket was N\+U\+LL \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+L\+O\+SE} & Socket was already closed (other errors are very unlikely to occur) \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+L\+O\+SE} & Socket was already closed (other errors are very unlikely to occur) \\
 \hline
 \end{DoxyRetVals}
 
 
-Definition at line 128 of file ess\+\_\+socket.\+c.
+Definition at line 130 of file ess\+\_\+socket.\+c.
 
 
 \begin{DoxyCode}
-128                                                            \{
-129   \textcolor{keywordflow}{if}(\_socket == 0) \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL};
-130 
-131   \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval}  = close(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}))  != 0 ) \{
-132     \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
-133     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a51ccd446ce3de87bfa81d620812f18a4}{ESS\_SOCKET\_ERROR\_CLOSE};
-134   \}
-135   \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405afed31ad640a62c99c98982717fcb4b40}{ESS\_SOCKET\_ERROR\_OK};
-136 \}
+130                                                     \{
+131   \textcolor{keywordflow}{if}(\_socket == 0) \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL};
+132 
+133   \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval}  = close(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}))  != 0 ) \{
+134     \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
+135     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa3c103cfeedd28b98ed4c47427b1b69ca}{ESS\_ERROR\_CLOSE};
+136   \}
+137   \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa7a39eb24d172b29cca7678967088d864}{ESS\_OK};
+138 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{ess__socket_8c_a8cd6ae7f8493a13c8cbd6ee36fc3a5af}\label{ess__socket_8c_a8cd6ae7f8493a13c8cbd6ee36fc3a5af}} 
+\mbox{\Hypertarget{ess__socket_8c_a5c657bebe31d11c04ef7d7df48087376}\label{ess__socket_8c_a5c657bebe31d11c04ef7d7df48087376}} 
 \index{ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}!ess\+\_\+socket\+\_\+connect\+\_\+dram@{ess\+\_\+socket\+\_\+connect\+\_\+dram}}
 \index{ess\+\_\+socket\+\_\+connect\+\_\+dram@{ess\+\_\+socket\+\_\+connect\+\_\+dram}!ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+socket\+\_\+connect\+\_\+dram()}{ess\_socket\_connect\_dram()}}
-{\footnotesize\ttfamily \hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+connect\+\_\+dram (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket,  }\item[{const char $\ast$}]{hostname,  }\item[{int}]{port }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+connect\+\_\+dram (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket,  }\item[{const char $\ast$}]{hostname,  }\item[{int}]{port }\end{DoxyParamCaption})}
 
 
 
@@ -271,7 +274,7 @@ This function returns a working client U\+DP socket.
 \hline
 {\em prot} & {\ttfamily E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+P\+R\+O\+T\+O\+\_\+\+D\+R\+AM} or {\ttfamily E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+P\+R\+O\+T\+O\+\_\+\+D\+R\+A\+M\+\_\+\+L\+I\+TE} \\
 \hline
-{\em error\+\_\+code} & E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL hostname was N\+U\+LL\\
+{\em error\+\_\+code} & E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL hostname was N\+U\+LL\\
 \hline
 \end{DoxyParams}
 
@@ -284,69 +287,69 @@ A valid socket.
 \end{DoxyReturn}
 
 
-Definition at line 351 of file ess\+\_\+socket.\+c.
+Definition at line 356 of file ess\+\_\+socket.\+c.
 
 
 \begin{DoxyCode}
-351                                                                                                \{
-352 
-353   \textcolor{keyword}{struct }addrinfo *result, *result\_check, hint;
-354   \textcolor{keyword}{struct }sockaddr\_storage oldsockaddr;
-355   socklen\_t oldsockaddrlen = \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct }sockaddr\_storage);
-356   \textcolor{keywordtype}{char} buffer[8]; buffer[0] = \textcolor{charliteral}{'\(\backslash\)0'};
+356                                                                                         \{
 357 
-358 
-359   snprintf(buffer, 8,\textcolor{stringliteral}{"%d"},port) ;
-360 
-361   \textcolor{keywordflow}{if} ( host == NULL ) \{
-362     \textcolor{keywordflow}{return} 0;
-363   \}
-364 
-365   \textcolor{comment}{//TODO: Create new ERROR Codes}
-366 
-367   \textcolor{keywordflow}{if} ( -1 == getsockname(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},(\textcolor{keyword}{struct} sockaddr*)&oldsockaddr,&oldsockaddrlen) )\{
-368     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a373256f32df7f8f490e7d918e9f59418}{ESS\_SOCKET\_ERROR\_UNSPEC};
-369   \}
-370 
-371   \textcolor{keywordflow}{if} ( oldsockaddrlen > \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} sockaddr\_storage) ) \{
-372     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a373256f32df7f8f490e7d918e9f59418}{ESS\_SOCKET\_ERROR\_UNSPEC};
-373   \}
-374 
-375   memset(&hint,0,\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} addrinfo));
-376 
-377   hint.ai\_family = ((\textcolor{keyword}{struct }sockaddr\_in*)&oldsockaddr)->sin\_family; \textcolor{comment}{// AF\_INET or AF\_INET6 - offset is same
+358   \textcolor{keyword}{struct }addrinfo *result, *result\_check, hint;
+359   \textcolor{keyword}{struct }sockaddr\_storage oldsockaddr;
+360   socklen\_t oldsockaddrlen = \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct }sockaddr\_storage);
+361   \textcolor{keywordtype}{char} buffer[8]; buffer[0] = \textcolor{charliteral}{'\(\backslash\)0'};
+362 
+363 
+364   snprintf(buffer, 8,\textcolor{stringliteral}{"%d"},port) ;
+365 
+366   \textcolor{keywordflow}{if} ( host == NULL ) \{
+367     \textcolor{keywordflow}{return} 0;
+368   \}
+369 
+370   \textcolor{comment}{//TODO: Create new ERROR Codes}
+371 
+372   \textcolor{keywordflow}{if} ( -1 == getsockname(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},(\textcolor{keyword}{struct} sockaddr*)&oldsockaddr,&oldsockaddrlen) )\{
+373     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07faa28e2c57627994f0cfa08dd3b4e28b97}{ESS\_ERROR};
+374   \}
+375 
+376   \textcolor{keywordflow}{if} ( oldsockaddrlen > \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} sockaddr\_storage) ) \{
+377     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07faa28e2c57627994f0cfa08dd3b4e28b97}{ESS\_ERROR};
+378   \}
+379 
+380   memset(&hint,0,\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} addrinfo));
+381 
+382   hint.ai\_family = ((\textcolor{keyword}{struct }sockaddr\_in*)&oldsockaddr)->sin\_family; \textcolor{comment}{// AF\_INET or AF\_INET6 - offset is same
        at sockaddr\_in and sockaddr\_in6}
-378 
-379   hint.ai\_socktype =  SOCK\_DGRAM;
-380 
-381   \textcolor{keywordflow}{if} (  getaddrinfo(host,buffer,&hint,&result) != 0) \{
-382     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae0eba04a60a1605cec5b429ec095c4c5}{ESS\_SOCKET\_ERROR\_GETADDR};
-383   \}
-384 
-385   \textcolor{keywordflow}{for} ( result\_check = result; result\_check != NULL; result\_check = result\_check->ai\_next ) \{ \textcolor{comment}{// go through
+383 
+384   hint.ai\_socktype =  SOCK\_DGRAM;
+385 
+386   \textcolor{keywordflow}{if} (  getaddrinfo(host,buffer,&hint,&result) != 0) \{
+387     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa27d1d29e5376284759ed12c811b4d94e}{ESS\_ERROR\_GETADDR};
+388   \}
+389 
+390   \textcolor{keywordflow}{for} ( result\_check = result; result\_check != NULL; result\_check = result\_check->ai\_next ) \{ \textcolor{comment}{// go through
        the linked list of struct addrinfo elements}
-386     \textcolor{keywordflow}{if} (  connect(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},result\_check->ai\_addr,result\_check->ai\_addrlen) != -1) \textcolor{comment}{// connected
+391     \textcolor{keywordflow}{if} (  connect(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},result\_check->ai\_addr,result\_check->ai\_addrlen) != -1) \textcolor{comment}{// connected
        without error}
-387         \textcolor{keywordflow}{break};
-388 
-389     \textcolor{keywordflow}{if} ( result\_check == 0 ) \{
-390       \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a228d3f324847daff4c8a5910b63105f7}{ESS\_SOCKET\_ERROR\_CONNECT};
-391     \}
-392   \}
-393   freeaddrinfo(result);
-394 
-395   \_socket->\hyperlink{structess__socket_a4d0d74743d167680649419163ce8c80e}{hostname\_len} = strlen(host);
-396   strncpy(\_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname}, host, \_socket->\hyperlink{structess__socket_a4d0d74743d167680649419163ce8c80e}{hostname\_len});
-397   \_socket->\hyperlink{structess__socket_a938bdc6ae46c346147b6d4f67ad1e704}{port} = port;
-398 
-399   \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405afed31ad640a62c99c98982717fcb4b40}{ESS\_SOCKET\_ERROR\_OK};
-400 \}
+392         \textcolor{keywordflow}{break};
+393 
+394     \textcolor{keywordflow}{if} ( result\_check == 0 ) \{
+395       \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07faa30baabd6fe0c3ccddb08d1692308f0e}{ESS\_ERROR\_CONNECT};
+396     \}
+397   \}
+398   freeaddrinfo(result);
+399 
+400   \_socket->\hyperlink{structess__socket_a4d0d74743d167680649419163ce8c80e}{hostname\_len} = strlen(host);
+401   strncpy(\_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname}, host, \_socket->\hyperlink{structess__socket_a4d0d74743d167680649419163ce8c80e}{hostname\_len});
+402   \_socket->\hyperlink{structess__socket_a938bdc6ae46c346147b6d4f67ad1e704}{port} = port;
+403 
+404   \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa7a39eb24d172b29cca7678967088d864}{ESS\_OK};
+405 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{ess__socket_8c_aa2183edb5d48e4023b832f607ca1b236}\label{ess__socket_8c_aa2183edb5d48e4023b832f607ca1b236}} 
+\mbox{\Hypertarget{ess__socket_8c_adef36f85812a91bfa3ded44e273d4c18}\label{ess__socket_8c_adef36f85812a91bfa3ded44e273d4c18}} 
 \index{ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}!ess\+\_\+socket\+\_\+connect\+\_\+stream@{ess\+\_\+socket\+\_\+connect\+\_\+stream}}
 \index{ess\+\_\+socket\+\_\+connect\+\_\+stream@{ess\+\_\+socket\+\_\+connect\+\_\+stream}!ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+socket\+\_\+connect\+\_\+stream()}{ess\_socket\_connect\_stream()}}
-{\footnotesize\ttfamily \hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t}$\ast$ ess\+\_\+socket\+\_\+connect\+\_\+stream (\begin{DoxyParamCaption}\item[{const char $\ast$}]{hostname,  }\item[{int}]{port,  }\item[{\hyperlink{ess__socket_8h_a9305eae437d57846661e997bb755d150}{ess\+\_\+socket\+\_\+fam\+\_\+t}}]{family,  }\item[{int}]{flags,  }\item[{\hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} $\ast$}]{error\+\_\+code }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t}$\ast$ ess\+\_\+socket\+\_\+connect\+\_\+stream (\begin{DoxyParamCaption}\item[{const char $\ast$}]{hostname,  }\item[{int}]{port,  }\item[{\hyperlink{ess__socket_8h_a9305eae437d57846661e997bb755d150}{ess\+\_\+socket\+\_\+fam\+\_\+t}}]{family,  }\item[{int}]{flags,  }\item[{\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} $\ast$}]{error\+\_\+code }\end{DoxyParamCaption})}
 
 
 
@@ -364,7 +367,7 @@ This function returns a working client T\+C\+P/\+IP socket.
 \hline
 {\em flags} & Flags to be passed to {\ttfamily socket(2)}. Most flags are Linux-\/only! \\
 \hline
-{\em error\+\_\+code} & E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL hostname was N\+U\+LL\\
+{\em error\+\_\+code} & E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL hostname was N\+U\+LL\\
 \hline
 \end{DoxyParams}
 
@@ -377,77 +380,76 @@ A valid socket.
 \end{DoxyReturn}
 
 
-Definition at line 247 of file ess\+\_\+socket.\+c.
+Definition at line 252 of file ess\+\_\+socket.\+c.
 
 
 \begin{DoxyCode}
-247                                                                                                            
-                                        \{
-248   \textcolor{keywordflow}{if}(hostname == NULL) \{ \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = 
-      \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL}; \} \textcolor{keywordflow}{return} 0; \}
-249 
-250   \textcolor{keywordtype}{int} sfd;
-251   \textcolor{keyword}{struct }addrinfo hint, *result, *result\_check;
-252   \hyperlink{structess__socket}{ess\_socket\_t}* new\_socket;
-253   \textcolor{keywordtype}{char} buffer[8]; buffer[0] = \textcolor{charliteral}{'\(\backslash\)0'};
+252                                                                                                            
+                                 \{
+253   \textcolor{keywordflow}{if}(hostname == NULL) \{ \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL}; \} \textcolor{keywordflow}{return} 0; \}
 254 
-255   memset(&hint,0,\textcolor{keyword}{sizeof} hint);
-256 
-257   \textcolor{keywordflow}{switch} ( family ) \{
-258     \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037a5e2c7645ba65720d7b828d111df09bb1}{ESS\_SOCKET\_FAMILY\_IP4}: hint.ai\_family = AF\_INET; \textcolor{keywordflow}{break};
-259     \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037aff947ddfbc0a3d635ad83146dbaa3a72}{ESS\_SOCKET\_FAMILY\_IP6}: hint.ai\_family = AF\_INET6; \textcolor{keywordflow}{break};
-260     \textcolor{keywordflow}{default}: hint.ai\_family = AF\_UNSPEC;
-261   \}
-262 
-263 
-264   hint.ai\_socktype = SOCK\_STREAM;
-265 
-266 
-267   snprintf(buffer, 8,\textcolor{stringliteral}{"%d"},port) ;
+255   \textcolor{keywordtype}{int} sfd;
+256   \textcolor{keyword}{struct }addrinfo hint, *result, *result\_check;
+257   \hyperlink{structess__socket}{ess\_socket\_t}* new\_socket;
+258   \textcolor{keywordtype}{char} buffer[8]; buffer[0] = \textcolor{charliteral}{'\(\backslash\)0'};
+259 
+260   memset(&hint,0,\textcolor{keyword}{sizeof} hint);
+261 
+262   \textcolor{keywordflow}{switch} ( family ) \{
+263     \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037a5e2c7645ba65720d7b828d111df09bb1}{ESS\_SOCKET\_FAMILY\_IP4}: hint.ai\_family = AF\_INET; \textcolor{keywordflow}{break};
+264     \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037aff947ddfbc0a3d635ad83146dbaa3a72}{ESS\_SOCKET\_FAMILY\_IP6}: hint.ai\_family = AF\_INET6; \textcolor{keywordflow}{break};
+265     \textcolor{keywordflow}{default}: hint.ai\_family = AF\_UNSPEC;
+266   \}
+267 
 268 
-269   \textcolor{keywordflow}{if} (   getaddrinfo(hostname,buffer,&hint,&result) != 0) \{
-270     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae0eba04a60a1605cec5b429ec095c4c5}{ESS\_SOCKET\_ERROR\_GETADDR}; \}
-271     \textcolor{keywordflow}{return} 0;
-272   \}
+269   hint.ai\_socktype = SOCK\_STREAM;
+270 
+271 
+272   snprintf(buffer, 8,\textcolor{stringliteral}{"%d"},port) ;
 273 
-274   \textcolor{keywordflow}{for} ( result\_check = result; result\_check != 0; result\_check = result\_check->ai\_next )  \{ \textcolor{comment}{// go through
-       the linked list of struct addrinfo elements}
-275       sfd = socket(result\_check->ai\_family, result\_check->ai\_socktype | flags, result\_check->ai\_protocol);
-276 
-277       \textcolor{keywordflow}{if} ( sfd < 0 )  \textcolor{keywordflow}{continue};
+274   \textcolor{keywordflow}{if} (   getaddrinfo(hostname,buffer,&hint,&result) != 0) \{
+275     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa27d1d29e5376284759ed12c811b4d94e}{ESS\_ERROR\_GETADDR}; \}
+276     \textcolor{keywordflow}{return} 0;
+277   \}
 278 
-279       \textcolor{keywordflow}{if} (  connect(sfd,result\_check->ai\_addr,result\_check->ai\_addrlen)  != -1) \textcolor{comment}{// connected without error}
-280         \textcolor{keywordflow}{break};
-281         close(sfd);
-282   \}
-283   freeaddrinfo(result);
-284 
-285   \textcolor{keywordflow}{if} ( result\_check == 0 ) \{
-286     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae0eba04a60a1605cec5b429ec095c4c5}{ESS\_SOCKET\_ERROR\_GETADDR}; \}
-287     \textcolor{keywordflow}{return} 0;
-288   \}
-289   \textcolor{comment}{// Yes :)}
-290   new\_socket = (\hyperlink{structess__socket}{ess\_socket\_t}*)malloc(\textcolor{keyword}{sizeof}(\hyperlink{structess__socket}{ess\_socket\_t}));
-291   \textcolor{keywordflow}{if}(new\_socket == 0) \{
-292     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a88fa3dacd5f2854c9977f5667e169851}{ESS\_SOCKET\_ERROR\_OUTOF\_MEM}; \}
-293     \textcolor{keywordflow}{return} 0;
-294   \}
-295   new\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket} = sfd;
-296 
-297   strncpy(new\_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname}, hostname, strlen(hostname));
-298 
-299   new\_socket->\hyperlink{structess__socket_a938bdc6ae46c346147b6d4f67ad1e704}{port} = port;
-300   new\_socket->\hyperlink{structess__socket_ad09623d57ebd33fef8dac4e18c0cba2f}{family} = family;
-301   new\_socket->\hyperlink{structess__socket_a1f0429596710512357072b192ba3d2bd}{protokol} = \hyperlink{ess__socket_8h_a2a924f6745a916783fa640cb1c7e1922acba46066923047105db966901c0e8904}{ESS\_SOCKET\_PROTO\_STREAM};
-302 
-303   \textcolor{keywordflow}{return} new\_socket;
-304 \}
+279   \textcolor{keywordflow}{for} ( result\_check = result; result\_check != 0; result\_check = result\_check->ai\_next )  \{ \textcolor{comment}{// go through
+       the linked list of struct addrinfo elements}
+280       sfd = socket(result\_check->ai\_family, result\_check->ai\_socktype | flags, result\_check->ai\_protocol);
+281 
+282       \textcolor{keywordflow}{if} ( sfd < 0 )  \textcolor{keywordflow}{continue};
+283 
+284       \textcolor{keywordflow}{if} (  connect(sfd,result\_check->ai\_addr,result\_check->ai\_addrlen)  != -1) \textcolor{comment}{// connected without error}
+285         \textcolor{keywordflow}{break};
+286         close(sfd);
+287   \}
+288   freeaddrinfo(result);
+289 
+290   \textcolor{keywordflow}{if} ( result\_check == 0 ) \{
+291     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa27d1d29e5376284759ed12c811b4d94e}{ESS\_ERROR\_GETADDR}; \}
+292     \textcolor{keywordflow}{return} 0;
+293   \}
+294   \textcolor{comment}{// Yes :)}
+295   new\_socket = (\hyperlink{structess__socket}{ess\_socket\_t}*)malloc(\textcolor{keyword}{sizeof}(\hyperlink{structess__socket}{ess\_socket\_t}));
+296   \textcolor{keywordflow}{if}(new\_socket == 0) \{
+297     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa6a45eefc15738cbbc15b5ef516da1c69}{ESS\_ERROR\_OUTOFMEM}; \}
+298     \textcolor{keywordflow}{return} 0;
+299   \}
+300   new\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket} = sfd;
+301 
+302   strncpy(new\_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname}, hostname, strlen(hostname));
+303 
+304   new\_socket->\hyperlink{structess__socket_a938bdc6ae46c346147b6d4f67ad1e704}{port} = port;
+305   new\_socket->\hyperlink{structess__socket_ad09623d57ebd33fef8dac4e18c0cba2f}{family} = family;
+306   new\_socket->\hyperlink{structess__socket_a1f0429596710512357072b192ba3d2bd}{protokol} = \hyperlink{ess__socket_8h_a2a924f6745a916783fa640cb1c7e1922acba46066923047105db966901c0e8904}{ESS\_SOCKET\_PROTO\_STREAM};
+307 
+308   \textcolor{keywordflow}{return} new\_socket;
+309 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{ess__socket_8c_a41df119d0e4bdb73aa8168f52a1e3216}\label{ess__socket_8c_a41df119d0e4bdb73aa8168f52a1e3216}} 
+\mbox{\Hypertarget{ess__socket_8c_a78d5b3a7daf7c40ab4b3a30ef8205ccc}\label{ess__socket_8c_a78d5b3a7daf7c40ab4b3a30ef8205ccc}} 
 \index{ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}!ess\+\_\+socket\+\_\+create\+\_\+dram@{ess\+\_\+socket\+\_\+create\+\_\+dram}}
 \index{ess\+\_\+socket\+\_\+create\+\_\+dram@{ess\+\_\+socket\+\_\+create\+\_\+dram}!ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+socket\+\_\+create\+\_\+dram()}{ess\_socket\_create\_dram()}}
-{\footnotesize\ttfamily \hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t}$\ast$ ess\+\_\+socket\+\_\+create\+\_\+dram (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_a9305eae437d57846661e997bb755d150}{ess\+\_\+socket\+\_\+fam\+\_\+t}}]{fam,  }\item[{\hyperlink{ess__socket_8h_a1e8e8de805f8e0b7da25e3b177977273}{ess\+\_\+socket\+\_\+pro\+\_\+t}}]{proto,  }\item[{int}]{flags,  }\item[{\hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} $\ast$}]{error\+\_\+code }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t}$\ast$ ess\+\_\+socket\+\_\+create\+\_\+dram (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_a9305eae437d57846661e997bb755d150}{ess\+\_\+socket\+\_\+fam\+\_\+t}}]{fam,  }\item[{\hyperlink{ess__socket_8h_a1e8e8de805f8e0b7da25e3b177977273}{ess\+\_\+socket\+\_\+pro\+\_\+t}}]{proto,  }\item[{int}]{flags,  }\item[{\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} $\ast$}]{error\+\_\+code }\end{DoxyParamCaption})}
 
 
 
@@ -469,66 +471,66 @@ The socket is automatically bound to some port.
 \begin{DoxyReturn}{Returns}
 The socket file descriptor number, on error N\+U\+LL.
 \end{DoxyReturn}
-To send and receive data with this socket use the functions explained below, \hyperlink{ess__socket_8h_aa04b07f0d95d5b5c307f96ea5f899e7f}{ess\+\_\+socket\+\_\+read\+\_\+dram()} and \hyperlink{ess__socket_8h_ac6b05df26d4631108fdb5fb9df51e7d6}{ess\+\_\+socket\+\_\+write\+\_\+dram()}. 
+To send and receive data with this socket use the functions explained below, \hyperlink{ess__socket_8h_abe25e0d1df2293293f0aa3ee0dedadcf}{ess\+\_\+socket\+\_\+read\+\_\+dram()} and \hyperlink{ess__socket_8h_a62b826aa7c650a8d4dc447f029364a94}{ess\+\_\+socket\+\_\+write\+\_\+dram()}. 
 
-Definition at line 305 of file ess\+\_\+socket.\+c.
+Definition at line 310 of file ess\+\_\+socket.\+c.
 
 
 \begin{DoxyCode}
-305                                                                                                            
-                          \{
-306   \textcolor{keywordtype}{int} sfd;
-307   \textcolor{keywordtype}{int} \_proto;
-308 
-309   \textcolor{keywordflow}{if} (fam != \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037aff947ddfbc0a3d635ad83146dbaa3a72}{ESS\_SOCKET\_FAMILY\_IP6} && fam != 
+310                                                                                                            
+                   \{
+311   \textcolor{keywordtype}{int} sfd;
+312   \textcolor{keywordtype}{int} \_proto;
+313 
+314   \textcolor{keywordflow}{if} (fam != \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037aff947ddfbc0a3d635ad83146dbaa3a72}{ESS\_SOCKET\_FAMILY\_IP6} && fam != 
       \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037a5e2c7645ba65720d7b828d111df09bb1}{ESS\_SOCKET\_FAMILY\_IP4})   \{
-310     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a9c2f02d06d1df58ff02311623373be99}{ESS\_SOCKET\_ERROR\_UNSPEC\_FAMILY}; \}
-311     \textcolor{keywordflow}{return} 0;
-312   \}
-313   \textcolor{keywordflow}{if}(proto == \hyperlink{ess__socket_8h_a2a924f6745a916783fa640cb1c7e1922afb68fe5545329fb828acf269580e0be9}{ESS\_SOCKET\_PROTO\_DRAM\_LITE}) \{
-314     \_proto = IPPROTO\_UDPLITE;
-315   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(proto == \hyperlink{ess__socket_8h_a2a924f6745a916783fa640cb1c7e1922a93d8e041d336d1198151ca5cca210d34}{ESS\_SOCKET\_PROTO\_DRAM}) \{
-316     \_proto  = 0;
-317   \} \textcolor{keywordflow}{else} \{
-318     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ac51c87b3c945bcf48a02f2294cff45fd}{ESS\_SOCKET\_ERROR\_UNSPEC\_PROTOKOL}; \}
-319     \textcolor{keywordflow}{return} 0;
-320   \}
-321 
-322   \textcolor{keywordflow}{switch} ( proto )
-323   \{
-324   \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037a5e2c7645ba65720d7b828d111df09bb1}{ESS\_SOCKET\_FAMILY\_IP4} :
-325     sfd = socket(AF\_INET,SOCK\_DGRAM|flags,\_proto);
-326     \textcolor{keywordflow}{break};
-327   \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037aff947ddfbc0a3d635ad83146dbaa3a72}{ESS\_SOCKET\_FAMILY\_IP6} :
-328     sfd = socket(AF\_INET6,SOCK\_DGRAM|flags,\_proto);
-329     \textcolor{keywordflow}{break};
-330   \textcolor{keywordflow}{default}:
-331     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a9c2f02d06d1df58ff02311623373be99}{ESS\_SOCKET\_ERROR\_UNSPEC\_FAMILY}; \}
-332     \textcolor{keywordflow}{return} 0;
-333   \}
-334 
-335   \textcolor{keywordflow}{if} ( -1 == sfd ) \{
-336     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a228d3f324847daff4c8a5910b63105f7}{ESS\_SOCKET\_ERROR\_CONNECT}; \}
+315     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa33645fb11bd8e70afa78f70c8510353b}{ESS\_ERROR\_UNSPEC\_FAMILY}; \}
+316     \textcolor{keywordflow}{return} 0;
+317   \}
+318   \textcolor{keywordflow}{if}(proto == \hyperlink{ess__socket_8h_a2a924f6745a916783fa640cb1c7e1922afb68fe5545329fb828acf269580e0be9}{ESS\_SOCKET\_PROTO\_DRAM\_LITE}) \{
+319     \_proto = IPPROTO\_UDPLITE;
+320   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(proto == \hyperlink{ess__socket_8h_a2a924f6745a916783fa640cb1c7e1922a93d8e041d336d1198151ca5cca210d34}{ESS\_SOCKET\_PROTO\_DRAM}) \{
+321     \_proto  = 0;
+322   \} \textcolor{keywordflow}{else} \{
+323     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa6e5f6a4817d742aaf08c97977006bd40}{ESS\_ERROR\_UNSPEC\_PROTOKOL}; \}
+324     \textcolor{keywordflow}{return} 0;
+325   \}
+326 
+327   \textcolor{keywordflow}{switch} ( proto )
+328   \{
+329   \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037a5e2c7645ba65720d7b828d111df09bb1}{ESS\_SOCKET\_FAMILY\_IP4} :
+330     sfd = socket(AF\_INET,SOCK\_DGRAM|flags,\_proto);
+331     \textcolor{keywordflow}{break};
+332   \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037aff947ddfbc0a3d635ad83146dbaa3a72}{ESS\_SOCKET\_FAMILY\_IP6} :
+333     sfd = socket(AF\_INET6,SOCK\_DGRAM|flags,\_proto);
+334     \textcolor{keywordflow}{break};
+335   \textcolor{keywordflow}{default}:
+336     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa33645fb11bd8e70afa78f70c8510353b}{ESS\_ERROR\_UNSPEC\_FAMILY}; \}
 337     \textcolor{keywordflow}{return} 0;
 338   \}
-339   \hyperlink{structess__socket}{ess\_socket\_t}*  new\_socket = (\hyperlink{structess__socket}{ess\_socket\_t}*)malloc(\textcolor{keyword}{sizeof}(
-      \hyperlink{structess__socket}{ess\_socket\_t}));
-340   \textcolor{keywordflow}{if}(new\_socket == 0) \{
-341     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a88fa3dacd5f2854c9977f5667e169851}{ESS\_SOCKET\_ERROR\_OUTOF\_MEM}; \}
+339 
+340   \textcolor{keywordflow}{if} ( -1 == sfd ) \{
+341     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07faa30baabd6fe0c3ccddb08d1692308f0e}{ESS\_ERROR\_CONNECT}; \}
 342     \textcolor{keywordflow}{return} 0;
 343   \}
-344   new\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket} = sfd;
-345   new\_socket->\hyperlink{structess__socket_ad09623d57ebd33fef8dac4e18c0cba2f}{family} = fam;
-346   new\_socket->\hyperlink{structess__socket_a1f0429596710512357072b192ba3d2bd}{protokol} = proto;
-347 
-348   \textcolor{keywordflow}{return} new\_socket;
-349 \}
+344   \hyperlink{structess__socket}{ess\_socket\_t}*  new\_socket = (\hyperlink{structess__socket}{ess\_socket\_t}*)malloc(\textcolor{keyword}{sizeof}(
+      \hyperlink{structess__socket}{ess\_socket\_t}));
+345   \textcolor{keywordflow}{if}(new\_socket == 0) \{
+346     \textcolor{keywordflow}{if}(error\_code != 0) \{ *error\_code = \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa6a45eefc15738cbbc15b5ef516da1c69}{ESS\_ERROR\_OUTOFMEM}; \}
+347     \textcolor{keywordflow}{return} 0;
+348   \}
+349   new\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket} = sfd;
+350   new\_socket->\hyperlink{structess__socket_ad09623d57ebd33fef8dac4e18c0cba2f}{family} = fam;
+351   new\_socket->\hyperlink{structess__socket_a1f0429596710512357072b192ba3d2bd}{protokol} = proto;
+352 
+353   \textcolor{keywordflow}{return} new\_socket;
+354 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{ess__socket_8c_a575203e27b7952239e151fffb66da602}\label{ess__socket_8c_a575203e27b7952239e151fffb66da602}} 
+\mbox{\Hypertarget{ess__socket_8c_a62c983ed003d1db7341a50b0ef1a98ed}\label{ess__socket_8c_a62c983ed003d1db7341a50b0ef1a98ed}} 
 \index{ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}!ess\+\_\+socket\+\_\+create\+\_\+server@{ess\+\_\+socket\+\_\+create\+\_\+server}}
 \index{ess\+\_\+socket\+\_\+create\+\_\+server@{ess\+\_\+socket\+\_\+create\+\_\+server}!ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+socket\+\_\+create\+\_\+server()}{ess\_socket\_create\_server()}}
-{\footnotesize\ttfamily \hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+create\+\_\+server (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_a9305eae437d57846661e997bb755d150}{ess\+\_\+socket\+\_\+fam\+\_\+t}}]{fam,  }\item[{\hyperlink{ess__socket_8h_a1e8e8de805f8e0b7da25e3b177977273}{ess\+\_\+socket\+\_\+pro\+\_\+t}}]{protokoll,  }\item[{const char $\ast$}]{addr,  }\item[{unsigned short}]{port,  }\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+create\+\_\+server (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_a9305eae437d57846661e997bb755d150}{ess\+\_\+socket\+\_\+fam\+\_\+t}}]{fam,  }\item[{\hyperlink{ess__socket_8h_a1e8e8de805f8e0b7da25e3b177977273}{ess\+\_\+socket\+\_\+pro\+\_\+t}}]{protokoll,  }\item[{const char $\ast$}]{addr,  }\item[{unsigned short}]{port,  }\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket }\end{DoxyParamCaption})}
 
 
 
@@ -549,17 +551,17 @@ Create a T\+CP or U\+DP server socket.
 \end{DoxyParams}
 
 \begin{DoxyRetVals}{Return values}
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+OK} & the socket was created -\/ T\+CP socket are listin \\
+{\em E\+S\+S\+\_\+\+OK} & the socket was created -\/ T\+CP socket are listin \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+P\+EC} & socket alwas created \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+P\+EC} & socket alwas created \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+P\+E\+C\+\_\+\+P\+R\+O\+T\+O\+K\+OL} & unknown protokol  E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+P\+E\+C\+\_\+\+F\+A\+M\+I\+LY unknown family \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+P\+E\+C\+\_\+\+P\+R\+O\+T\+O\+K\+OL} & unknown protokol  E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+P\+E\+C\+\_\+\+F\+A\+M\+I\+LY unknown family \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+G\+E\+T\+A\+D\+DR} & \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+G\+E\+T\+A\+D\+DR} & \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+I\+ND} & error to call bind \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+I\+ND} & error to call bind \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & socket was N\+U\+LL \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & socket was N\+U\+LL \\
 \hline
 \end{DoxyRetVals}
 
@@ -570,78 +572,87 @@ Definition at line 65 of file ess\+\_\+socket.\+c.
 \begin{DoxyCode}
 66                                                                                                            
                           \{
-67   \textcolor{keywordflow}{if}(\_socket == 0) \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL};
-68 
-69   \_socket->\hyperlink{structess__socket_ad09623d57ebd33fef8dac4e18c0cba2f}{family} = fam;
-70   \_socket->\hyperlink{structess__socket_a1f0429596710512357072b192ba3d2bd}{protokol} = protokoll;
-71   \_socket->\hyperlink{structess__socket_a938bdc6ae46c346147b6d4f67ad1e704}{port} = port;
-72   \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dca12156322e5e18ca7411b18dba57b9874}{ESS\_SOCKET\_STATUS\_CREATED};
-73   strncpy(\_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname}, hostname, strlen(hostname));
-74   \_socket->\hyperlink{structess__socket_a4d0d74743d167680649419163ce8c80e}{hostname\_len} = strlen(hostname);
-75 
-76   \textcolor{keywordflow}{if}(\_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} != \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dca12156322e5e18ca7411b18dba57b9874}{ESS\_SOCKET\_STATUS\_CREATED} || \_socket->
-      \hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} == \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dca37cf1e968a55c1fffcf40faa6fe58bd2}{ESS\_SOCKET\_STATUS\_STOPPED})
-77     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a373256f32df7f8f490e7d918e9f59418}{ESS\_SOCKET\_ERROR\_UNSPEC};
-78 
-79   \textcolor{keyword}{struct }addrinfo *result, *result\_check, hints;
-80   memset(&hints,0,\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} addrinfo));
-81 
-82   \textcolor{keywordflow}{switch}(\_socket->\hyperlink{structess__socket_a1f0429596710512357072b192ba3d2bd}{protokol}) \{
-83     \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_a2a924f6745a916783fa640cb1c7e1922acba46066923047105db966901c0e8904}{ESS\_SOCKET\_PROTO\_STREAM}:  hints.ai\_socktype = SOCK\_STREAM;  \textcolor{keywordflow}{break};
-84     \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_a2a924f6745a916783fa640cb1c7e1922a93d8e041d336d1198151ca5cca210d34}{ESS\_SOCKET\_PROTO\_DRAM}:  hints.ai\_socktype = SOCK\_DGRAM; \textcolor{keywordflow}{break};
-85     \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_a2a924f6745a916783fa640cb1c7e1922afb68fe5545329fb828acf269580e0be9}{ESS\_SOCKET\_PROTO\_DRAM\_LITE}:  hints.ai\_socktype = SOCK\_DGRAM;  hints.
+67   \textcolor{keywordflow}{if}(\_socket == 0) \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL};
+68   \textcolor{keywordflow}{if}( \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} == \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dca37cf1e968a55c1fffcf40faa6fe58bd2}{ESS\_SOCKET\_STATUS\_STOPPED})
+69     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07faa28e2c57627994f0cfa08dd3b4e28b97}{ESS\_ERROR};
+70 
+71   \_socket->\hyperlink{structess__socket_ad09623d57ebd33fef8dac4e18c0cba2f}{family} = fam;
+72   \_socket->\hyperlink{structess__socket_a1f0429596710512357072b192ba3d2bd}{protokol} = protokoll;
+73   \_socket->\hyperlink{structess__socket_a938bdc6ae46c346147b6d4f67ad1e704}{port} = port;
+74   \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dca12156322e5e18ca7411b18dba57b9874}{ESS\_SOCKET\_STATUS\_CREATED};
+75   \_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname}[0] = \textcolor{charliteral}{'\(\backslash\)0'};
+76   \_socket->\hyperlink{structess__socket_a4d0d74743d167680649419163ce8c80e}{hostname\_len} = strlen(hostname);
+77 
+78     strncpy(\_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname}, hostname, strlen(hostname));
+79 
+80 
+81   \textcolor{keyword}{struct }addrinfo *result, *result\_check, hints;
+82   memset(&hints,0,\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} addrinfo));
+83 
+84   \textcolor{keywordflow}{switch}(\_socket->\hyperlink{structess__socket_a1f0429596710512357072b192ba3d2bd}{protokol}) \{
+85     \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_a2a924f6745a916783fa640cb1c7e1922acba46066923047105db966901c0e8904}{ESS\_SOCKET\_PROTO\_STREAM}:  hints.ai\_socktype = SOCK\_STREAM;  \textcolor{keywordflow}{break};
+86     \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_a2a924f6745a916783fa640cb1c7e1922a93d8e041d336d1198151ca5cca210d34}{ESS\_SOCKET\_PROTO\_DRAM}:  hints.ai\_socktype = SOCK\_DGRAM; \textcolor{keywordflow}{break};
+87     \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_a2a924f6745a916783fa640cb1c7e1922afb68fe5545329fb828acf269580e0be9}{ESS\_SOCKET\_PROTO\_DRAM\_LITE}:  hints.ai\_socktype = SOCK\_DGRAM;  hints.
       ai\_protocol = IPPROTO\_UDPLITE; \textcolor{keywordflow}{break};
-86     \textcolor{keywordflow}{default}: \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR}; \textcolor{keywordflow}{return} 
-      \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ac51c87b3c945bcf48a02f2294cff45fd}{ESS\_SOCKET\_ERROR\_UNSPEC\_PROTOKOL};
-87   \};
-88   \textcolor{keywordflow}{switch} ( \_socket->\hyperlink{structess__socket_ad09623d57ebd33fef8dac4e18c0cba2f}{family} ) \{
-89     \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037a5e2c7645ba65720d7b828d111df09bb1}{ESS\_SOCKET\_FAMILY\_IP4}: hints.ai\_family = AF\_INET; \textcolor{keywordflow}{break};
-90     \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037aff947ddfbc0a3d635ad83146dbaa3a72}{ESS\_SOCKET\_FAMILY\_IP6}: hints.ai\_family = AF\_INET6; \textcolor{keywordflow}{break};
-91     \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037a7376a04481497185206395231d23624d}{ESS\_SOCKET\_FAMILY\_BOTH}: hints.ai\_family = AF\_UNSPEC; \textcolor{keywordflow}{break};
-92     \textcolor{keywordflow}{default}: \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR}; \textcolor{keywordflow}{return} 
-      \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a9c2f02d06d1df58ff02311623373be99}{ESS\_SOCKET\_ERROR\_UNSPEC\_FAMILY};
-93   \}
-94   hints.ai\_flags = AI\_PASSIVE;
-95 
-96   \textcolor{keywordtype}{char} buffer[8]; buffer[0] = \textcolor{charliteral}{'\(\backslash\)0'}; buffer[0] = \textcolor{charliteral}{'\(\backslash\)0'};
-97   snprintf(buffer, 8,\textcolor{stringliteral}{"%d"},\_socket->\hyperlink{structess__socket_a938bdc6ae46c346147b6d4f67ad1e704}{port}) ;
-98   \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval} = getaddrinfo(\_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname}, buffer ,&hints,&result)) != 0 ) \{
-99     \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
-100     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae0eba04a60a1605cec5b429ec095c4c5}{ESS\_SOCKET\_ERROR\_GETADDR};
-101   \}
-102 
-103   \textcolor{keywordflow}{for} ( result\_check = result; result\_check != NULL; result\_check = result\_check->ai\_next ) \{
-104     \_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket} = socket(result\_check->ai\_family, result\_check->ai\_socktype, result\_check->
+88     \textcolor{keywordflow}{default}: \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR}; \textcolor{keywordflow}{return} 
+      \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa6e5f6a4817d742aaf08c97977006bd40}{ESS\_ERROR\_UNSPEC\_PROTOKOL};
+89   \};
+90   \textcolor{keywordflow}{switch} ( \_socket->\hyperlink{structess__socket_ad09623d57ebd33fef8dac4e18c0cba2f}{family} ) \{
+91     \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037a5e2c7645ba65720d7b828d111df09bb1}{ESS\_SOCKET\_FAMILY\_IP4}: hints.ai\_family = AF\_INET; \textcolor{keywordflow}{break};
+92     \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037aff947ddfbc0a3d635ad83146dbaa3a72}{ESS\_SOCKET\_FAMILY\_IP6}: hints.ai\_family = AF\_INET6; \textcolor{keywordflow}{break};
+93     \textcolor{keywordflow}{case} \hyperlink{ess__socket_8h_aeaa282f75f614c7bb033f6b7a72ed037a7376a04481497185206395231d23624d}{ESS\_SOCKET\_FAMILY\_BOTH}: hints.ai\_family = AF\_UNSPEC; \textcolor{keywordflow}{break};
+94     \textcolor{keywordflow}{default}: \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR}; \textcolor{keywordflow}{return} 
+      \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa33645fb11bd8e70afa78f70c8510353b}{ESS\_ERROR\_UNSPEC\_FAMILY};
+95   \}
+96   hints.ai\_flags = AI\_PASSIVE;
+97 
+98   \textcolor{keywordtype}{char} buffer[8]; buffer[0] = \textcolor{charliteral}{'\(\backslash\)0'};
+99   snprintf(buffer, 8,\textcolor{stringliteral}{"%d"},\_socket->\hyperlink{structess__socket_a938bdc6ae46c346147b6d4f67ad1e704}{port}) ;
+100   \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval} = getaddrinfo(\_socket->\hyperlink{structess__socket_a0c6be700c8763c26054098348ebef8d6}{hostname}, buffer ,&hints,&result)) != 0 ) \{
+101     \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
+102     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa27d1d29e5376284759ed12c811b4d94e}{ESS\_ERROR\_GETADDR};
+103   \}
+104 
+105   \textcolor{keywordflow}{for} ( result\_check = result; result\_check != NULL; result\_check = result\_check->ai\_next ) \{
+106     \_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket} = socket(result\_check->ai\_family, result\_check->ai\_socktype, result\_check->
       ai\_protocol);
-105     \textcolor{keywordflow}{if} ( \_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket} < 0 )  \textcolor{keywordflow}{continue};
-106     \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval}  = bind(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, result\_check->ai\_addr,(socklen\_t)
+107     \textcolor{keywordflow}{if} ( \_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket} < 0 )  \textcolor{keywordflow}{continue};
+108     \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval}  = bind(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, result\_check->ai\_addr,(socklen\_t)
       result\_check->ai\_addrlen)) != 0 ) \{
-107       close(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}); \textcolor{keywordflow}{continue};
-108     \}
-109     \textcolor{keywordflow}{if} (\_socket->\hyperlink{structess__socket_a1f0429596710512357072b192ba3d2bd}{protokol} == \hyperlink{ess__socket_8h_a2a924f6745a916783fa640cb1c7e1922acba46066923047105db966901c0e8904}{ESS\_SOCKET\_PROTO\_STREAM}) \{
-110         \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval}  = listen(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, 128)) == 0) \{
-111           \textcolor{keywordflow}{break};
-112         \} \textcolor{keywordflow}{else} \{
-113           close(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket});
-114         \}
-115     \}
-116   \}
-117   \textcolor{keywordflow}{if} ( result\_check == NULL ) \{
-118     freeaddrinfo(result);
-119     \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
-120     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405af215791e214f048d485adbd827ae3a98}{ESS\_SOCKET\_ERROR\_BIND};
-121   \}
-122   freeaddrinfo(result);
-123 
-124   \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dca7ee468f68ee4bd3cfbcdc6bda032be83}{ESS\_SOCKET\_STATUS\_LISTEN};
-125   \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405afed31ad640a62c99c98982717fcb4b40}{ESS\_SOCKET\_ERROR\_OK};
-126 \}
+109       close(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}); \textcolor{keywordflow}{continue};
+110     \}
+111     \textcolor{keywordflow}{if} (\_socket->\hyperlink{structess__socket_a1f0429596710512357072b192ba3d2bd}{protokol} == \hyperlink{ess__socket_8h_a2a924f6745a916783fa640cb1c7e1922acba46066923047105db966901c0e8904}{ESS\_SOCKET\_PROTO\_STREAM}) \{
+112         \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval}  = listen(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, 128)) == 0) \{
+113           \textcolor{keywordflow}{break};
+114         \} \textcolor{keywordflow}{else} \{
+115           close(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket});
+116         \}
+117     \}
+118   \}
+119   \textcolor{keywordflow}{if} ( result\_check == NULL ) \{
+120     freeaddrinfo(result);
+121     \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
+122     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa497475ae748b432dea8df5daabc4f0ad}{ESS\_ERROR\_BIND};
+123   \}
+124   freeaddrinfo(result);
+125 
+126   \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dca7ee468f68ee4bd3cfbcdc6bda032be83}{ESS\_SOCKET\_STATUS\_LISTEN};
+127   \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa7a39eb24d172b29cca7678967088d864}{ESS\_OK};
+128 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{ess__socket_8c_aac19f047f96c480e53f0510c8e91e0b5}\label{ess__socket_8c_aac19f047f96c480e53f0510c8e91e0b5}} 
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{d7/d06/ess__socket_8c_a62c983ed003d1db7341a50b0ef1a98ed_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{ess__socket_8c_a8ba8f229958de5d36ad07b24f782a342}\label{ess__socket_8c_a8ba8f229958de5d36ad07b24f782a342}} 
 \index{ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}!ess\+\_\+socket\+\_\+end@{ess\+\_\+socket\+\_\+end}}
 \index{ess\+\_\+socket\+\_\+end@{ess\+\_\+socket\+\_\+end}!ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+socket\+\_\+end()}{ess\_socket\_end()}}
-{\footnotesize\ttfamily \hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+end (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+end (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket }\end{DoxyParamCaption})}
 
 
 
@@ -654,39 +665,39 @@ perform a {\ttfamily shutdown(2)} call on a socket (read/write)
 \end{DoxyParams}
 
 \begin{DoxyRetVals}{Return values}
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+OK} & Closed socket successfully \\
+{\em E\+S\+S\+\_\+\+OK} & Closed socket successfully \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & socket was N\+U\+LL \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & socket was N\+U\+LL \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+L\+O\+SE} & Socket was already closed (other errors are very unlikely to occur) \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+L\+O\+SE} & Socket was already closed (other errors are very unlikely to occur) \\
 \hline
 \end{DoxyRetVals}
 
 
-Definition at line 163 of file ess\+\_\+socket.\+c.
+Definition at line 165 of file ess\+\_\+socket.\+c.
 
 
 \begin{DoxyCode}
-163                                                          \{
-164   \textcolor{keywordflow}{if}(\_socket == 0) \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL};
-165 
-166   \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval}  = shutdown(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},  SHUT\_RD) )  != 0 ) \{
-167     \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
-168     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a51ccd446ce3de87bfa81d620812f18a4}{ESS\_SOCKET\_ERROR\_CLOSE};
-169   \}
-170   \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval}  = shutdown(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},  SHUT\_WR) )  != 0 ) \{
-171     \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
-172     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a51ccd446ce3de87bfa81d620812f18a4}{ESS\_SOCKET\_ERROR\_CLOSE};
-173   \}
-174 
-175   \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405afed31ad640a62c99c98982717fcb4b40}{ESS\_SOCKET\_ERROR\_OK};
-176 \}
+165                                                   \{
+166   \textcolor{keywordflow}{if}(\_socket == 0) \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL};
+167 
+168   \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval}  = shutdown(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},  SHUT\_RD) )  != 0 ) \{
+169     \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
+170     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa3c103cfeedd28b98ed4c47427b1b69ca}{ESS\_ERROR\_CLOSE};
+171   \}
+172   \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval}  = shutdown(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},  SHUT\_WR) )  != 0 ) \{
+173     \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
+174     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa3c103cfeedd28b98ed4c47427b1b69ca}{ESS\_ERROR\_CLOSE};
+175   \}
+176 
+177   \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa7a39eb24d172b29cca7678967088d864}{ESS\_OK};
+178 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{ess__socket_8c_aa3179d64bbaa6d4f395490edf9fc391d}\label{ess__socket_8c_aa3179d64bbaa6d4f395490edf9fc391d}} 
+\mbox{\Hypertarget{ess__socket_8c_a03a4601382a1dabaf2c8946191ea7c08}\label{ess__socket_8c_a03a4601382a1dabaf2c8946191ea7c08}} 
 \index{ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}!ess\+\_\+socket\+\_\+end\+\_\+read@{ess\+\_\+socket\+\_\+end\+\_\+read}}
 \index{ess\+\_\+socket\+\_\+end\+\_\+read@{ess\+\_\+socket\+\_\+end\+\_\+read}!ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+socket\+\_\+end\+\_\+read()}{ess\_socket\_end\_read()}}
-{\footnotesize\ttfamily \hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+end\+\_\+read (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+end\+\_\+read (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket }\end{DoxyParamCaption})}
 
 
 
@@ -699,34 +710,34 @@ perform a {\ttfamily shutdown(2)} call on a socket (read)
 \end{DoxyParams}
 
 \begin{DoxyRetVals}{Return values}
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+OK} & Closed socket successfully \\
+{\em E\+S\+S\+\_\+\+OK} & Closed socket successfully \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & socket was N\+U\+LL \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & socket was N\+U\+LL \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+L\+O\+SE} & Socket was already closed (other errors are very unlikely to occur) \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+L\+O\+SE} & Socket was already closed (other errors are very unlikely to occur) \\
 \hline
 \end{DoxyRetVals}
 
 
-Definition at line 153 of file ess\+\_\+socket.\+c.
+Definition at line 155 of file ess\+\_\+socket.\+c.
 
 
 \begin{DoxyCode}
-153                                                               \{
-154   \textcolor{keywordflow}{if}(\_socket == 0) \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL};
-155 
-156   \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval}  = shutdown(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},  SHUT\_RD) )  != 0 ) \{
-157     \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
-158     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a51ccd446ce3de87bfa81d620812f18a4}{ESS\_SOCKET\_ERROR\_CLOSE};
-159   \}
-160   \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405afed31ad640a62c99c98982717fcb4b40}{ESS\_SOCKET\_ERROR\_OK};
-161 \}
+155                                                        \{
+156   \textcolor{keywordflow}{if}(\_socket == 0) \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL};
+157 
+158   \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval}  = shutdown(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},  SHUT\_RD) )  != 0 ) \{
+159     \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
+160     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa3c103cfeedd28b98ed4c47427b1b69ca}{ESS\_ERROR\_CLOSE};
+161   \}
+162   \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa7a39eb24d172b29cca7678967088d864}{ESS\_OK};
+163 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{ess__socket_8c_a482df0724a01526b25ecc3bbd2ae2bcb}\label{ess__socket_8c_a482df0724a01526b25ecc3bbd2ae2bcb}} 
+\mbox{\Hypertarget{ess__socket_8c_a57c8d39ed9fc55eba03837238cb08557}\label{ess__socket_8c_a57c8d39ed9fc55eba03837238cb08557}} 
 \index{ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}!ess\+\_\+socket\+\_\+end\+\_\+write@{ess\+\_\+socket\+\_\+end\+\_\+write}}
 \index{ess\+\_\+socket\+\_\+end\+\_\+write@{ess\+\_\+socket\+\_\+end\+\_\+write}!ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+socket\+\_\+end\+\_\+write()}{ess\_socket\_end\_write()}}
-{\footnotesize\ttfamily \hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+end\+\_\+write (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+end\+\_\+write (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket }\end{DoxyParamCaption})}
 
 
 
@@ -741,39 +752,39 @@ This function closes a socket.
 \end{DoxyParams}
 
 \begin{DoxyRetVals}{Return values}
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+OK} & Closed socket successfully \\
+{\em E\+S\+S\+\_\+\+OK} & Closed socket successfully \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & socket was N\+U\+LL \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & socket was N\+U\+LL \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+L\+O\+SE} & Socket was already closed (other errors are very unlikely to occur) \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+L\+O\+SE} & Socket was already closed (other errors are very unlikely to occur) \\
 \hline
 \end{DoxyRetVals}
 
 
-Definition at line 138 of file ess\+\_\+socket.\+c.
+Definition at line 140 of file ess\+\_\+socket.\+c.
 
 
 \begin{DoxyCode}
-138                                                                \{
-139   \textcolor{keywordflow}{if}(\_socket == 0) \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL};
-140 
-141   \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval}  = shutdown(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},  SHUT\_WR) )  != 0 ) \{
-142     \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
-143     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a51ccd446ce3de87bfa81d620812f18a4}{ESS\_SOCKET\_ERROR\_CLOSE};
-144   \}
-145   \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405afed31ad640a62c99c98982717fcb4b40}{ESS\_SOCKET\_ERROR\_OK};
-146 
-147   \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval}  = shutdown(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},  SHUT\_WR) )  != 0 ) \{
-148     \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
-149     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a51ccd446ce3de87bfa81d620812f18a4}{ESS\_SOCKET\_ERROR\_CLOSE};
-150   \}
-151 \}
+140                                                         \{
+141   \textcolor{keywordflow}{if}(\_socket == 0) \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL};
+142 
+143   \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval}  = shutdown(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},  SHUT\_WR) )  != 0 ) \{
+144     \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
+145     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa3c103cfeedd28b98ed4c47427b1b69ca}{ESS\_ERROR\_CLOSE};
+146   \}
+147   \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa7a39eb24d172b29cca7678967088d864}{ESS\_OK};
+148 
+149   \textcolor{keywordflow}{if} (  (\_socket->\hyperlink{structess__socket_a7f345697df7eb20c9aba1ab6980cae8f}{retval}  = shutdown(\_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},  SHUT\_WR) )  != 0 ) \{
+150     \_socket->\hyperlink{structess__socket_a4e47521e8af756b9edf77f1f02f9b725}{status} = \hyperlink{ess__socket_8h_a85c5abde0574d4a5fbf9e220a18e89dcaa44487507568afb1224527edc59777bc}{ESS\_SOCKET\_STATUS\_ERROR};
+151     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa3c103cfeedd28b98ed4c47427b1b69ca}{ESS\_ERROR\_CLOSE};
+152   \}
+153 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{ess__socket_8c_a274fa100ab9d3180a27afca3bd61e5b4}\label{ess__socket_8c_a274fa100ab9d3180a27afca3bd61e5b4}} 
+\mbox{\Hypertarget{ess__socket_8c_a944f0798ea120bef422f97909451b1a9}\label{ess__socket_8c_a944f0798ea120bef422f97909451b1a9}} 
 \index{ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}!ess\+\_\+socket\+\_\+read@{ess\+\_\+socket\+\_\+read}}
 \index{ess\+\_\+socket\+\_\+read@{ess\+\_\+socket\+\_\+read}!ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+socket\+\_\+read()}{ess\_socket\_read()}}
-{\footnotesize\ttfamily \hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+read (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket,  }\item[{void $\ast$}]{buffer,  }\item[{unsigned int}]{size,  }\item[{unsigned int $\ast$}]{readed }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+read (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket,  }\item[{void $\ast$}]{buffer,  }\item[{unsigned int}]{size,  }\item[{unsigned int $\ast$}]{readed }\end{DoxyParamCaption})}
 
 
 
@@ -792,41 +803,40 @@ read from socket
 \end{DoxyParams}
 
 \begin{DoxyRetVals}{Return values}
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+OK} & all ok \\
+{\em E\+S\+S\+\_\+\+OK} & all ok \\
 \hline
 {\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+U\+N\+S\+P\+EC} & Error \\
 \hline
 \end{DoxyRetVals}
 
 
-Definition at line 459 of file ess\+\_\+socket.\+c.
+Definition at line 464 of file ess\+\_\+socket.\+c.
 
 
 \begin{DoxyCode}
-459                                                                                                            
-           \{
-460   \textcolor{keywordtype}{int} readed\_g = 0;
-461 
-462   \textcolor{keywordflow}{if}(buffer == 0) \{ \textcolor{keywordflow}{if}(readed) *readed = 0; \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL}; \}
-463 
-464   \textcolor{keywordflow}{if} (socket == 0)   \{
-465     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL}; \textcolor{keywordflow}{if}(readed) *readed = 0;
-466   \}
-467   readed\_g = read(socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, buffer, size);
-468   \textcolor{keywordflow}{if}(readed\_g > 0) \{
-469     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a373256f32df7f8f490e7d918e9f59418}{ESS\_SOCKET\_ERROR\_UNSPEC}; \textcolor{keywordflow}{if}(readed) *readed = 0;
-470   \}
-471   \textcolor{keywordflow}{if}(readed) \{
-472     *readed = readed\_g;
-473   \}
-474   \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405afed31ad640a62c99c98982717fcb4b40}{ESS\_SOCKET\_ERROR\_OK};
-475 \}
+464                                                                                                          \{
+465   \textcolor{keywordtype}{int} readed\_g = 0;
+466 
+467   \textcolor{keywordflow}{if}(buffer == 0) \{ \textcolor{keywordflow}{if}(readed) *readed = 0; \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL}; \}
+468 
+469   \textcolor{keywordflow}{if} (socket == 0)   \{
+470     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL};
+471   \}
+472   readed\_g = read(socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, buffer, size);
+473   \textcolor{keywordflow}{if}(readed\_g > 0) \{
+474     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07faa28e2c57627994f0cfa08dd3b4e28b97}{ESS\_ERROR};
+475   \}
+476   \textcolor{keywordflow}{if}(readed) \{
+477     *readed = readed\_g;
+478   \}
+479   \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa7a39eb24d172b29cca7678967088d864}{ESS\_OK};
+480 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{ess__socket_8c_aa04b07f0d95d5b5c307f96ea5f899e7f}\label{ess__socket_8c_aa04b07f0d95d5b5c307f96ea5f899e7f}} 
+\mbox{\Hypertarget{ess__socket_8c_abe25e0d1df2293293f0aa3ee0dedadcf}\label{ess__socket_8c_abe25e0d1df2293293f0aa3ee0dedadcf}} 
 \index{ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}!ess\+\_\+socket\+\_\+read\+\_\+dram@{ess\+\_\+socket\+\_\+read\+\_\+dram}}
 \index{ess\+\_\+socket\+\_\+read\+\_\+dram@{ess\+\_\+socket\+\_\+read\+\_\+dram}!ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+socket\+\_\+read\+\_\+dram()}{ess\_socket\_read\_dram()}}
-{\footnotesize\ttfamily \hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+read\+\_\+dram (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket,  }\item[{void $\ast$}]{buf,  }\item[{unsigned int}]{size,  }\item[{char $\ast$}]{src\+\_\+host,  }\item[{unsigned int}]{src\+\_\+host\+\_\+len,  }\item[{int}]{src\+\_\+port,  }\item[{int}]{recvfrom\+\_\+flags }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+read\+\_\+dram (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket,  }\item[{void $\ast$}]{buf,  }\item[{unsigned int}]{size,  }\item[{char $\ast$}]{src\+\_\+host,  }\item[{unsigned int}]{src\+\_\+host\+\_\+len,  }\item[{int}]{src\+\_\+port,  }\item[{int}]{recvfrom\+\_\+flags }\end{DoxyParamCaption})}
 
 
 
@@ -860,40 +870,40 @@ Receive data from a U\+D\+P/\+IP socket.
 \end{DoxyRetVals}
 
 
-Definition at line 434 of file ess\+\_\+socket.\+c.
+Definition at line 439 of file ess\+\_\+socket.\+c.
 
 
 \begin{DoxyCode}
-435                                                                 \{
-436 
-437   \textcolor{keyword}{struct }sockaddr\_storage client;
-438   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} bytes;
-439 
-440   \textcolor{keywordtype}{char} buffer[8]; buffer[0] = \textcolor{charliteral}{'\(\backslash\)0'};
-441   snprintf(buffer, 8, \textcolor{stringliteral}{"%d"}, src\_port);
-442 
-443   \textcolor{keywordflow}{if}(buf == 0 || size == 0) \textcolor{keywordflow}{return} 0;
+440                                                                 \{
+441 
+442   \textcolor{keyword}{struct }sockaddr\_storage client;
+443   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} bytes;
 444 
-445   \textcolor{keywordflow}{if} (socket == 0 )   \{
-446     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL};
-447   \}
-448   memset(buffer,0,size);
-449   \textcolor{keywordflow}{if} ( src\_host ) memset(src\_host,0,src\_host\_len);
-450 
-451   socklen\_t stor\_addrlen = \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct }sockaddr\_storage);
-452 
-453   \textcolor{keywordflow}{if} ( (bytes = recvfrom(socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, buffer,size,recvfrom\_flags,(\textcolor{keyword}{struct} sockaddr*)&client,&
-      stor\_addrlen)) == -1)
-454     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a373256f32df7f8f490e7d918e9f59418}{ESS\_SOCKET\_ERROR\_UNSPEC};
+445   \textcolor{keywordtype}{char} buffer[8]; buffer[0] = \textcolor{charliteral}{'\(\backslash\)0'};
+446   snprintf(buffer, 8, \textcolor{stringliteral}{"%d"}, src\_port);
+447 
+448   \textcolor{keywordflow}{if}(buf == 0 || size == 0) \textcolor{keywordflow}{return} 0;
+449 
+450   \textcolor{keywordflow}{if} (socket == 0 )   \{
+451     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL};
+452   \}
+453   memset(buffer,0,size);
+454   \textcolor{keywordflow}{if} ( src\_host ) memset(src\_host,0,src\_host\_len);
 455 
-456   \textcolor{keywordflow}{return} bytes;
-457 \}
+456   socklen\_t stor\_addrlen = \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct }sockaddr\_storage);
+457 
+458   \textcolor{keywordflow}{if} ( (bytes = recvfrom(socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, buffer,size,recvfrom\_flags,(\textcolor{keyword}{struct} sockaddr*)&client,&
+      stor\_addrlen)) == -1)
+459     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07faa28e2c57627994f0cfa08dd3b4e28b97}{ESS\_ERROR};
+460 
+461   \textcolor{keywordflow}{return} bytes;
+462 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{ess__socket_8c_af9473834026e8a7b8a523f0107049865}\label{ess__socket_8c_af9473834026e8a7b8a523f0107049865}} 
+\mbox{\Hypertarget{ess__socket_8c_a54f5a1366f009fc50e193874d71b7d7f}\label{ess__socket_8c_a54f5a1366f009fc50e193874d71b7d7f}} 
 \index{ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}!ess\+\_\+socket\+\_\+set\+\_\+buffer@{ess\+\_\+socket\+\_\+set\+\_\+buffer}}
 \index{ess\+\_\+socket\+\_\+set\+\_\+buffer@{ess\+\_\+socket\+\_\+set\+\_\+buffer}!ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+socket\+\_\+set\+\_\+buffer()}{ess\_socket\_set\_buffer()}}
-{\footnotesize\ttfamily \hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+set\+\_\+buffer (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket,  }\item[{unsigned int}]{rec\+\_\+buffer\+\_\+size,  }\item[{unsigned int}]{send\+\_\+buffer\+\_\+size }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+set\+\_\+buffer (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket,  }\item[{unsigned int}]{rec\+\_\+buffer\+\_\+size,  }\item[{unsigned int}]{send\+\_\+buffer\+\_\+size }\end{DoxyParamCaption})}
 
 
 
@@ -910,35 +920,35 @@ set send and recive buffer size of the socket
 \end{DoxyParams}
 
 \begin{DoxyRetVals}{Return values}
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+OK} & Closed socket successfully \\
+{\em E\+S\+S\+\_\+\+OK} & Closed socket successfully \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & socket was N\+U\+LL \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & socket was N\+U\+LL \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+L\+O\+SE} & Socket was already closed (other errors are very unlikely to occur) \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+L\+O\+SE} & Socket was already closed (other errors are very unlikely to occur) \\
 \hline
 \end{DoxyRetVals}
 
 
-Definition at line 239 of file ess\+\_\+socket.\+c.
+Definition at line 244 of file ess\+\_\+socket.\+c.
 
 
 \begin{DoxyCode}
-239                                                                                                            
-                          \{
-240   \textcolor{keywordflow}{if}(\_socket == 0) \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL};
-241 
-242   setsockopt( \_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, SOL\_SOCKET, SO\_SNDBUF, &send\_buffer\_size, \textcolor{keyword}{sizeof}( send\_buffer\_size ) )
+244                                                                                                            
+                   \{
+245   \textcolor{keywordflow}{if}(\_socket == 0) \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL};
+246 
+247   setsockopt( \_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, SOL\_SOCKET, SO\_SNDBUF, &send\_buffer\_size, \textcolor{keyword}{sizeof}( send\_buffer\_size ) )
       ;
-243   setsockopt( \_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, SOL\_SOCKET, SO\_RCVBUF, &rec\_buffer\_size, \textcolor{keyword}{sizeof}( rec\_buffer\_size ) );
-244 
-245   \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405afed31ad640a62c99c98982717fcb4b40}{ESS\_SOCKET\_ERROR\_OK};
-246 \}
+248   setsockopt( \_socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, SOL\_SOCKET, SO\_RCVBUF, &rec\_buffer\_size, \textcolor{keyword}{sizeof}( rec\_buffer\_size ) );
+249 
+250   \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa7a39eb24d172b29cca7678967088d864}{ESS\_OK};
+251 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{ess__socket_8c_a0adeaaf662d0d188ffa83262b6ae315b}\label{ess__socket_8c_a0adeaaf662d0d188ffa83262b6ae315b}} 
+\mbox{\Hypertarget{ess__socket_8c_a1cda1ccc6857cde561484dd998124bd7}\label{ess__socket_8c_a1cda1ccc6857cde561484dd998124bd7}} 
 \index{ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}!ess\+\_\+socket\+\_\+write@{ess\+\_\+socket\+\_\+write}}
 \index{ess\+\_\+socket\+\_\+write@{ess\+\_\+socket\+\_\+write}!ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+socket\+\_\+write()}{ess\_socket\_write()}}
-{\footnotesize\ttfamily \hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+write (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket,  }\item[{const void $\ast$}]{buffer,  }\item[{unsigned int}]{size,  }\item[{unsigned int $\ast$}]{wrote }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+write (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket,  }\item[{const void $\ast$}]{buffer,  }\item[{unsigned int}]{size,  }\item[{unsigned int $\ast$}]{wrote }\end{DoxyParamCaption})}
 
 
 
@@ -957,41 +967,41 @@ read from socket
 \end{DoxyParams}
 
 \begin{DoxyRetVals}{Return values}
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+OK} & all ok \\
+{\em E\+S\+S\+\_\+\+OK} & all ok \\
 \hline
 {\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+U\+N\+S\+P\+EC} & Error \\
 \hline
 \end{DoxyRetVals}
 
 
-Definition at line 476 of file ess\+\_\+socket.\+c.
+Definition at line 481 of file ess\+\_\+socket.\+c.
 
 
 \begin{DoxyCode}
-476                                                                                                            
-                 \{
-477   \textcolor{keywordtype}{int} wrote\_g = 0;
-478 
-479   \textcolor{keywordflow}{if}(buffer == 0) \{ \textcolor{keywordflow}{if}(wrote) *wrote = 0; \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL}; \}
-480 
-481   \textcolor{keywordflow}{if} (socket == 0)   \{
-482     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL}; \textcolor{keywordflow}{if}(wrote) *wrote = 0;
-483   \}
-484   wrote\_g = write(socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, buffer, size);
-485   \textcolor{keywordflow}{if}(wrote\_g > 0) \{
-486     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a373256f32df7f8f490e7d918e9f59418}{ESS\_SOCKET\_ERROR\_UNSPEC}; \textcolor{keywordflow}{if}(wrote) *wrote = 0;
-487   \}
-488   \textcolor{keywordflow}{if}(wrote) \{
-489     *wrote = wrote\_g;
-490   \}
-491   \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405afed31ad640a62c99c98982717fcb4b40}{ESS\_SOCKET\_ERROR\_OK};
-492 \}
+481                                                                                                            
+          \{
+482   \textcolor{keywordtype}{int} wrote\_g = 0;
+483 
+484   \textcolor{keywordflow}{if}(buffer == 0) \{ \textcolor{keywordflow}{if}(wrote) *wrote = 0; \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL}; \}
+485 
+486   \textcolor{keywordflow}{if} (socket == 0)   \{
+487     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL};
+488   \}
+489   wrote\_g = write(socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, buffer, size);
+490   \textcolor{keywordflow}{if}(wrote\_g > 0) \{
+491     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07faa28e2c57627994f0cfa08dd3b4e28b97}{ESS\_ERROR};
+492   \}
+493   \textcolor{keywordflow}{if}(wrote) \{
+494     *wrote = wrote\_g;
+495   \}
+496   \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa7a39eb24d172b29cca7678967088d864}{ESS\_OK};
+497 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{ess__socket_8c_ac6b05df26d4631108fdb5fb9df51e7d6}\label{ess__socket_8c_ac6b05df26d4631108fdb5fb9df51e7d6}} 
+\mbox{\Hypertarget{ess__socket_8c_a62b826aa7c650a8d4dc447f029364a94}\label{ess__socket_8c_a62b826aa7c650a8d4dc447f029364a94}} 
 \index{ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}!ess\+\_\+socket\+\_\+write\+\_\+dram@{ess\+\_\+socket\+\_\+write\+\_\+dram}}
 \index{ess\+\_\+socket\+\_\+write\+\_\+dram@{ess\+\_\+socket\+\_\+write\+\_\+dram}!ess\+\_\+socket.\+c@{ess\+\_\+socket.\+c}}
 \subsubsection{\texorpdfstring{ess\+\_\+socket\+\_\+write\+\_\+dram()}{ess\_socket\_write\_dram()}}
-{\footnotesize\ttfamily \hyperlink{ess__socket_8h_a10bd672efb8f19945749d1a3b3d63488}{ess\+\_\+socket\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+write\+\_\+dram (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket,  }\item[{const void $\ast$}]{buf,  }\item[{unsigned int}]{size,  }\item[{const char $\ast$}]{host,  }\item[{int}]{port,  }\item[{int}]{sendto\+\_\+flags }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+socket\+\_\+write\+\_\+dram (\begin{DoxyParamCaption}\item[{\hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} $\ast$}]{socket,  }\item[{const void $\ast$}]{buf,  }\item[{unsigned int}]{size,  }\item[{const char $\ast$}]{host,  }\item[{int}]{port,  }\item[{int}]{sendto\+\_\+flags }\end{DoxyParamCaption})}
 
 
 
@@ -1018,48 +1028,48 @@ This function is the equivalent to {\ttfamily sendto(2)}
 \begin{DoxyRetVals}{Return values}
 {\em n} & {\itshape n} bytes of data could be sent. \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+P\+EC} & Unsopec error. \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+P\+EC} & Unsopec error. \\
 \hline
-{\em E\+S\+S\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & size, host or socket is N\+U\+LL \\
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & size, host or socket is N\+U\+LL \\
 \hline
 \end{DoxyRetVals}
 
 
-Definition at line 402 of file ess\+\_\+socket.\+c.
+Definition at line 407 of file ess\+\_\+socket.\+c.
 
 
 \begin{DoxyCode}
-403                                                 \{
-404 
-405   \textcolor{keyword}{struct }sockaddr\_storage oldsock;
-406   \textcolor{keyword}{struct }addrinfo *result, *result\_check, hint;
-407   socklen\_t oldsocklen = \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct }sockaddr\_storage);
-408   \textcolor{keywordtype}{int} return\_value;
-409   \textcolor{keywordtype}{char} buffer[8]; buffer[0] = \textcolor{charliteral}{'\(\backslash\)0'};
-410   snprintf(buffer, 8, \textcolor{stringliteral}{"%d"}, port);
-411 
-412   \textcolor{keywordflow}{if}(buf == 0) \textcolor{keywordflow}{return} 0;
-413 
-414   \textcolor{keywordflow}{if} (socket == 0  || port == 0  || host == NULL)   \{
-415     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405ae8d8b6ffe8d8732e7127e12031d7760b}{ESS\_SOCKET\_ERROR\_NULL};
-416   \}
-417   \textcolor{keywordflow}{if} (  getsockname(socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, (\textcolor{keyword}{struct} sockaddr*)&oldsock,(socklen\_t*)&oldsocklen) == -1 )\{
-418     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a373256f32df7f8f490e7d918e9f59418}{ESS\_SOCKET\_ERROR\_UNSPEC};
-419   \}
-420   hint.ai\_family = oldsock.ss\_family;
-421   hint.ai\_socktype = SOCK\_DGRAM;
-422 
-423   \textcolor{keywordflow}{if} ( getaddrinfo(host,buffer,&hint,&result) != 0)\{
-424     \textcolor{keywordflow}{return} \hyperlink{ess__socket_8h_ae801b9b95ffd15cadd2a367ef726d405a373256f32df7f8f490e7d918e9f59418}{ESS\_SOCKET\_ERROR\_UNSPEC};
-425   \}
-426   \textcolor{keywordflow}{for} ( result\_check = result; result\_check != NULL; result\_check = result\_check->ai\_next ) \{ \textcolor{comment}{// go through
+408                                                 \{
+409 
+410   \textcolor{keyword}{struct }sockaddr\_storage oldsock;
+411   \textcolor{keyword}{struct }addrinfo *result, *result\_check, hint;
+412   socklen\_t oldsocklen = \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct }sockaddr\_storage);
+413   \textcolor{keywordtype}{int} return\_value;
+414   \textcolor{keywordtype}{char} buffer[8]; buffer[0] = \textcolor{charliteral}{'\(\backslash\)0'};
+415   snprintf(buffer, 8, \textcolor{stringliteral}{"%d"}, port);
+416 
+417   \textcolor{keywordflow}{if}(buf == 0) \textcolor{keywordflow}{return} 0;
+418 
+419   \textcolor{keywordflow}{if} (socket == 0  || port == 0  || host == NULL)   \{
+420     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07fa96978468215ef7117c99232e72d7fb39}{ESS\_ERROR\_NULL};
+421   \}
+422   \textcolor{keywordflow}{if} (  getsockname(socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket}, (\textcolor{keyword}{struct} sockaddr*)&oldsock,(socklen\_t*)&oldsocklen) == -1 )\{
+423     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07faa28e2c57627994f0cfa08dd3b4e28b97}{ESS\_ERROR};
+424   \}
+425   hint.ai\_family = oldsock.ss\_family;
+426   hint.ai\_socktype = SOCK\_DGRAM;
+427 
+428   \textcolor{keywordflow}{if} ( getaddrinfo(host,buffer,&hint,&result) != 0)\{
+429     \textcolor{keywordflow}{return} \hyperlink{ess__error_8h_a3a40ffb47f45a17c8989af8286e7a07faa28e2c57627994f0cfa08dd3b4e28b97}{ESS\_ERROR};
+430   \}
+431   \textcolor{keywordflow}{for} ( result\_check = result; result\_check != NULL; result\_check = result\_check->ai\_next ) \{ \textcolor{comment}{// go through
        the linked list of struct addrinfo elements}
-427     \textcolor{keywordflow}{if} (  (return\_value = sendto(socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},buf,size,sendto\_flags,result\_check->ai\_addr,
+432     \textcolor{keywordflow}{if} (  (return\_value = sendto(socket->\hyperlink{structess__socket_a3666576f6b88007cc7b8f26c7da596c8}{socket},buf,size,sendto\_flags,result\_check->ai\_addr,
       result\_check->ai\_addrlen)) != -1) \textcolor{comment}{// connected without error}
-428       \textcolor{keywordflow}{break};
-429   \}
-430   freeaddrinfo(result);
-431 
-432   \textcolor{keywordflow}{return} return\_value;
-433 \}
+433       \textcolor{keywordflow}{break};
+434   \}
+435   freeaddrinfo(result);
+436 
+437   \textcolor{keywordflow}{return} return\_value;
+438 \}
 \end{DoxyCode}

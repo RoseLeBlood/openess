@@ -2,7 +2,7 @@
 \label{structess__server}\index{ess\+\_\+server@{ess\+\_\+server}}
 
 
-{\ttfamily \#include $<$server.\+h$>$}
+{\ttfamily \#include $<$ess\+\_\+server.\+h$>$}
 
 
 
@@ -11,7 +11,7 @@ Collaboration diagram for ess\+\_\+server\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=147pt]{d0/d53/structess__server__coll__graph}
+\includegraphics[width=241pt]{d0/d53/structess__server__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Data Fields}
@@ -19,9 +19,9 @@ Collaboration diagram for ess\+\_\+server\+:
 \item 
 \hyperlink{ess__socket_8h_ab7457db5cd500e7f0d74d0bc07356663}{ess\+\_\+socket\+\_\+t} \hyperlink{structess__server_ae1095210270047614ecdcf9d808e764c}{socket}
 \item 
-ess\+\_\+backend\+\_\+t $\ast$ \hyperlink{structess__server_ab2b85d146ada2907a81371aace6e926d}{backend}
+\hyperlink{ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b}{ess\+\_\+context\+\_\+t} $\ast$ \hyperlink{structess__server_ac7de255331395ee883c238e3fe9838a2}{context}
 \item 
-\hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t} \hyperlink{structess__server_abb4395d1c05d3bbc2e1d011507ddd19b}{format}
+\hyperlink{ess__format_8h_a9aa23f58a25b9e8360c1400e0cadfd80}{ess\+\_\+format\+\_\+t} \hyperlink{structess__server_abb4395d1c05d3bbc2e1d011507ddd19b}{format}
 \item 
 void $\ast$ \hyperlink{structess__server_a368f7094dc38acca20612bbb392552f4}{buffer}
 \item 
@@ -35,28 +35,18 @@ int \hyperlink{structess__server_a9f59b34b1f25fe00023291b678246bcc}{length}
 \item 
 int \hyperlink{structess__server_aed7ea92f45bd273dde380a45ddced592}{offset}
 \item 
-\hyperlink{server_8h_a66019638fd44eba9d951ec93754c7b8d}{ess\+\_\+server\+\_\+status\+\_\+t} \hyperlink{structess__server_af34befa103928930a907b2eb5cc4739c}{status}
+\hyperlink{ess__server_8h_a66019638fd44eba9d951ec93754c7b8d}{ess\+\_\+server\+\_\+status\+\_\+t} \hyperlink{structess__server_af34befa103928930a907b2eb5cc4739c}{status}
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 
 
-Definition at line 19 of file server.\+h.
+Definition at line 19 of file ess\+\_\+server.\+h.
 
 
 
 \subsection{Field Documentation}
-\mbox{\Hypertarget{structess__server_ab2b85d146ada2907a81371aace6e926d}\label{structess__server_ab2b85d146ada2907a81371aace6e926d}} 
-\index{ess\+\_\+server@{ess\+\_\+server}!backend@{backend}}
-\index{backend@{backend}!ess\+\_\+server@{ess\+\_\+server}}
-\subsubsection{\texorpdfstring{backend}{backend}}
-{\footnotesize\ttfamily ess\+\_\+backend\+\_\+t$\ast$ backend}
-
-
-
-Definition at line 21 of file server.\+h.
-
 \mbox{\Hypertarget{structess__server_a368f7094dc38acca20612bbb392552f4}\label{structess__server_a368f7094dc38acca20612bbb392552f4}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!buffer@{buffer}}
 \index{buffer@{buffer}!ess\+\_\+server@{ess\+\_\+server}}
@@ -65,17 +55,27 @@ Definition at line 21 of file server.\+h.
 
 
 
-Definition at line 24 of file server.\+h.
+Definition at line 24 of file ess\+\_\+server.\+h.
+
+\mbox{\Hypertarget{structess__server_ac7de255331395ee883c238e3fe9838a2}\label{structess__server_ac7de255331395ee883c238e3fe9838a2}} 
+\index{ess\+\_\+server@{ess\+\_\+server}!context@{context}}
+\index{context@{context}!ess\+\_\+server@{ess\+\_\+server}}
+\subsubsection{\texorpdfstring{context}{context}}
+{\footnotesize\ttfamily \hyperlink{ess__context_8h_a8a8fec5766c0b3615f8f12f7948e949b}{ess\+\_\+context\+\_\+t}$\ast$ context}
+
+
+
+Definition at line 21 of file ess\+\_\+server.\+h.
 
 \mbox{\Hypertarget{structess__server_abb4395d1c05d3bbc2e1d011507ddd19b}\label{structess__server_abb4395d1c05d3bbc2e1d011507ddd19b}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!format@{format}}
 \index{format@{format}!ess\+\_\+server@{ess\+\_\+server}}
 \subsubsection{\texorpdfstring{format}{format}}
-{\footnotesize\ttfamily \hyperlink{ess__format_8h_ab03f24cb5d42f4448f713bf1ec178163}{ess\+\_\+format\+\_\+t} format}
+{\footnotesize\ttfamily \hyperlink{ess__format_8h_a9aa23f58a25b9e8360c1400e0cadfd80}{ess\+\_\+format\+\_\+t} format}
 
 
 
-Definition at line 22 of file server.\+h.
+Definition at line 22 of file ess\+\_\+server.\+h.
 
 \mbox{\Hypertarget{structess__server_a9f59b34b1f25fe00023291b678246bcc}\label{structess__server_a9f59b34b1f25fe00023291b678246bcc}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!length@{length}}
@@ -85,7 +85,7 @@ Definition at line 22 of file server.\+h.
 
 
 
-Definition at line 26 of file server.\+h.
+Definition at line 26 of file ess\+\_\+server.\+h.
 
 \mbox{\Hypertarget{structess__server_a1aa199bcd52f6acf8edbf2ee6898a21b}\label{structess__server_a1aa199bcd52f6acf8edbf2ee6898a21b}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!magl@{magl}}
@@ -95,7 +95,7 @@ Definition at line 26 of file server.\+h.
 
 
 
-Definition at line 25 of file server.\+h.
+Definition at line 25 of file ess\+\_\+server.\+h.
 
 \mbox{\Hypertarget{structess__server_a64b10d79850e935f9440886335b9f391}\label{structess__server_a64b10d79850e935f9440886335b9f391}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!magr@{magr}}
@@ -105,7 +105,7 @@ Definition at line 25 of file server.\+h.
 
 
 
-Definition at line 25 of file server.\+h.
+Definition at line 25 of file ess\+\_\+server.\+h.
 
 \mbox{\Hypertarget{structess__server_aed7ea92f45bd273dde380a45ddced592}\label{structess__server_aed7ea92f45bd273dde380a45ddced592}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!offset@{offset}}
@@ -115,7 +115,7 @@ Definition at line 25 of file server.\+h.
 
 
 
-Definition at line 26 of file server.\+h.
+Definition at line 26 of file ess\+\_\+server.\+h.
 
 \mbox{\Hypertarget{structess__server_ae1095210270047614ecdcf9d808e764c}\label{structess__server_ae1095210270047614ecdcf9d808e764c}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!socket@{socket}}
@@ -125,7 +125,7 @@ Definition at line 26 of file server.\+h.
 
 
 
-Definition at line 20 of file server.\+h.
+Definition at line 20 of file ess\+\_\+server.\+h.
 
 \mbox{\Hypertarget{structess__server_a218b4f7c6cc2681a99c23a3b089d68b1}\label{structess__server_a218b4f7c6cc2681a99c23a3b089d68b1}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!speed@{speed}}
@@ -135,20 +135,20 @@ Definition at line 20 of file server.\+h.
 
 
 
-Definition at line 26 of file server.\+h.
+Definition at line 26 of file ess\+\_\+server.\+h.
 
 \mbox{\Hypertarget{structess__server_af34befa103928930a907b2eb5cc4739c}\label{structess__server_af34befa103928930a907b2eb5cc4739c}} 
 \index{ess\+\_\+server@{ess\+\_\+server}!status@{status}}
 \index{status@{status}!ess\+\_\+server@{ess\+\_\+server}}
 \subsubsection{\texorpdfstring{status}{status}}
-{\footnotesize\ttfamily \hyperlink{server_8h_a66019638fd44eba9d951ec93754c7b8d}{ess\+\_\+server\+\_\+status\+\_\+t} status}
+{\footnotesize\ttfamily \hyperlink{ess__server_8h_a66019638fd44eba9d951ec93754c7b8d}{ess\+\_\+server\+\_\+status\+\_\+t} status}
 
 
 
-Definition at line 28 of file server.\+h.
+Definition at line 28 of file ess\+\_\+server.\+h.
 
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-include/\hyperlink{server_8h}{server.\+h}\end{DoxyCompactItemize}
+include/\hyperlink{ess__server_8h}{ess\+\_\+server.\+h}\end{DoxyCompactItemize}

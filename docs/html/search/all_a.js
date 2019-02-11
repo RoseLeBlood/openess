@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['name',['name',['../d7/d24/structess__platform__task.html#acd328517a6cf718155c2e6e22b671ca9',1,'ess_platform_task::name()'],['../d7/d90/structess__platform__semaphore.html#acd328517a6cf718155c2e6e22b671ca9',1,'ess_platform_semaphore::name()'],['../d3/dd4/structess__platform__ringbuffer.html#acd328517a6cf718155c2e6e22b671ca9',1,'ess_platform_ringbuffer::name()'],['../d4/db0/structess__backends__entry.html#a8f8f80d37794cde9472343e4487ba3eb',1,'ess_backends_entry::name()']]],
-  ['null_5fbackend_2ec',['null_backend.c',['../d1/df2/null__backend_8c.html',1,'']]]
+  ['magl',['magl',['../d6/dbc/structess__server.html#a1aa199bcd52f6acf8edbf2ee6898a21b',1,'ess_server']]],
+  ['magr',['magr',['../d6/dbc/structess__server.html#a64b10d79850e935f9440886335b9f391',1,'ess_server']]],
+  ['microsmux',['microsMux',['../d5/d24/esp32__platform_8c.html#a2bd5b9348154dbb586c0c9c2a9fca07b',1,'esp32_platform.c']]]
 ];

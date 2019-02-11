@@ -1,7 +1,7 @@
 var structess__server =
 [
-    [ "backend", "d6/dbc/structess__server.html#ab2b85d146ada2907a81371aace6e926d", null ],
     [ "buffer", "d6/dbc/structess__server.html#a368f7094dc38acca20612bbb392552f4", null ],
+    [ "context", "d6/dbc/structess__server.html#ac7de255331395ee883c238e3fe9838a2", null ],
     [ "format", "d6/dbc/structess__server.html#abb4395d1c05d3bbc2e1d011507ddd19b", null ],
     [ "length", "d6/dbc/structess__server.html#a9f59b34b1f25fe00023291b678246bcc", null ],
     [ "magl", "d6/dbc/structess__server.html#a1aa199bcd52f6acf8edbf2ee6898a21b", null ],

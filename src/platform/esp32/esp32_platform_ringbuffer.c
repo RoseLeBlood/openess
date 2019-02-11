@@ -71,7 +71,7 @@ ess_error_t ess_platform_ringbuffer_write(ess_platform_ringbuffer_t* rng,
       ESS_OK :  ESS_ERROR;
 }
 void* ess_platform_ringbuffer_read(ess_platform_ringbuffer_t* rng, unsigned int* length, unsigned int ms) {
-    if(rng == 0) return (ESS_ERROR_NULL);
+    if(rng == 0) return 0;
 
     return xRingbufferReceive(rng->handle, length, pdMS_TO_TICKS(ms));
 }

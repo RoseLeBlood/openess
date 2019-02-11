@@ -1,0 +1,249 @@
+\hypertarget{ess__ringbuffer_8h}{}\section{include/ess\+\_\+ringbuffer.h File Reference}
+\label{ess__ringbuffer_8h}\index{include/ess\+\_\+ringbuffer.\+h@{include/ess\+\_\+ringbuffer.\+h}}
+
+
+all platform ringbuffer specific functions  
+
+
+{\ttfamily \#include \char`\"{}ess\+\_\+error.\+h\char`\"{}}\newline
+Include dependency graph for ess\+\_\+ringbuffer.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{d2/de6/ess__ringbuffer_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structess__platform__ringbuffer}{ess\+\_\+platform\+\_\+ringbuffer}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \hyperlink{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode} \hyperlink{ess__ringbuffer_8h_a80a1652a42f77e9a51f3e45c7da84396}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode\+\_\+t}
+\item 
+typedef struct \hyperlink{structess__platform__ringbuffer}{ess\+\_\+platform\+\_\+ringbuffer} \hyperlink{ess__ringbuffer_8h_a9d764d1cfe4ef17268936028a683b7a3}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode} \{ \hyperlink{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651aade74af3c687f765e6ed7ae0eaa5d823}{E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+N\+O\+S\+P\+L\+IT}, 
+\hyperlink{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651a5f516be84e00a92f549871ac6cca35e4}{E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+A\+L\+L\+O\+W\+S\+P\+L\+IT}, 
+\hyperlink{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651acaa808912c42432dc4cfad09ff10a73f}{E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+B\+Y\+T\+E\+B\+UF}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__ringbuffer_8h_af429795e494870024c5ea3d488b669bb}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+create} (\hyperlink{ess__ringbuffer_8h_a9d764d1cfe4ef17268936028a683b7a3}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+t} $\ast$rng, unsigned int length, \hyperlink{ess__ringbuffer_8h_a80a1652a42f77e9a51f3e45c7da84396}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode\+\_\+t} type, const char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Create a ring buffer. \end{DoxyCompactList}\item 
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__ringbuffer_8h_aa9f774ab02a5f11ad7c4ca7a09be103c}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+destroy} (\hyperlink{ess__ringbuffer_8h_a9d764d1cfe4ef17268936028a683b7a3}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+t} $\ast$rng)
+\begin{DoxyCompactList}\small\item\em destroy the ring buffer. \end{DoxyCompactList}\item 
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__ringbuffer_8h_af9b04b647b8a52eb6487bd637715be61}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+write} (\hyperlink{ess__ringbuffer_8h_a9d764d1cfe4ef17268936028a683b7a3}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+t} $\ast$rng, void $\ast$data, unsigned int length, unsigned int ms)
+\begin{DoxyCompactList}\small\item\em write data to the ring buffer. \end{DoxyCompactList}\item 
+\hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} \hyperlink{ess__ringbuffer_8h_a4d1afb2132d463d51bebf936a1c60aea}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+can\+\_\+read} (\hyperlink{ess__ringbuffer_8h_a9d764d1cfe4ef17268936028a683b7a3}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+t} $\ast$rng, unsigned int ms)
+\begin{DoxyCompactList}\small\item\em can read from the ringbuffer \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{ess__ringbuffer_8h_a50ac56587b15cf3ce8939ebb82148e17}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+read} (\hyperlink{ess__ringbuffer_8h_a9d764d1cfe4ef17268936028a683b7a3}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+t} $\ast$rng, unsigned int $\ast$length, unsigned int ms)
+\begin{DoxyCompactList}\small\item\em read data from the ring buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+all platform ringbuffer specific functions 
+
+\begin{DoxyAuthor}{Author}
+Anna Sopdia Schröck 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+3 Februar 20119 
+\end{DoxyDate}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{ess__ringbuffer_8h_a80a1652a42f77e9a51f3e45c7da84396}\label{ess__ringbuffer_8h_a80a1652a42f77e9a51f3e45c7da84396}} 
+\index{ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}!ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode\+\_\+t@{ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode\+\_\+t}}
+\index{ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode\+\_\+t@{ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode\+\_\+t}!ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode\+\_\+t}{ess\_platform\_ringbuffer\_mode\_t}}
+{\footnotesize\ttfamily typedef enum \hyperlink{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode} \hyperlink{ess__ringbuffer_8h_a80a1652a42f77e9a51f3e45c7da84396}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode\+\_\+t}}
+
+\mbox{\Hypertarget{ess__ringbuffer_8h_a9d764d1cfe4ef17268936028a683b7a3}\label{ess__ringbuffer_8h_a9d764d1cfe4ef17268936028a683b7a3}} 
+\index{ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}!ess\+\_\+platform\+\_\+ringbuffer\+\_\+t@{ess\+\_\+platform\+\_\+ringbuffer\+\_\+t}}
+\index{ess\+\_\+platform\+\_\+ringbuffer\+\_\+t@{ess\+\_\+platform\+\_\+ringbuffer\+\_\+t}!ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+ringbuffer\+\_\+t}{ess\_platform\_ringbuffer\_t}}
+{\footnotesize\ttfamily typedef struct \hyperlink{structess__platform__ringbuffer}{ess\+\_\+platform\+\_\+ringbuffer} \hyperlink{ess__ringbuffer_8h_a9d764d1cfe4ef17268936028a683b7a3}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+t}}
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651}\label{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651}} 
+\index{ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}!ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode@{ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode}}
+\index{ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode@{ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode}!ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode}{ess\_platform\_ringbuffer\_mode}}
+{\footnotesize\ttfamily enum \hyperlink{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+N\+O\+S\+P\+L\+IT@{E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+N\+O\+S\+P\+L\+IT}!ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}}\index{ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}!E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+N\+O\+S\+P\+L\+IT@{E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+N\+O\+S\+P\+L\+IT}}}\mbox{\Hypertarget{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651aade74af3c687f765e6ed7ae0eaa5d823}\label{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651aade74af3c687f765e6ed7ae0eaa5d823}} 
+E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+N\+O\+S\+P\+L\+IT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+A\+L\+L\+O\+W\+S\+P\+L\+IT@{E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+A\+L\+L\+O\+W\+S\+P\+L\+IT}!ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}}\index{ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}!E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+A\+L\+L\+O\+W\+S\+P\+L\+IT@{E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+A\+L\+L\+O\+W\+S\+P\+L\+IT}}}\mbox{\Hypertarget{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651a5f516be84e00a92f549871ac6cca35e4}\label{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651a5f516be84e00a92f549871ac6cca35e4}} 
+E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+A\+L\+L\+O\+W\+S\+P\+L\+IT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+B\+Y\+T\+E\+B\+UF@{E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+B\+Y\+T\+E\+B\+UF}!ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}}\index{ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}!E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+B\+Y\+T\+E\+B\+UF@{E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+B\+Y\+T\+E\+B\+UF}}}\mbox{\Hypertarget{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651acaa808912c42432dc4cfad09ff10a73f}\label{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651acaa808912c42432dc4cfad09ff10a73f}} 
+E\+S\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+R\+I\+N\+G\+B\+U\+F\+F\+E\+R\+\_\+\+M\+O\+D\+E\+\_\+\+B\+Y\+T\+E\+B\+UF&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 36 of file ess\+\_\+ringbuffer.\+h.
+
+
+\begin{DoxyCode}
+36                                           \{
+37   \hyperlink{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651aade74af3c687f765e6ed7ae0eaa5d823}{ESS\_PLATFORM\_RINGBUFFER\_MODE\_NOSPLIT},
+38   \hyperlink{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651a5f516be84e00a92f549871ac6cca35e4}{ESS\_PLATFORM\_RINGBUFFER\_MODE\_ALLOWSPLIT},
+39   \hyperlink{ess__ringbuffer_8h_aadec572693e8bd97eefafaacb7049651acaa808912c42432dc4cfad09ff10a73f}{ESS\_PLATFORM\_RINGBUFFER\_MODE\_BYTEBUF},
+40 \}\hyperlink{ess__ringbuffer_8h_a80a1652a42f77e9a51f3e45c7da84396}{ess\_platform\_ringbuffer\_mode\_t};
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ess__ringbuffer_8h_a4d1afb2132d463d51bebf936a1c60aea}\label{ess__ringbuffer_8h_a4d1afb2132d463d51bebf936a1c60aea}} 
+\index{ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}!ess\+\_\+platform\+\_\+ringbuffer\+\_\+can\+\_\+read@{ess\+\_\+platform\+\_\+ringbuffer\+\_\+can\+\_\+read}}
+\index{ess\+\_\+platform\+\_\+ringbuffer\+\_\+can\+\_\+read@{ess\+\_\+platform\+\_\+ringbuffer\+\_\+can\+\_\+read}!ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+ringbuffer\+\_\+can\+\_\+read()}{ess\_platform\_ringbuffer\_can\_read()}}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+platform\+\_\+ringbuffer\+\_\+can\+\_\+read (\begin{DoxyParamCaption}\item[{\hyperlink{ess__ringbuffer_8h_a9d764d1cfe4ef17268936028a683b7a3}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+t} $\ast$}]{rng,  }\item[{unsigned int}]{ms }\end{DoxyParamCaption})}
+
+
+
+can read from the ringbuffer 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em rng} & the ringbuffer context \\
+\hline
+\mbox{\tt in}  & {\em ms} & how long to wait before giving up -\/ in ms\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em E\+S\+S\+\_\+\+OK} & yes  E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+MP function is for using platform not implantiert \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+OR} & no \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & \textquotesingle{}ess\+\_\+platform\+\_\+ringbuffer\+\_\+t\textquotesingle{} rng is null \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{ess__ringbuffer_8h_af429795e494870024c5ea3d488b669bb}\label{ess__ringbuffer_8h_af429795e494870024c5ea3d488b669bb}} 
+\index{ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}!ess\+\_\+platform\+\_\+ringbuffer\+\_\+create@{ess\+\_\+platform\+\_\+ringbuffer\+\_\+create}}
+\index{ess\+\_\+platform\+\_\+ringbuffer\+\_\+create@{ess\+\_\+platform\+\_\+ringbuffer\+\_\+create}!ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+ringbuffer\+\_\+create()}{ess\_platform\_ringbuffer\_create()}}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+platform\+\_\+ringbuffer\+\_\+create (\begin{DoxyParamCaption}\item[{\hyperlink{ess__ringbuffer_8h_a9d764d1cfe4ef17268936028a683b7a3}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+t} $\ast$}]{rng,  }\item[{unsigned int}]{length,  }\item[{\hyperlink{ess__ringbuffer_8h_a80a1652a42f77e9a51f3e45c7da84396}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+mode\+\_\+t}}]{type,  }\item[{const char $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Create a ring buffer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em rng} & the ringbuffer context \\
+\hline
+\mbox{\tt in}  & {\em length} & The amount of storage to allocate for the ring buffer. \\
+\hline
+\mbox{\tt in}  & {\em type} & the mode of the ring buffer. \\
+\hline
+\mbox{\tt in}  & {\em name} & the name of the ring buffer.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em E\+S\+S\+\_\+\+OK} & no error  E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+MP function is for using platform not implantiert \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+OR} & unspec error \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & \textquotesingle{}ess\+\_\+platform\+\_\+ringbuffer\+\_\+t\textquotesingle{} rng is null \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{ess__ringbuffer_8h_aa9f774ab02a5f11ad7c4ca7a09be103c}\label{ess__ringbuffer_8h_aa9f774ab02a5f11ad7c4ca7a09be103c}} 
+\index{ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}!ess\+\_\+platform\+\_\+ringbuffer\+\_\+destroy@{ess\+\_\+platform\+\_\+ringbuffer\+\_\+destroy}}
+\index{ess\+\_\+platform\+\_\+ringbuffer\+\_\+destroy@{ess\+\_\+platform\+\_\+ringbuffer\+\_\+destroy}!ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+ringbuffer\+\_\+destroy()}{ess\_platform\_ringbuffer\_destroy()}}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+platform\+\_\+ringbuffer\+\_\+destroy (\begin{DoxyParamCaption}\item[{\hyperlink{ess__ringbuffer_8h_a9d764d1cfe4ef17268936028a683b7a3}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+t} $\ast$}]{rng }\end{DoxyParamCaption})}
+
+
+
+destroy the ring buffer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em rng} & the ringbuffer context\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em E\+S\+S\+\_\+\+OK} & no error  E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+MP function is for using platform not implantiert \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+OR} & unspec error \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & \textquotesingle{}ess\+\_\+platform\+\_\+ringbuffer\+\_\+t\textquotesingle{} rng is null \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{ess__ringbuffer_8h_a50ac56587b15cf3ce8939ebb82148e17}\label{ess__ringbuffer_8h_a50ac56587b15cf3ce8939ebb82148e17}} 
+\index{ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}!ess\+\_\+platform\+\_\+ringbuffer\+\_\+read@{ess\+\_\+platform\+\_\+ringbuffer\+\_\+read}}
+\index{ess\+\_\+platform\+\_\+ringbuffer\+\_\+read@{ess\+\_\+platform\+\_\+ringbuffer\+\_\+read}!ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+ringbuffer\+\_\+read()}{ess\_platform\_ringbuffer\_read()}}
+{\footnotesize\ttfamily void$\ast$ ess\+\_\+platform\+\_\+ringbuffer\+\_\+read (\begin{DoxyParamCaption}\item[{\hyperlink{ess__ringbuffer_8h_a9d764d1cfe4ef17268936028a683b7a3}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+t} $\ast$}]{rng,  }\item[{unsigned int $\ast$}]{length,  }\item[{unsigned int}]{ms }\end{DoxyParamCaption})}
+
+
+
+read data from the ring buffer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em rng} & the ringbuffer context \\
+\hline
+\mbox{\tt out}  & {\em length} & the length of data to place into the buffer. \\
+\hline
+\mbox{\tt in}  & {\em ms} & how long to wait before giving up -\/ in ms\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em a} & pointer to the storage retrieved.  E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+MP function is for using platform not implantiert \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & \textquotesingle{}ess\+\_\+platform\+\_\+ringbuffer\+\_\+t\textquotesingle{} rng is null \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{ess__ringbuffer_8h_af9b04b647b8a52eb6487bd637715be61}\label{ess__ringbuffer_8h_af9b04b647b8a52eb6487bd637715be61}} 
+\index{ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}!ess\+\_\+platform\+\_\+ringbuffer\+\_\+write@{ess\+\_\+platform\+\_\+ringbuffer\+\_\+write}}
+\index{ess\+\_\+platform\+\_\+ringbuffer\+\_\+write@{ess\+\_\+platform\+\_\+ringbuffer\+\_\+write}!ess\+\_\+ringbuffer.\+h@{ess\+\_\+ringbuffer.\+h}}
+\subsubsection{\texorpdfstring{ess\+\_\+platform\+\_\+ringbuffer\+\_\+write()}{ess\_platform\_ringbuffer\_write()}}
+{\footnotesize\ttfamily \hyperlink{ess__error_8h_a08ab97fcf6745dee67de912e41bd3236}{ess\+\_\+error\+\_\+t} ess\+\_\+platform\+\_\+ringbuffer\+\_\+write (\begin{DoxyParamCaption}\item[{\hyperlink{ess__ringbuffer_8h_a9d764d1cfe4ef17268936028a683b7a3}{ess\+\_\+platform\+\_\+ringbuffer\+\_\+t} $\ast$}]{rng,  }\item[{void $\ast$}]{data,  }\item[{unsigned int}]{length,  }\item[{unsigned int}]{ms }\end{DoxyParamCaption})}
+
+
+
+write data to the ring buffer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em rng} & the ringbuffer context \\
+\hline
+\mbox{\tt in}  & {\em data} & the data to place into the buffer. \\
+\hline
+\mbox{\tt in}  & {\em length} & the length of data to place into the buffer. \\
+\hline
+\mbox{\tt in}  & {\em ms} & how long to wait before giving up -\/ in ms\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em E\+S\+S\+\_\+\+OK} & no error  E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+MP function is for using platform not implantiert \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+OR} & can\textquotesingle{}t write \\
+\hline
+{\em E\+S\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+LL} & \textquotesingle{}ess\+\_\+platform\+\_\+ringbuffer\+\_\+t\textquotesingle{} rng is null \\
+\hline
+\end{DoxyRetVals}

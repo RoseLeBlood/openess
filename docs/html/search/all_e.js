@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['readme',['README',['../d3/dcc/md__r_e_a_d_m_e.html',1,'']]],
-  ['readme_2emd',['README.md',['../d9/dd6/_r_e_a_d_m_e_8md.html',1,'']]],
-  ['retval',['retval',['../db/d9d/structess__socket.html#a7f345697df7eb20c9aba1ab6980cae8f',1,'ess_socket']]]
+  ['qhandle',['qhandle',['../d3/dd4/structess__platform__ringbuffer.html#a011a9cee6c81e61319318a9a5776db28',1,'ess_platform_ringbuffer']]]
 ];

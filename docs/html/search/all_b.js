@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['offset',['offset',['../d6/dbc/structess__server.html#aed7ea92f45bd273dde380a45ddced592',1,'ess_server']]],
-  ['open_5fess_5fversion_5f0_5f1',['OPEN_ESS_VERSION_0_1',['../da/dfe/ess_8h.html#ab5c4c3e854cac1ed4e80e9937780b52f',1,'ess.h']]]
+  ['name',['name',['../d3/dfd/structess__platform__mutex.html#acd328517a6cf718155c2e6e22b671ca9',1,'ess_platform_mutex::name()'],['../d3/dd4/structess__platform__ringbuffer.html#acd328517a6cf718155c2e6e22b671ca9',1,'ess_platform_ringbuffer::name()'],['../d3/d02/structess__platform__spinlock.html#acd328517a6cf718155c2e6e22b671ca9',1,'ess_platform_spinlock::name()'],['../d7/d24/structess__platform__task.html#acd328517a6cf718155c2e6e22b671ca9',1,'ess_platform_task::name()'],['../d4/db0/structess__backends__entry.html#a8f8f80d37794cde9472343e4487ba3eb',1,'ess_backends_entry::name()']]],
+  ['null_5fbackend_2ec',['null_backend.c',['../d1/df2/null__backend_8c.html',1,'']]]
 ];
