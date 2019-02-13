@@ -45,9 +45,9 @@
 //#define ESS_PLATFORM_LINUX /** @brief If defined compiled backend for generic linux (openal) */
 //#define ESS_PLATFORM_WINDOWS /** @brief If defined compiled backend for  generic windows (openal, wasapi) */
 
-#define ESS_DEFAULT_SERVER_PORT 16001
-#define ESS_DEFAULT_SERVER_PROTOCOL ESS_PROTOCOL_TCP
-#define ESS_DEFAULT_SERVER_FAMILY ESS_FAMILY_IP6
+#define ESS_DEFAULT_SERVER_PORT 8082
+#define ESS_DEFAULT_SERVER_PROTOCOL ESS_PROTOCOL_UDP
+#define ESS_DEFAULT_SERVER_FAMILY ESS_FAMILY_IP4
 // on IP4 : 0.0.0.0
 #define ESS_DEFAULT_SERVER_HOST "::"
 
@@ -134,7 +134,7 @@
 	#define  I2S_EXTERNAL_DAC_DIN   -1                                                    //Not used
 
   #define ESS_BACKEND_I2S_FORMAT ESS_FORMAT_STEREO_96000_16
-	#define ESS_BACKEND_I2S_DMA_BUF_SIZE	64
+	#define ESS_BACKEND_I2S_DMA_BUF_SIZE	512
 	#define ESS_BACKEND_I2S_DMA_BUF_COUNT 6
 #endif
 

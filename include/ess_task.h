@@ -24,17 +24,55 @@
  * @brief all platform specific task functions
  *
  */
-#ifndef _ESS_PLATFORM_TASK_H_
-#define _ESS_PLATFORM_TASK_H_
+#ifndef _H_
+#define _H_
 
 #include "ess_error.h"
 #include "ess_mutex.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+class ess_task {
+public:
+  ess_task(const char* taskName, void* param, unsigned int stackSize);
 
-typedef struct ess_platform_task {
+  /**
+   * @brief start the task
+   * @retval ESS_OK
+   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
+   * @retval ESS_ERROR
+   * @retval ESS_ERROR_NULL 'esp_platform_task_t' task is null
+   */
+  ess_error_t start();
+  /**
+   * @brief delete the task
+   * @retval ESS_OK
+   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
+   * @retval ESS_ERROR
+   * @retval ESS_ERROR_NULL 'esp_platform_task_t' task is null
+   */
+  ess_error_t destroy();
+
+
+  /**
+   * @brief suspend the task
+   * @param[int] task The  pointer to the 'esp_platform_task_t' struct
+   *
+   * @retval ESS_OK
+   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
+   * @retval ESS_ERROR
+   * @retval ESS_ERROR_NULL 'esp_platform_task_t' task is null
+   */
+  ess_error_t suspend();
+  /**
+   * @brief resume the task
+   * @param[int] task The  pointer to the 'esp_platform_task_t' struct
+   *
+   * @retval ESS_OK
+   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
+   * @retval ESS_ERROR
+   * @retval ESS_ERROR_NULL 'esp_platform_task_t' task is null
+   */
+  ess_error_t resume();
+private:
   char name[16];
   int task_id;
 
@@ -45,62 +83,11 @@ typedef struct ess_platform_task {
   int priority;
   int running;
 
-  ess_platform_mutex_t runningMutex;
-  ess_platform_mutex_t contextMutext;
-  ess_platform_mutex_t continuemutex;
-  ess_platform_mutex_t continuemutex2;
+  ess_mutex runningMutex;
+  ess_mutex contextMutext;
+  ess_mutex continuemutex;
+  ess_mutex continuemutex2;
+};
 
-  void (* task_stub)(void* data ); 
-}ess_platform_task_t;
-
-
-ess_error_t ess_platform_task_create(ess_platform_task_t* task, void task_func(void*),
-    const char* taskName, void* param, unsigned int stackSize);
-/**
- * @brief start the task
- * @param[int] task The  pointer to the 'esp_platform_task_t' struct
- *
- * @retval ESS_OK
- * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
- * @retval ESS_ERROR
- * @retval ESS_ERROR_NULL 'esp_platform_task_t' task is null
- */
-ess_error_t ess_platform_task_start(ess_platform_task_t* task);
-/**
- * @brief delete the task
- * @param[int] task The  pointer to the 'esp_platform_task_t' struct
- *
- * @retval ESS_OK
- * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
- * @retval ESS_ERROR
- * @retval ESS_ERROR_NULL 'esp_platform_task_t' task is null
- */
-ess_error_t ess_platform_task_delete(ess_platform_task_t* task);
-
-/**
- * @brief suspend the task
- * @param[int] task The  pointer to the 'esp_platform_task_t' struct
- *
- * @retval ESS_OK
- * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
- * @retval ESS_ERROR
- * @retval ESS_ERROR_NULL 'esp_platform_task_t' task is null
- */
-ess_error_t ess_platform_task_suspend(ess_platform_task_t* task);
-/**
- * @brief resume the task
- * @param[int] task The  pointer to the 'esp_platform_task_t' struct
- *
- * @retval ESS_OK
- * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
- * @retval ESS_ERROR
- * @retval ESS_ERROR_NULL 'esp_platform_task_t' task is null
- */
-ess_error_t ess_platform_task_resume(ess_platform_task_t* task);
-
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

@@ -37,56 +37,45 @@
 
 #include "esp_attr.h"
 
-
-ess_error_t ess_platform_mutex_create(ess_platform_mutex_t* mtx, const char* name) {
-  if(mtx == 0) return ESS_ERROR_NULL;
-
-  strncpy(mtx->name, name, 16);
-  mtx->handle = xSemaphoreCreateBinary();
-
- return  ess_platform_mutex_unlock(mtx);
+ess_mutex::ess_mutex() {
+  m_pHandle = xSemaphoreCreateBinary();
+  unlock();
 }
-ess_error_t ess_platform_mutex_destroy(ess_platform_mutex_t* mtx) {
-  if(mtx == 0) return ESS_ERROR_NULL;
-  if(mtx->handle == 0) return ESS_ERROR_NULL;
-
-  vSemaphoreDelete(mtx->handle) ;
-  return ESS_OK;
+ess_mutex::~ess_mutex() {
+  vSemaphoreDelete(m_pHandle) ;
 }
-ess_error_t ess_platform_mutex_lock(ess_platform_mutex_t* mtx) {
-  if(mtx == 0) return ESS_ERROR_NULL;
-  if(mtx->handle == 0) return ESS_ERROR_NULL;
+
+ess_error_t ess_mutex::lock() {
+  if(m_pHandle == 0) return ESS_ERROR_NULL;
 
   if (xPortInIsrContext()) {
        BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-       xSemaphoreTakeFromISR( mtx->handle, &xHigherPriorityTaskWoken );
+       xSemaphoreTakeFromISR( m_pHandle, &xHigherPriorityTaskWoken );
        if(xHigherPriorityTaskWoken)
          _frxt_setup_switch();
    } else {
-    xSemaphoreTake(mtx->handle, portMAX_DELAY);
+    xSemaphoreTake(m_pHandle, portMAX_DELAY);
    }
 
   return ESS_OK;
 }
-ess_error_t ess_platform_mutex_unlock(ess_platform_mutex_t* mtx) {
-  if(mtx == 0) return ESS_ERROR_NULL;
-  if(mtx->handle == 0) return ESS_ERROR_NULL;
+ess_error_t ess_mutex::unlock() {
+  if(m_pHandle == 0) return ESS_ERROR_NULL;
 
   if (xPortInIsrContext()) {
        BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-       xSemaphoreGiveFromISR( mtx->handle, &xHigherPriorityTaskWoken );
+       xSemaphoreGiveFromISR( m_pHandle, &xHigherPriorityTaskWoken );
        if(xHigherPriorityTaskWoken)
          _frxt_setup_switch();
    } else {
-      xSemaphoreGive(mtx->handle);
+      xSemaphoreGive(m_pHandle);
   }
   return ESS_OK;
 }
 
-ess_error_t ess_platform_mutex_try_lock(ess_platform_mutex_t* mtx) {
-  if(mtx == 0) return ESS_ERROR_NULL;
-  if(mtx->handle == 0) return ESS_ERROR_NULL;
+ess_error_t ess_mutex::try_lock() {
+  if(m_pHandle == 0) return ESS_ERROR_NULL;
 
-  return (xSemaphoreTake( mtx->handle, 0 ) == pdTRUE) ? ESS_OK : ESS_ERROR;
+  return (xSemaphoreTake( m_pHandle, 0 ) == pdTRUE) ? ESS_OK : ESS_ERROR;
 }
 #endif

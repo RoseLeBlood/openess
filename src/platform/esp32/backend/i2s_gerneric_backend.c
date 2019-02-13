@@ -45,10 +45,11 @@
 #include "esp_system.h"
 #include <math.h>
 
+#include "esp_log.h"
 
 static i2s_config_t std_config = {
     .mode = I2S_MODE_MASTER | I2S_MODE_TX,                                  // Only TX
-    .sample_rate = 44100,                                                                                        // Default: 48kHz
+    .sample_rate = 48000,                                                                                        // Default: 48kHz
     .bits_per_sample = 16,                                                                                     //16-bit per channel
     .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,                           //2-channels
     .communication_format = I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB,
@@ -66,25 +67,21 @@ static i2s_pin_config_t std_pin_config = {
 
 int g_i2s_generic_paused = 0;
 
-ess_error_t ess_backend_i2s_generic_probe(const ess_format_t format) {
-  return ESS_OK;
-}
 
 ess_error_t ess_backend_i2s_generic_open(const ess_format_t format ) {
-  std_config.sample_rate = ess_format_get_samplerate(ESS_BACKEND_I2S_FORMAT);
-  std_config.bits_per_sample = ess_format_get_bits(ESS_BACKEND_I2S_FORMAT);
+  std_config.sample_rate = ess_format_get_samplerate(format);
+  std_config.bits_per_sample = ess_format_get_bits(format);
+
+  printf("open %s (%s)\n", ESS_BACKEND_NAME_I2S_ESP32, ess_format_to_string(format));
 
   if(i2s_driver_install(0, &std_config, 0, NULL) != ESP_OK) {
+    ESP_LOGE("I2S", "i2s_driver_install");
     return ESS_ERROR;
   }
   if(i2s_set_pin(0, &std_pin_config) != ESP_OK) {
+    ESP_LOGE("I2S", "i2s_set_pin");
     return ESS_ERROR;
   }
-  i2s_set_clk(0, ess_format_get_samplerate(format) ,
-                         ess_format_get_bits(format),
-                         (ess_format_get_channels(format) == 2) ?
-                          I2S_CHANNEL_STEREO :
-                          I2S_CHANNEL_MONO);
 
 
   return ESS_OK;
@@ -132,7 +129,6 @@ const char* ess_backend_i2s_generic_get_info( ) {
   return "I2S Generic Backend";
 }
 ess_backend_facktory_t _i2s_generic_backend_config = {
-  ess_backend_i2s_generic_probe,
   ess_backend_i2s_generic_open,
   ess_backend_i2s_generic_close,
   ess_backend_i2s_generic_pause,

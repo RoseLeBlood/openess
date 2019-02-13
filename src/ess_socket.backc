@@ -62,6 +62,9 @@ ess_socket_fam_t ess_get_address_family(const char* hostname) {
   };
   return af;
 }
+
+
+
 ess_error_t ess_socket_create_server( ess_socket_fam_t fam, ess_socket_pro_t protokoll,
                                                              const char* hostname, unsigned short port, ess_socket_t* _socket) {
   if(_socket == 0) return ESS_ERROR_NULL;
@@ -73,13 +76,19 @@ ess_error_t ess_socket_create_server( ess_socket_fam_t fam, ess_socket_pro_t pro
   _socket->port = port;
   _socket->status = ESS_SOCKET_STATUS_CREATED;
   _socket->hostname[0] = '\0';
-  _socket->hostname_len = strlen(hostname);
+
+
 
     strncpy(_socket->hostname, hostname, strlen(hostname));
 
 
-  struct addrinfo *result, *result_check, hints;
-  memset(&hints,0,sizeof(struct addrinfo));
+    struct addrinfo hints, *res, *result = NULL;
+    struct sockaddr_in socket_addr;
+
+    size_t socket_len = 0;
+    struct sockaddr *saddr = NULL;
+
+    struct hostent *resolved;
 
   switch(_socket->protokol) {
     case ESS_SOCKET_PROTO_STREAM:  hints.ai_socktype = SOCK_STREAM;  break;
@@ -93,36 +102,42 @@ ess_error_t ess_socket_create_server( ess_socket_fam_t fam, ess_socket_pro_t pro
     case ESS_SOCKET_FAMILY_BOTH: hints.ai_family = AF_UNSPEC; break;
     default: _socket->status = ESS_SOCKET_STATUS_ERROR; return ESS_ERROR_UNSPEC_FAMILY;
   }
-  hints.ai_flags = AI_PASSIVE;
 
-  char buffer[8]; buffer[0] = '\0';
-  snprintf(buffer, 8,"%d",_socket->port) ;
-  if (  (_socket->retval = getaddrinfo(_socket->hostname, buffer ,&hints,&result)) != 0 ) {
-    _socket->status = ESS_SOCKET_STATUS_ERROR;
-    return ESS_ERROR_GETADDR;
-  }
+  if( _socket->family == ESS_FAMILY_IP6) {
+    struct sockaddr_in6 socket6_addr;
 
-  for ( result_check = result; result_check != NULL; result_check = result_check->ai_next ) {
-    _socket->socket = socket(result_check->ai_family, result_check->ai_socktype, result_check->ai_protocol);
-    if ( _socket->socket < 0 )  continue;
-    if (  (_socket->retval  = bind(_socket->socket, result_check->ai_addr,(socklen_t)result_check->ai_addrlen)) != 0 ) {
-      close(_socket->socket); continue;
-    }
-    if (_socket->protokol == ESS_SOCKET_PROTO_STREAM) {
-  	    if (  (_socket->retval  = listen(_socket->socket, 128)) == 0) {
-          break;
-        } else {
-          close(_socket->socket);
-        }
-    }
-  }
-  if ( result_check == NULL ) {
-    freeaddrinfo(result);
-    _socket->status = ESS_SOCKET_STATUS_ERROR;
-    return ESS_ERROR_BIND;
-  }
-  freeaddrinfo(result);
+    memset(&socket6_addr, 0, sizeof(struct sockaddr_in6));
+    socket6_addr.sin6_family = AF_INET6;
+    socket6_addr.sin6_port = htons(port);
+    socket6_addr.sin6_addr = in6addr_any;
 
+    saddr = (struct sockaddr *)&socket6_addr;
+    socket_len = sizeof(socket6_addr);
+  } else {
+   memset(&socket_addr, 0, sizeof(struct sockaddr_in));
+   socket_addr.sin_family = AF_INET;
+   socket_addr.sin_port = htons( port );
+   socket_addr.sin_addr.s_addr = htonl( INADDR_ANY );
+
+   saddr = (struct sockaddr *)&socket_addr;
+   socket_len = sizeof(socket_addr);
+  }
+  _socket->socket = socket(hints.ai_family, hints.ai_socktype, hints.ai_protocol);
+
+  if (fcntl(_socket->socket, F_SETFL, O_NONBLOCK) < 0) {
+    fprintf(stderr,"Unable to set socket to non-blocking\n");
+  }
+  int n = 1; setsockopt(_socket->socket, SOL_SOCKET, SO_REUSEADDR, &n, sizeof(n));
+
+  if (  (_socket->retval  = bind(_socket->socket, saddr, socket_len )) != 0 ) {
+    close(_socket->socket); return ESS_ERROR_BIND;
+  }
+  if (_socket->protokol == ESS_SOCKET_PROTO_STREAM) {
+      if (  (_socket->retval  = listen(_socket->socket,  16)) != 0) {
+        close(_socket->socket);
+      }
+  }
+  if ( result ) freeaddrinfo ( result );
   _socket->status = ESS_SOCKET_STATUS_LISTEN;
   return ESS_OK;
 }
@@ -462,20 +477,19 @@ ess_error_t ess_socket_read_dram(ess_socket_t* socket, void* buf, unsigned int s
 }
 
 ess_error_t ess_socket_read(ess_socket_t* socket, void* buffer, unsigned int size, unsigned int* readed) {
-  int readed_g = 0;
-
   if(buffer == 0) { if(readed) *readed = 0; return ESS_ERROR_NULL; }
+  if (socket == 0)    return ESS_ERROR_NULL;
 
-  if (socket == 0)   {
-    return ESS_ERROR_NULL;
+  ssize_t sizeRead = 0;
+  int sizeUsed = 0;
+  while(1) {
+    sizeRead = recv(socket->socket, buffer + sizeUsed, size -  sizeUsed, 0);
+    if(sizeRead < 0 ) break;
+    else if(sizeRead == 0) break;
+
+    sizeUsed += sizeRead;
   }
-  readed_g = read(socket->socket, buffer, size);
-  if(readed_g > 0) {
-  	return ESS_ERROR;
-  }
-  if(readed) {
-    *readed = readed_g;
-  }
+  if(readed != 0) { (*readed = sizeUsed); }
   return ESS_OK;
 }
 ess_error_t ess_socket_write(ess_socket_t* socket, const void* buffer, unsigned int size, unsigned int* wrote) {
@@ -486,7 +500,7 @@ ess_error_t ess_socket_write(ess_socket_t* socket, const void* buffer, unsigned 
   if (socket == 0)   {
     return ESS_ERROR_NULL;
   }
-  wrote_g = write(socket->socket, buffer, size);
+  wrote_g = send(socket->socket, buffer, size, 0);
   if(wrote_g > 0) {
   	return ESS_ERROR;
   }

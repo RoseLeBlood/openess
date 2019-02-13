@@ -40,7 +40,9 @@ typedef struct udp_backend {
 ess_backend_facktory_t _udp_backend_config;
 
 
-ess_error_t ess_backend_udp_probe(const ess_format_t format) {
+ess_error_t ess_backend_udp_open(const ess_format_t format) {
+  ess_error_t error;
+
   switch (format) {
     case ESS_FORMAT_MONO_96000_8:
     case ESS_FORMAT_MONO_96000_16:
@@ -48,14 +50,10 @@ ess_error_t ess_backend_udp_probe(const ess_format_t format) {
     case ESS_FORMAT_STEREO_96000_8:
     case ESS_FORMAT_STEREO_96000_16:
     case ESS_FORMAT_STEREO_96000_24:
-      break;
+      return ESS_ERROR_WRONG_FORMAT;
     default:
-      return ESS_OK;
-  }
-  return ESS_ERROR_WRONG_FORMAT;
-}
-ess_error_t ess_backend_udp_open(const ess_format_t format) {
-  ess_error_t error;
+      break;
+  };
 
 #if ESS_BACKEND_UDP_FAMILY == ESS_FAMILY_BOTH
   error =  ess_socket_create_server(  ESS_SOCKET_FAMILY_BOTH, ESS_SOCKET_PROTO_DRAM, "::",
@@ -108,7 +106,6 @@ const char* ess_backend_udp_get_info(void) {
 udp_backend_t backend_data;
 
 ess_backend_facktory_t _udp_backend_config = {
-  ess_backend_udp_probe,
   ess_backend_udp_open,
   ess_backend_udp_close,
   ess_backend_udp_pause,

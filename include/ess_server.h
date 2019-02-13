@@ -18,7 +18,7 @@ typedef enum ess_server_status {
 
 typedef struct ess_server {
   ess_socket_t socket;
-  ess_context_t* context;
+  ess_context_t context;
   ess_format_t format;
 
   void* buffer;
@@ -28,7 +28,7 @@ typedef struct ess_server {
   ess_server_status_t status;
 } ess_server_t;
 
-ess_error_t ess_server_start(ess_server_t* server, ess_context_t* context, ess_format_t format) ;
+ess_error_t ess_server_start(ess_server_t* server, const char* backend_name,  ess_format_t format) ;
 int ess_server_stop(ess_server_t* server);
 int ess_restart_server(ess_server_t* server);
 

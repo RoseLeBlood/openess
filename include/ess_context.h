@@ -33,35 +33,102 @@
 #include "ess_format.h"
 #include "ess_error.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
-typedef struct ess_backend ess_backend_facktory_t;
+class ess_backend;
+
 /**
  * @brief Audio context stats
  */
-typedef enum ess_context_status {
+enum  ess_context_status_t {
   ESS_CONTEXT_STATUS_CREATED, 	/**< context is created  */
   ESS_CONTEXT_STATUS_RUN, 	/**< context is running. */
   ESS_CONTEXT_STATUS_PAUSED,	/**< backend is paused */
   ESS_CONTEXT_STATUS_ERROR,	/**< error  */
   ESS_CONTEXT_STATUS_RESTART,	/**< context restart */
   ESS_CONTEXT_STATUS_CLOSE,	/**< audio backend in the context is closed */
-} ess_context_status_t;
+} ;
 
 /**
  * @brief ess context
  *
  * Embedded sound server context. Abstract managment
  */
-typedef struct ess_context {
-  ess_backend_facktory_t* backend; /**< using backend */
-  ess_format_t format;		   /**< backend format */
-  ess_context_status_t status;	   /**< context status */
-  ess_error_t last_error; /**< the last error */
-}ess_context_t;
+class ess_context {
+public:
+  ess_error_t  create(const char* name, const ess_format_t format);
+  ess_error_t  create(ess_backend* backend, const ess_format_t format);
 
+  /**
+   * @brief close the context and close the backend
+   * @param context the context
+    * @return when ok then ESS_OK
+   */
+  ess_error_t close();
+
+  /**
+   * @brief destroy and free the context
+   * @param context the context
+   * @return when ok then ESS_OK
+   */
+  ess_error_t destroy();
+
+  /**
+   * @brief set backend to standby
+   * @param context the context
+   * @return when ok then ESS_OK
+   */
+  ess_error_t paused();
+
+  /**
+   * @brief set backend to run
+   * @param context the context
+   * @return when ok then ESS_OK
+   */
+  ess_error_t resume(ess_context_t* context);
+  /**
+   * @brief set the sample format to backend
+   * @param format the new using format
+   * @return when ok then ESS_OK
+   */
+  ess_error_t set_format(const ess_format_t format);
+
+  /**
+   * @brief write audio data to the backend
+   * @param buffer the audio pcm data
+   * @param buf_size the size of the buffer
+   * @return the written data.
+   */
+  unsigned int write(void *buffer, unsigned int buf_size);
+  /**
+   * @brief write audio data to the backend
+   * @param buffer the audio pcm data
+   * @param buf_size the size of the buffer
+   * @param wrote  the written data
+   * @return when ok then ESS_OK
+   */
+  ess_error_t write(void *buffer, unsigned int buf_size,  unsigned int* wrote);
+  /**
+   * @brief get the usind backend name
+   * @return the using backend name
+   */
+  const char* get_backend_name();
+  /**
+   * @brief get using backend informations
+   * @return the using backend informations
+   */
+  const char* get_backend_info();
+
+  /**
+   * @brief get the last error from context
+   * @return the last error
+   */
+  ess_error_t get_last_error();
+protected:
+  ess_backend* m_pBackend;
+  ess_format_t m_eFormat;
+  ess_context_status_t m_eStatus;
+  ess_error_t last_error;
+};
 
 /**
  * @brief  initialisiert the context
@@ -80,7 +147,7 @@ typedef struct ess_context {
  * @reval ESS_ERROR_WRONG_FORMAT format not support
  * @retval ESS_OK context created
  */
-ess_error_t  ess_context_create(ess_context_t* context,  const char* name, const ess_format_t format);
+
 /**
  * @brief  initialisiert the context with a user backend
  * @code
@@ -99,86 +166,11 @@ ess_error_t  ess_context_create(ess_context_t* context,  const char* name, const
  * @retval ESS_OK context created
  * @reval ESS_ERROR_NOBACKEND backend was NULL
  */
-ess_error_t ess_context_create_ex(ess_context_t* context, ess_backend_facktory_t* backend, const ess_format_t format);
-/**
- * @brief close the context and close the backend
- * @param context the context
-  * @return when ok then ESS_OK
- */
-ess_error_t ess_context_close(ess_context_t* context);
-/**
- * @brief destroy and free the context
- * @param context the context
- * @return when ok then ESS_OK
- */
-ess_error_t ess_context_destroy(ess_context_t* context);
-/**
- * @brief set backend to standby
- * @param context the context
- * @return when ok then ESS_OK
- */
-ess_error_t ess_context_paused(ess_context_t* context);
-/**
- * @brief set backend to run
- * @param context the context
- * @return when ok then ESS_OK
- */
-ess_error_t ess_context_resume(ess_context_t* context);
-/**
- * @brief set the sample format to backend
- * @param context the context
- * @code
- * ess_context_t context;
- *
- * ess_context_create(&context, ESS_FORMAT_STEREO_92000_24); // Backend Format
- * ess_context_init_ex(&context, "uart"); // open uart backend
- *
- * ess_context_set_format(&context, LOADED_WAV_FORMAT);
- * @endcode
- * @param format the new using format
- * @return when ok then ESS_OK
- */
-ess_error_t ess_context_set_format(ess_context_t* context, const ess_format_t format);
 
-/**
- * @brief write audio data to the backend
- * @param context the context
- * @param buffer the audio pcm data
- * @param buf_size the size of the buffer
- * @return the written data.
- */
-unsigned int ess_context_write(ess_context_t* context, void *buffer, unsigned int buf_size);
-/**
- * @brief write audio data to the backend
- * @param context the context
- * @param buffer the audio pcm data
- * @param buf_size the size of the buffer
- * @param wrote  the written data
- * @return when ok then ESS_OK
- */
-ess_error_t ess_context_write_ex(ess_context_t* context, void *buffer, unsigned int buf_size,  unsigned int* wrote);
-/**
- * @brief get the usind backend name
- * @param context the context
- * @return the using backend name
- */
-const char* ess_context_get_backend_name(ess_context_t* context);
-/**
- * @brief get using backend informations
- * @param context the context
- * @return the using backend informations
- */
-const char* ess_context_get_backend_info(ess_context_t* context);
 
-/**
- * @brief get the last error from context
- * @param context the context
- * @return the last error
- */
-ess_error_t ess_context_get_last_error(ess_context_t* context);
 
-#ifdef __cplusplus
-}
-#endif
+
+
+
 
 #endif

@@ -1,7 +1,11 @@
 #include "ess_server.h"
 
-ess_error_t ess_server_start(ess_server_t* server, ess_context_t* context,  ess_format_t format)  {
-  if(server == 0 || context == 0) return ESS_ERROR_NULL;
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+ess_error_t ess_server_start(ess_server_t* server, const char* backend_name,  ess_format_t format)  {
+  if(server == 0 || backend_name == 0) return ESS_ERROR_NULL;
 
   ess_socket_pro_t proto;
   ess_socket_fam_t fam;
@@ -24,10 +28,13 @@ ess_error_t ess_server_start(ess_server_t* server, ess_context_t* context,  ess_
 
   ess_error_t error = ess_socket_create_server(fam, proto, ESS_DEFAULT_SERVER_HOST,
       ESS_DEFAULT_SERVER_PORT, &server->socket);
+  ESS_ERROR(error) ;
+
+  error = ess_context_create (&server->context, backend_name, format);
+  ESS_ERROR(error) ;
 
   server->format = format;
-  server->context = context;
   server->status = ESS_SERVER_STATUS_RUN;
-  
+
   return error;
 }

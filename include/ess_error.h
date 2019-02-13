@@ -1,9 +1,6 @@
 #ifndef _ESS_ERROR_H_
 #define _ESS_ERROR_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /**
  * @brief OpenESS error codes
@@ -37,8 +34,5 @@ typedef enum ess_error {
 
 const char* ess_error_to_string(const ess_error_t error);
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif

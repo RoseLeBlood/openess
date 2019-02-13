@@ -30,18 +30,47 @@
 // #define OPEN_ESS_VERSION  1_1 // TODO: Future Plan 11 - all platforms ready  -- MT Safe
 // #define OPEN_ESS_VERSION  2_0 // TODO: Future Future Plan 2 - ??
 
+#include "config.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <errno.h>
+#include <time.h>
+#include <sys/time.h>
+#include <sys/signal.h>
+
+
+#include "ess_format.h"
+#include "ess_protocol.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <errno.h>
-#include <time.h>
+/* structures to retrieve information about streams/samples from the server */
+typedef struct ess_server_info {
+    int version; 		             /**< server version encoded as an int */
+    int protocol_version;  /**< server protocol version encoded as an int */
+    char server_name[16]; /**<the name ot the server */
+    ess_format_t format;	/**<server format info */
+} ess_server_info_t;
 
-#include <sys/time.h>
-#include <sys/signal.h>
+typedef struct ess_stream_info {
+    struct ess_player_info *next; /* point to next entry in list */
+    ess_server_info_t *server;	/* the server that contains this stream */
 
-#include "config.h"
-#include "ess_format.h"
+    int source_id;		/* either a stream fd or sample id */
+    char name[ 16 ];	/* name of stream for remote control */
+    ess_format_t format;	/**<server format info */
+} ess_stream_info_t;
+
+
+typedef struct ess_info {
+    ess_server_info_t *server;
+    ess_stream_info_t *stream_list;
+} ess_info_t;
+
 
 
 #ifdef __cplusplus

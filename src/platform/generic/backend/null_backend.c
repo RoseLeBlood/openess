@@ -31,9 +31,6 @@
 
 int g_null_paused = 0;
 
-ess_error_t ess_backend_null_probe(const ess_format_t format) {
-  return ESS_OK;
-}
 ess_error_t ess_backend_null_open(const ess_format_t format) {
   printf("Possible to open backend: null (%s)\n",
   ess_format_to_string(format));
@@ -72,7 +69,6 @@ const char* ess_backend_null_get_info(void) {
   return "Null Audio";
 }
 ess_backend_facktory_t _null_backend_config = {
-  ess_backend_null_probe,
   ess_backend_null_open,
   ess_backend_null_close,
   ess_backend_null_pause,

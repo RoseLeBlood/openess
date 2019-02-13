@@ -5,12 +5,11 @@
 extern "C" {
 #endif
 
-#ifdef ESS_ENABLE_BACKEND_UART
-  ess_backend_facktory_t* ess_backend_uart_getFactory();
-#endif
-#ifdef ESS_ENABLE_BACKEND_I2S
-  ess_backend_facktory_t* ess_backend_i2s_generic_getFactory();
-#endif
+ess_backend_facktory_t* ess_backend_udp_getFactory();
+ess_backend_facktory_t* ess_backend_null_getFactory();
+ess_backend_facktory_t* ess_backend_uart_getFactory();
+ess_backend_facktory_t* ess_backend_i2s_generic_getFactory();
+
 
 
 typedef struct ess_backends_entry {

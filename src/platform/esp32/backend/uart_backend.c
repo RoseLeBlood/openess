@@ -39,9 +39,7 @@
 
 int g_uart_paused = 0;
 
-ess_error_t ess_backend_uart_probe(const ess_format_t format) {
-  return ESS_OK;
-}
+
 ess_error_t ess_backend_uart_open(const ess_format_t format) {
   uart_config_t uart_config = {
         .baud_rate = ESS_BACKEND_UART_BAUDRAT,
@@ -105,7 +103,6 @@ const char* ess_backend_uart_get_info(void) {
 }
 
 ess_backend_facktory_t _uart_backend_config = {
-  ess_backend_uart_probe,
   ess_backend_uart_open,
   ess_backend_uart_close,
   ess_backend_uart_pause,

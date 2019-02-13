@@ -17,56 +17,26 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-
 /**
- * @file backend.h
+ * @file ess_lock..h
  * @author Anna Sopdia Schröck
- * @date 30 Januar 20119
- * @brief Contains all ess backend  functions and the backend factory struct
- *
+ * @date 13 Februar 20119
+ * @brief lock interface
  *
  */
+#ifndef _ESS_PLATFORM_ILOCK_H_
+#define _ESS_PLATFORM_ILOCK_H_
 
-#ifndef __ESS_BACKEND_H__
-#define __ESS_BACKEND_H__
-
-#include "ess.h"
 #include "ess_error.h"
 
-#include <map.h>
-
-
-class ess_backend {
+class ess_lock {
 public:
-  virtual ess_error_t open(const ess_format_t format) = 0;
-  virtual ess_error_t close() = 0;
-  virtual ess_error_t restart(const ess_format_t format) = 0;
-
-  virtual ess_error_t pause() = 0;
-  virtual ess_error_t resume() = 0;
-
-  virtual ess_error_t write(const void *buffer, unsigned int buf_size, unsigned int* wrote) = 0;
-  virtual ess_error_t read(void *buffer, unsigned int buf_size, unsigned int* readed) = 0;
-
-  virtual const char* get_name() = 0;
-  virtual const char* get_info() = 0;
+  virtual ess_error_t lock() = 0;
+  virtual ess_error_t unlock() = 0;
+  virtual ess_error_t try_lock() = 0;
 protected:
-  void* m_pUserData;
+  char m_cName[16];
+  void* m_pHandle;
 };
-
-/**
- * @brief ess backend interface
- *
- * Embedded Sound System Backend factory. Backend vtable
- */
-class ess_backend_factory {
-public:
-  bool add_backend(const char* name, ess_backend* backend);
-
-  ess_backend& get_backend(const char* name);
-private:
-  std::map<const char*, ess_backend*> m_lBackends;
-};
-
 
 #endif
