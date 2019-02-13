@@ -32,7 +32,9 @@
 
 class ess_task {
 public:
+  ess_task() { }
   ess_task(const char* taskName, void* param, unsigned int stackSize);
+  virtual ~ess_task() { }
 
   /**
    * @brief start the task
@@ -72,16 +74,21 @@ public:
    * @retval ESS_ERROR_NULL 'esp_platform_task_t' task is null
    */
   ess_error_t resume();
-private:
-  char name[16];
-  int task_id;
 
-  void* userdata;
+  virtual void onTask(ess_task* self, void* userdata) { }
+
+private:
+  static void int_task_stub(void* data);
+protected:
+  char m_strName[16];
+  int m_iTaskId;
+
+  void* m_pUserdata;
   void* parem;
-  unsigned int stack_size;
-  void* handle;
-  int priority;
-  int running;
+  unsigned int m_uiStackSize;
+  void* m_pHandle;
+  int m_iPriority;
+  bool m_bRunning;
 
   ess_mutex runningMutex;
   ess_mutex contextMutext;

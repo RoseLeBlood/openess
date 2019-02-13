@@ -37,14 +37,20 @@
 
 #include "esp_attr.h"
 
-ess_mutex::ess_mutex() {
-  m_pHandle = xSemaphoreCreateBinary();
-  unlock();
-}
+ess_mutex::ess_mutex() { }
 ess_mutex::~ess_mutex() {
-  vSemaphoreDelete(m_pHandle) ;
+
 }
 
+ess_error_t ess_mutex::create() {
+  m_pHandle = xSemaphoreCreateBinary();
+  return unlock();
+}
+ess_error_t ess_mutex::destroy() {
+  if(m_pHandle == 0) return ESS_ERROR_NULL;
+  vSemaphoreDelete(m_pHandle) ;
+  return ESS_OK;
+}
 ess_error_t ess_mutex::lock() {
   if(m_pHandle == 0) return ESS_ERROR_NULL;
 

@@ -32,12 +32,17 @@
 
 #include "ess.h"
 #include "ess_error.h"
+#include "ess_format.h"
 
-#include <map.h>
+#include <map>
 
 
 class ess_backend {
 public:
+  ess_backend() { }
+  ess_backend(const char* name) { m_strName = name; }
+  virtual ~ess_backend() { }
+
   virtual ess_error_t open(const ess_format_t format) = 0;
   virtual ess_error_t close() = 0;
   virtual ess_error_t restart(const ess_format_t format) = 0;
@@ -48,10 +53,11 @@ public:
   virtual ess_error_t write(const void *buffer, unsigned int buf_size, unsigned int* wrote) = 0;
   virtual ess_error_t read(void *buffer, unsigned int buf_size, unsigned int* readed) = 0;
 
-  virtual const char* get_name() = 0;
+  virtual const char* get_name() { return m_strName; }
   virtual const char* get_info() = 0;
 protected:
   void* m_pUserData;
+  const char* m_strName;
 };
 
 /**

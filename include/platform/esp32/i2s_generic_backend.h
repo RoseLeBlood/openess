@@ -18,54 +18,43 @@
  ****************************************************************************/
 
 /**
- * @file ess_spinlock.h
+ * @file i2s_gerneric_backend.h
  * @author Anna Sopdia Schröck
- * @date 11 Februar 20119
- * @brief all platform specific spinlock functions
+ * @date 13 Februar 20119
+ * @brief all esp32 backend generic_i2s class
  *
  */
-#ifndef _ESS_PLATFORM_SPINLOCK_H_
-#define _ESS_PLATFORM_SPINLOCK_H_
+#ifndef _ESS_PLATFORM_INC_GENERIC_I2S_H_
+#define _ESS_PLATFORM_INC_GENERIC_I2S_H_
 
-#include "ess_lock.h"
+#include "ess_backend.h"
 
-class ess_spinlock : public ess_lock {
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/i2s.h"
+#include "esp_system.h"
+
+class ess_i2s_generic_backend : public ess_backend {
 public:
-  ess_spinlock();
-  ~ess_spinlock();
+  ess_i2s_generic_backend();
+  ~ess_i2s_generic_backend();
 
-  virtual ess_error_t create(int count);
-  virtual ess_error_t destroy();
+  virtual ess_error_t open(const ess_format_t format);
+  virtual ess_error_t close() = 0;
+  virtual ess_error_t restart(const ess_format_t format);
 
-  /**
-   * @brief lock the spinlock
-   * @retval ESS_OK no error
-   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
-   * @retval ESS_ERROR unspec error
-   * @retval ESS_ERROR_NOT_CREATED  mutex is not created
-   * @retval ESS_ERROR_NULL 'ess_platform_mutex_t' mtx is null
-   */
-  virtual ess_error_t lock();
-  /**
-   * @brief unlock the spinlock
-   * @retval ESS_OK no error
-   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
-   * @retval ESS_ERROR unspec error
-   * @retval ESS_ERROR_NOT_CREATED  mutex is not created
-   * @retval ESS_ERROR_NULL 'ess_platform_mutex_t' mtx is null
-   */
-  virtual ess_error_t unlock();
+  virtual ess_error_t pause();
+  virtual ess_error_t resume();
 
-  /**
-   * @brief try lock the mutex
-   *
-   * @retval ESS_OK lock the mutex
-   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
-   * @retval ESS_ERROR can't lock
-   * @retval ESS_ERROR_NULL 'ess_platform_mutex_t' mtx is null
-   */
-  virtual ess_error_t try_lock();
+  virtual ess_error_t write(const void *buffer, unsigned int buf_size, unsigned int* wrote);
+  virtual ess_error_t read(void *buffer, unsigned int buf_size, unsigned int* readed);
 
+  virtual const char* get_info();
+protected:
+  void* m_pUserData;
+  bool m_bPaused;
+  i2s_config_t m_i2sConfig;
+  i2s_pin_config_t m_pinConfig;
 };
 
 #endif

@@ -68,9 +68,6 @@ ess_error_t  ess_context::create(ess_backend* backend, const ess_format_t format
 }
 ess_error_t ess_context::close() {
 
-}
-ess_error_t ess_context::close() {
-
   if(m_pBackend == 0)  return last_error =  ESS_ERROR_NOBACKEND;
 
   m_pBackend->close();
@@ -102,7 +99,7 @@ ess_error_t ess_context::resume() {
   if(m_pBackend == 0)  return last_error =  ESS_ERROR_NOBACKEND;
 
   m_eStatus = ESS_CONTEXT_STATUS_RUN;
-  m_pBackend->resum();
+  m_pBackend->resume();
 
   last_error = ESS_OK;
   return ESS_OK;
@@ -117,7 +114,7 @@ ess_error_t ess_context::set_format(const ess_format_t format) {
 
 unsigned int ess_context::write(void *buffer, unsigned int buf_size) {
   unsigned int wrote;
-  write(context, buffer, buf_size, &wrote);
+  write(buffer, buf_size, &wrote);
   return wrote;
 }
 ess_error_t ess_context::write(void *buffer, unsigned int buf_size,  unsigned int* wrote) {
@@ -131,11 +128,11 @@ ess_error_t ess_context::write(void *buffer, unsigned int buf_size,  unsigned in
 }
 
 const char* ess_context::get_backend_name() {
-  if(context == 0) return 0;
+  if(m_pBackend == 0) return 0;
   return m_pBackend->get_name();
 }
 const char* ess_context::get_backend_info() {
-  if(context == 0) return 0;
+  if(m_pBackend == 0) return 0;
   return m_pBackend->get_info();
 }
 ess_error_t ess_context::get_last_error() {

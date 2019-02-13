@@ -84,7 +84,7 @@ public:
    * @param context the context
    * @return when ok then ESS_OK
    */
-  ess_error_t resume(ess_context_t* context);
+  ess_error_t resume();
   /**
    * @brief set the sample format to backend
    * @param format the new using format
@@ -132,13 +132,6 @@ protected:
 
 /**
  * @brief  initialisiert the context
- * @code
- * ess_context_t context;
- * ess_error_t error;
- *
- * error = ess_context_create (&context, "uart", ESS_FORMAT_STEREO_96000_24);
- * if(error != ESS_OK) printf/("error in creating the context\n");
- * @endcode
  *
  * @param [out] the creating ontext
  * @param [in] name the name of the using backend
@@ -150,14 +143,6 @@ protected:
 
 /**
  * @brief  initialisiert the context with a user backend
- * @code
- * ess_context_t context;
- * ess_error_t error;
- * ess_backend_facktory_t* user_backend = { ... };
- *
- * error = ess_context_create_ex(&context, user_backend, ESS_FORMAT_STEREO_96000_24);
- * if(error != ESS_OK) printf/("error in creating the context\n");
- * @endcode
   * @param [out] the creating ontext
  * @param [in] format the using context format
  * @param [in] backend the user backend factory

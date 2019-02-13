@@ -34,6 +34,9 @@ public:
   ess_mutex();
   ~ess_mutex();
 
+  virtual ess_error_t create();
+  virtual ess_error_t destroy();
+
   /**
    * @brief lock the mutex
    * @retval ESS_OK no error

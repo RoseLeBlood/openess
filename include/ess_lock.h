@@ -31,6 +31,9 @@
 
 class ess_lock {
 public:
+  virtual ess_error_t create() = 0;
+  virtual ess_error_t destroy() = 0;
+
   virtual ess_error_t lock() = 0;
   virtual ess_error_t unlock() = 0;
   virtual ess_error_t try_lock() = 0;

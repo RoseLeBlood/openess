@@ -29,9 +29,6 @@
 
  #include "ess_error.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 typedef enum  ess_platform_ringbuffer_mode{
   ESS_PLATFORM_RINGBUFFER_MODE_NOSPLIT,
@@ -40,83 +37,79 @@ typedef enum  ess_platform_ringbuffer_mode{
 }ess_platform_ringbuffer_mode_t;
 
 
-typedef struct ess_platform_ringbuffer {
-  char name[16];
-  void* handle, *qhandle;
-  ess_platform_ringbuffer_mode_t type;
-}ess_platform_ringbuffer_t;
+class ess_ringbuffer {
+public:
+  /**
+   * @brief construct the ringbuffer object
+   *
+   * @param [in] length The amount of storage to allocate for the ring buffer.
+   * @param [in] type the mode of the ring buffer.
+   * @param [in] name the name of the ring buffer.
+   */
+  ess_ringbuffer( unsigned int length,  ess_platform_ringbuffer_mode_t type);
+  virtual ~ess_ringbuffer();
+  /**
+   * @brief Create a ring buffer.
+   * @retval ESS_OK no error
+   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
+   * @retval ESS_ERROR unspec error
+   * @retval ESS_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
+   */
+  virtual ess_error_t create();
 
-/**
- * @brief Create a ring buffer.
- *
- * @param [in] rng the ringbuffer context
- * @param [in] length The amount of storage to allocate for the ring buffer.
- * @param [in] type the mode of the ring buffer.
- * @param [in] name the name of the ring buffer.
- *
- * @retval ESS_OK no error
- * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
- * @retval ESS_ERROR unspec error
- * @retval ESS_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
- */
-ess_error_t ess_platform_ringbuffer_create(ess_platform_ringbuffer_t* rng ,
-  unsigned int length,  ess_platform_ringbuffer_mode_t type, const char* name);
   /**
    * @brief destroy the ring buffer.
-   *
-   * @param [in] rng the ringbuffer context
    *
    * @retval ESS_OK no error
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
    * @retval ESS_ERROR unspec error
    * @retval ESS_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
    */
-ess_error_t ess_platform_ringbuffer_destroy(ess_platform_ringbuffer_t* rng);
-/**
- * @brief write data to the ring buffer.
- *
- * @param [in] rng the ringbuffer context
- * @param [in] data the data to place into the buffer.
- * @param [in] length the length of data to place into the buffer.
- * @param [in] ms how long to wait before giving up - in ms
- *
- * @retval ESS_OK no error
- * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
- * @retval ESS_ERROR can't write
- * @retval ESS_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
- */
-ess_error_t ess_platform_ringbuffer_write(ess_platform_ringbuffer_t* rng,
-    void* data, unsigned int length, unsigned int ms);
-/**
- * @brief can read from the ringbuffer
- *
- * @param [in] rng the ringbuffer context
- * @param [in] ms how long to wait before giving up - in ms
- *
- * @retval ESS_OK yes
- * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
- * @retval ESS_ERROR no
- * @retval ESS_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
- */
-ess_error_t ess_platform_ringbuffer_can_read(ess_platform_ringbuffer_t* rng, unsigned int ms);
-/**
- * @brief read data from the ring buffer.
- *
- * @param [in] rng the ringbuffer context
- * @param [out] length the length of data to place into the buffer.
- * @param [in] ms how long to wait before giving up - in ms
- *
- * @retval a pointer to the storage retrieved.
- * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
- * @retval ESS_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
- */
-void* ess_platform_ringbuffer_read(ess_platform_ringbuffer_t* rng, unsigned int* length, unsigned int ms);
+  virtual ess_error_t destroy();
 
+  /**
+   * @brief write data to the ring buffer.
+   *
+   * @param [in] data the data to place into the buffer.
+   * @param [in] length the length of data to place into the buffer.
+   * @param [in] ms how long to wait before giving up - in ms
+   *
+   * @retval ESS_OK no error
+   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
+   * @retval ESS_ERROR can't write
+   * @retval ESS_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
+   */
+  virtual ess_error_t write(void* data, unsigned int length, unsigned int ms);
 
+  /**
+   * @brief can read from the ringbuffer
+   *
+   * @param [in] ms how long to wait before giving up - in ms
+   *
+   * @retval ESS_OK yes
+   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
+   * @retval ESS_ERROR no
+   * @retval ESS_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
+   */
+  virtual ess_error_t can_read(unsigned int ms);
 
-#ifdef __cplusplus
-}
-#endif
+  /**
+   * @brief read data from the ring buffer.
+   *
+   * @param [out] length the length of data to place into the buffer.
+   * @param [in] ms how long to wait before giving up - in ms
+   *
+   * @retval a pointer to the storage retrieved.
+   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
+   * @retval ESS_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
+   */
+  virtual void* read(unsigned int* length, unsigned int ms);
+protected:
+  void* m_pHandle;
+  void* m_pQHandle;
+  ess_platform_ringbuffer_mode_t m_tType;
+  unsigned int m_sLength;
+};
 
 
 #endif

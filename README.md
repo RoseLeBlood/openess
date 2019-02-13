@@ -2,7 +2,7 @@
 <div>
  <img src="https://roseleblood.github.io/openess/Logo-OpenESS.png" width="256" align="left">
  <div align="left">
-  <h1>Open Embedded Sound Server</h1>
+  <h1>Open Embedded Sound Server ++</h1>
    <h3>
      <a href="https://roseleblood.github.io/">Website</a>
      <span> | </span>
@@ -29,8 +29,8 @@
 
 
 
-**OpenESS**  is a network-capable sound server libary mainly for embedded systems and other operatins systems.
-OpenESS is free and open-source software, and is licensed under the terms of the GNU Lesser General Public License.
+**OpenESS++**  is a network-capable sound server libary mainly for embedded systems and other operatins systems.
+OpenESS++ is free and open-source software, and is licensed under the terms of the GNU Lesser General Public License.
 
 <a href="https://www.codacy.com/app/RoseLeBlood/openess?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=RoseLeBlood/openess&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/4f0ba2c68a904b8da2f1d45d5f3596d4"/></a>
 
@@ -40,7 +40,7 @@ OpenESS is free and open-source software, and is licensed under the terms of the
 
 #### PlatformIO
 
-OpenESS is made for use with [platformio](http://platformio.org/), an advanced ecosystem for microcontroller
+OpenESS++ is made for use with [platformio](http://platformio.org/), an advanced ecosystem for microcontroller
 development. To get started with coding esphomelib applications, you first have to
 [install the atom-based platformio IDE](http://platformio.org/platformio-ide) or for advanced users,
 [install the command line version of platformio](http://docs.platformio.org/en/latest/installation.html).
@@ -83,7 +83,7 @@ void app_main() {
 ```
 _For more examples and usage, please refer to the [Wiki][wiki]
 
-## Current Features (version 0.3-1)
+## Current Features (version 0.3-3)
 
 * Powerful core that allows for easy to port
 * Powerful socket abscrations layer (SAL)
@@ -92,6 +92,7 @@ _For more examples and usage, please refer to the [Wiki][wiki]
 * generic backends: udp, uart and i2s
 * task are multitaskin safe
 * code style min B
+* C++ System
 
 ## Progressed features (when ready than version 0.9)
 
@@ -109,6 +110,10 @@ _For more examples and usage, please refer to the [Wiki][wiki]
 
 
 ## Release History
+* 0.3.3
+  - rename project to OpenESS ++
+  - switch to C++
+  - C++ convert i progress - unstable
 * 0.3
   - update platform abstraction layer
   - add mutex, task and spinlock functions - task using mutex on esp32 platforms
