@@ -24,7 +24,7 @@
  * @date 18 Februar 20119
  * @brief the basic i2s_generic class
  *
- *
+ * this is a null backend only for testing
  */
 #ifndef _ESS_PLATFORM_INC_GENERIC_NULL_H_
 #define _ESS_PLATFORM_INC_GENERIC_NULL_H_
