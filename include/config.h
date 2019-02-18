@@ -141,6 +141,6 @@
 #define ESS_BACKEND_NAME_I2S_ESP32 			 "i2s_esp32"
 #define ESS_BACKEND_NAME_NULL								"null"
 #define ESS_BACKEND_NAME_UDP								 "udp"
-#define ESS_BACKEND_NAME_UART_ESP32	 "UART_ESP32"
+#define ESS_BACKEND_NAME_OPENAL	 				"openal"
 
 #endif

@@ -36,10 +36,14 @@
 
 #include "platform/generic_null_backend.h"
 
+
+
 class ess_backend_platform {
 public:
   ess_backend_platform() {
     add_backend(new generic_null_backend());
+
+    
   }
   virtual void create() = 0;
   virtual ess_backend* get_backend(const char* name);

@@ -19,23 +19,23 @@
 
 
 /**
- * @file generic_null_backend.h
+ * @file generic_openal_backend.h
  * @author Anna Sopdia Schröck
  * @date 18 Februar 2019
- * @brief the basic i2s_generic class
+ * @brief the basic openal backend class
  *
  * this is a null backend only for testing
  */
-#ifndef _ESS_PLATFORM_INC_GENERIC_NULL_H_
-#define _ESS_PLATFORM_INC_GENERIC_NULL_H_
+#ifndef _ESS_PLATFORM_INC_GENERIC_OPENAL_H_
+#define _ESS_PLATFORM_INC_GENERIC_OPENAL_H_
 
 #include "ess.h"
 #include "ess_backend.h"
 
-class generic_null_backend : public ess_backend {
+class generic_openal_backend : public ess_backend {
 public:
-  generic_null_backend() : ess_backend(ESS_BACKEND_NAME_NULL) { }
-  ~generic_null_backend() { }
+  generic_openal_backend() : ess_backend(ESS_BACKEND_NAME_OPENAL) { }
+  ~generic_openal_backend() { }
 
   virtual ess_error_t probe(const ess_format_t format) { return ESS_OK; }
   virtual ess_error_t open(const ess_format_t format) { return ESS_OK; }

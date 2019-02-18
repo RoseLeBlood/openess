@@ -32,12 +32,18 @@
 
 #include "ess_backend_factory.h"
 
+#ifdef ESS_ENABLE_BACKEND_OPENAL
+#include "platform/generic_openal_backend.h"
+#endif
+
 class ess_backend_linux : public ess_backend_platform {
 public:
   ess_backend_linux() {
   }
   virtual void create() {
-     // TODO: Add Nackends to map with add_backend
+    #ifdef ESS_ENABLE_BACKEND_OPENAL
+      add_backend(new generic_openal_backend());
+    #endif
   }
   virtual std::string get_platform_name() {
     return std:string("Linux");
