@@ -19,70 +19,37 @@
 
 
 /**
- * @file ess_backend_factory.h
+ * @file generic_null_backend.h
  * @author Anna Sopdia Schröck
  * @date 18 Februar 20119
- * @brief Contains backend factory template class and backend root class
+ * @brief the basic i2s_generic class
  *
  *
  */
+#ifndef _ESS_PLATFORM_INC_GENERIC_NULL_H_
+#define _ESS_PLATFORM_INC_GENERIC_NULL_H_
 
-#ifndef __ESS_BACKEND_FACTORY_H__
-#define __ESS_BACKEND_FACTORY_H__
-
+#include "ess.h"
 #include "ess_backend.h"
 
-#include <map>
-
-#include "platform/generic_null_backend.h"
-
-class ess_backend_platform {
+class generic_null_backend : public ess_backend {
 public:
-  ess_backend_platform() {
-    add_backend(new generic_null_backend());
-  }
-  virtual void create() = 0;
-  virtual ess_backend* get_backend(const char* name);
+  generic_null_backend() : ess_backend(ESS_BACKEND_NAME_NULL) { }
+  ~generic_null_backend() { }
 
-  virtual std::string get_platform_name() = 0;
-  virtual std::string get_factory_creater() = 0;
+  virtual ess_error_t probe(const ess_format_t format) { return ESS_OK; }
+  virtual ess_error_t open(const ess_format_t format) { return ESS_OK; }
+  virtual ess_error_t close() { return ESS_OK; }
+  virtual ess_error_t restart(const ess_format_t format) { return ESS_OK; }
 
-  virtual  bool add_backend(ess_backend* backend);
+  virtual ess_error_t pause() { m_bPaused = true; return ESS_OK; }
+  virtual ess_error_t resume() { m_bPaused = false; return ESS_OK; }
 
+  virtual ess_error_t write(const void *buffer, unsigned int buf_size, unsigned int* wrote) { return ESS_OK; }
+  virtual ess_error_t read(void *buffer, unsigned int buf_size, unsigned int* readed) { return ESS_OK; }
 
-  std::map<std::string, ess_backend*>& get_backends() { return m_lBackends; }
+  virtual const char* get_info() { return "generic_null_backend"; }
 protected:
-  std::map<std::string, ess_backend*> m_lBackends;
+  bool m_bPaused;
 };
-/**
- * @brief ess backend factory
- *
- * Embedded Sound System Backend factory. Backend vtable
- */
-template <class BACKEND>
-class ess_backend_factory {
-public:
-  static ess_backend_factory<BACKEND>& Instance() {
-    if(m_pInstance == nullptr) {
-      m_pInstance = new ess_backend_factory<BACKEND>();
-    }
-    return *m_pInstance;
-  }
-public:
-  ess_backend* get_backend(const char* name)  {
-    return m_pPlatform.get_backend(name);
-  }
-  std::map<std::string, ess_backend*>& get_backends() {
-    return m_pPlatform.get_backends();
-  }
-private:
-  ess_backend_factory() {
-    m_pPlatform.create();
-  }
-private:
-  static ess_backend_factory<BACKEND> *m_pInstance ;
-  BACKEND m_pPlatform;
-};
-template <class BACKEND>
-ess_backend_factory<BACKEND>* ess_backend_factory<BACKEND>::m_pInstance = 0;
 #endif
