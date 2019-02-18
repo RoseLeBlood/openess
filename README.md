@@ -61,24 +61,59 @@ Finally, create a new source file in the `src/` folder (for example `main.c`) an
 
 _create the audio context_
 ```cpp
+#include "ess.h"
 #include "ess_context.h"
-#include "ess_format.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+ess_context context;
+ess_error_t error;
 
 
-void app_main() {
-  ess_context_t context;
-  ess_context_error_t error;
+#if ESS_PLATFORM_ESP32 == 1
+extern "C" void app_main() {
+#else
+int main() {
+#endif
+  error = context.create(ESS_BACKEND_NAME_NULL, ESS_FORMAT_STEREO_44100_24);
+  ESS_ERROR(error);
 
-  error = ess_context_create (&context, ESS_BACKEND_NAME_I2S_ESP32, ESS_FORMAT_STEREO_44100_16);
-  ESS_ERROR(error) ;
+  for(;;)  { ess_platform_sleep(10); }
+}
+```
 
-  for(;;) { usleep(100000); }
+_probe backends_
+```cpp
+
+#include "ess.h"
+#include "ess_context.h"
+
+ess_error_t error;
+
+void probe_backend(ess_backend* backend) {
+
+ printf("Probe backend: %s ----------------------------------------------------\n", backend->get_name() );
+
+ for(int y = 0; y < ESS_FORMAT_MAX; y++)  {
+  error = backend->probe(  (ess_format_t) y);
+
+   // ++ => support | !! => no support
+    printf("\t\t  %s (%s)   \n", (error == ESS_OK) ? "++" : "!!" ,
+      ess_format_to_string( (ess_format_t)(y)) );
+   }
 }
 
+#if ESS_PLATFORM_ESP32 == 1
+extern "C" void app_main() {
+#else
+int main() {
+#endif
+  ess_backend_t& ins = ess_backend_t::Instance();
+
+  for(auto i = ins.get_backends().begin(); i !=  ins.get_backends().end(); ++i ) {
+    probe_backend(i->second);
+  }
+
+  for(;;)  { ess_platform_sleep(10); }
+}
 
 ```
 _For more examples and usage, please refer to the [Wiki][wiki]
@@ -110,6 +145,11 @@ _For more examples and usage, please refer to the [Wiki][wiki]
 
 
 ## Release History
+* 0.3.4
+  - add backend factory
+  - add context creating functions
+  - add probe function to ess_backend as virtual
+  - add esp32 i2s_generic_backend 
 * 0.3.3
   - rename project to OpenESS ++
   - switch to C++
