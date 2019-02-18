@@ -17,44 +17,68 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
+
 /**
- * @file i2s_gerneric_backend.h
+ * @file ess_backend_factory.h
  * @author Anna Sopdia Schröck
- * @date 13 Februar 20119
- * @brief all esp32 backend generic_i2s class
+ * @date 18 Februar 20119
+ * @brief Contains backend factory template class and backend root class
+ *
  *
  */
-#ifndef _ESS_PLATFORM_INC_GENERIC_I2S_H_
-#define _ESS_PLATFORM_INC_GENERIC_I2S_H_
+
+#ifndef __ESS_BACKEND_FACTORY_H__
+#define __ESS_BACKEND_FACTORY_H__
 
 #include "ess_backend.h"
 
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "driver/i2s.h"
-#include "esp_system.h"
+#include <map>
 
-class ess_i2s_generic_backend : public ess_backend {
+
+class ess_backend_platform {
 public:
-  ess_i2s_generic_backend();
-  ~ess_i2s_generic_backend();
+  virtual void create() = 0;
+  virtual ess_backend* get_backend(const char* name);
 
-  virtual ess_error_t open(const ess_format_t format);
-  virtual ess_error_t close() = 0;
-  virtual ess_error_t restart(const ess_format_t format);
+  virtual std::string get_platform_name() = 0;
+  virtual std::string get_factory_creater() = 0;
 
-  virtual ess_error_t pause();
-  virtual ess_error_t resume();
+  virtual  bool add_backend(ess_backend* backend);
 
-  virtual ess_error_t write(const void *buffer, unsigned int buf_size, unsigned int* wrote);
-  virtual ess_error_t read(void *buffer, unsigned int buf_size, unsigned int* readed);
 
-  virtual const char* get_info();
+  std::map<std::string, ess_backend*>& get_backends() { return m_lBackends; }
 protected:
-  void* m_pUserData;
-  bool m_bPaused;
-  i2s_config_t m_i2sConfig;
-  i2s_pin_config_t m_pinConfig;
+  std::map<std::string, ess_backend*> m_lBackends;
 };
-
+/**
+ * @brief ess backend factory
+ *
+ * Embedded Sound System Backend factory. Backend vtable
+ */
+template <class BACKEND>
+class ess_backend_factory {
+public:
+  static ess_backend_factory<BACKEND>& Instance() {
+    if(m_pInstance == nullptr) {
+      m_pInstance = new ess_backend_factory<BACKEND>();
+    }
+    return *m_pInstance;
+  }
+public:
+  ess_backend* get_backend(const char* name)  {
+    return m_pPlatform.get_backend(name);
+  }
+  std::map<std::string, ess_backend*>& get_backends() {
+    return m_pPlatform.get_backends();
+  }
+private:
+  ess_backend_factory() {
+    m_pPlatform.create();
+  }
+private:
+  static ess_backend_factory<BACKEND> *m_pInstance ;
+  BACKEND m_pPlatform;
+};
+template <class BACKEND>
+ess_backend_factory<BACKEND>* ess_backend_factory<BACKEND>::m_pInstance = 0;
 #endif

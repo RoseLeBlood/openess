@@ -36,7 +36,3 @@
 #define LOG_TAG "EssB"
 
 #include "ess_platform.h"
-
-#ifdef ESS_PLATFORM_ESP32
-#include "platform/esp32/ess_platform_esp32.h"
-#endif

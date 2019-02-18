@@ -40,10 +40,10 @@
 
 /* Main config */
 
-#define ESS_PLATFORM_ESP32	/** @brief If defined compiled backend for esp32 */
-//#define ESS_PLATFORM_RPI 			/** @brief If defined compiled backend for Raspberry PI (linux) */
-//#define ESS_PLATFORM_LINUX /** @brief If defined compiled backend for generic linux (openal) */
-//#define ESS_PLATFORM_WINDOWS /** @brief If defined compiled backend for  generic windows (openal, wasapi) */
+#define ESS_PLATFORM_ESP32					1/** @brief If defined compiled backend for esp32 */
+#define ESS_PLATFORM_RPI 					 		 0/** @brief If defined compiled backend for Raspberry PI (linux) */
+#define ESS_PLATFORM_LINUX   			0/** @brief If defined compiled backend for generic linux (openal) */
+#define ESS_PLATFORM_WINDOWS  0/** @brief If defined compiled backend for  generic windows (openal, wasapi) */
 
 #define ESS_DEFAULT_SERVER_PORT 8082
 #define ESS_DEFAULT_SERVER_PROTOCOL ESS_PROTOCOL_UDP
@@ -52,7 +52,7 @@
 #define ESS_DEFAULT_SERVER_HOST "::"
 
 
-#ifdef ESS_PLATFORM_ESP32
+#if  ESS_PLATFORM_ESP32 == 1
 	#define ESS_CONFIG_SEMAPHORE_GENERIC
 	#define ESS_CONFIC_TASK_ESP32
 	#define ESS_CONFIG_RINGBUFFER_ESP32
@@ -68,7 +68,7 @@
 	#define ESS_DEFAULT_SERVER_NAME "OpenEssD-esp32"
 #endif // ESS_PLATFORM_ESP32
 
-#ifdef ESS_PLATFORM_RPI
+#if ESS_PLATFORM_RPI == 1
 	#define ESS_CONFIG_SEMAPHORE_GENERIC
 	#define ESS_CONFIG_MUTEX_GENERIC
 	#define ESS_CONFIC_TASK_GENERIC
@@ -80,7 +80,7 @@
 	#define ESS_DEFAULT_SERVER_NAME "OpenEssD-rpi"
 #endif //ESS_PLATFORM_RPI
 
-#ifdef ESS_PLATFORM_LINUX
+#if ESS_PLATFORM_LINUX == 1
 	#define ESS_CONFIG_SEMAPHORE_GENERIC
 	#define ESS_CONFIC_TASK_GENERIC
 	#define ESS_CONFIG_RINGBUFFER_GENERIC
@@ -96,7 +96,7 @@
 	#define ESS_DEFAULT_SERVER_NAME "OpenEssD-linux"
 #endif //ESS_PLATFORM_LINUX
 
-#ifdef ESS_PLATFORM_WINDOWS
+#if ESS_PLATFORM_WINDOWS == 1
 	#define ESS_CONFIG_SEMAPHORE_WINDOWS
 	#define ESS_CONFIC_TASK_WINDOWS
 	#define ESS_CONFIG_RINGBUFFER_WINDOWS

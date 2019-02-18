@@ -19,26 +19,23 @@
 
 
 /**
- * @file ess_platform_esp32.h
+ * @file ess_backend_factory.cpp
  * @author Anna Sopdia Schröck
  * @date 18 Februar 20119
- * @brief Contains the esp32 platform factory pool
+ * @brief Contains  backend root class source
  *
  *
  */
-#ifndef _ESS_PLATFORM_INC_ESP32_H_
-#define _ESS_PLATFORM_INC_ESP32_H_
 
 #include "ess_backend_factory.h"
 
-class ess_backend_esp32 : public ess_backend_platform { //public ess_backend_factory<ess_backend_esp32>
-public:
-  ess_backend_esp32();
 
-  virtual void create();
+bool ess_backend_platform::add_backend(ess_backend* backend) {
+  if(backend == 0) return false;
+  m_lBackends.insert(std::pair<std::string, ess_backend*>(backend->get_name(), backend)) ;
+  return true;
+}
 
-  virtual std::string get_platform_name();
-  virtual std::string get_factory_creater();
-};
-
-#endif
+ess_backend* ess_backend_platform::get_backend(const char* name) {
+  return m_lBackends[name];
+}

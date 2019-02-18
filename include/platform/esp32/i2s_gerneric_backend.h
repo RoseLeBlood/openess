@@ -19,26 +19,46 @@
 
 
 /**
- * @file ess_platform_esp32.h
+ * @file i2s_gerneric_backend.h
  * @author Anna Sopdia Schröck
  * @date 18 Februar 20119
- * @brief Contains the esp32 platform factory pool
+ * @brief the basic i2s_generic class
  *
  *
  */
-#ifndef _ESS_PLATFORM_INC_ESP32_H_
-#define _ESS_PLATFORM_INC_ESP32_H_
+#ifndef _ESS_PLATFORM_INC_ESP32_I2S_H_
+#define _ESS_PLATFORM_INC_ESP32_I2S_H_
 
+
+#include "ess_backend.h"
 #include "ess_backend_factory.h"
 
-class ess_backend_esp32 : public ess_backend_platform { //public ess_backend_factory<ess_backend_esp32>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/i2s.h"
+#include "esp_system.h"
+
+class ess_i2s_generic_backend : public ess_backend {
 public:
-  ess_backend_esp32();
+  ess_i2s_generic_backend();
+  ~ess_i2s_generic_backend();
 
-  virtual void create();
+  virtual ess_error_t probe(const ess_format_t format);
+  virtual ess_error_t open(const ess_format_t format);
+  virtual ess_error_t close();
+  virtual ess_error_t restart(const ess_format_t format);
 
-  virtual std::string get_platform_name();
-  virtual std::string get_factory_creater();
+  virtual ess_error_t pause();
+  virtual ess_error_t resume();
+
+  virtual ess_error_t write(const void *buffer, unsigned int buf_size, unsigned int* wrote);
+  virtual ess_error_t read(void *buffer, unsigned int buf_size, unsigned int* readed);
+
+  virtual const char* get_info();
+protected:
+  void* m_pUserData;
+  bool m_bPaused;
+  i2s_config_t m_i2sConfig;
+  i2s_pin_config_t m_pinConfig;
 };
-
 #endif

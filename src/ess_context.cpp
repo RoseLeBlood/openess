@@ -35,13 +35,17 @@
 
 #define LOG_TAG "EssC"
 
+
+
 ess_error_t  ess_context::create(const char* name, const ess_format_t format) {
- /*ess_backend_facktory_t* backend = ess_backend_get_by_name(name);
+ ess_backend_t& ins = ess_backend_t::Instance();
+ ess_backend* backend = ins.get_backend(name) ;
+
  if(backend == 0) {
    ESP_LOGE(LOG_TAG,"Backend with name: %s not found", name);
    return ESS_ERROR_NOBACKEND;
  }
-if(backend->ess_backend_open(format) != ESS_OK) {
+if(backend->open(format) != ESS_OK) {
   ESP_LOGE(LOG_TAG,"Backend with name: %s error open", name);
   return ESS_ERROR_WRONG_FORMAT;
 }
@@ -49,7 +53,7 @@ if(backend->ess_backend_open(format) != ESS_OK) {
  m_eFormat= format;
  m_eStatus = ESS_CONTEXT_STATUS_RUN;
  m_pBackend = backend;
-*/
+
  return ESS_OK;
 }
 ess_error_t  ess_context::create(ess_backend* backend, const ess_format_t format) {

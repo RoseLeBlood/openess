@@ -34,7 +34,7 @@
 #include "ess_error.h"
 #include "ess_format.h"
 
-#include <map>
+
 
 
 class ess_backend {
@@ -43,6 +43,7 @@ public:
   ess_backend(const char* name) { m_strName = name; }
   virtual ~ess_backend() { }
 
+  virtual ess_error_t probe(const ess_format_t format) = 0;
   virtual ess_error_t open(const ess_format_t format) = 0;
   virtual ess_error_t close() = 0;
   virtual ess_error_t restart(const ess_format_t format) = 0;
@@ -55,24 +56,14 @@ public:
 
   virtual const char* get_name() { return m_strName; }
   virtual const char* get_info() = 0;
+
+
 protected:
   void* m_pUserData;
   const char* m_strName;
 };
 
-/**
- * @brief ess backend interface
- *
- * Embedded Sound System Backend factory. Backend vtable
- */
-class ess_backend_factory {
-public:
-  bool add_backend(const char* name, ess_backend* backend);
 
-  ess_backend& get_backend(const char* name);
-private:
-  std::map<const char*, ess_backend*> m_lBackends;
-};
 
 
 #endif

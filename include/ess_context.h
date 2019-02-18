@@ -34,7 +34,8 @@
 #include "ess_error.h"
 
 
-class ess_backend;
+#include "ess_backend.h"
+#include "ess_context_backend.h"
 
 /**
  * @brief Audio context stats
@@ -123,6 +124,7 @@ public:
    * @return the last error
    */
   ess_error_t get_last_error();
+
 protected:
   ess_backend* m_pBackend;
   ess_format_t m_eFormat;

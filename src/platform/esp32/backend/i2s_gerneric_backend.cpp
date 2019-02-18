@@ -27,7 +27,7 @@
 
 #include "config.h"
 #ifdef ESS_ENABLE_BACKEND_I2S
-#include "platform/esp32/i2s_generic_backend.h"
+#include "platform/esp32/i2s_gerneric_backend.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -60,6 +60,12 @@ ess_i2s_generic_backend::ess_i2s_generic_backend() : ess_backend(ESS_BACKEND_NAM
   m_pinConfig.data_in_num = I2S_EXTERNAL_DAC_DIN;                                                       //Not used
 
   m_bPaused = true;
+}
+ess_i2s_generic_backend::~ess_i2s_generic_backend() {
+  close();
+}
+ess_error_t ess_i2s_generic_backend::probe(const ess_format_t format) {
+  return ESS_OK;
 }
 ess_error_t ess_i2s_generic_backend::open(const ess_format_t format) {
   m_i2sConfig.sample_rate = ess_format_get_samplerate(format);

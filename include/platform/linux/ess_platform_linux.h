@@ -19,26 +19,34 @@
 
 
 /**
- * @file ess_platform_esp32.h
+ * @file ess_platform_linux.h
  * @author Anna Sopdia Schröck
  * @date 18 Februar 20119
- * @brief Contains the esp32 platform factory pool
+ * @brief Contains the linux platform factory pool
  *
  *
  */
-#ifndef _ESS_PLATFORM_INC_ESP32_H_
-#define _ESS_PLATFORM_INC_ESP32_H_
+#ifndef _ESS_PLATFORM_INC_LINUX_H_
+#define _ESS_PLATFORM_INC_LINUX_H_
+
 
 #include "ess_backend_factory.h"
 
-class ess_backend_esp32 : public ess_backend_platform { //public ess_backend_factory<ess_backend_esp32>
+class ess_backend_linux : public ess_backend_platform {
 public:
-  ess_backend_esp32();
-
-  virtual void create();
-
-  virtual std::string get_platform_name();
-  virtual std::string get_factory_creater();
+  ess_backend_linux() {
+  }
+  virtual void create() {
+     // TODO: Add Nackends to map with add_backend
+  }
+  virtual std::string get_platform_name() {
+    return std:string("Linux");
+  }
+  virtual std::string get_factory_creater() {
+    return std:string("Anna_Sophia Schroeck - annasophia.schroeck@gmail.com");
+  }
 };
+
+
 
 #endif

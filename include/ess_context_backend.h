@@ -19,26 +19,42 @@
 
 
 /**
- * @file ess_platform_esp32.h
+ * @file ess_context_backend.h
  * @author Anna Sopdia Schröck
  * @date 18 Februar 20119
- * @brief Contains the esp32 platform factory pool
+ * @brief Contains  internal context factory platform conection
  *
  *
  */
-#ifndef _ESS_PLATFORM_INC_ESP32_H_
-#define _ESS_PLATFORM_INC_ESP32_H_
 
+#ifndef __ESS_CONTEXT_BACKEND_CON_H__
+#define __ESS_CONTEXT_BACKEND_CON_H__
+
+#include "config.h"
 #include "ess_backend_factory.h"
 
-class ess_backend_esp32 : public ess_backend_platform { //public ess_backend_factory<ess_backend_esp32>
-public:
-  ess_backend_esp32();
+#if ESS_PLATFORM_ESP32 == 1
+#include "platform/esp32/ess_platform_esp32.h"
+using ess_backend_t = ess_backend_factory<ess_backend_esp32>;
 
-  virtual void create();
+#elif  ESS_PLATFORM_LINUX == 1
+#include "platform/linux/ess_platform_linux.h"
+using ess_backend_t = ess_backend_factory<ess_backend_linux>;
 
-  virtual std::string get_platform_name();
-  virtual std::string get_factory_creater();
-};
+#elif ESS_PLATFORM_RPI == 1
+#include "platform/rpi/ess_platform_rpi.h"
+using ess_backend_t = ess_backend_factory<ess_platform_rpi>;
+
+#elif ESS_PLATFORM_WINDOWS == 1
+#include "platform/windows/ess_platform_windows.h"
+using ess_backend_t = ess_backend_factory<ess_platform_windows>;
+
+
+#elif ESS_PLATFORM_USER == 1
+#include "platform/user/ess_platform_user.h"
+using ess_backend_t = ess_backend_factory<ess_platform_user>;
+#endif
+
+
 
 #endif

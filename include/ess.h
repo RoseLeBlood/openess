@@ -40,6 +40,7 @@
 #include <sys/time.h>
 #include <sys/signal.h>
 
+#include <iostream>
 
 #include "ess_format.h"
 #include "ess_error.h"
