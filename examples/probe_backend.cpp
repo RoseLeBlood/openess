@@ -1,7 +1,6 @@
 #include "ess.h"
 #include "ess_context.h"
 
-ess_context context;
 ess_error_t error;
 
 void probe_backend(ess_backend* backend) {
@@ -21,6 +20,7 @@ void probe_backend(ess_backend* backend) {
 extern "C" void app_main() {
 #else
 int main() {
+#endif
   ess_backend_t& ins = ess_backend_t::Instance();
 
   for(auto i = ins.get_backends().begin(); i !=  ins.get_backends().end(); ++i ) {
