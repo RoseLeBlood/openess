@@ -1,5 +1,5 @@
 {
-  "name": "OpenESS++",
+  "name": "OpenESS",
   "keywords": "soundserver, audio,server,ess,sound,socket,esp32",
   "description": "An elegant and efficient Sound Server for embedded systems",
   "homepage": "https://github.com/RoseLeBlood/openess",
@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/RoseLeBlood/openess.git"
   },
-  "version": "0.3.4",
+  "version": "0.4.0",
   "authors": {
     "name": "Anna-Sophia Schröck",
     "url": "https://padersophia.wordpress.com"

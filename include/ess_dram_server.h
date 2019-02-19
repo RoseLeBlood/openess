@@ -18,10 +18,10 @@
  ****************************************************************************/
 
 /**
- * @file ess_server.h
+ * @file ess_dram_server.h
  * @author Anna Sopdia Schröck
  * @date 19 Februar 20119
- * @brief the OpenESS generic server class
+ * @brief the OpenESS dram server class
  *
  *
  */
@@ -29,49 +29,32 @@
  * @addtogroup ess_server
  * @{
  */
-#ifndef _ESS_MAIN_HEADER_H_
-#error "#include <ess.h> befor this include"
+#ifndef _ESS_SERVER_H__
+#error "#include <ess_server.h> befor this include"
 #endif
 
-#ifndef _ESS_SERVER_H__
-#define _ESS_SERVER_H__
+#ifndef _ESS_SERVER_UDP_H__
+#define _ESS_SERVER_UDP_H__
 
-#include "ess_context.h"
-#include "ess_inet_dram_server.h"
-
-
-typedef enum ess_server_status {
-  ESS_SERVER_STATUS_INIT,
-  ESS_SERVER_STATUS_STOP,
-  ESS_SERVER_STATUS_RUN,
-  ESS_SERVER_STATUS_STANDBY,
-  ESS_SERVER_STATUS_ERROR
-}ess_server_status_t;
-
-/*typedef struct ess_server {
-  void* buffer;
-  int magl, magr;
-  int  speed,  length, offset ;
-} ess_server_t;*/
-
-
-class ess_server {
+class ess_dram_server : public ess_server {
 public:
-  ess_server(std::string name, ess_format_t format);
+  ess_dram_server(std::string name, ess_format_t format);
 
-  virtual ess_error_t create(std::string backend_name, std::string host, std::string port, ess_socket_fam fam, bool lite) = 0;
-
-  ess_context& get_context() const{ return *m_pContext; }
-  ess_format_t get_server_format() const { return m_eFormat; }
-
-  std::string get_name() const { return m_strName; }
-  ess_server_status_t get_status() const { return m_eStatus; }
-protected:
-  ess_context *m_pContext;
-  ess_format_t m_eFormat;
-
-  std::string m_strName;
-  ess_server_status_t m_eStatus;
+  virtual ess_error_t create(std::string backend_name, std::string host, std::string port) {
+    #if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
+      return create(backend_name, host, port, ESS_SOCKET_FAMILY_IP6, false );
+    #elif ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
+      return create(backend_name, host, port, ESS_SOCKET_FAMILY_IP4, false );
+    #else
+      return create(backend_name, host, port, ESS_SOCKET_FAMILY_BOTH, false );
+    #endif
+  }
+  virtual ess_error_t create(std::string backend_name, std::string host, std::string port, ess_socket_fam fam) {
+    return create(backend_name, host, port, fam, false );
+  }
+  virtual ess_error_t create(std::string backend_name, std::string host, std::string port, ess_socket_fam fam, bool lite) ;
+private:
+  ess_inet_dram_server* m_pServerSocket;
 };
 
 

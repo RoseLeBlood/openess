@@ -1,5 +1,9 @@
 
 ## Release History
+* 0.4.0
+  - add udp_inet server / client backend
+  - add ess_server and ess_dram_server (basic)
+  - add esp32 dram server example
 * 0.3.4
   - add backend factory
   - add context creating functions

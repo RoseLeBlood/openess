@@ -47,9 +47,6 @@
 #include "ess_protocol.h"
 #include "ess_platform.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /* structures to retrieve information about streams/samples from the server */
 typedef struct ess_server_info {
@@ -59,26 +56,10 @@ typedef struct ess_server_info {
     ess_format_t format;	/**<server format info */
 } ess_server_info_t;
 
-typedef struct ess_stream_info {
-    struct ess_player_info *next; /* point to next entry in list */
-    ess_server_info_t *server;	/* the server that contains this stream */
-
-    int source_id;		/* either a stream fd or sample id */
-    char name[ 16 ];	/* name of stream for remote control */
-    ess_format_t format;	/**<server format info */
-} ess_stream_info_t;
-
-
-typedef struct ess_info {
-    ess_server_info_t *server;
-    ess_stream_info_t *stream_list;
-} ess_info_t;
 
 
 
-#ifdef __cplusplus
-}
-#endif
+
 
 
 #endif
