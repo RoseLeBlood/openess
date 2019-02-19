@@ -21,7 +21,7 @@
  * @file ess_insocket_dram.h
  * @author Anna Sopdia Schröck
  * @date 18 Februar 20119
- * @brief Contains ess_socket (base class) and ess_insocket (base for all internet sockets)
+ * 
  */
 
 #ifndef _ESS_SOCKET_INET_DGRAM_H_
@@ -47,6 +47,8 @@ public:
 protected:
   ess_insocket_dram(ess_socket_fam fam, ess_socket_pro proto) : ess_insocket(fam, proto) { }
 };
+
+
 /**
 * @}
 */

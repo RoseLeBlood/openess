@@ -36,13 +36,14 @@
 # include <sys/ioctl.h>
 # include <netinet/in.h>
 
-ess_inet_dram_client::ess_inet_dram_client(ess_socket_fam fam, int flags)
+ess_inet_dram_client::ess_inet_dram_client(ess_socket_fam fam, int flags, bool lite)
   : ess_insocket_dram(fam), m_isConnected(false) {
 
+  int proto = lite ? IPPROTO_UDPLITE : 0;
   switch ( fam ) {
-    case ESS_SOCKET_FAMILY_IP4 : m_iSocket = socket(AF_INET,SOCK_DGRAM|flags,0); break;
-    case ESS_SOCKET_FAMILY_IP6 : m_iSocket = socket(AF_INET6,SOCK_DGRAM|flags,0); break;
-    case ESS_SOCKET_FAMILY_BOTH:  m_iSocket = socket(AF_UNSPEC,SOCK_DGRAM|flags,0); break;
+    case ESS_SOCKET_FAMILY_IP4 : m_iSocket = socket(AF_INET,SOCK_DGRAM|flags, proto); break;
+    case ESS_SOCKET_FAMILY_IP6 : m_iSocket = socket(AF_INET6,SOCK_DGRAM|flags,proto); break;
+    case ESS_SOCKET_FAMILY_BOTH:  m_iSocket = socket(AF_UNSPEC,SOCK_DGRAM|flags,proto); break;
     default: m_iSocket = -1;
   }
 }

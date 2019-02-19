@@ -35,24 +35,24 @@
 */
 class ess_inet_dram_server : public ess_insocket_dram{
 public:
-  ess_inet_dram_server(std::string host, std::string port, ess_socket_fam fam);
-  ess_inet_dram_server(std::string host, std::string port, ess_socket_fam fam, int flags);
+  ess_inet_dram_server(std::string host, std::string port, ess_socket_fam fam, bool lite);
+  ess_inet_dram_server(std::string host, std::string port, ess_socket_fam fam, int flags, bool lite);
 
 private:
-  virtual int setup(std::string host, std::string port, int flags=0);
+  virtual int setup(std::string host, std::string port, int flags=0, bool lite = false);
 };
 
 class ess_inet_dram_server_ip4 : public ess_inet_dram_server {
 public:
-  ess_inet_dram_server_ip4(std::string host, std::string port);
-  ess_inet_dram_server_ip4(std::string host, std::string port, int flags);
+  ess_inet_dram_server_ip4(std::string host, std::string port, bool lite);
+  ess_inet_dram_server_ip4(std::string host, std::string port, int flags, bool lite);
 };
 
 
 class ess_inet_dram_server_ip6 : public ess_inet_dram_server {
 public:
-  ess_inet_dram_server_ip6(std::string host, std::string port);
-  ess_inet_dram_server_ip6(std::string host, std::string port, int flags);
+  ess_inet_dram_server_ip6(std::string host, std::string port, bool lite);
+  ess_inet_dram_server_ip6(std::string host, std::string port, int flags, bool lite);
 };
 /**
 * @}

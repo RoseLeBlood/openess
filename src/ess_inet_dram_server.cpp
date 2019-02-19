@@ -42,10 +42,11 @@
  * @param host Bind address (Wildcard: "0.0.0.0"/"::")
  * @param port Bind port
  * @param ess_socket_fam `ESS_SOCKET_FAMILY_IP4` or `ESS_SOCKET_FAMILY_IP6` or `ESS_SOCKET_FAMILY_BOTH`
+ * @param lite if true then create a dram lite socket
  */
-ess_inet_dram_server::ess_inet_dram_server(std::string host, std::string port, ess_socket_fam fam)
+ess_inet_dram_server::ess_inet_dram_server(std::string host, std::string port, ess_socket_fam fam, bool lite)
   : ess_insocket_dram(fam) {
-  m_iSocket = setup(host,port,0);
+  m_iSocket = setup(host,port,0, lite);
 }
 /**
  * @brief Create datagram (udp) socket and bind it.
@@ -54,10 +55,11 @@ ess_inet_dram_server::ess_inet_dram_server(std::string host, std::string port, e
  * @param port Bind port
  * @param ess_socket_fam `ESS_SOCKET_FAMILY_IP4` or `ESS_SOCKET_FAMILY_IP6` or `ESS_SOCKET_FAMILY_BOTH`
  * @param flags Flags for `socket(2)`
+ * @param lite if true then create a dram lite socket
  */
-ess_inet_dram_server::ess_inet_dram_server(std::string host, std::string port, ess_socket_fam fam, int flags)
+ess_inet_dram_server::ess_inet_dram_server(std::string host, std::string port, ess_socket_fam fam, int flags, bool lite)
   : ess_insocket_dram(fam) {
- m_iSocket = setup(host,port,flags);
+ m_iSocket = setup(host,port,flags, lite);
 }
 /**
  * @brief Set up socket
@@ -65,20 +67,16 @@ ess_inet_dram_server::ess_inet_dram_server(std::string host, std::string port, e
  * @param host Bind address (Wildcard: "0.0.0.0"/"::")
  * @param port Bind port
  * @param flags Flags for `socket(2)`
+ * @param lite if true then create a dram lite socket
  * @return the socket handle
  * @retval <=-1 error
 * @retval >0 socket bind ok
  */
-int ess_inet_dram_server::setup(std::string host, std::string port, int flags) {
+int ess_inet_dram_server::setup(std::string host, std::string port, int flags, bool lite) {
   if ( host.c_str() == NULL || port.c_str() == NULL ) return -1;
 
   int retval;
   struct addrinfo *result, *result_check, hints;
-
-
-  m_strHost = host;
-  m_strPort = port;
-
 
   memset(&hints,0,sizeof(struct addrinfo));
   hints.ai_socktype = SOCK_DGRAM;
@@ -91,13 +89,13 @@ default:
     return -1;
   }
   hints.ai_flags = AI_PASSIVE;
-
+  hints.ai_protocol =  lite ? IPPROTO_UDPLITE : 0;
   if ( getaddrinfo( m_strHost.c_str(), m_strPort.c_str(), &hints, &result )  !=0  ) {
     return -1;
   }
 
   for ( result_check = result; result_check != NULL; result_check = result_check->ai_next )  {
-    m_iSocket = socket( result_check->ai_family, result_check->ai_socktype | flags, result_check->ai_protocol );
+    m_iSocket = socket( result_check->ai_family, result_check->ai_socktype | flags, result_check->ai_protocol  );
     if ( m_iSocket < 0 )  continue;
 
     retval = bind(m_iSocket, result_check->ai_addr, (socklen_t)result_check->ai_addrlen );
@@ -111,6 +109,10 @@ default:
   if ( result_check == NULL )  m_iSocket = -1;
 
   freeaddrinfo(result);
+
+  m_strHost = host;
+  m_strPort = port;
+
   return m_iSocket;
 }
 
@@ -120,8 +122,8 @@ default:
  * @param host Bind address (Wildcard: "0.0.0.0")
  * @param port Bind port
  */
-ess_inet_dram_server_ip4::ess_inet_dram_server_ip4(std::string host, std::string port)
-  : ess_inet_dram_server(host, port, ESS_SOCKET_FAMILY_IP4) { }
+ess_inet_dram_server_ip4::ess_inet_dram_server_ip4(std::string host, std::string port, bool lite)
+  : ess_inet_dram_server(host, port, ESS_SOCKET_FAMILY_IP4, lite) { }
 /**
  * @brief Create datagram (udp)  IP4 socket and bind it.
  *
@@ -129,8 +131,8 @@ ess_inet_dram_server_ip4::ess_inet_dram_server_ip4(std::string host, std::string
  * @param port Bind port
  * @param flags Flags for `socket(2)`
  */
-ess_inet_dram_server_ip4::ess_inet_dram_server_ip4(std::string host, std::string port, int flags)
-  : ess_inet_dram_server(host, port, ESS_SOCKET_FAMILY_IP4, flags) { }
+ess_inet_dram_server_ip4::ess_inet_dram_server_ip4(std::string host, std::string port, int flags, bool lite)
+  : ess_inet_dram_server(host, port, ESS_SOCKET_FAMILY_IP4, flags, lite) { }
 
 
 /**
@@ -139,8 +141,8 @@ ess_inet_dram_server_ip4::ess_inet_dram_server_ip4(std::string host, std::string
  * @param host Bind address (Wildcard: "::")
  * @param port Bind port
  */
-ess_inet_dram_server_ip6::ess_inet_dram_server_ip6(std::string host, std::string port)
-  : ess_inet_dram_server(host, port, ESS_SOCKET_FAMILY_IP6) { }
+ess_inet_dram_server_ip6::ess_inet_dram_server_ip6(std::string host, std::string port, bool lite)
+  : ess_inet_dram_server(host, port, ESS_SOCKET_FAMILY_IP6, lite) { }
 /**
  * @brief Create datagram (udp)  IP6 socket and bind it.
  *
@@ -148,5 +150,5 @@ ess_inet_dram_server_ip6::ess_inet_dram_server_ip6(std::string host, std::string
  * @param port Bind port
  * @param flags Flags for `socket(2)`
  */
-ess_inet_dram_server_ip6::ess_inet_dram_server_ip6(std::string host, std::string port, int flags)
-  : ess_inet_dram_server(host, port, ESS_SOCKET_FAMILY_IP6, flags) { }
+ess_inet_dram_server_ip6::ess_inet_dram_server_ip6(std::string host, std::string port, int flags, bool lite)
+  : ess_inet_dram_server(host, port, ESS_SOCKET_FAMILY_IP6, flags, lite) { }
