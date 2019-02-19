@@ -118,13 +118,13 @@ int main() {
 ```
 _For more examples and usage, please refer to the [Wiki][wiki]
 
-## Current Features (version 0.3-3)
+## Current Features
 
 * Powerful core that allows for easy to port
-* Powerful socket abscrations layer (SAL)
+* Powerful socket abscrations layer (SAL) only dram and dramlite at the moment
 * Easy to use platform configuration
 * mutex, spinlock, task and ringbuffer handling on various platform (current only esp32)
-* generic backends: udp, uart and i2s
+* generic backends:  i2s, more work in progress
 * task are multitaskin safe
 * code style min B
 * C++ System
@@ -145,11 +145,15 @@ _For more examples and usage, please refer to the [Wiki][wiki]
 
 
 ## Release History
+* 0.4.0
+  - add udp_inet server / client backend
+  - add ess_server and ess_dram_server (basic)
+  - add esp32 dram server example
 * 0.3.4
   - add backend factory
   - add context creating functions
   - add probe function to ess_backend as virtual
-  - add esp32 i2s_generic_backend 
+  - add esp32 i2s_generic_backend
 * 0.3.3
   - rename project to OpenESS ++
   - switch to C++
