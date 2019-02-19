@@ -29,6 +29,10 @@
 
 #include "ess_lock.h"
 
+/**
+* @addtogroup ess_task
+* @{
+*/
 class ess_mutex : public ess_lock {
 public:
   ess_mutex();
@@ -67,5 +71,7 @@ public:
   virtual ess_error_t try_lock();
 
 };
-
+/**
+* @}
+*/
 #endif

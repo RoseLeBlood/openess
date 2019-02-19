@@ -25,7 +25,10 @@
  *
  *
  */
-
+ /**
+ * @addtogroup ess_backend
+ * @{
+ */
 #ifndef __ESS_CONTEXT_H__
 #define __ESS_CONTEXT_H__
 
@@ -133,31 +136,7 @@ protected:
 };
 
 /**
- * @brief  initialisiert the context
- *
- * @param [out] the creating ontext
- * @param [in] name the name of the using backend
- * @param [in] format the using context format
- *
- * @reval ESS_ERROR_WRONG_FORMAT format not support
- * @retval ESS_OK context created
- */
-
-/**
- * @brief  initialisiert the context with a user backend
-  * @param [out] the creating ontext
- * @param [in] format the using context format
- * @param [in] backend the user backend factory
- *
- * @reval ESS_ERROR_WRONG_FORMAT format not support
- * @retval ESS_OK context created
- * @reval ESS_ERROR_NOBACKEND backend was NULL
- */
-
-
-
-
-
-
+* @}
+*/
 
 #endif

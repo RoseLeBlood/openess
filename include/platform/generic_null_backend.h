@@ -29,6 +29,11 @@
 #ifndef _ESS_PLATFORM_INC_GENERIC_NULL_H_
 #define _ESS_PLATFORM_INC_GENERIC_NULL_H_
 
+/**
+* @addtogroup ess_platform_generic
+* @{
+*/
+
 #include "ess.h"
 #include "ess_backend.h"
 
@@ -52,4 +57,8 @@ public:
 protected:
   bool m_bPaused;
 };
+
+/**
+* @}
+*/
 #endif

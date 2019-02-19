@@ -24,10 +24,15 @@
  * @date 18 Februar 2019
  * @brief the basic openal backend class
  *
- * this is a null backend only for testing
+ * this is opanel backend
  */
 #ifndef _ESS_PLATFORM_INC_GENERIC_OPENAL_H_
 #define _ESS_PLATFORM_INC_GENERIC_OPENAL_H_
+
+/**
+* @addtogroup ess_platform_generic
+* @{
+*/
 
 #include "ess.h"
 #include "ess_backend.h"
@@ -52,4 +57,8 @@ public:
 protected:
   bool m_bPaused;
 };
+
+/**
+* @}
+*/
 #endif

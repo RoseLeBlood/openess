@@ -26,7 +26,10 @@
  *
  *
  */
-
+ /**
+ * @addtogroup ess_backend
+ * @{
+ */
 #ifndef __ESS_BACKEND_H__
 #define __ESS_BACKEND_H__
 
@@ -63,7 +66,9 @@ protected:
   const char* m_strName;
 };
 
-
+/**
+* @}
+*/
 
 
 #endif

@@ -29,6 +29,10 @@
 #ifndef _ESS_PLATFORM_INC_LINUX_H_
 #define _ESS_PLATFORM_INC_LINUX_H_
 
+/**
+* @addtogroup ess_platform_linux
+* @{
+*/
 
 #include "ess_backend_factory.h"
 
@@ -53,6 +57,8 @@ public:
   }
 };
 
-
+/**
+* @}
+*/
 
 #endif

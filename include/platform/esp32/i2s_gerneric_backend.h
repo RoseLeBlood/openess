@@ -29,6 +29,10 @@
 #ifndef _ESS_PLATFORM_INC_ESP32_I2S_H_
 #define _ESS_PLATFORM_INC_ESP32_I2S_H_
 
+/**
+* @addtogroup ess_platform_esp32
+* @{
+*/
 
 #include "ess_backend.h"
 #include "ess_backend_factory.h"
@@ -61,4 +65,8 @@ protected:
   i2s_config_t m_i2sConfig;
   i2s_pin_config_t m_pinConfig;
 };
+
+/**
+* @}
+*/
 #endif

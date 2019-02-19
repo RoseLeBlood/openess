@@ -29,24 +29,25 @@
 
 #include "ess_socket.h"
 
+/**
+* @addtogroup ess_socket (SAL)
+* @{
+*/
 class ess_insocket_dram : public ess_insocket {
 public:
-  ess_insocket_dram() : ess_insocket_dram(ESS_SOCKET_FAMILY_IP4) { }
+  ess_insocket_dram() : ess_insocket(ESS_SOCKET_FAMILY_IP4, ESS_SOCKET_PROTO_DRAM) { }
   ess_insocket_dram(ess_socket_fam fam) : ess_insocket(fam, ESS_SOCKET_PROTO_DRAM) { }
 
-  unsigned int write(const void* buf, unsigned int len, const char* dsthost, const char* dstport); //
-  unsigned int write(const std::string& buf, const std::string& dsthost, const std::string& dstport); //
+  virtual unsigned int write(const void* buf, unsigned int len, const char* dsthost, const char* dstport); //
+  virtual unsigned int write(const std::string& buf, const std::string& dsthost, const std::string& dstport); //
 
-  unsigned int read(void* buf, unsigned int len); //
-  unsigned int read(std::string& buf); //
+  virtual unsigned int read(void* buf, unsigned int len); //
+  virtual unsigned int read(std::string& buf); //
 
 protected:
   ess_insocket_dram(ess_socket_fam fam, ess_socket_pro proto) : ess_insocket(fam, proto) { }
 };
-
-class ess_insocket_dram_lite : public ess_insocket_dram {
-public:
-  ess_insocket_dram_lite() : ess_insocket_dram_lite(ESS_SOCKET_FAMILY_IP4) { }
-  ess_insocket_dram_lite(ess_socket_fam fam) : ess_insocket_dram(fam, ESS_SOCKET_PROTO_DRAM_LITE) { }
-};
+/**
+* @}
+*/
 #endif

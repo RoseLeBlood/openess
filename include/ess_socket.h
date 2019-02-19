@@ -20,7 +20,7 @@
 /**
  * @file ess_socket.h
  * @author Anna Sopdia Schröck
- * @date 18 Februar 20119
+ * @date 18 Februar 2019
  * @brief Contains ess_socket (base class) and ess_insocket (base for all internet sockets)
  */
 
@@ -29,6 +29,10 @@
 
 #include "ess.h"
 
+/**
+* @addtogroup ess_socket (SAL)
+* @{
+*/
 /**
  * @brief which ip family are use
  */
@@ -63,7 +67,7 @@ typedef enum ess_socket_status {
  */
 class ess_socket {
 public:
-  ess_socket() : ess_socket(ESS_SOCKET_FAMILY_IP4, ESS_SOCKET_PROTO_DRAM) { }
+  ess_socket()  { }
   ess_socket(ess_socket_pro proto) : ess_socket(ESS_SOCKET_FAMILY_IP4, proto) { }
   ess_socket(ess_socket_fam fam, ess_socket_pro proto);
   ess_socket(const ess_socket&) = delete;
@@ -78,6 +82,8 @@ public:
   int get_handle(void) const { return m_iSocket;}
   ess_socket_fam_t get_family() { return m_eFam; }
   ess_socket_pro_t get_proto() { return m_eProto; }
+
+  bool is_socket() { return m_iSocket != -1; }
 protected:
   ess_socket_fam_t m_eFam;
   ess_socket_pro_t m_eProto;
@@ -104,4 +110,8 @@ protected:
   /// The port we're bound or connected to
   std::string m_strPort;
 };
+
+/**
+* @}
+*/
 #endif

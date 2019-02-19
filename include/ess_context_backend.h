@@ -26,6 +26,10 @@
  *
  *
  */
+ /**
+ * @addtogroup ess_backend
+ * @{
+ */
 
 #ifndef __ESS_CONTEXT_BACKEND_CON_H__
 #define __ESS_CONTEXT_BACKEND_CON_H__
@@ -56,5 +60,7 @@ using ess_backend_t = ess_backend_factory<ess_platform_user>;
 #endif
 
 
-
+/**
+* @}
+*/
 #endif

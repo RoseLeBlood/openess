@@ -17,37 +17,44 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
+/**
+ * @file ess_inet_dram_server.h
+ * @author Anna Sopdia Schröck
+ * @date 19 Februar 20119
+ * @brief Contains the inet dram server (UDP Server) socket
+ */
+
+#ifndef _ESS_SOCKET_INET_DGRAM_SERVER_H_
+#define _ESS_SOCKET_INET_DGRAM_SERVER_H_
+
+#include "ess_insocket_dram.h"
 
 /**
- * @file ess_platform_esp32.h
- * @author Anna Sopdia Schröck
- * @date 18 Februar 20119
- * @brief Contains the esp32 platform factory pool
- *
- *
- */
-
- /**
- * @addtogroup ess_platform_esp32
- * @{
- */
-
-#ifndef _ESS_PLATFORM_INC_ESP32_H_
-#define _ESS_PLATFORM_INC_ESP32_H_
-
-#include "ess_backend_factory.h"
-
-class ess_backend_esp32 : public ess_backend_platform { //public ess_backend_factory<ess_backend_esp32>
+* @addtogroup ess_socket (SAL)
+* @{
+*/
+class ess_inet_dram_server : public ess_insocket_dram{
 public:
-  ess_backend_esp32();
+  ess_inet_dram_server(std::string host, std::string port, ess_socket_fam fam);
+  ess_inet_dram_server(std::string host, std::string port, ess_socket_fam fam, int flags);
 
-  virtual void create();
+private:
+  virtual int setup(std::string host, std::string port, int flags=0);
+};
 
-  virtual std::string get_platform_name();
-  virtual std::string get_factory_creater();
+class ess_inet_dram_server_ip4 : public ess_inet_dram_server {
+public:
+  ess_inet_dram_server_ip4(std::string host, std::string port);
+  ess_inet_dram_server_ip4(std::string host, std::string port, int flags);
+};
+
+
+class ess_inet_dram_server_ip6 : public ess_inet_dram_server {
+public:
+  ess_inet_dram_server_ip6(std::string host, std::string port);
+  ess_inet_dram_server_ip6(std::string host, std::string port, int flags);
 };
 /**
 * @}
 */
-
 #endif

@@ -29,6 +29,11 @@
 
 #include "ess_error.h"
 
+/**
+* @addtogroup ess_task
+* @{
+*/
+
 class ess_lock {
 public:
   virtual ess_error_t create() = 0;
@@ -41,5 +46,7 @@ protected:
   char m_cName[16];
   void* m_pHandle;
 };
-
+/**
+* @}
+*/
 #endif
