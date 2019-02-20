@@ -40,7 +40,9 @@
 # include <sys/ioctl.h>
 # include <netinet/in.h>
 
+#include "esp_log.h"
 
+/* ******************************************************************** */
 int ess_socket(ess_socket_fam fam, ess_socket_pro proto, int flags, int options) {
   if(proto == ESS_SOCKET_PROTO_DRAM_LITE ) {
     return socket(ess_socket_fam2platform(fam),
@@ -52,6 +54,49 @@ int ess_socket(ess_socket_fam fam, ess_socket_pro proto, int flags, int options)
                           options);
   }
 }
+/* ******************************************************************** */
+ess_error_t ess_socket_server_create(ess_socket_fam fam, ess_socket_pro proto,
+  const std::string& host, const std::string& port, int flags, int options, int* handle) {
+
+  int _socket, retval;
+  struct addrinfo *result, *result_check, hints;
+
+  memset(&hints,0,sizeof(struct addrinfo));
+  hints.ai_socktype = ess_socket_pro2platform(proto);
+  hints.ai_family = ess_socket_fam2platform(fam);
+  hints.ai_flags = 0;
+  hints.ai_protocol =  (proto == ESS_SOCKET_PROTO_DRAM_LITE) ? IPPROTO_UDPLITE : 0;
+
+  ESP_LOGI("ESSS", "server creating (%s %s on %s:%s)",  ess_socket_pro2string(proto).c_str(),
+    ess_socket_fam2string(fam).c_str(),
+    host.c_str(), port.c_str()
+  );
+
+  if ( getaddrinfo( host.c_str(), port.c_str(), &hints, &result )  !=0  ) {
+    return ESS_ERROR_GETADDR;
+  }
+
+  for ( result_check = result; result_check != NULL; result_check = result_check->ai_next )  {
+    _socket = socket( result_check->ai_family, result_check->ai_socktype | flags, result_check->ai_protocol  );
+    if ( _socket < 0 )  continue;
+
+    retval = bind(_socket, result_check->ai_addr, (socklen_t)result_check->ai_addrlen );
+    if ( retval != 0 )  { close(_socket); continue;   }
+
+    if( proto == ESS_SOCKET_PROTO_STREAM) {
+        retval = listen(_socket, 128);
+        if ( retval != 0 )  { close(_socket); continue;   } else { break; }
+    }
+  }
+  if ( result_check == NULL )  {
+    freeaddrinfo(result);
+    return ESS_ERROR;
+  }
+  *handle = _socket;
+  freeaddrinfo(result);
+  return ESS_OK;
+}
+/* ******************************************************************** */
 ess_error_t ess_socket_connect_dram(int socket, const std::string& dsthost, const std::string& dstport) {
   if(socket < 0) return ESS_ERROR_NOT_CREATED;
 
@@ -84,7 +129,7 @@ ess_error_t ess_socket_connect_dram(int socket, const std::string& dsthost, cons
   freeaddrinfo(result);
   return ESS_OK;
 }
-
+/* ******************************************************************** */
 ess_error_t ess_socket_disconnect(int socket) {
   struct sockaddr deconnect;
 
@@ -96,19 +141,24 @@ ess_error_t ess_socket_disconnect(int socket) {
   # endif
   return ESS_OK;
 }
+/* ******************************************************************** */
 unsigned int ess_send(int socket, const void* buf, unsigned int len, int flags) {
   return send(socket, buf, len, flags);
 }
+/* ******************************************************************** */
 unsigned int ess_recv(int socket, void* buf, unsigned int len, int flags) {
   memset(buf,0,len);
   return recv(socket,buf,len,flags);
 }
+/* ******************************************************************** */
 unsigned int ess_write (int socket, const std::string& str) {
   return write(socket, str.c_str(), str.size() );
 }
+/* ******************************************************************** */
 unsigned int ess_cwrite (int socket, const char* str, unsigned int lenght) {
   return write(socket, str, lenght);
 }
+/* ******************************************************************** */
 unsigned int ess_read(int socket, std::string& dest) {
   unsigned int read_bytes;
   char* buffer = new char[dest.size()];
@@ -126,9 +176,11 @@ unsigned int ess_read(int socket, std::string& dest) {
 
   return read_bytes;
 }
+/* ******************************************************************** */
 unsigned int ess_cread(int socket, char* str) {
   memset(str, 0, strlen(str));
   return read(socket, str, strlen(str) );
 }
+/* ******************************************************************** */
 
  #endif

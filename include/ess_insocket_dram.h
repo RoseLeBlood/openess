@@ -37,6 +37,7 @@ class ess_insocket_dram : public ess_insocket {
 public:
   ess_insocket_dram() : ess_insocket(ESS_SOCKET_FAMILY_IP4, ESS_SOCKET_PROTO_DRAM) { }
   ess_insocket_dram(ess_socket_fam fam) : ess_insocket(fam, ESS_SOCKET_PROTO_DRAM) { }
+  
 
   virtual unsigned int write(const void* buf, unsigned int len, const char* dsthost, const char* dstport); //
   virtual unsigned int write(const std::string& buf, const std::string& dsthost, const std::string& dstport); //

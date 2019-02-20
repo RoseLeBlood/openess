@@ -38,21 +38,10 @@
 
 class ess_dram_server : public ess_server {
 public:
+  ess_dram_server();
   ess_dram_server(std::string name, ess_format_t format);
 
-  virtual ess_error_t create(std::string backend_name, std::string host, std::string port) {
-    #if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
-      return create(backend_name, host, port, ESS_SOCKET_FAMILY_IP6, false );
-    #elif ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
-      return create(backend_name, host, port, ESS_SOCKET_FAMILY_IP4, false );
-    #else
-      return create(backend_name, host, port, ESS_SOCKET_FAMILY_BOTH, false );
-    #endif
-  }
-  virtual ess_error_t create(std::string backend_name, std::string host, std::string port, ess_socket_fam fam) {
-    return create(backend_name, host, port, fam, false );
-  }
-  virtual ess_error_t create(std::string backend_name, std::string host, std::string port, ess_socket_fam fam, bool lite) ;
+  virtual ess_error_t create(std::string backend_name) ;
 private:
   ess_inet_dram_server* m_pServerSocket;
 };

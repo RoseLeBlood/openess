@@ -79,7 +79,7 @@ std::string ess_socket_fam2string(ess_socket_fam fam); // ess_network.cpp
 std::string ess_socket_pro2string(ess_socket_pro proto); // ess_network.cpp
 
 /**
- * @brief create the specific platform socket handle
+ * @brief create the specific platform socket handle, don't use for a server socket
  *
  *
  * @param fam which ip family are use
@@ -90,17 +90,39 @@ std::string ess_socket_pro2string(ess_socket_pro proto); // ess_network.cpp
 int ess_socket(ess_socket_fam fam, ess_socket_pro proto, int flags, int options);
 
 /**
- * @brief connect to a dram peer
+ * @brief create the specific platform socket handle and bind it + listen on stream
  *
  *
- * @param socket the socket file desc
- * @param dsthost host of the peer
- * @param dstport port ot the peer
+ * @param fam which ip family are use
+ * @param proto which comunications protocol are use
+ * @param host Bind address (Wildcard: "0.0.0.0"/"::")
+ * @param port Bin
+ * @param flags Flags for `socket(2)`
+ * @param options special socket options
+ * @param [out] handle the socket handle
+ *
+ * @retval ESS_ERROR_GETADDR error to get the adress
+ * @retval ESS_ERROR can't bind or listen he socket
+ * @retval ESS_OK no error
+ */
+ess_error_t ess_socket_server_create(ess_socket_fam fam, ess_socket_pro proto,
+  const std::string& host, const std::string& port, int flags, int options, int* handle);
+/**
+* @brief Connect datagram socket.
+*
+* Connect a datagram socket to a remote peer so only its packets are received
+* and all data written is sent to it.
+*
+* @param socket the socket file desc
+* @param dsthost host of the peer
+* @param dstport port ot the peer
+ * @retval ESS_ERROR_NOT_CREATED socket
  */
 ess_error_t ess_socket_connect_dram(int socket, const std::string& dsthost, const std::string& dstport);
 /**
- * @brief disconnect the socket - not available on freeBSD
+ * @brief Break association to host. Does not close the socket. - not available on freeBSD
  * @param socket the socket file desc
+ * @retval ESS_ERROR_NOT_CREATED socket
  */
 ess_error_t ess_socket_disconnect(int socket);
 /**

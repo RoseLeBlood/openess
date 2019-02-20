@@ -45,10 +45,11 @@
 #define ESS_PLATFORM_LINUX   			0/** @brief If defined compiled backend for generic linux (openal) */
 #define ESS_PLATFORM_WINDOWS  0/** @brief If defined compiled backend for  generic windows (openal, wasapi) */
 
-#define ESS_DEFAULT_SERVER_PORT "8082"
+#define ESS_DEFAULT_SERVER_PORT "8686"
 #define ESS_DEFAULT_SERVER_PROTOCOL ESS_PROTOCOL_UDP
-#define ESS_DEFAULT_SERVER_FAMILY ESS_FAMILY_IP6
-// on IP4 : 0.0.0.0
+#define ESS_DEFAULT_SERVER_FAMILY ESS_FAMILY_IP4
+#define ESS_DEFAULT_SERVER_FORMAT ESS_FORMAT_STEREO_44100_16
+
 
 #if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
 #define ESS_DEFAULT_SERVER_HOST "0.0.0.0"

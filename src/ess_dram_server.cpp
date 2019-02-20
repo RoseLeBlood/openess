@@ -34,17 +34,26 @@
 
 #define LOG_TAG "ess_dram_server"
 
+ess_dram_server::ess_dram_server()
+  : ess_server(ESS_DEFAULT_SERVER_NAME, ESS_DEFAULT_SERVER_FORMAT) {
+
+}
 ess_dram_server::ess_dram_server(std::string name,  ess_format_t format)
   : ess_server(name, format) {
 
 }
-ess_error_t ess_dram_server::create(std::string backend_name, std::string host, std::string port, ess_socket_fam fam, bool lite) {
-  m_pServerSocket = new ess_inet_dram_server(host, port, fam, lite);
+
+ess_error_t ess_dram_server::create(std::string backend_name) {
+  #if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
+  m_pServerSocket = new ess_inet_dram_server_ip4(ESS_DEFAULT_SERVER_HOST, ESS_DEFAULT_SERVER_PORT, false);
+  #elif ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP6
+  m_pServerSocket = new ess_inet_dram_server_ip6(ESS_DEFAULT_SERVER_HOST, ESS_DEFAULT_SERVER_PORT, false);
+  #endif
+
   if(m_pServerSocket == 0) {
     ESP_LOGE(LOG_TAG, "ess_inet_dram_server - Out of Mem");
      return ESS_ERROR_OUTOFMEM;
    }
-  ESP_LOGI(LOG_TAG, "OpenESS dram%d socket opened", fam == ESS_SOCKET_FAMILY_IP4 ? 4 : 6);
 
   m_pContext = new ess_context();
   if(m_pContext == 0) {

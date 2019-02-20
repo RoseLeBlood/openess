@@ -21,7 +21,7 @@
  * @file ess_error.h
  * @author Anna Sopdia Schröck
  * @date 30 Januar 2019
- * @brief ess error list (ess_error_t) 
+ * @brief ess error list (ess_error_t)
  *
  */
 
@@ -59,7 +59,13 @@ typedef enum ess_error {
     ESS_ERROR_MAX,
 }ess_error_t;
 
-#define ESS_ERROR(error)   if(error != ESS_OK) printf("%s: %d %s\n", ess_error_to_string(error), __LINE__, __FILE__)
+
+#define ESS_ERROR(error)   if(error != ESS_OK) \
+  printf("%s: %d %s\n", ess_error_to_string(error), __LINE__, __FILE__);
+
+#define ESS_ERROR_RET(error, ret)  if(error != ESS_OK)  { \
+  printf("%s: %d %s\n", ess_error_to_string(error), __LINE__, __FILE__); \
+  return ret; }
 
 const char* ess_error_to_string(const ess_error_t error);
 

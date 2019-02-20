@@ -59,7 +59,7 @@ class ess_server {
 public:
   ess_server(std::string name, ess_format_t format);
 
-  virtual ess_error_t create(std::string backend_name, std::string host, std::string port, ess_socket_fam fam, bool lite) = 0;
+  virtual ess_error_t create(std::string backend_name) = 0;
 
   ess_context& get_context() const{ return *m_pContext; }
   ess_format_t get_server_format() const { return m_eFormat; }
