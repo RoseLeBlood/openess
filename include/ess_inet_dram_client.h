@@ -77,6 +77,23 @@ public:
   ess_inet_dram_client_ip6(int flags)
     : ess_inet_dram_client(ESS_SOCKET_FAMILY_IP6, flags)  { }
 };
+
+class ess_inet_dramlite_client_ip4 : public ess_inet_dram_client {
+public:
+  ess_inet_dramlite_client_ip4()
+    : ess_inet_dram_client(ESS_SOCKET_FAMILY_IP4, 0, true)  { }
+  ess_inet_dramlite_client_ip4(int flags)
+    : ess_inet_dram_client(ESS_SOCKET_FAMILY_IP4, flags, true)  { }
+};
+
+
+class ess_inet_dramlite_client_ip6 : public ess_inet_dram_client {
+public:
+  ess_inet_dramlite_client_ip6()
+    : ess_inet_dram_client(ESS_SOCKET_FAMILY_IP6, 0, true)  { }
+  ess_inet_dramlite_client_ip6(int flags)
+    : ess_inet_dram_client(ESS_SOCKET_FAMILY_IP6, flags, true)  { }
+};
 /**
 * @}
 */

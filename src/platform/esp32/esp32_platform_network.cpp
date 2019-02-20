@@ -67,10 +67,7 @@ ess_error_t ess_socket_server_create(ess_socket_fam fam, ess_socket_pro proto,
   hints.ai_flags = 0;
   hints.ai_protocol =  (proto == ESS_SOCKET_PROTO_DRAM_LITE) ? IPPROTO_UDPLITE : 0;
 
-  ESP_LOGI("ESSS", "server creating (%s %s on %s:%s)",  ess_socket_pro2string(proto).c_str(),
-    ess_socket_fam2string(fam).c_str(),
-    host.c_str(), port.c_str()
-  );
+
 
   if ( getaddrinfo( host.c_str(), port.c_str(), &hints, &result )  !=0  ) {
     return ESS_ERROR_GETADDR;
@@ -81,19 +78,29 @@ ess_error_t ess_socket_server_create(ess_socket_fam fam, ess_socket_pro proto,
     if ( _socket < 0 )  continue;
 
     retval = bind(_socket, result_check->ai_addr, (socklen_t)result_check->ai_addrlen );
-    if ( retval != 0 )  { close(_socket); continue;   }
-
-    if( proto == ESS_SOCKET_PROTO_STREAM) {
-        retval = listen(_socket, 128);
-        if ( retval != 0 )  { close(_socket); continue;   } else { break; }
+    if ( retval != 0 )  {
+      close(_socket); continue;
+    } else {
+      if( proto == ESS_SOCKET_PROTO_STREAM) {
+          retval = listen(_socket, 128);
+          if ( retval != 0 )  { close(_socket); continue;   }
+      }
+      break;
     }
   }
   if ( result_check == NULL )  {
     freeaddrinfo(result);
     return ESS_ERROR;
   }
-  *handle = _socket;
+
+  if(handle != 0) *handle = _socket;
   freeaddrinfo(result);
+
+  ESP_LOGI("ESSS", "server creating (%s %s on %s:%s) %d",  ess_socket_pro2string(proto).c_str(),
+    ess_socket_fam2string(fam).c_str(),
+    host.c_str(), port.c_str(), _socket
+  );
+
   return ESS_OK;
 }
 /* ******************************************************************** */

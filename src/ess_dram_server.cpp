@@ -54,14 +54,17 @@ ess_error_t ess_dram_server::create(std::string backend_name) {
     ESP_LOGE(LOG_TAG, "ess_inet_dram_server - Out of Mem");
      return ESS_ERROR_OUTOFMEM;
    }
+   ess_error_t error = m_pServerSocket->bind();
+   ess_platform_sleep(1);
 
-  m_pContext = new ess_context();
-  if(m_pContext == 0) {
-    ESP_LOGE(LOG_TAG, "ess_context - Out of Mem");
-     return ESS_ERROR_OUTOFMEM;
-   }
-   ess_error_t error = m_pContext->create(backend_name.c_str(), m_eFormat);
-   ESS_ERROR(error);
-
+   if(error == ESS_OK) {
+      m_pContext = new ess_context();
+      if(m_pContext == 0) {
+        ESP_LOGE(LOG_TAG, "ess_context - Out of Mem");
+         return ESS_ERROR_OUTOFMEM;
+       }
+       error = m_pContext->create(backend_name.c_str(), m_eFormat);
+       ESS_ERROR(error);
+  }
   return error;
 }
