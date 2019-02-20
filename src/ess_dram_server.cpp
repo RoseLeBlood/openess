@@ -44,10 +44,18 @@ ess_dram_server::ess_dram_server(std::string name,  ess_format_t format)
 }
 
 ess_error_t ess_dram_server::create(std::string backend_name) {
-  #if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
-  m_pServerSocket = new ess_inet_dram_server_ip4(ESS_DEFAULT_SERVER_HOST, ESS_DEFAULT_SERVER_PORT, false);
-  #elif ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP6
-  m_pServerSocket = new ess_inet_dram_server_ip6(ESS_DEFAULT_SERVER_HOST, ESS_DEFAULT_SERVER_PORT, false);
+  #if ESS_DEFAULT_SERVER_PROTOCOL == ESS_PROTOCOL_UDP
+    #if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
+    m_pServerSocket = new ess_inet_dram_server_ip4(ESS_DEFAULT_SERVER_HOST, ESS_DEFAULT_SERVER_PORT);
+    #elif ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP6
+    m_pServerSocket = new ess_inet_dram_server_ip6(ESS_DEFAULT_SERVER_HOST, ESS_DEFAULT_SERVER_PORT);
+    #endif
+  #elif ESS_DEFAULT_SERVER_PROTOCOL == ESS_PROTOCOL_UDP_LITE
+    #if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
+    m_pServerSocket = new ess_inet_dramlite_server_ip4(ESS_DEFAULT_SERVER_HOST, ESS_DEFAULT_SERVER_PORT);
+    #elif ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP6
+    m_pServerSocket = new ess_inet_dramlite_server_ip6(ESS_DEFAULT_SERVER_HOST, ESS_DEFAULT_SERVER_PORT);
+    #endif
   #endif
 
   if(m_pServerSocket == 0) {

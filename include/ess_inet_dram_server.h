@@ -45,13 +45,21 @@ private:
 
 class ess_inet_dram_server_ip4 : public ess_inet_dram_server {
 public:
-  ess_inet_dram_server_ip4(std::string host, std::string port, bool lite);
+  ess_inet_dram_server_ip4(std::string host, std::string port);
+};
+class ess_inet_dramlite_server_ip4 : public ess_inet_dram_server {
+public:
+  ess_inet_dramlite_server_ip4(std::string host, std::string port);
 };
 
 
 class ess_inet_dram_server_ip6 : public ess_inet_dram_server {
 public:
-  ess_inet_dram_server_ip6(std::string host, std::string port, bool lite);
+  ess_inet_dram_server_ip6(std::string host, std::string port);
+};
+class ess_inet_dramlite_server_ip6 : public ess_inet_dram_server {
+public:
+  ess_inet_dramlite_server_ip6(std::string host, std::string port);
 };
 /**
 * @}
