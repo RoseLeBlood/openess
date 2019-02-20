@@ -4,7 +4,10 @@
   - add ess_network.h for socket multiplatform layer
   - update example
   - ess_dram_server using config from config.h
+<<<<<<< HEAD
   - add generic_udp_backend
+=======
+>>>>>>> 2729ef24278bfac118ee3138f261ddf6296e9bf4
 * 0.4.0
   - add udp_inet server / client backend
   - add ess_server and ess_dram_server (basic)
