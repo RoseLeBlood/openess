@@ -20,7 +20,8 @@
 /**
  * @file ess.h
  * @author Anna Sopdia Schröck
- * @date 2 Februar 20119
+ * @date 2 Februar 2019
+ * @brief the basic OpenESS header file 
  */
 #ifndef _ESS_MAIN_HEADER_H_
 #define _ESS_MAIN_HEADER_H_

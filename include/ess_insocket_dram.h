@@ -20,8 +20,8 @@
 /**
  * @file ess_insocket_dram.h
  * @author Anna Sopdia Schröck
- * @date 18 Februar 20119
- * 
+ * @date 18 Februar 2019
+ *
  */
 
 #ifndef _ESS_SOCKET_INET_DGRAM_H_
@@ -30,7 +30,7 @@
 #include "ess_socket.h"
 
 /**
-* @addtogroup ess_socket (SAL)
+* @addtogroup socket
 * @{
 */
 class ess_insocket_dram : public ess_insocket {

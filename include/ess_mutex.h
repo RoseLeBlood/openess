@@ -20,7 +20,7 @@
 /**
  * @file ess_mutex.h
  * @author Anna Sopdia Schröck
- * @date 10 Februar 20119
+ * @date 10 Februar 2019
  * @brief all platform specific mutex functions
  *
  */
@@ -30,7 +30,7 @@
 #include "ess_lock.h"
 
 /**
-* @addtogroup ess_task
+* @addtogroup task
 * @{
 */
 class ess_mutex : public ess_lock {

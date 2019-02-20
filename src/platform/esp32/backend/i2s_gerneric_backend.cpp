@@ -18,9 +18,9 @@
  ****************************************************************************/
 
 /**
- * @file i2s_gerneric_backend.c
+ * @file i2s_gerneric_backend.cpp
  * @author Anna Sopdia Schröck
- * @date 2 Februar 20119
+ * @date 2 Februar 2019
  * @brief all esp32 backend generic_i2s functions source
  *
  */

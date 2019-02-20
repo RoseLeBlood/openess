@@ -30,7 +30,7 @@
 #include "ess.h"
 
 /**
-* @addtogroup ess_socket (SAL)
+* @addtogroup socket
 * @{
 */
 /**

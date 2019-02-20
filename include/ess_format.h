@@ -17,7 +17,7 @@
  *   License along with Box.  If not see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 /**
- * @file format.h
+ * @file ess_format.h
  * @author Anna Sopdia Schröck
  * @date 30 Januar 20119
  * @brief Contains all ess format  functions and all formats

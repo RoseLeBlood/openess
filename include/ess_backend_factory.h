@@ -21,7 +21,7 @@
 /**
  * @file ess_backend_factory.h
  * @author Anna Sopdia Schröck
- * @date 18 Februar 20119
+ * @date 18 Februar 2019
  * @brief Contains backend factory template class and backend root class
  *
  *
@@ -36,7 +36,7 @@
 #include "platform/generic_null_backend.h"
 
 /**
-* @addtogroup ess_backend
+* @addtogroup backend
 * @{
 */
 

@@ -18,9 +18,9 @@
  ****************************************************************************/
 
 /**
- * @file esp32_platform_ringbffer.c
+ * @file esp32_platform_ringbffer.cpp
  * @author Anna Sopdia Schröck
- * @date 3 Februar 20119
+ * @date 3 Februar 2019
  * @brief all esp32 platform ringbuffer functions source
  *
  */

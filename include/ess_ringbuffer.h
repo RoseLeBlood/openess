@@ -20,7 +20,7 @@
 /**
  * @file ess_ringbuffer.h
  * @author Anna Sopdia Schröck
- * @date 3 Februar 20119
+ * @date 3 Februar 2019
  * @brief all platform ringbuffer specific functions
  *
  */

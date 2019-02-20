@@ -18,15 +18,15 @@
  ****************************************************************************/
 
 /**
- * @file context.h
+ * @file ess_context.h
  * @author Anna Sopdia Schröck
- * @date 30 Januar 20119
- * @brief Contains all ess context  functions
+ * @date 30 Januar 2019
+ * @brief the simple OpenESS context class
  *
  *
  */
  /**
- * @addtogroup ess_backend
+ * @addtogroup context
  * @{
  */
 #ifndef __ESS_CONTEXT_H__

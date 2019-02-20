@@ -20,13 +20,13 @@
 /**
  * @file ess_dram_server.h
  * @author Anna Sopdia Schröck
- * @date 19 Februar 20119
+ * @date 19 Februar 2019
  * @brief the OpenESS dram server class
  *
  *
  */
  /**
- * @addtogroup ess_server
+ * @addtogroup socket
  * @{
  */
 #ifndef _ESS_SERVER_H__

@@ -18,10 +18,10 @@
  ****************************************************************************/
 
 /**
- * @file esp32_platform_mutex.c
+ * @file esp32_platform_mutex.cpp
  * @author Anna Sopdia Schröck
- * @date 11 Februar 20119
- * @brief all esp32 platform ringbuffer functions source
+ * @date 11 Februar 2019
+ * @brief all esp32 platform mutex class source
  *
  */
 #include "config.h"

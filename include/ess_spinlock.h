@@ -20,8 +20,8 @@
 /**
  * @file ess_spinlock.h
  * @author Anna Sopdia Schröck
- * @date 11 Februar 20119
- * @brief all platform specific spinlock functions
+ * @date 11 Februar 2019
+ * @brief  platform specific spinlock class
  *
  */
 #ifndef _ESS_PLATFORM_SPINLOCK_H_

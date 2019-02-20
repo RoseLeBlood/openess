@@ -18,9 +18,9 @@
  ****************************************************************************/
 
 /**
- * @file esp32_platform_spinlock.c
+ * @file esp32_platform_spinlock.cpp
  * @author Anna Sopdia Schröck
- * @date 11 Februar 20119
+ * @date 11 Februar 2019
  * @brief all esp32 platform spinlock functions source
  *
  */

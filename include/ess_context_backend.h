@@ -21,13 +21,13 @@
 /**
  * @file ess_context_backend.h
  * @author Anna Sopdia Schröck
- * @date 18 Februar 20119
- * @brief Contains  internal context factory platform conection
+ * @date 18 Februar 2019
+ * @brief platform backends combiunations with OpenESS
  *
  *
  */
  /**
- * @addtogroup ess_backend
+ * @addtogroup context
  * @{
  */
 

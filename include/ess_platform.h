@@ -20,8 +20,8 @@
 /**
  * @file ess_platform.h
  * @author Anna Sopdia Schröck
- * @date 3 Februar 20119
- * @brief all platform specific functions
+ * @date 3 Februar 2019
+ * @brief all basic platform specific functions
  *
  */
 #ifndef _ESS_PLATFORM_H_

@@ -20,7 +20,7 @@
 /**
  * @file ess_lock..h
  * @author Anna Sopdia Schröck
- * @date 13 Februar 20119
+ * @date 13 Februar 2019
  * @brief lock interface
  *
  */
@@ -30,7 +30,7 @@
 #include "ess_error.h"
 
 /**
-* @addtogroup ess_task
+* @addtogroup task
 * @{
 */
 

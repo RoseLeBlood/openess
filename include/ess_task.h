@@ -20,8 +20,8 @@
 /**
  * @file ess_platform.h
  * @author Anna Sopdia Schröck
- * @date 3 Februar 20119
- * @brief all platform specific task functions
+ * @date 3 Februar 2019
+ * @brief  platform specific task class
  *
  */
 #ifndef _H_

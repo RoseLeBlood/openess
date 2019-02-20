@@ -20,7 +20,7 @@
 /**
  * @file ess_inet_dram_client.h
  * @author Anna Sopdia Schröck
- * @date 19 Februar 20119
+ * @date 19 Februar 2019
  * @brief Contains the inet dram client (UDP client) socket
  */
 
@@ -30,7 +30,7 @@
 #include "ess_insocket_dram.h"
 
 /**
-* @addtogroup ess_socket (SAL)
+* @addtogroup socket
 * @{
 */
 

@@ -18,7 +18,7 @@
  ****************************************************************************/
 
 /**
- * @file ess_insocket_dram.c
+ * @file ess_insocket_dram.cpp
  * @author Anna Sopdia Schröck
  * @date 18 Februar 20119
  * @brief Contains the inet_dgram class

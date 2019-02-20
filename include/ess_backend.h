@@ -21,13 +21,13 @@
 /**
  * @file backend.h
  * @author Anna Sopdia Schröck
- * @date 30 Januar 20119
- * @brief Contains all ess backend  functions and the backend factory struct
+ * @date 30 Januar 2019
+ * @brief basic backend interface for user and system backends
  *
  *
  */
  /**
- * @addtogroup ess_backend
+ * @addtogroup backend
  * @{
  */
 #ifndef __ESS_BACKEND_H__

@@ -18,9 +18,9 @@
  ****************************************************************************/
 
 /**
- * @file format.c
+ * @file ess_format.cpp
  * @author Anna Sopdia Schröck
- * @date 30 Januar 20119
+ * @date 30 Januar 2019
  * @brief ESS format source
  *
  */

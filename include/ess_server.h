@@ -20,13 +20,13 @@
 /**
  * @file ess_server.h
  * @author Anna Sopdia Schröck
- * @date 19 Februar 20119
+ * @date 19 Februar 2019
  * @brief the OpenESS generic server class
  *
  *
  */
  /**
- * @addtogroup ess_server
+ * @addtogroup network
  * @{
  */
 #ifndef _ESS_MAIN_HEADER_H_

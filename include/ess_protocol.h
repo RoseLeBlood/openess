@@ -20,8 +20,8 @@
 /**
  * @file ess_protocol.h
  * @author Anna Sopdia Schröck
- * @date 12 Februar 20119
- * @brief contains the OpenESS prtocol
+ * @date 12 Februar 2019
+ * @brief contains the OpenESS protocol
  *
  */
 

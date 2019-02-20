@@ -18,9 +18,9 @@
  ****************************************************************************/
 
 /**
- * @file ess_socket.c
+ * @file ess_socket.cpp
  * @author Anna Sopdia Schröck
- * @date 18 Februar 20119
+ * @date 18 Februar 2019
  * @brief Contains ess_socket (base class) and ess_insocket (base for all internet sockets)
  */
 
@@ -39,7 +39,7 @@
 # include <string.h>
 # include <errno.h>
 # include <sys/ioctl.h>
-# include <netinet/in.h> 
+# include <netinet/in.h>
 
 /**
  * @brief Constructor. Sets `m_iSocket` to -1.

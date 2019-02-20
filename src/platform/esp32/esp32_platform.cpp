@@ -18,10 +18,10 @@
  ****************************************************************************/
 
 /**
- * @file esp32_platform.c
+ * @file esp32_platform.cpp
  * @author Anna Sopdia Schröck
- * @date 10 Februar 20119
- * @brief all esp32 platform functions source
+ * @date 10 Februar 2019
+ * @brief all esp32 generic platform functions source
  *
  */
 #include "ess.h"
