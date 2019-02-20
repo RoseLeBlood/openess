@@ -64,7 +64,6 @@
 	#define ESS_CONFIG_MUTEX_ESP32 /**< esp32 using own mutex functions */
 	#define ESS_CONFIG_SPINLOCK_ESP32 /**< esp32 using own spinlock functions */
 
-	#define ESS_ENABLE_BACKEND_UART /**< esp32 platform UART backend available */
 	#define ESS_ENABLE_BACKEND_I2S /**< esp32 platform I2S backend available */
 	#define ESS_ENABLE_BACKEND_UDP/**< generic platform UDP backend available */
 
@@ -122,10 +121,17 @@
 	#define ESS_BACKEND_UART_CTS  (UART_PIN_NO_CHANGE)
 #endif
 
+
+
 #ifdef ESS_ENABLE_BACKEND_UDP
-	#define ESS_BACKEND_UDP_PORT 17000
-	#define ESS_BACKEND_UDP_HOST 192.168.0.235
-	#define ESS_BACKEND_UDP_FAMILY ESS_FAMILY_BOTH
+	#define ESS_BACKEND_UDP_SENDTO_PORT "17000"
+	#define ESS_BACKEND_UDP_PROTOCOL ESS_PROTOCOL_UDP_LITE
+
+	#if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
+	#define ESS_BACKEND_UDP_SENDTO_HOST "192.168.0.235"
+	#else
+	#define ESS_BACKEND_UDP_SENDTO_HOST "::2"
+	#endif
 #endif
 
 #ifdef ESS_ENABLE_BACKEND_I2S

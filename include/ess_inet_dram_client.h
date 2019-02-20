@@ -34,7 +34,7 @@
 * @{
 */
 
-class ess_inet_dram_client : public ess_insocket_dram {
+class ess_inet_dram_client : public virtual ess_insocket_dram {
   friend ess_inet_dram_client& operator<<(ess_inet_dram_client& sock, const char* str);
   friend ess_inet_dram_client& operator<<(ess_inet_dram_client& sock, const std::string& str);
 

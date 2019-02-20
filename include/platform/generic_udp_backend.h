@@ -17,38 +17,56 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
+
 /**
- * @file ess_insocket_dram.h
+ * @file generic_udp_backend.h
  * @author Anna Sopdia Schröck
- * @date 18 Februar 2019
+ * @date 20 Februar 2019
+ * @brief the basic udp backend class
  *
+ * this is a udp backend
  */
-
-#ifndef _ESS_SOCKET_INET_DGRAM_H_
-#define _ESS_SOCKET_INET_DGRAM_H_
-
-#include "ess_socket.h"
+#ifndef _ESS_PLATFORM_INC_GENERIC_UDP_BACKEND_H_
+#define _ESS_PLATFORM_INC_GENERIC_UDP_BACKEND_H_
 
 /**
-* @addtogroup socket
+* @addtogroup ess_platform_generic
 * @{
 */
-class ess_insocket_dram : public ess_insocket {
+
+#include "ess.h"
+#include "ess_backend.h"
+#include "ess_inet_dram_client.h"
+
+/**
+* @brief generic udp backend
+*
+* send first the format (ess_format_t) as string then the data 
+*/
+class generic_udp_backend : public ess_backend { // TODO: in the future using multicast
 public:
-  ess_insocket_dram() : ess_insocket(ESS_SOCKET_FAMILY_IP4, ESS_SOCKET_PROTO_DRAM) { }
-  ess_insocket_dram(ess_socket_fam fam) : ess_insocket(fam, ESS_SOCKET_PROTO_DRAM) { }
+  generic_udp_backend();
+  ~generic_udp_backend() { }
 
+  virtual ess_error_t probe(const ess_format_t format); //
+  virtual ess_error_t open(const ess_format_t format) ; //
+  virtual ess_error_t close();
+  virtual ess_error_t restart(const ess_format_t format) ; //
 
-  virtual unsigned int sendto(const void* buf, unsigned int len, const char* dsthost, const char* dstport); //
-  virtual unsigned int sendto(const std::string& buf, const std::string& dsthost, const std::string& dstport); //
+  virtual ess_error_t pause() ;
+  virtual ess_error_t resume() ;
 
-  virtual unsigned int recvfrom(void* buf, unsigned int len); //
-  virtual unsigned int recvfrom(std::string& buf); //
+  virtual ess_error_t write(const void *buffer, unsigned int buf_size, unsigned int* wrote) ;
+  virtual ess_error_t read(void *buffer, unsigned int buf_size, unsigned int* readed) { return ESS_ERROR; }
 
+  virtual const char* get_info() { return "generic_udp_backend"; }
 protected:
-  ess_insocket_dram(ess_socket_fam fam, ess_socket_pro proto) : ess_insocket(fam, proto) { }
+  unsigned int send_packet(const void* data, unsigned int size);
+protected:
+  bool m_bPaused;
+  ess_inet_dram_client* m_pClient;
+  ess_format_t m_eFormat;
 };
-
 
 /**
 * @}

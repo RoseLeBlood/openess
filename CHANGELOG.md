@@ -1,5 +1,10 @@
 
 ## Release History
+* 0.4.02
+  - add ess_network.h for socket multiplatform layer
+  - update example
+  - ess_dram_server using config from config.h
+  - add generic_udp_backend
 * 0.4.0
   - add udp_inet server / client backend
   - add ess_server and ess_dram_server (basic)

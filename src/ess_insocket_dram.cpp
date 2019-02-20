@@ -53,7 +53,7 @@
  * @retval 0 Peer sent EOF
  * @retval -1 Socket is non-blocking and returned without any data.
  */
-unsigned int ess_insocket_dram::read(void* buf, unsigned int len) {
+unsigned int ess_insocket_dram::recvfrom(void* buf, unsigned int len) {
   struct sockaddr_storage client;
   if ( m_iSocket == -1 ) { return -1; }
   if ( buf == NULL || len == 0) return -1;
@@ -62,7 +62,7 @@ unsigned int ess_insocket_dram::read(void* buf, unsigned int len) {
 
   socklen_t stor_addrlen = sizeof(struct sockaddr_storage);
 
-  return recvfrom(m_iSocket,buf,len,0,(struct sockaddr*)&client,&stor_addrlen);
+  return ::recvfrom(m_iSocket,buf,len,0,(struct sockaddr*)&client,&stor_addrlen);
 }
 /**
  * @brief rcvfrom for C++ strings, implemented consistently
@@ -74,7 +74,7 @@ unsigned int ess_insocket_dram::read(void* buf, unsigned int len) {
  * @retval 0 Peer sent EOF
  * @retval -1 Socket is non-blocking and returned without any data.
  */
-unsigned int ess_insocket_dram::read(std::string& buf) {
+unsigned int ess_insocket_dram::recvfrom(std::string& buf) {
   unsigned int bytes;
 
   using std::unique_ptr;
@@ -82,14 +82,14 @@ unsigned int ess_insocket_dram::read(std::string& buf) {
 
   memset(cbuf.get(),0,buf.size());
 
-  bytes = read(cbuf.get(),static_cast<size_t>(buf.size()));
+  bytes = recvfrom(cbuf.get(),static_cast<size_t>(buf.size()));
 
   buf.resize(bytes);
   buf.assign(cbuf.get(), bytes);
 
   return bytes;
 }
-unsigned int ess_insocket_dram::write(const void* buf, size_t len, const char* dsthost, const char* dstport) {
+unsigned int ess_insocket_dram::sendto(const void* buf, size_t len, const char* dsthost, const char* dstport) {
   struct sockaddr_storage oldsock;
   struct addrinfo *result, *result_check, hint;
   socklen_t oldsocklen = sizeof(struct sockaddr_storage);
@@ -107,7 +107,7 @@ unsigned int ess_insocket_dram::write(const void* buf, size_t len, const char* d
 
   for ( result_check = result; result_check != NULL; result_check = result_check->ai_next )  {
 
-    return_value =  sendto(m_iSocket, buf, len, 0, result_check->ai_addr, result_check->ai_addrlen);
+    return_value =  ::sendto(m_iSocket, buf, len, 0, result_check->ai_addr, result_check->ai_addrlen);
 
     if(return_value != -1) break;
   }
@@ -125,8 +125,6 @@ unsigned int ess_insocket_dram::write(const void* buf, size_t len, const char* d
  *
  * @retval -1 Socket is non-blocking and didn't send any data.
  */
-unsigned int ess_insocket_dram::write(const std::string& buf, const std::string& dsthost, const std::string& dstport) {
-  ssize_t bytes;
-  bytes = write(buf.c_str(), buf.size(), dsthost.c_str(), dstport.c_str());
-  return bytes;
+unsigned int ess_insocket_dram::sendto(const std::string& buf, const std::string& dsthost, const std::string& dstport) {
+  return sendto(buf.c_str(), buf.size(), dsthost.c_str(), dstport.c_str());
 }

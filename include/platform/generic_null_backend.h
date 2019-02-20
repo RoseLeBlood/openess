@@ -22,7 +22,7 @@
  * @file generic_null_backend.h
  * @author Anna Sopdia Schröck
  * @date 18 Februar 2019
- * @brief the basic i2s_generic class
+ * @brief the basic null backend class
  *
  * this is a null backend only for testing
  */
