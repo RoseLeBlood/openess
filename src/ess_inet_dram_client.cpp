@@ -39,13 +39,9 @@
 ess_inet_dram_client::ess_inet_dram_client(ess_socket_fam fam, int flags, bool lite)
   : ess_insocket_dram(fam), m_isConnected(false) {
 
-  int proto = lite ? IPPROTO_UDPLITE : 0;
-  switch ( fam ) {
-    case ESS_SOCKET_FAMILY_IP4 : m_iSocket = socket(AF_INET,SOCK_DGRAM|flags, proto); break;
-    case ESS_SOCKET_FAMILY_IP6 : m_iSocket = socket(AF_INET6,SOCK_DGRAM|flags,proto); break;
-    case ESS_SOCKET_FAMILY_BOTH:  m_iSocket = socket(AF_UNSPEC,SOCK_DGRAM|flags,proto); break;
-    default: m_iSocket = -1;
-  }
+ m_iSocket = ::ess_socket(fam,
+   lite ? ESS_SOCKET_PROTO_DRAM_LITE : ESS_SOCKET_PROTO_DRAM,
+   flags, 0);
 }
 /**
  * @brief Connect datagram socket.
@@ -59,32 +55,8 @@ ess_inet_dram_client::ess_inet_dram_client(ess_socket_fam fam, int flags, bool l
 ess_error_t ess_inet_dram_client::connect(const std::string& dsthost, const std::string& dstport) {
   if(m_iSocket < 0) return ESS_ERROR_NOT_CREATED;
 
-  struct addrinfo *result, *result_check, hint;
-  struct sockaddr_storage oldsockaddr;
-  socklen_t oldsockaddrlen = sizeof(struct sockaddr_storage);
-
-  if (  getsockname(m_iSocket,(struct sockaddr*)&oldsockaddr, &oldsockaddrlen) == -1 )
-    return ESS_ERROR;
-
-  if ( oldsockaddrlen > sizeof(struct sockaddr_storage) )
-    return ESS_ERROR;
-
-  memset(&hint,0,sizeof(struct addrinfo));
-
-  hint.ai_family = ((struct sockaddr_in*)&oldsockaddr)->sin_family; // AF_INET or AF_INET6 - offset is same at sockaddr_in and sockaddr_in6
-  hint.ai_socktype = SOCK_DGRAM;
-
-  if (  getaddrinfo(dsthost.c_str(), dstport.c_str(), &hint, &result) != 0)
-    return ESS_ERROR_GETADDR;
-
-  for ( result_check = result; result_check != NULL; result_check = result_check->ai_next ) {
-    if ( ::connect(m_iSocket, result_check->ai_addr, result_check->ai_addrlen) != -1)
-        break;
-  }
-  if ( result_check == NULL ) {
-      freeaddrinfo(result);
-      return ESS_ERROR_CONNECT;
-  }
+  ess_error_t error = ess_socket_connect_dram(m_iSocket, dsthost, dstport);
+  if(error != ESS_OK) return error;
 
   m_strHost = dsthost;
   m_strPort = dstport;
@@ -98,15 +70,9 @@ ess_error_t ess_inet_dram_client::connect(const std::string& dsthost, const std:
  *
  */
 ess_error_t ess_inet_dram_client::disconnect(void) {
-  struct sockaddr deconnect;
-
-  # ifndef __FreeBSD__
-  	memset(&deconnect,0,sizeof(struct sockaddr));
-  	deconnect.sa_family = AF_UNSPEC;
-  	if ( ::connect(m_iSocket, &deconnect,sizeof(struct sockaddr)) )
-  	    return ESS_ERROR;
-  # endif
-
+  ess_error_t error = ess_socket_disconnect(m_iSocket);
+  if(error != ESS_OK) return error;
+  
   m_strHost.clear();
   m_strPort.clear();
   m_isConnected = false;
@@ -126,7 +92,7 @@ ess_error_t ess_inet_dram_client::disconnect(void) {
  */
 unsigned int ess_inet_dram_client::write(const void* buf, unsigned int len, int flags) {
   if ( m_isConnected != true ) return -1;
-  return send(m_iSocket,buf,len,flags);
+  return ess_send(m_iSocket,buf,len,flags);
 }
 /**
  * @brief Receive data from a connected DGRAM socket
@@ -144,8 +110,7 @@ unsigned int ess_inet_dram_client::write(const void* buf, unsigned int len, int 
  */
 unsigned int ess_inet_dram_client::read(void* buf, unsigned int len, int flags) {
   if ( m_isConnected != true ) return -1;
-  memset(buf,0,len);
-  return recv(m_iSocket,buf,len,flags);
+  return ess_recv(m_iSocket,buf,len,flags);
 }
 
 
@@ -157,7 +122,8 @@ unsigned int ess_inet_dram_client::read(void* buf, unsigned int len, int flags) 
  */
 ess_inet_dram_client& operator<< (ess_inet_dram_client& sock, const std::string& str) {
   if ( sock.m_isConnected != true ) return sock;
-  write(sock.m_iSocket, str.c_str(), str.size() );
+  //write(sock.m_iSocket, str.c_str(), str.size() );
+  ess_write(sock.m_iSocket, str);
   return sock;
 }
 /**
@@ -168,7 +134,7 @@ ess_inet_dram_client& operator<< (ess_inet_dram_client& sock, const std::string&
  */
 ess_inet_dram_client& operator<<(ess_inet_dram_client& sock, const char* str) {
   if ( sock.m_isConnected != true ) return sock;
-  write(sock.m_iSocket, str, strlen(str) );
+  ess_cwrite(sock.m_iSocket, str, strlen(str) );
   return sock;
 }
 
@@ -181,24 +147,10 @@ ess_inet_dram_client& operator<<(ess_inet_dram_client& sock, const char* str) {
  * @param dest The string to write data to. This string has to be resized to the number of bytes you wish to receive.
  */
 ess_inet_dram_client& operator>>(ess_inet_dram_client& sock, std::string& dest) {
-  unsigned int read_bytes;
-  char* buffer = new char[dest.size()];
-
-  memset(buffer,0,dest.size());
-
-  read_bytes = read(sock.m_iSocket, buffer, dest.size() );
-  if ( read_bytes == -1  ) {
-    delete[] buffer; return sock;
-  }
-  if ( read_bytes < static_cast<unsigned int>(dest.size()) )
-    dest.resize(read_bytes);
-  dest.assign(buffer,read_bytes);
-  delete[] buffer;
-
+  ess_read(sock.m_iSocket, dest);
   return sock;
 }
 ess_inet_dram_client& operator>>(ess_inet_dram_client& sock, char* dest) {
-  memset(dest, 0, strlen(dest));
-  read(sock.m_iSocket, dest, strlen(dest) );
+  ess_cread(sock.m_iSocket, dest);
   return sock;
 }

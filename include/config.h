@@ -57,23 +57,20 @@
 #endif
 
 #if  ESS_PLATFORM_ESP32 == 1
-	#define ESS_CONFIG_SEMAPHORE_GENERIC
-	#define ESS_CONFIC_TASK_ESP32
-	#define ESS_CONFIG_RINGBUFFER_ESP32
-	#define ESS_CONFIG_MUTEX_ESP32
-	#define ESS_CONFIG_SPINLOCK_ESP32
-	/** @brief If defined then UART backend available */
-	#define ESS_ENABLE_BACKEND_UART
-	/** @brief If defined then I2S backend available */
-	#define ESS_ENABLE_BACKEND_I2S
-	/** @brief If defined then UDP backend available */
-	#define ESS_ENABLE_BACKEND_UDP
+	#define ESS_CONFIG_NETWORK_ESP32 /**< esp32 using own network functions */
+	#define ESS_CONFIC_TASK_ESP32	/**< esp32 using own task functions */
+	#define ESS_CONFIG_RINGBUFFER_ESP32 /**< esp32 using own ringbuffer functions */
+	#define ESS_CONFIG_MUTEX_ESP32 /**< esp32 using own mutex functions */
+	#define ESS_CONFIG_SPINLOCK_ESP32 /**< esp32 using own spinlock functions */
 
-	#define ESS_DEFAULT_SERVER_NAME "OpenEssD-esp32"
+	#define ESS_ENABLE_BACKEND_UART /**< esp32 platform UART backend available */
+	#define ESS_ENABLE_BACKEND_I2S /**< esp32 platform I2S backend available */
+	#define ESS_ENABLE_BACKEND_UDP/**< generic platform UDP backend available */
+
+	#define ESS_DEFAULT_SERVER_NAME "OpenEssD-esp32" /**< basic server name*/
 #endif // ESS_PLATFORM_ESP32
 
 #if ESS_PLATFORM_RPI == 1
-	#define ESS_CONFIG_SEMAPHORE_GENERIC
 	#define ESS_CONFIG_MUTEX_GENERIC
 	#define ESS_CONFIC_TASK_GENERIC
 	#define ESS_CONFIG_RINGBUFFER_GENERIC
@@ -85,7 +82,6 @@
 #endif //ESS_PLATFORM_RPI
 
 #if ESS_PLATFORM_LINUX == 1
-	#define ESS_CONFIG_SEMAPHORE_GENERIC
 	#define ESS_CONFIC_TASK_GENERIC
 	#define ESS_CONFIG_RINGBUFFER_GENERIC
 	#define ESS_CONFIG_MUTEX_GENERIC

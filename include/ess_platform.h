@@ -31,9 +31,6 @@
 
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /**
  * @brief get the time in milliseconds since the  scheduler started.
@@ -78,8 +75,5 @@ unsigned long ess_platform_micros();
  */
 unsigned long ess_platform_millis();
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif

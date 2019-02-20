@@ -21,7 +21,7 @@
  * @file ess_mutex.h
  * @author Anna Sopdia Schröck
  * @date 10 Februar 2019
- * @brief all platform specific mutex functions
+ * @brief  platform specific mutex class
  *
  */
 #ifndef _ESS_PLATFORM_MUTEX_H_

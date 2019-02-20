@@ -29,38 +29,7 @@
 
 #include "ess.h"
 
-/**
-* @addtogroup socket
-* @{
-*/
-/**
- * @brief which ip family are use
- */
-typedef enum ess_socket_fam {
-  ESS_SOCKET_FAMILY_IP4,       /**< Internet protocol version 4 */
-  ESS_SOCKET_FAMILY_IP6,      /**< Internet protocol version 6 */
-  ESS_SOCKET_FAMILY_BOTH   /**< Unspec DNS resolver should decide.*/
-}ess_socket_fam_t;
-
-/**
- * @brief which comunications protocol are use
- */
-typedef enum ess_socket_pro {
-  ESS_SOCKET_PROTO_DRAM,              /**< UDP */
-  ESS_SOCKET_PROTO_STREAM,         /**< TCP */
-  ESS_SOCKET_PROTO_DRAM_LITE, /**< UDP Lite */
-}ess_socket_pro_t;
-
-/**
- * @brief ess_socket status
- */
-typedef enum ess_socket_status {
-  ESS_SOCKET_STATUS_CREATED,    /**< Socket is created and ready for using */
-  ESS_SOCKET_STATUS_LISTEN,         /**< server is running */
-  ESS_SOCKET_STATUS_STOPPED,    /**< socket is close*/
-  ESS_SOCKET_STATUS_ERROR,       /**< socket has an error */
-  ESS_SOCKET_STATUS_DESTROY   /**< socket is destroyed */
-}ess_socket_status_t;
+#include "ess_network.h"
 
 /**
  * @brief socket is the base class of every other ess_socket object.
