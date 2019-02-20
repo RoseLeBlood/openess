@@ -64,7 +64,7 @@ ess_error_t ess_socket_server_create(ess_socket_fam fam, ess_socket_pro proto,
   memset(&hints,0,sizeof(struct addrinfo));
   hints.ai_socktype = ess_socket_pro2platform(proto);
   hints.ai_family = ess_socket_fam2platform(fam);
-  hints.ai_flags = 0;
+  hints.ai_flags = AI_PASSIVE;
   hints.ai_protocol =  (proto == ESS_SOCKET_PROTO_DRAM_LITE) ? IPPROTO_UDPLITE : 0;
 
 
@@ -96,7 +96,7 @@ ess_error_t ess_socket_server_create(ess_socket_fam fam, ess_socket_pro proto,
   if(handle != 0) *handle = _socket;
   freeaddrinfo(result);
 
-  ESP_LOGI("ESSS", "server creating (%s %s on %s:%s) %d",  ess_socket_pro2string(proto).c_str(),
+  ESP_LOGI("ESSS", "server creating (%s %s on %s:%s) socket: %d",  ess_socket_pro2string(proto).c_str(),
     ess_socket_fam2string(fam).c_str(),
     host.c_str(), port.c_str(), _socket
   );
