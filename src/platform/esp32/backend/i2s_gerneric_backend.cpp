@@ -87,13 +87,15 @@ ess_error_t ess_i2s_generic_backend::open(const ess_format_t format) {
                           I2S_CHANNEL_STEREO :
                           I2S_CHANNEL_MONO) );
   m_bPaused = false;
-  return ESS_OK;
+
+  return ess_backend::open(format);
 }
 
 
 ess_error_t  ess_i2s_generic_backend::close(  ){
   i2s_driver_uninstall((i2s_port_t)0);
-  return ESS_OK;
+
+  return ess_backend::close();
 }
 ess_error_t  ess_i2s_generic_backend::pause(    ){
   m_bPaused = true;

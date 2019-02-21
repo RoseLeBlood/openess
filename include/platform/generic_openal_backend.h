@@ -43,8 +43,8 @@ public:
   ~generic_openal_backend() { }
 
   virtual ess_error_t probe(const ess_format_t format) { return ESS_OK; }
-  virtual ess_error_t open(const ess_format_t format) { return ESS_OK; }
-  virtual ess_error_t close() { return ESS_OK; }
+  virtual ess_error_t open(const ess_format_t format) { return ess_backend::open(format); }
+  virtual ess_error_t close() { return ess_backend::close(); }
   virtual ess_error_t restart(const ess_format_t format) { return ESS_OK; }
 
   virtual ess_error_t pause() { m_bPaused = true; return ESS_OK; }

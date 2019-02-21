@@ -62,7 +62,9 @@ ess_error_t generic_udp_backend::open(const ess_format_t format)  {
   #endif //ESS_BACKEND_UDP_PROTOCOL == ESS_PROTOCOL_UDP
 
   if(m_pClient == 0) return ESS_ERROR_OUTOFMEM;
-  return  m_pClient->is_socket() ? ESS_OK : ESS_ERROR;
+
+
+  return  m_pClient->is_socket() && ess_backend::open(format) ? ESS_OK : ESS_ERROR;
 
 }
 ess_error_t generic_udp_backend::restart(const ess_format_t format)  {
@@ -91,7 +93,7 @@ ess_error_t generic_udp_backend::resume() {
 ess_error_t generic_udp_backend::close() {
   if(m_pClient == 0) return ESS_ERROR;
 
-  return ESS_OK;
+  return ess_backend::close();
 }
 
 

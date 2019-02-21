@@ -43,12 +43,12 @@
 class ess_backend {
 public:
   ess_backend() { }
-  ess_backend(const char* name) { m_strName = name; }
+  ess_backend(const char* name) { m_strName = name; m_isUsed = false; }
   virtual ~ess_backend() { }
 
   virtual ess_error_t probe(const ess_format_t format) = 0;
-  virtual ess_error_t open(const ess_format_t format) = 0;
-  virtual ess_error_t close() = 0;
+  virtual ess_error_t open(const ess_format_t format) {m_isUsed = true; return ESS_OK; }
+  virtual ess_error_t close() {m_isUsed = false; return ESS_OK; }
   virtual ess_error_t restart(const ess_format_t format) = 0;
 
   virtual ess_error_t pause() = 0;
@@ -60,10 +60,10 @@ public:
   virtual const char* get_name() { return m_strName; }
   virtual const char* get_info() = 0;
 
-
+  virtual bool is_used() { return m_isUsed; }
 protected:
-  void* m_pUserData;
   const char* m_strName;
+  bool m_isUsed;
 };
 
 /**

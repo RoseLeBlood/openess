@@ -41,12 +41,12 @@
 /**
 * @brief generic udp backend
 *
-* send first the format (ess_format_t) as string then the data 
+* send first the format (ess_format_t) as string then the data
 */
 class generic_udp_backend : public ess_backend { // TODO: in the future using multicast
 public:
   generic_udp_backend();
-  ~generic_udp_backend() { }
+  ~generic_udp_backend() { close(); }
 
   virtual ess_error_t probe(const ess_format_t format); //
   virtual ess_error_t open(const ess_format_t format) ; //
