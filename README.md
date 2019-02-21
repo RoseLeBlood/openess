@@ -170,7 +170,7 @@ _For more examples and usage, please refer to the [Wiki][wiki]
 
 
 ## Release History
-Found you here: ![changelog][changelog]
+Found you here: [changelog][changelog]
 
 [wiki]: https://github.com/RoseLeBlood/openess/wiki
 [changelog]: https://github.com/RoseLeBlood/openess/blob/master/CHANGELOG.md
