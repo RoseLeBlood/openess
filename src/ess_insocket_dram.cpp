@@ -26,11 +26,6 @@
 #include "ess_insocket_dram.h"
 
 
-# include <iostream>
-# include <string>
-# include <string.h>
-# include <memory>
-
 /**
  * @brief Receives data from peer
  *

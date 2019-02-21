@@ -90,6 +90,12 @@ std::string ess_socket_pro2string(ess_socket_pro proto); // ess_network.cpp
 int ess_socket(ess_socket_fam fam, ess_socket_pro proto, int flags, int options);
 
 /**
+ * @brief set socket options on the underlying socket.
+ *
+ * @return the return value of setsockopt(2).
+ */
+int ess_setsockopt(int socket, int level, int optname, const char* optval, unsigned int optlen);
+/**
  * @brief create the specific platform socket handle and bind it + listen on stream
  *
  *

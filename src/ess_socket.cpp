@@ -80,15 +80,9 @@ ess_error_t ess_socket::destroy(void) {
     m_iSocket = -1;
     return ESS_OK;
 }
-/**
- * @brief Set socket options on the underlying socket.
- *
- * @return The return value of setsockopt(2).
- *
- * Sets socket options using setsockopt(2).
- */
+
 int ess_socket::set_opt(int level, int optname, const char* optval, unsigned int optlen) const {
-    return setsockopt(m_iSocket, level, optname, optval, optlen);
+    return ess_setsockopt(m_iSocket, level, optname, optval, optlen);
 }
 
 

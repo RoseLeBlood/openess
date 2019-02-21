@@ -40,6 +40,11 @@
 # include <sys/ioctl.h>
 # include <netinet/in.h>
 
+# include <iostream>
+# include <string>
+# include <string.h>
+# include <memory>
+
 #include "esp_log.h"
 
 /* ******************************************************************** */
@@ -207,14 +212,14 @@ unsigned int ess_recvfrom(int socket, std::string& dest, int flags) {
   unsigned int bytes;
 
   using std::unique_ptr;
-  std::unique_ptr<char[]> cbuf(new char[buf.size()]);
+  std::unique_ptr<char[]> cbuf(new char[dest.size()]);
 
-  memset(cbuf.get(),0,buf.size());
+  memset(cbuf.get(),0,dest.size());
 
-  bytes = ess_vrecvfrom(socket, cbuf.get(),static_cast<size_t>(buf.size()));
+  bytes = ess_vrecvfrom(socket, cbuf.get(),static_cast<size_t>(dest.size()), flags);
 
-  buf.resize(bytes);
-  buf.assign(cbuf.get(), bytes);
+  dest.resize(bytes);
+  dest.assign(cbuf.get(), bytes);
 
   return bytes;
 }
@@ -243,5 +248,9 @@ unsigned int ess_vsendto(int socket, const void* buf, size_t len, const char* ds
   }
   freeaddrinfo(result);
   return return_value;
+}
+/* ******************************************************************** */
+int ess_setsockopt(int socket, int level, int optname, const char* optval, unsigned int optlen) {
+  return setsockopt(socket, level, optname, optval, optlen);
 }
  #endif
