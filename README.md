@@ -50,10 +50,35 @@ Then create a new project for an [ESP32-based board](http://docs.platformio.org/
 
 ```ini
 ; ...
+; PlatformIO Project Configuration File
+;
+;   Build options: build flags, source filter
+;   Upload options: custom upload port, speed and extra flags
+;   Library options: dependencies, extra library storages
+;   Advanced options: extra scripting
+;
+; Please visit documentation for the other options and examples
+; http://docs.platformio.org/page/projectconf.html
+
+[env:my_build_env]
 platform = espressif32
-board = nodemcu-32s
-framework = esp-idf
-lib_deps = openess
+framework = espidf
+
+lib_deps =
+  # Using a library name
+  OpenESS
+
+  # ... or using library Id
+  6127
+
+  # ... or depend on a specific version
+  OpenESS@0.4.0
+
+  # Semantic Versioning Rules
+  # http://docs.platformio.org/page/userguide/lib/cmd_install.html#description
+  OpenESS@^0.4.0
+  OpenESS@~0.4.0
+  OpenESS@>=0.4.0
 ```
 Finally, create a new source file in the `src/` folder (for example `main.c`) and start coding with openess.
 
