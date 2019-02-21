@@ -188,4 +188,48 @@ unsigned int ess_read(int socket, std::string& str);
  */
 unsigned int ess_cread(int socket, char* str);
 
+/**
+ * @brief Receives data from peer
+ *
+ *
+* @param socket the socket to receive data from
+ * @param buf target memory
+ * @param len the size of the target memory
+ * @param flags flags to be passed to `recvfrom(2)`
+ * @retval >0 n bytes of data were read into `buf`.
+ * @retval 0 peer sent EOF
+ * @retval -1 socket is non-blocking and returned without any data or other error
+ */
+unsigned int ess_vrecvfrom(int socket, void *buf, size_t len, int flags);
+
+
+/**
+ * @brief Receives data from peer
+ *
+ *
+ * @param sock the socket to receive data from
+ * @param dest target string
+ * @param flags flags to be passed to `recvfrom(2)`
+ * @retval >0 n bytes of data were read into `buf`.
+ * @retval 0 peer sent EOF
+ * @retval -1 socket is non-blocking and returned without any data or other error
+ */
+unsigned int ess_recvfrom(int socket, std::string& dest, int flags);
+
+/**
+ * @brief Send data to UDP peer
+ *
+ * @param sock the socket to receive data from
+ * @param buf the data to be sent
+ * @param len the size of the to sending memory
+ * @param dsthost destination host
+ * @param dstport destination port
+ *
+ * @retval -1 Socket is non-blocking and didn't send any data.
+ * @retval >0 n bytes of data were send from `buf` to destination
+ * @retval 0 Peer sent EOF
+ */
+unsigned int ess_vsendto(int socket,const void* buf, size_t len, const char* dsthost, const char* dstport);
+
+
 #endif

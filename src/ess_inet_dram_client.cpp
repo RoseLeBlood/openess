@@ -72,7 +72,7 @@ ess_error_t ess_inet_dram_client::connect(const std::string& dsthost, const std:
 ess_error_t ess_inet_dram_client::disconnect(void) {
   ess_error_t error = ess_socket_disconnect(m_iSocket);
   if(error != ESS_OK) return error;
-  
+
   m_strHost.clear();
   m_strPort.clear();
   m_isConnected = false;

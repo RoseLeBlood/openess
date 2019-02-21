@@ -189,5 +189,59 @@ unsigned int ess_cread(int socket, char* str) {
   return read(socket, str, strlen(str) );
 }
 /* ******************************************************************** */
+unsigned int ess_vrecvfrom(int socket, void *buf, size_t len, int flags) {
+  if ( socket == -1 ) { return -1; }
+  if ( buf == NULL || len == 0) return -1;
 
+  struct sockaddr_storage client;
+
+  memset(buf,0,len);
+  socklen_t stor_addrlen = sizeof(struct sockaddr_storage);
+
+  return recvfrom(socket,buf,len,flags,(struct sockaddr*)&client,&stor_addrlen);
+}
+/* ******************************************************************** */
+unsigned int ess_recvfrom(int socket, std::string& dest, int flags) {
+  if ( socket == -1 ) { return -1; }
+
+  unsigned int bytes;
+
+  using std::unique_ptr;
+  std::unique_ptr<char[]> cbuf(new char[buf.size()]);
+
+  memset(cbuf.get(),0,buf.size());
+
+  bytes = ess_vrecvfrom(socket, cbuf.get(),static_cast<size_t>(buf.size()));
+
+  buf.resize(bytes);
+  buf.assign(cbuf.get(), bytes);
+
+  return bytes;
+}
+/* ******************************************************************** */
+unsigned int ess_vsendto(int socket, const void* buf, size_t len, const char* dsthost, const char* dstport) {
+  struct sockaddr_storage oldsock;
+  struct addrinfo *result, *result_check, hint;
+  socklen_t oldsocklen = sizeof(struct sockaddr_storage);
+  int return_value;
+
+  if ( socket == -1 ) { return -1; }
+
+  if (  getsockname(socket,(struct sockaddr*)&oldsock,(socklen_t*)&oldsocklen) == -1)  return -1;
+  memset(&hint,0,sizeof(struct addrinfo));
+
+  hint.ai_family = oldsock.ss_family;
+  hint.ai_socktype = SOCK_DGRAM;
+
+  if (  getaddrinfo(dsthost, dstport, &hint, &result) != 0 ) return -1;
+
+  for ( result_check = result; result_check != NULL; result_check = result_check->ai_next )  {
+
+    return_value =  sendto(socket, buf, len, 0, result_check->ai_addr, result_check->ai_addrlen);
+
+    if(return_value != -1) break;
+  }
+  freeaddrinfo(result);
+  return return_value;
+}
  #endif
