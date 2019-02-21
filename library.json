@@ -3,6 +3,7 @@
   "keywords": "soundserver, audio,server,ess,sound,socket,esp32",
   "description": "An elegant and efficient Sound Server for embedded systems",
   "homepage": "https://github.com/RoseLeBlood/openess",
+  "license": "LGPL-3.0-or-later",
   "repository": {
     "type": "git",
     "url": "https://github.com/RoseLeBlood/openess.git"
@@ -10,7 +11,8 @@
   "version": "0.4.03",
   "authors": {
     "name": "Anna-Sophia Schröck",
-    "url": "https://padersophia.wordpress.com"
+    "url": "http://roseleblood.github.io/",
+    "maintainer": true
   },
   "frameworks": "espidf",
   "platforms": "*"
