@@ -39,23 +39,19 @@ typedef enum  ess_platform_ringbuffer_mode{
 
 class ess_ringbuffer {
 public:
-  /**
-   * @brief construct the ringbuffer object
-   *
-   * @param [in] length The amount of storage to allocate for the ring buffer.
-   * @param [in] type the mode of the ring buffer.
-   * @param [in] name the name of the ring buffer.
-   */
-  ess_ringbuffer( unsigned int length,  ess_platform_ringbuffer_mode_t type);
+  ess_ringbuffer( );
   virtual ~ess_ringbuffer();
   /**
    * @brief Create a ring buffer.
+   * @param [in] length The amount of storage to allocate for the ring buffer.
+   * @param [in] type the mode of the ring buffer.
+   * @param [in] name the name of the ring buffer.
    * @retval ESS_OK no error
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
    * @retval ESS_ERROR unspec error
    * @retval ESS_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
    */
-  virtual ess_error_t create();
+  virtual ess_error_t create(unsigned int length,  ess_platform_ringbuffer_mode_t type);
 
   /**
    * @brief destroy the ring buffer.

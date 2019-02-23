@@ -44,6 +44,8 @@
 
 #include "esp_log.h"
 
+
+
 ess_i2s_generic_backend::ess_i2s_generic_backend() : ess_backend(ESS_BACKEND_NAME_I2S_ESP32)  {
   m_i2sConfig.mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX);                                // Only TX
   m_i2sConfig.sample_rate = 48000;                                                                                       // Default: 48kHz
@@ -103,14 +105,13 @@ ess_error_t  ess_i2s_generic_backend::pause(    ){
 }
 ess_error_t     ess_i2s_generic_backend::write( const void *buffer, unsigned int buf_size,  unsigned int* wrote  ){
   if(m_bPaused) return ESS_ERROR_PAUSED;
-  i2s_write((i2s_port_t)0, buffer, buf_size, wrote, 100);
+  i2s_write((i2s_port_t)0, buffer, buf_size, wrote, portMAX_DELAY);
 
   return ESS_OK;
 }
 ess_error_t  ess_i2s_generic_backend::read( void *buffer, unsigned int buf_size, unsigned int* readed  ){
   if(m_bPaused) return ESS_ERROR_PAUSED;
 
-//  int  len = uart_read_bytes(UART_NUM_1, buffer, buf_size, 20 / portTICK_RATE_MS);
   return ESS_ERROR;
 }
 

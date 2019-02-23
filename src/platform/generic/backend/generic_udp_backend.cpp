@@ -34,12 +34,12 @@ generic_udp_backend::generic_udp_backend() : ess_backend(ESS_BACKEND_NAME_UDP) {
 }
 ess_error_t generic_udp_backend::probe(const ess_format_t format) {
   switch (format) {
-    case ESS_FORMAT_MONO_96000_8:
-    case ESS_FORMAT_MONO_96000_16:
-    case ESS_FORMAT_MONO_96000_24:
-    case ESS_FORMAT_STEREO_96000_8:
-    case ESS_FORMAT_STEREO_96000_16:
-    case ESS_FORMAT_STEREO_96000_24:
+    case ESS_FORMAT_MONO_44100_FLOAT_32 :
+    case ESS_FORMAT_MONO_48000_FLOAT_32 :
+    case ESS_FORMAT_MONO_96000_FLOAT_32 :
+    case ESS_FORMAT_STEREO_44100_FLOAT_32 :
+    case ESS_FORMAT_STEREO_48000_FLOAT_32 :
+    case ESS_FORMAT_STEREO_96000_FLOAT_32 :
       return ESS_ERROR_WRONG_FORMAT;
     default:
       return ESS_OK;

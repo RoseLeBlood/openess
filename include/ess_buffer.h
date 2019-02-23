@@ -17,61 +17,26 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-
 /**
- * @file backend.h
+ * @file ess_buffer.h
  * @author Anna Sopdia Schröck
- * @date 30 Januar 2019
- * @brief basic backend interface for user and system backends
- *
+ * @date 23 Februar 2019
+ * @brief audio buffer class
  *
  */
- /**
- * @addtogroup backend
- * @{
- */
-#ifndef __ESS_BACKEND_H__
-#define __ESS_BACKEND_H__
+ #ifndef _ESS_AUDIO_BUFFER_H_
+ #define _ESS_AUDIO_BUFFER_H_
 
-#include "ess.h"
-#include "ess_error.h"
-#include "ess_format.h"
+#include "ess_ringbuffer.h"
 
-
-
-
-class ess_backend {
+class ess_buffer : public ess_ringbuffer {
 public:
-  ess_backend() { }
-  ess_backend(const char* name) { m_strName = name; m_isUsed = false; }
-  virtual ~ess_backend() { }
+  ess_buffer() { }
+  ess_buffer(ess_format_t format) : m_eFormat(format) { }
 
-  virtual ess_error_t probe(const ess_format_t format) = 0;
-  virtual ess_error_t open(const ess_format_t format) {m_isUsed = true; m_eFormat = format; return ESS_OK; }
-  virtual ess_error_t close() {m_isUsed = false;  return ESS_OK; }
-  virtual ess_error_t restart(const ess_format_t format) = 0;
-
-  virtual ess_error_t pause() = 0;
-  virtual ess_error_t resume() = 0;
-
-  virtual ess_error_t write(const void *buffer, unsigned int buf_size, unsigned int* wrote) = 0;
-  virtual ess_error_t read(void *buffer, unsigned int buf_size, unsigned int* readed) = 0;
-
-  virtual const char* get_name() { return m_strName; }
-  virtual const char* get_info() = 0;
-
-  virtual bool is_used() { return m_isUsed; }
-
-  virtual int get_blksize() { return ESS_BUF_SIZE * ESS_BUF_COUNT; }
+  ess_format_t get_format() { return m_eFormat; }
 protected:
-  const char* m_strName;
-  bool m_isUsed;
-  ess_format m_eFormat;
+  ess_format_t m_eFormat;
 };
-
-/**
-* @}
-*/
-
 
 #endif

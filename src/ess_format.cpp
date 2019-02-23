@@ -27,6 +27,7 @@
 
 #include "ess_format.h"
 #include <stdio.h>
+#include <stdint.h>
 
 typedef struct _format2human {
   char string[32];
@@ -48,12 +49,12 @@ format2human_t format_parse[] = {
   {   "ESS_FORMAT_STEREO_44100_16", 44100, 16, 2 },
   {  "ESS_FORMAT_STEREO_48000_16", 48000, 16, 2 },
   {  "ESS_FORMAT_STEREO_96000_16", 96000, 16, 2 },
-  {   "ESS_FORMAT_MONO_44100_24", 44100, 24, 1 },
-  {   "ESS_FORMAT_MONO_48000_24", 48000, 24, 1 },
-  {   "ESS_FORMAT_MONO_96000_24", 96000, 24, 1 },
-  {    "ESS_FORMAT_STEREO_44100_24", 44100, 24, 2 },
-  {   "ESS_FORMAT_STEREO_48000_24", 48000, 24, 2 },
-  {    "ESS_FORMAT_STEREO_96000_24", 96000, 24, 2 },
+  {   "ESS_FORMAT_MONO_44100_FLOAT", 44100, 32, 1 },
+  {   "ESS_FORMAT_MONO_48000_FLOAT", 48000, 32, 1 },
+  {   "ESS_FORMAT_MONO_96000_FLOAT", 96000, 32, 1 },
+  {    "ESS_FORMAT_STEREO_44100_FLOAT", 44100, 32, 2 },
+  {   "ESS_FORMAT_STEREO_48000_FLOAT", 48000, 32, 2 },
+  {    "ESS_FORMAT_STEREO_96000_FLOAT", 96000, 32, 2 },
 };
 
 int ess_format_get_channels(const ess_format_t format) {
@@ -70,10 +71,34 @@ int ess_format_get_bits(const ess_format_t format) {
   return format_parse[format].bits;
 }
 
-
-
-
 const char* ess_format_to_string(ess_format_t format) {
   if(format >= ESS_FORMAT_MAX) return "NO_FORMAT";
   return format_parse[format].string;
+}
+int ess_format_get_sample_size(const ess_format_t format) {
+  switch (format) {
+      case ESS_FORMAT_MONO_44100_8:
+      case ESS_FORMAT_MONO_48000_8:
+      case ESS_FORMAT_MONO_96000_8:
+      case ESS_FORMAT_STEREO_44100_8:
+      case ESS_FORMAT_STEREO_48000_8:
+      case ESS_FORMAT_STEREO_96000_8:
+        return sizeof(uint8_t);
+      case ESS_FORMAT_MONO_44100_16 :
+      case ESS_FORMAT_MONO_48000_16 :
+      case ESS_FORMAT_MONO_96000_16 :
+      case ESS_FORMAT_STEREO_44100_16 :
+      case ESS_FORMAT_STEREO_48000_16 :
+      case ESS_FORMAT_STEREO_96000_16 :
+        return sizeof(int16_t);
+      case ESS_FORMAT_MONO_44100_FLOAT_32 :
+      case ESS_FORMAT_MONO_48000_FLOAT_32 :
+      case ESS_FORMAT_MONO_96000_FLOAT_32 :
+      case ESS_FORMAT_STEREO_44100_FLOAT_32 :
+      case ESS_FORMAT_STEREO_48000_FLOAT_32 :
+      case ESS_FORMAT_STEREO_96000_FLOAT_32 :
+        return sizeof(float);
+      default: return -1;
+  }
+  return -1;
 }

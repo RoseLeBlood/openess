@@ -1,5 +1,9 @@
 
 ## Release History
+* 0.4.03
+  - ++ ess_backend::get_blksize
+  - ++ config ESS_BUF_COUNT 4
+  - ++ config ESS_BUF_SIZE      1024
 * 0.4.02
   - add ess_network.h for socket multiplatform layer
   - update example

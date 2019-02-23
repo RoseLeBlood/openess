@@ -41,11 +41,11 @@
 #include "esp_log.h"
 #define LOG_TAG  "OesSpR"
 
-ess_ringbuffer::ess_ringbuffer(unsigned int length,  ess_platform_ringbuffer_mode_t type) {
+ess_ringbuffer::ess_ringbuffer() {
+}
+ess_error_t ess_ringbuffer::create(unsigned int length,  ess_platform_ringbuffer_mode_t type) {
   m_tType = type;
   m_sLength = length;
-}
-ess_error_t ess_ringbuffer::create() {
 
   if(m_tType == ESS_PLATFORM_RINGBUFFER_MODE_NOSPLIT)
     m_pHandle = xRingbufferCreate(m_sLength, RINGBUF_TYPE_NOSPLIT);

@@ -29,6 +29,8 @@
 #define __ESS_CONFIG_H__
 
 
+#define ESS_BUF_COUNT 3
+#define ESS_BUF_SIZE      1024
 
 #define ESS_PROTOCOL_UDP							1
 #define ESS_PROTOCOL_TCP							2
@@ -141,8 +143,8 @@
 	#define  I2S_EXTERNAL_DAC_DIN   -1                                                    //Not used
 
   #define ESS_BACKEND_I2S_FORMAT ESS_FORMAT_STEREO_96000_16
-	#define ESS_BACKEND_I2S_DMA_BUF_SIZE	512
-	#define ESS_BACKEND_I2S_DMA_BUF_COUNT 6
+	#define ESS_BACKEND_I2S_DMA_BUF_SIZE	ESS_BUF_SIZE
+	#define ESS_BACKEND_I2S_DMA_BUF_COUNT ESS_BUF_COUNT
 #endif
 
 #define ESS_BACKEND_NAME_I2S_ESP32 			 "i2s_esp32"

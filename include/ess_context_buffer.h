@@ -17,61 +17,34 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-
 /**
- * @file backend.h
+ * @file ess_context_buffer.h
  * @author Anna Sopdia Schröck
- * @date 30 Januar 2019
- * @brief basic backend interface for user and system backends
+ * @date 23 Februar 2019
  *
  *
  */
  /**
- * @addtogroup backend
+ * @addtogroup context
  * @{
  */
-#ifndef __ESS_BACKEND_H__
-#define __ESS_BACKEND_H__
+#ifndef __ESS_CONTEXT_H__
+#define __ESS_CONTEXT_H__
+#include "ess_buffer.h"
+#include "ess_context.h"
 
-#include "ess.h"
-#include "ess_error.h"
-#include "ess_format.h"
-
-
-
-
-class ess_backend {
+class ess_context_buffer {
 public:
-  ess_backend() { }
-  ess_backend(const char* name) { m_strName = name; m_isUsed = false; }
-  virtual ~ess_backend() { }
+  virtual ess_error_t write(ess_buffer* other); // write
 
-  virtual ess_error_t probe(const ess_format_t format) = 0;
-  virtual ess_error_t open(const ess_format_t format) {m_isUsed = true; m_eFormat = format; return ESS_OK; }
-  virtual ess_error_t close() {m_isUsed = false;  return ESS_OK; }
-  virtual ess_error_t restart(const ess_format_t format) = 0;
-
-  virtual ess_error_t pause() = 0;
-  virtual ess_error_t resume() = 0;
-
-  virtual ess_error_t write(const void *buffer, unsigned int buf_size, unsigned int* wrote) = 0;
-  virtual ess_error_t read(void *buffer, unsigned int buf_size, unsigned int* readed) = 0;
-
-  virtual const char* get_name() { return m_strName; }
-  virtual const char* get_info() = 0;
-
-  virtual bool is_used() { return m_isUsed; }
-
-  virtual int get_blksize() { return ESS_BUF_SIZE * ESS_BUF_COUNT; }
+  virtual void update(); // write data from buffer to context
 protected:
-  const char* m_strName;
-  bool m_isUsed;
-  ess_format m_eFormat;
+  ess_buffer m_buffer;
+  ess_context *m_pContext;
 };
 
 /**
 * @}
 */
-
 
 #endif

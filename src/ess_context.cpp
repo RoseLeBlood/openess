@@ -32,6 +32,7 @@
 #include <stdio.h>
 #include <esp_log.h>
 #include "config.h"
+#include "ess_buffer.h"
 
 #define LOG_TAG "EssC"
 

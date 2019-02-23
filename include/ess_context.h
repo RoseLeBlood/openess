@@ -40,6 +40,7 @@
 #include "ess_backend.h"
 #include "ess_context_backend.h"
 
+
 /**
  * @brief Audio context stats
  */
@@ -51,6 +52,8 @@ enum  ess_context_status_t {
   ESS_CONTEXT_STATUS_RESTART,	/**< context restart */
   ESS_CONTEXT_STATUS_CLOSE,	/**< audio backend in the context is closed */
 } ;
+
+
 
 /**
  * @brief ess context
@@ -133,6 +136,7 @@ protected:
   ess_format_t m_eFormat;
   ess_context_status_t m_eStatus;
   ess_error_t last_error;
+
 };
 
 /**
