@@ -52,14 +52,14 @@ ess_inet_dram_client::ess_inet_dram_client(ess_socket_fam fam, int flags, bool l
  * @param dsthost destination host
  * @param dstport destination port
  */
-ess_error_t ess_inet_dram_client::connect(const std::string& dsthost, const std::string& dstport) {
+ess_error_t ess_inet_dram_client::connect(const std::string& dsthost, const int port) {
   if(m_iSocket < 0) return ESS_ERROR_NOT_CREATED;
 
-  ess_error_t error = ess_socket_connect_dram(m_iSocket, dsthost, dstport);
+  ess_error_t error = ess_socket_connect_dram(m_iSocket, dsthost, port);
   if(error != ESS_OK) return error;
 
   m_strHost = dsthost;
-  m_strPort = dstport;
+  m_iPort = port;
   m_isConnected = true;
 
   return ESS_OK;
@@ -74,7 +74,6 @@ ess_error_t ess_inet_dram_client::disconnect(void) {
   if(error != ESS_OK) return error;
 
   m_strHost.clear();
-  m_strPort.clear();
   m_isConnected = false;
 
   return ESS_OK;

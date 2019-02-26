@@ -65,7 +65,7 @@ unsigned int ess_insocket_dram::recvfrom(std::string& buf) {
  * @retval >0 n bytes of data were send from `buf` to destination
  * @retval 0 Peer sent EOF
  */
-unsigned int ess_insocket_dram::sendto(const void* buf, size_t len, const char* dsthost, const char* dstport) {
+unsigned int ess_insocket_dram::sendto(const void* buf, size_t len, const char* dsthost, const int dstport) {
   return ess_vsendto(m_iSocket, buf, len, dsthost, dstport);
 }
 /**
@@ -79,6 +79,6 @@ unsigned int ess_insocket_dram::sendto(const void* buf, size_t len, const char* 
  * @retval >0 n bytes of data were send from `buf` to destination
  * @retval 0 Peer sent EOF
  */
-unsigned int ess_insocket_dram::sendto(const std::string& buf, const std::string& dsthost, const std::string& dstport) {
-  return  ess_vsendto(m_iSocket, buf.c_str(), buf.size(), dsthost.c_str(), dstport.c_str());
+unsigned int ess_insocket_dram::sendto(const std::string& buf, const std::string& dsthost, const int dstport) {
+  return  ess_vsendto(m_iSocket, buf.c_str(), buf.size(), dsthost.c_str(), dstport);
 }

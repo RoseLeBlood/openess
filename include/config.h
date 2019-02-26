@@ -47,7 +47,7 @@
 #define ESS_PLATFORM_LINUX   			0/** @brief If defined compiled backend for generic linux (openal) */
 #define ESS_PLATFORM_WINDOWS  0/** @brief If defined compiled backend for  generic windows (openal, wasapi) */
 
-#define ESS_DEFAULT_SERVER_PORT "8686"
+#define ESS_DEFAULT_SERVER_PORT 8686
 #define ESS_DEFAULT_SERVER_PROTOCOL ESS_PROTOCOL_UDP_LITE
 #define ESS_DEFAULT_SERVER_FAMILY ESS_FAMILY_IP4
 #define ESS_DEFAULT_SERVER_FORMAT ESS_FORMAT_STEREO_44100_16
@@ -126,7 +126,7 @@
 
 
 #ifdef ESS_ENABLE_BACKEND_UDP
-	#define ESS_BACKEND_UDP_SENDTO_PORT "17000"
+	#define ESS_BACKEND_UDP_SENDTO_PORT 17000
 	#define ESS_BACKEND_UDP_PROTOCOL ESS_PROTOCOL_UDP_LITE
 
 	#if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4

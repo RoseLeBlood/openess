@@ -56,6 +56,7 @@ typedef enum ess_error {
 
     ESS_ERROR_TASK_CREAT, /**< can't create task mutex */
     ESS_ERROR_TASK_RUNNING, /**< task already running */
+    ESS_ERROR_ALREADY_CREATED, /**< task or socet are already created*/
     ESS_ERROR_MAX,
 }ess_error_t;
 

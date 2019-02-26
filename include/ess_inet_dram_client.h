@@ -45,7 +45,7 @@ public:
   ess_inet_dram_client(ess_socket_fam fam, int flags) : ess_inet_dram_client(fam, flags, false) { }
   ess_inet_dram_client(ess_socket_fam fam, int flags, bool lite); //
 
-  ess_error_t connect(const std::string& dsthost, const std::string& dstport); //
+  ess_error_t connect(const std::string& dsthost, const int port); //
   ess_error_t disconnect(void); //
 
   unsigned int write(const void* buf, unsigned int len, int flags=0);

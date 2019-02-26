@@ -112,7 +112,22 @@ int ess_setsockopt(int socket, int level, int optname, const char* optval, unsig
  * @retval ESS_OK no error
  */
 ess_error_t ess_socket_server_create(ess_socket_fam fam, ess_socket_pro proto,
-  const std::string& host, const std::string& port, int flags, int options, int* handle);
+  const std::string& host, const int port, int flags, int options, int* handle);
+
+  /**
+   * @brief Accept a connection attempt on a server socket.
+   *
+   * This function accepts an incoming connection on a server socket.
+   *
+   * @param socket the server socket
+   * @param host  where the client's address is copied to
+   * @param port which the client's port is stored
+   *
+   * @retval >0 A socket file descriptor which can be used to talk to the client
+   * @retval <0 Error.
+   */
+int ess_accept_stream_socket(int server_socket, char* src_host, unsigned int src_host_len, int* port, int flags) ;
+
 /**
 * @brief Connect datagram socket.
 *
@@ -124,7 +139,7 @@ ess_error_t ess_socket_server_create(ess_socket_fam fam, ess_socket_pro proto,
 * @param dstport port ot the peer
  * @retval ESS_ERROR_NOT_CREATED socket
  */
-ess_error_t ess_socket_connect_dram(int socket, const std::string& dsthost, const std::string& dstport);
+ess_error_t ess_socket_connect_dram(int socket, const std::string& dsthost, const int port);
 /**
  * @brief Break association to host. Does not close the socket. - not available on freeBSD
  * @param socket the socket file desc
@@ -235,7 +250,7 @@ unsigned int ess_recvfrom(int socket, std::string& dest, int flags);
  * @retval >0 n bytes of data were send from `buf` to destination
  * @retval 0 Peer sent EOF
  */
-unsigned int ess_vsendto(int socket,const void* buf, size_t len, const char* dsthost, const char* dstport);
+unsigned int ess_vsendto(int socket,const void* buf, size_t len, const char* dsthost, const int dstport);
 
 
 #endif

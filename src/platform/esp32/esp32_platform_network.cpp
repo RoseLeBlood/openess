@@ -39,14 +39,22 @@
 # include <errno.h>
 # include <sys/ioctl.h>
 # include <netinet/in.h>
+#include <netdb.h>
 
 # include <iostream>
 # include <string>
 # include <string.h>
 # include <memory>
+#include <sstream>
 
 #include "esp_log.h"
 
+
+inline const char* port_tostring(int a) {
+  std::ostringstream temp;
+    temp<<a;
+    return temp.str().c_str();
+}
 /* ******************************************************************** */
 int ess_socket(ess_socket_fam fam, ess_socket_pro proto, int flags, int options) {
   if(proto == ESS_SOCKET_PROTO_DRAM_LITE ) {
@@ -61,7 +69,7 @@ int ess_socket(ess_socket_fam fam, ess_socket_pro proto, int flags, int options)
 }
 /* ******************************************************************** */
 ess_error_t ess_socket_server_create(ess_socket_fam fam, ess_socket_pro proto,
-  const std::string& host, const std::string& port, int flags, int options, int* handle) {
+  const std::string& host, const int port, int flags, int options, int* handle) {
 
   int _socket, retval;
   struct addrinfo *result, *result_check, hints;
@@ -74,7 +82,7 @@ ess_error_t ess_socket_server_create(ess_socket_fam fam, ess_socket_pro proto,
 
 
 
-  if ( getaddrinfo( host.c_str(), port.c_str(), &hints, &result )  !=0  ) {
+  if ( getaddrinfo( host.c_str(), port_tostring(port), &hints, &result )  !=0  ) {
     return ESS_ERROR_GETADDR;
   }
 
@@ -101,15 +109,56 @@ ess_error_t ess_socket_server_create(ess_socket_fam fam, ess_socket_pro proto,
   if(handle != 0) *handle = _socket;
   freeaddrinfo(result);
 
-  ESP_LOGI("ESSS", "server creating (%s %s on %s:%s) socket: %d",  ess_socket_pro2string(proto).c_str(),
+  ESP_LOGI("ESSS", "server creating (%s %s on %s:%d) socket: %d",  ess_socket_pro2string(proto).c_str(),
     ess_socket_fam2string(fam).c_str(),
-    host.c_str(), port.c_str(), _socket
+    host.c_str(), port, _socket
   );
 
   return ESS_OK;
 }
 /* ******************************************************************** */
-ess_error_t ess_socket_connect_dram(int socket, const std::string& dsthost, const std::string& dstport) {
+
+int ess_accept_stream_socket(int server_socket, char* src_host, unsigned int src_host_len, int* port, int flags) {
+
+  if(server_socket < 0) return -1;
+
+  struct sockaddr_storage client_info;
+  int client_sfd;
+  struct sockaddr_storage oldsockaddr;
+  socklen_t oldsockaddrlen = sizeof(struct sockaddr_storage);
+  void* addrptr;
+
+
+  socklen_t addrlen = sizeof(struct sockaddr_storage);
+  client_sfd = accept(server_socket, (struct sockaddr*)&client_info,&addrlen);
+
+  if(client_sfd == -1) return -1;
+
+  if ( src_host_len > 0)   {
+    if (  getsockname(server_socket,(struct sockaddr*)&oldsockaddr,&oldsockaddrlen) == -1) return -1;
+  	if ( oldsockaddrlen > sizeof(struct sockaddr_storage) )   return -1;
+
+    if ( oldsockaddr.ss_family == AF_INET ) {
+  	    addrptr = &(((struct sockaddr_in*)&client_info)->sin_addr);
+  	    if(port) *port  = ntohs(((struct sockaddr_in*)&client_info)->sin_port);
+
+        inet_ntop(AF_INET, &((in_addr*)addrptr)->s_addr , src_host, src_host_len);
+
+  	} else if ( oldsockaddr.ss_family == AF_INET6 ) {
+  	    addrptr = &(((struct sockaddr_in6*)&client_info)->sin6_addr);
+  	    if(port) *port = ntohs(((struct sockaddr_in6*)&client_info)->sin6_port);
+
+      //inet_ntop(AF_INET6, &((in_addr6*)addrptr)->s_addr , src_host, src_host_len);
+  	}
+  }
+
+  return client_sfd;
+}
+
+
+/* ******************************************************************** */
+
+ess_error_t ess_socket_connect_dram(int socket, const std::string& dsthost, const int dstport) {
   if(socket < 0) return ESS_ERROR_NOT_CREATED;
 
   struct addrinfo *result, *result_check, hint;
@@ -127,7 +176,7 @@ ess_error_t ess_socket_connect_dram(int socket, const std::string& dsthost, cons
   hint.ai_family = ((struct sockaddr_in*)&oldsockaddr)->sin_family; // AF_INET or AF_INET6 - offset is same at sockaddr_in and sockaddr_in6
   hint.ai_socktype = SOCK_DGRAM;
 
-  if (  getaddrinfo(dsthost.c_str(), dstport.c_str(), &hint, &result) != 0)
+  if (  getaddrinfo(dsthost.c_str(), port_tostring(dstport), &hint, &result) != 0)
     return ESS_ERROR_GETADDR;
 
   for ( result_check = result; result_check != NULL; result_check = result_check->ai_next ) {
@@ -224,7 +273,7 @@ unsigned int ess_recvfrom(int socket, std::string& dest, int flags) {
   return bytes;
 }
 /* ******************************************************************** */
-unsigned int ess_vsendto(int socket, const void* buf, size_t len, const char* dsthost, const char* dstport) {
+unsigned int ess_vsendto(int socket, const void* buf, size_t len, const char* dsthost, const int dstport) {
   struct sockaddr_storage oldsock;
   struct addrinfo *result, *result_check, hint;
   socklen_t oldsocklen = sizeof(struct sockaddr_storage);
@@ -238,7 +287,7 @@ unsigned int ess_vsendto(int socket, const void* buf, size_t len, const char* ds
   hint.ai_family = oldsock.ss_family;
   hint.ai_socktype = SOCK_DGRAM;
 
-  if (  getaddrinfo(dsthost, dstport, &hint, &result) != 0 ) return -1;
+  if (  getaddrinfo(dsthost, port_tostring(dstport), &hint, &result) != 0 ) return -1;
 
   for ( result_check = result; result_check != NULL; result_check = result_check->ai_next )  {
 

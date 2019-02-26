@@ -44,11 +44,11 @@
  * @param ess_socket_fam `ESS_SOCKET_FAMILY_IP4` or `ESS_SOCKET_FAMILY_IP6` or `ESS_SOCKET_FAMILY_BOTH`
  * @param lite if true then create a dram lite socket
  */
-ess_inet_dram_server::ess_inet_dram_server(std::string host, std::string port, ess_socket_fam fam, bool lite)
+ess_inet_dram_server::ess_inet_dram_server(const std::string& host,const int port, ess_socket_fam fam, bool lite)
   : ess_insocket_dram(fam, lite ? ESS_SOCKET_PROTO_DRAM_LITE : ESS_SOCKET_PROTO_DRAM) {
 
     m_strHost = host;
-    m_strPort = port;
+    m_iPort = port;
 }
 /**
  * @brief bind the datagram socket
@@ -57,7 +57,7 @@ ess_inet_dram_server::ess_inet_dram_server(std::string host, std::string port, e
  */
 ess_error_t ess_inet_dram_server::bind(int flags) {
   return  ess_socket_server_create(get_family() , get_proto(),
-    m_strHost, m_strPort, flags, 0, &m_iSocket);
+    m_strHost, m_iPort, flags, 0, &m_iSocket);
   //return m_iSocket;
 }
 /**
@@ -66,7 +66,7 @@ ess_error_t ess_inet_dram_server::bind(int flags) {
  * @param host Bind address (Wildcard: "0.0.0.0")
  * @param port Bind port
  */
-ess_inet_dram_server_ip4::ess_inet_dram_server_ip4(std::string host, std::string port)
+ess_inet_dram_server_ip4::ess_inet_dram_server_ip4(const std::string& host,const int port)
   : ess_inet_dram_server(host, port, ESS_SOCKET_FAMILY_IP4, false) { }
   /**
    * @brief Create datagram lite (udplite)  IP4 socket
@@ -74,7 +74,7 @@ ess_inet_dram_server_ip4::ess_inet_dram_server_ip4(std::string host, std::string
    * @param host Bind address (Wildcard: "0.0.0.0")
    * @param port Bind port
    */
-  ess_inet_dramlite_server_ip4::ess_inet_dramlite_server_ip4(std::string host, std::string port)
+  ess_inet_dramlite_server_ip4::ess_inet_dramlite_server_ip4(const std::string& host,const int port)
     : ess_inet_dram_server(host, port, ESS_SOCKET_FAMILY_IP4, true) { }
 
 
@@ -85,7 +85,7 @@ ess_inet_dram_server_ip4::ess_inet_dram_server_ip4(std::string host, std::string
  * @param host Bind address (Wildcard: "::")
  * @param port Bind port
  */
-ess_inet_dram_server_ip6::ess_inet_dram_server_ip6(std::string host, std::string port)
+ess_inet_dram_server_ip6::ess_inet_dram_server_ip6(const std::string& host,const int port)
   : ess_inet_dram_server(host, port, ESS_SOCKET_FAMILY_IP6, false) { }
   /**
    * @brief Create datagram lite (udplite)  IP6 socket
@@ -93,5 +93,5 @@ ess_inet_dram_server_ip6::ess_inet_dram_server_ip6(std::string host, std::string
    * @param host Bind address (Wildcard: "::")
    * @param port Bind port
    */
-  ess_inet_dramlite_server_ip6::ess_inet_dramlite_server_ip6(std::string host, std::string port)
+  ess_inet_dramlite_server_ip6::ess_inet_dramlite_server_ip6(const std::string& host,const int port)
     : ess_inet_dram_server(host, port, ESS_SOCKET_FAMILY_IP6, true) { }

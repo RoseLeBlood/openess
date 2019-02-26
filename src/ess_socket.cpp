@@ -89,5 +89,5 @@ int ess_socket::set_opt(int level, int optname, const char* optval, unsigned int
 ess_insocket::ess_insocket(ess_socket_fam fam, ess_socket_pro proto)
   : ess_socket(fam, proto) {
     m_strHost = "";
-    m_strPort = "";
+    m_iPort = -1;
 }

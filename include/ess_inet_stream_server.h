@@ -18,35 +18,32 @@
  ****************************************************************************/
 
 /**
- * @file ess_insocket_dram.h
+ * @file ess_inet_stream_server.h
  * @author Anna Sopdia Schröck
- * @date 18 Februar 2019
- *
+ * @date 26 Februar 2019
+ * @brief Contains the ess_insocket_stream class (TCP internet socket)
  */
 
-#ifndef _ESS_SOCKET_INET_DGRAM_H_
-#define _ESS_SOCKET_INET_DGRAM_H_
+#ifndef _ESS_SOCKET_INET_STREAM_SERVER_H_
+#define _ESS_SOCKET_INET_STREAM_SERVER_H_
 
 #include "ess_socket.h"
-
+# include <memory>
 /**
 * @addtogroup socket
 * @{
 */
-class ess_insocket_dram : public ess_insocket {
+class ess_inet_stream_server : public ess_insocket {
 public:
-  ess_insocket_dram() : ess_insocket(ESS_SOCKET_FAMILY_IP4, ESS_SOCKET_PROTO_DRAM) { }
-  ess_insocket_dram(ess_socket_fam fam) : ess_insocket(fam, ESS_SOCKET_PROTO_DRAM) { }
+	    ess_inet_stream_server(ess_socket_fam fam);
 
+	    ess_error_t listen(const std::string& bindhost, const int bindport, int flags=0);
 
-  virtual unsigned int sendto(const void* buf, unsigned int len, const char* dsthost, const int dstport); //
-  virtual unsigned int sendto(const std::string& buf, const std::string& dsthost, const int dstport); //
+	    ess_insocket* accept(int flags=0);
+			std::unique_ptr<ess_insocket> accept_ex(int flags=0);
 
-  virtual unsigned int recvfrom(void* buf, unsigned int len); //
-  virtual unsigned int recvfrom(std::string& buf); //
-
-protected:
-  ess_insocket_dram(ess_socket_fam fam, ess_socket_pro proto) : ess_insocket(fam, proto) { }
+	    const std::string& get_bind_host(void) { return m_strHost;}
+	    const int get_bind_port(void) { return m_iPort;}
 };
 
 

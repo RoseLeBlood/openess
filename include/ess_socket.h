@@ -35,6 +35,7 @@
  * @brief socket is the base class of every other ess_socket object.
  */
 class ess_socket {
+  friend class ess_inet_stream_server;
 public:
   ess_socket()  { }
   ess_socket(ess_socket_pro proto) : ess_socket(ESS_SOCKET_FAMILY_IP4, proto) { }
@@ -66,18 +67,19 @@ protected:
  */
 
 class ess_insocket : public ess_socket {
+  friend class ess_inet_stream_server;
 public:
   ess_insocket() : ess_insocket(ESS_SOCKET_FAMILY_IP4, ESS_SOCKET_PROTO_DRAM) { }
   ess_insocket(ess_socket_pro proto) : ess_insocket(ESS_SOCKET_FAMILY_IP4, proto) { }
   ess_insocket(ess_socket_fam fam, ess_socket_pro proto);
 
   const std::string& get_host(void) const { return m_strHost; }
-  const std::string& get_port(void) const { return m_strPort; }
+  int get_port(void)  { return m_iPort;  }
 protected:
   /// The address we're bound or connected to
   std::string m_strHost;
   /// The port we're bound or connected to
-  std::string m_strPort;
+ int m_iPort;
 };
 
 /**
