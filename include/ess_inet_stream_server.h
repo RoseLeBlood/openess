@@ -46,7 +46,15 @@ public:
 	    const int get_bind_port(void) { return m_iPort;}
 };
 
+class ess_inet_stream_server_ip4 : public ess_inet_stream_server {
+public:
+	ess_inet_stream_server_ip4() : ess_inet_stream_server(ESS_SOCKET_FAMILY_IP4) { }
+};
 
+class ess_inet_stream_server_ip6 : public ess_inet_stream_server {
+public:
+	ess_inet_stream_server_ip6() : ess_inet_stream_server(ESS_SOCKET_FAMILY_IP6) { }
+};
 /**
 * @}
 */

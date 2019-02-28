@@ -51,12 +51,19 @@ typedef enum ess_protocol {
     OPENESS_PROTOCOL_GET_LATENCY,      /**<retrieve latency between write()'s and output */
 
 
-    OPENESS_PROTOCAL_CONTROLL_STOP,   /**< controll client stopped the audio backend - (req: `ESS_CLIENT_TYPE_CONTROLL`)*/
-    OPENESS_PROTOCAL_CONTROLL_START,   /**< controll client start the audio backend -(req: `ESS_CLIENT_TYPE_CONTROLL`)*/
-    OPENESS_PROTOCAL_CONTROLL_PAUSE,   /**< controll client paused the audio backend -(req: `ESS_CLIENT_TYPE_CONTROLL`) */
-    OPENESS_PROTOCAL_CONTROLL_RESTART,   /**< controll client restart the audio backend -(req: `ESS_CLIENT_TYPE_CONTROLL`)*/
-    OPENESS_PROTOCAL_CONTROLL_REMOVE,   /**< controll client remove a client -(req: `ESS_CLIENT_TYPE_CONTROLL`)t*/
-    OPENESS_PROTOCAL_CONTROLL_SET_FORMAT,   /**< controll client set a other server band format -(req: `ESS_CLIENT_TYPE_CONTROLL`)*/
+    OPENESS_PROTOCAL_CONTROLL_STOP,   /**< controll client stopped the audio backend */
+    OPENESS_PROTOCAL_CONTROLL_START,   /**< controll client start the audio backend */
+    OPENESS_PROTOCAL_CONTROLL_PAUSE,   /**< controll client paused the audio backend  */
+    OPENESS_PROTOCAL_CONTROLL_RESTART,   /**< controll client restart the audio backend */
+    OPENESS_PROTOCAL_CONTROLL_REMOVE,   /**< controll client remove a client t*/
+    OPENESS_PROTOCAL_CONTROLL_SET_FORMAT,   /**< controll client set a other server band format */
+    OPENESS_PROTOCAL_CONTROLL_SET_VOLUME,   /**< controll client set the mixer volume */
+    OPENESS_PROTOCAL_CONTROLL_ADD, /** < add a remote file to OpenESS -  */
+
+    OPENESS_PROTOCAL_CONTROLL_GET_VERSION,/** < csi client get OpenESS versioen*/
+    OPENESS_PROTOCAL_CONTROLL_GET_MIXER,/** < csi client get Mixer info*/
+    OPENESS_PROTOCAL_CONTROLL_GET_BACKEND,/** < csi client get backend info*/
+    OPENESS_PROTOCAL_CONTROLL_GET_PLATFORM,/** < csi client get platform info*/
 
     OPENESS_PROTOCOL_MAX           /**<for bounds checking */
 }ess_protocol_t;

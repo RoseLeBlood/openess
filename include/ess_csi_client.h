@@ -18,43 +18,36 @@
  ****************************************************************************/
 
 /**
- * @file ess.h
+ * @file ess_csi_client.h
  * @author Anna Sopdia Schröck
- * @date 2 Februar 2019
- * @brief the basic OpenESS header file
+ * @date 28 Februar 2019
+ * @brief OpenESS CSI - Command Socket Interface client
+ *
+ * socket interface - controll from a remote socket (client)
  */
-#ifndef _ESS_MAIN_HEADER_H_
-#define _ESS_MAIN_HEADER_H_
+ #ifndef _ESS_SOCKET_SERVER_CSI_H_
+ #define _ESS_SOCKET_SERVER_CSI_H_
 
-#define OPEN_ESS_VERSION_0_5  5 // backends, platform, context
-#define OPEN_ESS_VERSION_1_0 10 // TODO: Future Plan - server, backends, platforms referen imp ready
-#define OPEN_ESS_VERSION_1_1 11  // TODO: Future Plan 11 - all platforms ready  -- MT Safe
-#define OPEN_ESS_VERSION_2_0  20 // TODO: Future Future Plan 2 - ??
+#include "ess_task.h"
 
-#define OPEN_ESS_VERSION 4 //OPEN_ESS_VERSION_0_5
+ /**
+ * @addtogroup frontend
+ * @{
+ */
 
-#include "config.h"
+class ess_csi_client : public ess_insocket {
+public:
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <errno.h>
-#include <time.h>
-#include <sys/time.h>
-#include <sys/signal.h>
+  ess_error_t cheak_password(std::string password) { return ESS_OK; }
+  ess_error_t start_task(ess_csi_server* server) { m_pServer = server; return ESS_OK; }
 
-#include <iostream>
+  ess_error_t server_send_stop() { return ESS_OK; } 
+private:
+  ess_csi_server* m_pServer;
+  ess_csi_client_task* m_pTask;
+};
 
-#include "ess_format.h"
-#include "ess_error.h"
-#include "ess_protocol.h"
-#include "ess_platform.h"
-
-
-
-
-
-
-
-
-#endif
+  /**
+  * @}
+  */
+  #endif

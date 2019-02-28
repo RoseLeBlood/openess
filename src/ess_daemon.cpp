@@ -18,43 +18,32 @@
  ****************************************************************************/
 
 /**
- * @file ess.h
+ * @file ess_daemon.cpp
  * @author Anna Sopdia Schröck
- * @date 2 Februar 2019
- * @brief the basic OpenESS header file
+ * @date 28 Februar 2019
+ * @brief OpenESS daemon
+ *
+ * the main running class - I/O for openess (singleton)
  */
-#ifndef _ESS_MAIN_HEADER_H_
-#define _ESS_MAIN_HEADER_H_
 
-#define OPEN_ESS_VERSION_0_5  5 // backends, platform, context
-#define OPEN_ESS_VERSION_1_0 10 // TODO: Future Plan - server, backends, platforms referen imp ready
-#define OPEN_ESS_VERSION_1_1 11  // TODO: Future Plan 11 - all platforms ready  -- MT Safe
-#define OPEN_ESS_VERSION_2_0  20 // TODO: Future Future Plan 2 - ??
-
-#define OPEN_ESS_VERSION 4 //OPEN_ESS_VERSION_0_5
-
-#include "config.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <errno.h>
-#include <time.h>
-#include <sys/time.h>
-#include <sys/signal.h>
-
-#include <iostream>
-
-#include "ess_format.h"
-#include "ess_error.h"
-#include "ess_protocol.h"
-#include "ess_platform.h"
+#include "ess_daemon.h"
 
 
+ess_daemon* ess_daemon::m_pInstance = 0;
 
+ess_error_t ess_daemon::setup(const std::string& backend_name) {
+  m_pServer = new ess_dram_server(ESS_DEFAULT_SERVER_NAME,
+    ESS_DEFAULT_SERVER_FORMAT);
 
+  printf("start backend and server at  .....");
+  ess_error_t error = m_pServer->create(backend_name);
+  ESS_ERROR(error) ;
+  printf("OK\n");
 
+  printf("start csi .....");
+  error = m_CsiServer.setup(ESS_CONFIG_CSI_DEFAULT_PORT);
+  ESS_ERROR(error) ;
+  printf("OK\n");
 
-
-
-#endif
+  return ESS_OK;
+}

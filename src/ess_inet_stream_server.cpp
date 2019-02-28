@@ -57,6 +57,8 @@ ess_error_t ess_inet_stream_server::listen(const std::string& bindhost, const in
   return  ess_socket_server_create(get_family() , get_proto(),
     m_strHost, m_iPort, flags, 0, &m_iSocket);
 }
+
+
 ess_insocket* ess_inet_stream_server::accept(int flags) {
   int client_sfd;
   int port;
@@ -69,7 +71,7 @@ ess_insocket* ess_inet_stream_server::accept(int flags) {
  client_sfd = ess_accept_stream_socket(m_iSocket, src_host.get(), 1023, &port, flags);
  if(client_sfd == -1) {
    if(errno != EWOULDBLOCK ){
-
+     //ESP_LOGE("ESST", "EWOULDBLOCK");
    }
    delete client;
    return nullptr;

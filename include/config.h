@@ -59,6 +59,18 @@
 #define ESS_DEFAULT_SERVER_HOST "::"
 #endif
 
+
+#define ESS_CONFIG_CSI_DEFAULT_PORT 8989
+#define ESS_CONFIG_CSI_MAX_CONNECTIONS 4
+#define ESS_CONFIG_CSI_FAMILY ESS_FAMILY_IP4
+#define ESS_CONFIG_CSI_PASSWORD "PLEASEchangeME"
+
+#if ESS_CONFIG_CSI_FAMILY == ESS_FAMILY_IP4
+#define ESS_DEFAULT_CSI_HOST "0.0.0.0"
+#else
+#define ESS_DEFAULT_CSI_HOST "::"
+#endif
+
 #if  ESS_PLATFORM_ESP32 == 1
 	#define ESS_CONFIG_NETWORK_ESP32 /**< esp32 using own network functions */
 	#define ESS_CONFIC_TASK_ESP32	/**< esp32 using own task functions */
