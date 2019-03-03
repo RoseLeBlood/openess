@@ -29,28 +29,8 @@
 #ifndef _ESS_PROTOCOL_H_
 #define _ESS_PROTOCOL_H_
 
-typedef enum  ess_client_type {
-  ESS_CLIENT_TYPE_INPUT,            /**< client send data to server - normal modus*/
-  ESS_CLIENT_TYPE_MONITOR,      /**< client send no audio data to server - client get only status updates*/
-  ESS_CLIENT_TYPE_CONTROLL,   /**< client can controll the server*/
-}ess_client_type_t;
-
+// used  in ess_daemon
 typedef enum ess_protocol {
-    OPENESS_PROTOCOL_CLIENT_CONNECT,      /**< client connect*/
-    OPENESS_PROTOCOL_CLIENT_START,   /**< client send data to server */
-    OPENESS_PROTOCOL_CLIENT_STOP, /**< client stop send data to server */
-    OPENESS_PROTOCOL_CLIENT_SET_TYPE, /**< set the client type (`ess_client_type_t`) */
-    OPENESS_PROTOCOL_CLIENT_GET_TYPE, /**< get the client type (`ess_client_type_t`) */
-    OPENESS_PROTOCOL_CLIENT_GET_ID,  /**< get client id */
-    OPENESS_PROTOCOL_CLIENT_GET_NAME,   /**< get client name */
-    OPENESS_PROTOCOL_CLIENT_SET_NAME,   /**< set client name */
-    OPENESS_PROTOCOL_CLIENT_GET_FORMAT, /**< get server format */
-    OPENESS_PROTOCOL_CLIENT_DISCONNECT,  /**< client send disconnect */
-    OPENESS_PROTOCOL_CLIENT_GET_SERVER_INFO,  /**<get server info (ver, sample rate, format) */
-
-    OPENESS_PROTOCOL_GET_LATENCY,      /**<retrieve latency between write()'s and output */
-
-
     OPENESS_PROTOCAL_CONTROLL_STOP,   /**< controll client stopped the audio backend */
     OPENESS_PROTOCAL_CONTROLL_START,   /**< controll client start the audio backend */
     OPENESS_PROTOCAL_CONTROLL_PAUSE,   /**< controll client paused the audio backend  */
@@ -58,12 +38,19 @@ typedef enum ess_protocol {
     OPENESS_PROTOCAL_CONTROLL_REMOVE,   /**< controll client remove a client t*/
     OPENESS_PROTOCAL_CONTROLL_SET_FORMAT,   /**< controll client set a other server band format */
     OPENESS_PROTOCAL_CONTROLL_SET_VOLUME,   /**< controll client set the mixer volume */
-    OPENESS_PROTOCAL_CONTROLL_ADD, /** < add a remote file to OpenESS -  */
 
     OPENESS_PROTOCAL_CONTROLL_GET_VERSION,/** < csi client get OpenESS versioen*/
     OPENESS_PROTOCAL_CONTROLL_GET_MIXER,/** < csi client get Mixer info*/
     OPENESS_PROTOCAL_CONTROLL_GET_BACKEND,/** < csi client get backend info*/
     OPENESS_PROTOCAL_CONTROLL_GET_PLATFORM,/** < csi client get platform info*/
+
+
+//------------------------------------------------------------------------------- NOT INC
+    OPENESS_PROTOCAL_CONTROLL_GET_FORMAT,
+    OPENESS_PROTOCOL_CONTROLL_GET_ID,  /**< get client id */
+    OPENESS_PROTOCOL_CONTROLL_GET_NAME,   /**< get client name */
+    OPENESS_PROTOCOL_CONTROLL_SET_NAME,   /**< set client name */
+    OPENESS_PROTOCOL_GET_LATENCY,      /**<retrieve latency between write()'s and output */
 
     OPENESS_PROTOCOL_MAX           /**<for bounds checking */
 }ess_protocol_t;

@@ -1,3 +1,4 @@
+
 /****************************************************************************
  * Copyright (C) 2019 by Anna Sopdia Schröck                                *
  *                                                                          *
@@ -17,37 +18,19 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-/**
- * @file ess_csi_client.h
- * @author Anna Sopdia Schröck
- * @date 28 Februar 2019
- * @brief OpenESS CSI - Command Socket Interface client
- *
- * socket interface - controll from a remote socket (client)
- */
- #ifndef _ESS_SOCKET_SERVER_CSI_H_
- #define _ESS_SOCKET_SERVER_CSI_H_
+#include "ess_audio_conections.h"
+#include <stdio.h>
 
-#include "ess_task.h"
+ess_audio_conections::ess_audio_conections(ess_audio_stream &source, unsigned char sourceOutput,
+  ess_audio_stream &destination, unsigned char destinationInput) : m_pSrc(source), m_pDst(destination) {
 
- /**
- * @addtogroup frontend
- * @{
- */
+  m_iSrcIndex = sourceOutput;
+  m_iDestIndex = destinationInput;
+  m_pNext = NULL;
 
-class ess_csi_client : public ess_insocket {
-public:
-
-  ess_error_t cheak_password(std::string password) { return ESS_OK; }
-  ess_error_t start_task(ess_csi_server* server) { m_pServer = server; return ESS_OK; }
-
-  ess_error_t server_send_stop() { return ESS_OK; } 
-private:
-  ess_csi_server* m_pServer;
-  ess_csi_client_task* m_pTask;
-};
-
-  /**
-  * @}
-  */
-  #endif
+  m_bIsConnected = false;
+  connect();
+}
+ess_audio_conections::~ess_audio_conections() {
+  disconnect();
+}

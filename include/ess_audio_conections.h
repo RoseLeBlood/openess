@@ -1,3 +1,4 @@
+
 /****************************************************************************
  * Copyright (C) 2019 by Anna Sopdia Schröck                                *
  *                                                                          *
@@ -18,25 +19,46 @@
  ****************************************************************************/
 
 /**
- * @file ess_buffer.h
+ * @file ess_audio_conections.h
  * @author Anna Sopdia Schröck
- * @date 23 Februar 2019
- * @brief audio buffer class
+ * @date 03 März 2019
+ *
  *
  */
- #ifndef _ESS_AUDIO_BUFFER_H_
- #define _ESS_AUDIO_BUFFER_H_
+ /**
+ * @addtogroup stream
+ * @{
+ */
+#ifndef __ESS_AUDIO_CONNECTIONS_H__
+#define __ESS_AUDIO_CONNECTIONS_H__
 
-#include "ess_ringbuffer.h"
+class ess_audio_stream;
 
-class ess_buffer : public ess_ringbuffer {
+class ess_audio_conections {
+  friend class ess_audio_stream;
 public:
-  ess_buffer() { }
-  ess_buffer(ess_format_t format) : m_eFormat(format) { }
+	ess_audio_conections(ess_audio_stream &source, ess_audio_stream &destination)
+    : ess_audio_conections(source, 0, destination, 0) { }
 
-  ess_format_t get_format() { return m_eFormat; }
+	ess_audio_conections(ess_audio_stream &source, unsigned char sourceOutput,
+		ess_audio_stream &destination, unsigned char destinationInput);
+
+	~ess_audio_conections();
+
+	void disconnect(void);
+	void connect(void);
 protected:
-  ess_format_t m_eFormat;
+	ess_audio_stream &m_pSrc;
+	ess_audio_stream &m_pDst;
+
+	unsigned char m_iSrcIndex;
+	unsigned char m_iDestIndex;
+	ess_audio_conections *m_pNext;
+	bool m_bIsConnected;
 };
+
+/**
+* @}
+*/
 
 #endif

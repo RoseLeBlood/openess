@@ -49,11 +49,106 @@
 
 #include "esp_log.h"
 
+#include <string.h>
+#include <sys/param.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "freertos/event_groups.h"
+#include "esp_system.h"
+#include "esp_wifi.h"
+#include "esp_event_loop.h"
+#include "esp_log.h"
+#include "nvs_flash.h"
+
+#include "lwip/err.h"
+#include "lwip/sockets.h"
+#include "lwip/sys.h"
+#include <lwip/netdb.h>
 
 inline const char* port_tostring(int a) {
   std::ostringstream temp;
     temp<<a;
     return temp.str().c_str();
+}
+int ess_socket_multicast_ip6(const std::string& group, const int port, ess_socket_pro prop, bool loop) {
+  if(prop != ESS_SOCKET_PROTO_DRAM_LITE || prop != ESS_SOCKET_PROTO_DRAM ) return -1;
+
+  int sfd;
+  struct in6_addr if_inaddr;
+  struct ip6_addr if_ipaddr;
+  struct ip6_mreq v6imreq;
+
+  memset(&if_inaddr,0,sizeof(if_inaddr));
+  memset(&if_ipaddr,0,sizeof(if_ipaddr));
+  memset(&v6imreq,0,sizeof(v6imreq));
+
+  if(ess_socket_server_create(ESS_SOCKET_FAMILY_IP6, prop, group, port, 0, 0, &sfd ) != ESS_OK) {
+    return -1;
+  }
+
+  if( tcpip_adapter_get_ip6_linklocal(TCPIP_ADAPTER_IF_STA, &if_ipaddr) != ESP_OK) {
+    if( tcpip_adapter_get_ip6_linklocal(TCPIP_ADAPTER_IF_AP, &if_ipaddr) != ESP_OK)  {
+      close(sfd); return -1;
+    }
+  }
+
+  inet6_addr_from_ip6addr(&if_inaddr, &if_ipaddr);
+
+  // Assign the multicast source interface, via its IP
+  if(setsockopt(sfd, IPPROTO_IPV6, IPV6_MULTICAST_IF, &if_inaddr, sizeof(struct in6_addr)) < 0) {
+    close(sfd); return -1;
+  }
+  uint8_t ttl = 255;
+  if(setsockopt(sfd, IPPROTO_IPV6, IPV6_MULTICAST_HOPS, &ttl, sizeof(uint8_t)) == -1) {
+    close(sfd); return -1;
+  }
+
+
+   inet6_addr_from_ip6addr(&v6imreq.ipv6mr_interface, &if_ipaddr);
+   if(inet6_aton(group.c_str(), &v6imreq.ipv6mr_multiaddr) != 1) {
+     ESP_LOGE("IP6UDP", "Configured IPV6 multicast address '%s' is invalid.", group.c_str());
+   }
+   ESP_LOGI("IP6UDP", "Configured IPV6 Multicast address %s", inet6_ntoa(v6imreq.ipv6mr_multiaddr));
+
+  ip6_addr_t multi_addr;
+  inet6_addr_to_ip6addr(&multi_addr, &v6imreq.ipv6mr_multiaddr);
+  if (!ip6_addr_ismulticast(&multi_addr)) {
+    ESP_LOGW("IP6UDP", "Configured IPV6 multicast address '%s' is not a valid multicast address. This will probably not work.",
+    group.c_str() );
+  }
+  if(setsockopt(sfd, IPPROTO_IPV6, IPV6_ADD_MEMBERSHIP,
+                     &v6imreq, sizeof(struct ip6_mreq)) < 0) {
+    close(sfd); return -1;
+ }
+ int only = 1;
+ setsockopt(sfd, IPPROTO_IPV6, IPV6_V6ONLY, &only, sizeof(int));
+
+  if(loop) {
+    uint8_t c = 0;
+    setsockopt(sfd, IPPROTO_IPV6, IP_MULTICAST_LOOP, &c, sizeof(uint8_t) );
+  }
+  return sfd;
+}
+/* ******************************************************************** */
+int ess_socket_multicast_ip4(const std::string& group, const int port, ess_socket_pro prop, bool loop) {
+  if(prop != ESS_SOCKET_PROTO_DRAM_LITE || prop != ESS_SOCKET_PROTO_DRAM ) return -1;
+
+  int sfd;
+  struct sockaddr_in saddr ;
+
+  memset(&saddr,0,sizeof(saddr));
+
+  if(ess_socket_server_create(ESS_SOCKET_FAMILY_IP4, prop, group, port, 0, 0, &sfd ) != ESS_OK) {
+    return -1;
+  }
+  uint8_t ttl = 255;
+  if(setsockopt(sfd, IPPROTO_IP, IP_MULTICAST_TTL, &ttl, sizeof(uint8_t)) == -1) {
+    close(sfd); return -1;
+  }
+  if(loop) {
+    int c = 0; setsockopt(sfd,IPPROTO_IP,IP_MULTICAST_LOOP,&c,4);
+  }
+  return sfd;
 }
 /* ******************************************************************** */
 int ess_socket(ess_socket_fam fam, ess_socket_pro proto, int flags, int options) {
@@ -108,11 +203,6 @@ ess_error_t ess_socket_server_create(ess_socket_fam fam, ess_socket_pro proto,
 
   if(handle != 0) *handle = _socket;
   freeaddrinfo(result);
-
-  ESP_LOGI("ESSS", "server creating (%s %s on %s:%d) socket: %d",  ess_socket_pro2string(proto).c_str(),
-    ess_socket_fam2string(fam).c_str(),
-    host.c_str(), port, _socket
-  );
 
   return ESS_OK;
 }
@@ -302,4 +392,5 @@ unsigned int ess_vsendto(int socket, const void* buf, size_t len, const char* ds
 int ess_setsockopt(int socket, int level, int optname, const char* optval, unsigned int optlen) {
   return setsockopt(socket, level, optname, optval, optlen);
 }
+
  #endif

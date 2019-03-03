@@ -38,7 +38,6 @@ class ess_socket {
   friend class ess_inet_stream_server;
 public:
   ess_socket()  { }
-  ess_socket(ess_socket_pro proto) : ess_socket(ESS_SOCKET_FAMILY_IP4, proto) { }
   ess_socket(ess_socket_fam fam, ess_socket_pro proto);
   ess_socket(const ess_socket&) = delete;
   ess_socket(ess_socket&&);
@@ -69,8 +68,6 @@ protected:
 class ess_insocket : public ess_socket {
   friend class ess_inet_stream_server;
 public:
-  ess_insocket() : ess_insocket(ESS_SOCKET_FAMILY_IP4, ESS_SOCKET_PROTO_DRAM) { }
-  ess_insocket(ess_socket_pro proto) : ess_insocket(ESS_SOCKET_FAMILY_IP4, proto) { }
   ess_insocket(ess_socket_fam fam, ess_socket_pro proto);
 
   const std::string& get_host(void) const { return m_strHost; }

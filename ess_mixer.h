@@ -18,71 +18,58 @@
  ****************************************************************************/
 
 /**
- * @file ess_csi_server.h
+ * @file ess_mixer.h
  * @author Anna Sopdia Schröck
  * @date 28 Februar 2019
- * @brief OpenESS CSI - Command Socket Interface
+ * @brief OpenESS simple mixer
  *
- * socket interface - controll from a remote socket
+ * the generic mixer
  */
- #ifndef _ESS_SOCKET_SERVER_CSI_H_
- #define _ESS_SOCKET_SERVER_CSI_H_
+ #ifndef _ESS_GENERIC_MIXER_H_
+ #define _ESS_GENERIC_MIXER_H_
 
- /**
- * @addtogroup frontend
- * @{
- */
-#include <array>
-#include "ess_inet_stream_server.h"
-#include "ess_task.h"
+#include "ess_ringbuffer.h"
 
-class ess_csi_client;
-class ess_csi_server;
-
-class ess_csi_server_task : public ess_task {
+class ess_mixer_source : public ess_inet_dramlite_server_ip4 {
 public:
-  ess_csi_server_task(ess_csi_server* server);
+  ess_mixer_source(const std::string& host,const int port)
+    : ess_inet_dramlite_server_ip4(host, port) {  m_pRingBuffer.create(ESS_DEFAULT_SERVER_PACKET_SIZE); }
 
-  virtual void onTask(ess_task* self, void* userdata);
+ // TODO:Add event - auto update
 
-  bool is_ready() { return m_bReady; }
+  int update() {
+    static char buffer[ESS_DEFAULT_SERVER_PACKET_SIZE];
+
+    m_iReaded = recvfrom(buffer, ESS_DEFAULT_SERVER_PACKET_SIZE);
+    m_pRingBuffer.write(buffer, m_iReaded)
+    return m_iReaded;
+  }
 private:
-  bool volatile  m_bReady;
-  bool volatile m_bRunServer;
-};
+  ess_ringbuffer m_pRingBuffer;
 
-#if ESS_CONFIG_CSI_FAMILY == ESS_FAMILY_IP4
-class ess_csi_server : public ess_inet_stream_server_ip4 {
-#else
-class ess_csi_server : public ess_inet_stream_server_ip6 {
-#endif
-  friend class ess_csi_server_task;
+  int m_iReaded;
+}
+
+class ess_mixer {
 public:
-  ess_csi_server();
+  ess_mixer() : m_iMinVolume(0), m_iMaxVolume(100), m_iVolume(50) { }
 
-  ess_error_t setup(int port);
-  ess_error_t run();
+  virtual int get_min_volume() { return m_iMinVolume; }
+  virtual int get_max_volume() { return m_iMaxVolume; }
+  virtual int get_volume() {return m_iVolume; }
 
-  ess_csi_client* get_cli(int index);
+  virtual int get_channels() { return ESS_DEFAULT_MIXER_MAX_INPUTS; }
 
-  std::string get_controll_password() const { return m_strControllPassword; }
-  void set_controll_password(std::string password) { m_strControllPassword = password; }
+  virtual int read(void* buffer, int offset, unsigned int size) {
+    for(int i=0; i < ESS_DEFAULT_MIXER_MAX_INPUTS; i++) {
 
-  bool is_task_ready() { return (m_pTask != 0) ?  m_pTask->is_ready() : false; }
-public:
-
-  virtual bool cmd_add_client(const std::string& path) { return false; }
+    }
+  }
 protected:
-  ess_error_t add_client(ess_csi_client* cli);
-  ess_error_t send_destroy_to_clients();
-private:
-  ess_csi_server_task* m_pTask;
-  std::string m_strControllPassword;
-  std::array<ess_csi_client*, ESS_CONFIG_CSI_MAX_CONNECTIONS> m_csiClients;
+  ess_mixer_source* m_pServer[ESS_DEFAULT_MIXER_MAX_INPUTS];
+  char m_pBuffer[];
+  int m_iMinVolume, m_iMaxVolume, m_iVolume;
+
 };
 
-
- /**
- * @}
- */
  #endif

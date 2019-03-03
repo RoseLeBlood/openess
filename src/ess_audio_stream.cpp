@@ -17,33 +17,25 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-/**
- * @file ess_daemon.cpp
- * @author Anna Sopdia Schröck
- * @date 28 Februar 2019
- * @brief OpenESS daemon
- *
- * the main running class - I/O for openess (singleton)
- */
 
-#include "ess_daemon.h"
+#include "ess_audio_stream.h"
 
+ess_audio_stream::ess_audio_stream(unsigned char ninput, ess_audio_block_t **iqueue,
+  const std::string defaultName) : name(defaultName), num_inputs(ninput), inputQueue(iqueue) {
+    active = false;
+    blocking = false;
+    destination_list = NULL;
+    for (int i=0; i < num_inputs; i++) {
+      inputQueue[i] = NULL;
+    }
 
-ess_daemon* ess_daemon::m_pInstance = 0;
-
-ess_error_t ess_daemon::setup(const std::string& backend_name) {
-  m_pServer = new ess_dram_server(ESS_DEFAULT_SERVER_NAME,
-    ESS_DEFAULT_SERVER_FORMAT);
-
-  printf("start backend and server at  .....");
-  ess_error_t error = m_pServer->create(backend_name);
-  ESS_ERROR(error) ;
-  printf("OK\n");
-
-  printf("start csi .....");
-  error = m_CsiServer.setup(ESS_CONFIG_CSI_DEFAULT_PORT);
-  ESS_ERROR(error) ;
-  printf("OK\n");
-
-  return ESS_OK;
-}
+    if (first_update == NULL) {
+      first_update = this;
+    } else {
+      ess_audio_stream *p;
+      for (p=first_update; p->next_update; p = p->next_update) ;
+      p->next_update = this;
+    }
+    next_update = NULL;
+    numConnections = 0;
+  }

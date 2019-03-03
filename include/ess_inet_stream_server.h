@@ -43,7 +43,7 @@ public:
 			std::unique_ptr<ess_insocket> accept_ex(int flags=0);
 
 	    const std::string& get_bind_host(void) { return m_strHost;}
-	    const int get_bind_port(void) { return m_iPort;}
+	    int get_bind_port(void) { return m_iPort;}
 };
 
 class ess_inet_stream_server_ip4 : public ess_inet_stream_server {

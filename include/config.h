@@ -47,11 +47,13 @@
 #define ESS_PLATFORM_LINUX   			0/** @brief If defined compiled backend for generic linux (openal) */
 #define ESS_PLATFORM_WINDOWS  0/** @brief If defined compiled backend for  generic windows (openal, wasapi) */
 
-#define ESS_DEFAULT_SERVER_PORT 8686
-#define ESS_DEFAULT_SERVER_PROTOCOL ESS_PROTOCOL_UDP_LITE
+#define ESS_DEFAULT_AUDIO_PACKET_SIZE 128
+
+#define ESS_DEFAULT_SERVER_PORT 8686 // Clinet0: +1, Client1 +2 ...
+#define ESS_DEFAULT_SERVER_PROTOCOL ESS_PROTOCOL_UDP_LITE // only UDP or UDPLite
 #define ESS_DEFAULT_SERVER_FAMILY ESS_FAMILY_IP4
 #define ESS_DEFAULT_SERVER_FORMAT ESS_FORMAT_STEREO_44100_16
-
+#define ESS_DEFAULT_SERVER_PACKET_SIZE ESS_DEFAULT_AUDIO_PACKET_SIZE
 
 #if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
 #define ESS_DEFAULT_SERVER_HOST "0.0.0.0"
@@ -63,13 +65,16 @@
 #define ESS_CONFIG_CSI_DEFAULT_PORT 8989
 #define ESS_CONFIG_CSI_MAX_CONNECTIONS 4
 #define ESS_CONFIG_CSI_FAMILY ESS_FAMILY_IP4
-#define ESS_CONFIG_CSI_PASSWORD "PLEASEchangeME"
+#define ESS_COBFIG_CSI_ENABLE_PASSWORD 0 // if 1 then passowrd protected see `ESS_CONFIG_CSI_PASSWORD`
+#define ESS_CONFIG_CSI_PASSWORD "PLEASEchangeME" // `ESS_COBFIG_CSI_ENABLE_PASSWORD ` 1 then used and all clients must send this passowrd
 
 #if ESS_CONFIG_CSI_FAMILY == ESS_FAMILY_IP4
 #define ESS_DEFAULT_CSI_HOST "0.0.0.0"
 #else
 #define ESS_DEFAULT_CSI_HOST "::"
 #endif
+
+#define ESS_DEFAULT_MIXER_MAX_INPUTS 4
 
 #if  ESS_PLATFORM_ESP32 == 1
 	#define ESS_CONFIG_NETWORK_ESP32 /**< esp32 using own network functions */

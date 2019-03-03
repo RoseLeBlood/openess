@@ -90,6 +90,43 @@ std::string ess_socket_pro2string(ess_socket_pro proto); // ess_network.cpp
 int ess_socket(ess_socket_fam fam, ess_socket_pro proto, int flags, int options);
 
 /**
+ * @brief Create a datagram ip6 socket and join to the multicast group `group`.
+ *
+ * This function creates a multicast socket bound to `group`.
+ * After creating this socket, you may use the usual I/O functions on it, i.e. ess_sendto and ess_recvfrom.
+ *
+ * The group address and port is also used as arguments to `bind(2)`. After creating this socket, you
+ * may use the usual I/O functions on it, i.e. ess_sendto and ess_recvfrom.
+ *
+ * @param group group address. this address is also used to bind the socket
+ * @param port multicast port.
+ * @param loop set  IP_MULTICAST_LOOP
+ * @param prop only valid ESS_SOCKET_PROTO_DRAM or ESS_SOCKET_PROTO_DRAM_LITE
+ *
+ * @retval <0 Error
+ * @retval >=0 A valid socket descriptor.
+ *
+ */
+int ess_socket_multicast_ip6(const std::string& group, const int port, ess_socket_pro prop, bool loop = false);
+
+/**
+ * @brief Create a datagram IPv4 socket and join to the multicast group `group`.
+ *
+ * This function creates a multicast socket bound to `group`.
+ * After creating this socket, you may use the usual I/O functions on it, i.e. ess_sendto and ess_recvfrom.
+ *
+ * @param group group address. this address is also used to bind the socket
+ * @param port multicast port.
+ * @param if_name for IPv4 multicast groups: the address of the interface to be used.
+ * @param loop set  IP_MULTICAST_LOOP
+ * @param prop only valid ESS_SOCKET_PROTO_DRAM or ESS_SOCKET_PROTO_DRAM_LITE
+ *
+ * @retval <0 Error
+ * @retval >=0 A valid socket descriptor.
+ *
+ */
+int ess_socket_multicast_ip4(const std::string& group, const int port, ess_socket_pro prop, bool loop = false);
+/**
  * @brief set socket options on the underlying socket.
  *
  * @return the return value of setsockopt(2).
