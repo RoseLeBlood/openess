@@ -33,7 +33,7 @@
 bool ess_backend_platform::add_backend(ess_backend* backend) {
   if(backend == 0) return false;
 
-  if( backend->probe() == ESS_OK)
+  if( backend->probe(ESS_DEFAULT_SERVER_FORMAT) == ESS_OK)
     m_lBackends.insert(std::pair<std::string, ess_backend*>(backend->get_name(), backend)) ;
   return true;
 }

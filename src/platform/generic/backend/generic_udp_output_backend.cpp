@@ -18,7 +18,7 @@
  ****************************************************************************/
 
 /**
- * @file generic_udp_backend.cpp
+ * @file generic_udp_output_backend.cpp
  * @author Anna Sopdia Schröck
  * @date 20 Februar 2019
  * @brief the basic udp backend class
@@ -26,14 +26,14 @@
  */
 
 #include "config.h"
-#ifdef ESS_ENABLE_BACKEND_UDP
-#include "platform/generic_udp_backend.h"
+#ifdef ESS_ENABLE_BACKEND_OUT_UDP
+#include "platform/generic_udp_output_backend.h"
 
-generic_udp_backend::generic_udp_backend() : ess_backend(2, m_pInputQueueArray, ESS_BACKEND_NAME_UDP) {
+generic_udp_output_backend::generic_udp_output_backend() : ess_backend(2, m_pInputQueueArray, ESS_BACKEND_NAME_OUT_UDP) {
 
 }
-ess_error_t generic_udp_backend::probe() {
-  switch (m_eFormat) {
+ess_error_t generic_udp_output_backend::probe(ess_format_t format) {
+  switch (format) {
     case ESS_FORMAT_MONO_44100_FLOAT_32 :
     case ESS_FORMAT_MONO_48000_FLOAT_32 :
     case ESS_FORMAT_MONO_96000_FLOAT_32 :
@@ -46,7 +46,7 @@ ess_error_t generic_udp_backend::probe() {
   }
 
 }
-ess_error_t generic_udp_backend::open()  {
+ess_error_t generic_udp_output_backend::open()  {
   #if ESS_BACKEND_UDP_PROTOCOL == ESS_PROTOCOL_UDP
     #if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
       m_pClient = new ess_inet_dram_client_ip4();
@@ -69,21 +69,21 @@ ess_error_t generic_udp_backend::open()  {
 }
 
 
-ess_error_t generic_udp_backend::close() {
+ess_error_t generic_udp_output_backend::close() {
   if(m_pClient == 0) return ESS_ERROR;
 
   return ess_backend::close();
 }
 
 
-unsigned int generic_udp_backend::send_packet(const void* data, unsigned int size) {
+unsigned int generic_udp_output_backend::send_packet(const void* data, unsigned int size) {
   if(m_pClient == 0) return -1;
 
   return m_pClient->sendto(data, size,  ESS_BACKEND_UDP_SENDTO_HOST,
     ESS_BACKEND_UDP_SENDTO_PORT);
 }
 
-ess_error_t  generic_udp_backend::update(void) {
+ess_error_t  generic_udp_output_backend::update(void) {
 	ess_audio_block_t *block_left, *block_right;
 
 	if(m_isUsed) {

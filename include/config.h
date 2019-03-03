@@ -62,20 +62,6 @@
 #endif
 
 
-#define ESS_CONFIG_CSI_DEFAULT_PORT 8989
-#define ESS_CONFIG_CSI_MAX_CONNECTIONS 4
-#define ESS_CONFIG_CSI_FAMILY ESS_FAMILY_IP4
-#define ESS_COBFIG_CSI_ENABLE_PASSWORD 0 // if 1 then passowrd protected see `ESS_CONFIG_CSI_PASSWORD`
-#define ESS_CONFIG_CSI_PASSWORD "PLEASEchangeME" // `ESS_COBFIG_CSI_ENABLE_PASSWORD ` 1 then used and all clients must send this passowrd
-
-#if ESS_CONFIG_CSI_FAMILY == ESS_FAMILY_IP4
-#define ESS_DEFAULT_CSI_HOST "0.0.0.0"
-#else
-#define ESS_DEFAULT_CSI_HOST "::"
-#endif
-
-#define ESS_DEFAULT_MIXER_MAX_INPUTS 4
-
 #if  ESS_PLATFORM_ESP32 == 1
 	#define ESS_CONFIG_NETWORK_ESP32 /**< esp32 using own network functions */
 	#define ESS_CONFIC_TASK_ESP32	/**< esp32 using own task functions */
@@ -83,10 +69,10 @@
 	#define ESS_CONFIG_MUTEX_ESP32 /**< esp32 using own mutex functions */
 	#define ESS_CONFIG_SPINLOCK_ESP32 /**< esp32 using own spinlock functions */
 
-	#define ESS_ENABLE_BACKEND_I2S /**< esp32 platform I2S backend available */
-	#define ESS_ENABLE_BACKEND_UDP/**< generic platform UDP backend available */
+	#define ESS_ENABLE_BACKEND_OUT_I2S /**< esp32 platform I2S backend available */
+	#define ESS_ENABLE_BACKEND_OUT_UDP/**< generic platform UDP backend available */
 
-	#define ESS_DEFAULT_SERVER_NAME "OpenEssD-esp32" /**< basic server name*/
+	#define ESS_DEFAULT_SERVER_NAME "OpenESS-esp32" /**< basic server name*/
 #endif // ESS_PLATFORM_ESP32
 
 #if ESS_PLATFORM_RPI == 1
@@ -94,10 +80,10 @@
 	#define ESS_CONFIC_TASK_GENERIC
 	#define ESS_CONFIG_RINGBUFFER_GENERIC
 	/** @brief If defined then OpenAL backend available */
-	#define ESS_ENABLE_BACKEND_OPENAL
+	#define ESS_ENABLE_BACKEND_OUT_OPENAL
 	/** @brief If defined then UDP backend available */
-	#define ESS_ENABLE_BACKEND_UDP
-	#define ESS_DEFAULT_SERVER_NAME "OpenEssD-rpi"
+	#define ESS_ENABLE_BACKEND_OUT_UDP
+	#define ESS_DEFAULT_SERVER_NAME "OpenESS-rpi"
 #endif //ESS_PLATFORM_RPI
 
 #if ESS_PLATFORM_LINUX == 1
@@ -105,14 +91,10 @@
 	#define ESS_CONFIG_RINGBUFFER_GENERIC
 	#define ESS_CONFIG_MUTEX_GENERIC
 	/** @brief If defined then OpenAL backend available */
-	#define ESS_ENABLE_BACKEND_OPENAL
-	/** @brief If defined then Pulseaudio backend available */
-	#define ESS_ENABLE_BACKEND_PULSEAUDIO
-	/** @brief If defined then ALSA backend available */
-	#define ESS_ENABLE_BACKEND_ALSA
+	#define ESS_ENABLE_BACKEND_OUT_OPENAL
 	/** @brief If defined then UDP backend available */
-	#define ESS_ENABLE_BACKEND_UDP
-	#define ESS_DEFAULT_SERVER_NAME "OpenEssD-linux"
+	#define ESS_ENABLE_BACKEND_OUT_UDP
+	#define ESS_DEFAULT_SERVER_NAME "OpenESS-linux"
 #endif //ESS_PLATFORM_LINUX
 
 #if ESS_PLATFORM_WINDOWS == 1
@@ -121,28 +103,16 @@
 	#define ESS_CONFIG_RINGBUFFER_WINDOWS
 	#define ESS_CONFIG_MUTEX_WINDOWS
 	/** @brief If defined then OpenAL backend available */
-	#define ESS_ENABLE_BACKEND_OPENAL
-	/** @brief If defined then OpenAL backend available */
-	#define ESS_ENABLE_BACKEND_WASAPI
+	#define ESS_ENABLE_BACKEND_OUT_OPENAL
 	/** @brief If defined then UDP backend available */
-	#define ESS_ENABLE_BACKEND_UDP
-	#define ESS_DEFAULT_SERVER_NAME "OpenEssD-windows"
+	#define ESS_ENABLE_BACKEND_OUT_UDP
+	#define ESS_DEFAULT_SERVER_NAME "OpenESS-windows"
 #endif //ESS_PLATFORM_WINDOWS
 
 
 //-------------------------------------------------------------------------------------------------------
 
-#ifdef ESS_ENABLE_BACKEND_UART
-	#define ESS_BACKEND_UART_BAUDRAT 115200
-	#define ESS_BACKEND_UART_TXD  (GPIO_NUM_4)
-	#define ESS_BACKEND_UART_RXD  (GPIO_NUM_5)
-	#define ESS_BACKEND_UART_RTS  (UART_PIN_NO_CHANGE)
-	#define ESS_BACKEND_UART_CTS  (UART_PIN_NO_CHANGE)
-#endif
-
-
-
-#ifdef ESS_ENABLE_BACKEND_UDP
+#ifdef ESS_ENABLE_BACKEND_OUT_UDP
 	#define ESS_BACKEND_UDP_SENDTO_PORT 17000
 	#define ESS_BACKEND_UDP_PROTOCOL ESS_PROTOCOL_UDP_LITE
 
@@ -153,20 +123,22 @@
 	#endif
 #endif
 
-#ifdef ESS_ENABLE_BACKEND_I2S
+#ifdef ESS_ENABLE_BACKEND_OUT_I2S
 	#define I2S_EXTERNAL_DAC_BCK 26
 	#define I2S_EXTERNAL_DAC_LRCLK 25
 	#define I2S_EXTERNAL_DAC_DOUT 22
-	#define  I2S_EXTERNAL_DAC_DIN   -1                                                    //Not used
+	#define  I2S_EXTERNAL_DAC_DIN   23
 
-  #define ESS_BACKEND_I2S_FORMAT ESS_FORMAT_STEREO_96000_16
 	#define ESS_BACKEND_I2S_DMA_BUF_SIZE	ESS_BUF_SIZE
 	#define ESS_BACKEND_I2S_DMA_BUF_COUNT ESS_BUF_COUNT
 #endif
 
-#define ESS_BACKEND_NAME_I2S_ESP32 			 "i2s_esp32"
-#define ESS_BACKEND_NAME_NULL								"null"
-#define ESS_BACKEND_NAME_UDP								 "udp"
-#define ESS_BACKEND_NAME_OPENAL	 				"openal"
+#define ESS_BACKEND_NAME_OUT_I2S_ESP32 			 		"/dev/i2s0:0"
+#define ESS_BACKEND_NAME_OUT_NULL									 "/dev/null0:0"
+#define ESS_BACKEND_NAME_OUT_UDP								 		"/dev/udp0:0"
+#define ESS_BACKEND_NAME_OUT_OPENAL	 					 "/dev/openal0:0"
+
+#define ESS_BACKEND_NAME_IN_I2S_ESP32 			 	  "/dev/i2s0:1"
+#define ESS_BACKEND_NAME_IN_OPENAL	 					  "/dev/openal0:1"
 
 #endif

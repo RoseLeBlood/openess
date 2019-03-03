@@ -1,5 +1,18 @@
 
 ## Release History
+* 0.5.0:
+  - update to 0.5
+  - start impl new frontend system. based on the TeensyAudioLibrary with modifications
+  - rename backends:
+      - i2s_generic_backend -> i2s_generic_output_backend
+      - generic_openal_backend -> generic_openal_output_backend
+      - generic_udp_backend -> generic_udp_output_backend
+* 0.4.5:
+  - add IP4/IP6 multicast
+  - add new system
+  - remove ess_context
+* 0.4.2:
+  - remove issus
 * 0.4.03
   - ++ ess_backend::get_blksize
   - ++ config ESS_BUF_COUNT 4

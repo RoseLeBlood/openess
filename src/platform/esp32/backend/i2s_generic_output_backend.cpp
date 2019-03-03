@@ -18,7 +18,7 @@
  ****************************************************************************/
 
 /**
- * @file i2s_gerneric_backend.cpp
+ * @file i2s_generic_output_backend.cpp
  * @author Anna Sopdia Schröck
  * @date 2 Februar 2019
  * @brief all esp32 backend generic_i2s functions source
@@ -26,8 +26,8 @@
  */
 
 #include "config.h"
-#ifdef ESS_ENABLE_BACKEND_I2S
-#include "platform/esp32/i2s_gerneric_backend.h"
+#ifdef ESS_ENABLE_BACKEND_OUT_I2S
+#include "platform/esp32/i2s_generic_output_backend.h"
 
 #include "freertos/FreeRTOS.h"
 #include "driver/i2s.h"
@@ -49,53 +49,17 @@
 
 
 
-ess_i2s_generic_backend::ess_i2s_generic_backend()
-  : ess_backend(2, m_pInputQueueArray, ESS_BACKEND_NAME_I2S_ESP32)   {
-
-
-
-  m_i2sConfig.mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX);                                // Only TX
-  m_i2sConfig.sample_rate = 48000;                                                                                       // Default: 48kHz
-  m_i2sConfig.bits_per_sample = (i2s_bits_per_sample_t)16;                                                                                     //16-bit per channel
-  m_i2sConfig.channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT;                           //2-channels
-  m_i2sConfig.communication_format =(i2s_comm_format_t)(I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB);
-  m_i2sConfig.dma_buf_count = ESS_BACKEND_I2S_DMA_BUF_COUNT;
-  m_i2sConfig.dma_buf_len = ESS_BACKEND_I2S_DMA_BUF_SIZE;                                                      //
-  m_i2sConfig.intr_alloc_flags = ESP_INTR_FLAG_LEVEL1;                                //Interrupt level 1
-
-  m_pinConfig.bck_io_num = I2S_EXTERNAL_DAC_BCK;
-  m_pinConfig.ws_io_num = I2S_EXTERNAL_DAC_LRCLK;
-  m_pinConfig.data_out_num = I2S_EXTERNAL_DAC_DOUT;
-  m_pinConfig.data_in_num = I2S_EXTERNAL_DAC_DIN;                                                       //Not used
-
-  m_bPaused = true;
+i2s_generic_output_backend::i2s_generic_output_backend(i2s_config_t i2sconfig)
+  : ess_backend(2, m_pInputQueueArray, ESS_BACKEND_NAME_OUT_I2S_ESP32)   {
+    m_i2sConfig = i2sconfig;
 }
-ess_i2s_generic_backend::~ess_i2s_generic_backend() {
-  close();
+i2s_generic_output_backend::~i2s_generic_output_backend() {
+
 }
-ess_error_t ess_i2s_generic_backend::probe() {
+ess_error_t i2s_generic_output_backend::probe(ess_format_t format) {
   return ESS_OK;
 }
-ess_error_t ess_i2s_generic_backend::open() {
-  m_i2sConfig.sample_rate = ess_format_get_samplerate(m_eFormat);
-  m_i2sConfig.bits_per_sample = (i2s_bits_per_sample_t)ess_format_get_bits(m_eFormat);
-
-
-  if(i2s_driver_install((i2s_port_t)0, &m_i2sConfig, 0, NULL) != ESP_OK) {
-    ESP_LOGE("I2S", "i2s_driver_install");
-    return ESS_ERROR;
-  }
-  if(i2s_set_pin((i2s_port_t)0, &m_pinConfig) != ESP_OK) {
-    ESP_LOGE("I2S", "i2s_set_pin");
-    return ESS_ERROR;
-  }
-  i2s_set_clk((i2s_port_t)0, m_i2sConfig.sample_rate,
-                         m_i2sConfig.bits_per_sample,
-                        ( (ess_format_get_channels(m_eFormat) == 2) ?
-                          I2S_CHANNEL_STEREO :
-                          I2S_CHANNEL_MONO) );
-  m_bPaused = false;
-
+ess_error_t i2s_generic_output_backend::open() {
   m_bBlockingObjectRun = true;
   m_bBlocking = true;
   m_bInit = true;
@@ -104,19 +68,17 @@ ess_error_t ess_i2s_generic_backend::open() {
 }
 
 
-ess_error_t  ess_i2s_generic_backend::close(  ){
-  i2s_driver_uninstall((i2s_port_t)0);
-
+ess_error_t  i2s_generic_output_backend::close(  ){
   return ess_backend::close();
 }
 
-const char* ess_i2s_generic_backend::get_info( ) {
+const char* i2s_generic_output_backend::get_info( ) {
   return "I2S Generic Backend";
 }
 
 
 
-ess_error_t IRAM_ATTR ess_i2s_generic_backend::update(void) {
+ess_error_t IRAM_ATTR i2s_generic_output_backend::update(void) {
 	ess_audio_block_t *block_left, *block_right;
 
 	if(m_isUsed) {

@@ -19,7 +19,7 @@
 
 
 /**
- * @file i2s_gerneric_backend.h
+ * @file i2s_generic_output_backend.h
  * @author Anna Sopdia Schröck
  * @date 18 Februar 20119
  * @brief the basic i2s_generic class
@@ -42,12 +42,20 @@
 #include "driver/i2s.h"
 #include "esp_system.h"
 
-class ess_i2s_generic_backend : public ess_backend {
+class i2s_controller {
 public:
-  ess_i2s_generic_backend();
-  ~ess_i2s_generic_backend();
 
-  virtual ess_error_t probe();
+protected:
+
+
+};
+
+class i2s_generic_output_backend : public ess_backend {
+public:
+  i2s_generic_output_backend(i2s_config_t i2sconfig);
+  ~i2s_generic_output_backend();
+
+  virtual ess_error_t probe(ess_format_t format);
   virtual ess_error_t open();
   virtual ess_error_t close();
 
@@ -58,7 +66,6 @@ protected:
   void* m_pUserData;
   bool m_bPaused;
   i2s_config_t m_i2sConfig;
-  i2s_pin_config_t m_pinConfig;
 
   ess_audio_block_t *m_pInputQueueArray[2];
 	int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE * 2];

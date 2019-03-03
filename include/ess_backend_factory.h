@@ -33,9 +33,9 @@
 #include "ess_backend.h"
 #include <map>
 
-//#include "platform/generic_null_backend.h"
-#ifdef ESS_ENABLE_BACKEND_UDP
-//#include "platform/generic_udp_backend.h"
+#include "platform/generic_null_backend.h"
+#ifdef ESS_ENABLE_BACKEND_OUT_UDP
+#include "platform/generic_udp_output_backend.h"
 #endif
 /**
 * @addtogroup backend
@@ -45,9 +45,9 @@
 class ess_backend_platform {
 public:
   ess_backend_platform() {
-    //add_backend(new generic_null_backend());
+    add_backend(new generic_null_backend());
     #ifdef ESS_ENABLE_BACKEND_UDP
-    //add_backend(new generic_udp_backend());
+    add_backend(new generic_udp_output_backend());
     #endif
 
   }

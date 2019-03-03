@@ -37,6 +37,10 @@
 
 #include "ess_backend_factory.h"
 
+#ifdef ESS_ENABLE_BACKEND_OUT_I2S
+#include "platform/esp32/i2s_generic_output_backend.h"
+#endif
+
 class ess_backend_esp32 : public ess_backend_platform { //public ess_backend_factory<ess_backend_esp32>
 public:
   ess_backend_esp32();
@@ -45,6 +49,13 @@ public:
 
   virtual std::string get_platform_name();
   virtual std::string get_factory_creater();
+private:
+#ifdef ESS_ENABLE_BACKEND_OUT_I2S
+  ess_error_t install_i2s_sub_system();
+  i2s_config_t          m_i2sConfig;
+  i2s_pin_config_t   m_pinConfig;
+#endif
+
 };
 /**
 * @}

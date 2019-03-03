@@ -49,7 +49,7 @@ public:
 
   virtual ~ess_backend() { }
 
-  virtual ess_error_t probe() = 0;
+  virtual ess_error_t probe(ess_format_t format) = 0;
   virtual ess_error_t open() {m_isUsed = true;  return ESS_OK; }
   virtual ess_error_t close() {m_isUsed = false;  return ESS_OK; }
 

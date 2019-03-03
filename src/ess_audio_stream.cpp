@@ -1,22 +1,33 @@
-/****************************************************************************
- * Copyright (C) 2019 by Anna Sopdia Schröck                                *
- *                                                                          *
- * This file is part of ess.                                                *
- *                                                                          *
- *   ess is free software: you can redistribute it and/or modify it         *
- *   under the terms of the GNU Lesser General Public License as published  *
- *   by the Free Software Foundation, either version 3 of the License, or   *
- *   (at your option) any later version.                                    *
- *                                                                          *
- *   ess is distributed in the hope that it will be useful,                 *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of         *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the          *
- *   GNU Lesser General Public License for more details.                    *
- *                                                                          *
- *   You should have received a copy of the GNU Lesser General Public       *
- *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
- ****************************************************************************/
 
+ /* Teensyduino Core Library
+  * http://www.pjrc.com/teensy/
+  * Copyright (c) 2017 PJRC.COM, LLC.
+  *
+  * Permission is hereby granted, free of charge, to any person obtaining
+  * a copy of this software and associated documentation files (the
+  * "Software"), to deal in the Software without restriction, including
+  * without limitation the rights to use, copy, modify, merge, publish,
+  * distribute, sublicense, and/or sell copies of the Software, and to
+  * permit persons to whom the Software is furnished to do so, subject to
+  * the following conditions:
+  *
+  * 1. The above copyright notice and this permission notice shall be
+  * included in all copies or substantial portions of the Software.
+  *
+  * 2. If the Software is incorporated into a build system that allows
+  * selection among a list of target devices, then similar target
+  * devices manufactured by PJRC.COM must be included in the list of
+  * target devices and selectable in the same manner.
+  *
+  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+  * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+  * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+  * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  * SOFTWARE.
+  */
 
 #include "ess_audio_stream.h"
 #include "ess_task.h"
@@ -37,6 +48,7 @@ bool ess_audio_stream::m_bBlockingObjectRun = false;
 
 ess_audio_stream * ess_audio_stream::m_pFirstUpdate = NULL;
 
+ess_mutex ess_audio_stream::m_pUpdateMutex;
 
 ess_audio_stream::ess_audio_stream(unsigned char ninput, ess_audio_block_t **iqueue,
   const std::string defaultName, ess_format_t format) : m_strName(defaultName), m_ucNumInputs(ninput), m_pInputQueue(iqueue) {
@@ -58,6 +70,10 @@ ess_audio_stream::ess_audio_stream(unsigned char ninput, ess_audio_block_t **iqu
   }
   m_pNextUpdate = NULL;
   m_ucNumConn = 0;
+
+  m_pUpdateMutex.create();
+
+
 }
 
 void ess_audio_stream::initialize_memory(ess_audio_block_t *data, unsigned int num)  {
@@ -169,13 +185,13 @@ ess_audio_block_t * ess_audio_stream::receiveWritable(unsigned int index) {
 
 
 int updatePerSecondCounter = 0;
+int m_iUpdatesPerSecond = ess_format_get_samplerate(ESS_DEFAULT_SERVER_FORMAT) /  ESS_DEFAULT_AUDIO_PACKET_SIZE;
 
+void ess_audio_stream::update_all() {
 
-void ess_audio_stream::update_all(ess_format_t format) {
-  int updatesPerSecond = ess_format_get_samplerate(format) /  ESS_DEFAULT_AUDIO_PACKET_SIZE;
 
 	ess_audio_stream *p;
-	// TODO LOCK
+
 	for (p = ess_audio_stream::m_pFirstUpdate; p; p = p->m_pNextUpdate) {
 		if (p->m_bActive) {
 			if(p->m_bBlocking || !p->m_bInit){
@@ -183,11 +199,11 @@ void ess_audio_stream::update_all(ess_format_t format) {
 				p->m_iClocksPerUpdate = 0;
 			}
 			else{
-				//portENTER_CRITICAL(&mux);
+				m_pUpdateMutex.lock();
 				uint32_t startTick = ess_platform_get_ccount();
 				p->update();
 				uint32_t finishTick = ess_platform_get_ccount();
-				//portEXIT_CRITICAL(&mux);
+				m_pUpdateMutex.unlock();
 
 				if(finishTick > startTick) {
 					p->m_iClocksPerUpdate = (finishTick - startTick) - 11;
@@ -196,7 +212,7 @@ void ess_audio_stream::update_all(ess_format_t format) {
 						p->m_iClocksPerUpdateMax = p->m_iClocksPerUpdate;
 					if(p->m_iClocksPerUpdate < p->m_iClocksPerUpdateMin)
 						p->m_iClocksPerUpdateMin = p->m_iClocksPerUpdate;
-					if(updatePerSecondCounter == (updatesPerSecond - 1))
+					if(updatePerSecondCounter == (m_iUpdatesPerSecond - 1))
 					{
 						p->m_iClocksPerUpdateMax = p->m_iClocksPerUpdate;			//Reset max
 						p->m_iClocksPerUpdateMin = p->m_iClocksPerUpdate;			//Reset min
@@ -208,7 +224,7 @@ void ess_audio_stream::update_all(ess_format_t format) {
 		}
 	}
 	updatePerSecondCounter++;
-	if(updatePerSecondCounter == updatesPerSecond)
+	if(updatePerSecondCounter == m_iUpdatesPerSecond)
 		updatePerSecondCounter = 0;
 
 	if(!p->m_bBlockingObjectRun)

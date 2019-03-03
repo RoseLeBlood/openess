@@ -19,15 +19,15 @@
 
 
 /**
- * @file generic_openal_backend.h
+ * @file generic_udp_output_backend.h
  * @author Anna Sopdia Schröck
- * @date 18 Februar 2019
- * @brief the basic openal backend class
+ * @date 20 Februar 2019
+ * @brief the basic udp backend class
  *
- * this is opanel backend
+ * this is a udp backend
  */
-#ifndef _ESS_PLATFORM_INC_GENERIC_OPENAL_H_
-#define _ESS_PLATFORM_INC_GENERIC_OPENAL_H_
+#ifndef _ESS_PLATFORM_INC_GENERIC_UDP_BACKEND_H_
+#define _ESS_PLATFORM_INC_GENERIC_UDP_BACKEND_H_
 
 /**
 * @addtogroup ess_platform_generic
@@ -36,24 +36,34 @@
 
 #include "ess.h"
 #include "ess_backend.h"
+#include "ess_inet_dram_client.h"
 
-class generic_openal_backend : public ess_backend {
+/**
+* @brief generic udp backend
+*
+* send first the format (ess_format_t) as string then the data
+*/
+class generic_udp_output_backend : public ess_backend { // TODO: in the future using multicast
 public:
-  generic_openal_backend() : ess_backend(2, m_pInputQueueArray, ESS_BACKEND_NAME_OPENAL) { }
-  ~generic_openal_backend() { }
+  generic_udp_output_backend();
+  ~generic_udp_output_backend() { close(); }
 
-  virtual ess_error_t probe() { return ESS_OK; }
-  virtual ess_error_t open() { return ess_backend::open(); }
-  virtual ess_error_t close() { return ess_backend::close(); }
+  virtual ess_error_t probe(ess_format_t format); //
+  virtual ess_error_t open() ; //
+  virtual ess_error_t close();
 
-  virtual const char* get_info() { return "generic_null_backend"; }
+  virtual const char* get_info() { return "generic_udp_output_backend"; }
 
-  virtual ess_error_t update(void) {
-    return ESS_OK;
-  }
+  virtual ess_error_t update(void);
+
+protected:
+  unsigned int send_packet(const void* data, unsigned int size);
 protected:
   ess_audio_block_t *m_pInputQueueArray[2];
 	int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE * 2];
+
+  ess_inet_dram_client* m_pClient;
+  ess_format_t m_eFormat;
 };
 
 /**
