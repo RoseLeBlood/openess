@@ -47,8 +47,8 @@ public:
   ess_i2s_generic_backend();
   ~ess_i2s_generic_backend();
 
-  virtual ess_error_t probe(const ess_format_t format);
-  virtual ess_error_t open(const ess_format_t format);
+  virtual ess_error_t probe();
+  virtual ess_error_t open();
   virtual ess_error_t close();
 
   virtual ess_error_t update(void) ;

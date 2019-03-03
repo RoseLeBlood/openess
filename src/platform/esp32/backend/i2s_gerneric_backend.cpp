@@ -29,6 +29,9 @@
 #ifdef ESS_ENABLE_BACKEND_I2S
 #include "platform/esp32/i2s_gerneric_backend.h"
 
+#include "freertos/FreeRTOS.h"
+#include "driver/i2s.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -49,6 +52,8 @@
 ess_i2s_generic_backend::ess_i2s_generic_backend()
   : ess_backend(2, m_pInputQueueArray, ESS_BACKEND_NAME_I2S_ESP32)   {
 
+
+
   m_i2sConfig.mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX);                                // Only TX
   m_i2sConfig.sample_rate = 48000;                                                                                       // Default: 48kHz
   m_i2sConfig.bits_per_sample = (i2s_bits_per_sample_t)16;                                                                                     //16-bit per channel
@@ -68,12 +73,12 @@ ess_i2s_generic_backend::ess_i2s_generic_backend()
 ess_i2s_generic_backend::~ess_i2s_generic_backend() {
   close();
 }
-ess_error_t ess_i2s_generic_backend::probe(const ess_format_t format) {
+ess_error_t ess_i2s_generic_backend::probe() {
   return ESS_OK;
 }
-ess_error_t ess_i2s_generic_backend::open(const ess_format_t format) {
-  m_i2sConfig.sample_rate = ess_format_get_samplerate(format);
-  m_i2sConfig.bits_per_sample = (i2s_bits_per_sample_t)ess_format_get_bits(format);
+ess_error_t ess_i2s_generic_backend::open() {
+  m_i2sConfig.sample_rate = ess_format_get_samplerate(m_eFormat);
+  m_i2sConfig.bits_per_sample = (i2s_bits_per_sample_t)ess_format_get_bits(m_eFormat);
 
 
   if(i2s_driver_install((i2s_port_t)0, &m_i2sConfig, 0, NULL) != ESP_OK) {
@@ -86,12 +91,16 @@ ess_error_t ess_i2s_generic_backend::open(const ess_format_t format) {
   }
   i2s_set_clk((i2s_port_t)0, m_i2sConfig.sample_rate,
                          m_i2sConfig.bits_per_sample,
-                        ( (ess_format_get_channels(format) == 2) ?
+                        ( (ess_format_get_channels(m_eFormat) == 2) ?
                           I2S_CHANNEL_STEREO :
                           I2S_CHANNEL_MONO) );
   m_bPaused = false;
 
-  return ess_backend::open(format);
+  m_bBlockingObjectRun = true;
+  m_bBlocking = true;
+  m_bInit = true;
+
+  return ess_backend::open();
 }
 
 
@@ -103,6 +112,67 @@ ess_error_t  ess_i2s_generic_backend::close(  ){
 
 const char* ess_i2s_generic_backend::get_info( ) {
   return "I2S Generic Backend";
+}
+
+
+
+ess_error_t IRAM_ATTR ess_i2s_generic_backend::update(void) {
+	ess_audio_block_t *block_left, *block_right;
+
+	if(m_isUsed) {
+		block_left = receiveReadOnly(0);  // input 0
+		block_right = receiveReadOnly(1); // input 1
+
+		switch(m_i2sConfig.bits_per_sample) {
+			case 16:
+				for(int i = 0; i < ESS_DEFAULT_AUDIO_PACKET_SIZE; i++) {
+					int16_t sample[2];
+						sample[0] = (block_left) ?  (int16_t)(block_left->data[i] * 32767.0f) : 0;
+						sample[1] = (block_right) ?  (int16_t)(block_right->data[i] * 32767.0f) : 0;
+
+					  m_iSampleBuffer[i] = (((sample[1]+ 0x8000)<<16) | ((sample[0]+ 0x8000) & 0xffff));
+				}
+				break;
+			case 24:
+				for(int i = 0; i < ESS_DEFAULT_AUDIO_PACKET_SIZE; i++) {
+						m_iSampleBuffer[i*2 + 1] = (block_left) ? (-((int32_t)(block_left->data[i] * 8388608.0f))) << 8 : 0;
+						m_iSampleBuffer[i*2] = (block_right) ?  (-((int32_t)(block_right->data[i] * 8388608.0f))) << 8 : 0;
+				}
+				break;
+			case 32:
+				for(int i = 0; i < ESS_DEFAULT_AUDIO_PACKET_SIZE; i++) {
+						m_iSampleBuffer[i*2 + 1] = (block_left) ?  ((int32_t)(block_left->data[i] * 1073741823.0f)) : 0;
+						m_iSampleBuffer[i*2] = (block_right) ?  ((int32_t)(block_right->data[i] * 1073741823.0f)) : 0;
+				}
+				break;
+			default:
+				break;
+		}
+
+		size_t totalBytesWritten = 0;
+		size_t bytesWritten = 0;
+		for(;;) {
+			switch(m_i2sConfig.bits_per_sample) {
+				case 16:
+					i2s_write(I2S_NUM_0, (const char*)&m_iSampleBuffer, (ESS_DEFAULT_AUDIO_PACKET_SIZE * sizeof(uint32_t)), &bytesWritten, portMAX_DELAY);		//Block but yield to other tasks
+					break;
+				case 24:
+				case 32:
+					i2s_write(I2S_NUM_0, (const char*)&m_iSampleBuffer, (ESS_DEFAULT_AUDIO_PACKET_SIZE * sizeof(uint32_t)) * 2, &bytesWritten, portMAX_DELAY);		//Block but yield to other tasks
+					break;
+				default:
+					break;
+			}
+			totalBytesWritten += bytesWritten;
+			if(totalBytesWritten >= (ESS_DEFAULT_AUDIO_PACKET_SIZE * sizeof(uint32_t)))
+				break;
+			vPortYield();
+		}
+
+		if (block_left) release(block_left);
+		if (block_right) release(block_right);
+	}
+  return ESS_OK;
 }
 
 #endif

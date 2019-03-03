@@ -39,21 +39,18 @@
 
 class generic_null_backend : public ess_backend {
 public:
-  generic_null_backend() : ess_backend(ESS_BACKEND_NAME_NULL) { }
+  generic_null_backend() : ess_backend(0, 0, ESS_BACKEND_NAME_NULL) { }
   ~generic_null_backend() { close(); }
 
-  virtual ess_error_t probe(const ess_format_t format) { return ESS_OK; }
-  virtual ess_error_t open(const ess_format_t format) { return ess_backend::open (format); }
+  virtual ess_error_t probe() { return ESS_OK; }
+  virtual ess_error_t open() { return ess_backend::open (); }
   virtual ess_error_t close() { return ess_backend::close (); }
-  virtual ess_error_t restart(const ess_format_t format) { return ESS_OK; }
-
-  virtual ess_error_t pause() { m_bPaused = true; return ESS_OK; }
-  virtual ess_error_t resume() { m_bPaused = false; return ESS_OK; }
-
-  virtual ess_error_t write(const void *buffer, unsigned int buf_size, unsigned int* wrote) { return ESS_OK; }
-  virtual ess_error_t read(void *buffer, unsigned int buf_size, unsigned int* readed) { return ESS_OK; }
 
   virtual const char* get_info() { return "generic_null_backend"; }
+
+  virtual ess_error_t update(void) {
+    return ESS_OK;
+  }
 protected:
   bool m_bPaused;
 };

@@ -48,22 +48,20 @@ public:
   generic_udp_backend();
   ~generic_udp_backend() { close(); }
 
-  virtual ess_error_t probe(const ess_format_t format); //
-  virtual ess_error_t open(const ess_format_t format) ; //
+  virtual ess_error_t probe(); //
+  virtual ess_error_t open() ; //
   virtual ess_error_t close();
-  virtual ess_error_t restart(const ess_format_t format) ; //
-
-  virtual ess_error_t pause() ;
-  virtual ess_error_t resume() ;
-
-  virtual ess_error_t write(const void *buffer, unsigned int buf_size, unsigned int* wrote) ;
-  virtual ess_error_t read(void *buffer, unsigned int buf_size, unsigned int* readed) { return ESS_ERROR; }
 
   virtual const char* get_info() { return "generic_udp_backend"; }
+
+  virtual ess_error_t update(void);
+
 protected:
   unsigned int send_packet(const void* data, unsigned int size);
 protected:
-  bool m_bPaused;
+  ess_audio_block_t *m_pInputQueueArray[2];
+	int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE * 2];
+
   ess_inet_dram_client* m_pClient;
   ess_format_t m_eFormat;
 };

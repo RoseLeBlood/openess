@@ -61,7 +61,7 @@ class ess_audio_stream {
   friend class ess_audio_conections;
 public:
   ess_audio_stream() { }
-  
+
 	ess_audio_stream(unsigned char ninput, ess_audio_block_t **iqueue, const std::string defaultName,
     ess_format_t format = ESS_DEFAULT_SERVER_FORMAT);
 
@@ -114,6 +114,8 @@ protected:
 	uint32_t m_iClocksPerUpdateMax;
 	uint32_t m_iClocksPerUpdateMin;
 	uint32_t m_iClocksPerSecond;
+
+	ess_format_t m_eFormat;
 private:
   static ess_audio_block_t *m_pMemoryPool;
 	static uint32_t m_pMemoryPoolAvbm[];
@@ -124,7 +126,7 @@ private:
 	ess_audio_conections *m_pDestList;
 	ess_audio_block_t **m_pInputQueue;
 	uint32_t m_uiClocksPerSecSum;
-  ess_format_t m_tFormat;
+
 };
 
 /**

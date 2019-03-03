@@ -43,7 +43,7 @@ ess_audio_stream::ess_audio_stream(unsigned char ninput, ess_audio_block_t **iqu
   m_bActive = false;
   m_bBlocking = false;
   m_pDestList = NULL;
-  m_tFormat = format;
+  m_eFormat = format;
 
   for (int i=0; i < m_ucNumInputs; i++) {
     m_pInputQueue[i] = NULL;

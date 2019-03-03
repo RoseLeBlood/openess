@@ -29,11 +29,11 @@
 #ifdef ESS_ENABLE_BACKEND_UDP
 #include "platform/generic_udp_backend.h"
 
-generic_udp_backend::generic_udp_backend() : ess_backend(ESS_BACKEND_NAME_UDP) {
-  m_bPaused = false;
+generic_udp_backend::generic_udp_backend() : ess_backend(2, m_pInputQueueArray, ESS_BACKEND_NAME_UDP) {
+
 }
-ess_error_t generic_udp_backend::probe(const ess_format_t format) {
-  switch (format) {
+ess_error_t generic_udp_backend::probe() {
+  switch (m_eFormat) {
     case ESS_FORMAT_MONO_44100_FLOAT_32 :
     case ESS_FORMAT_MONO_48000_FLOAT_32 :
     case ESS_FORMAT_MONO_96000_FLOAT_32 :
@@ -46,7 +46,7 @@ ess_error_t generic_udp_backend::probe(const ess_format_t format) {
   }
 
 }
-ess_error_t generic_udp_backend::open(const ess_format_t format)  {
+ess_error_t generic_udp_backend::open()  {
   #if ESS_BACKEND_UDP_PROTOCOL == ESS_PROTOCOL_UDP
     #if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
       m_pClient = new ess_inet_dram_client_ip4();
@@ -64,32 +64,11 @@ ess_error_t generic_udp_backend::open(const ess_format_t format)  {
   if(m_pClient == 0) return ESS_ERROR_OUTOFMEM;
 
 
-  return  m_pClient->is_socket() && ess_backend::open(format) ? ESS_OK : ESS_ERROR;
+  return  m_pClient->is_socket() && ess_backend::open() ? ESS_OK : ESS_ERROR;
 
 }
-ess_error_t generic_udp_backend::restart(const ess_format_t format)  {
-  m_eFormat = format;
-  return ESS_OK;
-}
-ess_error_t generic_udp_backend::write(const void *buffer, unsigned int buf_size, unsigned int* wrote) {
-  unsigned int  dat = send_packet(buffer, buf_size);
-  if(wrote) *wrote = dat;
-  return ESS_OK;
-}
-ess_error_t generic_udp_backend::pause() {
-  if(m_pClient == 0) return ESS_ERROR;
-  if(m_bPaused) return ESS_ERROR;
-  m_bPaused = true;
 
-  return ESS_OK;
-}
-ess_error_t generic_udp_backend::resume() {
-  if(m_pClient == 0) return ESS_ERROR;
-  if(!m_bPaused) return ESS_ERROR;
-  m_bPaused = false;
 
-  return ESS_OK;
-}
 ess_error_t generic_udp_backend::close() {
   if(m_pClient == 0) return ESS_ERROR;
 
@@ -100,11 +79,65 @@ ess_error_t generic_udp_backend::close() {
 unsigned int generic_udp_backend::send_packet(const void* data, unsigned int size) {
   if(m_pClient == 0) return -1;
 
-  m_pClient->sendto(ess_format_to_string(m_eFormat), ESS_BACKEND_UDP_SENDTO_HOST,
-    ESS_BACKEND_UDP_SENDTO_PORT);
   return m_pClient->sendto(data, size,  ESS_BACKEND_UDP_SENDTO_HOST,
     ESS_BACKEND_UDP_SENDTO_PORT);
-
 }
 
+ess_error_t  generic_udp_backend::update(void) {
+	ess_audio_block_t *block_left, *block_right;
+
+	if(m_isUsed) {
+		block_left = receiveReadOnly(0);  // input 0
+		block_right = receiveReadOnly(1); // input 1
+
+		switch( ess_format_get_bits(m_eFormat) ) {
+			case 16:
+				for(int i = 0; i < ESS_DEFAULT_AUDIO_PACKET_SIZE; i++) {
+					int16_t sample[2];
+						sample[0] = (block_left) ?  (int16_t)(block_left->data[i] * 32767.0f) : 0;
+						sample[1] = (block_right) ?  (int16_t)(block_right->data[i] * 32767.0f) : 0;
+
+					  m_iSampleBuffer[i] = (((sample[1]+ 0x8000)<<16) | ((sample[0]+ 0x8000) & 0xffff));
+				}
+				break;
+			case 24:
+				for(int i = 0; i < ESS_DEFAULT_AUDIO_PACKET_SIZE; i++) {
+						m_iSampleBuffer[i*2 + 1] = (block_left) ? (-((int32_t)(block_left->data[i] * 8388608.0f))) << 8 : 0;
+						m_iSampleBuffer[i*2] = (block_right) ?  (-((int32_t)(block_right->data[i] * 8388608.0f))) << 8 : 0;
+				}
+				break;
+			case 32:
+				for(int i = 0; i < ESS_DEFAULT_AUDIO_PACKET_SIZE; i++) {
+						m_iSampleBuffer[i*2 + 1] = (block_left) ?  ((int32_t)(block_left->data[i] * 1073741823.0f)) : 0;
+						m_iSampleBuffer[i*2] = (block_right) ?  ((int32_t)(block_right->data[i] * 1073741823.0f)) : 0;
+				}
+				break;
+			default:
+				break;
+		}
+
+		size_t totalBytesWritten = 0;
+		size_t bytesWritten = 0;
+		for(;;) {
+			switch( ess_format_get_bits(m_eFormat) ) {
+				case 16:
+					bytesWritten = send_packet(&m_iSampleBuffer, (ESS_DEFAULT_AUDIO_PACKET_SIZE * sizeof(uint32_t)) );		//Block but yield to other tasks
+					break;
+				case 24:
+				case 32:
+          bytesWritten = send_packet(m_iSampleBuffer, (ESS_DEFAULT_AUDIO_PACKET_SIZE * sizeof(uint32_t)) * 2);
+					break;
+				default:
+					break;
+			}
+			totalBytesWritten += bytesWritten;
+			if(totalBytesWritten >= (ESS_DEFAULT_AUDIO_PACKET_SIZE * sizeof(uint32_t)))
+				break;
+		}
+
+		if (block_left) release(block_left);
+		if (block_right) release(block_right);
+	}
+  return ESS_OK;
+}
 #endif

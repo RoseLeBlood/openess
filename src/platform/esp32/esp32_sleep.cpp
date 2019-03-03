@@ -18,14 +18,14 @@
  ****************************************************************************/
 
 /**
- * @file esp32_platform.cpp
+ * @file esp32_sleep.cpp
  * @author Anna Sopdia Schröck
  * @date 10 Februar 2019
  * @brief all esp32 generic platform functions source
  *
  */
 #include "ess.h"
-#include "ess_platform.h"
+#include "ess_sleep.h"
 #include  "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/event_groups.h"

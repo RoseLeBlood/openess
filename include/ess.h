@@ -26,12 +26,12 @@
 #ifndef _ESS_MAIN_HEADER_H_
 #define _ESS_MAIN_HEADER_H_
 
-#define OPEN_ESS_VERSION_0_5  5 // backends, platform, context
+#define OPEN_ESS_VERSION_0_5  5 // backends, platform
 #define OPEN_ESS_VERSION_1_0 10 // TODO: Future Plan - server, backends, platforms referen imp ready
 #define OPEN_ESS_VERSION_1_1 11  // TODO: Future Plan 11 - all platforms ready  -- MT Safe
 #define OPEN_ESS_VERSION_2_0  20 // TODO: Future Future Plan 2 - ??
 
-#define OPEN_ESS_VERSION 4 //OPEN_ESS_VERSION_0_5
+#define OPEN_ESS_VERSION OPEN_ESS_VERSION_0_5
 
 #include "config.h"
 

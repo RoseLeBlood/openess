@@ -49,8 +49,8 @@ public:
 
   virtual ~ess_backend() { }
 
-  virtual ess_error_t probe(const ess_format_t format) = 0;
-  virtual ess_error_t open(const ess_format_t format) {m_isUsed = true; m_eFormat = format; return ESS_OK; }
+  virtual ess_error_t probe() = 0;
+  virtual ess_error_t open() {m_isUsed = true;  return ESS_OK; }
   virtual ess_error_t close() {m_isUsed = false;  return ESS_OK; }
 
 
@@ -63,7 +63,6 @@ public:
   virtual int get_blksize() { return ESS_BUF_SIZE ; }
 protected:
   bool m_isUsed;
-  ess_format m_eFormat;
 };
 
 /**

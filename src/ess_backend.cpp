@@ -26,7 +26,7 @@
  */
 #include "ess_backend.h"
 
-#include "ess_context.h"
+
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>

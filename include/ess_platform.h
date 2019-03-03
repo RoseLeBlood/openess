@@ -17,65 +17,50 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
+
 /**
  * @file ess_platform.h
  * @author Anna Sopdia Schröck
- * @date 3 Februar 2019
- * @brief all basic platform specific functions
+ * @date 18 Februar 2019
+ * @brief platform backends combiunations with OpenESS
+ *
  *
  */
-#ifndef _ESS_PLATFORM_H_
-#define _ESS_PLATFORM_H_
+ /**
+ * @addtogroup platform
+ * @{
+ */
 
-#include "ess_error.h"
+#ifndef __ESS_CONTEXT_BACKEND_CON_H__
+#define __ESS_CONTEXT_BACKEND_CON_H__
+
+#include "config.h"
+#include "ess_backend_factory.h"
+
+#if ESS_PLATFORM_ESP32 == 1
+#include "platform/esp32/ess_platform_esp32.h"
+using ess_backend_t = ess_backend_factory<ess_backend_esp32>;
+
+#elif  ESS_PLATFORM_LINUX == 1
+#include "platform/linux/ess_platform_linux.h"
+using ess_backend_t = ess_backend_factory<ess_backend_linux>;
+
+#elif ESS_PLATFORM_RPI == 1
+#include "platform/rpi/ess_platform_rpi.h"
+using ess_backend_t = ess_backend_factory<ess_platform_rpi>;
+
+#elif ESS_PLATFORM_WINDOWS == 1
+#include "platform/windows/ess_platform_windows.h"
+using ess_backend_t = ess_backend_factory<ess_platform_windows>;
 
 
+#elif ESS_PLATFORM_USER == 1
+#include "platform/user/ess_platform_user.h"
+using ess_backend_t = ess_backend_factory<ess_platform_user>;
+#endif
 
-unsigned int ess_platform_get_ccount();
 
 /**
- * @brief get the time in milliseconds since the  scheduler started.
- * @retval >0  the time in milliseconds since the scheduler started.
- *@reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
- * @retval ESS_ERROR
- */
-unsigned int ess_platform_get_tick_count();
-/**
- * @brief Sleep for the specified number of seconds.
- * @param [in] secs the period in seconds for which to sleep.
- * @retval ESS_OK
- *@reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
- */
-ess_error_t ess_platform_sleep(unsigned int secs);
-
-/**
- * @brief Sleep for the specified number of useconds.
- * @param [in] secs the period in useconds for which to sleep.
- * @retval ESS_OK
- *@reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
- */
-int ess_platform_usleep(unsigned int usec);
-/**
- * @brief Sleep for the specified number of nanoseconds.
- * @param [in] req
- * @param [in] rem
- * @retval ESS_OK
- *@reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
- */
-int ess_platform_nsleep(const struct timespec *req, struct timespec *rem);
-
-/**
- * @brief get microseconds since start
- * @reval -1  function is for using platform not implantiert
- * @return the microseconds since start
- */
-unsigned long ess_platform_micros();
-/**
- * @brief get milliseconds since start
- * @reval -1  function is for using platform not implantiert
- * @return the milliseconds since start
- */
-unsigned long ess_platform_millis();
-
-
+* @}
+*/
 #endif

@@ -19,48 +19,28 @@
 
 
 /**
- * @file ess_context_backend.h
+ * @file ess_platform.cpp
  * @author Anna Sopdia Schröck
  * @date 18 Februar 2019
- * @brief platform backends combiunations with OpenESS
+ * @brief Contains  backend root class source
  *
  *
  */
- /**
- * @addtogroup context
- * @{
- */
 
-#ifndef __ESS_CONTEXT_BACKEND_CON_H__
-#define __ESS_CONTEXT_BACKEND_CON_H__
-
-#include "config.h"
 #include "ess_backend_factory.h"
 
-#if ESS_PLATFORM_ESP32 == 1
-#include "platform/esp32/ess_platform_esp32.h"
-using ess_backend_t = ess_backend_factory<ess_backend_esp32>;
 
-#elif  ESS_PLATFORM_LINUX == 1
-#include "platform/linux/ess_platform_linux.h"
-using ess_backend_t = ess_backend_factory<ess_backend_linux>;
+bool ess_backend_platform::add_backend(ess_backend* backend) {
+  if(backend == 0) return false;
 
-#elif ESS_PLATFORM_RPI == 1
-#include "platform/rpi/ess_platform_rpi.h"
-using ess_backend_t = ess_backend_factory<ess_platform_rpi>;
+  if( backend->probe() == ESS_OK)
+    m_lBackends.insert(std::pair<std::string, ess_backend*>(backend->get_name(), backend)) ;
+  return true;
+}
 
-#elif ESS_PLATFORM_WINDOWS == 1
-#include "platform/windows/ess_platform_windows.h"
-using ess_backend_t = ess_backend_factory<ess_platform_windows>;
+ess_backend* ess_backend_platform::get_backend(const std::string name) {
+  if(m_lBackends[name] == NULL) return 0;
+  if(m_lBackends[name]->is_used()) return 0;
 
-
-#elif ESS_PLATFORM_USER == 1
-#include "platform/user/ess_platform_user.h"
-using ess_backend_t = ess_backend_factory<ess_platform_user>;
-#endif
-
-
-/**
-* @}
-*/
-#endif
+  return m_lBackends[name];
+}
