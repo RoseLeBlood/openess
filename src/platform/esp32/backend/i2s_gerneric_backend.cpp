@@ -46,7 +46,9 @@
 
 
 
-ess_i2s_generic_backend::ess_i2s_generic_backend() : ess_backend(ESS_BACKEND_NAME_I2S_ESP32)  {
+ess_i2s_generic_backend::ess_i2s_generic_backend()
+  : ess_backend(2, m_pInputQueueArray, ESS_BACKEND_NAME_I2S_ESP32)   {
+
   m_i2sConfig.mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX);                                // Only TX
   m_i2sConfig.sample_rate = 48000;                                                                                       // Default: 48kHz
   m_i2sConfig.bits_per_sample = (i2s_bits_per_sample_t)16;                                                                                     //16-bit per channel
@@ -73,7 +75,6 @@ ess_error_t ess_i2s_generic_backend::open(const ess_format_t format) {
   m_i2sConfig.sample_rate = ess_format_get_samplerate(format);
   m_i2sConfig.bits_per_sample = (i2s_bits_per_sample_t)ess_format_get_bits(format);
 
-  printf("open %s (%s)\n", m_strName, ess_format_to_string(format));
 
   if(i2s_driver_install((i2s_port_t)0, &m_i2sConfig, 0, NULL) != ESP_OK) {
     ESP_LOGE("I2S", "i2s_driver_install");
@@ -98,34 +99,6 @@ ess_error_t  ess_i2s_generic_backend::close(  ){
   i2s_driver_uninstall((i2s_port_t)0);
 
   return ess_backend::close();
-}
-ess_error_t  ess_i2s_generic_backend::pause(    ){
-  m_bPaused = true;
-  return ESS_OK;
-}
-ess_error_t     ess_i2s_generic_backend::write( const void *buffer, unsigned int buf_size,  unsigned int* wrote  ){
-  if(m_bPaused) return ESS_ERROR_PAUSED;
-  i2s_write((i2s_port_t)0, buffer, buf_size, wrote, portMAX_DELAY);
-
-  return ESS_OK;
-}
-ess_error_t  ess_i2s_generic_backend::read( void *buffer, unsigned int buf_size, unsigned int* readed  ){
-  if(m_bPaused) return ESS_ERROR_PAUSED;
-
-  return ESS_ERROR;
-}
-
-ess_error_t  ess_i2s_generic_backend::resume(  ){
-  m_bPaused = false;
-  return ESS_OK;
-}
-ess_error_t  ess_i2s_generic_backend::restart(const ess_format_t format) {
-  i2s_set_clk((i2s_port_t)0, ess_format_get_samplerate(format) ,
-                         (i2s_bits_per_sample_t)ess_format_get_bits(format),
-                         (ess_format_get_channels(format) == 2) ?
-                          I2S_CHANNEL_STEREO :
-                          I2S_CHANNEL_MONO);
-  return ESS_OK;
 }
 
 const char* ess_i2s_generic_backend::get_info( ) {

@@ -44,6 +44,9 @@
 unsigned int ess_platform_get_tick_count() {
   return (uint32_t) (xTaskGetTickCount() * portTICK_PERIOD_MS);
 }
+unsigned int ess_platform_get_ccount() {
+  return xthal_get_ccount();
+}
 ess_error_t ess_platform_sleep(unsigned int secs) {
   vTaskDelay( (secs * 1000) / ((TickType_t) 1000 / configTICK_RATE_HZ));
   return ESS_OK;

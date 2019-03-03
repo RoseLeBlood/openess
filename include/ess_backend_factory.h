@@ -33,9 +33,9 @@
 #include "ess_backend.h"
 #include <map>
 
-#include "platform/generic_null_backend.h"
+//#include "platform/generic_null_backend.h"
 #ifdef ESS_ENABLE_BACKEND_UDP
-#include "platform/generic_udp_backend.h"
+//#include "platform/generic_udp_backend.h"
 #endif
 /**
 * @addtogroup backend
@@ -45,14 +45,14 @@
 class ess_backend_platform {
 public:
   ess_backend_platform() {
-    add_backend(new generic_null_backend());
+    //add_backend(new generic_null_backend());
     #ifdef ESS_ENABLE_BACKEND_UDP
-    add_backend(new generic_udp_backend());
+    //add_backend(new generic_udp_backend());
     #endif
 
   }
   virtual void create() = 0;
-  virtual ess_backend* get_backend(const char* name);
+  virtual ess_backend* get_backend(const std::string name);
 
   virtual std::string get_platform_name() = 0;
   virtual std::string get_factory_creater() = 0;
@@ -79,7 +79,7 @@ public:
     return *m_pInstance;
   }
 public:
-  ess_backend* get_backend(const char* name)  {
+  ess_backend* get_backend(const std::string& name)  {
     return m_pPlatform.get_backend(name);
   }
   std::map<std::string, ess_backend*>& get_backends() {

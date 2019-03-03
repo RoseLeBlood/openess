@@ -36,7 +36,7 @@ bool ess_backend_platform::add_backend(ess_backend* backend) {
   return true;
 }
 
-ess_backend* ess_backend_platform::get_backend(const char* name) {
+ess_backend* ess_backend_platform::get_backend(const std::string name) {
   if(m_lBackends[name] == NULL) return 0;
   if(m_lBackends[name]->is_used()) return 0;
 

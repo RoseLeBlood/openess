@@ -31,6 +31,7 @@
 
 
 
+unsigned int ess_platform_get_ccount();
 
 /**
  * @brief get the time in milliseconds since the  scheduler started.
@@ -46,6 +47,7 @@ unsigned int ess_platform_get_tick_count();
  *@reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
  */
 ess_error_t ess_platform_sleep(unsigned int secs);
+
 /**
  * @brief Sleep for the specified number of useconds.
  * @param [in] secs the period in useconds for which to sleep.

@@ -50,13 +50,8 @@ public:
   virtual ess_error_t probe(const ess_format_t format);
   virtual ess_error_t open(const ess_format_t format);
   virtual ess_error_t close();
-  virtual ess_error_t restart(const ess_format_t format);
 
-  virtual ess_error_t pause();
-  virtual ess_error_t resume();
-
-  virtual ess_error_t write(const void *buffer, unsigned int buf_size, unsigned int* wrote);
-  virtual ess_error_t read(void *buffer, unsigned int buf_size, unsigned int* readed);
+  virtual ess_error_t update(void) ;
 
   virtual const char* get_info();
 protected:
@@ -64,6 +59,9 @@ protected:
   bool m_bPaused;
   i2s_config_t m_i2sConfig;
   i2s_pin_config_t m_pinConfig;
+
+  ess_audio_block_t *m_pInputQueueArray[2];
+	int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE * 2];
 };
 
 /**
