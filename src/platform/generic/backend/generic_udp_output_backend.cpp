@@ -83,7 +83,7 @@ unsigned int generic_udp_output_backend::send_packet(const void* data, unsigned 
     ESS_BACKEND_UDP_SENDTO_PORT);
 }
 
-ess_error_t  generic_udp_output_backend::update(void) {
+ess_error_t  ESS_IRAM_ATTR generic_udp_output_backend::update(void) {
 	ess_audio_block_t *block_left, *block_right;
 
 	if(m_isUsed) {

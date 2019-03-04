@@ -57,7 +57,7 @@ int ess_platform_usleep(unsigned int usec) {
 	return ESS_OK;
 }
 
-int IRAM_ATTR ess_platform_nsleep(const struct timespec *req, struct timespec *rem) {
+int ESS_IRAM_ATTR ess_platform_nsleep(const struct timespec *req, struct timespec *rem) {
 	struct timeval start, end;
 
 	if ((req->tv_nsec < 0) || (req->tv_nsec > 999999999)) {

@@ -78,7 +78,7 @@ const char* i2s_generic_output_backend::get_info( ) {
 
 
 
-ess_error_t IRAM_ATTR i2s_generic_output_backend::update(void) {
+ess_error_t ESS_IRAM_ATTR i2s_generic_output_backend::update(void) {
 	ess_audio_block_t *block_left, *block_right;
 
 	if(m_isUsed) {

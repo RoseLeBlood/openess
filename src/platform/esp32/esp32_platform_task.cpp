@@ -116,7 +116,7 @@ ess_error_t ess_task::resume() {
 
   return ESS_OK;
 }
-void ess_task::int_task_stub(void* data) {
+void ESS_IRAM_ATTR ess_task::int_task_stub(void* data) {
   ess_task* task; task = (ess_task*)(data);
 
   task->continuemutex2.lock();

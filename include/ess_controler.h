@@ -34,8 +34,8 @@
 class ess_controler {
 public:
   ess_controler() { m_bCreated = false; }
-  virtual ~ess_controler() { destroy(); }
-  
+  virtual ~ess_controler() { destroy(0); }
+
   virtual ess_error_t setup(int flags) { return ESS_OK; }
   virtual ess_error_t destroy(int flags) { return ESS_OK; }
 protected:

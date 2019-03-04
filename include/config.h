@@ -62,6 +62,7 @@
 
 
 #if  ESS_PLATFORM_ESP32 == 1
+	#include "freertos/FreeRTOS.h"
 	#define ESS_CONFIG_NETWORK_ESP32 /**< esp32 using own network functions */
 	#define ESS_CONFIC_TASK_ESP32	/**< esp32 using own task functions */
 	#define ESS_CONFIG_RINGBUFFER_ESP32 /**< esp32 using own ringbuffer functions */
@@ -72,6 +73,8 @@
 	#define ESS_ENABLE_BACKEND_OUT_UDP/**< generic platform UDP backend available */
 
 	#define ESS_DEFAULT_SERVER_NAME "OpenESS-esp32" /**< basic server name*/
+
+	#define ESS_IRAM_ATTR IRAM_ATTR
 #endif // ESS_PLATFORM_ESP32
 
 #if ESS_PLATFORM_RPI == 1
@@ -83,6 +86,8 @@
 	/** @brief If defined then UDP backend available */
 	#define ESS_ENABLE_BACKEND_OUT_UDP
 	#define ESS_DEFAULT_SERVER_NAME "OpenESS-rpi"
+
+	#define ESS_IRAM_ATTR IRAM_ATTR
 #endif //ESS_PLATFORM_RPI
 
 #if ESS_PLATFORM_LINUX == 1
@@ -94,6 +99,8 @@
 	/** @brief If defined then UDP backend available */
 	#define ESS_ENABLE_BACKEND_OUT_UDP
 	#define ESS_DEFAULT_SERVER_NAME "OpenESS-linux"
+
+	#define ESS_IRAM_ATTR /* */
 #endif //ESS_PLATFORM_LINUX
 
 #if ESS_PLATFORM_WINDOWS == 1
@@ -106,6 +113,8 @@
 	/** @brief If defined then UDP backend available */
 	#define ESS_ENABLE_BACKEND_OUT_UDP
 	#define ESS_DEFAULT_SERVER_NAME "OpenESS-windows"
+
+	#define ESS_IRAM_ATTR /* */
 #endif //ESS_PLATFORM_WINDOWS
 
 

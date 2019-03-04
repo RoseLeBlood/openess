@@ -1,13 +1,13 @@
 #include "platform/esp32/i2s_controller.h"
 
 
-ess_error_t i2s_controller::setup(int flags = 0) {
+ess_error_t i2s_controller::setup(int flags) {
   if(m_bCreated) return ESS_OK;
 
   m_i2sConfig.sample_rate = ess_format_get_samplerate(ESS_DEFAULT_SERVER_FORMAT);
   m_i2sConfig.bits_per_sample = (i2s_bits_per_sample_t)ess_format_get_bits(ESS_DEFAULT_SERVER_FORMAT);
 
-  m_i2sConfig.mode = (i2s_mode_t) (I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_RX);                                /
+  m_i2sConfig.mode = (i2s_mode_t) (I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_RX);                                
   m_i2sConfig.channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT;                           //2-channels
   m_i2sConfig.communication_format =(i2s_comm_format_t)(I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB);
   m_i2sConfig.dma_buf_count = ESS_BACKEND_I2S_DMA_BUF_COUNT;
@@ -34,7 +34,7 @@ ess_error_t i2s_controller::setup(int flags = 0) {
                         ( (ess_format_get_channels(ESS_DEFAULT_SERVER_FORMAT) == 2) ?
                           I2S_CHANNEL_STEREO :
                           I2S_CHANNEL_MONO) );
-                          
+
   m_bCreated = true;
 
   return ESS_OK;

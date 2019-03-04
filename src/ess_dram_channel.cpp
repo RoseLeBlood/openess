@@ -23,6 +23,8 @@
  * @author Anna Sopdia Schröck
  * @date 04 März 2019
  */
+ #include "config.h"
+
 #include "ess_dram_channel.h"
 #include "ess_sleep.h"
 
@@ -81,7 +83,7 @@ void ess_dram_channel::onTask(ess_task*, void* userdata) {
     ess_platform_sleep(1);
   }
 }
-ess_error_t ess_dram_channel::update(void) {
+ess_error_t ESS_IRAM_ATTR ess_dram_channel::update(void) {
   ess_audio_block_t *new_left=NULL, *new_right=NULL;
   int i;
 
