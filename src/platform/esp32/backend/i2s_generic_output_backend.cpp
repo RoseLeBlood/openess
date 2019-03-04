@@ -49,7 +49,7 @@
 
 
 
-i2s_generic_output_backend::i2s_generic_output_backend(i2s_config_t i2sconfig)
+i2s_generic_output_backend::i2s_generic_output_backend(i2s_controller i2sconfig)
   : ess_backend(2, m_pInputQueueArray, ESS_BACKEND_NAME_OUT_I2S_ESP32)   {
     m_i2sConfig = i2sconfig;
 }
@@ -85,7 +85,7 @@ ess_error_t IRAM_ATTR i2s_generic_output_backend::update(void) {
 		block_left = receive_read_only(0);  // input 0
 		block_right = receive_read_only(1); // input 1
 
-		switch(m_i2sConfig.bits_per_sample) {
+		switch(m_i2sConfig.get_bits()) {
 			case 16:
 				for(int i = 0; i < ESS_DEFAULT_AUDIO_PACKET_SIZE; i++) {
 					int16_t sample[2];
@@ -114,7 +114,7 @@ ess_error_t IRAM_ATTR i2s_generic_output_backend::update(void) {
 		size_t totalBytesWritten = 0;
 		size_t bytesWritten = 0;
 		for(;;) {
-			switch(m_i2sConfig.bits_per_sample) {
+			switch(m_i2sConfig.get_bits()) {
 				case 16:
 					i2s_write(I2S_NUM_0, (const char*)&m_iSampleBuffer, (ESS_DEFAULT_AUDIO_PACKET_SIZE * sizeof(uint32_t)), &bytesWritten, portMAX_DELAY);		//Block but yield to other tasks
 					break;

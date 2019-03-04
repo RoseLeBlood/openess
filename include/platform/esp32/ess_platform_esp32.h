@@ -51,9 +51,7 @@ public:
   virtual std::string get_factory_creater();
 private:
 #ifdef ESS_ENABLE_BACKEND_OUT_I2S
-  ess_error_t install_i2s_sub_system();
-  i2s_config_t          m_i2sConfig;
-  i2s_pin_config_t   m_pinConfig;
+  i2s_controller m_i2sController;
 #endif
 
 };

@@ -59,7 +59,6 @@ public:
 
   virtual  bool add_backend(ess_backend* backend);
 
-
   std::map<std::string, ess_backend*>& get_backends() { return m_lBackends; }
 protected:
   std::map<std::string, ess_backend*> m_lBackends;

@@ -19,54 +19,28 @@
 
 
 /**
- * @file i2s_generic_output_backend.h
+ * @file ess_ontroler.h
  * @author Anna Sopdia Schröck
- * @date 18 Februar 20119
- * @brief the basic i2s_generic class
+ * @date 04 März 20119
+ * @brief generic platform hardware controller
  *
  *
  */
-#ifndef _ESS_PLATFORM_INC_ESP32_I2S_H_
-#define _ESS_PLATFORM_INC_ESP32_I2S_H_
+#ifndef _ESS_PLATFORM_CONTROLER_H_
+#define _ESS_PLATFORM_CONTROLER_H_
 
-/**
-* @addtogroup ess_platform_esp32
-* @{
-*/
+#include "ess.h"
 
-#include "ess_backend.h"
-#include "platform/esp32/i2s_controller.h"
-
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "driver/i2s.h"
-#include "esp_system.h"
-
-
-
-
-class i2s_generic_output_backend : public ess_backend {
+class ess_controler {
 public:
-  i2s_generic_output_backend(i2s_controller i2scontroller);
-  ~i2s_generic_output_backend();
-
-  virtual ess_error_t probe(ess_format_t format);
-  virtual ess_error_t open();
-  virtual ess_error_t close();
-
-  virtual ess_error_t update(void) ;
-
-  virtual const char* get_info();
+  ess_controler() { m_bCreated = false; }
+  virtual ~ess_controler() { destroy(); }
+  
+  virtual ess_error_t setup(int flags) { return ESS_OK; }
+  virtual ess_error_t destroy(int flags) { return ESS_OK; }
 protected:
-  void* m_pUserData;
-  bool m_bPaused;
-  i2s_controller m_i2sConfig;
-
-  ess_audio_block_t *m_pInputQueueArray[2];
-	int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE * 2];
+  bool m_bCreated;
 };
 
-/**
-* @}
-*/
+
 #endif

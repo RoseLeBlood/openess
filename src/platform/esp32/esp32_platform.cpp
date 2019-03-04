@@ -17,56 +17,32 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-
 /**
- * @file i2s_generic_output_backend.h
+ * @file ess_platform_esp32.cpp
  * @author Anna Sopdia Schröck
- * @date 18 Februar 20119
- * @brief the basic i2s_generic class
- *
+ * @date 30 Januar 2019
+ * @brief ess esp32 backend impl.
  *
  */
-#ifndef _ESS_PLATFORM_INC_ESP32_I2S_H_
-#define _ESS_PLATFORM_INC_ESP32_I2S_H_
 
-/**
-* @addtogroup ess_platform_esp32
-* @{
-*/
 
-#include "ess_backend.h"
-#include "platform/esp32/i2s_controller.h"
-
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "driver/i2s.h"
-#include "esp_system.h"
+#include "platform/esp32/ess_platform_esp32.h"
+#include "esp_log.h"
 
 
 
+ess_backend_esp32::ess_backend_esp32() {
 
-class i2s_generic_output_backend : public ess_backend {
-public:
-  i2s_generic_output_backend(i2s_controller i2scontroller);
-  ~i2s_generic_output_backend();
-
-  virtual ess_error_t probe(ess_format_t format);
-  virtual ess_error_t open();
-  virtual ess_error_t close();
-
-  virtual ess_error_t update(void) ;
-
-  virtual const char* get_info();
-protected:
-  void* m_pUserData;
-  bool m_bPaused;
-  i2s_controller m_i2sConfig;
-
-  ess_audio_block_t *m_pInputQueueArray[2];
-	int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE * 2];
-};
-
-/**
-* @}
-*/
-#endif
+}
+void ess_backend_esp32::create() {
+  #ifdef ESS_ENABLE_BACKEND_OUT_I2S
+  m_i2sController.setup(0);
+  add_backend(new i2s_generic_output_backend(m_i2sController));
+  #endif
+}
+std::string ess_backend_esp32::get_platform_name() {
+  return std::string("ESP32");
+}
+std::string ess_backend_esp32::get_factory_creater() {
+  return std::string("Anna_Sophia Schroeck - annasophia.schroeck@gmail.com");
+}
