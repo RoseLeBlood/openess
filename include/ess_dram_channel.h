@@ -52,11 +52,11 @@ public:
    * @param name the name of the channel
    * @param outputs number of outputs of this channel
    */
-  ess_dram_channel(const std::string& name, uint8_t outputs, const std::string& host,const int port)
+  ess_dram_channel(const std::string& name, uint8_t outputs ,const int port)
 #if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
-    : ess_dram_channel(name, outputs, host, port, ESS_SOCKET_FAMILY_IP4) { }
+    : ess_dram_channel(name, outputs, ESS_DEFAULT_SERVER_HOST, port, ESS_SOCKET_FAMILY_IP4) { }
 #else
-    : ess_dram_channel(name, outputs, host, port, ESS_SOCKET_FAMILY_IP6) { }
+    : ess_dram_channel(name, outputs, ESS_DEFAULT_SERVER_HOST, port, ESS_SOCKET_FAMILY_IP6) { }
 #endif
   ess_dram_channel(const std::string& name, uint8_t outputs, const std::string& host,const int port, ess_socket_fam fam)
     : ess_channel(name, outputs) { setup(host, port, fam); }

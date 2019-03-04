@@ -37,13 +37,37 @@ ess_error_t ess_dram_channel::setup(const std::string& host,const int port, ess_
   m_RingBuffer.create(m_sampleBufferSize, ESS_PLATFORM_RINGBUFFER_MODE_NOSPLIT);
   m_pSampleData = (float*)malloc(m_sampleBufferSize * sizeof(float) );
 
+  ess_task::set_user_data(this);
+
   if( m_pSocketServer->bind() == ESS_OK)
     return ess_task::start();
   else
     return ESS_ERROR;
 }
-void ess_dram_channel::onTask(ess_task* self, void* userdata) {
-  ess_dram_channel *task_self = static_cast<ess_dram_channel*>(self);
+ess_error_t ess_dram_channel::init()  {
+  if(!m_bConfigured) {
+
+    m_bConfigured = true;
+    m_bActive = true;
+  }
+   return ESS_OK;
+}
+ess_error_t ess_dram_channel::destroy() {
+  if(m_bConfigured) {
+
+
+    m_bTaskBufferRun = false;
+
+    while(ess_task::is_running() ) { }
+    m_bConfigured = false;
+    m_bActive = false;
+
+    m_RingBuffer.destroy();
+  }
+   return ESS_OK;
+}
+void ess_dram_channel::onTask(ess_task*, void* userdata) {
+  ess_dram_channel *task_self = static_cast<ess_dram_channel*>(userdata);
   if(task_self == 0) return;
 
   void* buffer = malloc(m_sampleBufferSize * sizeof(float) );
