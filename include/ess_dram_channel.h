@@ -19,46 +19,56 @@
 
 
 /**
- * @file ess_platform_esp32.h
+ * @file ess_channel.h
  * @author Anna Sopdia Schröck
- * @date 18 Februar 20119
- * @brief Contains the esp32 platform factory pool
+ * @date 04 März 2019
+ * @brief dram input network audio-stream
  *
  *
  */
-
  /**
- * @addtogroup ess_platform_esp32
+ * @addtogroup channel
  * @{
  */
+ #ifndef __ESS_DRAM_CHANNEL_H__
+ #define __ESS_DRAM_CHANNEL_H__
 
-#ifndef _ESS_PLATFORM_INC_ESP32_H_
-#define _ESS_PLATFORM_INC_ESP32_H_
+#include "ess_channel.h"
+#include "ess_inet_dram_server.h"
 
-#include "ess_platform_factory.h"
-
-#ifdef ESS_ENABLE_BACKEND_OUT_I2S
-#include "platform/esp32/i2s_generic_output_backend.h"
-#endif
-
-class ess_backend_esp32 : public ess_interface_platform {
+class ess_dram_channel : public ess_channel {
 public:
-  ess_backend_esp32();
+  /**
+   * @brief simple constructer for this dram channel without automatic soocket init
+   * @param name the name of the channel
+   * @param outputs number of outputs of this channel
+   */
+  ess_dram_channel(const std::string& name, uint8_t outputs)
+    : ess_channel(name, outputs) { }
+  /**
+   * @brief simple constructer for this dram channel without automatic soocket init
+   * @param name the name of the channel
+   * @param outputs number of outputs of this channel
+   */
+  ess_dram_channel(const std::string& name, uint8_t outputs, const std::string& host,const int port)
+    : ess_dram_channel(name, outputs, host, port, ESS_DEFAULT_SERVER_PROTOCOL) { }
+  ess_dram_channel(const std::string& name, uint8_t outputs, const std::string& host,const int port, ess_socket_fam fam)
+    : ess_channel(name, outputs) { setup(host, port, fam); }
 
-  virtual void create();
+  virtual ess_error_t setup(const std::string& host,const int port, ess_socket_fam fam);
 
-  virtual std::string get_platform_name();
-  virtual std::string get_factory_creater();
+  virtual ess_error_t init() ;
+  virtual ess_error_t destroy() ;
+  virtual void update(void);
+
+  ess_inet_dram_server* get_socket() { return m_pSocketServer; }
 private:
-#ifdef ESS_ENABLE_BACKEND_OUT_I2S
-  ess_error_t install_i2s_sub_system();
-  i2s_config_t          m_i2sConfig;
-  i2s_pin_config_t   m_pinConfig;
-#endif
-
+  ess_inet_dram_server* m_pSocketServer;
 };
+
 /**
 * @}
 */
+
 
 #endif

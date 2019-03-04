@@ -82,8 +82,8 @@ ess_error_t IRAM_ATTR i2s_generic_output_backend::update(void) {
 	ess_audio_block_t *block_left, *block_right;
 
 	if(m_isUsed) {
-		block_left = receiveReadOnly(0);  // input 0
-		block_right = receiveReadOnly(1); // input 1
+		block_left = receive_read_only(0);  // input 0
+		block_right = receive_read_only(1); // input 1
 
 		switch(m_i2sConfig.bits_per_sample) {
 			case 16:

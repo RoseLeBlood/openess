@@ -43,8 +43,8 @@
 static int task_id = 0;
 
 
-ess_task::ess_task(const char* taskName, void* param, unsigned int stackSize) {
-  m_strName[0] = '\0'; strncpy(m_strName, taskName, sizeof(m_strName) );
+ess_task::ess_task(const std::string& taskName, void* param, unsigned int stackSize) {
+  m_strName = taskName;
 
   m_uiStackSize = stackSize;
   m_pUserdata = param;
@@ -72,7 +72,7 @@ ess_error_t ess_task::start() {
   }
   runningMutex.unlock();
 
-  xTaskCreate( int_task_stub, m_strName, m_uiStackSize, this , m_iPriority,  &m_pHandle);
+  xTaskCreate( int_task_stub, m_strName.c_str(), m_uiStackSize, this , m_iPriority,  &m_pHandle);
 
   continuemutex.unlock();
 

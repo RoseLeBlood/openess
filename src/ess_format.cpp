@@ -49,12 +49,12 @@ format2human_t format_parse[] = {
   {   "ESS_FORMAT_STEREO_44100_16", 44100, 16, 2 },
   {  "ESS_FORMAT_STEREO_48000_16", 48000, 16, 2 },
   {  "ESS_FORMAT_STEREO_96000_16", 96000, 16, 2 },
-  {   "ESS_FORMAT_MONO_44100_FLOAT", 44100, 32, 1 },
-  {   "ESS_FORMAT_MONO_48000_FLOAT", 48000, 32, 1 },
-  {   "ESS_FORMAT_MONO_96000_FLOAT", 96000, 32, 1 },
-  {    "ESS_FORMAT_STEREO_44100_FLOAT", 44100, 32, 2 },
-  {   "ESS_FORMAT_STEREO_48000_FLOAT", 48000, 32, 2 },
-  {    "ESS_FORMAT_STEREO_96000_FLOAT", 96000, 32, 2 },
+  {   "ESS_FORMAT_MONO_44100_32", 44100, 32, 1 },
+  {   "ESS_FORMAT_MONO_48000_32", 48000, 32, 1 },
+  {   "ESS_FORMAT_MONO_96000_32", 96000, 32, 1 },
+  {    "ESS_FORMAT_STEREO_44100_32", 44100, 32, 2 },
+  {   "ESS_FORMAT_STEREO_48000_32", 48000, 32, 2 },
+  {    "ESS_FORMAT_STEREO_96000_32", 96000, 32, 2 },
 };
 
 int ess_format_get_channels(const ess_format_t format) {
@@ -91,12 +91,12 @@ int ess_format_get_sample_size(const ess_format_t format) {
       case ESS_FORMAT_STEREO_48000_16 :
       case ESS_FORMAT_STEREO_96000_16 :
         return sizeof(int16_t);
-      case ESS_FORMAT_MONO_44100_FLOAT_32 :
-      case ESS_FORMAT_MONO_48000_FLOAT_32 :
-      case ESS_FORMAT_MONO_96000_FLOAT_32 :
-      case ESS_FORMAT_STEREO_44100_FLOAT_32 :
-      case ESS_FORMAT_STEREO_48000_FLOAT_32 :
-      case ESS_FORMAT_STEREO_96000_FLOAT_32 :
+      case ESS_FORMAT_MONO_44100_32 :
+      case ESS_FORMAT_MONO_48000_32 :
+      case ESS_FORMAT_MONO_96000_32 :
+      case ESS_FORMAT_STEREO_44100_32 :
+      case ESS_FORMAT_STEREO_48000_32 :
+      case ESS_FORMAT_STEREO_96000_32 :
         return sizeof(float);
       default: return -1;
   }

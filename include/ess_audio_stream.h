@@ -35,7 +35,7 @@
  * @date 03 März 2019
  * @brief audio stream
  *
- *
+ * Rename AudioStream to ess_audio_stream
  */
  /**
  * @addtogroup stream
@@ -85,12 +85,16 @@ public:
   static void update_all();
   static void initialize_memory(ess_audio_block_t *data, unsigned int num);
 
+	virtual std::string get_name() { return m_strName; }
+
   uint32_t get_clocks_per_update() { return m_iClocksPerUpdate; }
   uint32_t get_clocks_per_seconds() { return m_iClocksPerSecond; }
   uint32_t get_clocks_per_update_min() { return m_iClocksPerUpdateMin; }
   uint32_t get_clocks_per_update_max() { return m_iClocksPerUpdateMax; }
   static uint16_t get_mem_used() { return m_uMemoryUsed; }
   static uint16_t get_mem_umax() { return m_uMemoryUsedMax; }
+
+	virtual void set_name(const std::string& value) { m_strName = value; }
 
   void set_clocks_per_update(uint32_t value) { m_iClocksPerUpdate = value; }
   void set_clocks_per_seconds(uint32_t value) { m_iClocksPerSecond = value; }
@@ -99,10 +103,12 @@ public:
   static void  set_mem_used(uint16_t value) { m_uMemoryUsed = value; }
   static void set_mem_umax(uint16_t value) { m_uMemoryUsedMax = value; }
 
+
+
 protected:
 	void transmit(ess_audio_block_t *block, unsigned char index = 0);
-	ess_audio_block_t * receiveReadOnly(unsigned int index = 0);
-	ess_audio_block_t * receiveWritable(unsigned int index = 0);
+	ess_audio_block_t * receive_read_only(unsigned int index = 0);
+	ess_audio_block_t * receive_writable(unsigned int index = 0);
 
   static ess_audio_block_t * allocate(void);
 	static void release(ess_audio_block_t * block);

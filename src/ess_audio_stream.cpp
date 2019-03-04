@@ -159,7 +159,7 @@ void ess_audio_stream::transmit(ess_audio_block_t *block, unsigned char index) {
 		}
 	}
 }
-ess_audio_block_t * ess_audio_stream::receiveReadOnly(unsigned int index) {
+ess_audio_block_t * ess_audio_stream::receive_read_only(unsigned int index) {
 	ess_audio_block_t *in;
 
 	if (index >= m_ucNumInputs) return NULL;
@@ -168,7 +168,7 @@ ess_audio_block_t * ess_audio_stream::receiveReadOnly(unsigned int index) {
 	return in;
 }
 
-ess_audio_block_t * ess_audio_stream::receiveWritable(unsigned int index) {
+ess_audio_block_t * ess_audio_stream::receive_writable(unsigned int index) {
 	ess_audio_block_t *in, *p;
 
 	if (index >= m_ucNumInputs) return NULL;

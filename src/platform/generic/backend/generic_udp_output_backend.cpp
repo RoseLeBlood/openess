@@ -34,12 +34,12 @@ generic_udp_output_backend::generic_udp_output_backend() : ess_backend(2, m_pInp
 }
 ess_error_t generic_udp_output_backend::probe(ess_format_t format) {
   switch (format) {
-    case ESS_FORMAT_MONO_44100_FLOAT_32 :
-    case ESS_FORMAT_MONO_48000_FLOAT_32 :
-    case ESS_FORMAT_MONO_96000_FLOAT_32 :
-    case ESS_FORMAT_STEREO_44100_FLOAT_32 :
-    case ESS_FORMAT_STEREO_48000_FLOAT_32 :
-    case ESS_FORMAT_STEREO_96000_FLOAT_32 :
+    case ESS_FORMAT_MONO_44100_32 :
+    case ESS_FORMAT_MONO_48000_32 :
+    case ESS_FORMAT_MONO_96000_32 :
+    case ESS_FORMAT_STEREO_44100_32 :
+    case ESS_FORMAT_STEREO_48000_32 :
+    case ESS_FORMAT_STEREO_96000_32 :
       return ESS_ERROR_WRONG_FORMAT;
     default:
       return ESS_OK;
@@ -87,8 +87,8 @@ ess_error_t  generic_udp_output_backend::update(void) {
 	ess_audio_block_t *block_left, *block_right;
 
 	if(m_isUsed) {
-		block_left = receiveReadOnly(0);  // input 0
-		block_right = receiveReadOnly(1); // input 1
+		block_left = receive_read_only(0);  // input 0
+		block_right = receive_read_only(1); // input 1
 
 		switch( ess_format_get_bits(m_eFormat) ) {
 			case 16:

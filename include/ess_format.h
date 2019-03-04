@@ -35,22 +35,22 @@
 typedef enum ess_format {
    ESS_FORMAT_MONO_44100_8 =                             0 , /**< samplerate 44100   8 Bit Mono */
    ESS_FORMAT_MONO_44100_16 =                            1 , /**< samplerate 44100 16 Bit Mono */
-   ESS_FORMAT_MONO_44100_FLOAT_32 =                          2 , /**< samplerate 44100 32 Bit Mono */
+   ESS_FORMAT_MONO_44100_32 =                          2 , /**< samplerate 44100 32 Bit Mono */
    ESS_FORMAT_MONO_48000_8   =                          3 , /**< samplerate 48000   8 Bit Mono */
    ESS_FORMAT_MONO_48000_16 =                          4 , /**< samplerate 48000 16 Bit Mono */
-   ESS_FORMAT_MONO_48000_FLOAT_32 =                          5 , /**< samplerate 48000 32 Bit Mono */
+   ESS_FORMAT_MONO_48000_32 =                          5 , /**< samplerate 48000 32 Bit Mono */
    ESS_FORMAT_MONO_96000_8  =                           6 , /**< samplerate 96000   8 Bit Mono */
    ESS_FORMAT_MONO_96000_16 =                          7, /**< samplerate 96000 16 Bit Mono */
-   ESS_FORMAT_MONO_96000_FLOAT_32 =                          8, /**< samplerate 96000 32 Bit Mono */
+   ESS_FORMAT_MONO_96000_32 =                          8, /**< samplerate 96000 32 Bit Mono */
    ESS_FORMAT_STEREO_44100_8 =                          9 , /**< samplerate 44100   8 Bit Stereo */
    ESS_FORMAT_STEREO_44100_16 =                      10 , /**< samplerate 44100 16 Bit Stereo */
-   ESS_FORMAT_STEREO_44100_FLOAT_32 =                      11 , /**< samplerate 44100 32 Bit Stereo */
+   ESS_FORMAT_STEREO_44100_32 =                      11 , /**< samplerate 44100 32 Bit Stereo */
    ESS_FORMAT_STEREO_48000_8 =                        12 , /**< samplerate 48000   8 Bit Stereo */
    ESS_FORMAT_STEREO_48000_16 =                      13 , /**< samplerate 48000 16 Bit Stereo */
-   ESS_FORMAT_STEREO_48000_FLOAT_32 =              14, /**< samplerate 96000 32 Bit Stereo */
+   ESS_FORMAT_STEREO_48000_32 =              14, /**< samplerate 96000 32 Bit Stereo */
    ESS_FORMAT_STEREO_96000_8  =               15, /**< samplerate 96000   8 Bit Stereo */
    ESS_FORMAT_STEREO_96000_16 =              16, /**< samplerate 96000 16 Bit Stereo */
-   ESS_FORMAT_STEREO_96000_FLOAT_32 =              17, /**< samplerate 96000 32 Bit Stereo */
+   ESS_FORMAT_STEREO_96000_32 =              17, /**< samplerate 96000 32 Bit Stereo */
 
    ESS_FORMAT_MAX  = 18,
 } ess_format_t;

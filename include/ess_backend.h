@@ -54,8 +54,6 @@ public:
   virtual ess_error_t close() {m_isUsed = false;  return ESS_OK; }
 
 
-
-  virtual const std::string& get_name() { return m_strName; }
   virtual const char* get_info() = 0;
 
   virtual bool is_used() { return m_isUsed; }

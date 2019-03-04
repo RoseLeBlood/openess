@@ -19,7 +19,7 @@
 
 
 /**
- * @file ess_backend_factory.h
+ * @file ess_platform_factory.h
  * @author Anna Sopdia Schröck
  * @date 18 Februar 2019
  * @brief Contains backend factory template class and backend root class
@@ -42,9 +42,9 @@
 * @{
 */
 
-class ess_backend_platform {
+class ess_interface_platform {
 public:
-  ess_backend_platform() {
+  ess_interface_platform() {
     add_backend(new generic_null_backend());
     #ifdef ESS_ENABLE_BACKEND_UDP
     add_backend(new generic_udp_output_backend());
@@ -70,11 +70,11 @@ protected:
  * Embedded Sound System Backend factory. Backend vtable
  */
 template <class BACKEND>
-class ess_backend_factory {
+class ess_platform_factory {
 public:
-  static ess_backend_factory<BACKEND>& Instance() {
+  static ess_platform_factory<BACKEND>& Instance() {
     if(m_pInstance == nullptr) {
-      m_pInstance = new ess_backend_factory<BACKEND>();
+      m_pInstance = new ess_platform_factory<BACKEND>();
     }
     return *m_pInstance;
   }
@@ -86,15 +86,15 @@ public:
     return m_pPlatform.get_backends();
   }
 private:
-  ess_backend_factory() {
+  ess_platform_factory() {
     m_pPlatform.create();
   }
 private:
-  static ess_backend_factory<BACKEND> *m_pInstance ;
+  static ess_platform_factory<BACKEND> *m_pInstance ;
   BACKEND m_pPlatform;
 };
 template <class BACKEND>
-ess_backend_factory<BACKEND>* ess_backend_factory<BACKEND>::m_pInstance = 0;
+ess_platform_factory<BACKEND>* ess_platform_factory<BACKEND>::m_pInstance = 0;
 #endif
 /**
 * @}

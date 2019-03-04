@@ -31,32 +31,32 @@
  * @{
  */
 
-#ifndef __ESS_CONTEXT_BACKEND_CON_H__
-#define __ESS_CONTEXT_BACKEND_CON_H__
+#ifndef __ESS_PLATFORM_IMPL_H__
+#define __ESS_PLATFORM_IMPL_H__
 
 #include "config.h"
-#include "ess_backend_factory.h"
+#include "ess_platform_factory.h"
 
 #if ESS_PLATFORM_ESP32 == 1
 #include "platform/esp32/ess_platform_esp32.h"
-using ess_backend_t = ess_backend_factory<ess_backend_esp32>;
+using ess_platform = ess_platform_factory<ess_backend_esp32>;
 
 #elif  ESS_PLATFORM_LINUX == 1
 #include "platform/linux/ess_platform_linux.h"
-using ess_backend_t = ess_backend_factory<ess_backend_linux>;
+using ess_platform = ess_platform_factory<ess_backend_linux>;
 
 #elif ESS_PLATFORM_RPI == 1
 #include "platform/rpi/ess_platform_rpi.h"
-using ess_backend_t = ess_backend_factory<ess_platform_rpi>;
+using ess_platform = ess_platform_factory<ess_platform_rpi>;
 
 #elif ESS_PLATFORM_WINDOWS == 1
 #include "platform/windows/ess_platform_windows.h"
-using ess_backend_t = ess_backend_factory<ess_platform_windows>;
+using ess_platform = ess_platform_factory<ess_platform_windows>;
 
 
 #elif ESS_PLATFORM_USER == 1
 #include "platform/user/ess_platform_user.h"
-using ess_backend_t = ess_backend_factory<ess_platform_user>;
+using ess_platform = ess_platform_factory<ess_platform_user>;
 #endif
 
 

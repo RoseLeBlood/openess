@@ -18,69 +18,120 @@
  ****************************************************************************/
 
 /**
- * @file ess_platform.h
+ * @file ess_task.h
  * @author Anna Sopdia Schröck
  * @date 3 Februar 2019
  * @brief  platform specific task class
  *
  */
-#ifndef _H_
-#define _H_
+#ifndef _ESS_TASK_H_
+#define _ESS_TASK_H_
 
 #include "ess_error.h"
 #include "ess_mutex.h"
 
 class ess_task {
 public:
-  ess_task() { }
-  ess_task(const char* taskName, void* param, unsigned int stackSize);
-  virtual ~ess_task() { }
+  /**
+   * @brief simple constructer
+   *
+   * @retval ESS_OK
+   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
+   * @retval ESS_ERROR
+   */
+  ess_task()  : ess_task("ess_task", NULL, 4096){ }
+
+  /**
+   * @brief constructer for the task
+   *
+   * param [in] taskName the name of the task
+   * param[in] param the user daten of this task
+   * param [in] stackSize the n bytes for the task
+   *
+   * @retval ESS_OK
+   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
+   * @retval ESS_ERROR
+   */
+  ess_task(const std::string& taskName, void* param = NULL, unsigned int stackSize = 4096);
+  virtual ~ess_task() { destroy(); }
 
   /**
    * @brief start the task
    * @retval ESS_OK
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
    * @retval ESS_ERROR
-   * @retval ESS_ERROR_NULL 'esp_platform_task_t' task is null
    */
   ess_error_t start();
+
   /**
    * @brief delete the task
    * @retval ESS_OK
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
    * @retval ESS_ERROR
-   * @retval ESS_ERROR_NULL 'esp_platform_task_t' task is null
    */
   ess_error_t destroy();
 
 
   /**
    * @brief suspend the task
-   * @param[int] task The  pointer to the 'esp_platform_task_t' struct
    *
    * @retval ESS_OK
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
    * @retval ESS_ERROR
-   * @retval ESS_ERROR_NULL 'esp_platform_task_t' task is null
    */
   ess_error_t suspend();
   /**
    * @brief resume the task
-   * @param[int] task The  pointer to the 'esp_platform_task_t' struct
    *
    * @retval ESS_OK
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
    * @retval ESS_ERROR
-   * @retval ESS_ERROR_NULL 'esp_platform_task_t' task is null
    */
   ess_error_t resume();
 
+  /**
+   * @brief the virtual task functions
+   * @param[int] it self  of the task class
+   * @param[in] userdata the task userdaten
+   */
   virtual void onTask(ess_task* self, void* userdata) { }
 
+  /**
+   * @brief get the stack size
+   * @return the stack size
+   */
+  virtual unsigned int get_stack_size() { return m_uiStackSize; }
+  /**
+   * @brief get the platform handle
+   * @return the platform handle
+   */
+  virtual void* get_handle() { return m_pHandle; }
+  /**
+   * @brief get the task priority
+   * @return the task priority
+   */
+  virtual int get_priority() { return m_iPriority; }
+
+  /**
+   * @brief is the task running ?
+   * @return true when the task run
+   */
+  virtual bool is_running() { runningMutex.lock(); return m_bRunning; runningMutex.unlock();  }
+
+  /**
+   * @brief set the task priority
+   * @param [in] value the new task priority
+   */
+  virtual void set_prority(int value) { runningMutex.lock(); m_iPriority =  value; runningMutex.unlock();  }
+  /**
+   * @brief set the stack size
+   * @param [in] value the new stack size
+   */
+  virtual void set_stack_size(unsigned int value) { runningMutex.lock(); m_uiStackSize =  value; runningMutex.unlock();  }
 private:
   static void int_task_stub(void* data);
 protected:
-  char m_strName[16];
+  std::string m_strName;
   int m_iTaskId;
 
   void* m_pUserdata;
@@ -96,5 +147,19 @@ protected:
   ess_mutex continuemutex2;
 };
 
+using ess_task_wrapper_func = void (*)(void* userdata);
+
+/**
+  * simple c wrapper for c++ ess_task class
+**/
+class ess_task_wrapper : public ess_task {
+public:
+  ess_task_wrapper(ess_task_wrapper_func func, std::string name )
+    :  ess_task(name), m_pFunc(func) { }
+
+  virtual void onTask(ess_task* self, void* userdata) { if(m_pFunc) m_pFunc(userdata); }
+private:
+  ess_task_wrapper_func m_pFunc;
+};
 
 #endif
