@@ -49,7 +49,6 @@ public:
    * @retval ESS_OK no error
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
    * @retval ESS_ERROR unspec error
-   * @retval ESS_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
    */
   virtual ess_error_t create(unsigned int length,  ess_platform_ringbuffer_mode_t type);
 
@@ -59,7 +58,6 @@ public:
    * @retval ESS_OK no error
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
    * @retval ESS_ERROR unspec error
-   * @retval ESS_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
    */
   virtual ess_error_t destroy();
 
@@ -73,7 +71,6 @@ public:
    * @retval ESS_OK no error
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
    * @retval ESS_ERROR can't write
-   * @retval ESS_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
    */
   virtual ess_error_t write(void* data, unsigned int length, unsigned int ms);
 
@@ -85,7 +82,6 @@ public:
    * @retval ESS_OK yes
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
    * @retval ESS_ERROR no
-   * @retval ESS_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
    */
   virtual ess_error_t can_read(unsigned int ms);
 
@@ -97,7 +93,6 @@ public:
    *
    * @retval a pointer to the storage retrieved.
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
-   * @retval ESS_ERROR_NULL 'ess_platform_ringbuffer_t' rng is null
    */
   virtual void* read(unsigned int* length, unsigned int ms);
 protected:

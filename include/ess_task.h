@@ -128,6 +128,12 @@ public:
    * @param [in] value the new stack size
    */
   virtual void set_stack_size(unsigned int value) { runningMutex.lock(); m_uiStackSize =  value; runningMutex.unlock();  }
+protected:
+  /**
+   * @brief set the user data
+   * @param [in] value the new user data
+   */
+  virtual void set_user_data(void* value) { m_pUserdata = value; }
 private:
   static void int_task_stub(void* data);
 protected:

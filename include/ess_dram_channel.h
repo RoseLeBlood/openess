@@ -33,8 +33,10 @@
  #ifndef __ESS_DRAM_CHANNEL_H__
  #define __ESS_DRAM_CHANNEL_H__
 
+
 #include "ess_channel.h"
 #include "ess_inet_dram_server.h"
+#include "ess_ringbuffer.h"
 
 class ess_dram_channel : public ess_channel {
 public:
@@ -51,7 +53,11 @@ public:
    * @param outputs number of outputs of this channel
    */
   ess_dram_channel(const std::string& name, uint8_t outputs, const std::string& host,const int port)
-    : ess_dram_channel(name, outputs, host, port, ESS_DEFAULT_SERVER_PROTOCOL) { }
+#if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
+    : ess_dram_channel(name, outputs, host, port, ESS_SOCKET_FAMILY_IP4) { }
+#else
+    : ess_dram_channel(name, outputs, host, port, ESS_SOCKET_FAMILY_IP6) { }
+#endif
   ess_dram_channel(const std::string& name, uint8_t outputs, const std::string& host,const int port, ess_socket_fam fam)
     : ess_channel(name, outputs) { setup(host, port, fam); }
 
@@ -59,11 +65,16 @@ public:
 
   virtual ess_error_t init() ; // ess_channel
   virtual ess_error_t destroy() ; // ess_channel
-  virtual void update(void); // ess_audio_stream
+  virtual ess_error_t update(void); // ess_audio_stream
+
+  virtual void onTask(ess_task* self, void* userdata); // ess_task - fill the ringbuffer
 
   ess_inet_dram_server* get_socket() { return m_pSocketServer; }
 private:
   ess_inet_dram_server* m_pSocketServer;
+  ess_ringbuffer m_RingBuffer;
+
+  bool volatile m_bTaskBufferRun;
 };
 
 /**

@@ -47,7 +47,9 @@ public:
    * @param outputs number of outputs of this channel
    */
   explicit ess_channel(const std::string& name, int outputs = 2)
-    : ess_audio_stream(0, NULL, name), m_bConfigured(false), m_bActive(false), m_iOutputs(outputs) { }
+    : ess_audio_stream(0, NULL, name), m_bConfigured(false), m_bActive(false), m_iOutputs(outputs) {
+      m_sampleBufferSize = m_iOutputs * ESS_DEFAULT_AUDIO_PACKET_SIZE;
+  }
 
   /**
  * @brief basic destructor
@@ -100,6 +102,8 @@ protected:
   bool m_bActive;
 
   uint8_t m_iOutputs;
+  float* m_pSampleData;
+  unsigned int m_sampleBufferSize;
 };
 
 
