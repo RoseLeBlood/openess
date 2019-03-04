@@ -2,6 +2,8 @@
 
 
 ess_error_t i2s_controller::setup(int flags = 0) {
+  if(m_bCreated) return ESS_OK;
+
   m_i2sConfig.sample_rate = ess_format_get_samplerate(ESS_DEFAULT_SERVER_FORMAT);
   m_i2sConfig.bits_per_sample = (i2s_bits_per_sample_t)ess_format_get_bits(ESS_DEFAULT_SERVER_FORMAT);
 
@@ -32,6 +34,9 @@ ess_error_t i2s_controller::setup(int flags = 0) {
                         ( (ess_format_get_channels(ESS_DEFAULT_SERVER_FORMAT) == 2) ?
                           I2S_CHANNEL_STEREO :
                           I2S_CHANNEL_MONO) );
+                          
+  m_bCreated = true;
+
   return ESS_OK;
 }
 ess_error_t i2s_controller::destroy(int flags)  {
