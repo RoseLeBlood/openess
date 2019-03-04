@@ -33,13 +33,13 @@
  #ifndef __ESS_CHANNEL_H__
  #define __ESS_CHANNEL_H__
 
- #include "ess.h"
- #include "ess_error.h"
- #include "ess_format.h"
+#include "ess.h"
+#include "ess_error.h"
+#include "ess_format.h"
+#include "ess_task.h"
+#include "ess_audio_stream.h"
 
- #include "ess_audio_stream.h"
-
-class ess_channel : public ess_audio_stream {
+class ess_channel : public ess_audio_stream, public ess_task {
 public:
   /**
    * @brief basic constructer
