@@ -84,6 +84,9 @@ public:
   std::map<std::string, ess_backend*>& get_backends() {
     return m_pPlatform.get_backends();
   }
+  bool add_backend(ess_backend* backend) {
+    return m_pPlatform.add_backend(backend);
+  }
 private:
   ess_platform_factory() {
     m_pPlatform.create();

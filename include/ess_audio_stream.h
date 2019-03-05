@@ -52,6 +52,7 @@
 #include "ess_audio_conections.h"
 #include "ess_format.h"
 #include "ess_mutex.h"
+#include "ess_task.h"
 
 
 typedef struct ess_audio_block {

@@ -49,16 +49,16 @@ public:
 
   virtual ~ess_backend() { }
 
-  virtual ess_error_t probe(ess_format_t format) = 0;
+  virtual ess_error_t probe(ess_format_t format) { return ESS_ERROR; }
   virtual ess_error_t open() {m_isUsed = true;  return ESS_OK; }
   virtual ess_error_t close() {m_isUsed = false;  return ESS_OK; }
 
 
-  virtual const char* get_info() = 0;
-
+  virtual const char* get_info() { return ""; }
   virtual bool is_used() { return m_isUsed; }
-
   virtual int get_blksize() { return ESS_BUF_SIZE ; }
+
+  virtual ess_error_t update(void) { return ESS_ERROR; }
 protected:
   bool m_isUsed;
 };

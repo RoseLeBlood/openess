@@ -17,54 +17,49 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
+
 /**
- * @file ess.h
+ * @file ess_audio_system.h
  * @author Anna Sopdia Schröck
- * @date 2 Februar 2019
- * @brief the basic OpenESS header file
+ * @date 05 März 2019
+ * @brief ess audio system for auto update
+ *
+ *
  */
-#ifndef _ESS_MAIN_HEADER_H_
-#define _ESS_MAIN_HEADER_H_
+ /**
+ * @addtogroup stream
+ * @{
+ */
+ #ifndef __OPEN_ESS_AUDIO_SYSTEM_H__
+ #define __OPEN_ESS_AUDIO_SYSTEM_H__
 
-#define OPEN_ESS_VERSION_0_5  5 // backends, platform
-#define OPEN_ESS_VERSION_1_0 10 // TODO: Future Plan - server, backends, platforms referen imp ready
-#define OPEN_ESS_VERSION_1_1 11  // TODO: Future Plan 11 - all platforms ready  -- MT Safe
-#define OPEN_ESS_VERSION_2_0  20 // TODO: Future Future Plan 2 - ??
-
-#define OPEN_ESS_VERSION OPEN_ESS_VERSION_0_5
-
-#include "config.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <errno.h>
-#include <time.h>
-#include <sys/time.h>
-#include <sys/signal.h>
-
-#include <iostream>
-
-#include "ess_format.h"
-#include "ess_error.h"
-#include "ess_protocol.h"
-#include "ess_sleep.h"
-
-
-typedef enum ess_audio_channel {
-  ESS_AUDIO_CHANNEL_LEFT,
-  ESS_AUDIO_CHANNEL_RIGHT,
-  ESS_AUDIO_CHANNEL_REAR_LEFT,
-  ESS_AUDIO_CHANNEL_REAR_RIGHT,
-  ESS_AUDIO_CHANNEL_BACK_LEFT,
-  ESS_AUDIO_CHANNEL_BACK_RIGTH,
-  ESS_AUDIO_CHANNEL_CENTER,
-  ESS_AUDIO_CHANNEL_LFE,
-  ESS_AUDIO_CHANNEL_MAX,
-}ess_audio_channel_t;
+#include "ess.h"
+#include "ess_task.h"
+#include "ess_platform.h"
+#include "ess_audio_stream.h"
 
 
 
+
+class ess_audio_system : public ess_task {
+public:
+  ess_audio_system();
+
+  virtual ess_error_t  open_backend(const std::string name, ess_backend* bkd);
+  virtual ess_error_t  open_backend(const std::string name, ess_format_t format, ess_backend* bkd);
+
+  virtual ess_audio_conections  connect (ess_backend& source, ess_audio_channel_t sourceOutput,
+		ess_backend& destination, ess_audio_channel_t destinationInput);
+
+  virtual void onTask(ess_task* self, void* userdata);
+private:
+
+};
+
+
+/**
+* @}
+*/
 
 
 #endif
