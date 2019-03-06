@@ -39,19 +39,24 @@
 #include "ess_audio_stream.h"
 
 
-
-
 class ess_audio_system : public ess_task {
 public:
   ess_audio_system();
 
-  virtual ess_error_t  open_backend(const std::string name, ess_backend* bkd);
-  virtual ess_error_t  open_backend(const std::string name, ess_format_t format, ess_backend* bkd);
+  virtual ess_error_t  open_device(const std::string name, ess_output_stream* bkd);
+  virtual ess_error_t  open_device(const std::string name, ess_format_t format, ess_output_stream* bkd);
 
-  virtual ess_audio_conections  connect (ess_backend& source, ess_audio_channel_t sourceOutput,
-		ess_backend& destination, ess_audio_channel_t destinationInput);
+  virtual ess_audio_conections  connect (ess_audio_stream& source, ess_audio_stream& destination,
+    ess_audio_channel_t channel);
+
+  virtual ess_audio_conections  connect (ess_audio_stream& source, ess_audio_channel_t sourceOutput,
+		ess_audio_stream& destination, ess_audio_channel_t destinationInput);
 
   virtual void onTask(ess_task* self, void* userdata);
+
+  virtual ess_format_t get_format() { return ESS_DEFAULT_SERVER_FORMAT; }
+  virtual int get_block_size() { return ESS_DEFAULT_AUDIO_PACKET_SIZE; }
+
 private:
 
 };

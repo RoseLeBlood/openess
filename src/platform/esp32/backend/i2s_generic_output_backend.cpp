@@ -50,7 +50,7 @@
 
 
 i2s_generic_output_backend::i2s_generic_output_backend(i2s_controller i2sconfig)
-  : ess_backend(2, m_pInputQueueArray, ESS_BACKEND_NAME_OUT_I2S_ESP32)   {
+  : ess_output_stream(2, m_pInputQueueArray, ESS_BACKEND_NAME_OUT_I2S_ESP32)   {
     m_i2sConfig = i2sconfig;
 }
 i2s_generic_output_backend::~i2s_generic_output_backend() {
@@ -64,12 +64,12 @@ ess_error_t i2s_generic_output_backend::open() {
   m_bBlocking = true;
   m_bInit = true;
 
-  return ess_backend::open();
+  return ess_output_stream::open();
 }
 
 
 ess_error_t  i2s_generic_output_backend::close(  ){
-  return ess_backend::close();
+  return ess_output_stream::close();
 }
 
 const char* i2s_generic_output_backend::get_info( ) {

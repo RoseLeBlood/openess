@@ -35,7 +35,7 @@
 */
 
 #include "ess.h"
-#include "ess_backend.h"
+#include "ess_output_stream.h"
 #include "ess_inet_dram_client.h"
 
 /**
@@ -43,7 +43,7 @@
 *
 * send first the format (ess_format_t) as string then the data
 */
-class generic_udp_output_backend : public ess_backend { // TODO: in the future using multicast
+class generic_udp_output_backend : public ess_output_stream { // TODO: in the future using multicast
 public:
   generic_udp_output_backend();
   ~generic_udp_output_backend() { close(); }

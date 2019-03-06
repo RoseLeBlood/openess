@@ -37,7 +37,7 @@ ess_backend_esp32::ess_backend_esp32() {
 void ess_backend_esp32::create() {
   #ifdef ESS_ENABLE_BACKEND_OUT_I2S
   m_i2sController.setup(0);
-  add_backend(new i2s_generic_output_backend(m_i2sController));
+  add_device(new i2s_generic_output_backend(m_i2sController));
   #endif
 }
 std::string ess_backend_esp32::get_platform_name() {

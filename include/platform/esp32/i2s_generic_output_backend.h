@@ -34,7 +34,7 @@
 * @{
 */
 
-#include "ess_backend.h"
+#include "ess_output_stream.h"
 #include "platform/esp32/i2s_controller.h"
 
 #include "freertos/FreeRTOS.h"
@@ -45,7 +45,7 @@
 
 
 
-class i2s_generic_output_backend : public ess_backend {
+class i2s_generic_output_backend : public ess_output_stream {
 public:
   i2s_generic_output_backend(i2s_controller i2scontroller);
   ~i2s_generic_output_backend();

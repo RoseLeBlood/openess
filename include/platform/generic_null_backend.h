@@ -35,16 +35,16 @@
 */
 
 #include "ess.h"
-#include "ess_backend.h"
+#include "ess_output_stream.h"
 
-class generic_null_backend : public ess_backend {
+class generic_null_backend : public ess_output_stream {
 public:
-  generic_null_backend() : ess_backend(0, 0, ESS_BACKEND_NAME_OUT_NULL) { }
+  generic_null_backend() : ess_output_stream(0, 0, ESS_BACKEND_NAME_OUT_NULL) { }
   ~generic_null_backend() { close(); }
 
   virtual ess_error_t probe(ess_format_t format) { return ESS_OK; }
-  virtual ess_error_t open() { return ess_backend::open (); }
-  virtual ess_error_t close() { return ess_backend::close (); }
+  virtual ess_error_t open() { return ess_output_stream::open (); }
+  virtual ess_error_t close() { return ess_output_stream::close (); }
 
   virtual const char* get_info() { return "generic_null_backend"; }
 
