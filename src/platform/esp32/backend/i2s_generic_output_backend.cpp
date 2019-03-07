@@ -50,7 +50,7 @@
 
 
 i2s_generic_output_backend::i2s_generic_output_backend(i2s_controller i2sconfig)
-  : ess_output_stream(2, m_pInputQueueArray, ESS_BACKEND_NAME_OUT_I2S_ESP32)   {
+  : ess_output_stream<ESS_CHANNEL_FORMAT_STEREO>(ESS_BACKEND_NAME_OUT_I2S_ESP32)   {
     m_i2sConfig = i2sconfig;
 }
 i2s_generic_output_backend::~i2s_generic_output_backend() {
@@ -72,16 +72,11 @@ ess_error_t  i2s_generic_output_backend::close(  ){
   return ess_output_stream::close();
 }
 
-const char* i2s_generic_output_backend::get_info( ) {
-  return "I2S Generic Backend";
-}
-
 
 
 ess_error_t ESS_IRAM_ATTR i2s_generic_output_backend::update(void) {
 	ess_audio_block_t *block_left, *block_right;
 
-	if(m_isUsed) {
 		block_left = receive_read_only(0);  // input 0
 		block_right = receive_read_only(1); // input 1
 
@@ -133,7 +128,7 @@ ess_error_t ESS_IRAM_ATTR i2s_generic_output_backend::update(void) {
 
 		if (block_left) release(block_left);
 		if (block_right) release(block_right);
-	}
+	
   return ESS_OK;
 }
 

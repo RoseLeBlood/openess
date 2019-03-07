@@ -37,16 +37,14 @@
 #include "ess.h"
 #include "ess_output_stream.h"
 
-class generic_null_backend : public ess_output_stream {
+class generic_null_backend : public ess_output_stream<ESS_CHANNEL_FORMAT_MON0> {
 public:
-  generic_null_backend() : ess_output_stream(0, 0, ESS_BACKEND_NAME_OUT_NULL) { }
+  generic_null_backend() : ess_output_stream(ESS_BACKEND_NAME_OUT_NULL) { }
   ~generic_null_backend() { close(); }
 
   virtual ess_error_t probe(ess_format_t format) { return ESS_OK; }
   virtual ess_error_t open() { return ess_output_stream::open (); }
   virtual ess_error_t close() { return ess_output_stream::close (); }
-
-  virtual const char* get_info() { return "generic_null_backend"; }
 
   virtual ess_error_t update(void) {
     return ESS_OK;

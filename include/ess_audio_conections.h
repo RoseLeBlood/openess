@@ -42,27 +42,32 @@
 #ifndef __ESS_AUDIO_CONNECTIONS_H__
 #define __ESS_AUDIO_CONNECTIONS_H__
 
+#include "ess.h"
+
 class ess_audio_stream;
 
 class ess_audio_conections {
   friend class ess_audio_stream;
 public:
-	ess_audio_conections(ess_audio_stream &source, ess_audio_stream &destination)
-    : ess_audio_conections(source, 0, destination, 0) { }
-
-	ess_audio_conections(ess_audio_stream &source, unsigned char sourceOutput,
-		ess_audio_stream &destination, unsigned char destinationInput);
+  ess_audio_conections(ess_audio_stream &source, ess_audio_stream &destination);
+  ess_audio_conections(ess_audio_stream &source, ess_audio_stream &destination, ess_audio_channel_t n);
+	ess_audio_conections(ess_audio_stream &source, ess_audio_channel_t sourceOutput,
+		ess_audio_stream &destination, ess_audio_channel_t destinationInput);
 
 	~ess_audio_conections();
 
-	void disconnect(void);
-	void connect(void);
-protected:
-	ess_audio_stream &m_pSrc;
-	ess_audio_stream &m_pDst;
+	void connect(ess_audio_stream &source, ess_audio_channel_t sourceOutput,
+		ess_audio_stream &destination, ess_audio_channel_t destinationInput);
 
-	unsigned char m_iSrcIndex;
-	unsigned char m_iDestIndex;
+  void disconnect(void);
+
+  bool is_connected () { return m_bIsConnected; }
+protected:
+	ess_audio_stream& m_pSrc;
+	ess_audio_stream& m_pDst;
+
+	ess_audio_channel_t m_iSrcIndex;
+	ess_audio_channel_t m_iDestIndex;
 	ess_audio_conections *m_pNext;
 	bool m_bIsConnected;
 };

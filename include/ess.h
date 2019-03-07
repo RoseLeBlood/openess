@@ -52,7 +52,7 @@
 
 
 typedef enum ess_audio_channel {
-  ESS_AUDIO_CHANNEL_LEFT,
+  ESS_AUDIO_CHANNEL_LEFT = 0,
   ESS_AUDIO_CHANNEL_RIGHT,
   ESS_AUDIO_CHANNEL_REAR_LEFT,
   ESS_AUDIO_CHANNEL_REAR_RIGHT,
@@ -64,7 +64,14 @@ typedef enum ess_audio_channel {
 }ess_audio_channel_t;
 
 
-
+typedef enum  ess_audio_channel_format {
+  ESS_CHANNEL_FORMAT_MON0 = 1,
+  ESS_CHANNEL_FORMAT_STEREO = 2,
+  ESS_CHANNEL_FORMAT_2POINT1 = 3,
+  ESS_CHANNEL_FORMAT_QUAD = 4,
+  ESS_CHANNEL_FORMAT_5POINT1 = 6,
+  ESS_CHANNEL_FORMAT_7POINT1 = 8,
+}ess_audio_channel_format_t;
 
 
 #endif

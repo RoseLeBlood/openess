@@ -19,10 +19,10 @@
 
 
 /**
- * @file ess_audio_system.h
+ * @file ess_input_stream.h
  * @author Anna Sopdia Schröck
- * @date 05 März 2019
- * @brief ess audio system for auto update
+ * @date 07 März 2019
+ * @brief ESS generic input stream
  *
  *
  */
@@ -30,38 +30,26 @@
  * @addtogroup stream
  * @{
  */
- #ifndef __OPEN_ESS_AUDIO_SYSTEM_H__
- #define __OPEN_ESS_AUDIO_SYSTEM_H__
+#ifndef __ESS_INPUT_STREAM_H__
+#define __ESS_INPUT_STREAM_H__
 
-#include "ess.h"
-#include "ess_task.h"
-#include "ess_platform.h"
 #include "ess_audio_stream.h"
 
 
-class ess_audio_system : public ess_task {
+
+template <ess_audio_channel_format_t CFORMAT>
+class ess_input_stream: public ess_audio_stream {
 public:
-  ess_audio_system();
+  ess_input_stream() { }
+  ess_input_stream(const std::string& name) :
+    ess_audio_stream(0, NULL, name) {   }
 
-  virtual ess_error_t  open_device(const std::string name, ess_audio_stream*  bkd);
-  virtual ess_error_t  open_device(const std::string name, ess_format_t format,ess_audio_stream* bkd);
+  virtual ~ess_input_stream() { }
 
-  virtual ess_audio_conections  connect (ess_audio_stream& source, ess_audio_stream& destination,
-    ess_audio_channel_t channel);
+ virtual ess_audio_channel_format_t get_channel_format() { return CFORMAT; }
 
-  virtual ess_audio_conections  connect (ess_audio_stream& source, ess_audio_channel_t sourceOutput,
-		ess_audio_stream& destination, ess_audio_channel_t destinationInput);
-
-  virtual void onTask(ess_task* self, void* userdata);
-
-  virtual ess_format_t get_format() { return ESS_DEFAULT_SERVER_FORMAT; }
-  virtual int get_block_size() { return ESS_DEFAULT_AUDIO_PACKET_SIZE; }
-
-  virtual ess_error_t add_input_stream(ess_audio_stream* bkd);
-private:
-  ess_audio_stream *m_pRootStream;
+ virtual ess_stream_type_t get_type() { return ESS_INPUT_STREAM; }
 };
-
 
 /**
 * @}

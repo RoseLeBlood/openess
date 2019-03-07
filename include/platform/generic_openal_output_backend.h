@@ -37,23 +37,19 @@
 #include "ess.h"
 #include "ess_output_stream.h"
 
-class generic_openal_output_backend : public ess_output_stream {
+class generic_openal_output_backend : public ess_output_stream<ESS_CHANNEL_FORMAT_MON0> {
 public:
-  generic_openal_output_backend() : ess_output_stream(2, m_pInputQueueArray, ESS_BACKEND_NAME_OUT_OPENAL) { }
+  generic_openal_output_backend() : ess_output_stream(ESS_BACKEND_NAME_OUT_OPENAL) { }
   ~generic_openal_output_backend() { }
 
   virtual ess_error_t probe(ess_format_t format) { return ESS_OK; }
   virtual ess_error_t open() { return ess_output_stream::open(); }
   virtual ess_error_t close() { return ess_output_stream::close(); }
 
-  virtual const char* get_info() { return "generic_openal_output_backend"; }
 
   virtual ess_error_t update(void) {
     return ESS_OK;
   }
-protected:
-  ess_audio_block_t *m_pInputQueueArray[2];
-	int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE * 2];
 };
 
 /**

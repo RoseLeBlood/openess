@@ -43,24 +43,19 @@
 *
 * send first the format (ess_format_t) as string then the data
 */
-class generic_udp_output_backend : public ess_output_stream { // TODO: in the future using multicast
+class generic_udp_output_backend : public ess_output_stream<ESS_CHANNEL_FORMAT_STEREO> { // TODO: in the future using multicast
 public:
   generic_udp_output_backend();
-  ~generic_udp_output_backend() { close(); }
+  ~generic_udp_output_backend() { }
 
   virtual ess_error_t probe(ess_format_t format); //
   virtual ess_error_t open() ; //
   virtual ess_error_t close();
 
-  virtual const char* get_info() { return "generic_udp_output_backend"; }
-
   virtual ess_error_t update(void);
 
 protected:
   unsigned int send_packet(const void* data, unsigned int size);
-protected:
-  ess_audio_block_t *m_pInputQueueArray[2];
-	int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE * 2];
 
   ess_inet_dram_client* m_pClient;
   ess_format_t m_eFormat;

@@ -45,7 +45,7 @@
 
 
 
-class i2s_generic_output_backend : public ess_output_stream {
+class i2s_generic_output_backend : public ess_output_stream<ESS_CHANNEL_FORMAT_STEREO> {
 public:
   i2s_generic_output_backend(i2s_controller i2scontroller);
   ~i2s_generic_output_backend();
@@ -56,14 +56,10 @@ public:
 
   virtual ess_error_t update(void) ;
 
-  virtual const char* get_info();
 protected:
   void* m_pUserData;
   bool m_bPaused;
   i2s_controller m_i2sConfig;
-
-  ess_audio_block_t *m_pInputQueueArray[2];
-	int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE * 2];
 };
 
 /**

@@ -32,6 +32,7 @@
 
 #include "ess_output_stream.h"
 #include <map>
+# include <memory>
 
 #include "platform/generic_null_backend.h"
 #ifdef ESS_ENABLE_BACKEND_OUT_UDP
@@ -47,21 +48,21 @@ public:
   ess_interface_platform() {
     add_device(new generic_null_backend());
     #ifdef ESS_ENABLE_BACKEND_UDP
-    add_device(new generic_udp_output_backend());
+    add_device( new generic_udp_output_backend());
     #endif
 
   }
   virtual void create() = 0;
-  virtual ess_output_stream* open_device(const std::string name);
+  virtual ess_audio_stream*  open_device(const std::string name);
 
   virtual std::string get_platform_name() = 0;
   virtual std::string get_factory_creater() = 0;
 
-  virtual  bool add_device(ess_output_stream* backend);
+  virtual  bool add_device(ess_audio_stream* backend);
 
-  std::map<std::string, ess_output_stream*>& get_backends() { return m_lBackends; }
+
 protected:
-  std::map<std::string, ess_output_stream*> m_lBackends;
+  std::map<std::string, ess_audio_stream* > m_lBackends;
 };
 /**
  * @brief ess backend factory
@@ -80,14 +81,11 @@ public:
     return *m_pInstance;
   }
 public:
-  ess_output_stream* open_device(const std::string& name)  {
+  ess_audio_stream* open_device(const std::string& name)  {
     return m_pPlatform.open_device(name);
   }
-  std::map<std::string, ess_output_stream*>& get_backends() {
-    return m_pPlatform.get_backends();
-  }
-  bool add_device(ess_output_stream* backend) {
-    return m_pPlatform.add_backend(backend);
+  bool add_device(ess_audio_stream* backend) {
+    return m_pPlatform.add_device(backend);
   }
   ess_platform_t get_platform() {
     return m_pPlatform;

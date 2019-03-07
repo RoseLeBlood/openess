@@ -29,7 +29,8 @@
 #ifdef ESS_ENABLE_BACKEND_OUT_UDP
 #include "platform/generic_udp_output_backend.h"
 
-generic_udp_output_backend::generic_udp_output_backend() : ess_output_stream(2, m_pInputQueueArray, ESS_BACKEND_NAME_OUT_UDP) {
+generic_udp_output_backend::generic_udp_output_backend()
+  : ess_output_stream<ESS_CHANNEL_FORMAT_STEREO>(ESS_BACKEND_NAME_OUT_UDP) {
 
 }
 ess_error_t generic_udp_output_backend::probe(ess_format_t format) {
@@ -86,7 +87,7 @@ unsigned int generic_udp_output_backend::send_packet(const void* data, unsigned 
 ess_error_t  ESS_IRAM_ATTR generic_udp_output_backend::update(void) {
 	ess_audio_block_t *block_left, *block_right;
 
-	if(m_isUsed && m_pClient->is_socket() ) {
+	if(m_pClient->is_socket() ) {
 		block_left = receive_read_only(0);  // input 0
 		block_right = receive_read_only(1); // input 1
 

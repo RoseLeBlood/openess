@@ -30,18 +30,18 @@
 #include "ess_platform_factory.h"
 
 
-bool ess_interface_platform::add_device(ess_output_stream* backend) {
+bool ess_interface_platform::add_device(ess_audio_stream* backend) {
   if(backend == 0) return false;
 
   if( backend->probe(ESS_DEFAULT_SERVER_FORMAT) == ESS_OK)
-    m_lBackends.insert(std::pair<std::string, ess_output_stream*>(backend->get_name(), backend)) ;
+    m_lBackends.insert(std::pair<std::string, ess_audio_stream* >(backend->get_name(), backend)) ;
   else
     return false;
 
   return true;
 }
 
-ess_output_stream* ess_interface_platform::open_device(const std::string name) {
+ess_audio_stream* ess_interface_platform::open_device(const std::string name) {
   if(m_lBackends[name] == NULL) return 0;
   if(m_lBackends[name]->is_used()) return 0;
 

@@ -33,22 +33,37 @@
 
 #include <stdio.h>
 
-ess_audio_conections::ess_audio_conections(ess_audio_stream &source, unsigned char sourceOutput,
-  ess_audio_stream &destination, unsigned char destinationInput) : m_pSrc(source), m_pDst(destination) {
+ess_audio_conections::ess_audio_conections(ess_audio_stream &source, ess_audio_stream &destination)
+  : m_pSrc(source), m_pDst(destination) {
 
-  m_iSrcIndex = sourceOutput;
-  m_iDestIndex = destinationInput;
-  m_pNext = NULL;
+    m_iSrcIndex = ESS_AUDIO_CHANNEL_LEFT;
+    m_iDestIndex = ESS_AUDIO_CHANNEL_LEFT;
 
-  m_bIsConnected = false;
-  connect();
+    connect(source, ESS_AUDIO_CHANNEL_LEFT, destination, ESS_AUDIO_CHANNEL_LEFT);
+}
+ess_audio_conections::ess_audio_conections(ess_audio_stream &source, ess_audio_stream &destination, ess_audio_channel_t n)
+  : m_pSrc(source), m_pDst(destination) {
+
+    m_iSrcIndex = n;
+    m_iDestIndex = n;
+
+    connect(source, n, destination, n);
+}
+ess_audio_conections::ess_audio_conections(ess_audio_stream &source, ess_audio_channel_t sourceOutput,
+  ess_audio_stream &destination, ess_audio_channel_t destinationInput)
+  : m_pSrc(source), m_pDst(destination) {
+
+    m_iSrcIndex = sourceOutput;
+    m_iDestIndex = destinationInput;
+
+    connect(source, sourceOutput, destination, destinationInput);
 }
 ess_audio_conections::~ess_audio_conections() {
   disconnect();
 }
 
-
-void ess_audio_conections::connect(void) {
+void ess_audio_conections::connect(ess_audio_stream& source, ess_audio_channel_t sourceOutput,
+  ess_audio_stream& destination, ess_audio_channel_t destinationInput)  {
 	ess_audio_conections *p;
 
 	if (m_bIsConnected) return;

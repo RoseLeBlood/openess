@@ -27,40 +27,28 @@
  *
  */
  /**
- * @addtogroup backend
+ * @addtogroup stream
  * @{
  */
-#ifndef __ESS_BACKEND_H__
-#define __ESS_BACKEND_H__
-
-#include "ess.h"
-#include "ess_error.h"
-#include "ess_format.h"
+#ifndef __ESS_OUTPUT_STREAM_H__
+#define __ESS_OUTPUT_STREAM_H__
 
 #include "ess_audio_stream.h"
 
 
-
+template <ess_audio_channel_format_t CFORMAT, unsigned int ABS = ESS_DEFAULT_AUDIO_PACKET_SIZE>
 class ess_output_stream: public ess_audio_stream {
 public:
   ess_output_stream() { }
-  ess_output_stream(unsigned char ninput, ess_audio_block_t **iqueue, const std::string& name) :
-    ess_audio_stream(ninput, iqueue, name) {  m_isUsed = false; }
+  ess_output_stream(const std::string& name) :
+    ess_audio_stream((unsigned char)CFORMAT, m_pInputQueueArray, name) {   }
 
   virtual ~ess_output_stream() { }
 
-  virtual ess_error_t probe(ess_format_t format) { return ESS_ERROR; }
-  virtual ess_error_t open() {m_isUsed = true;  return ESS_OK; }
-  virtual ess_error_t close() {m_isUsed = false;  return ESS_OK; }
-
-
-  virtual const char* get_info() { return ""; }
-  virtual bool is_used() { return m_isUsed; }
-  virtual int get_blksize() { return ESS_BUF_SIZE ; }
-
-  virtual ess_error_t update(void) { return ESS_ERROR; }
+  virtual ess_audio_channel_format_t get_channel_format() { return CFORMAT; }
 protected:
-  bool m_isUsed;
+  ess_audio_block_t *m_pInputQueueArray[CFORMAT];
+	int32_t m_iSampleBuffer[ABS * CFORMAT];
 };
 
 /**

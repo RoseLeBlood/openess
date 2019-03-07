@@ -55,6 +55,12 @@
 #include "ess_task.h"
 
 
+typedef enum ess_stream_type {
+  ESS_INPUT_STREAM,
+  ESS_OUTPUT_STREAM
+}ess_stream_type_t;
+
+
 typedef struct ess_audio_block {
 	uint8_t  count;
 	uint8_t  ressv;
@@ -62,61 +68,42 @@ typedef struct ess_audio_block {
   float    data[ESS_DEFAULT_AUDIO_PACKET_SIZE];
 } ess_audio_block_t;
 
-#define ess_audio_memory(num) ({ \
-	static ess_audio_block_t data[num]; \
-	ess_audio_stream::initialize_memory(data, num); \
-})
-
-#define ess_audio_memory_use() (ess_audio_stream::get_mem_used())
-#define ess_audio_memory_use_max() (ess_audio_stream::get_mem_umax())
-#define ess_audio_memory_use_max_reset() (ess_audio_stream::set_mem_umax(ess_audio_stream::get_mem_umax()))
-
 class ess_audio_stream {
   friend class ess_audio_conections;
+	friend class ess_audio_system;
 public:
   ess_audio_stream() { }
 
 	ess_audio_stream(unsigned char ninput, ess_audio_block_t **iqueue, const std::string defaultName,
     ess_format_t format = ESS_DEFAULT_SERVER_FORMAT);
 
-	bool is_active(void) { return m_bActive; }
 
-  virtual ess_error_t update(void) = 0;
+  virtual ess_error_t update(void) { return ESS_OK; }
 
-  static void update_all();
-  static void initialize_memory(ess_audio_block_t *data, unsigned int num);
+  virtual ess_error_t probe(ess_format_t format) { return ESS_ERROR; }
 
-	virtual std::string get_name() { return m_strName; }
-
-  uint32_t get_clocks_per_update() { return m_iClocksPerUpdate; }
-  uint32_t get_clocks_per_seconds() { return m_iClocksPerSecond; }
-  uint32_t get_clocks_per_update_min() { return m_iClocksPerUpdateMin; }
-  uint32_t get_clocks_per_update_max() { return m_iClocksPerUpdateMax; }
-  static uint16_t get_mem_used() { return m_uMemoryUsed; }
-  static uint16_t get_mem_umax() { return m_uMemoryUsedMax; }
-
-	virtual void set_name(const std::string& value) { m_strName = value; }
-
-  void set_clocks_per_update(uint32_t value) { m_iClocksPerUpdate = value; }
-  void set_clocks_per_seconds(uint32_t value) { m_iClocksPerSecond = value; }
-  void set_clocks_per_update_min(uint32_t value) { m_iClocksPerUpdateMin = value; }
-  void set_clocks_per_update_max(uint32_t value) { m_iClocksPerUpdateMax = value; }
-  static void  set_mem_used(uint16_t value) { m_uMemoryUsed = value; }
-  static void set_mem_umax(uint16_t value) { m_uMemoryUsedMax = value; }
+  virtual ess_error_t open() {m_bActive = true;  return ESS_OK; }
+  virtual ess_error_t close() {m_bActive = false;  return ESS_OK; }
 
 
+  virtual bool 												is_used() { return m_bActive; }
+	bool 																	 is_active(void) { return m_bActive; }
 
+  virtual int 													get_blksize() { return ESS_DEFAULT_AUDIO_PACKET_SIZE ; }
+  virtual ess_stream_type_t	 get_type() { return ESS_OUTPUT_STREAM; }
+	virtual std::string 							get_info();
+	virtual std::string						 		get_name() { return m_strName; }
+
+
+	virtual void 												set_name(const std::string& value) { m_strName = value; }
 protected:
 	void transmit(ess_audio_block_t *block, unsigned char index = 0);
 	ess_audio_block_t * receive_read_only(unsigned int index = 0);
 	ess_audio_block_t * receive_writable(unsigned int index = 0);
 
-  static ess_audio_block_t * allocate(void);
-	static void release(ess_audio_block_t * block);
-
-
+  ess_audio_block_t * allocate(void);
+	void release(ess_audio_block_t * block);
 protected:
-  static ess_audio_stream *m_pFirstUpdate;
   static bool m_bBlockingObjectRun;
 
 	std::string m_strName;
@@ -127,27 +114,10 @@ protected:
 	unsigned char m_ucNumInputs;
 	uint8_t m_ucNumConn;
 
-  static uint16_t m_uMemoryUsed;
-	static uint16_t m_uMemoryUsedMax;
-
-	uint32_t m_iClocksPerUpdate;
-	uint32_t m_iClocksPerUpdateMax;
-	uint32_t m_iClocksPerUpdateMin;
-	uint32_t m_iClocksPerSecond;
-
 	ess_format_t m_eFormat;
-	static ess_mutex m_pUpdateMutex;
 private:
-  static ess_audio_block_t *m_pMemoryPool;
-	static uint32_t m_pMemoryPoolAvbm[];
-	static uint16_t m_pMemoryPoolFirst;
-
-
-
 	ess_audio_conections *m_pDestList;
 	ess_audio_block_t **m_pInputQueue;
-	uint32_t m_uiClocksPerSecSum;
-
 };
 
 /**
