@@ -28,32 +28,28 @@
  */
 
  /**
- * @addtogroup ess_platform_esp32
+ * @addtogroup platform
  * @{
  */
 
 #ifndef _ESS_PLATFORM_INC_ESP32_H_
 #define _ESS_PLATFORM_INC_ESP32_H_
 
-#include "ess_platform_factory.h"
+#include "config.h"
+#include "i2s_controller.h"
+#include "ess_format.h"
 
-#ifdef ESS_ENABLE_BACKEND_OUT_I2S
-#include "platform/esp32/i2s_generic_output_backend.h"
-#endif
-
-class ess_backend_esp32 : public ess_interface_platform {
+class ess_platform_esp32  {
 public:
-  ess_backend_esp32();
+  ess_platform_esp32();
+  void create();
 
-  virtual void create();
-
-  virtual std::string get_platform_name();
-  virtual std::string get_factory_creater();
+  static ess_format_t get_format() { return ESS_DEFAULT_SERVER_FORMAT; }
+  static unsigned char get_bits() { return ess_format_get_bits(ESS_DEFAULT_SERVER_FORMAT); }
+  static unsigned char get_samplerate() { return ess_format_get_samplerate(ESS_DEFAULT_SERVER_FORMAT); }
+  static unsigned char channels() { return ess_format_get_channels(ESS_DEFAULT_SERVER_FORMAT); }
 private:
-#ifdef ESS_ENABLE_BACKEND_OUT_I2S
   i2s_controller m_i2sController;
-#endif
-
 };
 /**
 * @}

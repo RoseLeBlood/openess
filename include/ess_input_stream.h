@@ -37,8 +37,8 @@
 
 
 
-template <ess_audio_channel_format_t CFORMAT>
-class ess_input_stream: public ess_audio_stream {
+template <ess_audio_channel_format_t CFORMAT, unsigned int ABS = ESS_DEFAULT_AUDIO_PACKET_SIZE>
+class ess_input_stream : public ess_audio_stream {
 public:
   ess_input_stream() { }
   ess_input_stream(const std::string& name) :
@@ -49,6 +49,8 @@ public:
  virtual ess_audio_channel_format_t get_channel_format() { return CFORMAT; }
 
  virtual ess_stream_type_t get_type() { return ESS_INPUT_STREAM; }
+protected:
+  int32_t m_iSampleBuffer[ABS * CFORMAT];
 };
 
 /**

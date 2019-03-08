@@ -139,12 +139,13 @@
 	#define ESS_BACKEND_I2S_DMA_BUF_COUNT 3
 #endif
 
-#define ESS_BACKEND_NAME_OUT_I2S_ESP32 			 		"/dev/i2s0:0"
-#define ESS_BACKEND_NAME_OUT_NULL									 "/dev/null0:0"
-#define ESS_BACKEND_NAME_OUT_UDP								 		"/dev/udp0:0"
-#define ESS_BACKEND_NAME_OUT_OPENAL	 					 "/dev/openal0:0"
+#define ESS_BACKEND_NAME_OUT_I2S_ESP32 			 		"i2s0:0"
+#define ESS_BACKEND_NAME_OUT_NULL									 "out_null"
+#define ESS_BACKEND_NAME_OUT_UDP								 		"udp0:0"
+#define ESS_BACKEND_NAME_OUT_OPENAL	 					 "openal0:0"
 
-#define ESS_BACKEND_NAME_IN_I2S_ESP32 			 	  "/dev/i2s0:1"
-#define ESS_BACKEND_NAME_IN_OPENAL	 					  "/dev/openal0:1"
+#define ESS_INPUT_STREAM_I2S_ESP32 			 	  "i2s0:1"
+#define ESS_INPUT_STREAM_OPENAL	 					  "openal0:1"
+#define ESS_INPUT_STREAM_NULL	 					  		"in_null"
 
 #endif

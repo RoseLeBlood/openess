@@ -47,19 +47,14 @@
 
 class i2s_generic_output_backend : public ess_output_stream<ESS_CHANNEL_FORMAT_STEREO> {
 public:
-  i2s_generic_output_backend(i2s_controller i2scontroller);
+  i2s_generic_output_backend();
   ~i2s_generic_output_backend();
-
-  virtual ess_error_t probe(ess_format_t format);
-  virtual ess_error_t open();
-  virtual ess_error_t close();
 
   virtual ess_error_t update(void) ;
 
 protected:
   void* m_pUserData;
   bool m_bPaused;
-  i2s_controller m_i2sConfig;
 };
 
 /**

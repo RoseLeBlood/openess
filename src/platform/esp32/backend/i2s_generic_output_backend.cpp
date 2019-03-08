@@ -46,41 +46,27 @@
 #include <math.h>
 
 #include "esp_log.h"
+#include "platform/esp32/ess_platform_esp32.h"
 
 
-
-i2s_generic_output_backend::i2s_generic_output_backend(i2s_controller i2sconfig)
+i2s_generic_output_backend::i2s_generic_output_backend()
   : ess_output_stream<ESS_CHANNEL_FORMAT_STEREO>(ESS_BACKEND_NAME_OUT_I2S_ESP32)   {
-    m_i2sConfig = i2sconfig;
+
+    m_bBlockingObjectRun = true;
+    m_bBlocking = true;
+    m_bInit = true;
+
 }
 i2s_generic_output_backend::~i2s_generic_output_backend() {
 
 }
-ess_error_t i2s_generic_output_backend::probe(ess_format_t format) {
-  return ESS_OK;
-}
-ess_error_t i2s_generic_output_backend::open() {
-  m_bBlockingObjectRun = true;
-  m_bBlocking = true;
-  m_bInit = true;
-
-  return ess_output_stream::open();
-}
-
-
-ess_error_t  i2s_generic_output_backend::close(  ){
-  return ess_output_stream::close();
-}
-
-
-
 ess_error_t ESS_IRAM_ATTR i2s_generic_output_backend::update(void) {
 	ess_audio_block_t *block_left, *block_right;
 
 		block_left = receive_read_only(0);  // input 0
 		block_right = receive_read_only(1); // input 1
 
-		switch(m_i2sConfig.get_bits()) {
+		switch( ess_platform_esp32::get_bits() ) {
 			case 16:
 				for(int i = 0; i < ESS_DEFAULT_AUDIO_PACKET_SIZE; i++) {
 					int16_t sample[2];
@@ -109,7 +95,7 @@ ess_error_t ESS_IRAM_ATTR i2s_generic_output_backend::update(void) {
 		size_t totalBytesWritten = 0;
 		size_t bytesWritten = 0;
 		for(;;) {
-			switch(m_i2sConfig.get_bits()) {
+			switch(ess_platform_esp32::get_bits() ) {
 				case 16:
 					i2s_write(I2S_NUM_0, (const char*)&m_iSampleBuffer, (ESS_DEFAULT_AUDIO_PACKET_SIZE * sizeof(uint32_t)), &bytesWritten, portMAX_DELAY);		//Block but yield to other tasks
 					break;
@@ -128,7 +114,7 @@ ess_error_t ESS_IRAM_ATTR i2s_generic_output_backend::update(void) {
 
 		if (block_left) release(block_left);
 		if (block_right) release(block_right);
-	
+
   return ESS_OK;
 }
 

@@ -19,53 +19,55 @@
 
 
 /**
- * @file ess_audio_system.h
+ * @file ess_null_input_stream.h
  * @author Anna Sopdia Schröck
- * @date 05 März 2019
- * @brief ess audio system for auto update
+ * @date 07 März 2019
+ * @brief OpenESS Null input stream
  *
  *
  */
+ #ifndef _ESS_NULL_INPUT_STREAM_
+ #define _ESS_NULL_INPUT_STREAM_
  /**
- * @addtogroup stream
+ * @addtogroup input_stream
  * @{
  */
- #ifndef __OPEN_ESS_AUDIO_SYSTEM_H__
- #define __OPEN_ESS_AUDIO_SYSTEM_H__
 
-#include "ess.h"
-#include "ess_task.h"
-#include "ess_platform.h"
-#include "ess_audio_stream.h"
+#include "ess_input_stream.h"
 
-
-class ess_audio_system : public ess_task {
+ class ess_null_input_stream : public ess_input_stream<ESS_CHANNEL_FORMAT_STEREO> {
 public:
-  ess_audio_system();
+  ess_null_input_stream() : ess_input_stream<ESS_CHANNEL_FORMAT_STEREO>(ESS_INPUT_STREAM_NULL) {
+    m_bBlockingObjectRun = true;
+    m_bBlocking = true;
+    m_bInit = true;
+  }
 
-  virtual ess_error_t  open_device(const std::string name, ess_audio_stream*  bkd);
-  virtual ess_error_t  open_device(const std::string name, ess_format_t format,ess_audio_stream* bkd);
+  ess_error_t update(void)  {
+    ess_audio_block_t *new_left, *new_right;
 
-  virtual ess_audio_conections  connect (ess_audio_stream& source, ess_audio_stream& destination,
-    ess_audio_channel_t channel);
+    new_left = allocate();
+		new_right = allocate();
 
-  virtual ess_audio_conections  connect (ess_audio_stream& source, ess_audio_channel_t sourceOutput,
-		ess_audio_stream& destination, ess_audio_channel_t destinationInput);
+		if (new_right != NULL && new_left != NULL) {
 
-  virtual void onTask(ess_task* self, void* userdata);
+      memset(new_left->data, 0, sizeof(new_left));
+      memset(new_right->data, 0, sizeof(new_right));
 
-  virtual ess_format_t get_format() { return ESS_DEFAULT_SERVER_FORMAT; }
-  virtual int get_block_size() { return ESS_DEFAULT_AUDIO_PACKET_SIZE; }
+      transmit(new_left, 0);
+  		release(new_left);
+  		transmit(new_right, 1);
+  		release(new_right);
+    }
+    return ESS_OK;
+  }
 
-  virtual ess_error_t add_input_stream(ess_audio_stream* bkd);
-private:
-  ess_audio_stream *m_pRootStream;
-};
-
-
-/**
-* @}
-*/
+ };
 
 
-#endif
+ /**
+ * @}
+ */
+
+
+ #endif

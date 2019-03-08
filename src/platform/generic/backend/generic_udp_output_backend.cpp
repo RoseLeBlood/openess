@@ -32,51 +32,25 @@
 generic_udp_output_backend::generic_udp_output_backend()
   : ess_output_stream<ESS_CHANNEL_FORMAT_STEREO>(ESS_BACKEND_NAME_OUT_UDP) {
 
+    #if ESS_BACKEND_UDP_PROTOCOL == ESS_PROTOCOL_UDP
+      #if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
+        m_pClient = new ess_inet_dram_client_ip4();
+      #else
+        m_pClient = new ess_inet_dram_client_ip6();
+      #endif  // ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
+    #elif ESS_BACKEND_UDP_PROTOCOL == ESS_PROTOCOL_UDP_LITE
+      #if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
+        m_pClient = new ess_inet_dramlite_client_ip4();
+      #else
+        m_pClient = new ess_inet_dramlite_client_ip6();
+      #endif  // ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
+    #endif //ESS_BACKEND_UDP_PROTOCOL == ESS_PROTOCOL_UDP
+
+
+    m_bBlockingObjectRun = true;
+    m_bBlocking = true;
+    m_bInit = true;
 }
-ess_error_t generic_udp_output_backend::probe(ess_format_t format) {
-  switch (format) {
-    case ESS_FORMAT_MONO_44100_32 :
-    case ESS_FORMAT_MONO_48000_32 :
-    case ESS_FORMAT_MONO_96000_32 :
-    case ESS_FORMAT_STEREO_44100_32 :
-    case ESS_FORMAT_STEREO_48000_32 :
-    case ESS_FORMAT_STEREO_96000_32 :
-      return ESS_ERROR_WRONG_FORMAT;
-    default:
-      return ESS_OK;
-  }
-
-}
-ess_error_t generic_udp_output_backend::open()  {
-  #if ESS_BACKEND_UDP_PROTOCOL == ESS_PROTOCOL_UDP
-    #if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
-      m_pClient = new ess_inet_dram_client_ip4();
-    #else
-      m_pClient = new ess_inet_dram_client_ip6();
-    #endif  // ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
-  #elif ESS_BACKEND_UDP_PROTOCOL == ESS_PROTOCOL_UDP_LITE
-    #if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
-      m_pClient = new ess_inet_dramlite_client_ip4();
-    #else
-      m_pClient = new ess_inet_dramlite_client_ip6();
-    #endif  // ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
-  #endif //ESS_BACKEND_UDP_PROTOCOL == ESS_PROTOCOL_UDP
-
-  if(m_pClient == 0) return ESS_ERROR_OUTOFMEM;
-
-
-  return  m_pClient->is_socket() && ess_output_stream::open() ? ESS_OK : ESS_ERROR;
-
-}
-
-
-ess_error_t generic_udp_output_backend::close() {
-  if(m_pClient == 0) return ESS_ERROR;
-
-  return ess_output_stream::close();
-}
-
-
 unsigned int generic_udp_output_backend::send_packet(const void* data, unsigned int size) {
   if(m_pClient == 0) return -1;
 
