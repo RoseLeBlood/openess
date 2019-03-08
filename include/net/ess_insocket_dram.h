@@ -18,54 +18,39 @@
  ****************************************************************************/
 
 /**
- * @file ess_spinlock.h
+ * @file ess_insocket_dram.h
  * @author Anna Sopdia Schröck
- * @date 11 Februar 2019
- * @brief  platform specific spinlock class
+ * @date 18 Februar 2019
  *
  */
-#ifndef _ESS_PLATFORM_SPINLOCK_H_
-#define _ESS_PLATFORM_SPINLOCK_H_
 
-#include "ess_lock.h"
+#ifndef _ESS_SOCKET_INET_DGRAM_H_
+#define _ESS_SOCKET_INET_DGRAM_H_
 
-class ess_spinlock : public ess_lock {
+#include "net/ess_socket.h"
+
+/**
+* @addtogroup socket
+* @{
+*/
+class ess_insocket_dram : public ess_insocket {
 public:
-  ess_spinlock();
-  ~ess_spinlock();
+  ess_insocket_dram() : ess_insocket(ESS_SOCKET_FAMILY_IP4, ESS_SOCKET_PROTO_DRAM) { }
+  ess_insocket_dram(ess_socket_fam fam) : ess_insocket(fam, ESS_SOCKET_PROTO_DRAM) { }
 
-  virtual ess_error_t create(int count);
-  virtual ess_error_t destroy();
 
-  /**
-   * @brief lock the spinlock
-   * @retval ESS_OK no error
-   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
-   * @retval ESS_ERROR unspec error
-   * @retval ESS_ERROR_NOT_CREATED  mutex is not created
-   * @retval ESS_ERROR_NULL 'ess_platform_mutex_t' mtx is null
-   */
-  virtual ess_error_t lock();
-  /**
-   * @brief unlock the spinlock
-   * @retval ESS_OK no error
-   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
-   * @retval ESS_ERROR unspec error
-   * @retval ESS_ERROR_NOT_CREATED  mutex is not created
-   * @retval ESS_ERROR_NULL 'ess_platform_mutex_t' mtx is null
-   */
-  virtual ess_error_t unlock();
+  virtual unsigned int sendto(const void* buf, unsigned int len, const char* dsthost, const int dstport); //
+  virtual unsigned int sendto(const std::string& buf, const std::string& dsthost, const int dstport); //
 
-  /**
-   * @brief try lock the mutex
-   *
-   * @retval ESS_OK lock the mutex
-   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
-   * @retval ESS_ERROR can't lock
-   * @retval ESS_ERROR_NULL 'ess_platform_mutex_t' mtx is null
-   */
-  virtual ess_error_t try_lock();
+  virtual unsigned int recvfrom(void* buf, unsigned int len); //
+  virtual unsigned int recvfrom(std::string& buf); //
 
+protected:
+  ess_insocket_dram(ess_socket_fam fam, ess_socket_pro proto) : ess_insocket(fam, proto) { }
 };
 
+
+/**
+* @}
+*/
 #endif

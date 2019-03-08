@@ -24,7 +24,7 @@
  * @brief Contains ess_socket (base class) and ess_insocket (base for all internet sockets)
  */
 
-#include "ess_socket.h"
+#include "net/ess_socket.h"
 #include "esp_log.h"
 
 #include "config.h"

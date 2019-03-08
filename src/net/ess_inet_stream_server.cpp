@@ -23,7 +23,7 @@
  * @date 26 Februar 20119
  *
  */
-#include "ess_inet_stream_server.h"
+#include "net/ess_inet_stream_server.h"
 
 /**
 * @brief construct the server socket.

@@ -28,7 +28,7 @@
 #define _ESS_TASK_H_
 
 #include "ess_error.h"
-#include "ess_mutex.h"
+#include "task/ess_mutex.h"
 
 class ess_task {
 public:

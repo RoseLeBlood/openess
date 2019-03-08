@@ -28,7 +28,7 @@
 #ifdef ESS_CONFIC_TASK_ESP32
 
 #include "ess_platform.h"
-#include "ess_task.h"
+#include "task/ess_task.h"
 
 #include <stdio.h>
 #include <string.h>

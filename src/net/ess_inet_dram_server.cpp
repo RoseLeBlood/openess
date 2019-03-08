@@ -23,7 +23,7 @@
  * @date 19 Februar 2019
  * @brief Contains the inet dram server (UDP Server) socket
  */
-#include "ess_inet_dram_server.h"
+#include "net/ess_inet_dram_server.h"
 
 # include <stdlib.h>
 # include <stdio.h>

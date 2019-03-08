@@ -27,7 +27,7 @@
 
 #include "config.h"
 #ifdef ESS_ENABLE_BACKEND_OUT_UDP
-#include "platform/generic_udp_output_backend.h"
+#include "platform/generic/generic_udp_output_backend.h"
 
 generic_udp_output_backend::generic_udp_output_backend()
   : ess_output_stream<ESS_CHANNEL_FORMAT_STEREO>(ESS_BACKEND_NAME_OUT_UDP) {

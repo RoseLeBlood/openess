@@ -18,44 +18,54 @@
  ****************************************************************************/
 
 /**
- * @file ess_inet_stream_server.h
+ * @file ess_spinlock.h
  * @author Anna Sopdia Schröck
- * @date 26 Februar 2019
- * @brief Contains the ess_insocket_stream class (TCP internet socket)
+ * @date 11 Februar 2019
+ * @brief  platform specific spinlock class
+ *
  */
+#ifndef _ESS_PLATFORM_SPINLOCK_H_
+#define _ESS_PLATFORM_SPINLOCK_H_
 
-#ifndef _ESS_SOCKET_INET_STREAM_SERVER_H_
-#define _ESS_SOCKET_INET_STREAM_SERVER_H_
+#include "task/ess_lock.h"
 
-#include "ess_socket.h"
-# include <memory>
-/**
-* @addtogroup socket
-* @{
-*/
-class ess_inet_stream_server : public ess_insocket {
+class ess_spinlock : public ess_lock {
 public:
-	    ess_inet_stream_server(ess_socket_fam fam);
+  ess_spinlock();
+  ~ess_spinlock();
 
-	    ess_error_t listen(const std::string& bindhost, const int bindport, int flags=0);
+  virtual ess_error_t create(int count);
+  virtual ess_error_t destroy();
 
-	    ess_insocket* accept(int flags=0);
-			std::unique_ptr<ess_insocket> accept_ex(int flags=0);
+  /**
+   * @brief lock the spinlock
+   * @retval ESS_OK no error
+   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
+   * @retval ESS_ERROR unspec error
+   * @retval ESS_ERROR_NOT_CREATED  mutex is not created
+   * @retval ESS_ERROR_NULL 'ess_platform_mutex_t' mtx is null
+   */
+  virtual ess_error_t lock();
+  /**
+   * @brief unlock the spinlock
+   * @retval ESS_OK no error
+   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
+   * @retval ESS_ERROR unspec error
+   * @retval ESS_ERROR_NOT_CREATED  mutex is not created
+   * @retval ESS_ERROR_NULL 'ess_platform_mutex_t' mtx is null
+   */
+  virtual ess_error_t unlock();
 
-	    const std::string& get_bind_host(void) { return m_strHost;}
-	    int get_bind_port(void) { return m_iPort;}
+  /**
+   * @brief try lock the mutex
+   *
+   * @retval ESS_OK lock the mutex
+   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
+   * @retval ESS_ERROR can't lock
+   * @retval ESS_ERROR_NULL 'ess_platform_mutex_t' mtx is null
+   */
+  virtual ess_error_t try_lock();
+
 };
 
-class ess_inet_stream_server_ip4 : public ess_inet_stream_server {
-public:
-	ess_inet_stream_server_ip4() : ess_inet_stream_server(ESS_SOCKET_FAMILY_IP4) { }
-};
-
-class ess_inet_stream_server_ip6 : public ess_inet_stream_server {
-public:
-	ess_inet_stream_server_ip6() : ess_inet_stream_server(ESS_SOCKET_FAMILY_IP6) { }
-};
-/**
-* @}
-*/
 #endif

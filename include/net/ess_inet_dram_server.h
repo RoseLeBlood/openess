@@ -18,38 +18,49 @@
  ****************************************************************************/
 
 /**
- * @file ess_insocket_dram.h
+ * @file ess_inet_dram_server.h
  * @author Anna Sopdia Schröck
- * @date 18 Februar 2019
- *
+ * @date 19 Februar 2019
+ * @brief Contains the inet dram server (UDP Server) socket
  */
 
-#ifndef _ESS_SOCKET_INET_DGRAM_H_
-#define _ESS_SOCKET_INET_DGRAM_H_
+#ifndef _ESS_SOCKET_INET_DGRAM_SERVER_H_
+#define _ESS_SOCKET_INET_DGRAM_SERVER_H_
 
-#include "ess_socket.h"
+#include "net/ess_insocket_dram.h"
 
 /**
 * @addtogroup socket
 * @{
 */
-class ess_insocket_dram : public ess_insocket {
+class ess_inet_dram_server : public ess_insocket_dram{
 public:
-  ess_insocket_dram() : ess_insocket(ESS_SOCKET_FAMILY_IP4, ESS_SOCKET_PROTO_DRAM) { }
-  ess_insocket_dram(ess_socket_fam fam) : ess_insocket(fam, ESS_SOCKET_PROTO_DRAM) { }
+  ess_inet_dram_server(const std::string& host, const int port, ess_socket_fam fam, bool lite);
 
+  virtual ess_error_t bind(int flags = 0);
 
-  virtual unsigned int sendto(const void* buf, unsigned int len, const char* dsthost, const int dstport); //
-  virtual unsigned int sendto(const std::string& buf, const std::string& dsthost, const int dstport); //
+private:
+  bool m_bLite;
+};
 
-  virtual unsigned int recvfrom(void* buf, unsigned int len); //
-  virtual unsigned int recvfrom(std::string& buf); //
-
-protected:
-  ess_insocket_dram(ess_socket_fam fam, ess_socket_pro proto) : ess_insocket(fam, proto) { }
+class ess_inet_dram_server_ip4 : public ess_inet_dram_server {
+public:
+  ess_inet_dram_server_ip4(const std::string& host,const int port);
+};
+class ess_inet_dramlite_server_ip4 : public ess_inet_dram_server {
+public:
+  ess_inet_dramlite_server_ip4(const std::string& host,const int port);
 };
 
 
+class ess_inet_dram_server_ip6 : public ess_inet_dram_server {
+public:
+  ess_inet_dram_server_ip6(const std::string& host,const int port);
+};
+class ess_inet_dramlite_server_ip6 : public ess_inet_dram_server {
+public:
+  ess_inet_dramlite_server_ip6(const std::string& host,const int port);
+};
 /**
 * @}
 */

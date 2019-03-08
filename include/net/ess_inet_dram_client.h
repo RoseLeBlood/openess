@@ -27,7 +27,7 @@
 #ifndef _ESS_SOCKET_INET_DGRAM_CLIENT_H_
 #define _ESS_SOCKET_INET_DGRAM_CLIENT_H_
 
-#include "ess_insocket_dram.h"
+#include "net/ess_insocket_dram.h"
 
 /**
 * @addtogroup socket

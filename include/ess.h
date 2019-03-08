@@ -48,7 +48,7 @@
 #include "ess_format.h"
 #include "ess_error.h"
 #include "ess_protocol.h"
-#include "ess_sleep.h"
+#include "platform/ess_sleep.h"
 
 
 typedef enum ess_audio_channel {
@@ -73,5 +73,10 @@ typedef enum  ess_audio_channel_format {
   ESS_CHANNEL_FORMAT_7POINT1 = 8,
 }ess_audio_channel_format_t;
 
+typedef enum ess_channel_type {
+  ESS_CHANNEL_INPUT,
+  ESS_CHANNEL_OUTPUT,
+  ESS_CHANNEL_MAX
+}ess_channel_t;
 
 #endif

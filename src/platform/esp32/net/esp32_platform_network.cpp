@@ -27,7 +27,7 @@
  #include "config.h"
  #ifdef ESS_CONFIG_NETWORK_ESP32
 
-#include "ess_network.h"
+#include "net/ess_network.h"
 
 # include <stdlib.h>
 # include <stdio.h>

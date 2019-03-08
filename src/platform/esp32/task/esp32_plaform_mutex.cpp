@@ -27,7 +27,7 @@
 #include "config.h"
 #ifdef ESS_CONFIG_MUTEX_ESP32
 #include "ess_platform.h"
-#include "ess_mutex.h"
+#include "task/ess_mutex.h"
 #include <string.h>
 
 #include "freertos/FreeRTOS.h"

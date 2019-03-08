@@ -27,7 +27,7 @@
 #include "config.h"
 #ifdef ESS_CONFIG_SPINLOCK_ESP32
 #include "ess_platform.h"
-#include "ess_spinlock.h"
+#include "task/ess_spinlock.h"
 #include <string.h>
 
 #include "freertos/FreeRTOS.h"

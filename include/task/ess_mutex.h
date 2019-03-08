@@ -27,7 +27,7 @@
 #ifndef _ESS_PLATFORM_MUTEX_H_
 #define _ESS_PLATFORM_MUTEX_H_
 
-#include "ess_lock.h"
+#include "task/ess_lock.h"
 
 /**
 * @addtogroup task

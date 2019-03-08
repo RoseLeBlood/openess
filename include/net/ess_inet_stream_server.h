@@ -18,48 +18,42 @@
  ****************************************************************************/
 
 /**
- * @file ess_inet_dram_server.h
+ * @file ess_inet_stream_server.h
  * @author Anna Sopdia Schröck
- * @date 19 Februar 2019
- * @brief Contains the inet dram server (UDP Server) socket
+ * @date 26 Februar 2019
+ * @brief Contains the ess_insocket_stream class (TCP internet socket)
  */
 
-#ifndef _ESS_SOCKET_INET_DGRAM_SERVER_H_
-#define _ESS_SOCKET_INET_DGRAM_SERVER_H_
+#ifndef _ESS_SOCKET_INET_STREAM_SERVER_H_
+#define _ESS_SOCKET_INET_STREAM_SERVER_H_
 
-#include "ess_insocket_dram.h"
-
+#include "net/ess_socket.h"
+# include <memory>
 /**
 * @addtogroup socket
 * @{
 */
-class ess_inet_dram_server : public ess_insocket_dram{
+class ess_inet_stream_server : public ess_insocket {
 public:
-  ess_inet_dram_server(const std::string& host, const int port, ess_socket_fam fam, bool lite);
+	    ess_inet_stream_server(ess_socket_fam fam);
 
-  virtual ess_error_t bind(int flags = 0);
+	    ess_error_t listen(const std::string& bindhost, const int bindport, int flags=0);
 
-private:
-  bool m_bLite;
+	    ess_insocket* accept(int flags=0);
+			std::unique_ptr<ess_insocket> accept_ex(int flags=0);
+
+	    const std::string& get_bind_host(void) { return m_strHost;}
+	    int get_bind_port(void) { return m_iPort;}
 };
 
-class ess_inet_dram_server_ip4 : public ess_inet_dram_server {
+class ess_inet_stream_server_ip4 : public ess_inet_stream_server {
 public:
-  ess_inet_dram_server_ip4(const std::string& host,const int port);
-};
-class ess_inet_dramlite_server_ip4 : public ess_inet_dram_server {
-public:
-  ess_inet_dramlite_server_ip4(const std::string& host,const int port);
+	ess_inet_stream_server_ip4() : ess_inet_stream_server(ESS_SOCKET_FAMILY_IP4) { }
 };
 
-
-class ess_inet_dram_server_ip6 : public ess_inet_dram_server {
+class ess_inet_stream_server_ip6 : public ess_inet_stream_server {
 public:
-  ess_inet_dram_server_ip6(const std::string& host,const int port);
-};
-class ess_inet_dramlite_server_ip6 : public ess_inet_dram_server {
-public:
-  ess_inet_dramlite_server_ip6(const std::string& host,const int port);
+	ess_inet_stream_server_ip6() : ess_inet_stream_server(ESS_SOCKET_FAMILY_IP6) { }
 };
 /**
 * @}

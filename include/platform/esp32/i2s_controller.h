@@ -33,7 +33,7 @@
 #include "driver/i2s.h"
 
 #include "ess_format.h"
-#include "ess_controler.h"
+#include "platform/ess_controler.h"
 
 class i2s_controller : public ess_controler {
 public:

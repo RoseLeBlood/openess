@@ -24,7 +24,7 @@
  * @brief  platform specific socket functions for all platforms
  *
  */
-#include "ess_network.h"
+#include "net/ess_network.h"
 
 # include <sys/socket.h>
 # include <sys/types.h>

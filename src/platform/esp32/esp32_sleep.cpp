@@ -25,7 +25,7 @@
  *
  */
 #include "ess.h"
-#include "ess_sleep.h"
+#include "platform/ess_sleep.h"
 #include  "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/event_groups.h"

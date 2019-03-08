@@ -27,7 +27,6 @@
 
 #include "ess.h"
 #include "platform/esp32/ess_platform_esp32.h"
-#include "ess_audio_system.h"
 
 ess_platform_esp32::ess_platform_esp32() {
 
