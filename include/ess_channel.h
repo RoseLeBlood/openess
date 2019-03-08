@@ -21,7 +21,7 @@
 /**
  * @file ess_channel.h
  * @author Anna Sopdia Schröck
- * @date 18 Februar 2019
+ * @date 08 März 2019
  * @brief basic class for `ess_input_channel` and ''ess_output_channel
  *
  *
@@ -36,27 +36,81 @@
  #include "ess.h"
 
 
-
+ /**
+  * @brief generic channel class - basic class for `ess_input_channel` and `ess_output_channel`
+  *
+  * all openess modules have n inputs channels or / and n outputs channels
+  */
 class ess_channel {
 public:
-  ess_object() : ess_object("ess_object", ESS_CHANNEL_INPUT) { }
+  /**
+   * @brief basic constructer
+   */
+  ess_channel() : ess_channel("ess_object", ESS_CHANNEL_INPUT) { }
 
-  ess_object(std::string name, ess_channel_t type) :
-    ess_object(name, type, ESS_AUDIO_CHANNEL_LEFT ) { }
+  /**
+   * @brief second constructer
+   * @param [in] name human readelble name for the channel
+   * @param [in] type type of the channel
+   */
+  ess_channel(std::string name, ess_channel_t type) :
+    ess_channel(name, type, ESS_AUDIO_CHANNEL_LEFT ) { }
 
-  ess_object(std::string name, ess_channel_t type, ess_audio_channel channel)
-    : m_strHumanChannelName(name) { }
+  /**
+   * @brief third constructer
+   * @param [in] name human readelble name for the channel
+   * @param [in] type type of the channel
+   * @param [in] channel which channel
+   */
+  ess_channel(std::string name, ess_channel_t type, ess_audio_channel channel)
+    : m_strHumanChannelName(name), m_iChannel(channel),  m_eType(type) { }
 
+
+  /**
+   * @brief get the human readelble name of this channel
+   * @return the human readelble name of this channel
+   */
   std::string& get_name() { return m_strHumanChannelName; }
   void set_name(const std::string& name) { m_strHumanChannelName = name; }
 
+  /**
+   * @brief get the using channel
+   * @return tthe using channel
+   */
   ess_audio_channel get_channel() { return m_iChannel; }
   ess_channel_t get_type() { return m_eType; }
 
+  /**
+   * @brief is the channel a input channel
+   * @retval true the channel is a input channel
+   * @retval false the channel is not a input channel
+   */
   bool is_input() { return m_eType == ESS_CHANNEL_INPUT; }
+  /**
+   * @brief is the channel a output channel
+   * @retval true the channel is a output channel
+   * @retval false the channel is not a output channel
+   */
   bool is_output() { return m_eType == ESS_CHANNEL_OUTPUT; }
+  /**
+   * @brief is the channel valid
+   * @retval true the channel is not a input or output channel
+   * @retval false the channel is valid
+   */
   bool is_invalid() { return m_eType >= ESS_CHANNEL_MAX; }
-  
+
+  /**
+   * @brief read interface
+   *
+   *  the output object read from input
+   * @param [out] buffer the pointer to write the data to
+   * @param [in] offset the readed offset
+   * @param [in] size length of the buffer
+   * 
+   * @return  the readed bytes
+   * @retval -1 somthings are wrong : error
+   */
+  virtual unsigned int read(void* buffer, unsigned int offset, unsigned int size) = 0;
 protected:
   void set_channel(const ess_audio_channel channel) { return m_iChannel = channel; }
   void set_type(const ess_channel_t type) { return m_eType = type; }
