@@ -19,59 +19,53 @@
 
 
 /**
- * @file ess_platform.h
+ * @file ess_output_channel.h
  * @author Anna Sopdia Schröck
- * @date 18 Februar 2019
- * @brief platform backends combiunations with OpenESS
+ * @date 08 März 2019
+ * @brief channel for the output object
  *
  *
  */
  /**
- * @addtogroup platform
+ * @addtogroup ess
  * @{
  */
-
-#ifndef __ESS_PLATFORM_IMPL_H__
-#define __ESS_PLATFORM_IMPL_H__
-
-#include "ess.h"
-
-#if ESS_PLATFORM_ESP32 == 1
-#include "platform/esp32/ess_platform_esp32.h"
-
-  #ifdef ESS_ENABLE_BACKEND_OUT_I2S
-  #include "platform/esp32/ess_esp32i2s_output_module.h"
-  using ess_output_i2s = ess_esp32i2s_output_module;
-  #endif
-
-  #ifdef ESS_ENABLE_BACKEND_OUT_UDP
-  //#include "platform/generic_udp_output_backend.h"
-  //using ess_output_udp = generic_udp_output_backend;
-  #endif
+ #ifndef __ESS_OUTPUT_CHANNEL_H__
+ #define __ESS_OUTPUT_CHANNEL_H__
 
 
-  using ess_platform = ess_platform_esp32;
-
-#elif  ESS_PLATFORM_LINUX == 1
-#include "platform/linux/ess_platform_linux.h"
-using ess_platform = ess_platform_linux;
-
-#elif ESS_PLATFORM_RPI == 1
-#include "platform/rpi/ess_platform_rpi.h"
-using ess_platform = ess_platform_ rpi;
-
-#elif ESS_PLATFORM_WINDOWS == 1
-#include "platform/windows/ess_platform_windows.h"
-using ess_platform = ess_platform_windows;
-
-
-#elif ESS_PLATFORM_USER == 1
-#include "platform/user/ess_platform_user.h"
-using ess_platform = ess_platform_user;
-#endif
-
+#include "ess_channel.h"
 
 /**
-* @}
-*/
-#endif
+ * @brief the ess_output_channel class
+ * the `ess_input_objec` has n outputs channels
+ */
+class ess_output_channel : public ess_channel {
+public:
+  ess_output_channel()  { }
+
+  ess_output_channel(std::string name)
+    : ess_channel(name, ESS_CHANNEL_OUTPUT, ESS_AUDIO_CHANNEL_LEFT)
+        { memset(m_iSampleBuffer, 0 ,ESS_DEFAULT_AUDIO_PACKET_SIZE); }
+
+  ess_output_channel(std::string name, ess_audio_channel channel )
+    : ess_channel(name, ESS_CHANNEL_INPUT, channel)
+       { memset(m_iSampleBuffer, 0 ,ESS_DEFAULT_AUDIO_PACKET_SIZE); }
+
+  virtual unsigned int read(int32_t* buffer, unsigned int offset, unsigned int size)  {
+    for(int i = offset; i < size; i++)
+      buffer[i] = m_iSampleBuffer[i];
+    return size - offset;
+   }
+
+   unsigned int get_size() { return ESS_DEFAULT_AUDIO_PACKET_SIZE; }
+   int32_t* get_buffer() { return m_iSampleBuffer; }
+protected:
+  int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE];
+};
+
+
+ /**
+ * @}
+ */
+ #endif

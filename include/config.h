@@ -40,6 +40,8 @@
 
 /* Main config */
 
+
+
 #define ESS_PLATFORM_ESP32					1/** @brief If defined compiled backend for esp32 */
 #define ESS_PLATFORM_RPI 					 		 0/** @brief If defined compiled backend for Raspberry PI (linux) */
 #define ESS_PLATFORM_LINUX   			0/** @brief If defined compiled backend for generic linux (openal) */

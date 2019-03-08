@@ -71,13 +71,21 @@ public:
    * @return the human readelble name of this channel
    */
   std::string& get_name() { return m_strHumanChannelName; }
+  /**
+   * @brief set the human readelble name of this channel
+   * @param [in]  name  the new human readelble name of this channel
+   */
   void set_name(const std::string& name) { m_strHumanChannelName = name; }
 
   /**
-   * @brief get the using channel
+   * @brief get the using channel (id)
    * @return tthe using channel
    */
   ess_audio_channel get_channel() { return m_iChannel; }
+  /**
+   * @brief get the type of the channel
+   * @return the type of the channel
+   */
   ess_channel_t get_type() { return m_eType; }
 
   /**
@@ -106,14 +114,22 @@ public:
    * @param [out] buffer the pointer to write the data to
    * @param [in] offset the readed offset
    * @param [in] size length of the buffer
-   * 
+   *
    * @return  the readed bytes
    * @retval -1 somthings are wrong : error
    */
-  virtual unsigned int read(void* buffer, unsigned int offset, unsigned int size) = 0;
+  virtual unsigned int read(int32_t* buffer, unsigned int offset, unsigned int size) = 0;
 protected:
-  void set_channel(const ess_audio_channel channel) { return m_iChannel = channel; }
-  void set_type(const ess_channel_t type) { return m_eType = type; }
+  /**
+   * @brief set the channel
+   * @param [in]  name  the new channel
+   */
+  void set_channel(const ess_audio_channel channel) { m_iChannel = channel; }
+  /**
+   * @brief set the type of this channel
+   * @param [in]  name  the new type of this channel
+   */
+  void set_type(const ess_channel_t type) { m_eType = type; }
 protected:
   std::string m_strHumanChannelName;
   ess_audio_channel m_iChannel;

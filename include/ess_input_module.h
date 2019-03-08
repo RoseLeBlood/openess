@@ -19,45 +19,56 @@
 
 
 /**
- * @file i2s_generic_output_backend.h
+ * @file ess_input_module.h
  * @author Anna Sopdia Schröck
- * @date 18 Februar 20119
- * @brief the basic i2s_generic class
+ * @date 08 März 2019
+ * @brief ESS generic input module
  *
  *
  */
-#ifndef _ESS_PLATFORM_INC_ESP32_I2S_H_
-#define _ESS_PLATFORM_INC_ESP32_I2S_H_
+ /**
+ * @addtogroup ess
+ * @{
+ */
+#ifndef __ESS_INPUT_MODULE_H__
+#define __ESS_INPUT_MODULE_H__
+
+#include "ess_output_channel.h"
+#include "ess_module.h"
+#include <list>
 
 /**
-* @addtogroup ess_platform_esp32
-* @{
+  * @brief basic class for input module - example `ess_null_input_module`
+  * +--------------+
+  *  |         OUT: |
+  *  |         OUT: |
+  * +------------- +
 */
-
-#include "ess_output_stream.h"
-#include "platform/esp32/i2s_controller.h"
-
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "driver/i2s.h"
-#include "esp_system.h"
-
-
-
-
-class i2s_generic_output_backend : public ess_output_stream<ESS_CHANNEL_FORMAT_STEREO> {
+class ess_input_module : public ess_module  {
 public:
-  i2s_generic_output_backend();
-  ~i2s_generic_output_backend();
+  ess_input_module(const std::string& name)  : ess_module(name) { }
 
-  virtual ess_error_t update(void) ;
+  virtual ~ess_input_module() { }
+
+  virtual ess_error_t add_channel(std::string name, ess_audio_channel channel);
+  virtual ess_error_t add_channel(ess_output_channel* channel);
+
+  virtual ess_output_channel* get_channel(ess_audio_channel channel);
+  virtual ess_output_channel* get_channel(std::string name);
+
+  virtual unsigned int read(ess_audio_channel id, int32_t* buffer,
+    unsigned int offset, unsigned int size);
+
+  virtual int32_t* get_buffer(ess_audio_channel id);
+  virtual uint32_t get_size(ess_audio_channel id);
 
 protected:
-  void* m_pUserData;
-  bool m_bPaused;
+  std::list<ess_output_channel*> m_lstChannels;
 };
 
 /**
 * @}
 */
+
+
 #endif

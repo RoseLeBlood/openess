@@ -19,10 +19,10 @@
 
 
 /**
- * @file ess_input_stream.h
+ * @file ess_output_stream.h
  * @author Anna Sopdia Schröck
- * @date 07 März 2019
- * @brief ESS generic input stream
+ * @date 30 Januar 2019
+ * @brief ESS generic ouput stream
  *
  *
  */
@@ -30,27 +30,38 @@
  * @addtogroup stream
  * @{
  */
-#ifndef __ESS_INPUT_STREAM_H__
-#define __ESS_INPUT_STREAM_H__
+#ifndef __ESS_OUTPUT_MODULE_H__
+#define __ESS_OUTPUT_MODULE_H__
 
-#include "ess_audio_stream.h"
+#include "ess_module.h"
+#include "ess_input_channel.h"
+#include <list>
 
-
-
-template <ess_audio_channel_format_t CFORMAT, unsigned int ABS = ESS_DEFAULT_AUDIO_PACKET_SIZE>
-class ess_input_stream : public ess_audio_stream {
+/**
+  * @brief basic class for input module - example `ess_null_input_module`
+  * +--------------+
+  *  |  IN              |
+  *  |  IN              |
+  * +------------- +
+*/
+class ess_output_module: public ess_module {
 public:
-  ess_input_stream() { }
-  ess_input_stream(const std::string& name) :
-    ess_audio_stream(0, NULL, name) {   }
+  ess_output_module(const std::string& name) : ess_module(name) {   }
 
-  virtual ~ess_input_stream() { }
+  virtual ~ess_output_module() { }
 
- virtual ess_audio_channel_format_t get_channel_format() { return CFORMAT; }
+  virtual ess_error_t add_channel(std::string name, ess_audio_channel channel);
+  virtual ess_error_t add_channel(ess_input_channel* channel);
 
- virtual ess_stream_type_t get_type() { return ESS_INPUT_STREAM; }
+  virtual ess_input_channel* get_channel(ess_audio_channel channel);
+  virtual ess_input_channel* get_channel(std::string name);
+
+  virtual unsigned int read(ess_audio_channel id, int32_t* buffer,
+    unsigned int offset, unsigned int size);
+
+  virtual ess_error_t update() = 0;
 protected:
-  int32_t m_iSampleBuffer[ABS * CFORMAT];
+  std::list<ess_input_channel*> m_lstChannels;
 };
 
 /**

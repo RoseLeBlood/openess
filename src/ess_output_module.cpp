@@ -18,60 +18,48 @@
  ****************************************************************************/
 
 
-/**
- * @file ess_platform.h
- * @author Anna Sopdia Schröck
- * @date 18 Februar 2019
- * @brief platform backends combiunations with OpenESS
- *
- *
- */
- /**
- * @addtogroup platform
- * @{
- */
+#include "ess_output_module.h"
 
-#ifndef __ESS_PLATFORM_IMPL_H__
-#define __ESS_PLATFORM_IMPL_H__
+ess_error_t ess_output_module::add_channel(std::string name, ess_audio_channel channel) {
+  if(get_channel(name) != NULL) return ESS_ERROR;
+  if(get_channel(channel) != NULL) return ESS_ERROR;
 
-#include "ess.h"
+  m_lstChannels.push_back(new ess_input_channel(name, channel));
 
-#if ESS_PLATFORM_ESP32 == 1
-#include "platform/esp32/ess_platform_esp32.h"
+  return ESS_OK;
+}
 
-  #ifdef ESS_ENABLE_BACKEND_OUT_I2S
-  #include "platform/esp32/ess_esp32i2s_output_module.h"
-  using ess_output_i2s = ess_esp32i2s_output_module;
-  #endif
+ess_error_t ess_output_module::add_channel(ess_input_channel* channel) {
+  if(channel == NULL) return ESS_ERROR_NULL;
 
-  #ifdef ESS_ENABLE_BACKEND_OUT_UDP
-  //#include "platform/generic_udp_output_backend.h"
-  //using ess_output_udp = generic_udp_output_backend;
-  #endif
+  if(get_channel(channel->get_name()) != NULL) return ESS_ERROR;
+  if(get_channel(channel->get_channel()) != NULL) return ESS_ERROR;
 
+  m_lstChannels.push_back(channel);
 
-  using ess_platform = ess_platform_esp32;
+  return ESS_OK;
+}
 
-#elif  ESS_PLATFORM_LINUX == 1
-#include "platform/linux/ess_platform_linux.h"
-using ess_platform = ess_platform_linux;
+ess_input_channel* ess_output_module::get_channel(ess_audio_channel channel) {
+  std::list<ess_input_channel*>::iterator it;
+  for(it = m_lstChannels.begin(); it != m_lstChannels.end(); it++) {
+    if((*it)->get_channel() == channel ) return *it;
+  }
+  return nullptr;
+}
 
-#elif ESS_PLATFORM_RPI == 1
-#include "platform/rpi/ess_platform_rpi.h"
-using ess_platform = ess_platform_ rpi;
+ess_input_channel* ess_output_module::get_channel(std::string name) {
+  std::list<ess_input_channel*>::iterator it;
+  for(it = m_lstChannels.begin(); it != m_lstChannels.end(); it++) {
+    if( (*it)->get_name() == name ) return *it;
+  }
+  return nullptr;
+}
 
-#elif ESS_PLATFORM_WINDOWS == 1
-#include "platform/windows/ess_platform_windows.h"
-using ess_platform = ess_platform_windows;
+unsigned int ess_output_module::read(ess_audio_channel id, int32_t* buffer,
+  unsigned int offset, unsigned int size ) {
 
-
-#elif ESS_PLATFORM_USER == 1
-#include "platform/user/ess_platform_user.h"
-using ess_platform = ess_platform_user;
-#endif
-
-
-/**
-* @}
-*/
-#endif
+    ess_input_channel* channel = get_channel(id);
+    if(channel) return channel->read(buffer, offset, id);
+    return -1;
+}

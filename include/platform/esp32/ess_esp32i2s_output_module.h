@@ -19,41 +19,46 @@
 
 
 /**
- * @file ess_output_stream.h
+ * @file i2s_generic_output_backend.h
  * @author Anna Sopdia Schröck
- * @date 30 Januar 2019
- * @brief ESS generic ouput stream
+ * @date 18 Februar 20119
+ * @brief the basic i2s_generic class
  *
  *
  */
- /**
- * @addtogroup stream
- * @{
- */
-#ifndef __ESS_OUTPUT_STREAM_H__
-#define __ESS_OUTPUT_STREAM_H__
+#ifndef _ESS_PLATFORM_INC_ESP32_I2S_H_
+#define _ESS_PLATFORM_INC_ESP32_I2S_H_
 
-#include "ess_audio_stream.h"
+/**
+* @addtogroup ess_platform_esp32
+* @{
+*/
+
+#include "ess_output_module.h"
+#include "platform/esp32/i2s_controller.h"
+
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/i2s.h"
+#include "esp_system.h"
 
 
-template <ess_audio_channel_format_t CFORMAT, unsigned int ABS = ESS_DEFAULT_AUDIO_PACKET_SIZE>
-class ess_output_stream: public ess_audio_stream {
+
+
+class ess_esp32i2s_output_module : public ess_output_module {
 public:
-  ess_output_stream() { }
-  ess_output_stream(const std::string& name) :
-    ess_audio_stream((unsigned char)CFORMAT, m_pInputQueueArray, name) {   }
+  ess_esp32i2s_output_module();
+  ~ess_esp32i2s_output_module();
 
-  virtual ~ess_output_stream() { }
+  virtual ess_error_t update(void) ;
 
-  virtual ess_audio_channel_format_t get_channel_format() { return CFORMAT; }
-protected:
-  ess_audio_block_t *m_pInputQueueArray[CFORMAT];
-	int32_t m_iSampleBuffer[ABS * CFORMAT];
+  virtual ess_error_t add_channel(std::string name, ess_audio_channel channel);
+  virtual ess_error_t add_channel(ess_input_channel* channel);
+private:
+  int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE*2];
 };
 
 /**
 * @}
 */
-
-
 #endif

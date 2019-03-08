@@ -29,7 +29,6 @@
 # include <sys/socket.h>
 # include <sys/types.h>
 
-#include "esp_log.h"
 /**
   * @brief convert ess_socket_fam to socket type (AF_)
   * @code
@@ -45,7 +44,7 @@ int ess_socket_fam2platform(ess_socket_fam fam) {
     case ESS_SOCKET_FAMILY_IP4 : return AF_INET;
     case ESS_SOCKET_FAMILY_IP6 : return AF_INET6;
     case ESS_SOCKET_FAMILY_BOTH: return AF_UNSPEC;
-    #if ESS_PLATFORM_ESP32 != 1
+    #if  ESS_PLATFORM_ESP32 == 0
     case ESS_SOCKET_FAMILY_X25: return AF_X25;
     case ESS_SOCKET_FAMILY_AX25: return AF_AX25;
     case ESS_SOCKET_FAMILY_IPX: return AF_IPX;
@@ -55,7 +54,7 @@ int ess_socket_fam2platform(ess_socket_fam fam) {
     case ESS_SOCKET_FAMILY_PACKET: return AF_PACKET;
     case ESS_SOCKET_FAMILY_ALG: return AF_ALG;
     #endif
-    default:  ESP_LOGE("ESSU", "%s not available on this platform", ess_socket_fam2string(fam).c_str()); return -1;
+    default:  return -1;
   }
   return -1;
 }
@@ -76,11 +75,11 @@ int ess_socket_pro2platform(ess_socket_pro proto) {
     case ESS_SOCKET_PROTO_STREAM: return SOCK_STREAM;
     case ESS_SOCKET_PROTO_DRAM_LITE: return SOCK_DGRAM;
     case ESS_SOCKET_PROTO_RAW: return SOCK_RAW;
-    #if ESS_PLATFORM_ESP32 != 1
+    #if  ESS_PLATFORM_ESP32 == 0
     case ESS_SOCKET_PROTO_SEQPACKET: return SOCK_SEQPACKET;
     case ESS_SOCKET_PROTO_RDM: return SOCK_RDM;
     #endif
-    default: ESP_LOGE("ESSU", "%s not available on this platform", ess_socket_pro2string(proto).c_str());
+    default:
      return -1;
   }
 

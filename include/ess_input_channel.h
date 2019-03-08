@@ -33,27 +33,37 @@
  #ifndef __ESS_INPUT_CHANNEL_H__
  #define __ESS_INPUT_CHANNEL_H__
 
-#include "ess_channel.h"
+#include "ess_output_channel.h"
 
-class ess_output_channel;
-
+/**
+ * @brief the ess_input_channel class
+ * the `ess_output_objec` has n input channels
+ * the input channel read from connected `ess_output_channel`
+ */
 class ess_input_channel : public ess_channel {
 public:
   ess_input_channel()
     : ess_input_channel("ess_input_channel", ESS_AUDIO_CHANNEL_LEFT)  { }
 
-  ess_channel(std::string name)
+  ess_input_channel(std::string name)
     : ess_channel(name, ESS_CHANNEL_INPUT, ESS_AUDIO_CHANNEL_LEFT),
       m_pConChannel(NULL)  { }
 
-  ess_channel(std::string name, ess_audio_channel channel )
+  ess_input_channel(std::string name, ess_audio_channel channel )
     : ess_channel(name, ESS_CHANNEL_INPUT, channel),
       m_pConChannel(NULL) { }
 
    bool is_connected() { return m_pConChannel != NULL; }
 
-   virtual unsigned int read(void* buffer, unsigned int offset, unsigned int size) {
+   virtual unsigned int read(int32_t* buffer, unsigned int offset, unsigned int size) {
      return is_connected() ? m_pConChannel->read(buffer, offset, size) : -1;
+   }
+
+   ess_error_t connect(ess_output_channel* channel) {
+     if(m_pConChannel != NULL )  return ESS_ERROR_CONNECT;
+
+     m_pConChannel = channel;
+     return ESS_OK;
    }
 protected:
   ess_output_channel* m_pConChannel;

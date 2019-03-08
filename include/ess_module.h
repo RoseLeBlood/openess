@@ -19,59 +19,60 @@
 
 
 /**
- * @file ess_platform.h
+ * @file ess_module.h
  * @author Anna Sopdia Schröck
- * @date 18 Februar 2019
- * @brief platform backends combiunations with OpenESS
+ * @date 08 März 2019
+ * @brief ESS generic  module
  *
  *
  */
  /**
- * @addtogroup platform
+ * @addtogroup ess
  * @{
  */
-
-#ifndef __ESS_PLATFORM_IMPL_H__
-#define __ESS_PLATFORM_IMPL_H__
+#ifndef __ESS_MODULE_H__
+#define __ESS_MODULE_H__
 
 #include "ess.h"
 
-#if ESS_PLATFORM_ESP32 == 1
-#include "platform/esp32/ess_platform_esp32.h"
+/**
+  * @brief basic class for module
+  *
+  */
+  // +--------------+
+  //  |                   |
+  //  |                   |
+  // +------------- +
+class ess_module  {
+public:
+  ess_module() { }
+  ess_module(const std::string& name)
+    : m_strName(name), m_bActive(false), m_bInit(false) { }
 
-  #ifdef ESS_ENABLE_BACKEND_OUT_I2S
-  #include "platform/esp32/ess_esp32i2s_output_module.h"
-  using ess_output_i2s = ess_esp32i2s_output_module;
-  #endif
+  virtual ~ess_module() { close(); }
 
-  #ifdef ESS_ENABLE_BACKEND_OUT_UDP
-  //#include "platform/generic_udp_output_backend.h"
-  //using ess_output_udp = generic_udp_output_backend;
-  #endif
+  virtual ess_error_t close() { m_bActive = m_bInit =  false; return ESS_OK; }
+  virtual ess_error_t open() {  m_bInit =  true; return ESS_OK; }
 
+  virtual bool is_init() { return m_bInit; }
+  virtual bool is_active() { return m_bActive; }
 
-  using ess_platform = ess_platform_esp32;
+  virtual ess_error_t set_active(bool active)  {
+     if(!m_bInit) return ESS_ERROR;  m_bActive = active; return ESS_OK;
+   }
 
-#elif  ESS_PLATFORM_LINUX == 1
-#include "platform/linux/ess_platform_linux.h"
-using ess_platform = ess_platform_linux;
+   virtual std::string get_name() { return m_strName; }
 
-#elif ESS_PLATFORM_RPI == 1
-#include "platform/rpi/ess_platform_rpi.h"
-using ess_platform = ess_platform_ rpi;
-
-#elif ESS_PLATFORM_WINDOWS == 1
-#include "platform/windows/ess_platform_windows.h"
-using ess_platform = ess_platform_windows;
-
-
-#elif ESS_PLATFORM_USER == 1
-#include "platform/user/ess_platform_user.h"
-using ess_platform = ess_platform_user;
-#endif
-
+   virtual unsigned int read(int32_t* buffer, unsigned int offset, unsigned int size, ess_audio_channel id) = 0;
+protected:
+  std::string m_strName;
+  bool m_bActive;
+  bool m_bInit;
+};
 
 /**
 * @}
 */
+
+
 #endif
