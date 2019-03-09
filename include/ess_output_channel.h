@@ -52,7 +52,8 @@ public:
     : ess_channel(name, ESS_CHANNEL_OUTPUT, channel)
        { ess_zeromem(m_iSampleBuffer ,ESS_DEFAULT_AUDIO_PACKET_SIZE); }
 
-  virtual unsigned int ESS_IRAM_ATTR read(int32_t* buffer, unsigned int offset, unsigned int size)  {
+  virtual unsigned int  read(int32_t* buffer, unsigned int offset, unsigned int size)  {
+    ess_automux_t lock(m_mutex);
     ess_memcpy(buffer, m_iSampleBuffer, size);
     return size;
    }

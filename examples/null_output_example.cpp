@@ -13,14 +13,14 @@
   null_input.add_channel("null_left", ESS_AUDIO_CHANNEL_LEFT);
   null_input.add_channel("null_right", ESS_AUDIO_CHANNEL_RIGHT);
 
-  printf("%s\n", i2s_output->to_string().c_str() );
+  std::cout << i2s_output << std::endl;
 
   i2s_output->connect(&null_input, ESS_AUDIO_CHANNEL_LEFT, ESS_AUDIO_CHANNEL_RIGHT);
   i2s_output->connect(&null_input, ESS_AUDIO_CHANNEL_RIGHT, ESS_AUDIO_CHANNEL_LEFT);
 
-  printf("%s\n", i2s_output->to_string().c_str() );
+  std::cout << i2s_output << std::endl;
 
-  printf("OpenESS is ready to take off \n");
+  std::cout << "OpenESS is ready to take off" << std::endl;
 
   for(;;) { i2s_output->update();  }
 }
