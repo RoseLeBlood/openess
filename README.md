@@ -1,41 +1,29 @@
+---
+title: ":sound: OpenESS Open Embeded Sound Server"
+layout: post
+date: 2019-02-10 22:10
+tag: cpp
+image: https://roseleblood.github.io/openess/Logo-OpenESS.png
+headerImage: true
+projects: true
+hidden: true # don't count this post in blog pagination
+description: "OpenESS is a small Sound Server for embedded devices"
+category: project
+author: roseleblood
+externalLink: false
+---
 
-<div>
- <img src="https://roseleblood.github.io/openess/Logo-OpenESS.png" width="256" align="left">
- <div align="left">
-  <h1>Open Embedded Sound Server ++</h1>
-   <h3>
-     <a href="https://roseleblood.github.io/">Website</a>
-     <span> | </span>
-     <a href="https://github.com/RoseLeBlood/openess/wiki">
-       Wiki
-     </a>
-     <span> | </span>
-     <a href="https://github.com/RoseLeBlood/openess/blob/master/CONTRIBUTING.md">
-       Contributing
-     </a>
-     <span> | </span>
-     <a href="https://roseleblood.github.io/openess/html/d3/dcc/md__r_e_a_d_m_e.html">
-       Documentation
-     </a>
-     <span> | </span>
-     <a href="https://webchat.freenode.net/?channels=openess">
-       Chat
-     </a>
-   </h3>
-
- </div>
-
-</div>
+---
 
 
-
-**OpenESS++**  is a network-capable sound server libary mainly for embedded systems and other operatins systems.
-OpenESS++ is free and open-source software, and is licensed under the terms of the GNU Lesser General Public License.
+**OpenESS 0.6.04**   is a network-capable sound server libary mainly for embedded systems and other operatins systems.
+OpenESS is free and open-source software, and is licensed under the terms of the GNU Lesser General Public License.
 
 <a href="https://www.codacy.com/app/RoseLeBlood/openess?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=RoseLeBlood/openess&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/4f0ba2c68a904b8da2f1d45d5f3596d4"/></a>
-![GitHub](https://img.shields.io/github/license/RoseLeBlood/Openess.svg)
-![GitHub last commit](https://img.shields.io/github/last-commit/roseleblood/openess.svg)
-![Twitter Follow](https://img.shields.io/twitter/follow/padersophia.svg)
+<img src="https://img.shields.io/github/license/RoseLeBlood/Openess.svg"/>
+<img src="https://img.shields.io/github/last-commit/roseleblood/openess.svg"/>
+<a href="https://twittercom/padersophia">
+<img src="https://img.shields.io/twitter/follow/padersophia.svg"></a>
 
 
 ## Getting Started
@@ -54,75 +42,102 @@ Then create a new project for an [ESP32-based board](http://docs.platformio.org/
 
 ```ini
 ; ...
-; PlatformIO Project Configuration File
-;
-;   Build options: build flags, source filter
-;   Upload options: custom upload port, speed and extra flags
-;   Library options: dependencies, extra library storages
-;   Advanced options: extra scripting
-;
-; Please visit documentation for the other options and examples
-; http://docs.platformio.org/page/projectconf.html
-
-[env:my_build_env]
 platform = espressif32
-framework = espidf
-
-lib_deps =
-  # Using a library name
-  OpenESS
-
-  # ... or using library Id
-  6127
-
-  # ... or depend on a specific version
-  OpenESS@0.4.0
-
-  # Semantic Versioning Rules
-  # http://docs.platformio.org/page/userguide/lib/cmd_install.html#description
-  OpenESS@^0.4.0
-  OpenESS@~0.4.0
-  OpenESS@>=0.4.0
+board = nodemcu-32s
+framework = esp-idf
+lib_deps = openess
 ```
 Finally, create a new source file in the `src/` folder (for example `main.c`) and start coding with openess.
 
 ## Usage example
 
-_probe backends_
+_simple create output_
 ```cpp
-
 #include "ess.h"
-#include "ess_context.h"
+#include "ess_platform.h"
+#include "ess_output_module.h"
+#include "ess_input_module.h"
 
-ess_error_t error;
+ void app_main() {
+   ess_platform::Instance().create();
 
-void probe_backend(ess_backend* backend) {
+   ess_output_module* i2s_output = ess_platform::Instance().create_output(ESS_OUTPUT_GENERIC_I2S,
+     std::string("ess_i2s_controller") );
 
- printf("Probe backend: %s ----------------------------------------------------\n", backend->get_name() );
+   std::cout << i2s_output->to_string() << std::endl;
 
- for(int y = 0; y < ESS_FORMAT_MAX; y++)  {
-  error = backend->probe(  (ess_format_t) y);
 
-   // ++ => support | !! => no support
-    printf("\t\t  %s (%s)   \n", (error == ESS_OK) ? "++" : "!!" ,
-      ess_format_to_string( (ess_format_t)(y)) );
-   }
+   printf("OpenESS is ready to take off \n");
+
+   for(;;) { i2s_output->update();  }
 }
 
-#if ESS_PLATFORM_ESP32 == 1
-extern "C" void app_main() {
-#else
-int main() {
-#endif
-  ess_backend_t& ins = ess_backend_t::Instance();
+/* Output:
 
-  for(auto i = ins.get_backends().begin(); i !=  ins.get_backends().end(); ++i ) {
-    probe_backend(i->second);
-  }
+I (5153) I2S: DMA Malloc info, datalen=blocksize=512, dma_buf_count=3
+I (5153) I2S: DMA Malloc info, datalen=blocksize=512, dma_buf_count=3
+I (5153) I2S: APLL: Req RATE: 48000, real rate: 47999.961, BITS: 16, CLKM: 1, BCK_M: 8, MCLK: 12287990.000, SCLK: 1535998.750000, diva: 1, divb: 0
+I (5173) I2S: APLL: Req RATE: 48000, real rate: 47999.961, BITS: 16, CLKM: 1, BCK_M: 8, MCLK: 12287990.000, SCLK: 1535998.750000, diva: 1, divb: 0
+i2s0:0 inputs:
+-------------------------
+        input: i2s0:0_left(0)
+        input: i2s0:0_right(1)
+-------------------------
 
-  for(;;)  { ess_platform_sleep(10); }
+OpenESS is ready to take off
+
+*/
+```
+
+_null output example_
+```cpp
+#include "ess.h"
+#include "ess_platform.h"
+#include "ess_output_module.h"
+#include "ess_input_module.h"
+
+void app_main() {
+  ess_platform::Instance().create();
+
+  ess_output_module* i2s_output = ess_platform::Instance().create_output(ESS_OUTPUT_GENERIC_I2S,
+    std::string("ess_i2s_controller") );
+
+  ess_input_module null_input("null_input");
+  null_input.add_channel("null_left", ESS_AUDIO_CHANNEL_LEFT);
+  null_input.add_channel("null_right", ESS_AUDIO_CHANNEL_RIGHT);
+
+  std::cout << i2s_output->to_string() << std::endl;
+
+
+  i2s_output->connect(&null_input, ESS_AUDIO_CHANNEL_LEFT, ESS_AUDIO_CHANNEL_RIGHT);
+  i2s_output->connect(&null_input, ESS_AUDIO_CHANNEL_RIGHT, ESS_AUDIO_CHANNEL_LEFT);
+
+  std::cout << i2s_output->to_string() << std::endl;
+
+  std::cout << "OpenESS is ready to take off" << std::endl;
+
+  for(;;) { i2s_output->update();  }
 }
+/* Output:
 
+I (5153) I2S: DMA Malloc info, datalen=blocksize=512, dma_buf_count=3
+I (5153) I2S: DMA Malloc info, datalen=blocksize=512, dma_buf_count=3
+I (5153) I2S: APLL: Req RATE: 48000, real rate: 47999.961, BITS: 16, CLKM: 1, BCK_M: 8, MCLK: 12287990.000, SCLK: 1535998.750000, diva: 1, divb: 0
+I (5173) I2S: APLL: Req RATE: 48000, real rate: 47999.961, BITS: 16, CLKM: 1, BCK_M: 8, MCLK: 12287990.000, SCLK: 1535998.750000, diva: 1, divb: 0
+i2s0:0 inputs:
+-------------------------
+        input: i2s0:0_left(0)
+        input: i2s0:0_right(1)
+-------------------------
+i2s0:0 inputs:
+-------------------------
+        input: i2s0:0_left(0) <- output: null_right(1)
+        input: i2s0:0_right(1) <- output: null_left(0)
+-------------------------
+
+OpenESS is ready to take off
+
+*/
 ```
 _For more examples and usage, please refer to the [Wiki][wiki]
 
@@ -153,7 +168,57 @@ _For more examples and usage, please refer to the [Wiki][wiki]
 
 
 ## Release History
-Found you here: [changelog][changelog]
+* 0.6.04:
+  - remove TeensyAudioLibrary
+  - add very flexible audio system
+  - rename class see examples
+  - add ess_channel
+  - add connecting system
+  - fix issus
+* 0.5.0:
+  - update to 0.5
+  - start impl new frontend system. based on the TeensyAudioLibrary with modifications
+  - rename backends:
+      - i2s_generic_backend -> i2s_generic_output_backend
+      - generic_openal_backend -> generic_openal_output_backend
+      - generic_udp_backend -> generic_udp_output_backend
+* 0.4.5:
+  - add IP4/IP6 multicast
+  - add new system
+  - remove ess_context
+* 0.4.2:
+  - remove issus
+* 0.4.03
+  - ++ ess_backend::get_blksize
+  - ++ config ESS_BUF_COUNT 4
+  - ++ config ESS_BUF_SIZE      1024
+* 0.4.02
+  - add ess_network.h for socket multiplatform layer
+  - update example
+  - ess_dram_server using config from config.h
+  - add generic_udp_backend
+* 0.4.0
+  - add udp_inet server / client backend
+  - add ess_server and ess_dram_server (basic)
+  - add esp32 dram server example
+* 0.3.4
+  - add backend factory
+  - add context creating functions
+  - add probe function to ess_backend as virtual
+  - add esp32 i2s_generic_backend
+* 0.3.3
+  - rename project to OpenESS ++
+  - switch to C++
+  - C++ convert i progress - unstable
+* 0.3
+  - update platform abstraction layer
+  - add mutex, task and spinlock functions - task using mutex on esp32 platforms
+  - add examples
+* 0.2
+  - rename headers
+  - add platform abstraction layer
+* 0.0.1
+  - Work in progress
+
 
 [wiki]: https://github.com/RoseLeBlood/openess/wiki
-[changelog]: https://github.com/RoseLeBlood/openess/blob/master/CHANGELOG.md

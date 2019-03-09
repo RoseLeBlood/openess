@@ -16,7 +16,7 @@ ess_input_channel::ess_input_channel(std::string name, ess_audio_channel channel
    return m_pConChannel != NULL;
  }
 
- unsigned int ess_input_channel::read(int32_t* buffer, unsigned int offset, unsigned int size) {
+ unsigned int ESS_IRAM_ATTR ess_input_channel::read(int32_t* buffer, unsigned int offset, unsigned int size) {
    return is_connected() ? m_pConChannel->read(buffer, offset, size) : -1;
  }
 
