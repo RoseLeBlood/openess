@@ -36,7 +36,6 @@
 #include <sstream>
 
 class ess_object {
-<<<<<<< HEAD
   friend std::ostream& operator>>(std::ostream& stream, ess_object& obj); // to_string
   friend std::istream& operator<< (std::istream& stream, ess_object& obj); // from_string
 
@@ -48,12 +47,7 @@ public:
   void set_name(const std::string name) { m_strName = name; }
 
   virtual std::string to_string() { return m_strName; }
-<<<<<<< HEAD
   virtual void from_string(const std::string str) { m_strName = str; }
-=======
-
->>>>>>> cc7a757f649f799b37632ea63e3f7ab465975d34
-
 private:
   std::string m_strName;
 };
