@@ -44,15 +44,15 @@
  	ess_autolock(LOCK &m) : m_ref_lock(m) {
      m_ref_lock.lock();
    }
- 	~basic_autolock() {
+ 	~ess_autolock() {
       m_ref_lock.unlock();
     }
  private:
- 	MUTEX &m_ref_lock;
+ 	LOCK &m_ref_lock;
  };
 
- using ess_autospin_t = basic_autolock<ess_spinlock>;
- using ess_automux_t = basic_autolock<ess_mutex>;
+ using ess_autospin_t = ess_autolock<ess_spinlock>;
+ using ess_automux_t = ess_autolock<ess_mutex>;
 
 
  /**

@@ -17,10 +17,12 @@ ess_input_channel::ess_input_channel(std::string name, ess_audio_channel channel
  }
 
  unsigned int ESS_IRAM_ATTR ess_input_channel::read(int32_t* buffer, unsigned int offset, unsigned int size) {
+   ess_automux_t lock(m_mutex);
    return is_connected() ? m_pConChannel->read(buffer, offset, size) : -1;
  }
 
  ess_error_t ess_input_channel::connect(ess_output_channel* channel) {
+   ess_automux_t lock(m_mutex);
    if(m_pConChannel != NULL )  return ESS_ERROR_CONNECT;
 
    m_pConChannel = channel;

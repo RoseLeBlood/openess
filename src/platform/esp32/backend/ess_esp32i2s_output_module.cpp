@@ -57,6 +57,8 @@ ess_esp32i2s_output_module::ess_esp32i2s_output_module(ess_controler* pControlle
     ESS_AUDIO_CHANNEL_LEFT);
   ess_output_module::add_channel(std::string(ESS_BACKEND_NAME_OUT_I2S_ESP32) + std::string("_right"),
     ESS_AUDIO_CHANNEL_RIGHT);
+
+  m_bActive = true;
 }
 
 ess_error_t ess_esp32i2s_output_module::add_channel(std::string name, ess_audio_channel channel) {
@@ -71,6 +73,9 @@ ess_esp32i2s_output_module::~ess_esp32i2s_output_module() {
 }
 
 ess_error_t ESS_IRAM_ATTR ess_esp32i2s_output_module::update(void) {
+  ess_automux_t lock(m_mutex);
+  if(!m_bActive) { ess_platform_sleep(1); return ESS_ERROR; }
+
   if(m_pController == NULL) return ESS_ERROR_NULL;
 
   bool blocked = false;
@@ -87,7 +92,7 @@ ess_error_t ESS_IRAM_ATTR ess_esp32i2s_output_module::update(void) {
    int red_l = read(ESS_AUDIO_CHANNEL_LEFT,    buffer_l, 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
    int red_r = read(ESS_AUDIO_CHANNEL_RIGHT, buffer_r, 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
 
-   
+
    if(red_l != -1 && red_r != -1)  {
   		switch( ess_platform_esp32::get_bits() ) {
   			case 16:

@@ -22,7 +22,7 @@
  * @file ess_object.h
  * @author Anna Sopdia Schröck
  * @date 09 März 2019
- * @brief ESS generic ouput stream
+ * @brief ESS basic class all ess objects
  *
  *
  */
@@ -33,8 +33,10 @@
 #ifndef __ESS_OBJECT_H__
 #define __ESS_OBJECT_H__
 
+#include <sstream>
 
 class ess_object {
+  friend std::ostream& operator>>(std::ostream& stream, ess_object& obj);
 public:
   ess_object() : m_strName("ess_object") { }
   ess_object(std::string name) : m_strName(name) {  }
@@ -43,6 +45,8 @@ public:
   void set_name(const std::string name) { m_strName = name; }
 
   virtual std::string to_string() { return m_strName; }
+
+
 private:
   std::string m_strName;
 };

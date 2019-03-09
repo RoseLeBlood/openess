@@ -34,6 +34,7 @@
 #define __ESS_MODULE_H__
 
 #include "ess.h"
+#include "task/ess_autolock.h"
 
 /**
   * @brief basic class for module
@@ -47,24 +48,23 @@ class ess_module  : public ess_object  {
 public:
   ess_module() { }
   ess_module(const std::string& name)
-    : ess_object(name), m_bActive(false), m_bInit(false) { }
+    : ess_object(name), m_bActive(false) { }
 
-  virtual ~ess_module() { close(); }
+  virtual ~ess_module() { set_active(false); }
 
-  virtual ess_error_t close() { m_bActive = m_bInit =  false; return ESS_OK; }
-  virtual ess_error_t open() {  m_bInit =  true; return ESS_OK; }
-
-  virtual bool is_init() { return m_bInit; }
-  virtual bool is_active() { return m_bActive; }
-
+  virtual bool is_active() {
+    ess_automux_t lock(m_mutex);
+    return m_bActive;
+  }
   virtual ess_error_t set_active(bool active)  {
-     if(!m_bInit) return ESS_ERROR;  m_bActive = active; return ESS_OK;
+    ess_automux_t lock(m_mutex);
+    m_bActive = active; return ESS_OK;
    }
 
    virtual unsigned int read(ess_audio_channel id, int32_t* buffer, unsigned int offset, unsigned int size) = 0;
 protected:
   bool m_bActive;
-  bool m_bInit;
+  ess_mutex m_mutex;
 };
 
 /**

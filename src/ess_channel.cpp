@@ -26,8 +26,12 @@ ess_channel::ess_channel(std::string name, ess_channel_t type)
   : ess_channel(name, type, ESS_AUDIO_CHANNEL_LEFT ) { }
 
 ess_channel::ess_channel(std::string name, ess_channel_t type, ess_audio_channel channel)
-  : ess_object(name), m_iChannel(channel),  m_eType(type) { }
-
+  : ess_object(name), m_iChannel(channel),  m_eType(type) {
+    m_mutex.create();
+}
+ess_channel::~ess_channel() {
+  m_mutex.destroy();
+}
 
 std::string ess_channel::to_string() {
   std::ostringstream ss;

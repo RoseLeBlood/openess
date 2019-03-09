@@ -34,7 +34,7 @@
  #define __ESS_CHANNEL_H__
 
  #include "ess.h"
-
+#include "task/ess_autolock.h"
 
  /**
   * @brief generic channel class - basic class for `ess_input_channel` and `ess_output_channel`
@@ -63,6 +63,7 @@ public:
    */
   ess_channel(std::string name, ess_channel_t type, ess_audio_channel channel);
 
+  ~ess_channel();
   /**
    * @brief get the using channel (id)
    * @return tthe using channel
@@ -121,6 +122,7 @@ protected:
 protected:
   ess_audio_channel m_iChannel;
   ess_channel_t m_eType;
+  ess_mutex m_mutex;
 };
 
 /**
