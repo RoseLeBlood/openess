@@ -41,6 +41,8 @@ public:
 
   std::string get_name() { return m_strName; }
   void set_name(const std::string name) { m_strName = name; }
+
+  virtual std::string to_string() { return m_strName; }
 private:
   std::string m_strName;
 };

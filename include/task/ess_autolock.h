@@ -18,55 +18,44 @@
  ****************************************************************************/
 
 /**
- * @file ess_spinlock.h
+ * @file ess_lock..h
  * @author Anna Sopdia Schröck
- * @date 11 Februar 2019
- * @brief  platform specific spinlock class
+ * @date 09 März 2019
+ * @brief autolock helper class
  *
  */
-#ifndef _ESS_PLATFORM_SPINLOCK_H_
-#define _ESS_PLATFORM_SPINLOCK_H_
 
-#include "task/ess_lock.h"
+ #ifndef _ESS_AUTOLOCK_H_
+ #define _ESS_AUTOLOCK_H_
 
-class ess_spinlock : public ess_lock {
-public:
-  ess_spinlock();
-  ess_spinlock(const std::string name);
-  ~ess_spinlock();
+#include "ess_error.h"
+#include "task/ess_task.h"
+#include "task/ess_spinlock.h"
 
-  virtual ess_error_t create(int count);
-  virtual ess_error_t destroy();
+ /**
+ * @addtogroup task
+ * @{
+ */
 
-  /**
-   * @brief lock the spinlock
-   * @retval ESS_OK no error
-   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
-   * @retval ESS_ERROR unspec error
-   * @retval ESS_ERROR_NOT_CREATED  mutex is not created
-   * @retval ESS_ERROR_NULL 'ess_platform_mutex_t' mtx is null
-   */
-  virtual ess_error_t lock();
-  /**
-   * @brief unlock the spinlock
-   * @retval ESS_OK no error
-   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
-   * @retval ESS_ERROR unspec error
-   * @retval ESS_ERROR_NOT_CREATED  mutex is not created
-   * @retval ESS_ERROR_NULL 'ess_platform_mutex_t' mtx is null
-   */
-  virtual ess_error_t unlock();
+ template <class LOCK>
+ class  ess_autolock
+ {
+ public:
+ 	ess_autolock(LOCK &m) : m_ref_lock(m) {
+     m_ref_lock.lock();
+   }
+ 	~basic_autolock() {
+      m_ref_lock.unlock();
+    }
+ private:
+ 	MUTEX &m_ref_lock;
+ };
 
-  /**
-   * @brief try lock the mutex
-   *
-   * @retval ESS_OK lock the mutex
-   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
-   * @retval ESS_ERROR can't lock
-   * @retval ESS_ERROR_NULL 'ess_platform_mutex_t' mtx is null
-   */
-  virtual ess_error_t try_lock();
+ using ess_autospin_t = basic_autolock<ess_spinlock>;
+ using ess_automux_t = basic_autolock<ess_mutex>;
 
-};
 
-#endif
+ /**
+ * @}
+ */
+ #endif

@@ -46,15 +46,14 @@ public:
   /**
    * @brief basic constructer
    */
-  ess_channel() : ess_channel("ess_object", ESS_CHANNEL_INPUT) { }
+  ess_channel();
 
   /**
    * @brief second constructer
    * @param [in] name human readelble name for the channel
    * @param [in] type type of the channel
    */
-  ess_channel(std::string name, ess_channel_t type) :
-    ess_channel(name, type, ESS_AUDIO_CHANNEL_LEFT ) { }
+  ess_channel(std::string name, ess_channel_t type);
 
   /**
    * @brief third constructer
@@ -62,8 +61,7 @@ public:
    * @param [in] type type of the channel
    * @param [in] channel which channel
    */
-  ess_channel(std::string name, ess_channel_t type, ess_audio_channel channel)
-    : ess_object(name), m_iChannel(channel),  m_eType(type) { }
+  ess_channel(std::string name, ess_channel_t type, ess_audio_channel channel);
 
   /**
    * @brief get the using channel (id)
@@ -107,6 +105,8 @@ public:
    * @retval -1 somthings are wrong : error
    */
   virtual unsigned int read(int32_t* buffer, unsigned int offset, unsigned int size) = 0;
+
+  virtual std::string to_string();
 protected:
   /**
    * @brief set the channel

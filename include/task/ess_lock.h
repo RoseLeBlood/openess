@@ -27,15 +27,18 @@
 #ifndef _ESS_PLATFORM_ILOCK_H_
 #define _ESS_PLATFORM_ILOCK_H_
 
-#include "ess_error.h"
+#include "ess.h"
 
 /**
 * @addtogroup task
 * @{
 */
 
-class ess_lock {
+class ess_lock : public ess_object {
 public:
+  ess_lock() : ess_object("ess_lock") { }
+  ess_lock(const std::string name) : ess_object(name) { }
+
   virtual ess_error_t create() = 0;
   virtual ess_error_t destroy() = 0;
 
@@ -43,7 +46,6 @@ public:
   virtual ess_error_t unlock() = 0;
   virtual ess_error_t try_lock() = 0;
 protected:
-  char m_cName[16];
   void* m_pHandle;
 };
 /**

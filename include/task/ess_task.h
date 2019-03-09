@@ -27,10 +27,10 @@
 #ifndef _ESS_TASK_H_
 #define _ESS_TASK_H_
 
-#include "ess_error.h"
+#include "ess.h"
 #include "task/ess_mutex.h"
 
-class ess_task {
+class ess_task : public ess_object  {
 public:
   /**
    * @brief simple constructer
@@ -52,7 +52,7 @@ public:
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
    * @retval ESS_ERROR
    */
-  ess_task(const std::string& taskName, void* param = NULL, unsigned int stackSize = 4096);
+  ess_task(const std::string taskName, void* param = NULL, unsigned int stackSize = 4096);
   virtual ~ess_task() { destroy(); }
 
   /**
@@ -137,7 +137,6 @@ protected:
 private:
   static void int_task_stub(void* data);
 protected:
-  std::string m_strName;
   int m_iTaskId;
 
   void* m_pUserdata;

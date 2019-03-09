@@ -17,49 +17,26 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
+#include "ess_channel.h"
+#include <sstream>
 
-/**
- * @file ess_input_channel.h
- * @author Anna Sopdia Schröck
- * @date 08 März 2019
- * @brief channel for the output object
- *
- *
- */
- /**
- * @addtogroup ess
- * @{
- */
- #ifndef __ESS_INPUT_CHANNEL_H__
- #define __ESS_INPUT_CHANNEL_H__
+ess_channel::ess_channel() : ess_channel("ess_object", ESS_CHANNEL_INPUT) { }
 
-#include "ess_output_channel.h"
+ess_channel::ess_channel(std::string name, ess_channel_t type)
+  : ess_channel(name, type, ESS_AUDIO_CHANNEL_LEFT ) { }
 
-/**
- * @brief the ess_input_channel class
- * the `ess_output_objec` has n input channels
- * the input channel read from connected `ess_output_channel`
- */
-class ess_input_channel : public ess_channel {
-public:
-  ess_input_channel();
-  ess_input_channel(std::string name);
-  ess_input_channel(std::string name, ess_audio_channel channel );
-
-  ess_error_t connect(ess_output_channel* channel) ;
+ess_channel::ess_channel(std::string name, ess_channel_t type, ess_audio_channel channel)
+  : ess_object(name), m_iChannel(channel),  m_eType(type) { }
 
 
-   virtual unsigned int read(int32_t* buffer, unsigned int offset, unsigned int size) ;
+std::string ess_channel::to_string() {
+  std::ostringstream ss;
 
-   bool is_connected();
+  if(is_input())   ss  << "input: ";
+  else if(is_output())   ss  << "output: ";
+  else   ss << "invalid: ";
 
-   virtual std::string to_string();
-protected:
-  ess_output_channel* m_pConChannel;
-};
+  ss << get_name() << "(" <<  get_channel() << ")";
 
-
- /**
- * @}
- */
- #endif
+  return ss.str();
+}

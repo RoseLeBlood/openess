@@ -66,6 +66,7 @@ public:
   virtual ess_error_t connect(ess_input_module* mod, ess_audio_channel this_channel,
     ess_audio_channel mod_channel);
 
+    virtual std::string to_string();
 protected:
   std::list<ess_input_channel*> m_lstChannels;
 };

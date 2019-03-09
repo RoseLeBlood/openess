@@ -62,6 +62,7 @@ public:
   virtual int32_t* get_buffer(ess_audio_channel id);
   virtual uint32_t get_size(ess_audio_channel id);
 
+  virtual std::string to_string();
 protected:
   std::list<ess_output_channel*> m_lstChannels;
 };

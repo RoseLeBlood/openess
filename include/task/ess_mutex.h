@@ -36,6 +36,7 @@
 class ess_mutex : public ess_lock {
 public:
   ess_mutex();
+  ess_mutex(const std::string name);
   ~ess_mutex();
 
   virtual ess_error_t create();

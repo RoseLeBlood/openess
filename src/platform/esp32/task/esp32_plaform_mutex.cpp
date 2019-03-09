@@ -37,7 +37,10 @@
 
 #include "esp_attr.h"
 
-ess_mutex::ess_mutex() { }
+
+ess_mutex::ess_mutex() : ess_lock("esp32_mutex") { }
+ess_mutex::ess_mutex(const std::string name)  : ess_lock(name) { }
+
 ess_mutex::~ess_mutex() {
 
 }

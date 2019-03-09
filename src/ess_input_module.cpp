@@ -19,6 +19,7 @@
 
 
 #include "ess_input_module.h"
+#include <sstream>
 
 ess_error_t ess_input_module::add_channel(std::string name, ess_audio_channel channel) {
   if(get_channel(name) != NULL) return ESS_ERROR;
@@ -73,4 +74,17 @@ unsigned int ess_input_module::read(ess_audio_channel id, int32_t* buffer,
     ess_output_channel* channel = get_channel(id);
     if(channel) return channel->read(buffer, offset, id);
     return -1;
+}
+std::string ess_input_module::to_string() {
+  std::ostringstream ss;
+
+  ss << get_name() << " outputs: " << std::endl;
+  ss << "-------------------------" << std::endl;
+  std::list<ess_output_channel*>::iterator it;
+  for(it = m_lstChannels.begin(); it != m_lstChannels.end(); it++) {
+     ss  << "\t"<< (*it)->to_string() << std::endl;
+  }
+  ss << "-------------------------";
+
+  return ss.str();
 }

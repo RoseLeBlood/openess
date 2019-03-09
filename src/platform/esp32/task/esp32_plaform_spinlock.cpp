@@ -37,9 +37,9 @@
 
 #include "esp_attr.h"
 
-ess_spinlock::ess_spinlock() {
+ess_spinlock::ess_spinlock() : ess_lock("ess_spinlock") { }
+ess_spinlock::ess_spinlock(const std::string name)  : ess_lock(name) { }
 
-}
 ess_spinlock::~ess_spinlock() {
 
 }
