@@ -19,52 +19,32 @@
 
 
 /**
- * @file ess_output_channel.h
+ * @file ess_memory.h
  * @author Anna Sopdia Schröck
- * @date 08 März 2019
- * @brief channel for the output object
+ * @date 09 März 20119
+ * @brief platform audio memory functions
  *
  *
  */
- /**
- * @addtogroup ess
- * @{
- */
- #ifndef __ESS_OUTPUT_CHANNEL_H__
- #define __ESS_OUTPUT_CHANNEL_H__
+ #ifndef _ESS_PLATFORM_MEMORY_H_
+ #define _ESS_PLATFORM_MEMORY_H_
 
+ #include "ess.h"
 
-#include "ess_channel.h"
+void* ess_malloc(unsigned int size);
+void* ess_malloc_audio(unsigned int size);
 
-/**
- * @brief the ess_output_channel class
- * the `ess_input_objec` has n outputs channels
- */
-class ess_output_channel : public ess_channel {
-public:
-  ess_output_channel()  { }
+void* ess_calloc(size_t nmemb, size_t size);
+void* ess_calloc_audio(size_t nmemb, size_t size);
 
-  ess_output_channel(std::string name)
-    : ess_channel(name, ESS_CHANNEL_OUTPUT, ESS_AUDIO_CHANNEL_LEFT)
-        { ess_zeromem(m_iSampleBuffer ,ESS_DEFAULT_AUDIO_PACKET_SIZE); }
+void* ess_realloc(void *ptr, size_t size);
+void* ess_realloc_audio(void *ptr, size_t size);
 
-  ess_output_channel(std::string name, ess_audio_channel channel )
-    : ess_channel(name, ESS_CHANNEL_OUTPUT, channel)
-       { ess_zeromem(m_iSampleBuffer ,ESS_DEFAULT_AUDIO_PACKET_SIZE); }
+void ess_free(void* buffer);
 
-  virtual unsigned int ESS_IRAM_ATTR read(int32_t* buffer, unsigned int offset, unsigned int size)  {
-    ess_memcpy(buffer, m_iSampleBuffer, size);
-    return size;
-   }
+void ess_zeromem(void* buffer, unsigned int size);
+void ess_memset(void* buffer, int data, unsigned int size);
 
-   unsigned int get_size() { return ESS_DEFAULT_AUDIO_PACKET_SIZE; }
-   int32_t* get_buffer() { return m_iSampleBuffer; }
-protected:
-  int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE];
-};
+void ess_memcpy(void* dest, void* src, unsigned int size);
 
-
- /**
- * @}
- */
  #endif

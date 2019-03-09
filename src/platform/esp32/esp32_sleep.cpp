@@ -40,7 +40,7 @@
 #include "esp_partition.h"
 #include <sys/time.h>
 
-
+#if  ESS_PLATFORM_ESP32 == 1
 unsigned int ess_platform_get_tick_count() {
   return (uint32_t) (xTaskGetTickCount() * portTICK_PERIOD_MS);
 }
@@ -116,3 +116,4 @@ unsigned long IRAM_ATTR ess_platform_micros() {
 unsigned long ess_platform_millis() {
   return xTaskGetTickCount() * portTICK_PERIOD_MS;
 }
+#endif

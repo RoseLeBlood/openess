@@ -53,6 +53,7 @@
 #include "ess_error.h"
 #include "ess_protocol.h"
 #include "platform/ess_sleep.h"
+#include "platform/ess_memory.h"
 
 typedef enum  ess_output_type {
   ESS_OUTPUT_GENERIC_I2S,
