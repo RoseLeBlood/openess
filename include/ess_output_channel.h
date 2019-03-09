@@ -49,10 +49,10 @@ public:
         { memset(m_iSampleBuffer, 0 ,ESS_DEFAULT_AUDIO_PACKET_SIZE); }
 
   ess_output_channel(std::string name, ess_audio_channel channel )
-    : ess_channel(name, ESS_CHANNEL_INPUT, channel)
+    : ess_channel(name, ESS_CHANNEL_OUTPUT, channel)
        { memset(m_iSampleBuffer, 0 ,ESS_DEFAULT_AUDIO_PACKET_SIZE); }
 
-  virtual unsigned int read(int32_t* buffer, unsigned int offset, unsigned int size)  {
+  virtual unsigned int ESS_IRAM_ATTR read(int32_t* buffer, unsigned int offset, unsigned int size)  {
     for(int i = offset; i < size; i++)
       buffer[i] = 0;
     return size - offset;

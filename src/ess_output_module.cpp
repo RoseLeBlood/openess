@@ -57,7 +57,7 @@ ess_input_channel* ess_output_module::get_channel(std::string name) {
   return nullptr;
 }
 
-unsigned int ess_output_module::read(ess_audio_channel id, int32_t* buffer,
+unsigned int ESS_IRAM_ATTR ess_output_module::read(ess_audio_channel id, int32_t* buffer,
   unsigned int offset, unsigned int size ) {
 
     ess_input_channel* channel = get_channel(id);

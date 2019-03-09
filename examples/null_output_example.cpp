@@ -34,8 +34,8 @@ i2s0:0 inputs:
 -------------------------
 i2s0:0 inputs:
 -------------------------
-        input: i2s0:0_left(0) <- input: null_right(1)
-        input: i2s0:0_right(1) <- input: null_left(0)
+        input: i2s0:0_left(0) <- output: null_right(1)
+        input: i2s0:0_right(1) <- output: null_left(0)
 -------------------------
 
 OpenESS is ready to take off
