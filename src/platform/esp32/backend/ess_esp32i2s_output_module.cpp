@@ -47,10 +47,11 @@
 
 #include "esp_log.h"
 #include "platform/esp32/ess_platform_esp32.h"
+#include "platform/ess_sleep.h"
 
 #if  ESS_PLATFORM_ESP32 == 1
-ess_esp32i2s_output_module::ess_esp32i2s_output_module()
-  : ess_output_module(ESS_BACKEND_NAME_OUT_I2S_ESP32)   {
+ess_esp32i2s_output_module::ess_esp32i2s_output_module(ess_controler* pController)
+  : ess_output_module(ESS_BACKEND_NAME_OUT_I2S_ESP32), m_pController(pController)   {
 
   ess_output_module::add_channel(std::string(ESS_BACKEND_NAME_OUT_I2S_ESP32) + std::string("_left"),
     ESS_AUDIO_CHANNEL_LEFT);
@@ -68,17 +69,25 @@ ess_error_t ess_esp32i2s_output_module::add_channel(ess_input_channel* channel) 
 ess_esp32i2s_output_module::~ess_esp32i2s_output_module() {
 
 }
+
 ess_error_t ESS_IRAM_ATTR ess_esp32i2s_output_module::update(void) {
-	 int32_t* buffer_r, *buffer_l;
+  if(m_pController == NULL) return ESS_ERROR_NULL;
+
+  bool blocked = false;
+  int32_t* buffer_r, *buffer_l;
 
    buffer_r = new int32_t[ESS_DEFAULT_AUDIO_PACKET_SIZE];
    buffer_l = new int32_t[ESS_DEFAULT_AUDIO_PACKET_SIZE];
+
+   memset(buffer_r, 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
+   memset(buffer_l, 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
 
    if(buffer_r == NULL || buffer_l == NULL) return ESS_ERROR_OUTOFMEM;
 
    int red_l = read(ESS_AUDIO_CHANNEL_LEFT,    buffer_l, 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
    int red_r = read(ESS_AUDIO_CHANNEL_RIGHT, buffer_r, 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
 
+   
    if(red_l != -1 && red_r != -1)  {
   		switch( ess_platform_esp32::get_bits() ) {
   			case 16:
@@ -88,6 +97,7 @@ ess_error_t ESS_IRAM_ATTR ess_esp32i2s_output_module::update(void) {
   						sample[1] = (buffer_r) ?  (int16_t)(buffer_r[i] * 32767.0f) : 0;
 
   					  m_iSampleBuffer[i] = (((sample[1]+ 0x8000)<<16) | ((sample[0]+ 0x8000) & 0xffff));
+
   				}
   				break;
   			case 24:
@@ -105,32 +115,31 @@ ess_error_t ESS_IRAM_ATTR ess_esp32i2s_output_module::update(void) {
   			default:
   				break;
   		}
+   } else {
+     printf("blocked\n");
+     blocked = true;
    }
 
-		size_t totalBytesWritten = 0;
-		size_t bytesWritten = 0;
-		for(;;) {
-			switch(ess_platform_esp32::get_bits() ) {
-				case 16:
-					i2s_write(I2S_NUM_0, (const char*)&m_iSampleBuffer, (ESS_DEFAULT_AUDIO_PACKET_SIZE * sizeof(uint32_t)), &bytesWritten, portMAX_DELAY);		//Block but yield to other tasks
-					break;
-				case 24:
-				case 32:
-					i2s_write(I2S_NUM_0, (const char*)&m_iSampleBuffer, (ESS_DEFAULT_AUDIO_PACKET_SIZE * sizeof(uint32_t)) * 2, &bytesWritten, portMAX_DELAY);		//Block but yield to other tasks
-					break;
-				default:
-					break;
-			}
-			totalBytesWritten += bytesWritten;
-			if(totalBytesWritten >= (ESS_DEFAULT_AUDIO_PACKET_SIZE * sizeof(uint32_t)))
-				break;
-			vPortYield();
-		}
 
-		if (buffer_r) delete buffer_r;
+   if(!blocked) {
+    size_t totalBytesWritten = 0;
+    size_t bytesWritten = 0;
+    for(;;) {
+    	bytesWritten = m_pController->write(m_iSampleBuffer, 0, (ESS_DEFAULT_AUDIO_PACKET_SIZE * sizeof(uint32_t)));
+
+    	totalBytesWritten += bytesWritten;
+    	if(totalBytesWritten >= (ESS_DEFAULT_AUDIO_PACKET_SIZE * sizeof(uint32_t)))
+    		break;
+    	vPortYield();
+    }
+  } else {
+    ess_platform_sleep(1);
+  }
+
+    if (buffer_r) delete buffer_r;
     if (buffer_l) delete buffer_l;
 
-  return ESS_OK;
+    return ESS_OK;
 }
 #endif
 

@@ -37,7 +37,7 @@ typedef enum  ess_platform_ringbuffer_mode{
 }ess_platform_ringbuffer_mode_t;
 
 
-class ess_ringbuffer {
+class ess_ringbuffer : public ess_object  {
 public:
   ess_ringbuffer( );
   virtual ~ess_ringbuffer();

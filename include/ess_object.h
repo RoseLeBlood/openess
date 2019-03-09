@@ -19,40 +19,33 @@
 
 
 /**
- * @file ess_ontroler.h
+ * @file ess_object.h
  * @author Anna Sopdia Schröck
- * @date 04 März 20119
- * @brief generic platform hardware controller
+ * @date 09 März 2019
+ * @brief ESS generic ouput stream
  *
  *
  */
-#ifndef _ESS_PLATFORM_CONTROLER_H_
-#define _ESS_PLATFORM_CONTROLER_H_
+ /**
+ * @addtogroup ess
+ * @{
+ */
+#ifndef __ESS_OBJECT_H__
+#define __ESS_OBJECT_H__
 
-#include "ess.h"
 
-class ess_controler  : public ess_object {
+class ess_object {
 public:
-  ess_controler() : ess_object("ess_controler") { m_bCreated = false; }
-  ess_controler(const std::string name)  : ess_object(name) { m_bCreated = false; }
+  ess_object() : m_strName("ess_object") { }
+  ess_object(std::string name) : m_strName(name) {  }
 
-  virtual ~ess_controler() { destroy(0); }
-
-  virtual ess_format_t get_format() { return ESS_DEFAULT_SERVER_FORMAT; }
-  virtual int get_bits() { return ess_format_get_bits(get_format()) ; }
-  virtual int get_samplerate()  { return ess_format_get_samplerate(get_format()) ; }
-  virtual int get_channels()  { return ess_format_get_channels(get_format()) ; }
-
-  virtual ess_error_t setup(int flags) { return ESS_OK; }
-  virtual ess_error_t destroy(int flags) { return ESS_OK; }
-
-  virtual unsigned int write(void* buffer, unsigned int offset, unsigned  int size) { return -1; }
-  virtual unsigned int read(void* buffer, unsigned int offset, unsigned  int size) { return -1; }
-
-  virtual bool is_created() { return m_bCreated; }
-protected:
-  bool m_bCreated;
+  std::string get_name() { return m_strName; }
+  void set_name(const std::string name) { m_strName = name; }
+private:
+  std::string m_strName;
 };
 
-
 #endif
+/**
+* @}
+*/

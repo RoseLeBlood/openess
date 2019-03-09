@@ -41,7 +41,7 @@
   *
   * all openess modules have n inputs channels or / and n outputs channels
   */
-class ess_channel {
+class ess_channel : public ess_object {
 public:
   /**
    * @brief basic constructer
@@ -63,19 +63,7 @@ public:
    * @param [in] channel which channel
    */
   ess_channel(std::string name, ess_channel_t type, ess_audio_channel channel)
-    : m_strHumanChannelName(name), m_iChannel(channel),  m_eType(type) { }
-
-
-  /**
-   * @brief get the human readelble name of this channel
-   * @return the human readelble name of this channel
-   */
-  std::string& get_name() { return m_strHumanChannelName; }
-  /**
-   * @brief set the human readelble name of this channel
-   * @param [in]  name  the new human readelble name of this channel
-   */
-  void set_name(const std::string& name) { m_strHumanChannelName = name; }
+    : ess_object(name), m_iChannel(channel),  m_eType(type) { }
 
   /**
    * @brief get the using channel (id)
@@ -131,7 +119,6 @@ protected:
    */
   void set_type(const ess_channel_t type) { m_eType = type; }
 protected:
-  std::string m_strHumanChannelName;
   ess_audio_channel m_iChannel;
   ess_channel_t m_eType;
 };

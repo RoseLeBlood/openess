@@ -1,7 +1,7 @@
-#include "platform/esp32/i2s_controller.h"
+#include "platform/esp32/ess_i2s_controller.h"
 
 #if  ESS_PLATFORM_ESP32 == 1
-ess_error_t i2s_controller::setup(int flags) {
+ess_error_t ess_i2s_controller::setup(int flags) {
   if(m_bCreated) return ESS_OK;
 
   m_i2sConfig.sample_rate = ess_format_get_samplerate(ESS_DEFAULT_SERVER_FORMAT);
@@ -39,11 +39,23 @@ ess_error_t i2s_controller::setup(int flags) {
 
   return ESS_OK;
 }
-ess_error_t i2s_controller::destroy(int flags)  {
+ess_error_t ess_i2s_controller::destroy(int flags)  {
     return ESS_OK;
 }
-ess_format_t i2s_controller::get_format() { return ESS_DEFAULT_SERVER_FORMAT; }
-int i2s_controller::get_bits() { return m_i2sConfig.bits_per_sample ; }
-int i2s_controller::get_samplerate() { return m_i2sConfig.sample_rate; }
-int i2s_controller::get_channels() { return ess_format_get_channels(ESS_DEFAULT_SERVER_FORMAT) ; }
+
+int ess_i2s_controller::get_bits() { return m_i2sConfig.bits_per_sample ; }
+int ess_i2s_controller::get_samplerate() { return m_i2sConfig.sample_rate; }
+
+
+unsigned int ess_i2s_controller::write(void* buffer, unsigned int offset, unsigned  int size)  {
+  size_t bytesWritten = 0;
+
+  if(get_bits() == 16) {
+    i2s_write(I2S_NUM_0, (const char*)&buffer, size, &bytesWritten, portMAX_DELAY);		//Block but yield to other tasks
+ } else if(get_bits() == 24 || get_bits() == 32) {
+   i2s_write(I2S_NUM_0, (const char*)&buffer, size *  2, &bytesWritten, portMAX_DELAY);		//Block but yield to other tasks
+ }
+ return bytesWritten;
+}
+
 #endif

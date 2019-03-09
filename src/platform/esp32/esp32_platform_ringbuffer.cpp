@@ -28,7 +28,7 @@
 #ifdef ESS_CONFIG_RINGBUFFER_ESP32
 
 #include "ess_platform.h"
-#include "ess_ringbuffer.h"
+#include "platform/ess_ringbuffer.h"
 
 #include <stdio.h>
 #include <string.h>

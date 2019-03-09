@@ -43,11 +43,11 @@
   //  |                   |
   //  |                   |
   // +------------- +
-class ess_module  {
+class ess_module  : public ess_object  {
 public:
   ess_module() { }
   ess_module(const std::string& name)
-    : m_strName(name), m_bActive(false), m_bInit(false) { }
+    : ess_object(name), m_bActive(false), m_bInit(false) { }
 
   virtual ~ess_module() { close(); }
 
@@ -61,11 +61,8 @@ public:
      if(!m_bInit) return ESS_ERROR;  m_bActive = active; return ESS_OK;
    }
 
-   virtual std::string get_name() { return m_strName; }
-
-   virtual unsigned int read(int32_t* buffer, unsigned int offset, unsigned int size, ess_audio_channel id) = 0;
+   virtual unsigned int read(ess_audio_channel id, int32_t* buffer, unsigned int offset, unsigned int size) = 0;
 protected:
-  std::string m_strName;
   bool m_bActive;
   bool m_bInit;
 };

@@ -54,7 +54,7 @@ public:
 
   virtual unsigned int read(int32_t* buffer, unsigned int offset, unsigned int size)  {
     for(int i = offset; i < size; i++)
-      buffer[i] = m_iSampleBuffer[i];
+      buffer[i] = 0;
     return size - offset;
    }
 

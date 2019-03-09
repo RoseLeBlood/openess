@@ -19,7 +19,7 @@
 
 
 /**
- * @file ess_ontroler.h
+ * @file ess_i2s_controller.h
  * @author Anna Sopdia Schröck
  * @date 04 März 20119
  * @brief generic platform hardware controller
@@ -35,18 +35,17 @@
 #include "ess_format.h"
 #include "platform/ess_controler.h"
 
-class i2s_controller : public ess_controler {
+class ess_i2s_controller : public ess_controler {
 public:
+  ess_i2s_controller() : ess_controler("ess_i2s_controller") { }
+
   virtual ess_error_t setup(int flags = 0);
-  virtual ess_error_t destroy(int flags) ;
+  virtual ess_error_t destroy(int flags = 0) ;
 
-  virtual void* get_value(int flags) { return NULL; }
+  virtual int get_bits();
+  virtual int get_samplerate();
 
-
-  ess_format_t get_format() ;
-  int get_bits();
-  int get_samplerate() ;
-  int get_channels();
+  virtual unsigned int write(void* buffer, unsigned int offset, unsigned  int size) ;
 private:
   i2s_config_t m_i2sConfig;
   i2s_pin_config_t m_pinConfig;

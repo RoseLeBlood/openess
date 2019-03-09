@@ -35,6 +35,7 @@
 
 #include "ess_module.h"
 #include "ess_input_channel.h"
+#include "ess_input_module.h"
 #include <list>
 
 /**
@@ -60,6 +61,11 @@ public:
     unsigned int offset, unsigned int size);
 
   virtual ess_error_t update() = 0;
+
+  virtual ess_error_t connect(ess_input_module* mod, ess_audio_channel channel);
+  virtual ess_error_t connect(ess_input_module* mod, ess_audio_channel this_channel,
+    ess_audio_channel mod_channel);
+
 protected:
   std::list<ess_input_channel*> m_lstChannels;
 };

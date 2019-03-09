@@ -35,7 +35,7 @@
 */
 
 #include "ess_output_module.h"
-#include "platform/esp32/i2s_controller.h"
+#include "platform/esp32/ess_i2s_controller.h"
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -47,7 +47,7 @@
 
 class ess_esp32i2s_output_module : public ess_output_module {
 public:
-  ess_esp32i2s_output_module();
+  ess_esp32i2s_output_module(ess_controler* pController);
   ~ess_esp32i2s_output_module();
 
   virtual ess_error_t update(void) ;
@@ -56,6 +56,7 @@ public:
   virtual ess_error_t add_channel(ess_input_channel* channel);
 private:
   int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE*2];
+  ess_controler* m_pController;
 };
 
 /**

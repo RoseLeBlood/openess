@@ -27,12 +27,27 @@
 
 #include "ess.h"
 #include "platform/esp32/ess_platform_esp32.h"
+#include "platform/esp32/ess_esp32i2s_output_module.h"
+#include "platform/esp32/ess_i2s_controller.h"
 
-ess_platform_esp32::ess_platform_esp32() {
+ess_platform_esp32::ess_platform_esp32()
+  : ess_platform_interface<ess_platform_esp32>("ess_platform_esp32") {
 
-}
-void ess_platform_esp32::create() {
   #ifdef ESS_ENABLE_BACKEND_OUT_I2S
-  m_i2sController.setup(0);
+  add_controller(new ess_i2s_controller());
   #endif
+}
+ess_output_module* ess_platform_esp32::create_output(ess_output_type type,
+  std::string controller_name,
+  ess_format_t format)  {
+
+  ess_output_module* mod = nullptr;
+  ess_controler* controller = get_controller(controller_name);
+
+  if(controller != NULL) {
+    if(type == ESS_OUTPUT_GENERIC_I2S) {
+      mod = new ess_esp32i2s_output_module(controller);
+    }
+  }
+  return mod;
 }

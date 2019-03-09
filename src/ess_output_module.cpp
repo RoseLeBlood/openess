@@ -63,3 +63,10 @@ unsigned int ess_output_module::read(ess_audio_channel id, int32_t* buffer,
     if(channel) return channel->read(buffer, offset, id);
     return -1;
 }
+ess_error_t ess_output_module::connect( ess_input_module* input, ess_audio_channel channel) {
+ return get_channel(channel)->connect(input->get_channel(channel));
+}
+ess_error_t ess_output_module::connect( ess_input_module* input, ess_audio_channel this_channel,
+  ess_audio_channel mod_channel) {
+  return get_channel(this_channel)->connect(input->get_channel(mod_channel));
+}

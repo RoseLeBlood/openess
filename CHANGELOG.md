@@ -1,5 +1,12 @@
 
 ## Release History
+* 0.6.04:
+  - remove TeensyAudioLibrary
+  - add very flexible audio system
+  - rename class see examples
+  - add ess_channel
+  - add connecting system
+  - fix issus
 * 0.5.0:
   - update to 0.5
   - start impl new frontend system. based on the TeensyAudioLibrary with modifications

@@ -48,11 +48,24 @@
 
 #include <iostream>
 
+#include "ess_object.h"
 #include "ess_format.h"
 #include "ess_error.h"
 #include "ess_protocol.h"
 #include "platform/ess_sleep.h"
 
+typedef enum  ess_output_type {
+  ESS_OUTPUT_GENERIC_I2S,
+  ESS_OUTPUT_GENERIC_UDP,
+  ESS_OUTPUT_GENERIC_TCP,
+  ESS_OUTPUT_GENERIC_OPENAL,
+  ESS_OUTPUT_GENERIC_WASAPI,
+  ESS_OUTPUT_GENERIC_ASIO,
+  ESS_OUTPUT_GENERIC_JACKD,
+  ESS_OUTPUT_GENERIC_I2C,
+  ESS_OUTPUT_GENERIC_WAV_WRITTER,
+  ESS_OUTPUT_USER, // +1 ...
+}ess_output_t;
 
 typedef enum ess_audio_channel {
   ESS_AUDIO_CHANNEL_LEFT = 0,
@@ -81,5 +94,9 @@ typedef enum ess_channel_type {
   ESS_CHANNEL_OUTPUT,
   ESS_CHANNEL_MAX
 }ess_channel_t;
+
+#if  ESS_PLATFORM_ESP32 == 1
+extern "C" void app_main()  ;
+#endif
 
 #endif
