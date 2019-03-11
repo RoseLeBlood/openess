@@ -19,49 +19,42 @@
 
 
 /**
- * @file i2s_generic_output_backend.h
+ * @file ess_amplifier.h
  * @author Anna Sopdia Schröck
- * @date 18 Februar 20119
- * @brief the basic i2s_generic class
+ * @date 11 März 2019
+ * @brief ESS ampliefer  module
  *
  *
  */
-#ifndef _ESS_PLATFORM_INC_ESP32_I2S_H_
-#define _ESS_PLATFORM_INC_ESP32_I2S_H_
+ /**
+ * @addtogroup ess_effect
+ * @{
+ */
+#ifndef _ESS_AMPLIFIER_H_
+#define _ESS_AMPLIFIER_H_
+
+#include "ess_inout_module.h"
 
 /**
-* @addtogroup ess_platform_esp32
-* @{
-*/
-
-#include "ess_output_module.h"
-#include "platform/esp32/ess_i2s_controller.h"
-
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "driver/i2s.h"
-#include "esp_system.h"
-
-
-
-
-class ess_esp32i2s_output_module : public ess_output_module {
+  * @brief basic ampliefer module
+  * basic ampliefer module with  input and  output
+  */
+class ess_amplifier : public ess_inout_module {
 public:
-  ess_esp32i2s_output_module(ess_controler* pController);
-  ~ess_esp32i2s_output_module();
+  ess_amplifier();
+  ess_amplifier(const std::string& name);
 
-  virtual ess_error_t update(void) ;
+  unsigned int read(ess_audio_channel id, int32_t* buffer, unsigned int offset, unsigned int size);
 
-  virtual ess_error_t add_channel(std::string name, ess_audio_channel channel);
-  virtual ess_error_t add_channel(ess_input_channel* channel);
+  void set_gain(float n);
+  void set_gain_db(float db);
+
+  float get_gain() { return m_fMultiplier; }
 private:
-  int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE*2];
-  int32_t *m_iBuffer[2];
-
-  ess_controler* m_pController;
+	float m_fMultiplier;
 };
 
+#endif
 /**
 * @}
 */
-#endif

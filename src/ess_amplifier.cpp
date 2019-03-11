@@ -17,51 +17,34 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
+#include "ess_amplifier.h"
+#include <math.h>
 
-/**
- * @file i2s_generic_output_backend.h
- * @author Anna Sopdia Schröck
- * @date 18 Februar 20119
- * @brief the basic i2s_generic class
- *
- *
- */
-#ifndef _ESS_PLATFORM_INC_ESP32_I2S_H_
-#define _ESS_PLATFORM_INC_ESP32_I2S_H_
+ess_amplifier::ess_amplifier() { }
+ess_amplifier::ess_amplifier(const std::string& name)
+  : ess_inout_module(name)  { }
 
-/**
-* @addtogroup ess_platform_esp32
-* @{
-*/
+unsigned int ess_amplifier::read(ess_audio_channel id, int32_t* buffer, unsigned int offset, unsigned int size) {
+  if(buffer == NULL || size == 0) return 0;
 
-#include "ess_output_module.h"
-#include "platform/esp32/ess_i2s_controller.h"
+  ess_input_channel* channel = get_channel(id);
 
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "driver/i2s.h"
-#include "esp_system.h"
+  if(channel == NULL) return 0;
 
+  unsigned int readed = channel->read(buffer, offset, size);
 
-
-
-class ess_esp32i2s_output_module : public ess_output_module {
-public:
-  ess_esp32i2s_output_module(ess_controler* pController);
-  ~ess_esp32i2s_output_module();
-
-  virtual ess_error_t update(void) ;
-
-  virtual ess_error_t add_channel(std::string name, ess_audio_channel channel);
-  virtual ess_error_t add_channel(ess_input_channel* channel);
-private:
-  int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE*2];
-  int32_t *m_iBuffer[2];
-
-  ess_controler* m_pController;
-};
-
-/**
-* @}
-*/
-#endif
+  for(int i=0; i < readed; i++) {
+    buffer[readed] = buffer[readed] * m_fMultiplier;
+  }
+  return readed;
+}
+void ess_amplifier::set_gain(float n) {
+  if (n > 100000.0f) n = 100000.0f;       //100000 = 100db
+  else if (n < -100000.0f) n = -100000.0f;
+  m_fMultiplier = n;
+}
+void ess_amplifier::set_gain_db(float db){
+    if (db > 100.0f) db = 100.0f;
+    else if (db < -100.0f) db = -100.0f;
+    m_fMultiplier = powf(10.0f,db/20.0f);
+}
