@@ -1,21 +1,3 @@
----
-title: ":sound: OpenESS Open Embeded Sound Server"
-layout: post
-date: 2019-02-10 22:10
-tag: cpp
-image: https://roseleblood.github.io/openess/Logo-OpenESS.png
-headerImage: true
-projects: true
-hidden: true # don't count this post in blog pagination
-description: "OpenESS is a small Sound Server for embedded devices"
-category: project
-author: roseleblood
-externalLink: false
----
-
----
-
-
 **OpenESS 0.6.04**   is a network-capable sound server libary mainly for embedded systems and other operatins systems.
 OpenESS is free and open-source software, and is licensed under the terms of the GNU Lesser General Public License.
 
