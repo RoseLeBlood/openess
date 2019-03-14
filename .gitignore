@@ -42,7 +42,4 @@
 *.idb
 *.pdb
 
-docs/html
-docs/latex
-docs/man
-docs/rtf
+docs/*
