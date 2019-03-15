@@ -28,7 +28,7 @@ other operatins systems. OpenESS is free and open-source software, and is licens
 
 
 ## 4.0 example
-  * [Simple create output](example/00/sinple_example_output)
-  * [Simple null output example](example/01/null_example_output)
+  * [Simple create output](sinple_example_output)
+  * [Simple null output example](null_example_output)
 
 ## 5.0 porting information
