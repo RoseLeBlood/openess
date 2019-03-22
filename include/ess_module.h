@@ -40,10 +40,10 @@
   * @brief basic class for module
   *
   */
-  // +--------------+
-  //  |                   |
-  //  |                   |
-  // +------------- +
+  // +--------------+<br>
+  //  |                   |<br>
+  //  |                   |<br>
+  // +------------- +<br>
 class ess_module  : public ess_object  {
 public:
   ess_module() { }

@@ -17,47 +17,27 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-/**
- * @file ess_platform_esp32.cpp
- * @author Anna Sopdia Schröck
- * @date 30 Januar 2019
- * @brief ess esp32 backend impl.
- *
- */
 
-#include "ess.h"
-#include "platform/esp32/ess_platform_esp32.h"
-#include "platform/esp32/ess_esp32i2s_output_module.h"
-#include "platform/esp32/ess_i2s_controller.h"
-
-
+#include "config.h"
 #include "platform/generic/ess_null_output_module.h"
-#include "platform/generic/ess_udplite_output_module.h"
+#include "platform/ess_sleep.h"
 
-ess_platform_esp32::ess_platform_esp32()
-  : ess_platform_interface<ess_platform_esp32>("ess_platform_esp32") {
-
-  #ifdef ESS_ENABLE_BACKEND_OUT_I2S
-  add_controller(new ess_i2s_controller());
-  #endif
+ess_null_output_module::ess_null_output_module() : ess_output_module(ESS_NULL_OUTPUT_NAME) {
+  m_iBuffer = new int32_t[ESS_DEFAULT_AUDIO_PACKET_SIZE];
+  memset(m_iBuffer, 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
 }
-ess_output_module* ess_platform_esp32::create_output(ess_output_type type,
-  std::string controller_name,
-  ess_format_t format)  {
+ess_null_output_module::~ess_null_output_module() {
+  if (m_iBuffer) delete m_iBuffer;
+}
 
-  ess_output_module* mod = nullptr;
-  ess_controler* controller = get_controller(controller_name);
+ess_error_t ess_null_output_module::update(void) {
+  if(!m_bActive) { ess_platform_sleep(1); return ESS_ERROR; }
 
-#ifdef  ESS_ENABLE_BACKEND_OUT_I2S
-  if(type == ESS_OUTPUT_GENERIC_I2S) {
-    if(controller != NULL) mod = new ess_esp32i2s_output_module(controller);
+  for(int i=0; i <= ESS_CHANNEL_FORMAT_7POINT1; i++) {
+    read(ESS_AUDIO_CHANNEL_LEFT,    m_iBuffer, 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
+    memset(m_iBuffer, 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
   }
-#endif
-
-#ifdef ESS_ENABLE_OUTMODULE_UDPLITE
-   if(type == ESS_OUTPUT_GENERIC_UDP) {
-    mod = new ess_udplite_output_module();
-  }
-#endif
-  return mod;
+  
+  ess_platform_sleep(1);
+  return ESS_OK;
 }

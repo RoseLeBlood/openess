@@ -49,7 +49,7 @@
 
 #define ESS_DEFAULT_AUDIO_PACKET_SIZE 128
 
-#define ESS_DEFAULT_SERVER_START_PORT 8686 // Clinet0: +1, Client1 +2 ...
+#define ESS_DEFAULT_SERVER_START_PORT 8686
 #define ESS_DEFAULT_SERVER_FAMILY ESS_FAMILY_IP4
 #define ESS_DEFAULT_SERVER_FORMAT ESS_FORMAT_STEREO_44100_16
 #define ESS_DEFAULT_SERVER_PACKET_SIZE ESS_DEFAULT_AUDIO_PACKET_SIZE
@@ -70,7 +70,8 @@
 	#define ESS_CONFIG_SPINLOCK_ESP32 /**< esp32 using own spinlock functions */
 
 	#define ESS_ENABLE_BACKEND_OUT_I2S /**< esp32 platform I2S backend available */
-	#define ESS_ENABLE_BACKEND_OUT_UDP/**< generic platform UDP backend available */
+	#define ESS_ENABLE_OUTMODULE_UDPLITE/**< generic platform UDP backend available */
+	#define ESS_ENABLE_OUTMODULE_UART
 
 	#define ESS_DEFAULT_SERVER_NAME "OpenESS-esp32" /**< basic server name*/
 
@@ -120,14 +121,14 @@
 
 //-------------------------------------------------------------------------------------------------------
 
-#ifdef ESS_ENABLE_BACKEND_OUT_UDP
-	#define ESS_BACKEND_UDP_SENDTO_PORT 17000
-	#define ESS_BACKEND_UDP_PROTOCOL ESS_PROTOCOL_UDP_LITE
+#ifdef ESS_ENABLE_OUTMODULE_UDPLITE
+	#define ESS_OUT_UDPLITE_SENDTO_PORT 8086
+	#define ESS_OUT_UDPLITE_OUTPUT_CHANNELS ESS_CHANNEL_FORMAT_STEREO // 2
 
 	#if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
-	#define ESS_BACKEND_UDP_SENDTO_HOST "192.168.0.235"
+	#define ESS_OUT_UDP_SENDTO_HOST "192.168.0.235"
 	#else
-	#define ESS_BACKEND_UDP_SENDTO_HOST "::2"
+	#define ESS_OUT_UDP_SENDTO_HOST "::2"
 	#endif
 #endif
 
@@ -141,13 +142,6 @@
 	#define ESS_BACKEND_I2S_DMA_BUF_COUNT 3
 #endif
 
-#define ESS_BACKEND_NAME_OUT_I2S_ESP32 			 		"i2s0:0"
-#define ESS_BACKEND_NAME_OUT_NULL									 "out_null"
-#define ESS_BACKEND_NAME_OUT_UDP								 		"udp0:0"
-#define ESS_BACKEND_NAME_OUT_OPENAL	 					 "openal0:0"
 
-#define ESS_INPUT_STREAM_I2S_ESP32 			 	  "i2s0:1"
-#define ESS_INPUT_STREAM_OPENAL	 					  "openal0:1"
-#define ESS_INPUT_STREAM_NULL	 					  		"in_null"
 
 #endif

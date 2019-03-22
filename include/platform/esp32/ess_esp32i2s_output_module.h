@@ -43,11 +43,13 @@
 #include "esp_system.h"
 
 
-
+#define ESS_MODULE_OUT_I2S_ESP32 			 		"i2s0:0"
+#define ESS_I2S_STD_CONTROLLER              "ess_i2s_controller"
 
 class ess_esp32i2s_output_module : public ess_output_module {
 public:
   ess_esp32i2s_output_module(ess_controler* pController);
+
   ~ess_esp32i2s_output_module();
 
   virtual ess_error_t update(void) ;

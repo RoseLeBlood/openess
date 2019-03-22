@@ -17,47 +17,46 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
+
 /**
- * @file ess_platform_esp32.cpp
+ * @file ess_udplite_output_module.h
  * @author Anna Sopdia Schröck
- * @date 30 Januar 2019
- * @brief ess esp32 backend impl.
+ * @date 15 März 2019
+ * @brief the basic udplite backend class
  *
  */
+#ifndef _ESS_UDPLITE_OUTPUT_MODULE_H_
+#define _ESS_UDPLITE_OUTPUT_MODULE_H_
+/**
+* @addtogroup ess_platform_generic
+* @{
+*/
+#include "ess_output_module.h"
+#include "net/ess_inet_dram_client.h"
+#define ESS_MODULE_OUT_UDPLITE 			 		"ess_udplilte"
 
-#include "ess.h"
-#include "platform/esp32/ess_platform_esp32.h"
-#include "platform/esp32/ess_esp32i2s_output_module.h"
-#include "platform/esp32/ess_i2s_controller.h"
+class ess_udplite_output_module  : public ess_output_module {
+public:
+  ess_udplite_output_module();
+  ~ess_udplite_output_module();
 
+  virtual ess_error_t update(void) ;
 
-#include "platform/generic/ess_null_output_module.h"
-#include "platform/generic/ess_udplite_output_module.h"
+  ess_error_t add_channel(std::string name, ess_audio_channel channel);
+  ess_error_t add_channel(ess_input_channel* channel);
+private:
+  int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE * ESS_OUT_UDPLITE_OUTPUT_CHANNELS];
+  int32_t *m_iBuffer[ESS_OUT_UDPLITE_OUTPUT_CHANNELS];
 
-ess_platform_esp32::ess_platform_esp32()
-  : ess_platform_interface<ess_platform_esp32>("ess_platform_esp32") {
-
-  #ifdef ESS_ENABLE_BACKEND_OUT_I2S
-  add_controller(new ess_i2s_controller());
-  #endif
-}
-ess_output_module* ess_platform_esp32::create_output(ess_output_type type,
-  std::string controller_name,
-  ess_format_t format)  {
-
-  ess_output_module* mod = nullptr;
-  ess_controler* controller = get_controller(controller_name);
-
-#ifdef  ESS_ENABLE_BACKEND_OUT_I2S
-  if(type == ESS_OUTPUT_GENERIC_I2S) {
-    if(controller != NULL) mod = new ess_esp32i2s_output_module(controller);
-  }
+#if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
+  ess_inet_dramlite_client_ip4 m_iClient;
+#else
+  ess_inet_dramlite_client_ip6 m_iClient;
 #endif
+};
 
-#ifdef ESS_ENABLE_OUTMODULE_UDPLITE
-   if(type == ESS_OUTPUT_GENERIC_UDP) {
-    mod = new ess_udplite_output_module();
-  }
+
+/**
+* @}
+*/
 #endif
-  return mod;
-}

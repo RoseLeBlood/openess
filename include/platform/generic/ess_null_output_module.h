@@ -19,7 +19,7 @@
 
 
 /**
- * @file ess_null_backend.h
+ * @file ess_null_output_module.h
  * @author Anna Sopdia Schröck
  * @date 18 Februar 2019
  * @brief the basic null backend class
@@ -34,19 +34,18 @@
 * @{
 */
 
-#include "ess.h"
-#include "ess_output_stream.h"
+#include "ess_output_module.h"
 
-class ess_null_backend : public ess_output_stream<ESS_CHANNEL_FORMAT_MON0> {
+#define ESS_NULL_OUTPUT_NAME									   "ess_outnull"
+
+class ess_null_output_module  : public ess_output_module {
 public:
-  generic_null_backend() : ess_output_stream(ESS_BACKEND_NAME_OUT_NULL) { }
-  ~generic_null_backend() { }
+  ess_null_output_module();
+  ~ess_null_output_module();
 
-  virtual ess_error_t update(void) {
-    return ESS_OK;
-  }
-protected:
-  bool m_bPaused;
+  virtual ess_error_t update(void) ;
+private:
+  int32_t* m_iBuffer;
 };
 
 /**

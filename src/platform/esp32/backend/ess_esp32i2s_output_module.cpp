@@ -50,13 +50,21 @@
 #include "platform/ess_sleep.h"
 
 #if  ESS_PLATFORM_ESP32 == 1
-ess_esp32i2s_output_module::ess_esp32i2s_output_module(ess_controler* pController)
-  : ess_output_module(ESS_BACKEND_NAME_OUT_I2S_ESP32), m_pController(pController)   {
 
-  ess_output_module::add_channel(std::string(ESS_BACKEND_NAME_OUT_I2S_ESP32) + std::string("_left"),
+
+ess_esp32i2s_output_module::ess_esp32i2s_output_module(ess_controler* pController)
+  : ess_output_module(ESS_MODULE_OUT_I2S_ESP32), m_pController(pController)   {
+
+  ess_output_module::add_channel(std::string(ESS_MODULE_OUT_I2S_ESP32) + std::string("_left"),
     ESS_AUDIO_CHANNEL_LEFT);
-  ess_output_module::add_channel(std::string(ESS_BACKEND_NAME_OUT_I2S_ESP32) + std::string("_right"),
+  ess_output_module::add_channel(std::string(ESS_MODULE_OUT_I2S_ESP32) + std::string("_right"),
     ESS_AUDIO_CHANNEL_RIGHT);
+
+  m_iBuffer[1] = new int32_t[ESS_DEFAULT_AUDIO_PACKET_SIZE];
+  m_iBuffer[0] = new int32_t[ESS_DEFAULT_AUDIO_PACKET_SIZE];
+
+  memset(m_iBuffer[1], 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
+  memset(m_iBuffer[0], 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
 
   m_bActive = true;
 }
@@ -69,24 +77,18 @@ ess_error_t ess_esp32i2s_output_module::add_channel(ess_input_channel* channel) 
   return ESS_ERROR;
 }
 ess_esp32i2s_output_module::~ess_esp32i2s_output_module() {
-
+  if (m_iBuffer[1]) delete m_iBuffer[1];
+  if (m_iBuffer[0]) delete m_iBuffer[0];
 }
 
 ess_error_t ESS_IRAM_ATTR ess_esp32i2s_output_module::update(void) {
   ess_automux_t lock(m_mutex);
-  if(!m_bActive) { ess_platform_sleep(1); return ESS_ERROR; }
 
-  if(m_pController == NULL) return ESS_ERROR_NULL;
+  if(!m_bActive) { ess_platform_sleep(1); return ESS_ERROR; }
+  if(m_iBuffer[1] == NULL || m_iBuffer[0] == NULL) {   ess_platform_sleep(1);  return ESS_ERROR_OUTOFMEM;}
+  if(m_pController == NULL){  ess_platform_sleep(1);  return ESS_ERROR_NULL; }
 
   bool blocked = false;
-
-   m_iBuffer[1] = new int32_t[ESS_DEFAULT_AUDIO_PACKET_SIZE];
-   m_iBuffer[0] = new int32_t[ESS_DEFAULT_AUDIO_PACKET_SIZE];
-
-   memset(m_iBuffer[1], 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
-   memset(m_iBuffer[0], 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
-
-   if(m_iBuffer[1] == NULL || m_iBuffer[0] == NULL) return ESS_ERROR_OUTOFMEM;
 
    int red_l = read(ESS_AUDIO_CHANNEL_LEFT,    m_iBuffer[0], 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
    int red_r = read(ESS_AUDIO_CHANNEL_RIGHT, m_iBuffer[1], 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
@@ -140,8 +142,6 @@ ess_error_t ESS_IRAM_ATTR ess_esp32i2s_output_module::update(void) {
     ess_platform_sleep(1);
   }
 
-    if (m_iBuffer[1]) delete m_iBuffer[1];
-    if (m_iBuffer[0]) delete m_iBuffer[0];
 
     return ESS_OK;
 }
