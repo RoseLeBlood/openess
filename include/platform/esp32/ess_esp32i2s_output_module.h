@@ -19,10 +19,10 @@
 
 
 /**
- * @file i2s_generic_output_backend.h
+ * @file ess_esp32i2s_output_module.h
  * @author Anna Sopdia Schröck
  * @date 18 Februar 20119
- * @brief the basic i2s_generic class
+ * @brief generic i2s output module
  *
  *
  */

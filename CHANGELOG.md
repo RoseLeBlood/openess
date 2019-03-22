@@ -2,7 +2,7 @@
 ## Release History
 * 0.8.00:
   - ++ udplite output module
-  - start esp32 refecrence implantierung
+  - start esp32 refecrence implantierung (private git - public in the future)
   - version update to 0.8
 * 0.6.04:
   - remove TeensyAudioLibrary

@@ -19,9 +19,9 @@
 
 
 /**
- * @file ess_null_input_stream.h
+ * @file ess_null_input_module.h
  * @author Anna Sopdia Schröck
- * @date 07 März 2019
+ * @date 22 März 2019
  * @brief OpenESS Null input stream
  *
  *
@@ -33,37 +33,15 @@
  * @{
  */
 
-#include "ess_input_stream.h"
+#include "ess_input_module.h"
 
- class ess_null_input_stream : public ess_input_stream<ESS_CHANNEL_FORMAT_STEREO> {
+ class ess_null_input_module : public ess_input_module {
 public:
-  ess_null_input_stream() : ess_input_stream<ESS_CHANNEL_FORMAT_STEREO>(ESS_INPUT_STREAM_NULL) {
-    m_bBlockingObjectRun = true;
-    m_bBlocking = true;
-    m_bInit = true;
+  ess_null_input_module() : ess_input_module("null_input") {
+    add_channel("null_left", ESS_AUDIO_CHANNEL_LEFT);
+    add_channel("null_right", ESS_AUDIO_CHANNEL_RIGHT);
   }
-
-  ess_error_t update(void)  {
-    ess_audio_block_t *new_left, *new_right;
-
-    new_left = allocate();
-		new_right = allocate();
-
-		if (new_right != NULL && new_left != NULL) {
-
-      memset(new_left->data, 0, sizeof(new_left));
-      memset(new_right->data, 0, sizeof(new_right));
-
-      transmit(new_left, 0);
-  		release(new_left);
-  		transmit(new_right, 1);
-  		release(new_right);
-    }
-    return ESS_OK;
-  }
-
- };
-
+};
 
  /**
  * @}

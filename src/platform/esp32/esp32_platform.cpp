@@ -32,7 +32,14 @@
 
 
 #include "platform/generic/ess_null_output_module.h"
+
+#ifdef ESS_ENABLE_OUTMODULE_UDPLITE
 #include "platform/generic/ess_udplite_output_module.h"
+#endif
+
+#ifdef ESS_ENABLE_OUTMODULE_UART
+#include "platform/esp32/ess_esp32uart_output_module.h"
+#endif
 
 ess_platform_esp32::ess_platform_esp32()
   : ess_platform_interface<ess_platform_esp32>("ess_platform_esp32") {
@@ -46,18 +53,32 @@ ess_output_module* ess_platform_esp32::create_output(ess_output_type type,
   ess_format_t format)  {
 
   ess_output_module* mod = nullptr;
-  ess_controler* controller = get_controller(controller_name);
+  ess_controler* controller ;
 
-#ifdef  ESS_ENABLE_BACKEND_OUT_I2S
-  if(type == ESS_OUTPUT_GENERIC_I2S) {
-    if(controller != NULL) mod = new ess_esp32i2s_output_module(controller);
-  }
-#endif
+  switch(type) {
+    case ESS_OUTPUT_NULL:
+      mod = new ess_null_output_module();
+      break;
+    case ESS_OUTPUT_UART:
+      #ifdef ESS_ENABLE_OUTMODULE_UART
+      mod = new ess_esp32uart_output_module();
+      #endif
+      break;
+    case ESS_OUTPUT_UDP:
+      #ifdef ESS_ENABLE_OUTMODULE_UDPLITE
+      mod = new ess_udplite_output_module();
+      #endif
+      break;
+    case ESS_OUTPUT_I2S:
+      #ifdef  ESS_ENABLE_BACKEND_OUT_I2S
+      controller = get_controller(controller_name);
+      if(controller != NULL)
+        mod = new ess_esp32i2s_output_module(controller);
+      #endif
+      break;
 
-#ifdef ESS_ENABLE_OUTMODULE_UDPLITE
-   if(type == ESS_OUTPUT_GENERIC_UDP) {
-    mod = new ess_udplite_output_module();
+    default:
+      mod = nullptr; break;
   }
-#endif
   return mod;
 }

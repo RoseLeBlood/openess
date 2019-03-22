@@ -19,53 +19,42 @@
 
 
 /**
- * @file ess_output_channel.h
+ * @file ess_esp32uart_output_module.h
  * @author Anna Sopdia Schröck
- * @date 08 März 2019
- * @brief channel for the output object
+ * @date 22 März 20119
+ * @brief generic uart output module
  *
  *
  */
- /**
- * @addtogroup ess
- * @{
- */
- #ifndef __ESS_OUTPUT_CHANNEL_H__
- #define __ESS_OUTPUT_CHANNEL_H__
-
-
-#include "ess_channel.h"
+#ifndef _ESS_PLATFORM_INC_ESP32_UART_H_
+#define _ESS_PLATFORM_INC_ESP32_UART_H_
 
 /**
- * @brief the ess_output_channel class
- * the `ess_input_objec` has n outputs channels
- */
-class ess_output_channel : public ess_channel {
+* @addtogroup ess_platform_esp32
+* @{
+*/
+
+#include "ess_output_module.h"
+#include "esp_system.h"
+
+
+#define ESS_MODULE_OUT_UART_ESP32 			 		"uart0:0"
+
+class ess_esp32uart_output_module : public ess_output_module {
 public:
-  ess_output_channel()  { }
+  ess_esp32uart_output_module();
+  ~ess_esp32uart_output_module();
 
-  ess_output_channel(std::string name)
-    : ess_channel(name, ESS_CHANNEL_OUTPUT, ESS_AUDIO_CHANNEL_LEFT)
-        {  }
+  virtual ess_error_t update(void) ;
 
-  ess_output_channel(std::string name, ess_audio_channel channel )
-    : ess_channel(name, ESS_CHANNEL_OUTPUT, channel)
-       { }
-
-  virtual unsigned int  read(int32_t* buffer, unsigned int offset, unsigned int size)  {
-    ess_automux_t lock(m_mutex);
-    memset(buffer, 0, size);
-    
-    return size;
-   }
-
-   unsigned int get_size() { return ESS_DEFAULT_AUDIO_PACKET_SIZE; }
-   int32_t* get_buffer() { return nullptr; }
-
+  virtual ess_error_t add_channel(std::string name, ess_audio_channel channel);
+  virtual ess_error_t add_channel(ess_input_channel* channel);
+private:
+  int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE*2];
+  int32_t *m_iBuffer[2];
 };
 
-
- /**
- * @}
- */
- #endif
+/**
+* @}
+*/
+#endif
