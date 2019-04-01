@@ -46,7 +46,10 @@ ess_error_t ess_i2s_controller::destroy(int flags)  {
 int ess_i2s_controller::get_bits() { return m_i2sConfig.bits_per_sample ; }
 int ess_i2s_controller::get_samplerate() { return m_i2sConfig.sample_rate; }
 
-
+ess_i2s_controller::ess_format_t get_format() {
+  return ess_format_parse(m_i2sConfig.bits_per_sample, m_i2sConfig.sample_rate,
+    ess_format_get_channels(ESS_DEFAULT_SERVER_FORMAT) );
+}
 unsigned int ess_i2s_controller::write(void* buffer, unsigned int offset, unsigned  int size)  {
   size_t bytesWritten = 0;
 

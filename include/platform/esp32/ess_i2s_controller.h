@@ -75,7 +75,7 @@ public:
   * @param [in] size the size of the buffer
   *
   * @return the size to write to the device
-  * @retval <0 error 
+  * @retval <0 error
   **/
   virtual unsigned int write(void* buffer, unsigned int offset, unsigned  int size) ;
 private:

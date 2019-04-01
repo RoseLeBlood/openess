@@ -86,4 +86,8 @@ const char* ess_format_to_string(const ess_format_t format);
  * @return samplesize of the format
  */
 int ess_format_get_sample_size(const ess_format_t format);
+
+ess_format_t ess_format_parse(const unsigned char bits,
+                                                   const unsigned char samplerate,
+                                                   const unsigned char channels);
 #endif
