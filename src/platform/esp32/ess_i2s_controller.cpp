@@ -46,7 +46,7 @@ ess_error_t ess_i2s_controller::destroy(int flags)  {
 int ess_i2s_controller::get_bits() { return m_i2sConfig.bits_per_sample ; }
 int ess_i2s_controller::get_samplerate() { return m_i2sConfig.sample_rate; }
 
-ess_i2s_controller::ess_format_t get_format() {
+ess_format_t ess_i2s_controller::get_format() {
   return ess_format_parse(m_i2sConfig.bits_per_sample, m_i2sConfig.sample_rate,
     ess_format_get_channels(ESS_DEFAULT_SERVER_FORMAT) );
 }
@@ -54,9 +54,9 @@ unsigned int ess_i2s_controller::write(void* buffer, unsigned int offset, unsign
   size_t bytesWritten = 0;
 
   if(get_bits() == 16) {
-    i2s_write(I2S_NUM_0, (const char*)&buffer[offset], size - offset, &bytesWritten, portMAX_DELAY);		//Block but yield to other tasks
+    i2s_write(I2S_NUM_0, (const char*)&(buffer), size , &bytesWritten, portMAX_DELAY);		//Block but yield to other tasks
  } else if(get_bits() == 24 || get_bits() == 32) {
-   i2s_write(I2S_NUM_0, (const char*)&buffer[offset], (size *  2) - offset, &bytesWritten, portMAX_DELAY);		//Block but yield to other tasks
+   i2s_write(I2S_NUM_0, (const char*)&(buffer), (size *  2) , &bytesWritten, portMAX_DELAY);		//Block but yield to other tasks
  }
  return bytesWritten;
 }

@@ -121,6 +121,14 @@ int ess_format_get_bits(const ess_format_t format) ;
  */
 const char* ess_format_to_string(const ess_format_t format);
 
+
+/**
+ * @brief get format from string
+ * @param [in] format string  of the format
+ * @return the parsed format
+ */
+ess_format_t ess_format_from_string(const char* format);
+
 /**
  * @brief Help to get the sample size of the format.
  * @param format The format to parse
@@ -135,6 +143,8 @@ int ess_format_get_sample_size(const ess_format_t format);
  * @param channels number of channels - 1, 2, 4, 6, 8
  */
 ess_format_t ess_format_parse(const unsigned char bits,
-                                                   const unsigned char samplerate,
+                                                   const unsigned int samplerate,
                                                    const unsigned char channels);
+
+
 #endif
