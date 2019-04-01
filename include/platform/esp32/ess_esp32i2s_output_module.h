@@ -46,10 +46,26 @@
 #define ESS_MODULE_OUT_I2S_ESP32 			 		"i2s0:0"
 #define ESS_I2S_STD_CONTROLLER              "ess_i2s_controller"
 
+/**
+* @brief esp32 i2s stereo output module
+**/
 class ess_esp32i2s_output_module : public ess_stereo_simple_buffer_output_module {
 public:
+  /**
+  * @brief basic constructer
+  * @param [in] pController the using i2s controller  basic controller `ess_i2s_controller`
+  **/
   ess_esp32i2s_output_module(ess_controler* pController);
 protected:
+  /**
+  * @brief send buffer to the using controller
+  * @param [in] simple_buffer the simple buffer to send to the controller
+  * @param [in] offset offset to send
+  * @param [in] size size of the simple buffer to send
+  *
+  * @return the size to write to the device
+  * @retval <0 error on send
+  **/
   virtual size_t send_simple_buffer_to_device(int32_t* simple_buffer, size_t offset, size_t size);
 private:
   ess_controler* m_pController;

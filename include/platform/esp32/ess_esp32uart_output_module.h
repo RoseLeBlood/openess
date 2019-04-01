@@ -40,10 +40,25 @@
 
 #define ESS_MODULE_OUT_UART_ESP32 			 		"uart0:0"
 
+/**
+* @brief esp32 uart stereo output module
+**/
 class ess_esp32uart_output_module : public ess_stereo_simple_buffer_output_module {
 public:
+  /**
+  * @brief basic constructer
+  **/
   ess_esp32uart_output_module(void);
 protected:
+  /**
+  * @brief send buffer to the uart0 device
+  * @param [in] simple_buffer the simple buffer to send to the uart0 device
+  * @param [in] offset offset to send
+  * @param [in] size size of the simple buffer to send
+  *
+  * @return the size to write to the uart0 device
+  * @retval <0 error on send
+  **/
   virtual size_t send_simple_buffer_to_device(int32_t* simple_buffer, size_t offset, size_t size);
 };
 

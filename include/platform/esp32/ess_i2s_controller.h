@@ -35,16 +35,48 @@
 #include "ess_format.h"
 #include "platform/ess_controler.h"
 
+/**
+* @brief the basic i2s esp32 controller
+**/
 class ess_i2s_controller : public ess_controler {
 public:
+  /**
+  * @brief basic constructor - set name to "ess_i2s_controller"
+  **/
   ess_i2s_controller() : ess_controler("ess_i2s_controller") { }
 
+  /**
+  * @brief setup the controller using in `ess_platform_interface`
+  **/
   virtual ess_error_t setup(int flags = 0);
+  /**
+  * @brief destroy the controller using in `ess_platform_interface`
+  **/
   virtual ess_error_t destroy(int flags = 0) ;
 
+  /**
+  * @brief get the controller format bits
+  **/
   virtual int get_bits();
+  /**
+  * @brief get the controller format samplerate
+  **/
   virtual int get_samplerate();
 
+  /**
+  * @brief get the controller format
+  **/
+  virtual ess_format_t get_format();
+
+  /**
+  * @brief write audio buffer to the using device
+  * @param [in] buffer rhe audio buffer
+  * @param [in] the write offset
+  * @param [in] size the size of the buffer
+  *
+  * @return the size to write to the device
+  * @retval <0 error 
+  **/
   virtual unsigned int write(void* buffer, unsigned int offset, unsigned  int size) ;
 private:
   i2s_config_t m_i2sConfig;
