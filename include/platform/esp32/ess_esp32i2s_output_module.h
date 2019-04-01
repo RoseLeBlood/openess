@@ -34,7 +34,7 @@
 * @{
 */
 
-#include "ess_output_module.h"
+#include "ess_stereo_simple_buffer_output_module.h"
 #include "platform/esp32/ess_i2s_controller.h"
 
 #include "freertos/FreeRTOS.h"
@@ -46,20 +46,12 @@
 #define ESS_MODULE_OUT_I2S_ESP32 			 		"i2s0:0"
 #define ESS_I2S_STD_CONTROLLER              "ess_i2s_controller"
 
-class ess_esp32i2s_output_module : public ess_output_module {
+class ess_esp32i2s_output_module : public ess_stereo_simple_buffer_output_module {
 public:
   ess_esp32i2s_output_module(ess_controler* pController);
-
-  ~ess_esp32i2s_output_module();
-
-  virtual ess_error_t update(void) ;
-
-  virtual ess_error_t add_channel(std::string name, ess_audio_channel channel);
-  virtual ess_error_t add_channel(ess_input_channel* channel);
+protected:
+  virtual size_t send_simple_buffer_to_device(int32_t* simple_buffer, size_t offset, size_t size);
 private:
-  int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE*2];
-  int32_t *m_iBuffer[2];
-
   ess_controler* m_pController;
 };
 

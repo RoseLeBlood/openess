@@ -78,6 +78,8 @@ public:
 
   virtual ess_output_module* create_output(ess_output_type type, std::string controller_name,
     ess_format_t format)  = 0;
+
+  
 private:
   std::list<ess_controler*> m_iController;
 };

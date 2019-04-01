@@ -34,24 +34,17 @@
 * @{
 */
 
-#include "ess_output_module.h"
+#include "ess_stereo_simple_buffer_output_module.h"
 #include "esp_system.h"
 
 
 #define ESS_MODULE_OUT_UART_ESP32 			 		"uart0:0"
 
-class ess_esp32uart_output_module : public ess_output_module {
+class ess_esp32uart_output_module : public ess_stereo_simple_buffer_output_module {
 public:
-  ess_esp32uart_output_module();
-  ~ess_esp32uart_output_module();
-
-  virtual ess_error_t update(void) ;
-
-  virtual ess_error_t add_channel(std::string name, ess_audio_channel channel);
-  virtual ess_error_t add_channel(ess_input_channel* channel);
-private:
-  int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE*2];
-  int32_t *m_iBuffer[2];
+  ess_esp32uart_output_module(void);
+protected:
+  virtual size_t send_simple_buffer_to_device(int32_t* simple_buffer, size_t offset, size_t size);
 };
 
 /**

@@ -45,9 +45,7 @@ protected:
   ess_platform_esp32();
 public:
   static ess_format_t get_format() { return ESS_DEFAULT_SERVER_FORMAT; }
-  static unsigned char get_bits() { return ess_format_get_bits(ESS_DEFAULT_SERVER_FORMAT); }
-  static unsigned char get_samplerate() { return ess_format_get_samplerate(ESS_DEFAULT_SERVER_FORMAT); }
-  static unsigned char channels() { return ess_format_get_channels(ESS_DEFAULT_SERVER_FORMAT); }
+
 
   virtual ess_output_module* create_output(ess_output_type type, std::string controller_name,
     ess_format_t format = ESS_DEFAULT_SERVER_FORMAT);

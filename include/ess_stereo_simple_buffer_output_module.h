@@ -19,10 +19,10 @@
 
 
 /**
- * @file ess_output_stream.h
+ * @file ess_stereo_simple_buffer_output_module.h
  * @author Anna Sopdia Schröck
- * @date 30 Januar 2019
- * @brief ESS generic ouput stream
+ * @date 01 April 2019
+ * @brief mix audio data (stereo) to a single buffer integer
  *
  *
  */
@@ -30,50 +30,60 @@
  * @addtogroup stream
  * @{
  */
-#ifndef __ESS_OUTPUT_MODULE_H__
-#define __ESS_OUTPUT_MODULE_H__
+ #ifndef __ESS_OUTPUT_SIMPLE_BUFFER_MODULE_H__
+ #define __ESS_OUTPUT_SIMPLE_BUFFER_MODULE_H__
 
-#include "ess_module.h"
-#include "ess_input_channel.h"
-#include "ess_input_module.h"
-#include <list>
+#include "ess_output_module.h"
 
 /**
-  * @brief basic class for output module - example `ess_null_input_module`
+  * @brief mix audio data (stereo) to a single buffer integer
   * +--------------+
   *  |  IN              |
   *  |  IN              |
   * +------------- +
 */
-class ess_output_module: public ess_module {
+class ess_stereo_simple_buffer_output_module : public ess_output_module {
 public:
-  ess_output_module(const std::string& name) : ess_module(name) {   }
+  /**
+  * @brief  constructor to create the module with a name
+  * @param [in] name human name of the module
+  **/
+  ess_stereo_simple_buffer_output_module(const std::string& name);
 
-  virtual ~ess_output_module() { }
-
+  ~ess_stereo_simple_buffer_output_module();
+  /**
+  * @brief dont add a channel - overide
+  * @param [in] name name of the new channel (human name)
+  * @param channel which input channel ID are use the new channel
+  * @return only 'ESS_ERROR'
+  **/
   virtual ess_error_t add_channel(std::string name, ess_audio_channel channel);
+  /**
+  * @brief dont add a channel - overide
+  * @param [in] name name of the new channel (human name)
+  * @param channel which input channel ID are use the new channel
+  * @return only 'ESS_ERROR'
+  **/
   virtual ess_error_t add_channel(ess_input_channel* channel);
 
-  virtual ess_input_channel* get_channel(ess_audio_channel channel);
-  virtual ess_input_channel* get_channel(std::string name);
-
-  virtual unsigned int read(ess_audio_channel id, int32_t* buffer,
-    unsigned int offset, unsigned int size);
-
-  virtual ess_error_t update() = 0;
-
-  virtual ess_error_t connect(ess_input_module* mod, ess_audio_channel channel);
-  virtual ess_error_t connect(ess_input_module* mod, ess_audio_channel this_channel,
-    ess_audio_channel mod_channel);
-
-  virtual std::string to_string();
+  /**
+  * @brief  update function  - internal use functions  `send_simple_buffer_to_device`
+  **/
+  virtual ess_error_t update() ;
 protected:
-  std::list<ess_input_channel*> m_lstChannels;
+  /**
+  * @brief send the simple buffer to the using device
+  * @param [in] simple_buffer the buffer to write to device
+  * @param [in] offset buffer write offset
+  * @param [in] size the size of the buffer
+  **/
+  virtual size_t send_simple_buffer_to_device(int32_t* simple_buffer, size_t offset, size_t size) = 0;
+private:
+  int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE*2];
+  int32_t *m_iBuffer[2];
 };
 
-/**
-* @}
-*/
-
-
-#endif
+ #endif
+ /**
+ * @}
+ */

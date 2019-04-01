@@ -1,7 +1,18 @@
 
 ## Release History
+* 0.8.01:
+  - add  class ess_stereo_simple_buffer_output_module
+    mix floated audio data to a simple integer buffer stereo
+  - ess_esp32i2s_output_module changes:
+    basic class ess_stereo_simple_buffer_output_module
+    ess_esp32uart_output_module changes:
+      basic class ess_stereo_simple_buffer_output_module
+  - add class ess_system_format:
+    static class holder for formart handling
+  - ess_platform_esp32 remove:
+    get_bits, get_samplerate, get_channels functions and move it to ess_system_format
 * 0.8.00:
-  - ++ udplite output module
+  - add udplite output module
   - start esp32 refecrence implantierung (private git - public in the future)
   - version update to 0.8
 * 0.6.04:
@@ -25,9 +36,9 @@
 * 0.4.2:
   - remove issus
 * 0.4.03
-  - ++ ess_backend::get_blksize
-  - ++ config ESS_BUF_COUNT 4
-  - ++ config ESS_BUF_SIZE      1024
+  - add ess_backend::get_blksize
+  - add config ESS_BUF_COUNT 4
+  - add config ESS_BUF_SIZE      1024
 * 0.4.02
   - add ess_network.h for socket multiplatform layer
   - update example
@@ -42,10 +53,6 @@
   - add context creating functions
   - add probe function to ess_backend as virtual
   - add esp32 i2s_generic_backend
-* 0.3.3
-  - rename project to OpenESS ++
-  - switch to C++
-  - C++ convert i progress - unstable
 * 0.3
   - update platform abstraction layer
   - add mutex, task and spinlock functions - task using mutex on esp32 platforms
