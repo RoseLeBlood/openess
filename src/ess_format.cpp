@@ -1,4 +1,4 @@
-/****************************************************************************
+ess_format_/****************************************************************************
  * Copyright (C) 2019 by Anna Sopdia Schröck                                *
  *                                                                          *
  * This file is part of ess.                                                *
@@ -37,68 +37,248 @@ typedef struct _format2human {
 }format2human_t;
 
 format2human_t format_parse[] = {
-  {  "ESS_FORMAT_MONO_44100_8", 44100, 8, 1 },
-  {  "ESS_FORMAT_MONO_48000_8", 48000, 8, 1 },
-  {  "ESS_FORMAT_MONO_96000_8", 96000, 8, 1 },
-  {  "ESS_FORMAT_STEREO_44100_8", 44100, 8, 2 },
-  {  "ESS_FORMAT_STEREO_48000_8", 48000, 8, 2 },
-  {  "ESS_FORMAT_STEREO_96000_8", 96000, 8, 2 },
-  {  "ESS_FORMAT_MONO_48000_16", 48000, 16, 1 },
-  {  "ESS_FORMAT_MONO_44100_16", 44100, 16, 1 },
-  {  "ESS_FORMAT_MONO_96000_16", 96000, 16, 1 },
-  {   "ESS_FORMAT_STEREO_44100_16", 44100, 16, 2 },
-  {  "ESS_FORMAT_STEREO_48000_16", 48000, 16, 2 },
-  {  "ESS_FORMAT_STEREO_96000_16", 96000, 16, 2 },
-  {   "ESS_FORMAT_MONO_44100_32", 44100, 32, 1 },
-  {   "ESS_FORMAT_MONO_48000_32", 48000, 32, 1 },
-  {   "ESS_FORMAT_MONO_96000_32", 96000, 32, 1 },
-  {    "ESS_FORMAT_STEREO_44100_32", 44100, 32, 2 },
-  {   "ESS_FORMAT_STEREO_48000_32", 48000, 32, 2 },
-  {    "ESS_FORMAT_STEREO_96000_32", 96000, 32, 2 },
+  { "ESS_FORMAT_MONO_44100_8", 44100, 8, 1 },
+  { "ESS_FORMAT_MONO_44100_16", 44100, 16, 1 },
+  { "ESS_FORMAT_MONO_44100_32", 44100, 32, 1 },
+  { "ESS_FORMAT_MONO_48000_8", 48000, 8, 1 },
+  { "ESS_FORMAT_MONO_48000_16", 48000, 16, 1 },
+  { "ESS_FORMAT_MONO_48000_32", 48000, 32, 1 },
+  { "ESS_FORMAT_MONO_96000_8", 96000, 8, 1 },
+  { "ESS_FORMAT_MONO_96000_16", 96000, 16, 1 },
+  { "ESS_FORMAT_MONO_96000_32", 96000, 32, 1 },
+
+  { "ESS_FORMAT_STEREO_44100_8", 44100, 8, 2 },
+  { "ESS_FORMAT_STEREO_44100_16", 44100, 16, 2 },
+  { "ESS_FORMAT_STEREO_44100_32", 44100, 32, 2 },
+  { "ESS_FORMAT_STEREO_48000_8", 48000, 8, 2 },
+  { "ESS_FORMAT_STEREO_48000_16", 48000, 16, 2 },
+  { "ESS_FORMAT_STEREO_48000_32", 48000, 32, 2 },
+  { "ESS_FORMAT_STEREO_96000_8", 96000, 8, 2 },
+  { "ESS_FORMAT_STEREO_96000_16", 96000, 16, 2 },
+  { "ESS_FORMAT_STEREO_96000_32", 96000, 32, 2 },
+
+  { "ESS_FORMAT_2POINT1_44100_8", 44100, 8, 3 },
+  { "ESS_FORMAT_2POINT1_44100_16", 44100, 16, 3 },
+  { "ESS_FORMAT_2POINT1_44100_32", 44100, 32, 3 },
+  { "ESS_FORMAT_2POINT1_48000_8", 48000, 8, 3 },
+  { "ESS_FORMAT_2POINT1_48000_16", 48000, 16, 3 },
+  { "ESS_FORMAT_2POINT1_48000_32", 48000, 32, 3 },
+  { "ESS_FORMAT_2POINT1_96000_8", 96000, 8, 3 },
+  { "ESS_FORMAT_2POINT1_96000_16", 96000, 16, 3 },
+  { "ESS_FORMAT_2POINT1_96000_32", 96000, 32, 3 },
+
+  { "ESS_FORMAT_QUAD_44100_8", 44100, 8, 4 },
+  { "ESS_FORMAT_QUAD_44100_16", 44100, 16,  4},
+  { "ESS_FORMAT_QUAD_44100_32", 44100, 32, 4 },
+  { "ESS_FORMAT_QUAD_48000_8", 48000, 8, 4 },
+  { "ESS_FORMAT_QUAD_48000_16", 48000, 16, 4 },
+  { "ESS_FORMAT_QUAD_48000_32", 48000, 32, 4 },
+  { "ESS_FORMAT_QUAD_96000_8", 96000, 8, 4 },
+  { "ESS_FORMAT_QUAD_96000_16", 96000, 16, 4 },
+  { "ESS_FORMAT_QUAD_96000_32", 96000, 32, 4 },
+
+  { "ESS_FORMAT_5POINT1_44100_8", 44100, 8, 6 },
+  { "ESS_FORMAT_5POINT1_44100_16", 44100, 16, 6 },
+  { "ESS_FORMAT_5POINT1_44100_32", 44100, 32, 6 },
+  { "ESS_FORMAT_5POINT1_48000_8", 48000, 8, 6 },
+  { "ESS_FORMAT_5POINT1_48000_16", 48000, 16, 6 },
+  { "ESS_FORMAT_5POINT1_48000_32", 48000, 32, 6 },
+  { "ESS_FORMAT_5POINT1_96000_8", 96000, 8, 6 },
+  { "ESS_FORMAT_5POINT1_96000_16", 96000, 16, 6 },
+  { "ESS_FORMAT_5POINT1_96000_32", 96000, 32, 6 },
+
+  { "ESS_FORMAT_7POINT1_44100_8", 44100, 8, 8 },
+  { "ESS_FORMAT_7POINT1_44100_16", 44100, 16, 8 },
+  { "ESS_FORMAT_7POINT1_44100_32", 44100, 32, 8 },
+  { "ESS_FORMAT_7POINT1_48000_8", 48000, 8, 8 },
+  { "ESS_FORMAT_7POINT1_48000_16", 48000, 16, 8 },
+  { "ESS_FORMAT_7POINT1_48000_32", 48000, 32, 8 },
+  { "ESS_FORMAT_7POINT1_96000_8", 96000, 8, 8 },
+  { "ESS_FORMAT_7POINT1_96000_16", 96000, 16, 8 },
+  { "ESS_FORMAT_7POINT1_96000_32", 96000, 32, 8 },
 };
 
 int ess_format_get_channels(const ess_format_t format) {
-  if(format >= ESS_FORMAT_MAX) return -1;
+  if(format >= ESS_FORMAT_INVALID) return -1;
     return format_parse[format].channels;
 }
 int ess_format_get_samplerate(const ess_format_t format) {
-  if(format >= ESS_FORMAT_MAX) return -1;
+  if(format >= ESS_FORMAT_INVALID) return -1;
   return format_parse[format].samplerate;
 }
 
 int ess_format_get_bits(const ess_format_t format) {
-  if(format >= ESS_FORMAT_MAX) return -1;
+  if(format >= ESS_FORMAT_INVALID) return -1;
   return format_parse[format].bits;
 }
 
 const char* ess_format_to_string(ess_format_t format) {
-  if(format >= ESS_FORMAT_MAX) return "NO_FORMAT";
+  if(format >= ESS_FORMAT_INVALID) return "ESS_FORMAT_INVALID";
   return format_parse[format].string;
 }
-int ess_format_get_sample_size(const ess_format_t format) {
-  switch (format) {
-      case ESS_FORMAT_MONO_44100_8:
-      case ESS_FORMAT_MONO_48000_8:
-      case ESS_FORMAT_MONO_96000_8:
-      case ESS_FORMAT_STEREO_44100_8:
-      case ESS_FORMAT_STEREO_48000_8:
-      case ESS_FORMAT_STEREO_96000_8:
-        return sizeof(uint8_t);
-      case ESS_FORMAT_MONO_44100_16 :
-      case ESS_FORMAT_MONO_48000_16 :
-      case ESS_FORMAT_MONO_96000_16 :
-      case ESS_FORMAT_STEREO_44100_16 :
-      case ESS_FORMAT_STEREO_48000_16 :
-      case ESS_FORMAT_STEREO_96000_16 :
-        return sizeof(int16_t);
-      case ESS_FORMAT_MONO_44100_32 :
-      case ESS_FORMAT_MONO_48000_32 :
-      case ESS_FORMAT_MONO_96000_32 :
-      case ESS_FORMAT_STEREO_44100_32 :
-      case ESS_FORMAT_STEREO_48000_32 :
-      case ESS_FORMAT_STEREO_96000_32 :
-        return sizeof(float);
-      default: return -1;
-  }
-  return -1;
+
+ess_format_t ess_format_parse(const unsigned char bits,
+                                                   const unsigned char samplerate,
+                                                   const unsigned char channels) {
+  ess_format_t ret = ESS_FORMAT_INVALID;
+
+  switch(channels) {
+    case 1:
+      switch(bits) {
+        case 8:
+          switch(samplerate) {
+            case 44100: ret = ESS_FORMAT_MONO_44100_8; break;
+            case 48000: ret = ESS_FORMAT_MONO_48000_8; break;
+            case 96000: ret = ESS_FORMAT_MONO_96000_8; break;
+          }; //switch(samplerate)
+          break;
+        case 16:
+          switch(samplerate) {
+            case 44100: ret = ESS_FORMAT_MONO_44100_16; break;
+            case 48000: ret = ESS_FORMAT_MONO_48000_16; break;
+            case 96000: ret = ESS_FORMAT_MONO_96000_16; break;
+          };  //switch(samplerate)
+          break;
+        case 32:
+        switch(samplerate) {
+          case 44100: ret = ESS_FORMAT_MONO_44100_32; break;
+          case 48000: ret = ESS_FORMAT_MONO_48000_32; break;
+          case 96000: ret = ESS_FORMAT_MONO_96000_32; break;
+        };  //switch(samplerate)
+        break;
+      };  // switch(bits)
+      break;
+
+    case 2:
+      switch(bits) {
+        case 8:
+          switch(samplerate) {
+            case 44100: ret = ESS_FORMAT_STEREO_44100_8; break;
+            case 48000: ret = ESS_FORMAT_STEREO_48000_8; break;
+            case 96000: ret = ESS_FORMAT_STEREO_96000_8; break;
+          };  //switch(samplerate)
+          break;
+        case 16:
+          switch(samplerate) {
+            case 44100: ret = ESS_FORMAT_STEREO_44100_16; break;
+            case 48000: ret = ESS_FORMAT_STEREO_48000_16; break;
+            case 96000: ret = ESS_FORMAT_STEREO_96000_16; break;
+          };  //switch(samplerate)
+          break;
+        case 32:
+        switch(samplerate) {
+          case 44100: ret = ESS_FORMAT_STEREO_44100_32; break;
+          case 48000: ret = ESS_FORMAT_STEREO_48000_32; break;
+          case 96000: ret = ESS_FORMAT_STEREO_96000_32; break;
+        };  //switch(samplerate)
+        break;
+      };  // switch(bits)
+      break;
+
+    case 3:
+      switch(bits) {
+        case 8:
+          switch(samplerate) {
+            case 44100: ret = ESS_FORMAT_2POINT1_44100_8; break;
+            case 48000: ret = ESS_FORMAT_2POINT1_48000_8; break;
+            case 96000: ret = ESS_FORMAT_2POINT1_96000_8; break;
+          };  //switch(samplerate)
+          break;
+        case 16:
+          switch(samplerate) {
+            case 44100: ret = ESS_FORMAT_2POINT1_44100_16; break;
+            case 48000: ret = ESS_FORMAT_2POINT1_48000_16; break;
+            case 96000: ret = ESS_FORMAT_2POINT1_96000_16; break;
+          };  //switch(samplerate)
+          break;
+        case 32:
+        switch(samplerate) {
+          case 44100: ret = ESS_FORMAT_2POINT1_44100_32; break;
+          case 48000: ret = ESS_FORMAT_2POINT1_48000_32; break;
+          case 96000: ret = ESS_FORMAT_2POINT1_96000_32; break;
+        };  //switch(samplerate)
+        break;
+      };  // switch(bits)
+      break;
+
+    case 4:
+      switch(bits) {
+        case 8:
+          switch(samplerate) {
+            case 44100: ret = ESS_FORMAT_QUAD_44100_8; break;
+            case 48000: ret = ESS_FORMAT_QUAD_48000_8; break;
+            case 96000: ret = ESS_FORMAT_QUAD_96000_8; break;
+          };  //switch(samplerate)
+          break;
+        case 16:
+          switch(samplerate) {
+            case 44100: ret = ESS_FORMAT_QUAD_44100_16; break;
+            case 48000: ret = ESS_FORMAT_QUAD_48000_16; break;
+            case 96000: ret = ESS_FORMAT_QUAD_96000_16; break;
+          };  //switch(samplerate)
+          break;
+        case 32:
+        switch(samplerate) {
+          case 44100: ret = ESS_FORMAT_QUAD_44100_32; break;
+          case 48000: ret = ESS_FORMAT_QUAD_48000_32; break;
+          case 96000: ret = ESS_FORMAT_QUAD_96000_32; break;
+        };  //switch(samplerate)
+        break;
+      };  // switch(bits)
+      break;
+
+    case 6:
+      switch(bits) {
+        case 8:
+          switch(samplerate) {
+            case 44100: ret = ESS_FORMAT_5POINT1_44100_8; break;
+            case 48000: ret = ESS_FORMAT_5POINT1_48000_8; break;
+            case 96000: ret = ESS_FORMAT_5POINT1_96000_8; break;
+          };  //switch(samplerate)
+          break;
+        case 16:
+          switch(samplerate) {
+            case 44100: ret = ESS_FORMAT_5POINT1_44100_16; break;
+            case 48000: ret = ESS_FORMAT_5POINT1_48000_16; break;
+            case 96000: ret = ESS_FORMAT_5POINT1_96000_16; break;
+          };  //switch(samplerate)
+          break;
+        case 32:
+        switch(samplerate) {
+          case 44100: ret = ESS_FORMAT_5POINT1_44100_32; break;
+          case 48000: ret = ESS_FORMAT_5POINT1_48000_32; break;
+          case 96000: ret = ESS_FORMAT_5POINT1_96000_32; break;
+        };  //switch(samplerate)
+        break;
+      };  // switch(bits)
+      break;
+
+    case 8:
+      switch(bits) {
+        case 8:
+          switch(samplerate) {
+            case 44100: ret = ESS_FORMAT_7POINT1_44100_8; break;
+            case 48000: ret = ESS_FORMAT_7POINT1_48000_8; break;
+            case 96000: ret = ESS_FORMAT_7POINT1_96000_8; break;
+          };  //switch(samplerate)
+          break;
+        case 16:
+          switch(samplerate) {
+            case 44100: ret = ESS_FORMAT_7POINT1_44100_16; break;
+            case 48000: ret = ESS_FORMAT_7POINT1_48000_16; break;
+            case 96000: ret = ESS_FORMAT_7POINT1_96000_16; break;
+          };  //switch(samplerate)
+          break;
+        case 32:
+        switch(samplerate) {
+          case 44100: ret = ESS_FORMAT_7POINT1_44100_32; break;
+          case 48000: ret = ESS_FORMAT_7POINT1_48000_32; break;
+          case 96000: ret = ESS_FORMAT_7POINT1_96000_32; break;
+        };  //switch(samplerate)
+        break;
+      }; // switch(bits)
+      break;
+  }; //switch(channels)
+
+  return ret;
 }
