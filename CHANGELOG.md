@@ -11,6 +11,14 @@
     static class holder for formart handling
   - ess_platform_esp32 remove:
     get_bits, get_samplerate, get_channels functions and move it to ess_system_format
+  - ess_format add:
+      ess_format_from_string(const char*)
+      remove issus
+  - ess_i2s_controller esp32:
+      remove issus
+      get_format
+  - ess_format_t add:
+      2.1, Quad , 5.1, 7.1 Formats
 * 0.8.00:
   - add udplite output module
   - start esp32 refecrence implantierung (private git - public in the future)
