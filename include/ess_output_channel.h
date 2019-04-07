@@ -59,8 +59,8 @@ public:
     return size;
    }
 
-   unsigned int get_size() { return ESS_DEFAULT_AUDIO_PACKET_SIZE; }
-   int32_t* get_buffer() { return nullptr; }
+   virtual unsigned int get_size() { return ESS_DEFAULT_AUDIO_PACKET_SIZE; }
+   virtual int32_t* get_buffer() { return nullptr; }
 
 };
 
