@@ -55,12 +55,12 @@ public:
   virtual unsigned int  read(int32_t* buffer, unsigned int offset, unsigned int size)  {
     ess_automux_t lock(m_mutex);
     memset(buffer, 0, size);
-    
+
     return size;
    }
 
-   unsigned int get_size() { return ESS_DEFAULT_AUDIO_PACKET_SIZE; }
-   int32_t* get_buffer() { return nullptr; }
+   virtual unsigned int get_size() { return ESS_DEFAULT_AUDIO_PACKET_SIZE; }
+   virtual int32_t* get_buffer() { return nullptr; }
 
 };
 
