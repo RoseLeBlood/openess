@@ -98,14 +98,13 @@ public:
    * @brief read interface
    *
    *  the output object read from input
-   * @param [out] buffer the pointer to write the data to
+   * @param [out] block the pointer off the audioblock
    * @param [in] offset the readed offset
-   * @param [in] size length of the buffer
    *
    * @return  the readed bytes
    * @retval -1 somthings are wrong : error
    */
-  virtual unsigned int read(int32_t* buffer, unsigned int offset, unsigned int size) = 0;
+  virtual unsigned int read(ess_audioblock_t *block, unsigned int offset) = 0;
 
   virtual std::string to_string();
 protected:

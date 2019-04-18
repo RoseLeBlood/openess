@@ -56,8 +56,7 @@ public:
   virtual ess_output_channel* get_channel(ess_audio_channel channel);
   virtual ess_output_channel* get_channel(std::string name);
 
-  virtual unsigned int read(ess_audio_channel id, int32_t* buffer,
-    unsigned int offset, unsigned int size);
+  virtual unsigned int read(ess_audio_channel id, ess_audioblock_t *block, unsigned int offset);
 
   virtual int32_t* get_buffer(ess_audio_channel id);
   virtual uint32_t get_size(ess_audio_channel id);

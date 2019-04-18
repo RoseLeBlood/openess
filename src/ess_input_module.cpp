@@ -68,11 +68,10 @@ uint32_t ess_input_module::get_size(ess_audio_channel id) {
 
   return -1;
 }
-unsigned int ess_input_module::read(ess_audio_channel id, int32_t* buffer,
-  unsigned int offset, unsigned int size ) {
+unsigned int ess_input_module::read(ess_audio_channel id, ess_audioblock_t *block, unsigned int offset ) {
 
     ess_output_channel* channel = get_channel(id);
-    if(channel) return channel->read(buffer, offset, id);
+    if(channel) return channel->read(block, offset);
     return -1;
 }
 std::string ess_input_module::to_string() {

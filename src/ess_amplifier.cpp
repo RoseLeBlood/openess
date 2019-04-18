@@ -21,8 +21,8 @@
 #include <math.h>
 
 inline void add_volume(float* data, float vol, size_t size) {
-  for(size_t i = 0; i < size) {
-    data[size] *= vol; 
+  for(size_t i = 0; i < size; i++) {
+    data[size] *= vol;
   }
 }
 
@@ -40,7 +40,7 @@ unsigned int ess_amplifier::read(ess_audio_channel id, int32_t* buffer, unsigned
   unsigned int readed = channel->read(buffer, offset, size);
 
   add_volume((float*)buffer, m_fMultiplier, readed);
-  
+
   return readed;
 }
 void ess_amplifier::set_gain(float n) {

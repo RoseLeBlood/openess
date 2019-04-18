@@ -52,11 +52,10 @@ public:
     : ess_channel(name, ESS_CHANNEL_OUTPUT, channel)
        { }
 
-  virtual unsigned int  read(int32_t* buffer, unsigned int offset, unsigned int size)  {
+  virtual unsigned int  read(ess_audioblock_t *block, unsigned int offset)  {
     ess_automux_t lock(m_mutex);
-    memset(buffer, 0, size);
 
-    return size;
+    return -1;
    }
 
    virtual unsigned int get_size() { return ESS_DEFAULT_AUDIO_PACKET_SIZE; }

@@ -105,6 +105,14 @@ typedef enum ess_channel_type {
   ESS_CHANNEL_MAX
 }ess_channel_t;
 
+typedef struct ess_audioblock {
+  uint8_t  ref_count;
+  uint16_t memory_pool_index;
+  float    data[ESS_DEFAULT_AUDIO_PACKET_SIZE];
+  ess_format_t format;
+} ess_audioblock_t;
+
+
 /**
 * @brief system format helper
 **/
@@ -123,6 +131,8 @@ public:
   **/
   static unsigned char channels() { return ess_format_get_channels(ESS_DEFAULT_SERVER_FORMAT); }
 };
+
+
 
 #if  ESS_PLATFORM_ESP32 == 1
 extern "C" void app_main()  ;

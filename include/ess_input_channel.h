@@ -49,7 +49,7 @@ public:
   ess_error_t connect(ess_output_channel* channel) ;
 
 
-   virtual unsigned int read(int32_t* buffer, unsigned int offset, unsigned int size) ;
+   virtual unsigned int read(ess_audioblock_t *block, unsigned int offset) ;
 
    bool is_connected();
 
