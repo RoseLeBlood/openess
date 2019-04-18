@@ -44,8 +44,6 @@ public:
   ~ess_null_output_module();
 
   virtual ess_error_t update(void) ;
-private:
-  int32_t* m_iBuffer;
 };
 
 /**

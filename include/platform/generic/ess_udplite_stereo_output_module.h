@@ -33,21 +33,19 @@
 */
 #include "ess_output_module.h"
 #include "net/ess_inet_dram_client.h"
-#define ESS_MODULE_OUT_UDPLITE 			 		"ess_udplilte"
+#include "ess_stereo_simple_buffer_output_module.h"
 
-class ess_udplite_output_module  : public ess_output_module {
+#define ESS_MODULE_OUT_UDPLITE 			 		"udplite0:0"
+
+
+class ess_udplite_stereo_output_module  : public ess_stereo_simple_buffer_output_module {
 public:
-  ess_udplite_output_module();
-  ~ess_udplite_output_module();
+  ess_udplite_stereo_output_module();
+  ~ess_udplite_stereo_output_module();
 
-  virtual ess_error_t update(void) ;
-
-  ess_error_t add_channel(std::string name, ess_audio_channel channel);
-  ess_error_t add_channel(ess_input_channel* channel);
+protected:
+  virtual size_t send_simple_buffer_to_device(int32_t* simple_buffer, size_t offset, size_t size);
 private:
-  int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE * ESS_OUT_UDPLITE_OUTPUT_CHANNELS];
-  int32_t *m_iBuffer[ESS_OUT_UDPLITE_OUTPUT_CHANNELS];
-
 #if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
   ess_inet_dramlite_client_ip4 m_iClient;
 #else

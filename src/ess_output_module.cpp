@@ -57,11 +57,11 @@ ess_input_channel* ess_output_module::get_channel(std::string name) {
   return nullptr;
 }
 
-unsigned int ESS_IRAM_ATTR ess_output_module::read(ess_audio_channel id, int32_t* buffer,
-  unsigned int offset, unsigned int size ) {
+unsigned int ESS_IRAM_ATTR ess_output_module::read(ess_audio_channel id, ess_audioblock_t *block,
+   unsigned int offset ) {
 
     ess_input_channel* channel = get_channel(id);
-    if(channel) return channel->read(buffer, offset, id);
+    if(channel) return channel->read(block, offset);
     return -1;
 }
 ess_error_t ess_output_module::connect( ess_input_module* input, ess_audio_channel channel) {

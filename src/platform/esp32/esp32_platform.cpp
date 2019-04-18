@@ -34,19 +34,37 @@
 #include "platform/generic/ess_null_output_module.h"
 
 #ifdef ESS_ENABLE_OUTMODULE_UDPLITE
-#include "platform/generic/ess_udplite_output_module.h"
+#include "platform/generic/ess_udplite_stereo_output_module.h"
 #endif
 
 #ifdef ESS_ENABLE_OUTMODULE_UART
 #include "platform/esp32/ess_esp32uart_output_module.h"
 #endif
 
+#include <esp_freertos_hooks.h>
+
+volatile uint32_t idlectrl1 = 0;
+volatile uint32_t idlectrl0 = 0;
+
+void _esp32_platform_montoring_cpu0( void * parameter ) ;
+void _esp32_platform_montoring_cpu1( void * parameter ) ;
+
 ess_platform_esp32::ess_platform_esp32()
-  : ess_platform_interface<ess_platform_esp32>("ess_platform_esp32") {
+  : ess_platform_interface<ess_platform_esp32, ESS_CONFIC_MAX_CORES>("ess_platform_esp32") {
+
+
 
   #ifdef ESS_ENABLE_BACKEND_OUT_I2S
   add_controller(new ess_i2s_controller());
   #endif
+}
+ess_error_t ess_platform_esp32::create()  {
+  #if ESS_PLATFORM_MONTORING == 1
+  esp_register_freertos_idle_hook_for_cpu((esp_freertos_idle_cb_t)_esp32_platform_montoring_cpu0, 1);
+  esp_register_freertos_idle_hook_for_cpu((esp_freertos_idle_cb_t)_esp32_platform_montoring_cpu1, 1);
+  #endif
+
+  return  ess_platform_interface<ess_platform_esp32, ESS_CONFIC_MAX_CORES>::create();
 }
 ess_output_module* ess_platform_esp32::create_output(ess_output_type type,
   std::string controller_name,
@@ -66,7 +84,7 @@ ess_output_module* ess_platform_esp32::create_output(ess_output_type type,
       break;
     case ESS_OUTPUT_UDP:
       #ifdef ESS_ENABLE_OUTMODULE_UDPLITE
-      mod = new ess_udplite_output_module();
+      mod = new ess_udplite_stereo_output_module();
       #endif
       break;
     case ESS_OUTPUT_I2S:
@@ -82,3 +100,42 @@ ess_output_module* ess_platform_esp32::create_output(ess_output_type type,
   }
   return mod;
 }
+
+
+#if ESS_PLATFORM_MONTORING == 1
+void _esp32_platform_montoring_cpu1( void * parameter ) {
+  const uint32_t cycleCount = 21818182;   //240MHz / 11
+  uint32_t t00, t01;
+
+  t00 = xthal_get_ccount();
+  for(uint32_t i = 0; i < cycleCount; i++) {
+    idlectrl0++;
+  }
+  t01 = xthal_get_ccount();
+
+  uint32_t cycles_expected = 11 * cycleCount;
+  uint32_t cycles_used = t01 - t00;
+
+  ess_platform_esp32::Instance().m_fCPULoad[1] = 100.0f * (cycles_used - cycles_expected) / cycles_used;
+  if(ess_platform_esp32::Instance().m_fCPULoad[1] > ess_platform_esp32::Instance().m_fCPULoadMax[1])
+    ess_platform_esp32::Instance().m_fCPULoadMax[1] = ess_platform_esp32::Instance().m_fCPULoad[1];
+}
+void _esp32_platform_montoring_cpu0( void * parameter ) {
+  const uint32_t cycleCount = 21818182;   //240MHz / 11
+  uint32_t t00, t01;
+
+  t00 = xthal_get_ccount();
+  for(uint32_t i = 0; i < cycleCount; i++) {
+    idlectrl0++;
+  }
+  t01 = xthal_get_ccount();
+
+  uint32_t cycles_expected = 11 * cycleCount;
+  uint32_t cycles_used = t01 - t00;
+
+
+  ess_platform_esp32::Instance().m_fCPULoad[0] = 100.0f * (cycles_used - cycles_expected) / cycles_used;
+  if(ess_platform_esp32::Instance().m_fCPULoad[0] > ess_platform_esp32::Instance().m_fCPULoadMax[0])
+    ess_platform_esp32::Instance().m_fCPULoadMax[0] = ess_platform_esp32::Instance().m_fCPULoad[0];
+}
+#endif

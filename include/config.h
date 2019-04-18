@@ -60,6 +60,10 @@
 #define ESS_DEFAULT_SERVER_HOST "::"
 #endif
 
+#define ESS_MAX_AUDIO_MEMORY 163840
+#define ESS_MEMORY_MAP_DEBUG
+
+#define ESS_PLATFORM_MONTORING 1 /**< when set then useble get_cpu_max and get_cpu_load*/
 
 #if  ESS_PLATFORM_ESP32 == 1
 	#include "freertos/FreeRTOS.h"
@@ -76,6 +80,7 @@
 	#define ESS_DEFAULT_SERVER_NAME "OpenESS-esp32" /**< basic server name*/
 
 	#define ESS_IRAM_ATTR IRAM_ATTR
+	#define ESS_CONFIC_MAX_CORES 2
 #endif // ESS_PLATFORM_ESP32
 
 #if ESS_PLATFORM_RPI == 1

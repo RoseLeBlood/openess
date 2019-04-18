@@ -17,30 +17,20 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-
 #include "config.h"
-#include "platform/generic/ess_null_output_module.h"
+
+#ifdef ESS_ENABLE_OUTMODULE_UDPLITE
+#include "platform/generic/ess_udplite_stereo_output_module.h"
 #include "platform/ess_sleep.h"
 
-ess_null_output_module::ess_null_output_module()
-  : ess_output_module(ESS_NULL_OUTPUT_NAME) { }
-
-ess_null_output_module::~ess_null_output_module() { }
-
-ess_error_t ess_null_output_module::update(void) {
-  ess_audioblock_t* pBlock;
-  uint32_t readed;
-
-  if(!m_bActive) { ess_platform_sleep(1); return ESS_ERROR; }
-
-  pBlock = ess_mem_alloc();
-
-  for(int i=0; i <= ESS_CHANNEL_FORMAT_7POINT1; i++) {
-    readed = read(ESS_AUDIO_CHANNEL_LEFT,    pBlock, 0);
-  }
-
-  ess_mem_free(pBlock);
-
-  ess_platform_sleep(1);
-  return ESS_OK;
+ess_udplite_stereo_output_module::ess_udplite_stereo_output_module()
+: ess_stereo_simple_buffer_output_module(ESS_MODULE_OUT_UDPLITE) {
+  m_bActive = true;
 }
+ess_udplite_stereo_output_module::~ess_udplite_stereo_output_module() { }
+
+size_t ess_udplite_stereo_output_module::send_simple_buffer_to_device(int32_t* simple_buffer, size_t offset, size_t size) {
+  return m_iClient.sendto(simple_buffer,  (size), ESS_OUT_UDP_SENDTO_HOST,   ESS_OUT_UDPLITE_SENDTO_PORT);
+}
+
+#endif

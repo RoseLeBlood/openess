@@ -36,6 +36,8 @@
 #include "ess.h"
 #include "task/ess_autolock.h"
 
+#include "ess_audio_memory_map.h"
+
 /**
   * @brief basic class for module
   *

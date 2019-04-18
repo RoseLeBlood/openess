@@ -17,30 +17,24 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
+/**
+ * @file ess_audio_memory_map.h
+ * @author Anna Sopdia Schröck
+ * @date 18 April 2019
+ * @brief OpenESS audio memory map - allocater for `ess_audioblock_t`
+ *
+ */
+#ifndef _OPENESS_AUDIO_MEMORY_MAP_
+#define _OPENESS_AUDIO_MEMORY_MAP_
 
-#include "config.h"
-#include "platform/generic/ess_null_output_module.h"
-#include "platform/ess_sleep.h"
+#include "ess.h"
 
-ess_null_output_module::ess_null_output_module()
-  : ess_output_module(ESS_NULL_OUTPUT_NAME) { }
 
-ess_null_output_module::~ess_null_output_module() { }
+uint16_t ess_mem_used();
+uint16_t ess_mem_max();
 
-ess_error_t ess_null_output_module::update(void) {
-  ess_audioblock_t* pBlock;
-  uint32_t readed;
+ess_audioblock_t *ess_mem_alloc(void);
+void ess_mem_free(ess_audioblock_t * block);
 
-  if(!m_bActive) { ess_platform_sleep(1); return ESS_ERROR; }
 
-  pBlock = ess_mem_alloc();
-
-  for(int i=0; i <= ESS_CHANNEL_FORMAT_7POINT1; i++) {
-    readed = read(ESS_AUDIO_CHANNEL_LEFT,    pBlock, 0);
-  }
-
-  ess_mem_free(pBlock);
-
-  ess_platform_sleep(1);
-  return ESS_OK;
-}
+#endif

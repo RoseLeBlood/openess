@@ -77,6 +77,28 @@ ess_error_t ess_task::start() {
 
   return ESS_OK;
 }
+ess_error_t ess_task::start(uint32_t core) {
+  if(continuemutex.create() != ESS_OK) return ESS_ERROR_TASK_CREAT;
+  if(continuemutex2.create()!= ESS_OK) return ESS_ERROR_TASK_CREAT;
+  if(runningMutex.create()!= ESS_OK) return ESS_ERROR_TASK_CREAT;
+  if(contextMutext.create()!= ESS_OK) return ESS_ERROR_TASK_CREAT;
+
+  continuemutex.lock();
+  runningMutex.lock();
+
+  if (m_bRunning) {
+    continuemutex.unlock();
+    runningMutex.unlock();
+    return ESS_ERROR_TASK_RUNNING;
+  }
+  runningMutex.unlock();
+
+  xTaskCreatePinnedToCore( int_task_stub, get_name().c_str(), m_uiStackSize, this , m_iPriority,  &m_pHandle, core);
+
+  continuemutex.unlock();
+
+  return ESS_OK;
+}
 ess_error_t ess_task::destroy() {
   continuemutex.lock();
   runningMutex.lock();

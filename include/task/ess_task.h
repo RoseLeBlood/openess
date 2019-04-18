@@ -64,6 +64,14 @@ public:
   ess_error_t start();
 
   /**
+   * @brief start the task and pinned it to a core
+   * @param [in] core pinned to core
+   * @retval ESS_OK
+   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
+   * @retval ESS_ERROR
+   */
+  ess_error_t start(uint32_t core);
+  /**
    * @brief delete the task
    * @retval ESS_OK
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert

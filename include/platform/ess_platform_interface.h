@@ -39,7 +39,7 @@
 
 #include <list>
 
-template <class T>
+template <class T, uint8_t NUM_CPUS>
 class ess_platform_interface : public ess_object  {
   static T* m_pInstance;
 public:
@@ -79,11 +79,19 @@ public:
   virtual ess_output_module* create_output(ess_output_type type, std::string controller_name,
     ess_format_t format)  = 0;
 
-  
+  #if ESS_PLATFORM_MONTORING == 1
+  float get_cpu_load(int cpu) { return (cpu > NUM_CPUS) ?  0 : m_fCPULoad[cpu]; }
+  float get_cpu_max(int cpu) { return (cpu > NUM_CPUS) ? 0 : m_fCPULoadMax[cpu]; }
+  #endif
+protected:
+  #if ESS_PLATFORM_MONTORING == 1
+  float m_fCPULoad[NUM_CPUS];
+  float m_fCPULoadMax[NUM_CPUS];
+#endif
 private:
   std::list<ess_controler*> m_iController;
 };
 
-template <class T>
-T* ess_platform_interface<T>::m_pInstance = nullptr;
+template <class T, uint8_t NUM_CPUS>
+T* ess_platform_interface<T, NUM_CPUS>::m_pInstance = nullptr;
 #endif
