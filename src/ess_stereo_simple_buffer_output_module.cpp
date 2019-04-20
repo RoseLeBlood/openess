@@ -3,7 +3,8 @@
 
 
 ess_stereo_simple_buffer_output_module::ess_stereo_simple_buffer_output_module(const std::string& name)
-  : ess_output_module(name) {
+  : ess_output_analyzed_module(name) {
+
 
     ess_output_module::add_channel(std::string(name) + std::string("_left"),
       ESS_AUDIO_CHANNEL_LEFT);
@@ -28,6 +29,10 @@ ess_error_t ess_stereo_simple_buffer_output_module::add_channel(ess_input_channe
 }
 ess_error_t ESS_IRAM_ATTR ess_stereo_simple_buffer_output_module::update(void) {
   ess_automux_t lock(m_mutex);
+
+#if ESS_OUTPUT_TIME_ANALYZED == 1
+  start_time_analyzed();
+#endif
 
    if(!m_bActive) { ess_platform_sleep(1); return ESS_ERROR; }
 
@@ -95,6 +100,8 @@ ess_error_t ESS_IRAM_ATTR ess_stereo_simple_buffer_output_module::update(void) {
    } else {
      ess_platform_sleep(1);
    }
-
+#if ESS_OUTPUT_TIME_ANALYZED == 1
+   end_time_analyzed();
+#endif
    return ESS_OK;
  }

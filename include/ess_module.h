@@ -50,9 +50,9 @@ class ess_module  : public ess_object  {
 public:
   ess_module() { }
   ess_module(const std::string& name)
-    : ess_object(name), m_bActive(false) { }
+    : ess_object(name), m_bActive(false) { m_mutex.create(); }
 
-  virtual ~ess_module() { set_active(false); }
+  virtual ~ess_module() { set_active(false); m_mutex.destroy(); }
 
   virtual bool is_active() {
     ess_automux_t lock(m_mutex);

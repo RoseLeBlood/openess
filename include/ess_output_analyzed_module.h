@@ -18,28 +18,58 @@
  ****************************************************************************/
 
 
-#include "config.h"
-#include "platform/generic/ess_null_output_module.h"
-#include "platform/ess_sleep.h"
+/**
+ * @file ess_output_analyzed_module.h
+ * @author Anna Sopdia Schröck
+ * @date 30 Januar 2019
+ * @brief ESS time analyzed ouput module
+ *
+ *
+ */
+ /**
+ * @addtogroup stream
+ * @{
+ */
+ #ifndef __ESS_OUTPUT_ANALYZED_MODULE_H__
+ #define __ESS_OUTPUT_ANALYZED_MODULE_H__
 
-ess_null_output_module::ess_null_output_module()
-  : ess_output_module(ESS_NULL_OUTPUT_NAME) { }
+#include "ess_output_module.h"
 
-ess_null_output_module::~ess_null_output_module() { }
+class ess_output_analyzed_module : public ess_output_module {
+public:
+  ess_output_analyzed_module(const std::string& name);
+  virtual ~ess_output_analyzed_module() { }
 
-ess_error_t ess_null_output_module::update(void) {
-  ess_audioblock_t* pBlock;
+#if ESS_OUTPUT_TIME_ANALYZED == 1
 
-  if(!m_bActive) { ess_platform_sleep(1); return ESS_ERROR; }
+  uint32_t get_time() { return m_iClocksUpdate; }
+  uint32_t get_time_max() { return m_iClocksUpdateMax; }
+  uint32_t get_time_min() { return m_iClocksUpdateMin; }
+  uint32_t get_time_per_seconds() { return m_iCloocksSecond; }
 
-  pBlock = ess_mem_alloc();
+  uint32_t get_time_per_seconds_sum() { return m_iCloocksSecondSum; }
 
-  for(int i=0; i <= ESS_CHANNEL_FORMAT_7POINT1; i++) {
-    read(ESS_AUDIO_CHANNEL_LEFT,    pBlock, 0);
-  }
 
-  ess_mem_free(pBlock);
+  virtual std::string get_formated_states();
+protected:
+  virtual void start_time_analyzed();
+  virtual void end_time_analyzed();
+protected:
+  uint32_t m_iClocksUpdate;
+	uint32_t m_iClocksUpdateMax;
+	uint32_t m_iClocksUpdateMin;
+	uint32_t m_iCloocksSecond;
+  uint32_t m_iCloocksSecondSum;
 
-  ess_platform_sleep(1);
-  return ESS_OK;
-}
+  int32_t m_iUpdatesPerSecond;
+  int32_t m_iUpdateCounter;
+private:
+  uint32_t m_iStartTick;
+  uint32_t m_iFinishTick;
+#endif
+};
+
+ #endif
+ /**
+ * @}
+ */

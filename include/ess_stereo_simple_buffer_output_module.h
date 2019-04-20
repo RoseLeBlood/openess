@@ -33,7 +33,11 @@
  #ifndef __ESS_OUTPUT_SIMPLE_BUFFER_MODULE_H__
  #define __ESS_OUTPUT_SIMPLE_BUFFER_MODULE_H__
 
+#if ESS_ANALYZED_OUTPUT == 1
 #include "ess_output_module.h"
+#else
+#include "ess_output_analyzed_module.h"
+#endif
 
 /**
   * @brief mix audio data (stereo) to a single buffer integer
@@ -42,7 +46,7 @@
   *  |  IN              |
   * +------------- +
 */
-class ess_stereo_simple_buffer_output_module : public ess_output_module {
+class ess_stereo_simple_buffer_output_module : public ess_output_analyzed_module {
 public:
   /**
   * @brief  constructor to create the module with a name

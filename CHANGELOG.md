@@ -1,14 +1,20 @@
 
 ## Release History
+* 0.8.11:
+  - call ess_audio_memory_map in ess_platform creating - bug fix
+  - update ref implatierung esp32 debug output
+  - add ess_debug.h helper functions and example for  ess_output_analyzed_module and the configs ESS_PLATFORM_MONTORING, ESS_OUTPUT_TIME_ANALYZED
 * 0.8.10:
   - add ess_error_t ess_task::start(uint32_t core)
   - add ess_audio_block_t
   - update read functions in channel and modules virtual unsigned int  read(ess_audioblock_t *block, unsigned int offset)
   - add memory map for ess_audio_block_t
-  - add new configs:
+  - add ess_output_analyzed_module - output module with time analyzed
+  - add new configs and reoder:
     - ESS_MAX_AUDIO_MEMORY 163840,
     - ESS_MEMORY_MAP_DEBUG
     - ESS_PLATFORM_MONTORING 1 /**< when set then useble get_cpu_max and get_cpu_load*/
+    - ESS_OUTPUT_TIME_ANALYZED
 * 0.8.01:
   - add  class ess_stereo_simple_buffer_output_module
     mix floated audio data to a simple integer buffer stereo

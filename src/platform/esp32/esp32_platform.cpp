@@ -49,10 +49,13 @@ volatile uint32_t idlectrl0 = 0;
 void _esp32_platform_montoring_cpu0( void * parameter ) ;
 void _esp32_platform_montoring_cpu1( void * parameter ) ;
 
+
+
+
 ess_platform_esp32::ess_platform_esp32()
   : ess_platform_interface<ess_platform_esp32, ESS_CONFIC_MAX_CORES>("ess_platform_esp32") {
 
-
+    
 
   #ifdef ESS_ENABLE_BACKEND_OUT_I2S
   add_controller(new ess_i2s_controller());
