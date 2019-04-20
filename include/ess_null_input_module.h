@@ -35,11 +35,23 @@
 
 #include "ess_input_module.h"
 
- class ess_null_input_module : public ess_input_module {
+class ess_null_output_channel : public ess_output_channel {
+public:
+  ess_null_output_channel(std::string name, ess_audio_channel channel )
+    : ess_output_channel(name, channel) { }
+
+  virtual unsigned int  read(ess_audioblock_t *block, unsigned int offset)  {
+      ess_automux_t lock(m_mutex);
+      memset(block->data, 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
+      return ESS_DEFAULT_AUDIO_PACKET_SIZE;
+   }
+};
+
+class ess_null_input_module : public ess_input_module {
 public:
   ess_null_input_module() : ess_input_module("null_input") {
-    add_channel("null_left", ESS_AUDIO_CHANNEL_LEFT);
-    add_channel("null_right", ESS_AUDIO_CHANNEL_RIGHT);
+    add_channel(new ess_null_output_channel("null_left", ESS_AUDIO_CHANNEL_LEFT));
+    add_channel(new ess_null_output_channel("null_right", ESS_AUDIO_CHANNEL_RIGHT));
   }
 };
 

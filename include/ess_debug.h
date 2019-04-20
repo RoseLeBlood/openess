@@ -18,28 +18,47 @@
  ****************************************************************************/
 
 
-#include "config.h"
-#include "platform/generic/ess_null_output_module.h"
-#include "platform/ess_sleep.h"
+/**
+ * @file ess_debug.h
+ * @author Anna Sopdia Schröck
+ * @date 20 April 2019
+ * @brief inline function for debug
+ *
+ *
+ */
+ /**
+ * @addtogroup debug
+ * @{
+ */
+#ifndef _ESS_DEBUG_INFO_H_
+#define _ESS_DEBUG_INFO_H_
 
-ess_null_output_module::ess_null_output_module()
-  : ess_output_module(ESS_NULL_OUTPUT_NAME) { }
+#include "ess_output_analyzed_module.h"
+#include "ess_audio_memory_map.h"
+#include "ess_platform.h"
 
-ess_null_output_module::~ess_null_output_module() { }
+#include <sstream>
 
-ess_error_t ess_null_output_module::update(void) {
-  ess_audioblock_t* pBlock;
+inline void ess_debug(ess_output_analyzed_module* mod) {
+  #if ESS_PLATFORM_MONTORING == 1
 
-  if(!m_bActive) { ess_platform_sleep(1); return ESS_ERROR; }
-
-  pBlock = ess_mem_alloc();
-
-  for(int i=0; i <= ESS_CHANNEL_FORMAT_7POINT1; i++) {
-    read(ESS_AUDIO_CHANNEL_LEFT,    pBlock, 0);
+  std::cout << ess_platform_millis() <<  " ms uptime" << std::endl;
+  for(int i= 0; i < ESS_CONFIC_MAX_CORES; i++) {
+    std::cout << "CPU" << i << ": " << ess_platform::Instance().get_cpu_load(i) << " %"
+                   << "[ " << ess_platform::Instance().get_cpu_max(i) << " % ]" << std::endl;
   }
+  #endif
 
-  ess_mem_free(pBlock);
+  #if ESS_OUTPUT_TIME_ANALYZED == 1
+  std::cout  << mod->get_formated_states() << std::endl;
+  #endif
+
+  mod->update();
+  std::cout << "mem: " << ess_mem_used() << " / " << ess_mem_max() << "\r\n" ;
 
   ess_platform_sleep(1);
-  return ESS_OK;
 }
+/**
+* @}
+*/
+#endif

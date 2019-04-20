@@ -40,14 +40,7 @@
 
 /* Main config */
 
-
-
-#define ESS_PLATFORM_ESP32					1/** @brief If defined compiled backend for esp32 */
-#define ESS_PLATFORM_RPI 					 		 0/** @brief If defined compiled backend for Raspberry PI (linux) */
-#define ESS_PLATFORM_LINUX   			0/** @brief If defined compiled backend for generic linux (openal) */
-#define ESS_PLATFORM_WINDOWS  0/** @brief If defined compiled backend for  generic windows (openal, wasapi) */
-
-#define ESS_DEFAULT_AUDIO_PACKET_SIZE 128
+#define ESS_DEFAULT_AUDIO_PACKET_SIZE 512
 
 #define ESS_DEFAULT_SERVER_START_PORT 8686
 #define ESS_DEFAULT_SERVER_FAMILY ESS_FAMILY_IP4
@@ -60,10 +53,26 @@
 #define ESS_DEFAULT_SERVER_HOST "::"
 #endif
 
-#define ESS_MAX_AUDIO_MEMORY 163840
+// ----------------------------- ess_audio_memory_map config ----------------
 #define ESS_MEMORY_MAP_DEBUG
 
+#define ESS_MAX_AUDIO_MEMORY 163840
+#define ESS_MAX_AUDIO_BLOCKS   16 // using format channels * 8
+#define ESS_MIN_AUDIO_BLOCKS 		4 // using format channels * 2
+
+#define ESS_USED_AUDIO_BLOCKS ESS_MAX_AUDIO_BLOCKS
+
+
+// ----------------------------- ess_debug config ----------------
 #define ESS_PLATFORM_MONTORING 1 /**< when set then useble get_cpu_max and get_cpu_load*/
+#define ESS_OUTPUT_TIME_ANALYZED 1
+
+
+// ---------------------------- ess_platform configs ------------
+#define ESS_PLATFORM_ESP32					1/** @brief If defined compiled backend for esp32 */
+#define ESS_PLATFORM_RPI 					 		 0/** @brief If defined compiled backend for Raspberry PI (linux) */
+#define ESS_PLATFORM_LINUX   			0/** @brief If defined compiled backend for generic linux (openal) */
+#define ESS_PLATFORM_WINDOWS  0/** @brief If defined compiled backend for  generic windows (openal, wasapi) */
 
 #if  ESS_PLATFORM_ESP32 == 1
 	#include "freertos/FreeRTOS.h"
