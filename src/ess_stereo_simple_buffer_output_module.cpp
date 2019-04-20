@@ -41,9 +41,8 @@ ess_error_t ESS_IRAM_ATTR ess_stereo_simple_buffer_output_module::update(void) {
 
    bool blocked = false;
 
-    int red_l = read(ESS_AUDIO_CHANNEL_LEFT,    m_iBuffer[0], 0);
-    int red_r = read(ESS_AUDIO_CHANNEL_RIGHT, m_iBuffer[1], 0);
-
+    int red_l = read(ESS_AUDIO_CHANNEL_LEFT,    ess_mem_send(m_iBuffer[0]), 0); ess_mem_give(m_iBuffer[0]);
+    int red_r = read(ESS_AUDIO_CHANNEL_RIGHT, ess_mem_send(m_iBuffer[1]), 0); ess_mem_give(m_iBuffer[1]);
 
     if(red_l != -1 && red_r != -1)  {
    		switch( ess_system_format::get_bits() ) {
@@ -73,7 +72,6 @@ ess_error_t ESS_IRAM_ATTR ess_stereo_simple_buffer_output_module::update(void) {
    				break;
    		}
     } else {
-      printf("blocked\n");
       blocked = true;
     }
 

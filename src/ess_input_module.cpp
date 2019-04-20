@@ -19,6 +19,8 @@
 
 
 #include "ess_input_module.h"
+#include "ess_audio_memory_map.h"
+
 #include <sstream>
 
 ess_error_t ess_input_module::add_channel(std::string name, ess_audio_channel channel) {
@@ -69,10 +71,15 @@ uint32_t ess_input_module::get_size(ess_audio_channel id) {
   return -1;
 }
 unsigned int ess_input_module::read(ess_audio_channel id, ess_audioblock_t *block, unsigned int offset ) {
+  int readed = -1;
 
     ess_output_channel* channel = get_channel(id);
-    if(channel) return channel->read(block, offset);
-    return -1;
+    if(channel) {
+      readed = channel->read(ess_mem_send(block), offset);
+      ess_mem_give(block);
+    }
+
+    return readed;
 }
 std::string ess_input_module::to_string() {
   std::ostringstream ss;

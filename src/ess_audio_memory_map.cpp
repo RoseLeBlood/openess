@@ -66,6 +66,11 @@ ess_audioblock_t * ess_mem_alloc(void) {
 	block->ref_count = 1;
 	if (used > _memory_used_max) _memory_used_max = used;
 
+	block->format = ESS_DEFAULT_SERVER_FORMAT;
+
+	#if ESS_MEMORY_MAP_DEBUG == 1
+		printf("[MEM] alloc block (%X)\n", (uint32_t)block );
+	#endif
 
 	return block;
 }
@@ -83,6 +88,10 @@ void ess_mem_free(ess_audioblock_t * block) {
 		_memory_pool_available_mask[index] |= mask;
 		if (index < _memory_pool_first_mask) _memory_pool_first_mask = index;
 		_memory_used--;
+
+		#if ESS_MEMORY_MAP_DEBUG == 1
+			printf("[MEM] free block (%X)\n", (uint32_t)block );
+		#endif
 	}
 }
 
@@ -91,4 +100,22 @@ uint16_t ess_mem_used() {
 }
 uint16_t ess_mem_max() {
   return _memory_used_max;
+}
+ess_audioblock_t *ess_mem_send(ess_audioblock_t* block) {
+	if(block == NULL) return nullptr;
+	block->ref_count++;
+
+#if ESS_MEMORY_MAP_DEBUG == 1
+	printf("[MEM] send block (%d)\n", block->ref_count );
+#endif
+	return block;
+}
+ess_audioblock_t *ess_mem_give(ess_audioblock_t* block) {
+	if(block == NULL) return nullptr;
+	block->ref_count--;
+
+#if ESS_MEMORY_MAP_DEBUG == 1
+	printf("[MEM] give block (%d)\n", block->ref_count );
+#endif
+	return block;
 }

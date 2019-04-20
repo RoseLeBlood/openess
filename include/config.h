@@ -28,7 +28,8 @@
 #ifndef __ESS_CONFIG_H__
 #define __ESS_CONFIG_H__
 
-
+#define ESS_ON 1
+#define ESS_OFF 0
 
 #define ESS_PROTOCOL_UDP							1
 #define ESS_PROTOCOL_TCP							2
@@ -54,7 +55,7 @@
 #endif
 
 // ----------------------------- ess_audio_memory_map config ----------------
-#define ESS_MEMORY_MAP_DEBUG
+#define ESS_MEMORY_MAP_DEBUG ESS_ON
 
 #define ESS_MAX_AUDIO_MEMORY 163840
 #define ESS_MAX_AUDIO_BLOCKS   16 // using format channels * 8
@@ -64,17 +65,17 @@
 
 
 // ----------------------------- ess_debug config ----------------
-#define ESS_PLATFORM_MONTORING 1 /**< when set then useble get_cpu_max and get_cpu_load*/
-#define ESS_OUTPUT_TIME_ANALYZED 1
+#define ESS_PLATFORM_MONTORING ESS_ON /**< when set then useble get_cpu_max and get_cpu_load*/
+#define ESS_OUTPUT_TIME_ANALYZED ESS_ON
 
 
 // ---------------------------- ess_platform configs ------------
-#define ESS_PLATFORM_ESP32					1/** @brief If defined compiled backend for esp32 */
-#define ESS_PLATFORM_RPI 					 		 0/** @brief If defined compiled backend for Raspberry PI (linux) */
-#define ESS_PLATFORM_LINUX   			0/** @brief If defined compiled backend for generic linux (openal) */
-#define ESS_PLATFORM_WINDOWS  0/** @brief If defined compiled backend for  generic windows (openal, wasapi) */
+#define ESS_PLATFORM_ESP32					ESS_ON/** @brief If defined compiled backend for esp32 */
+#define ESS_PLATFORM_RPI 					 		 ESS_OFF/** @brief If defined compiled backend for Raspberry PI (linux) */
+#define ESS_PLATFORM_LINUX   			ESS_OFF/** @brief If defined compiled backend for generic linux (openal) */
+#define ESS_PLATFORM_WINDOWS  ESS_OFF/** @brief If defined compiled backend for  generic windows (openal, wasapi) */
 
-#if  ESS_PLATFORM_ESP32 == 1
+#if  ESS_PLATFORM_ESP32 == ESS_ON
 	#include "freertos/FreeRTOS.h"
 	#define ESS_CONFIG_NETWORK_ESP32 /**< esp32 using own network functions */
 	#define ESS_CONFIC_TASK_ESP32	/**< esp32 using own task functions */
@@ -92,7 +93,7 @@
 	#define ESS_CONFIC_MAX_CORES 2
 #endif // ESS_PLATFORM_ESP32
 
-#if ESS_PLATFORM_RPI == 1
+#if ESS_PLATFORM_RPI == ESS_ON
 	#define ESS_CONFIG_MUTEX_GENERIC
 	#define ESS_CONFIC_TASK_GENERIC
 	#define ESS_CONFIG_RINGBUFFER_GENERIC
@@ -105,7 +106,7 @@
 	#define ESS_IRAM_ATTR IRAM_ATTR
 #endif //ESS_PLATFORM_RPI
 
-#if ESS_PLATFORM_LINUX == 1
+#if ESS_PLATFORM_LINUX == ESS_ON
 	#define ESS_CONFIC_TASK_GENERIC
 	#define ESS_CONFIG_RINGBUFFER_GENERIC
 	#define ESS_CONFIG_MUTEX_GENERIC
@@ -118,7 +119,7 @@
 	#define ESS_IRAM_ATTR /* */
 #endif //ESS_PLATFORM_LINUX
 
-#if ESS_PLATFORM_WINDOWS == 1
+#if ESS_PLATFORM_WINDOWS == ESS_ON
 	#define ESS_CONFIG_SEMAPHORE_WINDOWS
 	#define ESS_CONFIC_TASK_WINDOWS
 	#define ESS_CONFIG_RINGBUFFER_WINDOWS
