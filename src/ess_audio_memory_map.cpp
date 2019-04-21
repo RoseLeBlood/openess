@@ -29,7 +29,7 @@ void ess_mem_init(unsigned int num, ess_audioblock_t* _static_data) {
 	for (i=0; i < num; i++) {
 		_static_data[i].memory_pool_index = i;
 	}
-	printf("[MEM] Init on %d with %d\n", (int)_static_data, num);
+	printf("[0x%X:%d] Memory map\n", (int)_static_data, num);
 }
 
 // Allocate 1 audio data block.  If successful
@@ -63,13 +63,13 @@ ess_audioblock_t * ess_mem_alloc(void) {
 
 	index = p - _memory_pool_available_mask;
 	block = _memory_pool + ((index << 5) + (31 - n));
-	block->ref_count = 1;
+	block->ref_count = 0;
 	if (used > _memory_used_max) _memory_used_max = used;
 
 	block->format = ESS_DEFAULT_SERVER_FORMAT;
 
 	#if ESS_MEMORY_MAP_DEBUG == 1
-		printf("[MEM] alloc block (%X)\n", (uint32_t)block );
+		printf("[0x%X] alloc block\n", (uint32_t)block );
 	#endif
 
 	return block;
@@ -78,21 +78,25 @@ ess_audioblock_t * ess_mem_alloc(void) {
 
 
 
-void ess_mem_free(ess_audioblock_t * block) {
-  uint32_t mask = (0x80000000 >> (31 - (block->memory_pool_index & 0x1F)));
+uint32_t ess_mem_free(ess_audioblock_t * block) {
+    uint32_t mask = (0x80000000 >> (31 - (block->memory_pool_index & 0x1F)));
 	uint32_t index = block->memory_pool_index >> 5;
 
   if (block->ref_count > 1) {
 		block->ref_count--;
+#if ESS_MEMORY_MAP_DEBUG == 1
+	    printf("[%d] give block %d\n", (uint32_t)block, block->ref_count );
+#endif
 	} else {
 		_memory_pool_available_mask[index] |= mask;
 		if (index < _memory_pool_first_mask) _memory_pool_first_mask = index;
 		_memory_used--;
 
 		#if ESS_MEMORY_MAP_DEBUG == 1
-			printf("[MEM] free block (%X)\n", (uint32_t)block );
+			printf("[0x%X] free block\n", (uint32_t)block );
 		#endif
 	}
+    return block->ref_count;
 }
 
 uint16_t ess_mem_used() {
@@ -110,12 +114,4 @@ ess_audioblock_t *ess_mem_send(ess_audioblock_t* block) {
 #endif
 	return block;
 }
-ess_audioblock_t *ess_mem_give(ess_audioblock_t* block) {
-	if(block == NULL) return nullptr;
-	block->ref_count--;
 
-#if ESS_MEMORY_MAP_DEBUG == 1
-	printf("[MEM] give block (%d)\n", block->ref_count );
-#endif
-	return block;
-}

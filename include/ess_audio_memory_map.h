@@ -35,9 +35,8 @@ uint16_t ess_mem_max();
 
 
 ess_audioblock_t *ess_mem_alloc(void);
-void ess_mem_free(ess_audioblock_t * block);
+uint32_t ess_mem_free(ess_audioblock_t * block);
 
 ess_audioblock_t *ess_mem_send(ess_audioblock_t* bock);
-ess_audioblock_t *ess_mem_give(ess_audioblock_t* bock);
 
 #endif
