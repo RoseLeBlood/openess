@@ -16,9 +16,17 @@ ess_input_channel::ess_input_channel(std::string name, ess_audio_channel channel
    return m_pConChannel != NULL;
  }
 
- unsigned int ESS_IRAM_ATTR ess_input_channel::read(ess_audioblock_t *block, unsigned int offset) {
+ unsigned int ESS_IRAM_ATTR ess_input_channel::read(ess_audioblock_t*  block, unsigned int offset) {
    ess_automux_t lock(m_mutex);
-   return is_connected() ? m_pConChannel->read(block, offset) : -1;
+   unsigned int readed = -1;
+
+   if(is_connected()) {
+     ess_audioblock_take(block);
+     readed = m_pConChannel->read(block, offset);
+     ess_audioblock_relese(block);
+  }
+
+   return readed;// is_connected() ? m_pConChannel->read(block, offset) : -1;
  }
 
  ess_error_t ess_input_channel::connect(ess_output_channel* channel) {

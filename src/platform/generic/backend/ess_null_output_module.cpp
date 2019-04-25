@@ -28,18 +28,14 @@ ess_null_output_module::ess_null_output_module()
 ess_null_output_module::~ess_null_output_module() { }
 
 ess_error_t ess_null_output_module::update(void) {
-  ess_audioblock_t* pBlock;
-
   if(!m_bActive) { ess_platform_sleep(1); return ESS_ERROR; }
 
-  pBlock = ess_mem_alloc();
+/*  ess_audio_buffer buffer("null_buffer");
 
   for(int i=0; i <= ESS_CHANNEL_FORMAT_7POINT1; i++) {
-    read(ESS_AUDIO_CHANNEL_LEFT,    pBlock, 0);
+    read(ESS_AUDIO_CHANNEL_LEFT,    buffer, 0);
   }
-
-  ess_mem_free(pBlock);
-
+*/
   ess_platform_sleep(1);
   return ESS_OK;
 }

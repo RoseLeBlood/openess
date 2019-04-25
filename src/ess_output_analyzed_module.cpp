@@ -17,10 +17,12 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-#include "ess_output_analyzed_module.h"
+
 #include "platform/ess_sleep.h"
+#include "ess_output_analyzed_module.h"
 
 #include <sstream>
+
 
 ess_output_analyzed_module::ess_output_analyzed_module(const std::string& name)
   : ess_output_module(name) {

@@ -52,8 +52,12 @@ public:
     : ess_channel(name, ESS_CHANNEL_OUTPUT, channel)
        { }
 
-  virtual unsigned int  read(ess_audioblock_t *block, unsigned int offset)  {
+  virtual unsigned int  read(ess_audioblock_t*  block, unsigned int offset)  {
     ess_automux_t lock(m_mutex);
+    #if ESS_CHANNEL_OUTPUT_DEBUG == ESS_ON
+
+    #endif
+
 
     return -1;
    }

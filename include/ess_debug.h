@@ -34,12 +34,12 @@
 #define _ESS_DEBUG_INFO_H_
 
 #include "ess_output_analyzed_module.h"
-#include "ess_audio_memory_map.h"
+#include "ess_audioblock.h"
 #include "ess_platform.h"
 
 #include <sstream>
 
-inline void ess_debug(ess_output_analyzed_module* mod) {
+inline void ess_debug() {
   #if ESS_PLATFORM_MONTORING == 1
 
   std::cout << ess_platform_millis() <<  " ms uptime" << std::endl;
@@ -50,11 +50,31 @@ inline void ess_debug(ess_output_analyzed_module* mod) {
   #endif
 
   #if ESS_OUTPUT_TIME_ANALYZED == 1
-  std::cout  << mod->get_formated_states() << std::endl;
+  ess_output_analyzed_module* mod = (ess_output_analyzed_module*)ess_platform::Instance().get_std_device();
   #endif
 
-  mod->update();
-  std::cout << "mem: " << ess_mem_used() << " / " << ess_mem_max() << "\r\n" ;
+  #if ESS_OUTPUT_TIME_ANALYZED == 1
+  if(mod != 0) std::cout  << mod->get_formated_states() << std::endl;
+  std::cout << "------------------------------------" << std::endl;
+  #endif
+
+  std::cout << "mem: " << ess_audioblock_used() << " /  " <<
+  ess_audioblock_max_used() << " / " <<
+  ess_audioblock_num() << "\r\n" ;
+  std::cout << "------------------------------------" << std::endl;
+
+  if(mod != 0)  mod->update();
+  std::cout << "------------------------------------" << std::endl;
+
+  std::cout << "mem: " << ess_audioblock_used() << " /  " <<
+  ess_audioblock_max_used() << " / " <<
+  ess_audioblock_num() << "\r\n" ;
+  std::cout << "------------------------------------" << std::endl;
+
+  #if ESS_OUTPUT_TIME_ANALYZED == 1
+  if(mod != 0)  std::cout  << mod->get_formated_states() << std::endl;
+  std::cout << "------------------------------------" << std::endl;
+  #endif
 
   ess_platform_sleep(1);
 }

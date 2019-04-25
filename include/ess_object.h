@@ -48,7 +48,7 @@ public:
 
   virtual std::string to_string() { return m_strName; }
   virtual void from_string(const std::string str) { m_strName = str; }
-private:
+protected:
   std::string m_strName;
 };
 

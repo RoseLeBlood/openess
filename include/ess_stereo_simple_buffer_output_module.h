@@ -84,7 +84,6 @@ protected:
   virtual size_t send_simple_buffer_to_device(int32_t* simple_buffer, size_t offset, size_t size) = 0;
 private:
   int32_t m_iSampleBuffer[ESS_DEFAULT_AUDIO_PACKET_SIZE*2];
-  ess_audioblock_t *m_iBuffer[2];
 };
 
  #endif

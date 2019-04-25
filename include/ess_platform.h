@@ -35,7 +35,7 @@
 #define __ESS_PLATFORM_IMPL_H__
 
 #include "ess.h"
-#include "ess_audio_memory_map.h"
+#include "ess_audioblock.h"
 
 #if ESS_PLATFORM_ESP32 == 1
 #include "platform/esp32/ess_platform_esp32.h"

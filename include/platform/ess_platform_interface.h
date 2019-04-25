@@ -51,11 +51,15 @@ public:
   }
 protected:
   ess_platform_interface(const std::string name)  : ess_object(name) {
-
+    m_pStdDevice = nullptr;
   }
 public:
-  virtual ess_error_t create() {
-    ess_mem_init(ESS_USED_AUDIO_BLOCKS,  m_memory_map_data);
+  virtual ess_error_t create(ess_audioblock_t* _static_data = nullptr, unsigned int num = 0) {
+    #if ESS_MEMORY_MAP_EXTERN == ESS_ON
+    ess_audioblock_create(num, _static_data);
+    #else
+    ess_audioblock_create();
+    #endif
 
     std::list<ess_controler*>::iterator it;
     for(it = m_iController.begin(); it != m_iController.end(); it++) {
@@ -79,9 +83,17 @@ public:
   }
 
   virtual ess_output_module* create_output(ess_output_type type, std::string controller_name) {
-    return create_output(type, controller_name, ESS_DEFAULT_SERVER_FORMAT);
-  }
+    ess_output_module* output = create_output(type, controller_name, ESS_DEFAULT_SERVER_FORMAT);
+    if(m_pStdDevice == nullptr) m_pStdDevice = output;
 
+    if(output != NULL) {
+      m_iOutputs.push_back(output);
+    }
+    return output;
+  }
+  virtual ess_output_module* get_std_device() {
+    return m_pStdDevice;
+  }
   virtual ess_output_module* create_output(ess_output_type type, std::string controller_name,
     ess_format_t format)  = 0;
 
@@ -96,15 +108,12 @@ protected:
 #endif
 private:
   std::list<ess_controler*> m_iController;
-
-  static ess_audioblock_t m_memory_map_data[ESS_USED_AUDIO_BLOCKS];
+  std::list<ess_output_module*> m_iOutputs;
+  ess_output_module* m_pStdDevice;
 };
 
 template <class T, uint8_t NUM_CPUS>
 T* ess_platform_interface<T, NUM_CPUS>::m_pInstance = nullptr;
-
-template <class T, uint8_t NUM_CPUS>
-ess_audioblock_t ess_platform_interface<T, NUM_CPUS>::m_memory_map_data[ESS_USED_AUDIO_BLOCKS];
 
 #endif
 /**

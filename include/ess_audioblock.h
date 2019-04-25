@@ -18,7 +18,7 @@
  ****************************************************************************/
 
 /**
- * @file ess_audio_memory_map.h
+ * @file ess_audioblock.h
  * @author Anna Sopdia Schröck
  * @date 18 April 2019
  * @brief OpenESS audio memory map - allocater for `ess_audioblock_t`
@@ -29,14 +29,27 @@
 
 #include "ess.h"
 
-
-uint16_t ess_mem_used();
-uint16_t ess_mem_max();
+#define NUM_MASKS  (((ESS_MAX_AUDIO_MEMORY / ESS_DEFAULT_AUDIO_PACKET_SIZE / 2) + 31) / 32)
 
 
-ess_audioblock_t *ess_mem_alloc(void);
-uint32_t ess_mem_free(ess_audioblock_t * block);
+#if ESS_MEMORY_MAP_EXTERN == ESS_ON
+ess_error_t ess_audioblock_create(unsigned int num, ess_audioblock_t* _static_data);
+#else
+ess_error_t ess_audioblock_create();
+#endif
 
-ess_audioblock_t *ess_mem_send(ess_audioblock_t* bock);
+ess_audioblock_t *ess_audioblock_alloc(void);
+uint32_t ess_audioblock_relese(ess_audioblock_t * block);
+ess_audioblock_t* ess_audioblock_take(ess_audioblock_t * block);
+
+
+uint16_t ess_audioblock_used();
+uint16_t ess_audioblock_max_used();
+uint16_t ess_audioblock_num();
+
+
+void ess_audioblock_set_null(ess_audioblock_t * block );
+void ess_audioblock_set(ess_audioblock_t * block, uint32_t value);
+
 
 #endif

@@ -44,7 +44,7 @@ public:
   ess_amplifier();
   ess_amplifier(const std::string& name);
 
-  unsigned int read(ess_audio_channel id, ess_audioblock_t *block, unsigned int offset );
+  unsigned int read(ess_audio_channel id, ess_audioblock_t*  block, unsigned int offset );
 
   void set_gain(float n);
   void set_gain_db(float db);

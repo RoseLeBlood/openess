@@ -19,7 +19,7 @@
 
 
 #include "ess_input_module.h"
-#include "ess_audio_memory_map.h"
+#include "ess_audioblock.h"
 
 #include <sstream>
 
@@ -70,13 +70,14 @@ uint32_t ess_input_module::get_size(ess_audio_channel id) {
 
   return -1;
 }
-unsigned int ess_input_module::read(ess_audio_channel id, ess_audioblock_t *block, unsigned int offset ) {
+unsigned int ess_input_module::read(ess_audio_channel id, ess_audioblock_t*  block, unsigned int offset ) {
   int readed = -1;
 
     ess_output_channel* channel = get_channel(id);
     if(channel) {
-      readed = channel->read(ess_mem_send(block), offset);
-      ess_mem_give(block);
+      ess_audioblock_take(block);
+      readed = channel->read(block, offset);
+      ess_audioblock_relese(block);
     }
 
     return readed;

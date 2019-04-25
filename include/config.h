@@ -57,6 +57,8 @@
 // ----------------------------- ess_audio_memory_map config ----------------
 #define ESS_MEMORY_MAP_DEBUG ESS_ON
 
+#define ESS_MEMORY_MAP_EXTERN ESS_OFF
+
 #define ESS_MAX_AUDIO_MEMORY 163840
 #define ESS_MAX_AUDIO_BLOCKS   16 // using format channels * 8
 #define ESS_MIN_AUDIO_BLOCKS 		4 // using format channels * 2
@@ -67,7 +69,16 @@
 // ----------------------------- ess_debug config ----------------
 #define ESS_PLATFORM_MONTORING ESS_ON /**< when set then useble get_cpu_max and get_cpu_load*/
 #define ESS_OUTPUT_TIME_ANALYZED ESS_ON
+#define ESS_CHANNEL_DEBUG ESS_ON
+#define ESS_MODULE_DEBUG ESS_ON
 
+#if ESS_CHANNEL_DEBUG == ESS_ON
+#define ESS_CHANNEL_OUTPUT_DEBUG ESS_ON
+#define ESS_CHANNEL_INPUT_DEBUG ESS_ON
+#else
+#define ESS_CHANNEL_OUTPUT_DEBUG ESS_OFF
+#define ESS_CHANNEL_INPUT_DEBUG ESS_OFF
+#endif
 
 // ---------------------------- ess_platform configs ------------
 #define ESS_PLATFORM_ESP32					ESS_ON/** @brief If defined compiled backend for esp32 */

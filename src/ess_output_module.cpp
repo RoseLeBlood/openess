@@ -19,7 +19,7 @@
 
 
 #include "ess_output_module.h"
-#include "ess_audio_memory_map.h"
+#include "ess_audioblock.h"
 
 #include <sstream>
 
@@ -59,14 +59,15 @@ ess_input_channel* ess_output_module::get_channel(std::string name) {
   return nullptr;
 }
 
-unsigned int ESS_IRAM_ATTR ess_output_module::read(ess_audio_channel id, ess_audioblock_t *block,
+unsigned int ESS_IRAM_ATTR ess_output_module::read(ess_audio_channel id, ess_audioblock_t*  block,
    unsigned int offset ) {
 
     int readed = -1;
     ess_input_channel* channel = get_channel(id);
     if(channel) {
-      readed = channel->read(ess_mem_send(block), offset);
-      ess_mem_give(block);
+      ess_audioblock_take(block);
+      readed = channel->read(block, offset);
+      ess_audioblock_relese(block);
     }
 
     return readed;

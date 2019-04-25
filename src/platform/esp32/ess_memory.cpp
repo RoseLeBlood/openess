@@ -40,7 +40,7 @@ void* ess_malloc_audio(unsigned int size) {
 }
 
 void* ess_calloc(size_t nmemb, size_t size) {
-  return ess_calloc(nmemb, size);
+  return calloc(nmemb, size);
 }
 void* ess_calloc_audio(size_t nmemb, size_t size) {
   void *data =  NULL;

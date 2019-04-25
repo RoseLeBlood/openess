@@ -33,8 +33,9 @@
  #ifndef __ESS_CHANNEL_H__
  #define __ESS_CHANNEL_H__
 
- #include "ess.h"
+#include "ess.h"
 #include "task/ess_autolock.h"
+#include "ess_audio_buffer.h"
 
  /**
   * @brief generic channel class - basic class for `ess_input_channel` and `ess_output_channel`
@@ -104,7 +105,7 @@ public:
    * @return  the readed bytes
    * @retval -1 somthings are wrong : error
    */
-  virtual unsigned int read(ess_audioblock_t *block, unsigned int offset) = 0;
+  virtual unsigned int read(ess_audioblock_t*  block, unsigned int offset) = 0;
 
   virtual std::string to_string();
 protected:

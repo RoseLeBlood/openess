@@ -57,7 +57,7 @@ public:
   virtual ess_input_channel* get_channel(ess_audio_channel channel);
   virtual ess_input_channel* get_channel(std::string name);
 
-  virtual unsigned int read(ess_audio_channel id, ess_audioblock_t *block, unsigned int offset);
+  virtual unsigned int read(ess_audio_channel id, ess_audioblock_t*   block, unsigned int offset);
 
   virtual ess_error_t update() = 0;
 
@@ -66,6 +66,8 @@ public:
     ess_audio_channel mod_channel);
 
   virtual std::string to_string();
+
+  virtual bool allow_multi_outputs() { return false; }
 protected:
   std::list<ess_input_channel*> m_lstChannels;
 };

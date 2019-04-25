@@ -25,14 +25,13 @@ ess_amplifier::ess_amplifier() { }
 ess_amplifier::ess_amplifier(const std::string& name)
   : ess_inout_module(name)  { }
 
-unsigned int ess_amplifier::read(ess_audio_channel id, ess_audioblock_t *block, unsigned int offset ) {
-  if(block == NULL) return 0;
-
+unsigned int ess_amplifier::read(ess_audio_channel id, ess_audioblock_t*  block, unsigned int offset ) {
   ess_input_channel* channel = get_channel(id);
   if(channel == NULL) return 0;
 
+  ess_audioblock_take(block);
   unsigned int readed = channel->read(block, offset);
-
+  ess_audioblock_relese(block);
 
   for(size_t i = 0; i < readed; i++) {
     block->data[i] *= m_fMultiplier;
