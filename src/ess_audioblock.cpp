@@ -118,7 +118,7 @@ ess_audioblock_t* ess_audioblock_take(ess_audioblock_t* block) {
 	return block;
 }
 
-uint16_t ess_audioblock_used() { return m_memory_used; }
+uint16_t ess_audioblock_used() { return m_memory_used >= m_memory_size ? 0 : m_memory_used; }
 uint16_t ess_audioblock_max_used() { return m_memory_used_max; }
 uint16_t ess_audioblock_num() { return m_memory_size; }
 

@@ -82,7 +82,7 @@ public:
     return nullptr;
   }
 
-  virtual ess_output_module* create_output(ess_output_type type, std::string controller_name) {
+  virtual ess_output_module* open_output(ess_output_type type, std::string controller_name) {
     ess_output_module* output = create_output(type, controller_name, ESS_DEFAULT_SERVER_FORMAT);
     if(m_pStdDevice == nullptr) m_pStdDevice = output;
 

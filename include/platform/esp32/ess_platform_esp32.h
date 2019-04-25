@@ -51,7 +51,7 @@ public:
   virtual ess_error_t create() ;
 
   virtual ess_output_module* create_output(ess_output_type type, std::string controller_name,
-    ess_format_t format = ESS_DEFAULT_SERVER_FORMAT);
+    ess_format_t format);
 
 };
 /**

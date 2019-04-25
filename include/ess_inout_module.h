@@ -42,6 +42,11 @@
 //  |  IN   OUT  |
 //  |                   |
 // +------------- +
+
+class ess_inout_channel : public ess_channel {
+
+};
+
 class ess_inout_module  : public ess_module {
 public:
   struct entry {
@@ -88,7 +93,25 @@ public:
   virtual ess_error_t connect(ess_input_module* mod, ess_audio_channel this_channel,
     ess_audio_channel mod_channel) {
       return get_channel(this_channel)->connect(mod->get_channel(mod_channel));
+  }
+  virtual unsigned int read(ess_audio_channel id, ess_audioblock_t* block, unsigned int offset) {
+    ess_automux_t lock(m_mutex);
+
+    int readed = -1;
+    ess_input_channel* channel = get_channel(id);
+
+    if(channel) {
+      ess_audioblock_take(block);
+      readed = channel->read(block, offset);
+      ess_audioblock_relese(block);
     }
+
+    do_effect(id, block, readed);
+
+    return readed;
+  }
+protected:
+  virtual unsigned int do_effect(ess_audio_channel id, ess_audioblock_t* block, unsigned int size) = 0;
 protected:
   std::list<entry> m_lstChannels;
 };
