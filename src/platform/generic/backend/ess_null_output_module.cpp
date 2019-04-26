@@ -28,14 +28,22 @@ ess_null_output_module::ess_null_output_module()
 ess_null_output_module::~ess_null_output_module() { }
 
 ess_error_t ess_null_output_module::update(void) {
-  if(!m_bActive) { ess_platform_sleep(1); return ESS_ERROR; }
+  #if ESS_OUTPUT_TIME_ANALYZED == 1
+    start_time_analyzed();
+  #endif
 
-/*  ess_audio_buffer buffer("null_buffer");
+  if(m_bActive) {
 
-  for(int i=0; i <= ESS_CHANNEL_FORMAT_7POINT1; i++) {
-    read(ESS_AUDIO_CHANNEL_LEFT,    buffer, 0);
+
+    for(int i=0; i <= ESS_CHANNEL_FORMAT_7POINT1; i++) {
+      ess_audioblock_t* buffer = ess_audioblock_alloc();
+      read(ESS_AUDIO_CHANNEL_LEFT,    buffer, 0);
+      ess_audioblock_relese(buffer);
+    }
   }
-*/
-  ess_platform_sleep(1);
+
+  #if ESS_OUTPUT_TIME_ANALYZED == 1
+     end_time_analyzed();
+  #endif
   return ESS_OK;
 }

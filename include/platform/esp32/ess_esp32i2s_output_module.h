@@ -34,8 +34,8 @@
 * @{
 */
 
-#include "ess_stereo_simple_buffer_output_module.h"
-#include "platform/esp32/ess_i2s_controller.h"
+#include "../../core/module/ess_stereo_simple_buffer_output_module.h"
+#include "ess_i2s_controller.h"
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"

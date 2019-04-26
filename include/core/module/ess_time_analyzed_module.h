@@ -19,10 +19,10 @@
 
 
 /**
- * @file ess_output_stream.h
+ * @file ess_time_analyzed_module.h
  * @author Anna Sopdia Schröck
  * @date 30 Januar 2019
- * @brief ESS generic ouput stream
+ * @brief ESS time analyzed ouput module
  *
  *
  */
@@ -30,51 +30,46 @@
  * @addtogroup stream
  * @{
  */
-#ifndef __ESS_OUTPUT_MODULE_H__
-#define __ESS_OUTPUT_MODULE_H__
+ #ifndef __ESS_OUTPUT_ANALYZED_MODULE_H__
+ #define __ESS_OUTPUT_ANALYZED_MODULE_H__
 
 #include "ess_module.h"
-#include "ess_input_channel.h"
-#include "ess_input_module.h"
-#include <list>
 
-/**
-  * @brief basic class for output module - example `ess_null_input_module`
-  * +--------------+
-  *  |  IN              |
-  *  |  IN              |
-  * +------------- +
-*/
-class ess_output_module: public ess_module {
+class ess_time_analyzed_module : public ess_module {
 public:
-  ess_output_module(const std::string& name) : ess_module(name) {   }
+  ess_time_analyzed_module(const std::string& name);
+  virtual ~ess_time_analyzed_module() { }
 
-  virtual ~ess_output_module() { }
+#if ESS_TIME_ANALYZED_MODULE == 1
 
-  virtual ess_error_t add_channel(std::string name, ess_audio_channel channel);
-  virtual ess_error_t add_channel(ess_input_channel* channel);
+  uint32_t get_time() { return m_iClocksUpdate; }
+  uint32_t get_time_max() { return m_iClocksUpdateMax; }
+  uint32_t get_time_min() { return m_iClocksUpdateMin; }
+  uint32_t get_time_per_seconds() { return m_iCloocksSecond; }
 
-  virtual ess_input_channel* get_channel(ess_audio_channel channel);
-  virtual ess_input_channel* get_channel(std::string name);
+  uint32_t get_time_per_seconds_sum() { return m_iCloocksSecondSum; }
 
-  virtual unsigned int read(ess_audio_channel id, ess_audioblock_t*   block, unsigned int offset);
 
-  virtual ess_error_t update() = 0;
-
-  virtual ess_error_t connect(ess_input_module* mod, ess_audio_channel channel);
-  virtual ess_error_t connect(ess_input_module* mod, ess_audio_channel this_channel,
-    ess_audio_channel mod_channel);
-
-  virtual std::string to_string();
-
-  virtual bool allow_multi_outputs() { return false; }
+  virtual std::string get_formated_states();
 protected:
-  std::list<ess_input_channel*> m_lstChannels;
+  virtual void start_time_analyzed();
+  virtual void end_time_analyzed();
+protected:
+  uint32_t m_iClocksUpdate;
+	uint32_t m_iClocksUpdateMax;
+	uint32_t m_iClocksUpdateMin;
+	uint32_t m_iCloocksSecond;
+  uint32_t m_iCloocksSecondSum;
+
+  int32_t m_iUpdatesPerSecond;
+  int32_t m_iUpdateCounter;
+private:
+  uint32_t m_iStartTick;
+  uint32_t m_iFinishTick;
+#endif
 };
 
-/**
-* @}
-*/
-
-
-#endif
+ #endif
+ /**
+ * @}
+ */

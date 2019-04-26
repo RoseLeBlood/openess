@@ -108,6 +108,8 @@ public:
   virtual unsigned int read(ess_audioblock_t*  block, unsigned int offset) = 0;
 
   virtual std::string to_string();
+
+  virtual bool is_connected () = 0;
 protected:
   /**
    * @brief set the channel

@@ -17,34 +17,46 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-#include "ess_amplifier.h"
-#include <math.h>
 
+/**
+ * @file ess_amplifier.h
+ * @author Anna Sopdia Schröck
+ * @date 11 März 2019
+ * @brief ESS ampliefer  module
+ *
+ *
+ */
+ /**
+ * @addtogroup dsp
+ * @{
+ */
+#ifndef _ESS_AMPLIFIER_H_
+#define _ESS_AMPLIFIER_H_
 
-ess_amplifier::ess_amplifier() { }
-ess_amplifier::ess_amplifier(const std::string& name)
-  : ess_inout_module(name)  { }
+#include "ess_effect.h"
 
-unsigned int ess_amplifier::read(ess_audio_channel id, ess_audioblock_t*  block, unsigned int offset ) {
-  ess_input_channel* channel = get_channel(id);
-  if(channel == NULL) return 0;
+/**
+  * @brief basic ampliefer module
+  * basic ampliefer module with  input and  output
+  */
+class ess_amplifier : public ess_effect {
+public:
+  ess_amplifier();
+  ess_amplifier(const std::string& name);
 
-  ess_audioblock_take(block);
-  unsigned int readed = channel->read(block, offset);
-  ess_audioblock_relese(block);
+  void set_gain(float n);
+  void set_gain_db(float db);
 
-  for(size_t i = 0; i < readed; i++) {
-    block->data[i] *= m_fMultiplier;
-  }
-  return readed;
-}
-void ess_amplifier::set_gain(float n) {
-  if (n > 100000.0f) n = 100000.0f;       //100000 = 100db
-  else if (n < -100000.0f) n = -100000.0f;
-  m_fMultiplier = n;
-}
-void ess_amplifier::set_gain_db(float db){
-    if (db > 100.0f) db = 100.0f;
-    else if (db < -100.0f) db = -100.0f;
-    m_fMultiplier = powf(10.0f,db/20.0f);
-}
+  float get_gain();
+  float get_gain_db();
+protected:
+  virtual unsigned int do_effect(ess_audioblock_t* block, unsigned int offset, unsigned int size,
+    ess_audio_channel id);
+private:
+	float m_fMultiplier;
+};
+
+#endif
+/**
+* @}
+*/

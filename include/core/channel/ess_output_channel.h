@@ -19,10 +19,10 @@
 
 
 /**
- * @file ess_module.h
+ * @file ess_output_channel.h
  * @author Anna Sopdia Schröck
  * @date 08 März 2019
- * @brief ESS generic  module
+ * @brief channel for the output object
  *
  *
  */
@@ -30,48 +30,48 @@
  * @addtogroup ess
  * @{
  */
-#ifndef __ESS_MODULE_H__
-#define __ESS_MODULE_H__
+ #ifndef __ESS_OUTPUT_CHANNEL_H__
+ #define __ESS_OUTPUT_CHANNEL_H__
 
-#include "ess.h"
-#include "task/ess_autolock.h"
 
-#include "ess_audio_buffer.h"
+#include "ess_channel.h"
 
 /**
-  * @brief basic class for module
-  *
-  */
-  // +--------------+<br>
-  //  |                   |<br>
-  //  |                   |<br>
-  // +------------- +<br>
-class ess_module  : public ess_object  {
+ * @brief the ess_output_channel class
+ * the `ess_input_objec` has n outputs channels
+ */
+class ess_output_channel : public ess_channel {
+  friend class ess_input_channel;
 public:
-  ess_module() { }
-  ess_module(const std::string& name)
-    : ess_object(name), m_bActive(false) { m_mutex.create(); }
+  ess_output_channel()  { }
 
-  virtual ~ess_module() { set_active(false); m_mutex.destroy(); }
+  ess_output_channel(std::string name)
+    : ess_channel(name, ESS_CHANNEL_OUTPUT, ESS_AUDIO_CHANNEL_LEFT),
+      m_bConnected(false)
+        {  }
 
-  virtual bool is_active() {
+  ess_output_channel(std::string name, ess_audio_channel channel )
+    : ess_channel(name, ESS_CHANNEL_OUTPUT, channel), m_bConnected(false)
+       { }
+
+  virtual unsigned int  read(ess_audioblock_t*  block, unsigned int offset)  {
     ess_automux_t lock(m_mutex);
-    return m_bActive;
-  }
-  virtual ess_error_t set_active(bool active)  {
-    ess_automux_t lock(m_mutex);
-    m_bActive = active; return ESS_OK;
+
+    return -1;
    }
 
-   virtual unsigned int read(ess_audio_channel id, ess_audioblock_t* block, unsigned int offset) = 0;
+   virtual unsigned int get_size() { return ESS_DEFAULT_AUDIO_PACKET_SIZE; }
+   virtual int32_t* get_buffer() { return nullptr; }
+
+   virtual bool is_connected () {return m_bConnected; }
 protected:
-  bool m_bActive;
-  ess_mutex m_mutex;
+  void set_connected(bool value) { ess_automux_t lock(m_mutex);  m_bConnected = value; }
+protected:
+  bool m_bConnected;
 };
 
-/**
-* @}
-*/
 
-
-#endif
+ /**
+ * @}
+ */
+ #endif

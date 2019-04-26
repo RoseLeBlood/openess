@@ -36,7 +36,7 @@
 #define _ESS_PLATFORM_INC_ESP32_H_
 
 #include "ess.h"
-#include "platform/ess_platform_interface.h"
+#include "../ess_platform_interface.h"
 
 
 class ess_platform_esp32 : public ess_platform_interface<ess_platform_esp32, ESS_CONFIC_MAX_CORES>  {

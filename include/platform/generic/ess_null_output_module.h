@@ -34,7 +34,7 @@
 * @{
 */
 
-#include "ess_output_module.h"
+#include "../../core/module/ess_output_module.h"
 
 #define ESS_NULL_OUTPUT_NAME									   "ess_outnull"
 

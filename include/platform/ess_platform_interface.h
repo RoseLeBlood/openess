@@ -35,7 +35,7 @@
  #define __ESS_PLATFORM_INTERFACE_H__
 
 #include "platform/ess_controler.h"
-#include "ess_output_module.h"
+#include "../core/module/ess_output_module.h"
 
 #include <list>
 

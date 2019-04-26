@@ -32,13 +32,8 @@
  #include "ess.h"
 
 void* ess_malloc(unsigned int size);
-void* ess_malloc_audio(unsigned int size);
-
 void* ess_calloc(size_t nmemb, size_t size);
-void* ess_calloc_audio(size_t nmemb, size_t size);
-
 void* ess_realloc(void *ptr, size_t size);
-void* ess_realloc_audio(void *ptr, size_t size);
 
 void ess_free(void* buffer);
 

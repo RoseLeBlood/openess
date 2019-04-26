@@ -1,10 +1,10 @@
 #include "ess.h"
-#include "ess_stereo_simple_buffer_output_module.h"
+#include "core/module/ess_stereo_simple_buffer_output_module.h"
 
 
 
 ess_stereo_simple_buffer_output_module::ess_stereo_simple_buffer_output_module(const std::string& name)
-  : ess_output_analyzed_module(name) {
+  : ess_output_module(name) {
 
     ess_output_module::add_channel(std::string(name) + std::string("_left"),
       ESS_AUDIO_CHANNEL_LEFT);

@@ -33,48 +33,50 @@
 #ifndef _ESS_DEBUG_INFO_H_
 #define _ESS_DEBUG_INFO_H_
 
-#include "ess_output_analyzed_module.h"
+#include "core/module/ess_output_module.h"
 #include "ess_audioblock.h"
 #include "ess_platform.h"
 
 #include <sstream>
 
-inline void ess_debug() {
+inline void cpu_display() {
   #if ESS_PLATFORM_MONTORING == 1
 
   std::cout << ess_platform_millis() <<  " ms uptime" << std::endl;
   for(int i= 0; i < ESS_CONFIC_MAX_CORES; i++) {
-    std::cout << "CPU" << i << ": " << ess_platform::Instance().get_cpu_load(i) << " %"
-                   << "[ " << ess_platform::Instance().get_cpu_max(i) << " % ]" << std::endl;
+    printf("CPU %d %5.2f%% [%5.2f%% max] \n", i,
+      ess_platform::Instance().get_cpu_load(i),
+      ess_platform::Instance().get_cpu_max(i));
   }
-  #endif
 
-  #if ESS_OUTPUT_TIME_ANALYZED == 1
-  ess_output_analyzed_module* mod = (ess_output_analyzed_module*)ess_platform::Instance().get_std_device();
   #endif
-
+}
+inline void output_display() {
   #if ESS_OUTPUT_TIME_ANALYZED == 1
+  ess_output_module* mod = ess_platform::Instance().get_std_device();
+
   if(mod != 0) std::cout  << mod->get_formated_states() << std::endl;
-  std::cout << "------------------------------------" << std::endl;
   #endif
+}
 
+inline void mem_display() {
   std::cout << "mem: " << ess_audioblock_used() << " /  " <<
   ess_audioblock_max_used() << " / " <<
   ess_audioblock_num() << "\r\n" ;
+}
+inline void ess_debug() {
+  cpu_display();
+  output_display( );
+  mem_display();
+
+  std::cout << "------------------------------------" << std::endl;
+  if(ess_platform::Instance().get_std_device() != 0)
+    ess_platform::Instance().get_std_device()->update();
   std::cout << "------------------------------------" << std::endl;
 
-  if(mod != 0)  mod->update();
-  std::cout << "------------------------------------" << std::endl;
-
-  std::cout << "mem: " << ess_audioblock_used() << " /  " <<
-  ess_audioblock_max_used() << " / " <<
-  ess_audioblock_num() << "\r\n" ;
-  std::cout << "------------------------------------" << std::endl;
-
-  #if ESS_OUTPUT_TIME_ANALYZED == 1
-  if(mod != 0)  std::cout  << mod->get_formated_states() << std::endl;
-  std::cout << "------------------------------------" << std::endl;
-  #endif
+  cpu_display();
+  output_display( );
+  mem_display();
 
   ess_platform_sleep(1);
 }

@@ -17,30 +17,40 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-#include "ess_channel.h"
-#include <sstream>
 
-ess_channel::ess_channel() : ess_channel("ess_object", ESS_CHANNEL_INPUT) { }
+/**
+ * @file ess_dsp_multiply.h
+ * @author Anna Sopdia Schröck
+ * @date 26 Apr 2019
+ * @brief ESS simple DSP with 2 Inputs and 1 Output (InA * InB = Out)
+ *
+ *
+ */
+ /**
+ * @addtogroup dsp
+ * @{
+ */
+ #ifndef _ESS_DSP_MULTIPLY_H_
+ #define _ESS_DSP_MULTIPLY_H_
 
-ess_channel::ess_channel(std::string name, ess_channel_t type)
-  : ess_channel(name, type, ESS_AUDIO_CHANNEL_LEFT ) { }
+ #include "ess_effect.h"
 
-ess_channel::ess_channel(std::string name, ess_channel_t type, ess_audio_channel channel)
-  : ess_object(name), m_iChannel(channel),  m_eType(type) {
-    m_mutex.create();
-}
-ess_channel::~ess_channel() {
-  m_mutex.destroy();
-}
+ class ess_dsp_multiply : ess_effect {
+public:
+  ess_dsp_multiply() : ess_effect("ess_dsp_multiply") {
+    add_channel("dsp_multi", ESS_AUDIO_CHANNEL_LEFT);
+  }
+  ess_dsp_multiply(const std::string& name) : ess_effect(name) { }
 
-std::string ess_channel::to_string() {
-  std::ostringstream ss;
+  virtual ess_error_t add_channel(std::string name, ess_audio_channel channel);
+  virtual unsigned int read(ess_audio_channel id, ess_audioblock_t* block, unsigned int offset);
+protected:
+  virtual unsigned int do_effect(ess_audioblock_t* block,
+    unsigned int offset, unsigned int size, ess_audio_channel id) { return 0; /* don't use */ }
+ };
 
-  if(is_input())   ss  << "input: ";
-  else if(is_output())   ss  << "output: ";
-  else   ss << "invalid: ";
+ #endif
 
-  ss << get_name() << "(" <<  get_channel() << ")";
-
-  return ss.str();
-}
+ /**
+ * @}
+ */

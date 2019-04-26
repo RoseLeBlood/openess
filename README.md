@@ -1,4 +1,4 @@
-**OpenESS 0.6.04**   is a network-capable sound server libary mainly for embedded systems and other operatins systems.
+**OpenESS 0.8.21**   is a network-capable sound server libary mainly for embedded systems and other operatins systems.
 OpenESS is free and open-source software, and is licensed under the terms of the GNU Lesser General Public License.
 
 <a href="https://www.codacy.com/app/RoseLeBlood/openess?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=RoseLeBlood/openess&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/4f0ba2c68a904b8da2f1d45d5f3596d4"/></a>
@@ -21,13 +21,11 @@ _For informations, examples and usage, please refer to the [Wiki][wiki]_
 * code style min B
 * C++ System
 
-## Progressed features (when ready than version 0.9)
+## Progressed features (when ready than leave beta phase)
 
 * running example server on esp32 and linux
-* audio mixing from multiple clients
-* MQTT status upport and logging
-* mDNS
-* code style
+* MQTT status upport and logging (abscrations layer)
+* Mini Webserver  - TCP for status (Port 8080)
 
 ## Planned features
 

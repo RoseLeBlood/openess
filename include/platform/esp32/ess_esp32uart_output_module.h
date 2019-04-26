@@ -34,7 +34,7 @@
 * @{
 */
 
-#include "ess_stereo_simple_buffer_output_module.h"
+#include "../../core/module/ess_stereo_simple_buffer_output_module.h"
 #include "esp_system.h"
 
 

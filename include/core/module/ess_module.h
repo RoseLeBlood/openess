@@ -19,10 +19,10 @@
 
 
 /**
- * @file ess_input_module.h
+ * @file ess_module.h
  * @author Anna Sopdia Schröck
  * @date 08 März 2019
- * @brief ESS generic input module
+ * @brief ESS generic  module
  *
  *
  */
@@ -30,40 +30,43 @@
  * @addtogroup ess
  * @{
  */
-#ifndef __ESS_INPUT_MODULE_H__
-#define __ESS_INPUT_MODULE_H__
+#ifndef __ESS_MODULE_H__
+#define __ESS_MODULE_H__
 
-#include "ess_output_channel.h"
-#include "ess_module.h"
-#include <list>
+#include "ess.h"
+#include "../../task/ess_autolock.h"
+
+#include "../../ess_audio_buffer.h"
 
 /**
-  * @brief basic class for input module - example `ess_null_input_module`
-  * +--------------+
-  *  |         OUT: |
-  *  |         OUT: |
-  * +------------- +
-*/
-class ess_input_module : public ess_module  {
+  * @brief basic class for module
+  *
+  */
+  // +--------------+<br>
+  //  |                   |<br>
+  //  |                   |<br>
+  // +------------- +<br>
+class ess_module  : public ess_object  {
 public:
-  ess_input_module(const std::string& name)  : ess_module(name) { }
+  ess_module() { }
+  ess_module(const std::string& name)
+    : ess_object(name), m_bActive(false) { m_mutex.create(); }
 
-  virtual ~ess_input_module() { }
+  virtual ~ess_module() { set_active(false); m_mutex.destroy(); }
 
-  virtual ess_error_t add_channel(std::string name, ess_audio_channel channel);
-  virtual ess_error_t add_channel(ess_output_channel* channel);
+  virtual bool is_active() {
+    ess_automux_t lock(m_mutex);
+    return m_bActive;
+  }
+  virtual ess_error_t set_active(bool active)  {
+    ess_automux_t lock(m_mutex);
+    m_bActive = active; return ESS_OK;
+   }
 
-  virtual ess_output_channel* get_channel(ess_audio_channel channel);
-  virtual ess_output_channel* get_channel(std::string name);
-
-  virtual unsigned int read(ess_audio_channel id, ess_audioblock_t*  block, unsigned int offset);
-
-  virtual int32_t* get_buffer(ess_audio_channel id);
-  virtual uint32_t get_size(ess_audio_channel id);
-
-  virtual std::string to_string();
+   virtual unsigned int read(ess_audio_channel id, ess_audioblock_t* block, unsigned int offset) = 0;
 protected:
-  std::list<ess_output_channel*> m_lstChannels;
+  bool m_bActive;
+  ess_mutex m_mutex;
 };
 
 /**

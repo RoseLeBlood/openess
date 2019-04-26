@@ -17,59 +17,30 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
+#include "core/channel/ess_channel.h"
+#include <sstream>
 
-/**
- * @file ess_output_analyzed_module.h
- * @author Anna Sopdia Schröck
- * @date 30 Januar 2019
- * @brief ESS time analyzed ouput module
- *
- *
- */
- /**
- * @addtogroup stream
- * @{
- */
- #ifndef __ESS_OUTPUT_ANALYZED_MODULE_H__
- #define __ESS_OUTPUT_ANALYZED_MODULE_H__
+ess_channel::ess_channel() : ess_channel("ess_object", ESS_CHANNEL_INPUT) { }
 
-#include "ess_output_module.h"
+ess_channel::ess_channel(std::string name, ess_channel_t type)
+  : ess_channel(name, type, ESS_AUDIO_CHANNEL_LEFT ) { }
 
-class ess_output_analyzed_module : public ess_output_module {
-public:
-  ess_output_analyzed_module(const std::string& name);
-  virtual ~ess_output_analyzed_module() { }
+ess_channel::ess_channel(std::string name, ess_channel_t type, ess_audio_channel channel)
+  : ess_object(name), m_iChannel(channel),  m_eType(type) {
+    m_mutex.create();
+}
+ess_channel::~ess_channel() {
+  m_mutex.destroy();
+}
 
-#if ESS_OUTPUT_TIME_ANALYZED == 1
+std::string ess_channel::to_string() {
+  std::ostringstream ss;
 
-  uint32_t get_time() { return m_iClocksUpdate; }
-  uint32_t get_time_max() { return m_iClocksUpdateMax; }
-  uint32_t get_time_min() { return m_iClocksUpdateMin; }
-  uint32_t get_time_per_seconds() { return m_iCloocksSecond; }
+  if(is_input())   ss  << "input: ";
+  else if(is_output())   ss  << "output: ";
+  else   ss << "invalid: ";
 
-  uint32_t get_time_per_seconds_sum() { return m_iCloocksSecondSum; }
+  ss << get_name() << "(" <<  get_channel() << ")";
 
-
-  virtual std::string get_formated_states();
-protected:
-  virtual void start_time_analyzed();
-  virtual void end_time_analyzed();
-protected:
-  uint32_t m_iClocksUpdate;
-	uint32_t m_iClocksUpdateMax;
-	uint32_t m_iClocksUpdateMin;
-	uint32_t m_iCloocksSecond;
-  uint32_t m_iCloocksSecondSum;
-
-  int32_t m_iUpdatesPerSecond;
-  int32_t m_iUpdateCounter;
-private:
-  uint32_t m_iStartTick;
-  uint32_t m_iFinishTick;
-#endif
-};
-
- #endif
- /**
- * @}
- */
+  return ss.str();
+}

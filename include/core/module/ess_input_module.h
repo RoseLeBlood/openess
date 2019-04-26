@@ -19,41 +19,56 @@
 
 
 /**
- * @file ess_udplite_output_module.h
+ * @file ess_input_module.h
  * @author Anna Sopdia Schröck
- * @date 15 März 2019
- * @brief the basic udplite backend class
+ * @date 08 März 2019
+ * @brief ESS generic input module
+ *
  *
  */
-#ifndef _ESS_UDPLITE_OUTPUT_MODULE_H_
-#define _ESS_UDPLITE_OUTPUT_MODULE_H_
+ /**
+ * @addtogroup ess
+ * @{
+ */
+#ifndef __ESS_INPUT_MODULE_H__
+#define __ESS_INPUT_MODULE_H__
+
+#include "../channel/ess_output_channel.h"
+#include "ess_time_analyzed_module.h"
+#include <list>
+
 /**
-* @addtogroup ess_platform_generic
-* @{
+  * @brief basic class for input module - example `ess_null_input_module`
+  * +--------------+
+  *  |         OUT: |
+  *  |         OUT: |
+  * +------------- +
 */
-#include "net/ess_inet_dram_client.h"
-#include "../../core/module/ess_stereo_simple_buffer_output_module.h"
-
-#define ESS_MODULE_OUT_UDPLITE 			 		"udplite0:0"
-
-
-class ess_udplite_stereo_output_module  : public ess_stereo_simple_buffer_output_module {
+class ess_input_module : public ess_time_analyzed_module  {
 public:
-  ess_udplite_stereo_output_module();
-  ~ess_udplite_stereo_output_module();
+  ess_input_module(const std::string& name)  : ess_time_analyzed_module(name) { }
 
+  virtual ~ess_input_module() { }
+
+  virtual ess_error_t add_channel(std::string name, ess_audio_channel channel);
+  virtual ess_error_t add_channel(ess_output_channel* channel);
+
+  virtual ess_output_channel* get_channel(ess_audio_channel channel);
+  virtual ess_output_channel* get_channel(std::string name);
+
+  virtual unsigned int read(ess_audio_channel id, ess_audioblock_t*  block, unsigned int offset);
+
+  virtual int32_t* get_buffer(ess_audio_channel id);
+  virtual uint32_t get_size(ess_audio_channel id);
+
+  virtual std::string to_string();
 protected:
-  virtual size_t send_simple_buffer_to_device(int32_t* simple_buffer, size_t offset, size_t size);
-private:
-#if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
-  ess_inet_dramlite_client_ip4 m_iClient;
-#else
-  ess_inet_dramlite_client_ip6 m_iClient;
-#endif
+  std::list<ess_output_channel*> m_lstChannels;
 };
-
 
 /**
 * @}
 */
+
+
 #endif

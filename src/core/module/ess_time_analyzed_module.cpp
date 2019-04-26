@@ -19,25 +19,25 @@
 
 
 #include "platform/ess_sleep.h"
-#include "ess_output_analyzed_module.h"
+#include "core/module/ess_time_analyzed_module.h"
 
 #include <sstream>
 
 
-ess_output_analyzed_module::ess_output_analyzed_module(const std::string& name)
-  : ess_output_module(name) {
-#if ESS_OUTPUT_TIME_ANALYZED == 1
+ess_time_analyzed_module::ess_time_analyzed_module(const std::string& name)
+  : ess_module(name) {
+#if ESS_TIME_ANALYZED_MODULE == 1
      m_iUpdatesPerSecond = ess_system_format::get_samplerate()  / ESS_DEFAULT_AUDIO_PACKET_SIZE;
      m_iUpdateCounter = 0;
 #endif
 }
-#if ESS_OUTPUT_TIME_ANALYZED == 1
-void ess_output_analyzed_module::start_time_analyzed() {
+#if ESS_TIME_ANALYZED_MODULE == 1
+void ess_time_analyzed_module::start_time_analyzed() {
   if (this->m_bActive) {
     m_iStartTick = ess_platform_get_tick_count();
   }
 }
-void ess_output_analyzed_module::end_time_analyzed() {
+void ess_time_analyzed_module::end_time_analyzed() {
   if (this->m_bActive) {
     m_iFinishTick = ess_platform_get_tick_count();
 
@@ -68,13 +68,14 @@ void ess_output_analyzed_module::end_time_analyzed() {
     m_iUpdateCounter = 0;
 }
 
-std::string ess_output_analyzed_module::get_formated_states() {
+std::string ess_time_analyzed_module::get_formated_states() {
   std::ostringstream ss;
 
   int clocks, clocksMax, clocksSec;
   float load, loadMax, loadSec;
 
-  const float maxTicksPerUpdate = (((float)F_CPU) / 44100.0f) * 128.0f;
+  const float maxTicksPerUpdate = (((float)F_CPU) / (float)ess_system_format::get_samplerate()) *
+    (float)ESS_DEFAULT_AUDIO_PACKET_SIZE;
 
   clocks = m_iClocksUpdateMin;
   clocksMax = m_iClocksUpdateMax;
@@ -84,12 +85,17 @@ std::string ess_output_analyzed_module::get_formated_states() {
   loadMax = 100.0f * ((float)clocksMax / maxTicksPerUpdate);
   loadSec = 100.0f * ((float)clocksSec/((float)F_CPU));
 
+
+  char buf[128];
+
   if (this->m_bActive) {
-    ss << get_name() << " ld:  " << load << " cl: " << clocks << " cla: " << loadMax << " ldsec: " << loadSec
-        << " clsec: " << clocksSec << std::endl;
+    sprintf(buf, ": load [%6.2f:%6.2f  %6.2f sec]  clocks [%7i:%9i]",
+      load, loadMax, loadSec,
+      clocks, clocksSec);
+
+      ss << get_name() << buf << std::endl;
   } else {
-    ss << get_name() << " ld:  " << "-" << " cl: " << "-" << " cla: " << "-" << " ldsec: " << "-"
-        << " clsec: " << "-" << std::endl;
+    ss << get_name() << ": load [-:- - sec]  clocks [-:-]" << std::endl;
   }
 
   return ss.str();

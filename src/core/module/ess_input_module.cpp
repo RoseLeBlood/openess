@@ -18,21 +18,21 @@
  ****************************************************************************/
 
 
-#include "ess_output_module.h"
+#include "core/module/ess_input_module.h"
 #include "ess_audioblock.h"
 
 #include <sstream>
 
-ess_error_t ess_output_module::add_channel(std::string name, ess_audio_channel channel) {
+ess_error_t ess_input_module::add_channel(std::string name, ess_audio_channel channel) {
   if(get_channel(name) != NULL) return ESS_ERROR;
   if(get_channel(channel) != NULL) return ESS_ERROR;
 
-  m_lstChannels.push_back(new ess_input_channel(name, channel));
+  m_lstChannels.push_back(new ess_output_channel(name, channel));
 
   return ESS_OK;
 }
 
-ess_error_t ess_output_module::add_channel(ess_input_channel* channel) {
+ess_error_t ess_input_module::add_channel(ess_output_channel* channel) {
   if(channel == NULL) return ESS_ERROR_NULL;
 
   if(get_channel(channel->get_name()) != NULL) return ESS_ERROR;
@@ -43,50 +43,63 @@ ess_error_t ess_output_module::add_channel(ess_input_channel* channel) {
   return ESS_OK;
 }
 
-ess_input_channel* ess_output_module::get_channel(ess_audio_channel channel) {
-  std::list<ess_input_channel*>::iterator it;
+ess_output_channel* ess_input_module::get_channel(ess_audio_channel channel) {
+  std::list<ess_output_channel*>::iterator it;
   for(it = m_lstChannels.begin(); it != m_lstChannels.end(); it++) {
     if((*it)->get_channel() == channel ) return *it;
   }
   return nullptr;
 }
 
-ess_input_channel* ess_output_module::get_channel(std::string name) {
-  std::list<ess_input_channel*>::iterator it;
+ess_output_channel* ess_input_module::get_channel(std::string name) {
+  std::list<ess_output_channel*>::iterator it;
   for(it = m_lstChannels.begin(); it != m_lstChannels.end(); it++) {
     if( (*it)->get_name() == name ) return *it;
   }
   return nullptr;
 }
+int32_t* ess_input_module::get_buffer(ess_audio_channel id) {
+  ess_output_channel* channel = get_channel(id);
+  if(channel) return channel->get_buffer();
 
-unsigned int ESS_IRAM_ATTR ess_output_module::read(ess_audio_channel id, ess_audioblock_t*  block,
-   unsigned int offset ) {
+  return nullptr;
+}
+uint32_t ess_input_module::get_size(ess_audio_channel id) {
+  ess_output_channel* channel = get_channel(id);
+  if(channel) return channel->get_size();
 
-    int readed = -1;
-    ess_input_channel* channel = get_channel(id);
+  return -1;
+}
+unsigned int ESS_IRAM_ATTR ess_input_module::read(ess_audio_channel id, ess_audioblock_t*  block, unsigned int offset ) {
+  ess_automux_t lock(m_mutex);
+  
+  int readed = -1;
+
+  #if ESS_OUTPUT_TIME_ANALYZED == 1
+    start_time_analyzed();
+  #endif
+
+    ess_output_channel* channel = get_channel(id);
     if(channel) {
       ess_audioblock_take(block);
       readed = channel->read(block, offset);
       ess_audioblock_relese(block);
     }
 
+#if ESS_OUTPUT_TIME_ANALYZED == 1
+   end_time_analyzed();
+#endif
+
     return readed;
 }
-ess_error_t ess_output_module::connect( ess_input_module* input, ess_audio_channel channel) {
- return get_channel(channel)->connect(input->get_channel(channel));
-}
-ess_error_t ess_output_module::connect( ess_input_module* input, ess_audio_channel this_channel,
-  ess_audio_channel mod_channel) {
-  return get_channel(this_channel)->connect(input->get_channel(mod_channel));
-}
-std::string ess_output_module::to_string() {
+std::string ess_input_module::to_string() {
   std::ostringstream ss;
 
-  ss << get_name() << " inputs: " << std::endl;
+  ss << get_name() << " outputs: " << std::endl;
   ss << "-------------------------" << std::endl;
-  std::list<ess_input_channel*>::iterator it;
+  std::list<ess_output_channel*>::iterator it;
   for(it = m_lstChannels.begin(); it != m_lstChannels.end(); it++) {
-     ss << "\t" << (*it)->to_string() << std::endl;
+     ss  << "\t"<< (*it)->to_string() << std::endl;
   }
   ss << "-------------------------";
 

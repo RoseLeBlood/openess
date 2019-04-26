@@ -68,7 +68,7 @@
 
 // ----------------------------- ess_debug config ----------------
 #define ESS_PLATFORM_MONTORING ESS_ON /**< when set then useble get_cpu_max and get_cpu_load*/
-#define ESS_OUTPUT_TIME_ANALYZED ESS_ON
+#define ESS_TIME_ANALYZED_MODULE ESS_ON
 #define ESS_CHANNEL_DEBUG ESS_ON
 #define ESS_MODULE_DEBUG ESS_ON
 
@@ -93,6 +93,7 @@
 	#define ESS_CONFIG_RINGBUFFER_ESP32 /**< esp32 using own ringbuffer functions */
 	#define ESS_CONFIG_MUTEX_ESP32 /**< esp32 using own mutex functions */
 	#define ESS_CONFIG_SPINLOCK_ESP32 /**< esp32 using own spinlock functions */
+	#define ESS_CONFIG_MEMORY_ESP32 /**< esp32 using own memory functions */
 
 	#define ESS_ENABLE_BACKEND_OUT_I2S /**< esp32 platform I2S backend available */
 	#define ESS_ENABLE_OUTMODULE_UDPLITE/**< generic platform UDP backend available */
@@ -108,6 +109,8 @@
 	#define ESS_CONFIG_MUTEX_GENERIC
 	#define ESS_CONFIC_TASK_GENERIC
 	#define ESS_CONFIG_RINGBUFFER_GENERIC
+	#define ESS_CONFIG_MEMORY_GENERIC
+
 	/** @brief If defined then OpenAL backend available */
 	#define ESS_ENABLE_BACKEND_OUT_OPENAL
 	/** @brief If defined then UDP backend available */
@@ -115,17 +118,21 @@
 	#define ESS_DEFAULT_SERVER_NAME "OpenESS-rpi"
 
 	#define ESS_IRAM_ATTR IRAM_ATTR
+	#define ESS_CONFIC_MAX_CORES 1
 #endif //ESS_PLATFORM_RPI
 
 #if ESS_PLATFORM_LINUX == ESS_ON
 	#define ESS_CONFIC_TASK_GENERIC
 	#define ESS_CONFIG_RINGBUFFER_GENERIC
 	#define ESS_CONFIG_MUTEX_GENERIC
+	#define ESS_CONFIG_MEMORY_GENERIC
+
 	/** @brief If defined then OpenAL backend available */
 	#define ESS_ENABLE_BACKEND_OUT_OPENAL
 	/** @brief If defined then UDP backend available */
 	#define ESS_ENABLE_BACKEND_OUT_UDP
 	#define ESS_DEFAULT_SERVER_NAME "OpenESS-linux"
+	#define ESS_CONFIC_MAX_CORES 8
 
 	#define ESS_IRAM_ATTR /* */
 #endif //ESS_PLATFORM_LINUX
@@ -135,11 +142,14 @@
 	#define ESS_CONFIC_TASK_WINDOWS
 	#define ESS_CONFIG_RINGBUFFER_WINDOWS
 	#define ESS_CONFIG_MUTEX_WINDOWS
+	#define ESS_CONFIG_MEMORY_GENERIC
+
 	/** @brief If defined then OpenAL backend available */
 	#define ESS_ENABLE_BACKEND_OUT_OPENAL
 	/** @brief If defined then UDP backend available */
 	#define ESS_ENABLE_BACKEND_OUT_UDP
 	#define ESS_DEFAULT_SERVER_NAME "OpenESS-windows"
+	#define ESS_CONFIC_MAX_CORES 8
 
 	#define ESS_IRAM_ATTR /* */
 #endif //ESS_PLATFORM_WINDOWS

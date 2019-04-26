@@ -19,42 +19,48 @@
 
 
 /**
- * @file ess_amplifier.h
+ * @file ess_input_channel.h
  * @author Anna Sopdia Schröck
- * @date 11 März 2019
- * @brief ESS ampliefer  module
+ * @date 08 März 2019
+ * @brief channel for the output object
  *
  *
  */
  /**
- * @addtogroup ess_effect
+ * @addtogroup ess
  * @{
  */
-#ifndef _ESS_AMPLIFIER_H_
-#define _ESS_AMPLIFIER_H_
+ #ifndef __ESS_INPUT_CHANNEL_H__
+ #define __ESS_INPUT_CHANNEL_H__
 
-#include "ess_inout_module.h"
+#include "ess_output_channel.h"
 
 /**
-  * @brief basic ampliefer module
-  * basic ampliefer module with  input and  output
-  */
-class ess_amplifier : public ess_inout_module {
+ * @brief the ess_input_channel class
+ * the `ess_output_objec` has n input channels
+ * the input channel read from connected `ess_output_channel`
+ */
+class ess_input_channel : public ess_channel {
 public:
-  ess_amplifier();
-  ess_amplifier(const std::string& name);
+  ess_input_channel();
+  ess_input_channel(std::string name);
+  ess_input_channel(std::string name, ess_audio_channel channel );
 
-  unsigned int read(ess_audio_channel id, ess_audioblock_t*  block, unsigned int offset );
+  ess_error_t connect(ess_output_channel* channel) ;
+  ess_error_t disconnect();
 
-  void set_gain(float n);
-  void set_gain_db(float db);
 
-  float get_gain() { return m_fMultiplier; }
-private:
-	float m_fMultiplier;
+   virtual unsigned int read(ess_audioblock_t*  block, unsigned int offset) ;
+
+   virtual bool is_connected();
+
+   virtual std::string to_string();
+protected:
+  ess_output_channel* m_pConChannel;
 };
 
-#endif
-/**
-* @}
-*/
+
+ /**
+ * @}
+ */
+ #endif

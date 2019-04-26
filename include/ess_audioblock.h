@@ -27,9 +27,12 @@
 #ifndef _OPENESS_AUDIO_MEMORY_MAP_
 #define _OPENESS_AUDIO_MEMORY_MAP_
 
-#include "ess.h"
-
-#define NUM_MASKS  (((ESS_MAX_AUDIO_MEMORY / ESS_DEFAULT_AUDIO_PACKET_SIZE / 2) + 31) / 32)
+typedef struct ess_audioblock {
+  uint8_t  ref_count;
+  uint16_t memory_pool_index;
+  float    data[ESS_DEFAULT_AUDIO_PACKET_SIZE];
+  ess_format_t format;
+} ess_audioblock_t;
 
 
 #if ESS_MEMORY_MAP_EXTERN == ESS_ON

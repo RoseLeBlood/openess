@@ -17,58 +17,64 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
+#include "config.h"
+#ifdef  ESS_CONFIG_MEMORY_ESP32
 
-/**
- * @file ess_output_channel.h
- * @author Anna Sopdia Schröck
- * @date 08 März 2019
- * @brief channel for the output object
- *
- *
- */
- /**
- * @addtogroup ess
- * @{
- */
- #ifndef __ESS_OUTPUT_CHANNEL_H__
- #define __ESS_OUTPUT_CHANNEL_H__
+#include "platform/ess_memory.h"
+
+#include <stdlib.h>
+#include "string.h"
+#include "sdkconfig.h"
+#include "esp_system.h"
+#include "esp_heap_caps.h"
 
 
-#include "ess_channel.h"
 
-/**
- * @brief the ess_output_channel class
- * the `ess_input_objec` has n outputs channels
- */
-class ess_output_channel : public ess_channel {
-public:
-  ess_output_channel()  { }
+void* ess_malloc(unsigned int size) {
+  #if CONFIG_SPIRAM_BOOT_INIT
+    return heap_caps_malloc(size, MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);
+  #else
+    return malloc(size);
+  #endif
+}
 
-  ess_output_channel(std::string name)
-    : ess_channel(name, ESS_CHANNEL_OUTPUT, ESS_AUDIO_CHANNEL_LEFT)
-        {  }
+void* ess_calloc(size_t nmemb, size_t size) {
+  void *data =  NULL;
+#if CONFIG_SPIRAM_BOOT_INIT
+  data = heap_caps_malloc(nmemb * size, MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);
+  if (data) {
+      ess_zeromem(data, nmemb * size);
+  }
+#else
+  data = calloc(nmemb, size);
+#endif
+  return data;
+}
 
-  ess_output_channel(std::string name, ess_audio_channel channel )
-    : ess_channel(name, ESS_CHANNEL_OUTPUT, channel)
-       { }
+void* ess_realloc(void *ptr, size_t size) {
+  if(!ptr) return NULL;
 
-  virtual unsigned int  read(ess_audioblock_t*  block, unsigned int offset)  {
-    ess_automux_t lock(m_mutex);
-    #if ESS_CHANNEL_OUTPUT_DEBUG == ESS_ON
+  void *newdata = ess_malloc(size);
+  ess_memcpy(newdata, ptr, size);
+  ess_free(ptr);
 
-    #endif
+  return (ptr =newdata);
+}
 
+void ess_free(void* buffer) {
+  free(buffer);
+}
 
-    return -1;
-   }
+void ess_zeromem(void* buffer, unsigned int size) {
+  ess_memset(buffer, 0, size);
+}
 
-   virtual unsigned int get_size() { return ESS_DEFAULT_AUDIO_PACKET_SIZE; }
-   virtual int32_t* get_buffer() { return nullptr; }
+void ess_memset(void* buffer, int data, unsigned int size) {
+  memset(buffer, data, size);
+}
 
-};
+void ess_memcpy(void* dest, void* src, unsigned int size) {
+  memcpy(dest, src, size);
+}
 
-
- /**
- * @}
- */
- #endif
+#endif

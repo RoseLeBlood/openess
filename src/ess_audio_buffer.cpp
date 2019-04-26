@@ -1,3 +1,4 @@
+#include "ess.h"
 #include "ess_audio_buffer.h"
 
 #include <sstream>

@@ -55,6 +55,7 @@
 #include "platform/ess_sleep.h"
 #include "platform/ess_memory.h"
 
+#include "ess_audioblock.h"
 /**
 * @brief which output module to create the platform factory
 **/
@@ -85,6 +86,8 @@ typedef enum ess_audio_channel {
   ESS_AUDIO_CHANNEL_CENTER, /**< channel id for center*/
   ESS_AUDIO_CHANNEL_LFE, /**< channel id for LFE*/
   ESS_AUDIO_CHANNEL_MAX,
+
+  ESS_AUDIO_EFFECT_CHANNEL = 1000,
 }ess_audio_channel_t;
 
 typedef enum  ess_audio_channel_format {
@@ -104,14 +107,6 @@ typedef enum ess_channel_type {
   ESS_CHANNEL_OUTPUT,
   ESS_CHANNEL_MAX
 }ess_channel_t;
-
-typedef struct ess_audioblock {
-  uint8_t  ref_count;
-  uint16_t memory_pool_index;
-  float    data[ESS_DEFAULT_AUDIO_PACKET_SIZE];
-  ess_format_t format;
-} ess_audioblock_t;
-
 
 /**
 * @brief system format helper

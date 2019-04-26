@@ -1,4 +1,6 @@
-#include "ess_audioblock.h"
+#include "ess.h"
+
+#define NUM_MASKS  (((ESS_MAX_AUDIO_MEMORY / ESS_DEFAULT_AUDIO_PACKET_SIZE / 2) + 31) / 32)
 
 uint32_t m_memory_pool_available_mask[NUM_MASKS];
 uint16_t m_memory_pool_first_mask;

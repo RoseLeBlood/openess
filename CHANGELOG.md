@@ -1,5 +1,12 @@
 
 ## Release History
+* 0.8.21:
+  - reorder header
+  - rename ess_inout_module to ess_effect
+  - new base from ess_effect is ess_input_module
+  - add ess_dsp_multiply - simple DSP with 2 Inputs and 1 Output (InA * InB = Out)
+  - add ess_dsp_multiplexer - simple DSP with 1 Inputs and 2 Output (OutB = In; OutA = In)
+  - add ess_channel: virtual bool is_connected
 * 0.8.11:
   - call ess_audio_memory_map in ess_platform creating - bug fix
   - update ref implatierung esp32 debug output

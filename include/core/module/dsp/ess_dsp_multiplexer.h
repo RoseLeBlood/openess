@@ -19,47 +19,41 @@
 
 
 /**
- * @file ess_input_channel.h
+ * @file ess_dsp_multiplexer.h
  * @author Anna Sopdia Schröck
- * @date 08 März 2019
- * @brief channel for the output object
- *
- *
+ * @date 26 Apr 2019
+ * @brief ESS simple DSP with 1 Inputs and 2 Output (OutB = In; OutA = In)
  */
+
  /**
- * @addtogroup ess
+ * @addtogroup dsp
  * @{
  */
- #ifndef __ESS_INPUT_CHANNEL_H__
- #define __ESS_INPUT_CHANNEL_H__
+ #ifndef _ESS_DSP_MULTIPLEXER_H_
+ #define _ESS_DSP_MULTIPLEXER_H_
 
-#include "ess_output_channel.h"
+#define ESS_DSP_MULTIPLEXER_OUTA   ESS_AUDIO_CHANNEL_LEFT
+#define ESS_DSP_MULTIPLEXER_OUTB   ESS_AUDIO_CHANNEL_RIGHT
+
+ #include "ess_effect.h"
+
+class ess_dsp_multiplexer : ess_effect {
+public:
+  ess_dsp_multiplexer();
+  ess_dsp_multiplexer(const std::string& name);
+
+  virtual ess_error_t add_channel(std::string name, ess_audio_channel channel);
+
+  unsigned int read(ess_audio_channel id, ess_audioblock_t* block, unsigned int offset);
+protected:
+  virtual unsigned int do_effect(ess_audioblock_t* block,
+    unsigned int offset, unsigned int size, ess_audio_channel id) { return 0; /* don't use */ }
+private:
+  bool m_outUpdate[2];
+  ess_audioblock_t* block_hold;
+};
+#endif
 
 /**
- * @brief the ess_input_channel class
- * the `ess_output_objec` has n input channels
- * the input channel read from connected `ess_output_channel`
- */
-class ess_input_channel : public ess_channel {
-public:
-  ess_input_channel();
-  ess_input_channel(std::string name);
-  ess_input_channel(std::string name, ess_audio_channel channel );
-
-  ess_error_t connect(ess_output_channel* channel) ;
-
-
-   virtual unsigned int read(ess_audioblock_t*  block, unsigned int offset) ;
-
-   bool is_connected();
-
-   virtual std::string to_string();
-protected:
-  ess_output_channel* m_pConChannel;
-};
-
-
- /**
- * @}
- */
- #endif
+* @}
+*/
