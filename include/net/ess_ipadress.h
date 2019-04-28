@@ -17,51 +17,31 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-
 /**
- * @file ess_object.h
+ * @file ess_ipadress.h
  * @author Anna Sopdia Schröck
- * @date 09 März 2019
- * @brief ESS basic class all ess objects
- *
- *
+ * @date 28 April 2019
+ * @brief basic ip adress handler
  */
- /**
- * @addtogroup ess
- * @{
- */
-#ifndef __ESS_OBJECT_H__
-#define __ESS_OBJECT_H__
+ #ifndef _ESS_IPADRESS_H_
+ #define _ESS_IPADRESS_H_
 
-#include <sstream>
+ #include "ess.h"
+#include "ess_network.h"
 
-class ess_object {
-  friend std::ostream& operator>>(std::ostream& stream, ess_object& obj); // to_string
-  friend std::istream& operator<< (std::istream& stream, ess_object& obj); // from_string
-
+class ess_ipaddress : public ess_object {
 public:
-  ess_object()
-    : m_strName("ess_object") { }
+  ess_ipaddress(ess_socket_fam fam);
+  ess_ipaddress(ess_socket_fam fam, std::string name);
 
-  ess_object(std::string name)
-    : m_strName(name) {  }
+  ess_ipaddress(const ess_ipaddress& value);
 
-  ess_object(const ess_object& other)
-    : m_strName(other.m_strName)  { }
-    
-  ess_object(const ess_object&& other)
-    : m_strName(other.m_strName)  { }
+  bool is_valid() { return !m_bInvalid; }
+  ess_socket_fam get_family() { return m_eFamily; }
 
-  std::string get_name() { return m_strName; }
-  void set_name(const std::string name) { m_strName = name; }
-
-  virtual std::string to_string() { return m_strName; }
-  virtual void from_string(const std::string str) { m_strName = str; }
 protected:
-  std::string m_strName;
+  ess_socket_fam m_eFamily;
+  bool m_bInvalid;
 };
 
 #endif
-/**
-* @}
-*/

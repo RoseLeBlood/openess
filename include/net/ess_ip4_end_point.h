@@ -17,51 +17,33 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-
 /**
- * @file ess_object.h
+ * @file ess_ip4_end_point.h
  * @author Anna Sopdia Schröck
- * @date 09 März 2019
- * @brief ESS basic class all ess objects
- *
- *
+ * @date 28 April 2019
  */
- /**
- * @addtogroup ess
- * @{
- */
-#ifndef __ESS_OBJECT_H__
-#define __ESS_OBJECT_H__
 
-#include <sstream>
+ #ifndef _ESS_IP_V4_ENDPOINT_H_
+ #define _ESS_IP_V4_ENDPOINT_H_
 
-class ess_object {
-  friend std::ostream& operator>>(std::ostream& stream, ess_object& obj); // to_string
-  friend std::istream& operator<< (std::istream& stream, ess_object& obj); // from_string
+ #include "ess_ip_end_point.h"
+#include "ess_ip4address.h"
 
-public:
-  ess_object()
-    : m_strName("ess_object") { }
+ #define ESS_IP4ENDPOINT_ANY ess_ip4_end_point(ESS_IP4ADRESS_ANY, 0)
 
-  ess_object(std::string name)
-    : m_strName(name) {  }
 
-  ess_object(const ess_object& other)
-    : m_strName(other.m_strName)  { }
-    
-  ess_object(const ess_object&& other)
-    : m_strName(other.m_strName)  { }
+ class ess_ip4_end_point : public ess_ip_end_point {
+ public:
+   ess_ip4_end_point();
 
-  std::string get_name() { return m_strName; }
-  void set_name(const std::string name) { m_strName = name; }
+   ess_ip4_end_point(ess_ip4address address, uint16_t port);
+   ess_ip4_end_point( ess_ip4address address,  uint16_t port, std::string name);
 
-  virtual std::string to_string() { return m_strName; }
-  virtual void from_string(const std::string str) { m_strName = str; }
-protected:
-  std::string m_strName;
-};
+   virtual ess_ip4address get_address()  { return m_ipAdress; }
+   virtual std::string to_string() ;
+ protected:
+   ess_ip4address m_ipAdress;
+ };
 
-#endif
-/**
-* @}
-*/
+
+ #endif

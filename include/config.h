@@ -41,7 +41,7 @@
 
 /* Main config */
 
-#define ESS_DEFAULT_AUDIO_PACKET_SIZE 512
+#define ESS_DEFAULT_AUDIO_PACKET_SIZE 256
 
 #define ESS_DEFAULT_SERVER_START_PORT 8686
 #define ESS_DEFAULT_SERVER_FAMILY ESS_FAMILY_IP4
@@ -60,14 +60,15 @@
 #define ESS_MEMORY_MAP_EXTERN ESS_OFF
 
 #define ESS_MAX_AUDIO_MEMORY 163840
-#define ESS_MAX_AUDIO_BLOCKS   16 // using format channels * 8
-#define ESS_MIN_AUDIO_BLOCKS 		4 // using format channels * 2
+#define ESS_MAX_AUDIO_BLOCKS   64
+#define ESS_MOD_AUDIO_BLOCKS   32
+#define ESS_MIN_AUDIO_BLOCKS 		16
 
-#define ESS_USED_AUDIO_BLOCKS ESS_MAX_AUDIO_BLOCKS
+#define ESS_USED_AUDIO_BLOCKS ESS_MOD_AUDIO_BLOCKS
 
 
 // ----------------------------- ess_debug config ----------------
-#define ESS_PLATFORM_MONTORING ESS_ON /**< when set then useble get_cpu_max and get_cpu_load*/
+#define ESS_PLATFORM_MONTORING ESS_OFF /**< when set then useble get_cpu_max and get_cpu_load (experimental)*/
 #define ESS_TIME_ANALYZED_MODULE ESS_ON
 #define ESS_CHANNEL_DEBUG ESS_ON
 #define ESS_MODULE_DEBUG ESS_ON
@@ -96,7 +97,7 @@
 	#define ESS_CONFIG_MEMORY_ESP32 /**< esp32 using own memory functions */
 
 	#define ESS_ENABLE_BACKEND_OUT_I2S /**< esp32 platform I2S backend available */
-	#define ESS_ENABLE_OUTMODULE_UDPLITE/**< generic platform UDP backend available */
+	//#define ESS_ENABLE_OUTMODULE_UDPLITE/**< generic platform UDP backend available */
 	#define ESS_ENABLE_OUTMODULE_UART
 
 	#define ESS_DEFAULT_SERVER_NAME "OpenESS-esp32" /**< basic server name*/

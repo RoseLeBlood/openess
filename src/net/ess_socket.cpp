@@ -26,38 +26,22 @@
 
 #include "net/ess_socket.h"
 #include "esp_log.h"
-
 #include "config.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <sys/socket.h>
-# include <sys/types.h>
-# include <unistd.h> // read()/write()
-# include <stdint.h>
-# include <netdb.h> // getaddrinfo()
-# include <string.h>
-# include <errno.h>
-# include <sys/ioctl.h>
-# include <netinet/in.h>
+
 
 /**
- * @brief Constructor. Sets `m_iSocket` to -1.
+ * @brief Constructor
  *
  */
-ess_socket::ess_socket(ess_socket_fam fam, ess_socket_pro proto) {
+ess_socket::ess_socket(ess_socket_fam fam, ess_socket_type socket_type,
+  ess_socket_proto protocolType, std::string name)
+   : ess_object(name) {
+
    m_eFam = fam;
-   m_eProto = proto;
-   m_iSocket = -1;
-}
-/**
- * @brief Move constructor.
- */
-ess_socket::ess_socket(ess_socket&& other) {
-  m_eFam = other.m_eFam;
-  m_eProto = other.m_eProto;
-  m_iSocket = other.m_iSocket;
-  other.m_iSocket = -1;
+   m_eProto = protocolType;
+   m_fType = socket_type;
+   m_iSocket = ::ess_socket(fam, socket_type, protocolType);
 }
 
 /**
@@ -75,19 +59,16 @@ ess_socket::~ess_socket(void) {
  */
 ess_error_t ess_socket::destroy(void) {
     if ( 0 > m_iSocket ) return ESS_ERROR_NULL;
-    if ( 0 > close(m_iSocket)) return ESS_ERROR_CLOSE;
-
+    if(ess_socket_close(m_iSocket) != ESS_OK) return ESS_ERROR_CLOSE;
     m_iSocket = -1;
     return ESS_OK;
 }
 
-int ess_socket::set_opt(int level, int optname, const char* optval, unsigned int optlen) const {
+int ess_socket::set_opt(int level, ess_socket_option_name_t optname,
+  const char* optval, unsigned int optlen) const {
     return ess_setsockopt(m_iSocket, level, optname, optval, optlen);
 }
-
-
-ess_insocket::ess_insocket(ess_socket_fam fam, ess_socket_pro proto)
-  : ess_socket(fam, proto) {
-    m_strHost = "";
-    m_iPort = -1;
+int ess_socket::get_opt(int level, ess_socket_option_name_t optname,
+  char* optval, unsigned int *option_len) {
+  return ess_getsockopt(m_iSocket, level, optname, optval, option_len);
 }

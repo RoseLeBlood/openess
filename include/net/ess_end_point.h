@@ -18,50 +18,36 @@
  ****************************************************************************/
 
 /**
- * @file ess_inet_dram_server.h
+ * @file ess_endpoint.h
  * @author Anna Sopdia Schröck
- * @date 19 Februar 2019
- * @brief Contains the inet dram server (UDP Server) socket
+ * @date 28 April 2019
  */
 
-#ifndef _ESS_SOCKET_INET_DGRAM_SERVER_H_
-#define _ESS_SOCKET_INET_DGRAM_SERVER_H_
+ #ifndef _ESS_ENDPOINT_H_
+ #define _ESS_ENDPOINT_H_
 
-#include "net/ess_insocket_dram.h"
+#include "ess_network.h"
 
-/**
-* @addtogroup socket
-* @{
-*/
-class ess_inet_dram_server : public ess_insocket_dram{
+class ess_end_point : public  ess_object {
 public:
-  ess_inet_dram_server(const std::string& host, const int port, ess_socket_fam fam, bool lite);
+  ess_end_point()
+    : ess_end_point(ESS_SOCKET_FAMILY_ALG) { }
 
-  virtual ess_error_t bind(int flags = 0);
+  ess_end_point(ess_socket_fam_t fam)
+    : ess_object("ess_end_point") { }
 
-private:
-  bool m_bLite;
+  ess_end_point(ess_socket_fam_t fam, std::string name)
+    : ess_object(name), m_fFam(fam) { }
+
+  ess_end_point(const ess_end_point& other)
+    : ess_object(other), m_fFam(other.m_fFam) { }
+
+  ess_end_point(const ess_end_point&& other)
+    : ess_object(other), m_fFam(other.m_fFam) { }
+
+  virtual ess_socket_fam_t get_family()  { return m_fFam; }
+protected:
+  ess_socket_fam_t m_fFam;
 };
 
-class ess_inet_dram_server_ip4 : public ess_inet_dram_server {
-public:
-  ess_inet_dram_server_ip4(const std::string& host,const int port);
-};
-class ess_inet_dramlite_server_ip4 : public ess_inet_dram_server {
-public:
-  ess_inet_dramlite_server_ip4(const std::string& host,const int port);
-};
-
-
-class ess_inet_dram_server_ip6 : public ess_inet_dram_server {
-public:
-  ess_inet_dram_server_ip6(const std::string& host,const int port);
-};
-class ess_inet_dramlite_server_ip6 : public ess_inet_dram_server {
-public:
-  ess_inet_dramlite_server_ip6(const std::string& host,const int port);
-};
-/**
-* @}
-*/
-#endif
+ #endif

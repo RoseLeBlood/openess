@@ -17,8 +17,8 @@ ess_audioblock_t _memory_map_data[ESS_USED_AUDIO_BLOCKS];
 ess_error_t __memory_map_internal_create(unsigned int num, ess_audioblock_t* _static_data) {
 	unsigned int i;
 
-	if (num > ( ESS_MAX_AUDIO_MEMORY / ESS_DEFAULT_AUDIO_PACKET_SIZE / 2) )
-		num =  ESS_MAX_AUDIO_MEMORY / ESS_DEFAULT_AUDIO_PACKET_SIZE / 2;
+	if (num > ( ESS_MAX_AUDIO_BLOCKS) )
+		num =  ESS_MAX_AUDIO_BLOCKS;
 
 	m_memory_size = num;
 	m_pMemory_pool = _static_data;

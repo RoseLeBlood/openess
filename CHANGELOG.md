@@ -1,5 +1,10 @@
 
 ## Release History
+* 0.85.0:
+  - remove old socket system
+  - add ess_ipaddress , ess_ip4address, ess_ip6address class
+  - add ess_endpoint, ess_ip_endpoint4_t, ess_ip_endpoint6_t
+  - add ess_sockets#: inet, inet_stream - ip4/ip6
 * 0.8.21:
   - reorder header
   - rename ess_inout_module to ess_effect

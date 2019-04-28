@@ -16,52 +16,25 @@
  *   You should have received a copy of the GNU Lesser General Public       *
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
+#include "net/ess_ip6_end_point.h"
+ #include <sstream>
+
+ ess_ip6_end_point::ess_ip6_end_point()
+   : ess_ip_end_point(ESS_SOCKET_FAMILY_IP6, 0, "ess_ip4_end_point")/*,
+     m_ipAdress(ESS_IP6ADRESS_ANY)*/ {
+
+ }
+ ess_ip6_end_point::ess_ip6_end_point(ess_ip6address address, uint16_t port)
+    : ess_ip_end_point(ESS_SOCKET_FAMILY_IP6, port, "ess_ip4_end_point"),
+      m_ipAdress(address) { }
+
+  ess_ip6_end_point::ess_ip6_end_point( ess_ip6address address,  uint16_t port, std::string name)
+    : ess_ip_end_point(ESS_SOCKET_FAMILY_IP6, port, name),
+      m_ipAdress(address) { }
 
 
-/**
- * @file ess_object.h
- * @author Anna Sopdia Schröck
- * @date 09 März 2019
- * @brief ESS basic class all ess objects
- *
- *
- */
- /**
- * @addtogroup ess
- * @{
- */
-#ifndef __ESS_OBJECT_H__
-#define __ESS_OBJECT_H__
-
-#include <sstream>
-
-class ess_object {
-  friend std::ostream& operator>>(std::ostream& stream, ess_object& obj); // to_string
-  friend std::istream& operator<< (std::istream& stream, ess_object& obj); // from_string
-
-public:
-  ess_object()
-    : m_strName("ess_object") { }
-
-  ess_object(std::string name)
-    : m_strName(name) {  }
-
-  ess_object(const ess_object& other)
-    : m_strName(other.m_strName)  { }
-    
-  ess_object(const ess_object&& other)
-    : m_strName(other.m_strName)  { }
-
-  std::string get_name() { return m_strName; }
-  void set_name(const std::string name) { m_strName = name; }
-
-  virtual std::string to_string() { return m_strName; }
-  virtual void from_string(const std::string str) { m_strName = str; }
-protected:
-  std::string m_strName;
-};
-
-#endif
-/**
-* @}
-*/
+std::string ess_ip6_end_point::to_string() {
+  std::ostringstream ss;
+  ss << "[" << m_ipAdress.to_string() << "]:" << m_iPort;
+  return  ss.str();
+}

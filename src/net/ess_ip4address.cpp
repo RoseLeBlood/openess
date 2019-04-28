@@ -16,41 +16,43 @@
  *   You should have received a copy of the GNU Lesser General Public       *
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
+#include "net/ess_ip4address.h"
+#include <sstream>
 
-/**
- * @file ess_insocket_dram.h
- * @author Anna Sopdia Schröck
- * @date 18 Februar 2019
- *
- */
+ess_ip4address::ess_ip4address()
+  : ess_ipaddress(ESS_SOCKET_FAMILY_IP4) { }
 
-#ifndef _ESS_SOCKET_INET_DGRAM_H_
-#define _ESS_SOCKET_INET_DGRAM_H_
+ess_ip4address::ess_ip4address( int address)
+  : ess_ip4address(address, "ess_ip4address") { }
 
-#include "net/ess_socket.h"
-
-/**
-* @addtogroup socket
-* @{
-*/
-class ess_insocket_dram : public ess_insocket {
-public:
-  ess_insocket_dram() : ess_insocket(ESS_SOCKET_FAMILY_IP4, ESS_SOCKET_PROTO_DRAM) { }
-  ess_insocket_dram(ess_socket_fam fam) : ess_insocket(fam, ESS_SOCKET_PROTO_DRAM) { }
+ess_ip4address::ess_ip4address( int address, std::string name)
+  : ess_ipaddress(ESS_SOCKET_FAMILY_IP4, name)  {
+    m_iAddress = (long)address & 0x00000000FFFFFFFF;
+}
 
 
-  virtual unsigned int sendto(const void* buf, unsigned int len, const char* dsthost, const int dstport); //
-  virtual unsigned int sendto(const std::string& buf, const std::string& dsthost, const int dstport); //
+ess_ip4address::ess_ip4address(unsigned short address[4], std::string name)
+  : ess_ipaddress(ESS_SOCKET_FAMILY_IP4, name) {
+    m_bInvalid = false;
 
-  virtual unsigned int recvfrom(void* buf, unsigned int len); //
-  virtual unsigned int recvfrom(std::string& buf); //
+    m_iAddress = ((address[3] << 24 | address[2] <<16 |
+                              address[1] << 8| address[0]) & 0x0FFFFFFFF);
 
-protected:
-  ess_insocket_dram(ess_socket_fam fam, ess_socket_pro proto) : ess_insocket(fam, proto) { }
-};
+}
 
 
-/**
-* @}
-*/
-#endif
+void ess_ip4address::get_address(unsigned short b[4]) {
+  b[0] = (unsigned short)(m_iAddress);
+  b[1] = (unsigned short)(m_iAddress >> 8);
+  b[2] = (unsigned short)(m_iAddress >> 16);
+  b[3] = (unsigned short)(m_iAddress >> 24);
+}
+
+
+std::string ess_ip4address::to_string() {
+  std::ostringstream ss;
+  ss << ((m_iAddress >> 24) & 0xFF) << "." << ((m_iAddress >> 16) & 0xFF)  << ".";
+  ss << ((m_iAddress >>  8) & 0xFF) << "." << ((m_iAddress          ) & 0xFF) ;
+
+  return ss.str();
+}

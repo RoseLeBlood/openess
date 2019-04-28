@@ -17,51 +17,31 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-
 /**
- * @file ess_object.h
+ * @file ess_ip_end_point.h
  * @author Anna Sopdia Schröck
- * @date 09 März 2019
- * @brief ESS basic class all ess objects
- *
- *
+ * @date 28 April 2019
  */
- /**
- * @addtogroup ess
- * @{
- */
-#ifndef __ESS_OBJECT_H__
-#define __ESS_OBJECT_H__
 
-#include <sstream>
+ #ifndef _ESS_IP_ENDPOINT_H_
+ #define _ESS_IP_ENDPOINT_H_
 
-class ess_object {
-  friend std::ostream& operator>>(std::ostream& stream, ess_object& obj); // to_string
-  friend std::istream& operator<< (std::istream& stream, ess_object& obj); // from_string
+ #include "ess_end_point.h"
 
-public:
-  ess_object()
-    : m_strName("ess_object") { }
+ class ess_ip_end_point : public ess_end_point {
+ public:
+   ess_ip_end_point();
+   ess_ip_end_point(ess_socket_fam_t fam);
+   ess_ip_end_point(ess_socket_fam_t fam, uint16_t port);
+   ess_ip_end_point(ess_socket_fam_t fam, uint16_t port, std::string name);
 
-  ess_object(std::string name)
-    : m_strName(name) {  }
+  virtual uint16_t get_port() const { return m_iPort; }
+  virtual void set_port(uint32_t port);
 
-  ess_object(const ess_object& other)
-    : m_strName(other.m_strName)  { }
-    
-  ess_object(const ess_object&& other)
-    : m_strName(other.m_strName)  { }
+  virtual bool is_valid() const { return !m_bInValid; }
+ protected:
+   uint16_t m_iPort;
+   bool m_bInValid;
+ };
 
-  std::string get_name() { return m_strName; }
-  void set_name(const std::string name) { m_strName = name; }
-
-  virtual std::string to_string() { return m_strName; }
-  virtual void from_string(const std::string str) { m_strName = str; }
-protected:
-  std::string m_strName;
-};
-
-#endif
-/**
-* @}
-*/
+ #endif

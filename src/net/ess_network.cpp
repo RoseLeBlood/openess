@@ -63,17 +63,16 @@ int ess_socket_fam2platform(ess_socket_fam fam) {
   * @brief convert ess_socket_pro to socket type (SOCK_)
   * @code
   * // SOCK_TYPE == SOCK_RAW
-  * int SOCK_TYPE = ess_socket_pro2platform(ESS_SOCKET_PROTO_RAW);
+  * int SOCK_TYPE = ess_socket_type2platform(ESS_SOCKET_PROTO_RAW);
   * @endcode
   * @param [in] fam the ess_socket_fam enum member
   * @return the socket family type
   * @retval -1 socket proto don't avaible on this platform
 */
-int ess_socket_pro2platform(ess_socket_pro proto) {
+int ess_socket_type2platform(ess_socket_type_t proto) {
   switch (proto) {
     case ESS_SOCKET_PROTO_DRAM:        return SOCK_DGRAM;
     case ESS_SOCKET_PROTO_STREAM: return SOCK_STREAM;
-    case ESS_SOCKET_PROTO_DRAM_LITE: return SOCK_DGRAM;
     case ESS_SOCKET_PROTO_RAW: return SOCK_RAW;
     #if  ESS_PLATFORM_ESP32 == 0
     case ESS_SOCKET_PROTO_SEQPACKET: return SOCK_SEQPACKET;
@@ -102,11 +101,10 @@ std::string ess_socket_fam2string(ess_socket_fam fam){
   }
   return "ESS_SOCKET_FAMILY_MAX";
 }
-std::string ess_socket_pro2string(ess_socket_pro proto) {
+std::string ess_socket_pro2string(ess_socket_type_t proto) {
   switch (proto) {
     case ESS_SOCKET_PROTO_DRAM:        return "ESS_SOCKET_PROTO_DRAM";
     case ESS_SOCKET_PROTO_STREAM: return "ESS_SOCKET_PROTO_STREAM";
-    case ESS_SOCKET_PROTO_DRAM_LITE: return "ESS_SOCKET_PROTO_DRAM_LITE";
     case ESS_SOCKET_PROTO_RAW: return "ESS_SOCKET_PROTO_RAW";
     case ESS_SOCKET_PROTO_SEQPACKET: return "ESS_SOCKET_PROTO_SEQPACKET";
     case ESS_SOCKET_PROTO_RDM: return "ESS_SOCKET_PROTO_RDM";

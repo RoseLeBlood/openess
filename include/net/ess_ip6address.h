@@ -17,51 +17,43 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-
 /**
- * @file ess_object.h
+ * @file ess_ip6address.h
  * @author Anna Sopdia Schröck
- * @date 09 März 2019
- * @brief ESS basic class all ess objects
- *
- *
+ * @date 28 April 2019
+ * @brief class for IP Adress version 6
  */
- /**
- * @addtogroup ess
- * @{
- */
-#ifndef __ESS_OBJECT_H__
-#define __ESS_OBJECT_H__
 
-#include <sstream>
+ #ifndef _ESS_IP6ADRESS_H_
+ #define _ESS_IP6ADRESS_H_
 
-class ess_object {
-  friend std::ostream& operator>>(std::ostream& stream, ess_object& obj); // to_string
-  friend std::istream& operator<< (std::istream& stream, ess_object& obj); // from_string
+#include "ess_ipadress.h"
+#include "ess_ip4address.h"
 
+#define ESS_IP6ADRESS_ANY ess_ip6address( unsigned char[] { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }, 0)
+#define ESS_IP6ADRESS_LOOPBACK ess_ip6address( unsigned char[] { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },  0)
+#define ESS_IP46DRESS_BROADCAST ess_ip6address( unsigned char[] { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }, 0)
+
+class ess_ip6address : public ess_ipaddress {
 public:
-  ess_object()
-    : m_strName("ess_object") { }
+  ess_ip6address();
+  ess_ip6address(ess_ip4address v);
+  ess_ip6address(const ess_ip6address& value);
+  ess_ip6address(unsigned short address[16], long scopid);
+  ess_ip6address(unsigned short address[16], long scopid, std::string name);
 
-  ess_object(std::string name)
-    : m_strName(name) {  }
+  void get_address(unsigned short b[16]);
+  unsigned short* get_address() { return m_numbers; }
 
-  ess_object(const ess_object& other)
-    : m_strName(other.m_strName)  { }
-    
-  ess_object(const ess_object&& other)
-    : m_strName(other.m_strName)  { }
+  long get_scopid() { return m_scopid; }
+  void set_scopid(long id) { m_scopid = id; }
 
-  std::string get_name() { return m_strName; }
-  void set_name(const std::string name) { m_strName = name; }
+  ess_ip4address to_ip4();
 
-  virtual std::string to_string() { return m_strName; }
-  virtual void from_string(const std::string str) { m_strName = str; }
+  virtual std::string to_string();
 protected:
-  std::string m_strName;
+  long m_scopid;
+  unsigned short  m_numbers[8];
 };
 
 #endif
-/**
-* @}
-*/

@@ -20,42 +20,18 @@
 /**
  * @file ess_inet_stream_server.h
  * @author Anna Sopdia Schröck
- * @date 26 Februar 2019
- * @brief Contains the ess_insocket_stream class (TCP internet socket)
+ * @date 29 April 2019
  */
 
-#ifndef _ESS_SOCKET_INET_STREAM_SERVER_H_
-#define _ESS_SOCKET_INET_STREAM_SERVER_H_
+#ifndef _ESS_INET_STREAM_SERVER_H_
+#define _ESS_INET_STREAM_SERVER_H_
 
-#include "net/ess_socket.h"
-# include <memory>
-/**
-* @addtogroup socket
-* @{
-*/
-class ess_inet_stream_server : public ess_insocket {
+class ess_inet_stream_server {
 public:
-	    ess_inet_stream_server(ess_socket_fam fam);
+  virtual ess_error_t listen(int optons) = 0;
 
-	    ess_error_t listen(const std::string& bindhost, const int bindport, int flags=0);
-
-	    ess_insocket* accept(int flags=0);
-			std::unique_ptr<ess_insocket> accept_ex(int flags=0);
-
-	    const std::string& get_bind_host(void) { return m_strHost;}
-	    int get_bind_port(void) { return m_iPort;}
+  virtual uint32_t write(const void* data, size_t offset, size_t size) = 0;
+  virtual uint32_t read(void* data, size_t offset, size_t size) = 0;
 };
 
-class ess_inet_stream_server_ip4 : public ess_inet_stream_server {
-public:
-	ess_inet_stream_server_ip4() : ess_inet_stream_server(ESS_SOCKET_FAMILY_IP4) { }
-};
-
-class ess_inet_stream_server_ip6 : public ess_inet_stream_server {
-public:
-	ess_inet_stream_server_ip6() : ess_inet_stream_server(ESS_SOCKET_FAMILY_IP6) { }
-};
-/**
-* @}
-*/
 #endif

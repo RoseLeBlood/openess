@@ -18,50 +18,11 @@
  ****************************************************************************/
 
 
-/**
- * @file ess_object.h
- * @author Anna Sopdia Schröck
- * @date 09 März 2019
- * @brief ESS basic class all ess objects
- *
- *
- */
- /**
- * @addtogroup ess
- * @{
- */
-#ifndef __ESS_OBJECT_H__
-#define __ESS_OBJECT_H__
+#include "net/ess_inet_ip6_socket.h"
 
-#include <sstream>
+ess_inet_ip6_socket::ess_inet_ip6_socket(ess_socket_type socket_type, ess_socket_proto_t protocolType)
+  : ess_inet_socket(ESS_SOCKET_FAMILY_IP6, socket_type, protocolType, "ess_inet_socket_ip6") { }
 
-class ess_object {
-  friend std::ostream& operator>>(std::ostream& stream, ess_object& obj); // to_string
-  friend std::istream& operator<< (std::istream& stream, ess_object& obj); // from_string
-
-public:
-  ess_object()
-    : m_strName("ess_object") { }
-
-  ess_object(std::string name)
-    : m_strName(name) {  }
-
-  ess_object(const ess_object& other)
-    : m_strName(other.m_strName)  { }
-    
-  ess_object(const ess_object&& other)
-    : m_strName(other.m_strName)  { }
-
-  std::string get_name() { return m_strName; }
-  void set_name(const std::string name) { m_strName = name; }
-
-  virtual std::string to_string() { return m_strName; }
-  virtual void from_string(const std::string str) { m_strName = str; }
-protected:
-  std::string m_strName;
-};
-
-#endif
-/**
-* @}
-*/
+ess_inet_ip6_socket::ess_inet_ip6_socket(ess_socket_type socket_type,
+    ess_socket_proto_t protocolType, std::string name)
+    : ess_inet_socket(ESS_SOCKET_FAMILY_IP6, socket_type, protocolType, name) { }

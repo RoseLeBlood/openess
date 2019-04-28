@@ -17,51 +17,10 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
+#include "net/ess_ipadress.h"
 
-/**
- * @file ess_object.h
- * @author Anna Sopdia Schröck
- * @date 09 März 2019
- * @brief ESS basic class all ess objects
- *
- *
- */
- /**
- * @addtogroup ess
- * @{
- */
-#ifndef __ESS_OBJECT_H__
-#define __ESS_OBJECT_H__
+ess_ipaddress::ess_ipaddress(ess_socket_fam fam)
+  : ess_object("ess_ipaddress"), m_eFamily(fam) { }
 
-#include <sstream>
-
-class ess_object {
-  friend std::ostream& operator>>(std::ostream& stream, ess_object& obj); // to_string
-  friend std::istream& operator<< (std::istream& stream, ess_object& obj); // from_string
-
-public:
-  ess_object()
-    : m_strName("ess_object") { }
-
-  ess_object(std::string name)
-    : m_strName(name) {  }
-
-  ess_object(const ess_object& other)
-    : m_strName(other.m_strName)  { }
-    
-  ess_object(const ess_object&& other)
-    : m_strName(other.m_strName)  { }
-
-  std::string get_name() { return m_strName; }
-  void set_name(const std::string name) { m_strName = name; }
-
-  virtual std::string to_string() { return m_strName; }
-  virtual void from_string(const std::string str) { m_strName = str; }
-protected:
-  std::string m_strName;
-};
-
-#endif
-/**
-* @}
-*/
+ess_ipaddress::ess_ipaddress(ess_socket_fam fam, std::string name)
+  : ess_object(name), m_eFamily(fam) { }
