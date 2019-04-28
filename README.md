@@ -1,4 +1,4 @@
-**OpenESS 0.8.21**   is a network-capable sound server libary mainly for embedded systems and other operatins systems.
+**OpenESS 0.85.0**   is a network-capable sound server libary mainly for embedded systems and other operatins systems.
 OpenESS is free and open-source software, and is licensed under the terms of the GNU Lesser General Public License.
 
 <a href="https://www.codacy.com/app/RoseLeBlood/openess?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=RoseLeBlood/openess&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/4f0ba2c68a904b8da2f1d45d5f3596d4"/></a>

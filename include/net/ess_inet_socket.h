@@ -17,44 +17,29 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-
 /**
- * @file ess_object.h
+ * @file ess_inet_socket.h
  * @author Anna Sopdia Schröck
- * @date 09 März 2019
- * @brief ESS basic class all ess objects
- *
- *
+ * @date 18 Februar 2019
  */
- /**
- * @addtogroup ess
- * @{
- */
-#ifndef __ESS_OBJECT_H__
-#define __ESS_OBJECT_H__
 
-#include <sstream>
+ #ifndef _ESS_INET_SOCKET_H_
+ #define _ESS_INET_SOCKET_H_
 
-class ess_object {
-  friend std::ostream& operator>>(std::ostream& stream, ess_object& obj); // to_string
-  friend std::istream& operator<< (std::istream& stream, ess_object& obj); // from_string
+ #include "ess_socket.h"
 
-public:
-  ess_object() : m_strName("ess_object") { }
-  ess_object(std::string name) : m_strName(name) {  }
+ class ess_inet_socket : public ess_socket {
+ public:
+   ess_inet_socket(ess_socket_fam fam, ess_socket_type socket_type,
+     ess_socket_proto_t protocolType);
 
-  ess_object(const ess_object& other) : m_strName(other.m_strName)  { }
+   ess_inet_socket(ess_socket_fam fam, ess_socket_type socket_type,
+       ess_socket_proto_t protocolType, std::string name);
 
-  std::string get_name() { return m_strName; }
-  void set_name(const std::string name) { m_strName = name; }
-
-  virtual std::string to_string() { return m_strName; }
-  virtual void from_string(const std::string str) { m_strName = str; }
-protected:
-  std::string m_strName;
+   ess_error_t bind(int port);
+ private:
+   int m_iPort;
 };
 
+
 #endif
-/**
-* @}
-*/

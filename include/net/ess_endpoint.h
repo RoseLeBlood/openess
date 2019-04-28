@@ -17,44 +17,59 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-
 /**
- * @file ess_object.h
+ * @file ess_endpoint.h
  * @author Anna Sopdia Schröck
- * @date 09 März 2019
- * @brief ESS basic class all ess objects
- *
- *
+ * @date 28 April 2019
+ * @brief class forip endpoint
  */
- /**
- * @addtogroup ess
- * @{
- */
-#ifndef __ESS_OBJECT_H__
-#define __ESS_OBJECT_H__
 
+ #ifndef _ESS_ENDPOINT_H_
+ #define _ESS_ENDPOINT_H_
+
+#include "ess_ip6address.h"
 #include <sstream>
 
-class ess_object {
-  friend std::ostream& operator>>(std::ostream& stream, ess_object& obj); // to_string
-  friend std::istream& operator<< (std::istream& stream, ess_object& obj); // from_string
 
+
+#define ESS_IP4ENDPOINT_ANY ess_ip_endpoint4_t(ESS_IP4ADRESS_ANY, 0)
+#define ESS_IP6ENDPOINT_ANY ess_ip_endpoint4_t(ESS_IP6ADRESS_ANY, 0)
+
+template <class IPTYPE >
+class ess_ip_end_point : public ess_object {
 public:
-  ess_object() : m_strName("ess_object") { }
-  ess_object(std::string name) : m_strName(name) {  }
+  ess_ip_end_point()
+    : ess_object("ess_ip_end_point") { }
 
-  ess_object(const ess_object& other) : m_strName(other.m_strName)  { }
+  ess_ip_end_point(IPTYPE address, int port)
+    : ess_object("ess_ip_end_point"),
+    m_ipAdress(address), m_iPort(port),
+    m_bInvalid(port>= 0 && port<=0x0000FFFF) { }
 
-  std::string get_name() { return m_strName; }
-  void set_name(const std::string name) { m_strName = name; }
+  ess_socket_fam get_family() {
+    return m_ipAdress.get_family();
+  }
 
-  virtual std::string to_string() { return m_strName; }
-  virtual void from_string(const std::string str) { m_strName = str; }
+  IPTYPE get_address() { return m_ipAdress; }
+  int get_port() { return m_iPort; }
+
+  void set_address(IPTYPE addr) { m_ipAdress = addr; }
+  void set_port(uint32_t port) { m_iPort = port; }
+
+  bool is_valid() { return !m_bInvalid; }
+
+  virtual std::string to_string() {
+    std::ostringstream ss;
+    ss << m_ipAdress.to_string() << ":" << m_iPort;
+    return  ss.str();
+  }
 protected:
-  std::string m_strName;
+  IPTYPE m_ipAdress;
+  int m_iPort;
+  bool m_bInvalid;
 };
 
-#endif
-/**
-* @}
-*/
+using ess_ip_endpoint4_t = ess_ip_end_point<ess_ip4address>;
+using ess_ip_endpoint6_t = ess_ip_end_point<ess_ip6address>;
+
+ #endif

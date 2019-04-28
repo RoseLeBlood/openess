@@ -17,51 +17,21 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-/**
- * @file ess_inet_dram_server.h
- * @author Anna Sopdia Schröck
- * @date 19 Februar 2019
- * @brief Contains the inet dram server (UDP Server) socket
- */
 
-#ifndef _ESS_SOCKET_INET_DGRAM_SERVER_H_
-#define _ESS_SOCKET_INET_DGRAM_SERVER_H_
-
-#include "net/ess_insocket_dram.h"
-
-/**
-* @addtogroup socket
-* @{
-*/
-class ess_inet_dram_server : public ess_insocket_dram{
-public:
-  ess_inet_dram_server(const std::string& host, const int port, ess_socket_fam fam, bool lite);
-
-  virtual ess_error_t bind(int flags = 0);
-
-private:
-  bool m_bLite;
-};
-
-class ess_inet_dram_server_ip4 : public ess_inet_dram_server {
-public:
-  ess_inet_dram_server_ip4(const std::string& host,const int port);
-};
-class ess_inet_dramlite_server_ip4 : public ess_inet_dram_server {
-public:
-  ess_inet_dramlite_server_ip4(const std::string& host,const int port);
-};
+#include "net/ess_inet_stream_ip4_socket.h"
 
 
-class ess_inet_dram_server_ip6 : public ess_inet_dram_server {
-public:
-  ess_inet_dram_server_ip6(const std::string& host,const int port);
-};
-class ess_inet_dramlite_server_ip6 : public ess_inet_dram_server {
-public:
-  ess_inet_dramlite_server_ip6(const std::string& host,const int port);
-};
-/**
-* @}
-*/
-#endif
+ess_inet_stream_ip4_socket::ess_inet_stream_ip4_socket()
+  : ess_inet_ip4_socket(ESS_SOCKET_PROTO_STREAM,
+    ESS_SOCKET_PROTO_UNSPEC,  "ess_inet_socket_ip4") { }
+
+  ess_inet_stream_ip4_socket::ess_inet_stream_ip4_socket(std::string name)
+    : ess_inet_ip4_socket(ESS_SOCKET_PROTO_STREAM,
+      ESS_SOCKET_PROTO_UNSPEC, name) { }
+
+ess_error_t ess_inet_stream_ip4_socket::listen(ess_ip4address address, int port) {
+  return ESS_ERROR_NOT_IMP;
+}
+ess_error_t ess_inet_stream_ip4_socket::listen(int port) {
+  return ESS_ERROR_NOT_IMP;
+}

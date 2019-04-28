@@ -96,7 +96,7 @@
 	#define ESS_CONFIG_MEMORY_ESP32 /**< esp32 using own memory functions */
 
 	#define ESS_ENABLE_BACKEND_OUT_I2S /**< esp32 platform I2S backend available */
-	#define ESS_ENABLE_OUTMODULE_UDPLITE/**< generic platform UDP backend available */
+	//#define ESS_ENABLE_OUTMODULE_UDPLITE/**< generic platform UDP backend available */
 	#define ESS_ENABLE_OUTMODULE_UART
 
 	#define ESS_DEFAULT_SERVER_NAME "OpenESS-esp32" /**< basic server name*/
