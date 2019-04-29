@@ -30,14 +30,8 @@ ess_ip6address::ess_ip6address()
     m_numbers[6] = 0;
     m_numbers[7] = 0;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
 ess_ip6address::ess_ip6address(unsigned short address[16], long scopid)
   : ess_ip6address(address, scopid, "ess_ip6address") { }
-=======
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
-=======
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
 
 ess_ip6address::ess_ip6address(unsigned short address[16], long scopid, std::string name)
     : ess_ipaddress(ESS_SOCKET_FAMILY_IP6, "ess_ip6address"), m_scopid(scopid) {
@@ -52,29 +46,6 @@ ess_ip6address::ess_ip6address(unsigned short address[16], long scopid, std::str
       m_numbers[7] = (unsigned short)(address[14] * 256 + address[15]);
 
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
-ess_ip6address::ess_ip6address(const ess_ip6address& value)
-  : ess_ipaddress(value)  {
-
-  m_numbers[0] = value.m_numbers[0];
-  m_numbers[1] = value.m_numbers[1];
-  m_numbers[2] = value.m_numbers[2];
-  m_numbers[3] = value.m_numbers[3];
-  m_numbers[4] = value.m_numbers[4];
-  m_numbers[5] = value.m_numbers[5];
-  m_numbers[6] = value.m_numbers[6];
-  m_numbers[7] = value.m_numbers[7];
-
-  m_scopid = value.m_scopid;
-}
-<<<<<<< HEAD
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
-=======
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
 ess_ip6address::ess_ip6address(ess_ip4address v)
   : ess_ipaddress(ESS_SOCKET_FAMILY_IP6)  {
 

@@ -19,8 +19,7 @@
 #include "net/ess_ip4address.h"
 #include <sstream>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 ess_ip4address::ess_ip4address()
   : ess_ipaddress(ESS_SOCKET_FAMILY_IP4) { }
 
@@ -32,11 +31,6 @@ ess_ip4address::ess_ip4address( int address, std::string name)
     m_iAddress = (long)address & 0x00000000FFFFFFFF;
 }
 
-
-=======
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
-=======
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
 ess_ip4address::ess_ip4address(unsigned short address[4], std::string name)
   : ess_ipaddress(ESS_SOCKET_FAMILY_IP4, name) {
     m_bInvalid = false;

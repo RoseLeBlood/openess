@@ -28,19 +28,3 @@ ess_inet_stream_ip4_socket::ess_inet_stream_ip4_socket()
   ess_inet_stream_ip4_socket::ess_inet_stream_ip4_socket(std::string name)
     : ess_inet_ip4_socket(ESS_SOCKET_PROTO_STREAM,
       ESS_SOCKET_PROTO_UNSPEC, name) { }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
-
-ess_error_t ess_inet_stream_ip4_socket::listen(ess_ip4address address, int port) {
-  return ESS_ERROR_NOT_IMP;
-}
-ess_error_t ess_inet_stream_ip4_socket::listen(int port) {
-  return ESS_ERROR_NOT_IMP;
-}
-<<<<<<< HEAD
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
-=======
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8

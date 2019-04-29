@@ -28,18 +28,12 @@
 
 #include "ess_inet_ip6_socket.h"
 
-#include "ess_endpoint.h"
+#include "ess_end_point.h"
 
 class ess_inet_stream_ip6_socket : public ess_inet_ip6_socket {
 public:
   ess_inet_stream_ip6_socket();
-
-    ess_inet_stream_ip6_socket(std::string name);
-
-  ess_error_t listen(ess_ip6address address, int port) ;
-  ess_error_t listen(int port) ;
-private:
-  ess_ip_endpoint6_t m_pEndPoint;
+  ess_inet_stream_ip6_socket(std::string name);
 };
 
 #endif

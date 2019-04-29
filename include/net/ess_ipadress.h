@@ -18,28 +18,31 @@
  ****************************************************************************/
 
 /**
- * @file ess_inet_stream_ip4_socket.h
+ * @file ess_ipadress.h
  * @author Anna Sopdia Schröck
- * @date 18 Februar 2019
  */
 
-#ifndef _ESS_INET_STREAM_IP4_SOCKET_H_
-#define _ESS_INET_STREAM_IP4_SOCKET_H_
+ #ifndef _ESS_IPADRESS_H_
+ #define _ESS_IPADRESS_H_
 
-#include "ess_inet_ip4_socket.h"
+ #include "ess.h"
+#include "ess_network.h"
 
-#include "ess_endpoint.h"
-#include "ess_ip4address.h"
-
-class ess_inet_stream_ip4_socket : public ess_inet_ip4_socket {
+class ess_ipaddress : public ess_object {
 public:
-  ess_inet_stream_ip4_socket();
-  ess_inet_stream_ip4_socket(std::string name);
+  ess_ipaddress(ess_socket_fam fam);
+  ess_ipaddress(ess_socket_fam fam, std::string name);
 
-  ess_error_t listen(ess_ip4address address, int port);
-  ess_error_t listen(int port);
-private:
-  ess_ip_endpoint4_t m_pEndPoint;
+  ess_ipaddress(const ess_ipaddress& value) : ess_object(value) {
+    m_eFamily = value.m_eFamily; m_bInvalid = value.m_bInvalid; }
+
+  bool is_valid() { return !m_bInvalid; }
+  ess_socket_fam get_family() { return m_eFamily; }
+
+protected:
+  ess_socket_fam m_eFamily;
+  bool m_bInvalid;
 };
+
 
 #endif

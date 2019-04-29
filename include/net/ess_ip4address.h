@@ -29,62 +29,23 @@
 
 #include "ess_ipadress.h"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 #define ESS_IP4ADRESS_ANY ess_ip4address(0x0000000000000000, "ess_ipaddress::any")
 #define ESS_IP4ADRESS_LOOPBACK ess_ip4address(0x000000000100007F, "ess_ipaddress::loopback")
 #define ESS_IP4ADRESS_BROADCAST ess_ip4address(0x00000000FFFFFFFF, "ess_ipaddress::broadcast")
 #define ESS_IP4ADRESS_NONE  ess_ip4address(0x00000000FFFFFFFF, "ess_ipaddress::none")
 
-
-class ess_ip4address : public ess_ipaddress {
+class ess_ip4address : ess_ipaddress {
 public:
   ess_ip4address();
   ess_ip4address( int address);
   ess_ip4address( int address, std::string name);
 
-=======
-=======
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
-#define ESS_IP4ADRESS_ANY ess_ip4address_t(0x0000000000000000, "ess_ipaddress::any")
-#define ESS_IP4ADRESS_LOOPBACK ess_ip4address_t(0x000000000100007F, "ess_ipaddress::loopback")
-#define ESS_IP4ADRESS_BROADCAST ess_ip4address_t(0x00000000FFFFFFFF, "ess_ipaddress::broadcast")
-#define ESS_IP4ADRESS_NONE  ess_ip4address_t(0x00000000FFFFFFFF, "ess_ipaddress::none")
-
-class ess_ip4address : ess_ipaddress {
-public:
-  ess_ip4address()
-    : ess_ipaddress(ESS_SOCKET_FAMILY_IP4) { }
-
-  ess_ip4address( int address)
-    : ess_ip4address(address, "ess_ip4address") { }
-
-  ess_ip4address( int address, std::string name)
-    : ess_ipaddress(ESS_SOCKET_FAMILY_IP4, name)  {
-      m_iAddress = (long)address & 0x00000000FFFFFFFF;
-  }
-  ess_ip4address(const ess_ip4address& value)
-    : ess_ipaddress(value)  {
-    m_iAddress = value.m_iAddress;
-  }
-<<<<<<< HEAD
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
-=======
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
   ess_ip4address(unsigned short address[4]) : ess_ip4address(address, "ess_ip4address") { }
   ess_ip4address(unsigned short address[4], std::string name) ;
 
   unsigned int get_address() { return m_iAddress; }
   void             get_address(unsigned short b[4]);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
-=======
-
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
   virtual std::string to_string();
 protected:
   unsigned int m_iAddress;

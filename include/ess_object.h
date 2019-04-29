@@ -48,13 +48,10 @@ public:
 
   ess_object(const ess_object& other)
     : m_strName(other.m_strName)  { }
-    
+
   ess_object(const ess_object&& other)
     : m_strName(other.m_strName)  { }
 
-  ess_object(const ess_object& other) : m_strName(other.m_strName)  { }
-
-  ess_object(const ess_object& other) : m_strName(other.m_strName)  { }
 
   std::string get_name() { return m_strName; }
   void set_name(const std::string name) { m_strName = name; }

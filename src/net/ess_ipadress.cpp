@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 /****************************************************************************
  * Copyright (C) 2019 by Anna Sopdia Schröck                                *
  *                                                                          *
@@ -26,9 +24,3 @@ ess_ipaddress::ess_ipaddress(ess_socket_fam fam)
 
 ess_ipaddress::ess_ipaddress(ess_socket_fam fam, std::string name)
   : ess_object(name), m_eFamily(fam) { }
-=======
-#include "net/ess_ipadress.h"
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
-=======
-#include "net/ess_ipadress.h"
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
