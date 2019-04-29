@@ -18,20 +18,58 @@
  ****************************************************************************/
 
 /**
- * @file ess_inet_stream_server.h
+ * @file ess_endpoint.h
  * @author Anna Sopdia Schröck
- * @date 29 April 2019
+ * @date 28 April 2019
+ * @brief class forip endpoint
  */
 
-#ifndef _ESS_INET_STREAM_SERVER_H_
-#define _ESS_INET_STREAM_SERVER_H_
+ #ifndef _ESS_ENDPOINT_H_
+ #define _ESS_ENDPOINT_H_
 
-class ess_inet_stream_server {
+#include "ess_ip6address.h"
+#include <sstream>
+
+
+
+#define ESS_IP4ENDPOINT_ANY ess_ip_endpoint4_t(ESS_IP4ADRESS_ANY, 0)
+#define ESS_IP6ENDPOINT_ANY ess_ip_endpoint4_t(ESS_IP6ADRESS_ANY, 0)
+
+template <class IPTYPE >
+class ess_ip_end_point : public ess_object {
 public:
-  virtual ess_error_t listen(int optons) = 0;
+  ess_ip_end_point()
+    : ess_object("ess_ip_end_point") { }
 
-  virtual uint32_t write(const void* data, size_t offset, size_t size) = 0;
-  virtual uint32_t read(void* data, size_t offset, size_t size) = 0;
+  ess_ip_end_point(IPTYPE address, int port)
+    : ess_object("ess_ip_end_point"),
+    m_ipAdress(address), m_iPort(port),
+    m_bInvalid(port>= 0 && port<=0x0000FFFF) { }
+
+  ess_socket_fam get_family() {
+    return m_ipAdress.get_family();
+  }
+
+  IPTYPE get_address() { return m_ipAdress; }
+  int get_port() { return m_iPort; }
+
+  void set_address(IPTYPE addr) { m_ipAdress = addr; }
+  void set_port(uint32_t port) { m_iPort = port; }
+
+  bool is_valid() { return !m_bInvalid; }
+
+  virtual std::string to_string() {
+    std::ostringstream ss;
+    ss << m_ipAdress.to_string() << ":" << m_iPort;
+    return  ss.str();
+  }
+protected:
+  IPTYPE m_ipAdress;
+  int m_iPort;
+  bool m_bInvalid;
 };
 
-#endif
+using ess_ip_endpoint4_t = ess_ip_end_point<ess_ip4address>;
+using ess_ip_endpoint6_t = ess_ip_end_point<ess_ip6address>;
+
+ #endif

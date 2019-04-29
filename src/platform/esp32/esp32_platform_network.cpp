@@ -92,12 +92,18 @@ int ess_getsockopt(int socket, int level, ess_socket_option_name optname,
 }
 
 ess_error_t ess_socket_bind(int socket,  int port) {
+<<<<<<< HEAD
   if(socket == -1) return ESS_ERROR;
   
   struct sockaddr_in serverAddress;
   memset(&serverAddress,0,sizeof(serverAddress));
 
 
+=======
+  struct sockaddr_in serverAddress;
+  memset(&serverAddress,0,sizeof(serverAddress));
+
+>>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
 	serverAddress.sin_family=AF_INET;
 	serverAddress.sin_addr.s_addr=htonl(INADDR_ANY);
 	serverAddress.sin_port=htons(port);
@@ -106,9 +112,12 @@ ess_error_t ess_socket_bind(int socket,  int port) {
     return ESS_ERROR;
   return ESS_OK;
 }
+<<<<<<< HEAD
 ess_error_t ess_socket_listen(int socket, int options) {
   if(listen(socket,options) != 0)
     return ESS_ERROR;
   return ESS_OK;
 }
+=======
+>>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
  #endif

@@ -108,9 +108,14 @@ int ess_setsockopt(int socket, int level, ess_socket_option_name_t optname,
 
 int ess_getsockopt(int socket, int level, ess_socket_option_name_t optname,
    const char* optval, unsigned int* optlen);
+<<<<<<< HEAD
 
 ess_error_t ess_socket_bind(int socket,  int port);
 
 ess_error_t ess_socket_listen(int socket, int options) ;
+=======
+
+ess_error_t ess_socket_bind(int socket,  int port);
+>>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
 
 #endif
