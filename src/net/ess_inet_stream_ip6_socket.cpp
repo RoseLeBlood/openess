@@ -30,13 +30,19 @@ ess_inet_stream_ip6_socket::ess_inet_stream_ip6_socket(std::string name)
     ESS_SOCKET_PROTO_UNSPEC, name) { }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ess_error_t ess_inet_stream_ip6_socket::listen(int optons) {
   return ess_socket_listen(m_iSocket, optons);
 =======
+=======
+>>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
 ess_error_t ess_inet_stream_ip6_socket::listen(ess_ip6address address, int port) {
   return ESS_ERROR_NOT_IMP;
 }
 ess_error_t ess_inet_stream_ip6_socket::listen(int port) {
   return ESS_ERROR_NOT_IMP;
+<<<<<<< HEAD
+>>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
+=======
 >>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
 }

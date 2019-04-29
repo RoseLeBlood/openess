@@ -31,9 +31,15 @@
 #include "ess_ip4address.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ESS_IP6ADRESS_ANY ess_ip6address( unsigned char[] { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }, 0)
 #define ESS_IP6ADRESS_LOOPBACK ess_ip6address( unsigned char[] { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },  0)
 #define ESS_IP46DRESS_BROADCAST ess_ip6address( unsigned char[] { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }, 0)
+=======
+#define ESS_IP6ADRESS_ANY ess_ip6address_t( unsigned char[] { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }, 0)
+#define ESS_IP6ADRESS_LOOPBACK ess_ip6address_t( unsigned char[] { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },  0)
+#define ESS_IP46DRESS_BROADCAST ess_ip6address_t( unsigned char[] { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }, 0)
+>>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
 =======
 #define ESS_IP6ADRESS_ANY ess_ip6address_t( unsigned char[] { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }, 0)
 #define ESS_IP6ADRESS_LOOPBACK ess_ip6address_t( unsigned char[] { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },  0)
@@ -44,10 +50,13 @@ class ess_ip6address : public ess_ipaddress {
 public:
   ess_ip6address();
 <<<<<<< HEAD
+<<<<<<< HEAD
   ess_ip6address(ess_ip4address v);
   ess_ip6address(const ess_ip6address& value);
   ess_ip6address(unsigned short address[16], long scopid);
 =======
+=======
+>>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
 
   ess_ip6address(ess_ip4address v);
   ess_ip6address(const ess_ip6address& value);
@@ -55,6 +64,9 @@ public:
   ess_ip6address(unsigned short address[16], long scopid)
     : ess_ip6address(address, scopid, "ess_ip6address") { }
 
+<<<<<<< HEAD
+>>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
+=======
 >>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
   ess_ip6address(unsigned short address[16], long scopid, std::string name);
 

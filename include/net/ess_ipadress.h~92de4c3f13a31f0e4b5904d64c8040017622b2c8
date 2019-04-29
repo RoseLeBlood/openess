@@ -17,30 +17,42 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
+/**
+ * @file ess_ipadress.h
+ * @author Anna Sopdia Schröck
+ * @date 28 April 2019
+ * @brief basic ip adress handler
+ */
+ #ifndef _ESS_IPADRESS_H_
+ #define _ESS_IPADRESS_H_
 
-#include "net/ess_inet_stream_ip4_socket.h"
+ #include "ess.h"
+#include "ess_network.h"
+
+class ess_ipaddress : public ess_object {
+public:
+  ess_ipaddress(ess_socket_fam fam) : ess_object("ess_ipaddress"), m_eFamily(fam) { }
+  ess_ipaddress(ess_socket_fam fam, std::string name) : ess_object(name), m_eFamily(fam) { }
+
+  ess_ipaddress(const ess_ipaddress& value) : ess_object(value) {
+    m_eFamily = value.m_eFamily; m_bInvalid = value.m_bInvalid; }
+
+  bool is_valid() { return !m_bInvalid; }
+  ess_socket_fam get_family() { return m_eFamily; }
+
+protected:
+  ess_socket_fam m_eFamily;
+  bool m_bInvalid;
+};
+using ess_ipaddress_t = ess_ipaddress;
+
+/*
 
 
-ess_inet_stream_ip4_socket::ess_inet_stream_ip4_socket()
-  : ess_inet_ip4_socket(ESS_SOCKET_PROTO_STREAM,
-    ESS_SOCKET_PROTO_UNSPEC,  "ess_inet_socket_ip4") { }
 
-  ess_inet_stream_ip4_socket::ess_inet_stream_ip4_socket(std::string name)
-    : ess_inet_ip4_socket(ESS_SOCKET_PROTO_STREAM,
-      ESS_SOCKET_PROTO_UNSPEC, name) { }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
 
-ess_error_t ess_inet_stream_ip4_socket::listen(ess_ip4address address, int port) {
-  return ESS_ERROR_NOT_IMP;
-}
-ess_error_t ess_inet_stream_ip4_socket::listen(int port) {
-  return ESS_ERROR_NOT_IMP;
-}
-<<<<<<< HEAD
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
-=======
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
+
+
+using ess_ip6address_t = ess_ip6address;
+*/
+#endif

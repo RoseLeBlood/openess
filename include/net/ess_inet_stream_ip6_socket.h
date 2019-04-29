@@ -17,30 +17,29 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
+/**
+ * @file ess_inet_stream_ip4_socket.h
+ * @author Anna Sopdia Schröck
+ * @date 18 Februar 2019
+ */
 
-#include "net/ess_inet_stream_ip4_socket.h"
+#ifndef _ESS_INET_STREAM_IP6_SOCKET_H_
+#define _ESS_INET_STREAM_IP6_SOCKET_H_
 
+#include "ess_inet_ip6_socket.h"
 
-ess_inet_stream_ip4_socket::ess_inet_stream_ip4_socket()
-  : ess_inet_ip4_socket(ESS_SOCKET_PROTO_STREAM,
-    ESS_SOCKET_PROTO_UNSPEC,  "ess_inet_socket_ip4") { }
+#include "ess_endpoint.h"
 
-  ess_inet_stream_ip4_socket::ess_inet_stream_ip4_socket(std::string name)
-    : ess_inet_ip4_socket(ESS_SOCKET_PROTO_STREAM,
-      ESS_SOCKET_PROTO_UNSPEC, name) { }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
+class ess_inet_stream_ip6_socket : public ess_inet_ip6_socket {
+public:
+  ess_inet_stream_ip6_socket();
 
-ess_error_t ess_inet_stream_ip4_socket::listen(ess_ip4address address, int port) {
-  return ESS_ERROR_NOT_IMP;
-}
-ess_error_t ess_inet_stream_ip4_socket::listen(int port) {
-  return ESS_ERROR_NOT_IMP;
-}
-<<<<<<< HEAD
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
-=======
->>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
+    ess_inet_stream_ip6_socket(std::string name);
+
+  ess_error_t listen(ess_ip6address address, int port) ;
+  ess_error_t listen(int port) ;
+private:
+  ess_ip_endpoint6_t m_pEndPoint;
+};
+
+#endif

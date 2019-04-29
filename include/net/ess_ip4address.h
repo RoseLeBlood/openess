@@ -30,6 +30,7 @@
 #include "ess_ipadress.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ESS_IP4ADRESS_ANY ess_ip4address(0x0000000000000000, "ess_ipaddress::any")
 #define ESS_IP4ADRESS_LOOPBACK ess_ip4address(0x000000000100007F, "ess_ipaddress::loopback")
 #define ESS_IP4ADRESS_BROADCAST ess_ip4address(0x00000000FFFFFFFF, "ess_ipaddress::broadcast")
@@ -43,6 +44,8 @@ public:
   ess_ip4address( int address, std::string name);
 
 =======
+=======
+>>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
 #define ESS_IP4ADRESS_ANY ess_ip4address_t(0x0000000000000000, "ess_ipaddress::any")
 #define ESS_IP4ADRESS_LOOPBACK ess_ip4address_t(0x000000000100007F, "ess_ipaddress::loopback")
 #define ESS_IP4ADRESS_BROADCAST ess_ip4address_t(0x00000000FFFFFFFF, "ess_ipaddress::broadcast")
@@ -64,6 +67,9 @@ public:
     : ess_ipaddress(value)  {
     m_iAddress = value.m_iAddress;
   }
+<<<<<<< HEAD
+>>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
+=======
 >>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
   ess_ip4address(unsigned short address[4]) : ess_ip4address(address, "ess_ip4address") { }
   ess_ip4address(unsigned short address[4], std::string name) ;
@@ -72,6 +78,10 @@ public:
   void             get_address(unsigned short b[4]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
 =======
 
 >>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8

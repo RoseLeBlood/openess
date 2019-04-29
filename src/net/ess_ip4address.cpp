@@ -20,6 +20,7 @@
 #include <sstream>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ess_ip4address::ess_ip4address()
   : ess_ipaddress(ESS_SOCKET_FAMILY_IP4) { }
 
@@ -32,6 +33,8 @@ ess_ip4address::ess_ip4address( int address, std::string name)
 }
 
 
+=======
+>>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
 =======
 >>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
 ess_ip4address::ess_ip4address(unsigned short address[4], std::string name)

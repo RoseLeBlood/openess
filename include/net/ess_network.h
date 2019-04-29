@@ -98,6 +98,7 @@ int ess_socket_type2platform(ess_socket_type proto); // ess_network.cpp
 
 std::string ess_socket_fam2string(ess_socket_fam fam); // ess_network.cpp
 std::string ess_socket_type2string(ess_socket_type proto); // ess_network.cpp
+<<<<<<< HEAD
 
 
 int ess_socket(ess_socket_fam fam, ess_socket_type type, ess_socket_proto protocolType);
@@ -114,6 +115,20 @@ ess_error_t ess_socket_bind(int socket,  int port);
 
 ess_error_t ess_socket_listen(int socket, int options) ;
 =======
+
+ess_error_t ess_socket_bind(int socket,  int port);
+>>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
+=======
+
+
+int ess_socket(ess_socket_fam fam, ess_socket_type type, ess_socket_proto protocolType);
+ess_error_t ess_socket_close(int socket);
+
+int ess_setsockopt(int socket, int level, ess_socket_option_name_t optname,
+  const char* optval, unsigned int optlen);
+
+int ess_getsockopt(int socket, int level, ess_socket_option_name_t optname,
+   const char* optval, unsigned int* optlen);
 
 ess_error_t ess_socket_bind(int socket,  int port);
 >>>>>>> 92de4c3f13a31f0e4b5904d64c8040017622b2c8
