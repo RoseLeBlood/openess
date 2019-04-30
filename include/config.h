@@ -30,43 +30,31 @@
 
 #define ESS_ON 1
 #define ESS_OFF 0
-
 #define ESS_PROTOCOL_UDP							1
 #define ESS_PROTOCOL_TCP							2
 #define ESS_PROTOCOL_UDP_LITE		3
-
 #define ESS_FAMILY_IP4											4
 #define ESS_FAMILY_IP6											6
 #define ESS_FAMILY_BOTH 							46
-
-/* Main config */
-
+// ----------------------------- main config ----------------
 #define ESS_DEFAULT_AUDIO_PACKET_SIZE 256
-
-#define ESS_DEFAULT_SERVER_START_PORT 8686
-#define ESS_DEFAULT_SERVER_FAMILY ESS_FAMILY_IP4
 #define ESS_DEFAULT_SERVER_FORMAT ESS_FORMAT_STEREO_44100_16
 #define ESS_DEFAULT_SERVER_PACKET_SIZE ESS_DEFAULT_AUDIO_PACKET_SIZE
-
-#if ESS_DEFAULT_SERVER_FAMILY == ESS_FAMILY_IP4
-#define ESS_DEFAULT_SERVER_HOST "0.0.0.0"
-#else
-#define ESS_DEFAULT_SERVER_HOST "::"
-#endif
-
 // ----------------------------- ess_audio_memory_map config ----------------
 #define ESS_MEMORY_MAP_DEBUG ESS_ON
-
 #define ESS_MEMORY_MAP_EXTERN ESS_OFF
-
 #define ESS_MAX_AUDIO_MEMORY 163840
 #define ESS_MAX_AUDIO_BLOCKS   64
 #define ESS_MOD_AUDIO_BLOCKS   32
 #define ESS_MIN_AUDIO_BLOCKS 		16
-
 #define ESS_USED_AUDIO_BLOCKS ESS_MOD_AUDIO_BLOCKS
+// ----------------------------- ess_http_request server config ----------------
+#define ESS_CONFIG_HTTP_REQUEST_SERVER ESS_ON
+#define ESS_CONFIG_HTTP_REQUEST_MAX_HEADERS 32
+#define ESS_CONFIG_HTTP_REQUEST_MAX_ARGS 32
 
-
+#define ESS_CONFIG_HTTP_REQUEST_PORT 8686
+#define ESS_CONFIG_HTTP_REQUEST_FAMILY ESS_FAMILY_IP4
 // ----------------------------- ess_debug config ----------------
 #define ESS_PLATFORM_MONTORING ESS_OFF /**< when set then useble get_cpu_max and get_cpu_load (experimental)*/
 #define ESS_TIME_ANALYZED_MODULE ESS_ON
@@ -80,7 +68,6 @@
 #define ESS_CHANNEL_OUTPUT_DEBUG ESS_OFF
 #define ESS_CHANNEL_INPUT_DEBUG ESS_OFF
 #endif
-
 // ---------------------------- ess_platform configs ------------
 #define ESS_PLATFORM_ESP32					ESS_ON/** @brief If defined compiled backend for esp32 */
 #define ESS_PLATFORM_RPI 					 		 ESS_OFF/** @brief If defined compiled backend for Raspberry PI (linux) */
@@ -95,13 +82,10 @@
 	#define ESS_CONFIG_MUTEX_ESP32 /**< esp32 using own mutex functions */
 	#define ESS_CONFIG_SPINLOCK_ESP32 /**< esp32 using own spinlock functions */
 	#define ESS_CONFIG_MEMORY_ESP32 /**< esp32 using own memory functions */
-
 	#define ESS_ENABLE_BACKEND_OUT_I2S /**< esp32 platform I2S backend available */
 	//#define ESS_ENABLE_OUTMODULE_UDPLITE/**< generic platform UDP backend available */
 	#define ESS_ENABLE_OUTMODULE_UART
-
 	#define ESS_DEFAULT_SERVER_NAME "OpenESS-esp32" /**< basic server name*/
-
 	#define ESS_IRAM_ATTR IRAM_ATTR
 	#define ESS_CONFIC_MAX_CORES 2
 #endif // ESS_PLATFORM_ESP32
@@ -111,13 +95,11 @@
 	#define ESS_CONFIC_TASK_GENERIC
 	#define ESS_CONFIG_RINGBUFFER_GENERIC
 	#define ESS_CONFIG_MEMORY_GENERIC
-
 	/** @brief If defined then OpenAL backend available */
 	#define ESS_ENABLE_BACKEND_OUT_OPENAL
 	/** @brief If defined then UDP backend available */
 	#define ESS_ENABLE_BACKEND_OUT_UDP
 	#define ESS_DEFAULT_SERVER_NAME "OpenESS-rpi"
-
 	#define ESS_IRAM_ATTR IRAM_ATTR
 	#define ESS_CONFIC_MAX_CORES 1
 #endif //ESS_PLATFORM_RPI
@@ -127,14 +109,12 @@
 	#define ESS_CONFIG_RINGBUFFER_GENERIC
 	#define ESS_CONFIG_MUTEX_GENERIC
 	#define ESS_CONFIG_MEMORY_GENERIC
-
 	/** @brief If defined then OpenAL backend available */
 	#define ESS_ENABLE_BACKEND_OUT_OPENAL
 	/** @brief If defined then UDP backend available */
 	#define ESS_ENABLE_BACKEND_OUT_UDP
 	#define ESS_DEFAULT_SERVER_NAME "OpenESS-linux"
 	#define ESS_CONFIC_MAX_CORES 8
-
 	#define ESS_IRAM_ATTR /* */
 #endif //ESS_PLATFORM_LINUX
 
@@ -144,20 +124,15 @@
 	#define ESS_CONFIG_RINGBUFFER_WINDOWS
 	#define ESS_CONFIG_MUTEX_WINDOWS
 	#define ESS_CONFIG_MEMORY_GENERIC
-
 	/** @brief If defined then OpenAL backend available */
 	#define ESS_ENABLE_BACKEND_OUT_OPENAL
 	/** @brief If defined then UDP backend available */
 	#define ESS_ENABLE_BACKEND_OUT_UDP
 	#define ESS_DEFAULT_SERVER_NAME "OpenESS-windows"
 	#define ESS_CONFIC_MAX_CORES 8
-
 	#define ESS_IRAM_ATTR /* */
 #endif //ESS_PLATFORM_WINDOWS
-
-
 //-------------------------------------------------------------------------------------------------------
-
 #ifdef ESS_ENABLE_OUTMODULE_UDPLITE
 	#define ESS_OUT_UDPLITE_SENDTO_PORT 8086
 	#define ESS_OUT_UDPLITE_OUTPUT_CHANNELS ESS_CHANNEL_FORMAT_STEREO // 2
