@@ -46,6 +46,18 @@ ess_ip6address::ess_ip6address(unsigned short address[16], long scopid, std::str
       m_numbers[7] = (unsigned short)(address[14] * 256 + address[15]);
 
 }
+ess_ip6address::ess_ip6address(const ess_ip6address& value) : ess_ipaddress(value) {
+  m_scopid = value.m_scopid;
+  m_numbers[0] = value.m_numbers[0];
+  m_numbers[1] = value.m_numbers[1];
+  m_numbers[2] = value.m_numbers[2];
+  m_numbers[3] = value.m_numbers[3];
+  m_numbers[4] = value.m_numbers[4];
+  m_numbers[5] = value.m_numbers[5];
+  m_numbers[6] = value.m_numbers[6];
+  m_numbers[7] = value.m_numbers[7];
+}
+
 ess_ip6address::ess_ip6address(ess_ip4address v)
   : ess_ipaddress(ESS_SOCKET_FAMILY_IP6)  {
 
@@ -59,7 +71,7 @@ ess_ip6address::ess_ip6address(ess_ip4address v)
   m_strName = "ess_ip64";
 }
 
-void ess_ip6address::get_address(unsigned short b[16]) {
+void ess_ip6address::get_address(unsigned short b[16])  const {
   b[0] = (unsigned char)((m_numbers[0] >> 8) & 0xFF);
   b[1] = (unsigned char)((m_numbers[0]     ) & 0xFF);
   b[2] = (unsigned char)((m_numbers[1] >> 8) & 0xFF);
@@ -91,4 +103,29 @@ std::string ess_ip6address::to_string() {
 
 
   return ss.str();
+}
+ess_ip6address& ess_ip6address::operator = (const ess_ip6address& value) {
+  m_scopid = value.m_scopid;
+  m_numbers[0] = value.m_numbers[0];
+  m_numbers[1] = value.m_numbers[1];
+  m_numbers[2] = value.m_numbers[2];
+  m_numbers[3] = value.m_numbers[3];
+  m_numbers[4] = value.m_numbers[4];
+  m_numbers[5] = value.m_numbers[5];
+  m_numbers[6] = value.m_numbers[6];
+  m_numbers[7] = value.m_numbers[7];
+
+  return *this;
+}
+ess_ip6address& ess_ip6address::operator = (const ess_ip4address& value) {
+  unsigned int ip4 =value.get_address();
+
+  m_numbers[0] = m_numbers[1] = m_numbers[2] = m_numbers[3] = m_numbers[4] = 0;
+  m_numbers[5] = 0xFFFF;
+  m_numbers[6] = (unsigned short)(((ip4 & 0x0000FF00) >> 8) |
+                             ((ip4 & 0x000000FF) << 8));
+  m_numbers[7] = (unsigned short)(((ip4 & 0xFF000000) >> 24) |
+                              ((ip4 & 0x00FF0000) >> 8));
+  m_scopid = 0;
+  m_strName = "ess_ip64"; return *this;
 }

@@ -44,12 +44,6 @@ public:
   virtual ~ess_socket();
   virtual ess_error_t destroy(void);
 
-  int set_opt(int level, ess_socket_option_name_t optname,
-    const char* optval, unsigned int optlen) const;
-
-  int get_opt(int level, ess_socket_option_name_t optname,
-    char* optval, unsigned int *option_len);
-
   ess_socket_fam_t get_family() { return m_eFam; }
   ess_socket_proto_t get_protocol_type() { return m_eProto; }
   ess_socket_type get_socket_type() { return m_fType; }
@@ -57,7 +51,14 @@ public:
   bool is_socket() { return m_iSocket != -1; }
   int get_handle(void) const { return m_iSocket;}
 
+protected:
+  virtual ess_error_t create();
+  
+  int set_opt(int level, ess_socket_option_name_t optname,
+    const char* optval, unsigned int optlen) const;
 
+  int get_opt(int level, ess_socket_option_name_t optname,
+    char* optval, unsigned int *option_len);
 protected:
   ess_socket_fam m_eFam;
   ess_socket_type m_fType;

@@ -44,7 +44,7 @@ public:
 
   ess_ip6address(unsigned short address[16], long scopid, std::string name);
 
-  void get_address(unsigned short b[16]);
+  void get_address(unsigned short b[16]) const;
   unsigned short* get_address() { return m_numbers; }
 
   long get_scopid() { return m_scopid; }
@@ -53,6 +53,9 @@ public:
   ess_ip4address to_ip4();
 
   virtual std::string to_string();
+
+  ess_ip6address& operator = (const ess_ip6address& value) ;
+  ess_ip6address& operator = (const ess_ip4address& value) ;
 protected:
   long m_scopid;
   unsigned short  m_numbers[8];

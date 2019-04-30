@@ -39,6 +39,8 @@ public:
   bool is_valid() { return !m_bInvalid; }
   ess_socket_fam get_family() { return m_eFamily; }
 
+  ess_ipaddress& operator = (const ess_ipaddress& value) {
+    m_eFamily = value.m_eFamily; m_bInvalid = value.m_bInvalid; return *this; }
 protected:
   ess_socket_fam m_eFamily;
   bool m_bInvalid;

@@ -41,7 +41,6 @@ ess_socket::ess_socket(ess_socket_fam fam, ess_socket_type socket_type,
    m_eFam = fam;
    m_eProto = protocolType;
    m_fType = socket_type;
-   m_iSocket = ::ess_socket(fam, socket_type, protocolType);
 }
 
 /**
@@ -49,6 +48,11 @@ ess_socket::ess_socket(ess_socket_fam fam, ess_socket_type socket_type,
  */
 ess_socket::~ess_socket(void) {
     destroy();
+}
+ess_error_t ess_socket::create() {
+  if ( 0 > m_iSocket ) return ESS_ERROR_NULL;
+  m_iSocket = ::ess_socket(m_eFam, m_fType, m_eProto);
+  return m_iSocket != -1 ? ESS_OK : ESS_ERROR;
 }
 /**
  * @brief	Destroys a socket.

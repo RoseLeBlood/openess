@@ -43,10 +43,16 @@ public:
   ess_ip4address(unsigned short address[4]) : ess_ip4address(address, "ess_ip4address") { }
   ess_ip4address(unsigned short address[4], std::string name) ;
 
-  unsigned int get_address() { return m_iAddress; }
+  ess_ip4address(const ess_ip4address& value) : ess_ipaddress(value) {
+    m_iAddress = value.m_iAddress;  }
+
+  unsigned int get_address() const { return m_iAddress; }
   void             get_address(unsigned short b[4]);
 
   virtual std::string to_string();
+
+  ess_ip4address& operator = (const ess_ip4address& value) {
+    m_iAddress = value.m_iAddress; return *this;  }
 protected:
   unsigned int m_iAddress;
 };

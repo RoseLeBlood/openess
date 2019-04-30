@@ -33,5 +33,8 @@ ess_inet_socket::ess_inet_socket(ess_socket_fam fam, ess_socket_type socket_type
 }
 
 ess_error_t ess_inet_socket::bind(int port) {
-  return ess_socket_bind(m_iSocket, port);
+  ess_error_t error = create();
+  if(error != ESS_OK)
+    error =  ess_socket_bind(m_iSocket, port);
+  return error;
 }
