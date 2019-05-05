@@ -47,7 +47,7 @@ public:
   void get_address(unsigned short b[16]) const;
   unsigned short* get_address() { return m_numbers; }
 
-  long get_scopid() { return m_scopid; }
+  long get_scopid() const { return m_scopid; }
   void set_scopid(long id) { m_scopid = id; }
 
   ess_ip4address to_ip4();
@@ -56,9 +56,18 @@ public:
 
   ess_ip6address& operator = (const ess_ip6address& value) ;
   ess_ip6address& operator = (const ess_ip4address& value) ;
+
+  bool is_equels(const ess_ip6address& other) const;
 protected:
   long m_scopid;
   unsigned short  m_numbers[8];
 };
+
+inline bool operator == (const ess_ip6address& a, const ess_ip6address& b) {
+  return a.is_equels(b);
+}
+inline bool operator != (const ess_ip6address& a, const ess_ip6address& b) {
+  return !(a.is_equels(b) );
+}
 
 #endif

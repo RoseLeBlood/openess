@@ -129,3 +129,14 @@ ess_ip6address& ess_ip6address::operator = (const ess_ip4address& value) {
   m_scopid = 0;
   m_strName = "ess_ip64"; return *this;
 }
+bool ess_ip6address::is_equels(const ess_ip6address& other) const {
+  if(m_scopid != other.m_scopid) return false;
+  if(m_numbers[0] != other.m_numbers[0]) return false;
+  if(m_numbers[1] != other.m_numbers[1]) return false;
+  if(m_numbers[2] != other.m_numbers[2]) return false;
+  if(m_numbers[3] != other.m_numbers[3]) return false;
+  if(m_numbers[4] != other.m_numbers[4]) return false;
+  if(m_numbers[5] != other.m_numbers[5]) return false;
+  if(m_numbers[6] != other.m_numbers[6]) return false;
+  return (m_numbers[7] == other.m_numbers[7]);
+}

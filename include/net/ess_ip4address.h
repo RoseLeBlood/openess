@@ -53,31 +53,21 @@ public:
 
   ess_ip4address& operator = (const ess_ip4address& value) {
     m_iAddress = value.m_iAddress; return *this;  }
+
+  bool is_equels(const ess_ip4address& other) const { return m_iAddress == other.m_iAddress;   }
 protected:
   unsigned int m_iAddress;
 };
-/*
-bool operator == (const ess_ip4address& a, const ess_ip4address& b)  {
-  return a.get_address() == b.get_address();
-}
-bool operator != (const ess_ip4address& a, const ess_ip4address& b)  {
-  return a.get_address() != b.get_address();
-}
 
-bool operator <= (const ess_ip4address& a, const ess_ip4address& b)  {
-  return a.get_address() <= b.get_address();
-}
-bool operator >= (const ess_ip4address& a, const ess_ip4address& b)  {
-  return a.get_address() >= b.get_address();
-}
-
-bool operator < (const ess_ip4address& a, const ess_ip4address& b)  {
-  return a.get_address() < b.get_address();
-}
-bool operator > (const ess_ip4address& a, const ess_ip4address& b)  {
-  return a.get_address() > b.get_address();
-}
-*/
 using ess_ip4address_t = ess_ip4address;
+
+inline bool operator == (const ess_ip4address& a, const ess_ip4address& b) {
+  return a.is_equels(b);
+}
+inline bool operator != (const ess_ip4address& a, const ess_ip4address& b) {
+  return !(a.is_equels(b) );
+}
+
+
 
 #endif
