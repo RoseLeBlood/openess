@@ -1,0 +1,9 @@
+{
+  "build": [
+    "make"
+  ],
+  "test": [
+    "make test",
+    "make benchmark"
+  ]
+}
