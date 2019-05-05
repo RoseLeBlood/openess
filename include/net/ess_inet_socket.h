@@ -37,6 +37,13 @@
        ess_socket_proto_t protocolType, std::string name);
 
    ess_error_t bind(int port);
+
+   virtual uint32_t write(const void* data, size_t offset, size_t size);
+   virtual uint32_t read(void* data, size_t offset, size_t size);
+
+   virtual uint32_t write_string(std::string srt);
+
+   void set_strem_nodelay(int flag);
  private:
    int m_iPort;
 };

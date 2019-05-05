@@ -65,13 +65,7 @@
 #include "lwip/sys.h"
 #include <lwip/netdb.h>
 
-/*
-inline const char* port_tostring(int a) {
-  std::ostringstream temp;
-    temp<<a;
-    return temp.str().c_str();
-}
-*/
+#define ESP_NET_TAG "esp32_socket"
 
 int ess_socket(ess_socket_fam fam, ess_socket_type type, ess_socket_proto options) {
     return socket(ess_socket_fam2platform(fam),
@@ -82,32 +76,47 @@ ess_error_t ess_socket_close(int socket) {
   if ( 0 > close(socket)) return ESS_ERROR_CLOSE;
   return ESS_OK;
 }
-int ess_setsockopt(int socket, int level, int optname, const char* optval, unsigned int optlen) {
-  return setsockopt(socket, level, optname, optval, optlen);
+int ess_setsockopt(int socket, int level, ess_socket_option_name_t optname, const char* optval, unsigned int optlen) {
+  return setsockopt(socket, level, (int)optname, optval, optlen);
 }
 
-int ess_getsockopt(int socket, int level, ess_socket_option_name optname,
+int ess_getsockopt(int socket, int level, ess_socket_option_name_t optname,
   char* optval, unsigned int* optlen) {
     return getsockopt(socket, level, optname, optval, optlen);
 }
 
 ess_error_t ess_socket_bind(int socket,  int port) {
-
   struct sockaddr_in serverAddress;
   memset(&serverAddress,0,sizeof(serverAddress));
 
 	serverAddress.sin_family=AF_INET;
-	serverAddress.sin_addr.s_addr=htonl(INADDR_ANY);
+	serverAddress.sin_addr.s_addr= INADDR_ANY;
 	serverAddress.sin_port=htons(port);
 
-	if(bind(socket,(struct sockaddr *)&serverAddress, sizeof(serverAddress)) != 0)
+	if(bind(socket,(struct sockaddr *)&serverAddress, sizeof(serverAddress)) < 0) {
+    ESP_LOGE(ESP_NET_TAG, "error to bind socket");
     return ESS_ERROR;
+  }
+  ESP_LOGI(ESP_NET_TAG, "ok to bind socket");
   return ESS_OK;
 }
 
 ess_error_t ess_socket_listen(int socket, int options) {
-  if(listen(socket,options) != 0)
+  if(listen(socket,options) < 0) {
+    ESP_LOGE(ESP_NET_TAG, "error to listen");
     return ESS_ERROR;
+  }
+  ESP_LOGI(ESP_NET_TAG, "ok to listen");
   return ESS_OK;
+}
+ess_error_t ess_socket_accept(int socket, int* client) {
+  struct sockaddr_in cli_addr;
+  unsigned int clilen;
+
+  memset(&cli_addr,0,sizeof(cli_addr));
+  clilen = sizeof(cli_addr);
+
+  *client = accept(socket, (struct sockaddr *) &cli_addr, &clilen);
+  return ( (*client) < 0) ? ESS_ERROR : ESS_OK;
 }
  #endif

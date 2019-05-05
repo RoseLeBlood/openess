@@ -29,16 +29,26 @@
 #include "ess_inet_stream_ip4_socket.h"
 #include "ess_inet_stream_server.h"
 
-class ess_inet_stream_ip4_server : public ess_inet_stream_ip4_socket,
-                                                                    ess_inet_stream_server {
+class ess_inet_stream_ip4_client : public ess_inet_stream_ip4_socket {
+public:
+  ess_inet_stream_ip4_client() : ess_inet_stream_ip4_socket() { }
+  ess_inet_stream_ip4_client(int handle) : ess_inet_stream_ip4_socket() {
+    m_iSocket = handle;
+  }
+
+  ess_inet_stream_ip4_client& operator = (const ess_inet_stream_ip4_client& other) {
+    m_iSocket = other.m_iSocket; return *this;
+  }
+};
+
+class ess_inet_stream_ip4_server : public ess_inet_stream_ip4_socket {
 public:
   ess_inet_stream_ip4_server();
   ess_inet_stream_ip4_server(std::string name);
 
   ess_error_t listen(int optons);
 
-  virtual uint32_t write(const void* data, size_t offset, size_t size);
-  virtual uint32_t read(void* data, size_t offset, size_t size);
+  virtual ess_inet_stream_ip4_client accept();
 
 };
 #endif

@@ -29,13 +29,12 @@ ess_inet_stream_ip4_server::ess_inet_stream_ip4_server(std::string name)
 
 }
 ess_error_t ess_inet_stream_ip4_server::listen(int optons) {
+  set_strem_nodelay(1);
   return ess_socket_listen(m_iSocket, optons);
 }
-uint32_t ess_inet_stream_ip4_server::write(const void* data, size_t offset, size_t size) {
+ess_inet_stream_ip4_client ess_inet_stream_ip4_server::accept() {
+  int newsockfd = -1;
+  ess_socket_accept(get_handle(), &newsockfd);
 
-  return 0;
-}
-uint32_t ess_inet_stream_ip4_server::read(void* data, size_t offset, size_t size) {
-
-  return 0;
+  return ess_inet_stream_ip4_client(newsockfd);
 }

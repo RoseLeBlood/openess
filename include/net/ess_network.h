@@ -114,4 +114,5 @@ ess_error_t ess_socket_bind(int socket,  int port);
 
 ess_error_t ess_socket_listen(int socket, int options) ;
 
+ess_error_t ess_socket_accept(int socket, int* client);
 #endif

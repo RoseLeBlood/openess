@@ -53,12 +53,14 @@ public:
 
 protected:
   virtual ess_error_t create();
-  
+
   int set_opt(int level, ess_socket_option_name_t optname,
     const char* optval, unsigned int optlen) const;
 
   int get_opt(int level, ess_socket_option_name_t optname,
     char* optval, unsigned int *option_len);
+
+  void set_tcp_nodelay();
 protected:
   ess_socket_fam m_eFam;
   ess_socket_type m_fType;
