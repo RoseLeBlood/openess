@@ -34,10 +34,6 @@ class ess_task : public ess_object  {
 public:
   /**
    * @brief simple constructer
-   *
-   * @retval ESS_OK
-   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
-   * @retval ESS_ERROR
    */
   ess_task()  : ess_task("ess_task", NULL, 4096){ }
 
@@ -48,9 +44,6 @@ public:
    * param[in] param the user daten of this task
    * param [in] stackSize the n bytes for the task
    *
-   * @retval ESS_OK
-   * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
-   * @retval ESS_ERROR
    */
   ess_task(const std::string taskName, void* param = NULL, unsigned int stackSize = 4096);
   virtual ~ess_task() { destroy(); }
@@ -61,7 +54,7 @@ public:
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
    * @retval ESS_ERROR
    */
-  ess_error_t start();
+  virtual ess_error_t start();
 
   /**
    * @brief start the task and pinned it to a core
@@ -70,7 +63,7 @@ public:
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
    * @retval ESS_ERROR
    */
-  ess_error_t start(uint32_t core);
+  virtual ess_error_t start(uint32_t core);
   /**
    * @brief delete the task
    * @retval ESS_OK
@@ -136,7 +129,6 @@ public:
    * @param [in] value the new stack size
    */
   virtual void set_stack_size(unsigned int value) { runningMutex.lock(); m_uiStackSize =  value; runningMutex.unlock();  }
-protected:
   /**
    * @brief set the user data
    * @param [in] value the new user data

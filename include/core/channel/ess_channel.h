@@ -35,7 +35,7 @@
 
 #include "ess.h"
 #include "task/ess_autolock.h"
-#include "ess_audio_buffer.h"
+#include "../../ess_audio_buffer_stream.h"
 
  /**
   * @brief generic channel class - basic class for `ess_input_channel` and `ess_output_channel`

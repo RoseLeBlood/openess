@@ -17,61 +17,34 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-
 /**
- * @file ess_module.h
+ * @file ess_stream.h
  * @author Anna Sopdia Schröck
- * @date 08 März 2019
- * @brief ESS generic  module
- *
+ * @date 19 Mai 2019
  *
  */
- /**
- * @addtogroup ess
- * @{
- */
-#ifndef __ESS_MODULE_H__
-#define __ESS_MODULE_H__
+#ifndef _ESS_STREAM_H_
+#define _ESS_STREAM_H_
 
-#include "ess.h"
-#include "../../task/ess_autolock.h"
+#include "ess_object.h"
 
-#include "../../ess_audio_buffer_stream.h"
-
-/**
-  * @brief basic class for module
-  *
-  */
-  // +--------------+<br>
-  //  |                   |<br>
-  //  |                   |<br>
-  // +------------- +<br>
-class ess_module  : public ess_object  {
+class ess_stream : public ess_object {
 public:
-  ess_module() { }
-  ess_module(const std::string& name)
-    : ess_object(name), m_bActive(false) { m_mutex.create(); }
+  ess_stream() : ess_object("ess_stream") { }
+  ess_stream(const std::string& name) : ess_object(name) { }
 
-  virtual ~ess_module() { set_active(false); m_mutex.destroy(); }
+  virtual void set_value(const uint32_t value)  = 0;
+  virtual void set_value(const uint32_t value, const uint32_t position )  = 0;
 
-  virtual bool is_active() {
-    ess_automux_t lock(m_mutex);
-    return m_bActive;
-  }
-  virtual ess_error_t set_active(bool active)  {
-    ess_automux_t lock(m_mutex);
-    m_bActive = active; return ESS_OK;
-   }
+  virtual size_t read(void* data, const size_t offset, const size_t size)  = 0;
+  virtual size_t write(const void* data, const size_t offset, const size_t size)  = 0;
 
-   virtual unsigned int read(ess_audio_channel id, ess_audioblock_t* block, unsigned int offset) = 0;
-protected:
-  bool m_bActive;
-  ess_mutex m_mutex;
+  virtual float read() = 0;
+
+  virtual bool can_read() = 0;
+  virtual bool can_write() = 0;
+  virtual bool can_seek() = 0;
 };
-
-/**
-* @}
-*/
 
 
 #endif

@@ -82,6 +82,8 @@
 	#define ESS_CONFIG_MUTEX_ESP32 /**< esp32 using own mutex functions */
 	#define ESS_CONFIG_SPINLOCK_ESP32 /**< esp32 using own spinlock functions */
 	#define ESS_CONFIG_MEMORY_ESP32 /**< esp32 using own memory functions */
+	#define ESS_CONFIG_STREAM_WRITER_GENERIC
+
 	#define ESS_ENABLE_BACKEND_OUT_I2S /**< esp32 platform I2S backend available */
 	//#define ESS_ENABLE_OUTMODULE_UDPLITE/**< generic platform UDP backend available */
 	#define ESS_ENABLE_OUTMODULE_UART
@@ -95,6 +97,7 @@
 	#define ESS_CONFIC_TASK_GENERIC
 	#define ESS_CONFIG_RINGBUFFER_GENERIC
 	#define ESS_CONFIG_MEMORY_GENERIC
+	#define ESS_CONFIG_STREAM_WRITER_GENERIC
 	/** @brief If defined then OpenAL backend available */
 	#define ESS_ENABLE_BACKEND_OUT_OPENAL
 	/** @brief If defined then UDP backend available */
@@ -109,6 +112,7 @@
 	#define ESS_CONFIG_RINGBUFFER_GENERIC
 	#define ESS_CONFIG_MUTEX_GENERIC
 	#define ESS_CONFIG_MEMORY_GENERIC
+	#define ESS_CONFIG_STREAM_WRITER_GENERIC
 	/** @brief If defined then OpenAL backend available */
 	#define ESS_ENABLE_BACKEND_OUT_OPENAL
 	/** @brief If defined then UDP backend available */
@@ -124,6 +128,7 @@
 	#define ESS_CONFIG_RINGBUFFER_WINDOWS
 	#define ESS_CONFIG_MUTEX_WINDOWS
 	#define ESS_CONFIG_MEMORY_GENERIC
+	#define ESS_CONFIG_STREAM_WRITER_GENERIC
 	/** @brief If defined then OpenAL backend available */
 	#define ESS_ENABLE_BACKEND_OUT_OPENAL
 	/** @brief If defined then UDP backend available */
