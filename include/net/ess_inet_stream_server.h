@@ -20,9 +20,14 @@
 #ifndef _ESS_INET_STREAM_SERVER_H_
 #define _ESS_INET_STREAM_SERVER_H_
 
-class ess_inet_stream_server {
+#include "ess_server.h"
+
+class ess_inet_stream_server : public ess_server {
 public:
-  virtual ess_error_t listen(int optons) = 0;
+  ess_inet_stream_server() : ess_server("ess_inet_stream_server") { }
+  ess_inet_stream_server(const std::string name) : ess_server(name) { }
+
+  virtual ess_error_t listen(int port, int max_clients = 10) = 0;
 
   virtual uint32_t write(const void* data, size_t offset, size_t size) = 0;
   virtual uint32_t read(void* data, size_t offset, size_t size) = 0;

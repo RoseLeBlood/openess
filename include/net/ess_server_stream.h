@@ -16,25 +16,45 @@
  *   You should have received a copy of the GNU Lesser General Public       *
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
-#include "net/ess_ip6_end_point.h"
- #include <sstream>
 
- ess_ip6_end_point::ess_ip6_end_point()
-   : ess_ip_end_point(ESS_SOCKET_FAMILY_IP6, 0, "ess_ip4_end_point")/*,
-     m_ipAdress(ESS_IP6ADRESS_ANY)*/ {
+/**
+ * @file ess_server_stream.h
+ * @author Anna Sopdia Schröck
+ * @date 13 Mai 2019
+ *
+ */
+#ifndef _ESS_SERVER_STREAM_H_
+#define _ESS_SERVER_STREAM_H_
 
- }
- ess_ip6_end_point::ess_ip6_end_point(ess_ip6address address, uint16_t port)
-    : ess_ip_end_point(ESS_SOCKET_FAMILY_IP6, port, "ess_ip4_end_point"),
-      m_ipAdress(address) { }
+#include "ess_stream.h"
+#include "ess_server.h"
+#include "ess_stream_writer.h"
 
-  ess_ip6_end_point::ess_ip6_end_point( ess_ip6address address,  uint16_t port, std::string name)
-    : ess_ip_end_point(ESS_SOCKET_FAMILY_IP6, port, name),
-      m_ipAdress(address) { }
+class ess_server_stream : public ess_stream {
+public:
+  ess_server_stream(ess_server& server)
+    : ess_stream("ess_server_stream"), m_sServer(server) { }
+  ess_server_stream(ess_server& server, const std::string& name)
+    : ess_stream(name), m_sServer(server)  { }
 
+  virtual size_t read(void* data, const size_t offset, const size_t size) ;
+  virtual size_t write(const void* data, const size_t offset, const size_t size) ;
 
-std::string ess_ip6_end_point::to_string() {
-  std::ostringstream ss;
-  ss << "[" << m_ipAdress.to_string() << "]:" << m_iPort;
-  return  ss.str();
-}
+  virtual unsigned char  read() ;
+
+  virtual bool can_read() { return m_sServer.is_listing(); }
+  virtual bool can_write() { return m_sServer.is_listing(); }
+  virtual bool can_seek() { return false; }
+protected:
+  ess_server& m_sServer;
+};
+
+class ess_server_stream_writer : public ess_stream_writer {
+public:
+  ess_server_stream_writer(ess_server_stream& stream)
+    : ess_stream_writer(stream , "ess_server_stream_writer") { }
+  ess_server_stream_writer(ess_server_stream& stream, std::string name)
+    : ess_stream_writer(stream , name) { }
+};
+
+#endif

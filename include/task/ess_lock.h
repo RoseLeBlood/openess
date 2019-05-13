@@ -45,6 +45,13 @@ public:
   virtual ess_error_t lock() = 0;
   virtual ess_error_t unlock() = 0;
   virtual ess_error_t try_lock() = 0;
+
+  virtual bool operator == (const ess_lock& other) {
+    return (m_pHandle == other.m_pHandle );
+  }
+  virtual bool operator != (const ess_lock& other) {
+    return (m_pHandle != other.m_pHandle);
+  }
 protected:
   void* m_pHandle;
 };

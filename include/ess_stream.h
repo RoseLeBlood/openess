@@ -33,13 +33,11 @@ public:
   ess_stream() : ess_object("ess_stream") { }
   ess_stream(const std::string& name) : ess_object(name) { }
 
-  virtual void set_value(const uint32_t value)  = 0;
-  virtual void set_value(const uint32_t value, const uint32_t position )  = 0;
 
   virtual size_t read(void* data, const size_t offset, const size_t size)  = 0;
   virtual size_t write(const void* data, const size_t offset, const size_t size)  = 0;
 
-  virtual float read() = 0;
+  virtual unsigned char read() = 0;
 
   virtual bool can_read() = 0;
   virtual bool can_write() = 0;

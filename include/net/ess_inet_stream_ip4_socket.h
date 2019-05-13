@@ -27,7 +27,6 @@
 #define _ESS_INET_STREAM_IP4_SOCKET_H_
 
 #include "ess_inet_ip4_socket.h"
-#include "ess_ip4_end_point.h"
 
 class ess_inet_stream_ip4_socket : public ess_inet_ip4_socket {
 public:

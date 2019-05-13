@@ -17,70 +17,47 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-
 /**
- * @file ess_debug.h
+ * @file ess_singleton_object.h
  * @author Anna Sopdia Schröck
- * @date 20 April 2019
- * @brief inline function for debug
- *
- *
+ * @date 15 Mai 2019
  */
- /**
- * @addtogroup debug
- * @{
- */
-#ifndef _ESS_DEBUG_INFO_H_
-#define _ESS_DEBUG_INFO_H_
+#ifndef _ESS_SINGLETON_OBJECT_H_
+#define _ESS_SINGLETON_OBJECT_H_
 
-#include "core/module/ess_output_module.h"
-#include "ess_audioblock.h"
-#include "ess_platform.h"
+#include "ess_lockable_object.h"
+#include "task/ess_auto_mutex.h"
 
-#include <sstream>
+#define ESS_SINGLETON(X) friend class ess_singleton_object<X>;
 
-inline void cpu_display() {
-  #if ESS_PLATFORM_MONTORING == 1
+template<class TOBJECT>
+class ess_singleton_object : public ess_lockable_object {
+protected:
+  ess_singleton_object(std::string name)
+    : ess_lockable_object(name) { }
 
-  std::cout << ess_platform_millis() <<  " ms uptime" << std::endl;
-  for(int i= 0; i < ESS_CONFIC_MAX_CORES; i++) {
-    printf("CPU %d %5.2f%% [%5.2f%% max] \n", i,
-      ess_platform::instance().get_cpu_load(i),
-      ess_platform::instance().get_cpu_max(i));
+public:
+  ess_singleton_object(const ess_singleton_object&) = delete;
+  ess_singleton_object(const ess_singleton_object&&) = delete;
+
+  static TOBJECT& instance() {
+    static ess_auto_mutex _creatingMutex("ess_singleton_creating_mutex");
+
+    _creatingMutex.lock();
+
+    if(m_pSingleton == nullptr) {
+      m_pSingleton = new TOBJECT();
+    }
+
+    _creatingMutex.unlock();
+
+    return *m_pSingleton;
   }
+private:
+  static TOBJECT* m_pSingleton;
+};
+template<class TOBJECT>
+TOBJECT* ess_singleton_object<TOBJECT>::m_pSingleton = nullptr;
 
-  #endif
-}
-inline void output_display() {
-  #if ESS_OUTPUT_TIME_ANALYZED == 1
-  ess_output_module* mod = ess_platform::instance().get_std_device();
 
-  if(mod != 0) std::cout  << mod->get_formated_states() << std::endl;
-  #endif
-}
-
-inline void mem_display() {
-  std::cout << "mem: " << ess_audioblock_used() << " /  " <<
-  ess_audioblock_max_used() << " / " <<
-  ess_audioblock_num() << "\r\n" ;
-}
-inline void ess_debug() {
-  cpu_display();
-  output_display( );
-  mem_display();
-
-  std::cout << "------------------------------------" << std::endl;
-  if(ess_platform::instance().get_std_device() != 0)
-    ess_platform::instance().get_std_device()->update();
-  std::cout << "------------------------------------" << std::endl;
-
-  cpu_display();
-  output_display( );
-  mem_display();
-
-  ess_platform_sleep(1);
-}
-/**
-* @}
-*/
 #endif

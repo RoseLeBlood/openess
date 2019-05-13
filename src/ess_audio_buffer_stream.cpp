@@ -18,7 +18,7 @@ size_t ess_audio_buffer_stream::read(void* data, const size_t offset, const size
     if (n > size) n = size;
     if (n <= 0) return 0;
 
-    memmove ((data + offset), (m_pMemBlock.data + m_iPosition), n * sizeof(float) );
+    memmove ((data + offset), (m_pMemBlock.data + m_iPosition), n );
     m_iPosition += n;
 
     return n;
@@ -31,7 +31,7 @@ size_t ess_audio_buffer_stream::write(const void* data, const size_t offset, con
     if (i > ESS_DEFAULT_AUDIO_PACKET_SIZE) return -1;
 
 
-    memmove ((m_pMemBlock.data + m_iPosition), (data + offset), size * sizeof(float) );
+    memmove ((m_pMemBlock.data + m_iPosition), (data + offset), size );
 
     m_iPosition = i;
     return size;
@@ -42,11 +42,14 @@ bool ess_audio_buffer_stream::can_read() {
 bool ess_audio_buffer_stream::can_write() {
   return   (m_iPosition < ESS_DEFAULT_AUDIO_PACKET_SIZE);
 }
-float ess_audio_buffer_stream::read() {
-    if (m_iPosition >= ESS_DEFAULT_AUDIO_PACKET_SIZE) return 0.0f/0.0f;
-
+float ess_audio_buffer_stream::read_float() {
     return m_pMemBlock.data[m_iPosition++];
 }
+unsigned char  ess_audio_buffer_stream::read() {
+    return (unsigned char)('0');
+}
+
+
 void ess_audio_buffer_stream::set_null() {
     ess_zeromem(m_pMemBlock.data, ESS_DEFAULT_AUDIO_PACKET_SIZE);
 }

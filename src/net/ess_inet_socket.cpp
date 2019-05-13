@@ -41,15 +41,6 @@ ess_error_t ess_inet_socket::bind(int port) {
   return error;
 }
 
-uint32_t ess_inet_socket::write(const void* data, size_t offset, size_t size) {
-  return ::write(m_iSocket,  (data), size);
-}
-uint32_t ess_inet_socket::read(void* data, size_t offset, size_t size) {
-  return ::read(m_iSocket, (data), size);
-}
-uint32_t ess_inet_socket::write_string(std::string string) {
-  return write( string.c_str(), 0, string.size() );
-}
 void ess_inet_socket::set_strem_nodelay(int flag) {
   ess_setsockopt(m_iSocket, IPPROTO_TCP,  (ess_socket_option_name_t)TCP_NODELAY, (char*)&flag, sizeof(int));
 }

@@ -45,7 +45,8 @@ public:
     virtual size_t read(void* data, const size_t offset, const size_t size);
     virtual size_t write(const void* data, const size_t offset, const size_t size);
 
-    virtual float read();
+    virtual unsigned char read();
+    virtual float read_float();
 
     virtual std::string to_string() ;
 

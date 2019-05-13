@@ -18,32 +18,49 @@
  ****************************************************************************/
 
 /**
- * @file ess_ip4_end_point.h
+ * @file ess_lockable_object.h
  * @author Anna Sopdia Schröck
- * @date 28 April 2019
+ * @date 15 Mai 2019
  */
+#ifndef _ESS_LOCKABLE_OBJECT_H_
+#define _ESS_LOCKABLE_OBJECT_H_
 
- #ifndef _ESS_IP_V4_ENDPOINT_H_
- #define _ESS_IP_V4_ENDPOINT_H_
+#include "task/ess_autolock.h"
 
- #include "ess_ip_end_point.h"
-#include "ess_ip4address.h"
+class ess_lockable_object : public ess_lock {
+public:
+  ess_lockable_object()
+    : ess_lock("ess_object") {  create(); }
 
- #define ESS_IP4ENDPOINT_ANY ess_ip4_end_point(ESS_IP4ADRESS_ANY, 0)
+  ess_lockable_object(std::string name)
+    : ess_lock(name) {  create(); }
 
+  ess_lockable_object(const ess_lockable_object& other)  = delete;
+  ess_lockable_object(const ess_lockable_object&& other)  = delete;
 
- class ess_ip4_end_point : public ess_ip_end_point {
- public:
-   ess_ip4_end_point();
+  virtual ess_error_t create() { return m_pMutex.create(); }
+  virtual ess_error_t destroy()  { return m_pMutex.destroy(); }
 
-   ess_ip4_end_point(ess_ip4address address, uint16_t port);
-   ess_ip4_end_point( ess_ip4address address,  uint16_t port, std::string name);
+  virtual ess_error_t lock() { return m_pMutex.lock(); }
+  virtual ess_error_t unlock()  { return m_pMutex.unlock(); }
+  virtual ess_error_t try_lock() { return m_pMutex.try_lock(); }
 
-   virtual ess_ip4address get_address()  { return m_ipAdress; }
-   virtual std::string to_string() ;
- protected:
-   ess_ip4address m_ipAdress;
- };
+  virtual std::string get_name() {
+    ess_automux_t lock(m_pMutex); return m_strName; }
 
+  virtual void set_name(const std::string name) {
+    ess_automux_t lock(m_pMutex); ess_lock::set_name(name); }
 
- #endif
+  virtual std::string to_string() {
+     ess_automux_t lock(m_pMutex); return ess_lock::to_string();  }
+
+  virtual void from_string(const std::string str) {
+    ess_automux_t lock(m_pMutex); ess_lock::set_name(str); }
+
+protected:
+  ess_mutex m_pMutex;
+};
+
+ using ess_autolock_t = ess_autolock<ess_lockable_object>;
+
+#endif

@@ -45,6 +45,8 @@
 #include <time.h>
 #include <sys/time.h>
 #include <sys/signal.h>
+# include <sys/socket.h>
+# include <sys/types.h>
 
 #include <iostream>
 

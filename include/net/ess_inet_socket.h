@@ -38,14 +38,11 @@
 
    ess_error_t bind(int port);
 
-   virtual uint32_t write(const void* data, size_t offset, size_t size);
-   virtual uint32_t read(void* data, size_t offset, size_t size);
-
-   virtual uint32_t write_string(std::string srt);
-
    void set_strem_nodelay(int flag);
+
+   uint16_t get_port() { return m_iPort; }
  private:
-   int m_iPort;
+   uint16_t m_iPort;
 };
 
 

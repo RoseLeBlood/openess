@@ -53,8 +53,8 @@ public:
     : m_strName(other.m_strName)  { }
 
 
-  std::string get_name() { return m_strName; }
-  void set_name(const std::string name) { m_strName = name; }
+  virtual std::string get_name() { return m_strName; }
+  virtual void set_name(const std::string name) { m_strName = name; }
 
   virtual std::string to_string() { return m_strName; }
   virtual void from_string(const std::string str) { m_strName = str; }

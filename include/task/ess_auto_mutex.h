@@ -18,29 +18,19 @@
  ****************************************************************************/
 
 /**
- * @file ess_ip6_end_point.h
+ * @file ess_auto_mutex.h
  * @author Anna Sopdia Schröck
- * @date 28 April 2019
+ * @date 16 Mai 2019
  */
+ #ifndef _ESS_PLATFORM_AUTO_MUTEX_H_
+ #define _ESS_PLATFORM_AUTO_MUTEX_H_
 
- #ifndef _ESS_IP_V6_ENDPOINT_H_
- #define _ESS_IP_V6_ENDPOINT_H_
+#include "task/ess_mutex.h"
 
-#include "ess_ip_end_point.h"
-#include "ess_ip6address.h"
-
-#define ESS_IP6ENDPOINT_ANY ess_ip6_end_point(ESS_IP6ADRESS_ANY, 0)
-
-class ess_ip6_end_point : public ess_ip_end_point {
+class ess_auto_mutex : public ess_mutex {
 public:
-  ess_ip6_end_point();
-  ess_ip6_end_point(ess_ip6address address, uint16_t port);
-  ess_ip6_end_point( ess_ip6address address,  uint16_t port, std::string name);
-
-  virtual ess_ip6address get_address() const { return m_ipAdress; }
-  virtual std::string to_string();
-protected:
-  ess_ip6address m_ipAdress;
+  ess_auto_mutex() : ess_mutex() { create();  }
+  ess_auto_mutex(const std::string name) : ess_mutex(name) { create(); }
 };
 
 #endif

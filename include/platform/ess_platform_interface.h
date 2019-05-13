@@ -36,21 +36,16 @@
 
 #include "platform/ess_controler.h"
 #include "../core/module/ess_output_module.h"
-
+#include "../ess_singleton_object.h"
 #include <list>
 
 void ess_mem_init(unsigned int num, ess_audioblock_t* _static_data);
 
 template <class T, uint8_t NUM_CPUS>
-class ess_platform_interface : public ess_object  {
-  static T* m_pInstance;
-public:
-  static T& Instance() {
-    if(m_pInstance == nullptr) m_pInstance = new T();
-    return *m_pInstance;
-  }
+class ess_platform_interface : public ess_singleton_object<T>  {
+  friend class ess_singleton_object<T>;
 protected:
-  ess_platform_interface(const std::string name)  : ess_object(name) {
+  ess_platform_interface(const std::string name)  : ess_singleton_object<T>(name) {
     m_pStdDevice = nullptr;
   }
 public:
@@ -112,8 +107,6 @@ private:
   ess_output_module* m_pStdDevice;
 };
 
-template <class T, uint8_t NUM_CPUS>
-T* ess_platform_interface<T, NUM_CPUS>::m_pInstance = nullptr;
 
 #endif
 /**

@@ -16,22 +16,38 @@
  *   You should have received a copy of the GNU Lesser General Public       *
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
-#include "net/ess_ip4_end_point.h"
- #include <sstream>
 
-ess_ip4_end_point::ess_ip4_end_point()
-  : ess_ip4_end_point(ESS_SOCKET_FAMILY_IP4, 0, "ess_ip4_end_point") {
-}
-ess_ip4_end_point::ess_ip4_end_point(ess_ip4address address, uint16_t port)
-   : ess_ip_end_point(ESS_SOCKET_FAMILY_IP4, port, "ess_ip4_end_point"),
-     m_ipAdress(address) { }
+/**
+ * @file ess_server.h
+ * @author Anna Sopdia Schröck
+ * @date 12 Mai 2019
+ */
+#ifndef _ESS_SERVER_H_
+#define _ESS_SERVER_H_
 
- ess_ip4_end_point::ess_ip4_end_point( ess_ip4address address,  uint16_t port, std::string name)
-   : ess_ip_end_point(ESS_SOCKET_FAMILY_IP4, port, name),
-     m_ipAdress(address) { }
+#include "ess.h"
+#include "ess_stream_writer.h"
+#include "ess_ip_end_point.h"
 
-std::string ess_ip4_end_point::to_string() {
-  std::ostringstream ss;
-  ss << m_ipAdress.to_string() << ":" << m_iPort;
-  return  ss.str();
-}
+class ess_server : public ess_object {
+public:
+  ess_server() : ess_object("ess_server") , m_bIsListing(false) { }
+  ess_server(const std::string name) : ess_object(name), m_bIsListing(false)  { }
+
+  virtual ess_error_t listen(int port, int optons = 128) = 0;
+  virtual ess_error_t stop() = 0;
+
+  virtual size_t read(void* data, const size_t size)  = 0;
+  virtual size_t write(const void* datat, const size_t size)  = 0;
+
+  virtual bool client_available() = 0;
+
+  bool is_listing() const { return m_bIsListing ; }
+
+  virtual ess_ip_end_point get_end_point() = 0;
+protected:
+  bool m_bIsListing;
+  int m_iAccetpedHandle;
+};
+
+#endif

@@ -41,6 +41,8 @@
 
 class ess_platform_esp32 : public ess_platform_interface<ess_platform_esp32, ESS_CONFIC_MAX_CORES>  {
   friend class ess_platform_interface<ess_platform_esp32, ESS_CONFIC_MAX_CORES> ;
+  friend class ess_singleton_object<ess_platform_esp32>;
+
   friend void _esp32_platform_montoring_cpu0( void * parameter ) ;
   friend void _esp32_platform_montoring_cpu1( void * parameter ) ;
 protected:
