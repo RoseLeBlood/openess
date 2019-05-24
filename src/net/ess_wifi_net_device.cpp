@@ -16,43 +16,15 @@
  *   You should have received a copy of the GNU Lesser General Public       *
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
+#include "net/ess_wifi_net_device.h"
 
-#include "core/module/dsp/ess_amplifier.h"
-#include <math.h>
+ess_wifi_net_device::ess_wifi_net_device(std::string name, std::string password, uint8_t channel,
+  bool ssid_hidden, uint8_t max_connection,
+  ess_wifi_auth_mode_t authmode) : ess_net_device(ESS_NET_DEVICE_WIFI, name) {
 
-
-ess_amplifier::ess_amplifier()  : ess_effect("ess_amplifier")  { }
-ess_amplifier::ess_amplifier(const std::string& name)
-  : ess_effect(name)  { }
-
-void ess_amplifier::set_gain(float n) {
-  if (n > 100000.0f) n = 100000.0f;       //100000 = 100db [ 1000 = ~1db]
-  else if (n < -100000.0f) n = -100000.0f;
-  m_fMultiplier = n;
-}
-void ess_amplifier::set_gain_db(float db){
-    if (db > 100.0f) db = 100.0f;
-    else if (db < -100.0f) db = -100.0f;
-    m_fMultiplier = powf(10.0f,db/20.0f);
-}
-
-float ess_amplifier::get_gain() {
-  return m_fMultiplier;
-}
-
-float ess_amplifier::get_gain_db() {
-
-  if(m_fMultiplier > 100000.0f) return 100.0f;
-  else if (m_fMultiplier < -100000.0f) return -100.0f;
-
-  return m_fMultiplier / 1000.0f; // ~
-}
-
-unsigned int ESS_IRAM_ATTR ess_amplifier::do_effect(ess_audioblock_t& block, unsigned int offset, unsigned int size,
-  ess_audio_channel id) {
-
-  for(size_t i = offset; i < size; i++) {
-    block.data[i] *= m_fMultiplier;
-  }
-  return size;
+  m_strPassword = password;
+  m_iAuthmode = authmode;
+  m_iChannel = channel;
+  m_bSsidhidden = ssid_hidden;
+   m_iMaxConnections =max_connection ;
 }

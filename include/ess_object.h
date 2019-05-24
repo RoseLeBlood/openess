@@ -57,7 +57,7 @@ public:
   virtual void set_name(const std::string name) { m_strName = name; }
 
   virtual std::string to_string() { return m_strName; }
-  virtual void from_string(const std::string str) { m_strName = str; }
+  virtual bool from_string(const std::string str) { m_strName = str;  return true; }
 
   virtual bool is_equels(const ess_object& other) const {
     return (other.m_strName == m_strName);

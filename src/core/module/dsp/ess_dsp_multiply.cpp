@@ -26,7 +26,7 @@ ess_error_t ess_dsp_multiply::add_channel(std::string name, ess_audio_channel ch
   tr = add_input_channel(name + std::string("_inb"), (ess_audio_channel)  ((ESS_AUDIO_EFFECT_CHANNEL *  channel) + 1) ); // 1001
   return tr;
 }
-unsigned int ESS_IRAM_ATTR ess_dsp_multiply::read(ess_audio_channel id, ess_audioblock_t* block, unsigned int offset) {
+unsigned int ESS_IRAM_ATTR ess_dsp_multiply::read(ess_audio_channel id, ess_audioblock_t& block, unsigned int offset) {
   ess_automux_t lock(m_mutex);
 
 #if ESS_OUTPUT_TIME_ANALYZED == 1
@@ -36,22 +36,18 @@ unsigned int ESS_IRAM_ATTR ess_dsp_multiply::read(ess_audio_channel id, ess_audi
   uint32_t readeda = 0, readedb = 0;
   bool blocked = false;
 
-  ess_audioblock_t *block_ina = ess_audioblock_alloc();
-  ess_audioblock_t *block_inb = ess_audioblock_alloc();
+  static ess_audioblock_t block_ina;
+  static ess_audioblock_t block_inb;
 
   ess_input_channel* ina = get_input_channel( (ess_audio_channel) (ESS_AUDIO_EFFECT_CHANNEL *  id) );
   ess_input_channel* inb = get_input_channel( (ess_audio_channel) ((ESS_AUDIO_EFFECT_CHANNEL *  id) + 1) );
 
   if(ina) {
-    ess_audioblock_take(block_ina);
     readeda = ina->read(block_ina, offset);
-    ess_audioblock_relese(block_ina);
   }
 
   if(inb) {
-    ess_audioblock_take(block_inb);
     readedb = inb->read(block_inb, offset);
-    ess_audioblock_relese(block_inb);
   }
 
   if(readedb <= 0) blocked = true;
@@ -59,13 +55,11 @@ unsigned int ESS_IRAM_ATTR ess_dsp_multiply::read(ess_audio_channel id, ess_audi
 
   if(!blocked) {
     for (int i = 0; i < readeda; i++) {
-        block->data[i] += block_ina->data[i] * block_inb->data[i];
+        block.data[i] += block_ina.data[i] * block_inb.data[i];
     }
   } else {
 
   }
-  ess_audioblock_relese(block_ina);
-  ess_audioblock_relese(block_inb);
 
 #if ESS_OUTPUT_TIME_ANALYZED == 1
    end_time_analyzed();

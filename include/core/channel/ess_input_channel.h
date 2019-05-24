@@ -50,7 +50,7 @@ public:
   ess_error_t disconnect();
 
 
-   virtual unsigned int read(ess_audioblock_t*  block, unsigned int offset) ;
+   virtual unsigned int read(ess_audioblock_t&  block, unsigned int offset) ;
 
    virtual bool is_connected();
 

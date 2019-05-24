@@ -30,37 +30,47 @@
 #include "ess_ipadress.h"
 #include "ess_ip4address.h"
 
-#define ESS_IP6ADRESS_ANY ess_ip6address( unsigned char[] { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }, 0)
-#define ESS_IP6ADRESS_LOOPBACK ess_ip6address( unsigned char[] { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },  0)
-#define ESS_IP46DRESS_BROADCAST ess_ip6address( unsigned char[] { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }, 0)
 
+#define ESS_IP6ADRESS_ANY ess_ip6address( "ESS_IP4ADRESS_ANY")
 
 class ess_ip6address : public ess_ipaddress {
 public:
-  ess_ip6address();
-  ess_ip6address(ess_ip4address v);
-  ess_ip6address(const ess_ip6address& value);
-  ess_ip6address(unsigned short address[16], long scopid);
+  union {
+        uint8_t bytes[16];
+        uint32_t dword[4];
+    } address;
 
-  ess_ip6address(unsigned short address[16], long scopid, std::string name);
+    ess_ip6address()
+      :  ess_ip6address("ESS_IP4ADRESS_ANY") { }
 
-  void get_address(unsigned short b[16]) const;
-  unsigned short* get_address() { return m_numbers; }
+    ess_ip6address(const uint8_t *address)
+      :  ess_ip6address(address, "ess_ip6address") { }
+    ess_ip6address(const uint32_t *address)
+       :  ess_ip6address(address, "ess_ip6address") { }
 
-  long get_scopid() const { return m_scopid; }
-  void set_scopid(long id) { m_scopid = id; }
+    ess_ip6address(std::string name);
+    ess_ip6address(const uint8_t *address, std::string name);
+    ess_ip6address(const uint32_t *address, std::string name);
 
-  ess_ip4address to_ip4();
+    virtual ~ess_ip6address() {}
 
-  virtual std::string to_string();
+    virtual std::string to_string();
 
-  ess_ip6address& operator = (const ess_ip6address& value) ;
-  ess_ip6address& operator = (const ess_ip4address& value) ;
 
-  bool is_equels(const ess_ip6address& other) const;
-protected:
-  long m_scopid;
-  unsigned short  m_numbers[8];
+    operator const uint8_t*() const { return address.bytes; }
+    operator const uint32_t*() const {  return address.dword;  }
+
+    uint8_t operator [] (int index) const   {   return address.bytes[index]; }
+    uint8_t& operator[](int index) { return address.bytes[index]; }
+
+    ess_ip6address& operator = (const uint8_t *address);
+
+    bool is_equels(const ess_ip6address& other)  const {
+        return (address.dword[0] == other.address.dword[0])
+            && (address.dword[1] == other.address.dword[1])
+            && (address.dword[2] == other.address.dword[2])
+            && (address.dword[3] == other.address.dword[3]);
+    }
 };
 
 inline bool operator == (const ess_ip6address& a, const ess_ip6address& b) {

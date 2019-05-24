@@ -44,6 +44,8 @@ public:
   ~ess_null_output_module();
 
   virtual ess_error_t update(void) ;
+private:
+  ess_audioblock_t m_pBuffer;
 };
 
 /**

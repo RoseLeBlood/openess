@@ -43,9 +43,9 @@ public:
   ess_dsp_multiply(const std::string& name) : ess_effect(name) { }
 
   virtual ess_error_t add_channel(std::string name, ess_audio_channel channel);
-  virtual unsigned int read(ess_audio_channel id, ess_audioblock_t* block, unsigned int offset);
+  virtual unsigned int read(ess_audio_channel id, ess_audioblock_t& block, unsigned int offset);
 protected:
-  virtual unsigned int do_effect(ess_audioblock_t* block,
+  virtual unsigned int do_effect(ess_audioblock_t& block,
     unsigned int offset, unsigned int size, ess_audio_channel id) { return 0; /* don't use */ }
  };
 

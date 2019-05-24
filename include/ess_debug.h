@@ -59,15 +59,9 @@ inline void output_display() {
   #endif
 }
 
-inline void mem_display() {
-  std::cout << "mem: " << ess_audioblock_used() << " /  " <<
-  ess_audioblock_max_used() << " / " <<
-  ess_audioblock_num() << "\r\n" ;
-}
 inline void ess_debug() {
   cpu_display();
   output_display( );
-  mem_display();
 
   std::cout << "------------------------------------" << std::endl;
   if(ess_platform::instance().get_std_device() != 0)
@@ -76,7 +70,6 @@ inline void ess_debug() {
 
   cpu_display();
   output_display( );
-  mem_display();
 
   ess_platform_sleep(1);
 }

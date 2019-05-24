@@ -20,39 +20,79 @@
 #include <sstream>
 
 
-ess_ip4address::ess_ip4address()
-  : ess_ipaddress(ESS_SOCKET_FAMILY_IP4) { }
+ess_ip4address::ess_ip4address(uint8_t first_octet, uint8_t second_octet,
+  uint8_t third_octet, uint8_t fourth_octet, std::string name)
+  :  ess_ipaddress(ESS_SOCKET_FAMILY_IP4, name) {
 
-ess_ip4address::ess_ip4address( int address)
-  : ess_ip4address(address, "ess_ip4address") { }
-
-ess_ip4address::ess_ip4address( int address, std::string name)
-  : ess_ipaddress(ESS_SOCKET_FAMILY_IP4, name)  {
-    m_iAddress = (long)address & 0x00000000FFFFFFFF;
-}
-
-ess_ip4address::ess_ip4address(unsigned short address[4], std::string name)
-  : ess_ipaddress(ESS_SOCKET_FAMILY_IP4, name) {
-    m_bInvalid = false;
-
-    m_iAddress = ((address[3] << 24 | address[2] <<16 |
-                              address[1] << 8| address[0]) & 0x0FFFFFFFF);
+    address.bytes[0] = first_octet;
+    address.bytes[1] = second_octet;
+    address.bytes[2] = third_octet;
+    address.bytes[3] = fourth_octet;
 
 }
-
-
-void ess_ip4address::get_address(unsigned short b[4]) {
-  b[0] = (unsigned short)(m_iAddress);
-  b[1] = (unsigned short)(m_iAddress >> 8);
-  b[2] = (unsigned short)(m_iAddress >> 16);
-  b[3] = (unsigned short)(m_iAddress >> 24);
+ess_ip4address::ess_ip4address(uint32_t addr, std::string name)
+:  ess_ipaddress(ESS_SOCKET_FAMILY_IP4, name) {
+    address.dword = addr;
 }
 
+ess_ip4address::ess_ip4address(const uint8_t *addr, std::string name)
+:  ess_ipaddress(ESS_SOCKET_FAMILY_IP4, name) {
 
-std::string ess_ip4address::to_string() {
+  address.bytes[0] = addr[0];
+  address.bytes[1] = addr[1];
+  address.bytes[2] = addr[2];
+  address.bytes[3] = addr[3];
+
+}
+
+std::string ess_ip4address::to_string()  {
   std::ostringstream ss;
-  ss << ((m_iAddress >> 24) & 0xFF) << "." << ((m_iAddress >> 16) & 0xFF)  << ".";
-  ss << ((m_iAddress >>  8) & 0xFF) << "." << ((m_iAddress          ) & 0xFF) ;
+  ss << address.bytes[0]  << "." << address.bytes[1]  << ".";
+  ss << address.bytes[2]  << "." <<address.bytes[3]  ;
 
   return ss.str();
+}
+
+bool ess_ip4address::from_string(const std::string str) {
+    uint16_t acc = 0;
+    uint8_t dots = 0;
+    uint8_t bytes[4];
+
+    const char* addr = str.c_str();
+
+    while (*addr) {
+        char c = *addr++;
+        if (c >= '0' && c <= '9') {
+            acc = acc * 10 + (c - '0');
+            if (acc > 255) { return false; }
+        } else if (c == '.')   {
+            if (dots == 3) { return false;   }
+            bytes[dots++] = acc;
+            acc = 0;
+        } else {
+            return false;
+        }
+    }
+    if (dots != 3) { return false; }
+    bytes[3] = acc;
+
+    // only cpy when pars ok is
+    address.bytes[0] = bytes[0];
+    address.bytes[1] = bytes[1];
+    address.bytes[2] = bytes[2];
+    address.bytes[3] = bytes[3];
+
+    return true;
+}
+
+ess_ip4address& ess_ip4address::operator = (const uint8_t *addr) {
+  address.bytes[0] = addr[0];
+  address.bytes[1] = addr[1];
+  address.bytes[2] = addr[2];
+  address.bytes[3] = addr[3];
+  return *this;
+}
+ess_ip4address& ess_ip4address::operator = (uint32_t addr) {
+  address.dword = addr;
+  return *this;
 }

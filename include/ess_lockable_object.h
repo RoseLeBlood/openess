@@ -54,8 +54,8 @@ public:
   virtual std::string to_string() {
      ess_automux_t lock(m_pMutex); return ess_lock::to_string();  }
 
-  virtual void from_string(const std::string str) {
-    ess_automux_t lock(m_pMutex); ess_lock::set_name(str); }
+  virtual bool from_string(const std::string str) {
+    ess_automux_t lock(m_pMutex); ess_lock::set_name(str); return true;  }
 
 protected:
   ess_mutex m_pMutex;

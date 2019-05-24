@@ -99,13 +99,13 @@ public:
    * @brief read interface
    *
    *  the output object read from input
-   * @param [out] block the pointer off the audioblock
+   * @param [out] block the reference off the audioblock
    * @param [in] offset the readed offset
    *
    * @return  the readed bytes
    * @retval -1 somthings are wrong : error
    */
-  virtual unsigned int read(ess_audioblock_t*  block, unsigned int offset) = 0;
+  virtual unsigned int read(ess_audioblock_t&  block, unsigned int offset) = 0;
 
   virtual std::string to_string();
 

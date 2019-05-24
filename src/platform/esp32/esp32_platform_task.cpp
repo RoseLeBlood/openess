@@ -117,6 +117,11 @@ ess_error_t ess_task::destroy() {
   continuemutex.unlock();
   runningMutex.unlock();
 
+  continuemutex.destroy();
+  continuemutex2.destroy();
+  runningMutex.destroy();
+  contextMutext.destroy();
+
   return ESS_OK;
 }
 
@@ -138,24 +143,25 @@ ess_error_t ess_task::resume() {
   return ESS_OK;
 }
 void ESS_IRAM_ATTR ess_task::int_task_stub(void* data) {
-  ess_task* task; task = (ess_task*)(data);
+  ess_task* task; task = static_cast<ess_task*>(data);
+  if(task != NULL) {
+    task->continuemutex2.lock();
+    task->runningMutex.lock();
+    task->m_bRunning = true;
+    task->runningMutex.unlock();
 
-  task->continuemutex2.lock();
-  task->runningMutex.lock();
-  task->m_bRunning = true;
-  task->runningMutex.unlock();
+    task->continuemutex.lock();
+    task->continuemutex.unlock();
 
-  task->continuemutex.lock();
-  task->continuemutex.unlock();
+    task->continuemutex2.unlock();
 
-  task->continuemutex2.unlock();
+      task->onTask(task->m_pUserdata);
 
-    task->onTask(task, task->m_pUserdata);
-
-  task->runningMutex.lock();
-  task->m_bRunning = false;
-  vTaskDelete(task->m_pHandle);
-  task->runningMutex.unlock();
+    task->runningMutex.lock();
+    task->m_bRunning = false;
+    vTaskDelete(task->m_pHandle);
+    task->runningMutex.unlock();
+  }
 }
 
 #endif

@@ -73,7 +73,7 @@ void ess_memset(void* buffer, int data, unsigned int size) {
   memset(buffer, data, size);
 }
 
-void ess_memcpy(void* dest, void* src, unsigned int size) {
+void ess_memcpy(void* dest, const void* src, unsigned int size) {
   memcpy(dest, src, size);
 }
 

@@ -92,7 +92,7 @@ ess_error_t ess_effect::connect(ess_input_module* mod, ess_audio_channel this_ch
     return get_input_channel(this_channel)->connect(mod->get_channel(mod_channel));
 }
 
-unsigned int ESS_IRAM_ATTR ess_effect::read(ess_audio_channel id, ess_audioblock_t* block, unsigned int offset) {
+unsigned int ESS_IRAM_ATTR ess_effect::read(ess_audio_channel id, ess_audioblock_t& block, unsigned int offset) {
   ess_automux_t lock(m_mutex);
 
   #if ESS_OUTPUT_TIME_ANALYZED == 1
@@ -103,9 +103,7 @@ unsigned int ESS_IRAM_ATTR ess_effect::read(ess_audio_channel id, ess_audioblock
   ess_input_channel* channel = get_input_channel(id);
 
   if(channel) {
-    ess_audioblock_take(block);
     readed = channel->read(block, offset);
-    ess_audioblock_relese(block);
   }
 
   if(m_bActive)

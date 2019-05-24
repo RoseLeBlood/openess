@@ -23,11 +23,13 @@
 #include "platform/ess_sleep.h"
 
 ess_null_output_module::ess_null_output_module()
-  : ess_output_module(ESS_NULL_OUTPUT_NAME) { }
+  : ess_output_module(ESS_NULL_OUTPUT_NAME) {
+}
 
-ess_null_output_module::~ess_null_output_module() { }
+ess_null_output_module::~ess_null_output_module() {
+}
 
-ess_error_t ess_null_output_module::update(void) {
+ess_error_t ESS_IRAM_ATTR ess_null_output_module::update(void) {
   #if ESS_OUTPUT_TIME_ANALYZED == 1
     start_time_analyzed();
   #endif
@@ -36,9 +38,8 @@ ess_error_t ess_null_output_module::update(void) {
 
 
     for(int i=0; i <= ESS_CHANNEL_FORMAT_7POINT1; i++) {
-      ess_audioblock_t* buffer = ess_audioblock_alloc();
-      read(ESS_AUDIO_CHANNEL_LEFT,    buffer, 0);
-      ess_audioblock_relese(buffer);
+      ess_memset(m_pBuffer.data, 0, ESS_DEFAULT_AUDIO_PACKET_SIZE);
+      read( (ess_audio_channel_t) i,  m_pBuffer, 0);
     }
   }
 

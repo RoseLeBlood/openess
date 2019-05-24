@@ -27,15 +27,19 @@
 
 #include "ess_ip6address.h"
 
-enum ess_net_device_type {
+typedef enum ess_net_device_type {
   ESS_NET_DEVICE_WIFI,
   ESS_NET_DEVICE_ETHRNET,
   ESS_NET_DEVICE_MOBILE
-};
-enum ess_net_device_status {
+}ess_net_device_type_t;
+
+typedef enum ess_net_device_status {
   ESS_NET_DEVICE_STATUS_UP = 0x0001,
   ESS_NET_DEVICE_STATUS_DOWN = 0x0000,
-};
+} ess_net_device_status_t;
+
+
+
 class ess_net_device : public ess_object {
 public:
   struct if_address {
@@ -52,6 +56,13 @@ public:
   virtual ess_error_t initialize() = 0;
   virtual ess_error_t set_status(ess_net_device_status nstet) = 0;
   virtual ess_error_t change_if_address(if_address if_addr) = 0;
+  virtual ess_error_t discconnect() = 0;
+
+  virtual std::string get_mac_address() = 0;
+  virtual void set_mac_adress(std::string mac) = 0;
+
+  virtual std::string get_hostname() = 0;
+  virtual void set_hostname(std::string host) = 0;
 
 //-------get_ip4------------------------------------
   virtual ess_ip4address get_local_ip4() const

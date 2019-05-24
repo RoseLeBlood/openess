@@ -29,7 +29,7 @@ ess_udplite_stereo_output_module::ess_udplite_stereo_output_module()
 }
 ess_udplite_stereo_output_module::~ess_udplite_stereo_output_module() { }
 
-size_t ess_udplite_stereo_output_module::send_simple_buffer_to_device(int32_t* simple_buffer, size_t offset, size_t size) {
+size_t ESS_IRAM_ATTR ess_udplite_stereo_output_module::send_simple_buffer_to_device(int32_t* simple_buffer, size_t offset, size_t size) {
   return m_iClient.sendto(simple_buffer,  (size), ESS_OUT_UDP_SENDTO_HOST,   ESS_OUT_UDPLITE_SENDTO_PORT);
 }
 

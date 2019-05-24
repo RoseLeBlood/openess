@@ -54,7 +54,7 @@ public:
     : ess_channel(name, ESS_CHANNEL_OUTPUT, channel), m_bConnected(false)
        { }
 
-  virtual unsigned int  read(ess_audioblock_t*  block, unsigned int offset)  {
+  virtual unsigned int  read(ess_audioblock_t&  block, unsigned int offset)  {
     ess_automux_t lock(m_mutex);
 
     return -1;
@@ -65,7 +65,7 @@ public:
 
    virtual bool is_connected () {return m_bConnected; }
 protected:
-  void set_connected(bool value) { ess_automux_t lock(m_mutex);  m_bConnected = value; }
+  void set_connected(bool value) { m_bConnected = value; }
 protected:
   bool m_bConnected;
 };

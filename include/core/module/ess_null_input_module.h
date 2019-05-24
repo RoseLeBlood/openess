@@ -40,9 +40,9 @@ public:
   ess_null_output_channel(std::string name, ess_audio_channel channel )
     : ess_output_channel(name, channel) { }
 
-  virtual unsigned int  read(ess_audioblock_t* block, unsigned int offset)  {
+  virtual unsigned int  read(ess_audioblock_t& block, unsigned int offset)  {
       ess_automux_t lock(m_mutex);
-      ess_zeromem(block, ESS_DEFAULT_AUDIO_PACKET_SIZE);
+      ess_zeromem(block.data, ESS_DEFAULT_AUDIO_PACKET_SIZE);
 
       return ESS_DEFAULT_AUDIO_PACKET_SIZE;
    }

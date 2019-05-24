@@ -64,10 +64,7 @@ void ess_audio_buffer_stream::set_value(const uint32_t value, const uint32_t pos
     }
 }
 std::string ess_audio_buffer_stream::to_string()  {
-  std::ostringstream ss;
-
-  ss << get_name() << " ref: " << (uint32_t)(m_pMemBlock.ref_count);
-  return ss.str();
+  return get_name();
 }
 
 ess_audio_buffer_stream& ess_audio_buffer_stream::operator += (const ess_audio_buffer_stream& v) {

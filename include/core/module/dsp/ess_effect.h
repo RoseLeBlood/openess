@@ -66,10 +66,10 @@ public:
   virtual ess_error_t connect(ess_input_module* mod, ess_audio_channel this_channel,
     ess_audio_channel mod_channel);
 
-  virtual unsigned int read(ess_audio_channel id, ess_audioblock_t* block, unsigned int offset);
+  virtual unsigned int read(ess_audio_channel id, ess_audioblock_t& block, unsigned int offset);
 
 protected:
-  virtual unsigned int do_effect(ess_audioblock_t* block,
+  virtual unsigned int do_effect(ess_audioblock_t& block,
     unsigned int offset, unsigned int size, ess_audio_channel id) = 0;
 protected:
   std::list<ess_input_channel*> m_lstInChannels;

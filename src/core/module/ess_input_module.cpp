@@ -70,9 +70,9 @@ uint32_t ess_input_module::get_size(ess_audio_channel id) {
 
   return -1;
 }
-unsigned int ESS_IRAM_ATTR ess_input_module::read(ess_audio_channel id, ess_audioblock_t*  block, unsigned int offset ) {
+unsigned int ESS_IRAM_ATTR ess_input_module::read(ess_audio_channel id, ess_audioblock_t& block, unsigned int offset ) {
   ess_automux_t lock(m_mutex);
-  
+
   int readed = -1;
 
   #if ESS_OUTPUT_TIME_ANALYZED == 1
@@ -81,9 +81,7 @@ unsigned int ESS_IRAM_ATTR ess_input_module::read(ess_audio_channel id, ess_audi
 
     ess_output_channel* channel = get_channel(id);
     if(channel) {
-      ess_audioblock_take(block);
       readed = channel->read(block, offset);
-      ess_audioblock_relese(block);
     }
 
 #if ESS_OUTPUT_TIME_ANALYZED == 1
@@ -92,6 +90,7 @@ unsigned int ESS_IRAM_ATTR ess_input_module::read(ess_audio_channel id, ess_audi
 
     return readed;
 }
+
 std::string ess_input_module::to_string() {
   std::ostringstream ss;
 

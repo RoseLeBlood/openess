@@ -40,6 +40,6 @@ void ess_free(void* buffer);
 void ess_zeromem(void* buffer, unsigned int size);
 void ess_memset(void* buffer, int data, unsigned int size);
 
-void ess_memcpy(void* dest, void* src, unsigned int size);
+void ess_memcpy(void* dest, const void* src, unsigned int size);
 
  #endif

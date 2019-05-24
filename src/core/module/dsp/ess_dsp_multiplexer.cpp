@@ -36,7 +36,7 @@ ess_error_t ess_dsp_multiplexer::add_channel(std::string name, ess_audio_channel
 }
 
 unsigned int ESS_IRAM_ATTR ess_dsp_multiplexer::read(ess_audio_channel id,
-  ess_audioblock_t* block, unsigned int offset) {
+  ess_audioblock_t& block, unsigned int offset) {
   ess_automux_t lock(m_mutex);
 
    #if ESS_OUTPUT_TIME_ANALYZED == 1
@@ -48,7 +48,7 @@ unsigned int ESS_IRAM_ATTR ess_dsp_multiplexer::read(ess_audio_channel id,
      if(m_outUpdate[0]  && m_outUpdate[1] ) {
        ess_input_channel* in = get_input_channel( id );
        if(in) {
-         block_hold  = ess_audioblock_alloc();
+
          in->read(block_hold, offset);
 
          m_outUpdate[0]  = false;
@@ -56,12 +56,9 @@ unsigned int ESS_IRAM_ATTR ess_dsp_multiplexer::read(ess_audio_channel id,
        }
      }
 
-    memmove(block->data, block_hold->data, sizeof(block->data));
+    memmove(block.data, block_hold.data, sizeof(block.data));
     m_outUpdate[id] = true;
 
-     if(m_outUpdate[0] && m_outUpdate[1] ) {
-        ess_audioblock_relese(block_hold);
-     }
    }
 
 #if ESS_OUTPUT_TIME_ANALYZED == 1

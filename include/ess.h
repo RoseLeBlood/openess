@@ -33,6 +33,8 @@
 
 #define OPEN_ESS_VERSION OPEN_ESS_VERSION_0_5
 
+#define LIBOPEN_ESS_VERSION_STRING "0.86.0"
+
 #include "config.h"
 
 #include <stdio.h>

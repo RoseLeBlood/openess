@@ -31,6 +31,7 @@
 #include "ess_error.h"
 #include "task/ess_task.h"
 #include "task/ess_spinlock.h"
+#include "ess_auto_mutex.h"
 
  /**
  * @addtogroup task
@@ -53,7 +54,7 @@
 
  using ess_autospin_t = ess_autolock<ess_spinlock>;
  using ess_automux_t = ess_autolock<ess_mutex>;
-
+ //using ess_automux_t = ess_autolock<ess_auto_mutex>;
 
  /**
  * @}

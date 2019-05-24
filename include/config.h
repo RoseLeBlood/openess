@@ -37,7 +37,7 @@
 #define ESS_FAMILY_IP6											6
 #define ESS_FAMILY_BOTH 							46
 // ----------------------------- main config ----------------
-#define ESS_DEFAULT_AUDIO_PACKET_SIZE 256
+#define ESS_DEFAULT_AUDIO_PACKET_SIZE 1024
 #define ESS_DEFAULT_SERVER_FORMAT ESS_FORMAT_STEREO_44100_16
 #define ESS_DEFAULT_SERVER_PACKET_SIZE ESS_DEFAULT_AUDIO_PACKET_SIZE
 // ----------------------------- ess_audio_memory_map config ----------------

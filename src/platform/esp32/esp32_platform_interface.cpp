@@ -53,7 +53,7 @@ void _esp32_platform_montoring_cpu1( void * parameter ) ;
 
 
 ess_platform_esp32::ess_platform_esp32()
-  : ess_platform_interface<ess_platform_esp32, ESS_CONFIC_MAX_CORES>("ess_platform_esp32") {
+  : ess_platform_interface<ess_platform_esp32, ESS_CONFIC_MAX_CORES>() {
 
 
 

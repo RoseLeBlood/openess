@@ -44,13 +44,13 @@ public:
 
   virtual ess_error_t add_channel(std::string name, ess_audio_channel channel);
 
-  unsigned int read(ess_audio_channel id, ess_audioblock_t* block, unsigned int offset);
+  unsigned int read(ess_audio_channel id, ess_audioblock_t& block, unsigned int offset);
 protected:
-  virtual unsigned int do_effect(ess_audioblock_t* block,
+  virtual unsigned int do_effect(ess_audioblock_t& block,
     unsigned int offset, unsigned int size, ess_audio_channel id) { return 0; /* don't use */ }
 private:
   bool m_outUpdate[2];
-  ess_audioblock_t* block_hold;
+  ess_audioblock_t block_hold;
 };
 #endif
 

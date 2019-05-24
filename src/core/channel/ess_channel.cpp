@@ -30,7 +30,7 @@ ess_channel::ess_channel(std::string name, ess_channel_t type, ess_audio_channel
     m_mutex.create();
 }
 ess_channel::~ess_channel() {
-  m_mutex.destroy();
+
 }
 
 std::string ess_channel::to_string() {

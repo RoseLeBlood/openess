@@ -50,7 +50,7 @@ public:
   float get_gain();
   float get_gain_db();
 protected:
-  virtual unsigned int do_effect(ess_audioblock_t* block, unsigned int offset, unsigned int size,
+  virtual unsigned int do_effect(ess_audioblock_t& block, unsigned int offset, unsigned int size,
     ess_audio_channel id);
 private:
 	float m_fMultiplier;

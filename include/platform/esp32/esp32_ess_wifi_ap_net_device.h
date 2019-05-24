@@ -17,42 +17,35 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-#include "core/module/dsp/ess_amplifier.h"
-#include <math.h>
+/**
+ * @file esp32_ess_wifi_ap_net_device.h
+ * @author Anna Sopdia Schröck
+ * @date 24 Mai 2019
+ */
+ #ifndef _ESS_ESP32_NET_INTERFACE_DEVICE_H_
+ #define _ESS_ESP32_NET_INTERFACE_DEVICE_H_
+
+#include "net/ess_wifi_net_device.h"
 
 
-ess_amplifier::ess_amplifier()  : ess_effect("ess_amplifier")  { }
-ess_amplifier::ess_amplifier(const std::string& name)
-  : ess_effect(name)  { }
+class esp32_ess_wifi_ap_net_device : public ess_wifi_net_device {
+public:
+  esp32_ess_wifi_ap_net_device(std::string name, std::string password, uint8_t channel = 1,
+    bool ssid_hidden = 0, uint8_t max_connection = 4,
+    ess_wifi_auth_mode_t authmode = ESS_WIFI_AUTH_MODE_WPA2_PSK);
 
-void ess_amplifier::set_gain(float n) {
-  if (n > 100000.0f) n = 100000.0f;       //100000 = 100db [ 1000 = ~1db]
-  else if (n < -100000.0f) n = -100000.0f;
-  m_fMultiplier = n;
-}
-void ess_amplifier::set_gain_db(float db){
-    if (db > 100.0f) db = 100.0f;
-    else if (db < -100.0f) db = -100.0f;
-    m_fMultiplier = powf(10.0f,db/20.0f);
-}
+  virtual ess_error_t initialize();
+  virtual ess_error_t set_status(ess_net_device_status nstet)  { return ESS_ERROR; }
+  virtual ess_error_t change_if_address(if_address if_addr);
+  virtual ess_error_t discconnect();
 
-float ess_amplifier::get_gain() {
-  return m_fMultiplier;
-}
+  virtual std::string get_mac_address();
+  virtual void set_mac_adress(std::string mac);
 
-float ess_amplifier::get_gain_db() {
+  virtual std::string get_hostname();
+  virtual void set_hostname(std::string host);
 
-  if(m_fMultiplier > 100000.0f) return 100.0f;
-  else if (m_fMultiplier < -100000.0f) return -100.0f;
+  virtual std::string to_string();
+};
 
-  return m_fMultiplier / 1000.0f; // ~
-}
-
-unsigned int ESS_IRAM_ATTR ess_amplifier::do_effect(ess_audioblock_t& block, unsigned int offset, unsigned int size,
-  ess_audio_channel id) {
-
-  for(size_t i = offset; i < size; i++) {
-    block.data[i] *= m_fMultiplier;
-  }
-  return size;
-}
+#endif

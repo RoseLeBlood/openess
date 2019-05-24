@@ -28,31 +28,8 @@
 #define _OPENESS_AUDIO_MEMORY_MAP_
 
 typedef struct ess_audioblock {
-  uint8_t  ref_count;
-  uint16_t memory_pool_index;
   float    data[ESS_DEFAULT_AUDIO_PACKET_SIZE];
   ess_format_t format;
 } ess_audioblock_t;
-
-
-#if ESS_MEMORY_MAP_EXTERN == ESS_ON
-ess_error_t ess_audioblock_create(unsigned int num, ess_audioblock_t* _static_data);
-#else
-ess_error_t ess_audioblock_create();
-#endif
-
-ess_audioblock_t *ess_audioblock_alloc(void);
-uint32_t ess_audioblock_relese(ess_audioblock_t * block);
-ess_audioblock_t* ess_audioblock_take(ess_audioblock_t * block);
-
-
-uint16_t ess_audioblock_used();
-uint16_t ess_audioblock_max_used();
-uint16_t ess_audioblock_num();
-
-
-void ess_audioblock_set_null(ess_audioblock_t * block );
-void ess_audioblock_set(ess_audioblock_t * block, uint32_t value);
-
 
 #endif

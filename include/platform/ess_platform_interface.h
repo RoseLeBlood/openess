@@ -39,23 +39,15 @@
 #include "../ess_singleton_object.h"
 #include <list>
 
-void ess_mem_init(unsigned int num, ess_audioblock_t* _static_data);
+//void ess_mem_init(unsigned int num, ess_audioblock_t* _static_data);
 
 template <class T, uint8_t NUM_CPUS>
 class ess_platform_interface : public ess_singleton_object<T>  {
   friend class ess_singleton_object<T>;
 protected:
-  ess_platform_interface(const std::string name)  : ess_singleton_object<T>(name) {
-    m_pStdDevice = nullptr;
-  }
+  ess_platform_interface()  : ess_singleton_object<T>() { }
 public:
   virtual ess_error_t create(ess_audioblock_t* _static_data = nullptr, unsigned int num = 0) {
-    #if ESS_MEMORY_MAP_EXTERN == ESS_ON
-    ess_audioblock_create(num, _static_data);
-    #else
-    ess_audioblock_create();
-    #endif
-
     std::list<ess_controler*>::iterator it;
     for(it = m_iController.begin(); it != m_iController.end(); it++) {
       if( (*it)->is_created() == false )
@@ -78,17 +70,9 @@ public:
   }
 
   virtual ess_output_module* open_output(ess_output_type type, std::string controller_name) {
-    ess_output_module* output = create_output(type, controller_name, ESS_DEFAULT_SERVER_FORMAT);
-    if(m_pStdDevice == nullptr) m_pStdDevice = output;
+    return create_output(type, controller_name, ESS_DEFAULT_SERVER_FORMAT);
+  }
 
-    if(output != NULL) {
-      m_iOutputs.push_back(output);
-    }
-    return output;
-  }
-  virtual ess_output_module* get_std_device() {
-    return m_pStdDevice;
-  }
   virtual ess_output_module* create_output(ess_output_type type, std::string controller_name,
     ess_format_t format)  = 0;
 
@@ -103,8 +87,6 @@ protected:
 #endif
 private:
   std::list<ess_controler*> m_iController;
-  std::list<ess_output_module*> m_iOutputs;
-  ess_output_module* m_pStdDevice;
 };
 
 

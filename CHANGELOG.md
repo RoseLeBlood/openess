@@ -1,11 +1,16 @@
 
 ## Release History
+* 0.86.0:
+  - add: singleton object class,  lockable_object class, task_group class, ess_wifi_net_device interface
+  - add esp32_ap_wifi class
+  - ess_audioblock_t allocater remove
+  - module and channel update read function: from  ess_audioblock_t* to ess_audioblock_t&
 * 0.85.1:
   - add lib/tiny-http libary
   - add is_equels to ip4 and ip6 address class
   - add ess_stream and ess_stream_writer class
   - rename ess_audio_buffer to ess_audio_buffer_stream
-  - add ESS_CONFIG_STREAM_WRITER_GENERIC config to all platform defines 
+  - add ESS_CONFIG_STREAM_WRITER_GENERIC config to all platform defines
 * 0.85.0:
   - remove old socket system
   - add ess_ipaddress , ess_ip4address, ess_ip6address class

@@ -17,42 +17,40 @@
  *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
  ****************************************************************************/
 
-#include "core/module/dsp/ess_amplifier.h"
-#include <math.h>
+/**
+ * @file ess_wifi_net_device.h
+ * @author Anna Sopdia Schröck
+ * @date 05 Mai 2019
+ */
+ #ifndef _ESS_WIFI_NET_INTERFACE_DEVICE_H_
+ #define _ESS_WIFI_NET_INTERFACE_DEVICE_H_
 
+#include "ess_net_device.h"
 
-ess_amplifier::ess_amplifier()  : ess_effect("ess_amplifier")  { }
-ess_amplifier::ess_amplifier(const std::string& name)
-  : ess_effect(name)  { }
+typedef enum ess_wifi_auth_mode {
+  ESS_WIFI_AUTH_MODE_OPEN,
+  ESS_WIFI_AUTH_MODE_WPA2_PSK,
+} ess_wifi_auth_mode_t;
 
-void ess_amplifier::set_gain(float n) {
-  if (n > 100000.0f) n = 100000.0f;       //100000 = 100db [ 1000 = ~1db]
-  else if (n < -100000.0f) n = -100000.0f;
-  m_fMultiplier = n;
-}
-void ess_amplifier::set_gain_db(float db){
-    if (db > 100.0f) db = 100.0f;
-    else if (db < -100.0f) db = -100.0f;
-    m_fMultiplier = powf(10.0f,db/20.0f);
-}
+class ess_wifi_net_device : public ess_net_device {
+public:
+  ess_wifi_net_device(std::string name, std::string password, uint8_t channel = 1,
+    bool ssid_hidden = 0, uint8_t max_connection = 4,
+    ess_wifi_auth_mode_t authmode = ESS_WIFI_AUTH_MODE_WPA2_PSK);
 
-float ess_amplifier::get_gain() {
-  return m_fMultiplier;
-}
+  virtual std::string get_ssid() const { return m_strName; }
+  virtual std::string get_passwd() const { return m_strPassword; }
+  virtual ess_wifi_auth_mode_t get_authmode() const { return m_iAuthmode; }
 
-float ess_amplifier::get_gain_db() {
+  virtual uint8_t get_channel() const  { return m_iChannel; }
+  virtual bool is_ssid_hidden() const { return m_bSsidhidden; }
+  virtual uint8_t get_max_connecions() const { return m_iMaxConnections; }
+protected:
+  std::string m_strPassword;
+  ess_wifi_auth_mode_t m_iAuthmode;
+  uint8_t m_iChannel;
+  bool m_bSsidhidden;
+  uint8_t m_iMaxConnections;
+};
 
-  if(m_fMultiplier > 100000.0f) return 100.0f;
-  else if (m_fMultiplier < -100000.0f) return -100.0f;
-
-  return m_fMultiplier / 1000.0f; // ~
-}
-
-unsigned int ESS_IRAM_ATTR ess_amplifier::do_effect(ess_audioblock_t& block, unsigned int offset, unsigned int size,
-  ess_audio_channel id) {
-
-  for(size_t i = offset; i < size; i++) {
-    block.data[i] *= m_fMultiplier;
-  }
-  return size;
-}
+#endif

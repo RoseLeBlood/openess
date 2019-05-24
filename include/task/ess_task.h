@@ -70,7 +70,7 @@ public:
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
    * @retval ESS_ERROR
    */
-  ess_error_t destroy();
+  virtual ess_error_t destroy();
 
 
   /**
@@ -80,7 +80,7 @@ public:
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
    * @retval ESS_ERROR
    */
-  ess_error_t suspend();
+  virtual ess_error_t suspend();
   /**
    * @brief resume the task
    *
@@ -88,14 +88,14 @@ public:
    * @reval ESS_ERROR_NOT_IMP  function is for using platform not implantiert
    * @retval ESS_ERROR
    */
-  ess_error_t resume();
+  virtual ess_error_t resume();
 
   /**
    * @brief the virtual task functions
    * @param[int] it self  of the task class
    * @param[in] userdata the task userdaten
    */
-  virtual void onTask(ess_task* self, void* userdata) { }
+  virtual void onTask(void* userdata) { }
 
   /**
    * @brief get the stack size

@@ -18,14 +18,41 @@
  ****************************************************************************/
 
 /**
- * @file ess_task_pool.h
+ * @file ess_task_group.h
  * @author Anna Sopdia Schröck
- * @date 6 Mai 2019
- * @brief  simple tak pool
+ * @date 19 Mai 2019
  */
-
- #include <vector>
- #include <queue>
+#ifndef _ESS_TASK_GROUP_H_
+#define _ESS_TASK_GROUP_H_
 
 #include "ess_task.h"
-#include "ess_autolock.h"
+#include "ess_lockable_object.h"
+
+#include <list>
+
+class ess_task_group : public ess_lockable_object {
+public:
+  ess_task_group() : ess_lockable_object() { m_bIsStarted = false; }
+  ess_task_group(const std::string groupname)
+    : ess_lockable_object(groupname) { m_bIsStarted = false;  }
+
+    virtual ess_error_t start() ;
+    virtual ess_error_t start(uint32_t core) ;
+    virtual ess_error_t destroy();
+    virtual ess_error_t suspend();
+    virtual ess_error_t resume();
+
+    ess_error_t add(ess_task* node) ;
+
+    virtual void clear();
+
+    virtual ess_task_group& operator +=  (ess_task* node) {
+      add(node); return *this; }
+
+    void set_user_data(void* data);
+protected:
+  std::list<ess_task*> m_listTasks;
+  bool m_bIsStarted;
+};
+
+#endif

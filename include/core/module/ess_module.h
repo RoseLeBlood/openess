@@ -63,7 +63,7 @@ public:
     m_bActive = active; return ESS_OK;
    }
 
-   virtual unsigned int read(ess_audio_channel id, ess_audioblock_t* block, unsigned int offset) = 0;
+   virtual unsigned int read(ess_audio_channel id, ess_audioblock_t& block, unsigned int offset) = 0;
 protected:
   bool m_bActive;
   ess_mutex m_mutex;

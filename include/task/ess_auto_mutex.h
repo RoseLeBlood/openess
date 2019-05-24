@@ -31,6 +31,10 @@ class ess_auto_mutex : public ess_mutex {
 public:
   ess_auto_mutex() : ess_mutex() { create();  }
   ess_auto_mutex(const std::string name) : ess_mutex(name) { create(); }
+
+  ~ess_auto_mutex() { destroy(); }
 };
+
+
 
 #endif

@@ -33,8 +33,8 @@
 template<class TOBJECT>
 class ess_singleton_object : public ess_lockable_object {
 protected:
-  ess_singleton_object(std::string name)
-    : ess_lockable_object(name) { }
+  ess_singleton_object()
+    : ess_lockable_object("ess_singleton_object") { }
 
 public:
   ess_singleton_object(const ess_singleton_object&) = delete;
@@ -43,13 +43,14 @@ public:
   static TOBJECT& instance() {
     static ess_auto_mutex _creatingMutex("ess_singleton_creating_mutex");
 
-    _creatingMutex.lock();
-
     if(m_pSingleton == nullptr) {
-      m_pSingleton = new TOBJECT();
-    }
+      _creatingMutex.lock();
 
-    _creatingMutex.unlock();
+      if(m_pSingleton == nullptr)
+        m_pSingleton = new TOBJECT();
+
+      _creatingMutex.unlock();
+    }
 
     return *m_pSingleton;
   }

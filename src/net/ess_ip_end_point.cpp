@@ -29,31 +29,27 @@ ess_ip_end_point::ess_ip_end_point()
 ess_ip_end_point::ess_ip_end_point(ess_ip6address address, uint32_t port)
   : ess_end_point(ESS_SOCKET_FAMILY_IP6, "ess_ip_end_point") {
     m_ip6 = address;
-    m_ip4 = address.to_ip4();
     m_bInValid =  (port == 0 && port<=0x0000FFFF);
 }
 ess_ip_end_point::ess_ip_end_point(ess_ip4address address, uint32_t port)
   : ess_end_point(ESS_SOCKET_FAMILY_IP4, "ess_ip_end_point") {
-    m_ip6 = ess_ip6address(address);
     m_ip4 = address;
     m_bInValid =  (port == 0 && port<=0x0000FFFF);
 }
 ess_ip_end_point::ess_ip_end_point(ess_ip6address address, uint32_t port, std::string name)
   : ess_end_point(ESS_SOCKET_FAMILY_IP6, "ess_ip_end_point") {
     m_ip6 = address;
-    m_ip4 = address.to_ip4();
     m_bInValid =  (port == 0 && port<=0x0000FFFF);
 }
 ess_ip_end_point::ess_ip_end_point(ess_ip4address address, uint32_t port, std::string name)
   : ess_end_point(ESS_SOCKET_FAMILY_IP4, name) {
-    m_ip6 = ess_ip6address(address);
     m_ip4 = address;
     m_bInValid =  (port == 0 && port<=0x0000FFFF);
 }
 
 std::string ess_ip_end_point::to_string() {
   std::ostringstream ss;
-  ss << "[" <<  m_ip4.to_string()  << "(" << m_ip6.to_string() << ")] : " << m_iPort;
+  ss << "[" <<  m_ip4.to_string()  << " (" << m_ip6.to_string() << ")] : " << m_iPort;
   return  ss.str();
 }
 

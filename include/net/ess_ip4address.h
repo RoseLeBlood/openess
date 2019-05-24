@@ -29,44 +29,59 @@
 
 #include "ess_ipadress.h"
 
-#define ESS_IP4ADRESS_ANY ess_ip4address(0x0000000000000000, "ess_ipaddress::any")
-#define ESS_IP4ADRESS_LOOPBACK ess_ip4address(0x000000000100007F, "ess_ipaddress::loopback")
-#define ESS_IP4ADRESS_BROADCAST ess_ip4address(0x00000000FFFFFFFF, "ess_ipaddress::broadcast")
-#define ESS_IP4ADRESS_NONE  ess_ip4address(0x00000000FFFFFFFF, "ess_ipaddress::none")
+
+#define ESS_IP4ADRESS_ANY ess_ip4address(0, 0, 0, 0,  "ESS_IP4ADRESS_ANY")
 
 class ess_ip4address : ess_ipaddress {
 public:
-  ess_ip4address();
-  ess_ip4address( int address);
-  ess_ip4address( int address, std::string name);
+  union {
+        uint8_t bytes[4];
+        uint32_t dword;
+    } address;
 
-  ess_ip4address(unsigned short address[4]) : ess_ip4address(address, "ess_ip4address") { }
-  ess_ip4address(unsigned short address[4], std::string name) ;
+  // Constructors
+  ess_ip4address()
+    : ess_ip4address(0, 0, 0, 0,  "ANY") { }
 
-  ess_ip4address(const ess_ip4address& value) : ess_ipaddress(value) {
-    m_iAddress = value.m_iAddress;  }
+  ess_ip4address(uint8_t first_octet, uint8_t second_octet, uint8_t third_octet, uint8_t fourth_octet)
+    :   ess_ip4address(first_octet, second_octet, third_octet, fourth_octet, "ess_ip4address") { }
 
-  unsigned int get_address() const { return m_iAddress; }
-  void             get_address(unsigned short b[4]);
+  ess_ip4address(uint32_t address)
+    : ess_ip4address(address,  "ess_ip4address") { }
 
-  virtual std::string to_string();
+  ess_ip4address(const uint8_t *address)
+    : ess_ip4address(address,  "ess_ip4address") { }
 
-  ess_ip4address& operator = (const ess_ip4address& value) {
-    m_iAddress = value.m_iAddress; return *this;  }
+  ess_ip4address(uint8_t first_octet, uint8_t second_octet, uint8_t third_octet,
+      uint8_t fourth_octet, std::string name);
 
-  bool is_equels(const ess_ip4address& other) const { return m_iAddress == other.m_iAddress;   }
-protected:
-  unsigned int m_iAddress;
+  ess_ip4address(uint32_t address, std::string name);
+
+  ess_ip4address(const uint8_t *address, std::string name);
+
+  virtual ~ess_ip4address() { }
+
+  virtual std::string to_string() ;
+  virtual bool from_string(const std::string str);
+
+  ess_ip4address& operator =(const uint8_t *address);
+  ess_ip4address& operator = (uint32_t address);
+
+  operator uint32_t() const {
+    return address.dword; }
+
+  uint8_t operator []  (int index) const {
+    return address.bytes[index]; }
+
+  uint8_t& operator [] (int index) {
+      return address.bytes[index];   }
+
+  bool is_equels(const ess_ip4address& other) const {
+     return address.dword == other.address.dword;   }
 };
 
 using ess_ip4address_t = ess_ip4address;
 
-inline bool operator == (const ess_ip4address& a, const ess_ip4address& b) {
-  return a.is_equels(b);
-}
-inline bool operator != (const ess_ip4address& a, const ess_ip4address& b) {
-  return !(a.is_equels(b) );
-}
 
 
 
